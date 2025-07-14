@@ -1,0 +1,18 @@
+[
+  {
+    "title": "稅務小貼士",
+    "slug": "general-tax-tips",
+    "description": "簡單的稅務管理技巧，提升效率。",
+    "content": "# 稅務小貼士\n提供實用的稅務管理建議。\n## 建議\n1. 定期檢查帳目\n2. 保留所有收據",
+    "publish_date": "2025-07-13",
+    "image": "/assets/images/articles/standalone/general-tax-tips.webp",
+    "keywords": [
+      "稅務管理",
+      "記帳"
+    ],
+    "related_faqs": [
+      "記帳/faq1"
+    ],
+    "clicks": 0
+  }
+]

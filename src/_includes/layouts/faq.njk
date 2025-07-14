@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+---
+<h1>常見問題</h1>
+{% include "partials/search.njk" %}
+<button id="toggle-all" class="cta-button mb-4">全部展開</button>
+<div class="space-y-4">
+  {% for faq in pagination.items %}
+    <div class="faq-item" data-track="faq:{{ faq.id }}">
+      <div class="faq-question">{{ faq.question }}</div>
+      <div class="faq-answer hidden">{{ faq.answer }}</div>
+    </div>
+  {% endfor %}
+</div>
+{% include "partials/pagination.njk" %}
+<a href="/booking" class="cta-button mt-8 inline-block">預約諮詢</a>

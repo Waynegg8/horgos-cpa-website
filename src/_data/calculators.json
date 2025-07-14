@@ -1,0 +1,16 @@
+[
+  {
+    "id": "income-tax",
+    "title": "所得稅計算器",
+    "description": "計算個人所得稅，快速了解稅務負擔。",
+    "image": "/assets/images/calculators/income-tax.webp",
+    "clicks": 0
+  },
+  {
+    "id": "inheritance-tax",
+    "title": "遺產稅計算器",
+    "description": "計算遺產稅，協助遺囑規劃。",
+    "image": "/assets/images/calculators/inheritance-tax.webp",
+    "clicks": 0
+  }
+]

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>{{ title }} | {{ site_meta.companyName }}</title>
+  <meta name="description" content="{{ description or site_meta.footerTagline }}">
+
+  {# Google Material Symbols (取代 Font Awesome) #}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  {# 網站主要樣式表 #}
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  {# Google Analytics #}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site_meta.googleAnalyticsId }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site_meta.googleAnalyticsId }}');
+  </script>
+  
+  {# 結構化資料 (會由各頁面傳入) #}
+  {% if structuredData %}
+    <script type="application/ld+json">
+      {{ structuredData | safe }}
+    </script>
+  {% endif %}
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
+
+  {# 引入共用的頁首 #}
+  {% include "partials/header.njk" %}
+
+  {# 主要內容區塊 #}
+  <main class="container mx-auto px-4 py-8 flex-grow">
+    {{ content | safe }}
+  </main>
+
+  {# 引入共用的頁尾 #}
+  {% include "partials/footer.njk" %}
+
+  {# 網站分析或其他全域腳本 #}
+  <script src="/assets/js/analytics.js"></script>
+  {# 如果有其他全域 JS，可以在此引入，例如 main.js #}
+  <script src="/assets/js/main.js"></script> 
+
+</body>
+</html>

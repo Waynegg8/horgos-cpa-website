@@ -1,0 +1,44 @@
+name: Scan and Update Content
+
+on:
+  push:
+    paths:
+      - 'content-json/**'
+      - 'faqs/**'
+      - 'src/_data/videos.txt'
+      - 'src/_data/downloads.txt'
+      - 'src/_data/calculators.json'
+      - 'src/_data/services.json'
+  schedule:
+    - cron: '0 2 * * *' # 每日凌晨 2:00 AM
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+      - name: Process JSON to Markdown
+        run: python scripts/process_json.py
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install Node dependencies
+        run: npm install
+      - name: Build site
+        run: npm run build
+      - name: Commit processed files
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add content-json/*/processed/*
+          git commit -m "Update processed content" || echo "No changes to commit"
+          git push

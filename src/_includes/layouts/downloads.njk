@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+---
+<h1>下載中心</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  {% for download in downloads | sortBy('clicks') | reverse %}
+    <a href="/assets/downloads/{{ download.category }}/{{ download.file }}" class="card" data-track="download:{{ download.file }}">
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">{{ download.title }}</h3>
+        <p class="text-gray-600">{{ download.description }}</p>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+<a href="/booking" class="cta-button mt-8 inline-block">預約諮詢</a>

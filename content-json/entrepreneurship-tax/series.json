@@ -1,0 +1,37 @@
+[
+  {
+    "title": "創業稅務入門",
+    "slug": "ep1",
+    "description": "介紹創業初期的稅務基礎知識。",
+    "content": "# 創業稅務入門\n了解創業初期的稅務注意事項，快速掌握記帳技巧。\n## 記帳基礎\n記帳需遵守台灣稅法，確保收入與支出清晰記錄。",
+    "publish_date": "2025-07-13",
+    "series_progress": "20%",
+    "image": "/assets/images/articles/創業稅務/taichung-accounting.webp",
+    "keywords": [
+      "創業稅務",
+      "記帳",
+      "公司設立"
+    ],
+    "related_faqs": [
+      "記帳/faq1"
+    ],
+    "clicks": 0
+  },
+  {
+    "title": "避免記帳錯誤",
+    "slug": "ep2",
+    "description": "常見記帳錯誤及如何避免。",
+    "content": "# 避免記帳錯誤\n詳細說明常見錯誤及解決方法。\n## 錯誤類型\n1. 漏記收入\n2. 重複記錄支出",
+    "publish_date": "2025-07-14",
+    "series_progress": "40%",
+    "image": "/assets/images/articles/創業稅務/taichung-accounting.webp",
+    "keywords": [
+      "記帳錯誤",
+      "創業稅務"
+    ],
+    "related_faqs": [
+      "記帳/faq1"
+    ],
+    "clicks": 0
+  }
+]

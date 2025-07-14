@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+---
+<h1>服務介紹</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  {% for service in services %}
+    <a href="/services/{{ service.id }}" class="card" data-track="service:{{ service.id }}">
+      <img src="{{ service.image }}" alt="{{ service.title }}" class="w-full h-48 object-cover rounded-t-lg">
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">{{ service.title }}</h3>
+        <p class="text-gray-600">{{ service.description }}</p>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+<a href="/booking" class="cta-button mt-8 inline-block">預約諮詢</a>
