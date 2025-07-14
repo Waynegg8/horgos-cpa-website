@@ -4,7 +4,7 @@ title: 影片總覽
 permalink: /videos/
 description: 觀看我們的財稅教學影片
 pagination:
-  data: collections.videosPaginated
+  data: collections.videosPaginated # Reverted to use pagination for individual video pages
   size: 10
   alias: items
 structuredData: |
@@ -37,7 +37,7 @@ structuredData: |
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  {% for item in items %}
+  {% for item in items %} {# Loop through paginated collection items #}
     <a href="{{ item.url }}" class="card" data-track="video:{{ item.data.slug }}">
       <img src="{{ item.data.image or '/assets/images/videos/default-video-thumbnail.webp' }}" alt="{{ item.data.title }}" class="w-full h-48 object-cover rounded-t-lg">
       <div class="p-4">

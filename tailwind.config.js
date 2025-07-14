@@ -18,5 +18,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [], // 確保這裡有正確的閉合方括號
 }

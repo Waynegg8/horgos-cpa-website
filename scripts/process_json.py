@@ -88,18 +88,23 @@ relatedFaqs: {json.dumps(item.get('related_faqs', []), ensure_ascii=False)}
 
 def process_videos():
     """
-    Reads videos.txt and converts them to Eleventy-ready Markdown and a combined JSON.
-    讀取 videos.txt 並將其轉換為 Eleventy 可用的 Markdown 和合併的 JSON。
+    Reads videos.txt and converts each entry into a separate Eleventy-ready Markdown file.
+    讀取 videos.txt 並將每個條目轉換為單獨的 Eleventy 可用的 Markdown 檔案。
     """
     video_file_path = os.path.join('src', '_data', 'videos.txt')
     output_dir = os.path.join('src', 'generated-videos')
     
-    if not os.path.exists(video_file_path):
-        return []
+    # Ensure the output directory exists
+    # 確保輸出目錄存在
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
+    
+    # Clear existing generated video files to avoid duplicates
+    # 清除現有的生成影片檔案以避免重複
+    for f in os.listdir(output_dir):
+        os.remove(os.path.join(output_dir, f))
 
-    print("Starting video processing...")
+    print("Starting video processing for individual pages...")
     videos_for_search = []
     
     try:
@@ -120,7 +125,6 @@ def process_videos():
                     video_url = parts[2].strip()
                     
                     slug = f"video{i+1}" # Simple slug generation
-                    
                     permalink_str = f"/videos/{slug}/"
                     
                     md_content = f'''---
@@ -145,6 +149,8 @@ structuredData: |
                     with open(md_path, 'w', encoding='utf-8') as out_f:
                         out_f.write(md_content)
 
+                    # Add to all_content_for_search (each individual video page)
+                    # 添加到 all_content_for_search (每個獨立的影片頁面)
                     videos_for_search.append({
                         "title": title,
                         "description": description,
@@ -162,19 +168,19 @@ structuredData: |
 
 def process_downloads():
     """
-    Reads downloads.txt and converts them to Eleventy-ready Markdown and a combined JSON.
-    讀取 downloads.txt 並將其轉換為 Eleventy 可用的 Markdown 和合併的 JSON。
+    Reads downloads.txt and converts them into a JSON data file for the single downloads list page.
+    No individual Markdown files are generated for downloads.
+    讀取 downloads.txt 並將其轉換為 JSON 數據檔案，供單一下載列表頁面使用。
+    不為下載生成單獨的 Markdown 檔案。
     """
     download_file_path = os.path.join('src', '_data', 'downloads.txt')
-    output_dir = os.path.join('src', 'generated-downloads')
 
     if not os.path.exists(download_file_path):
-        return []
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+        return [], [] # Return empty lists if file not found
 
-    print("Starting download processing...")
-    downloads_for_search = []
+    print("Starting download processing for data...")
+    downloads_data = [] # This will be written to processed_downloads.json
+    downloads_for_search = [] # This will be added to all-content.json
 
     try:
         with open(download_file_path, 'r', encoding='utf-8') as f:
@@ -187,49 +193,48 @@ def process_downloads():
                 # 預期格式: [來源: X] 檔案名稱.副檔名|標題|描述|標籤1,標籤2|YYYY-MM-DD|點擊數
                 parts = line.split('|')
                 if len(parts) >= 6:
-                    # parts[0] is like '[source: 1] filename.ext'
-                    # We need to extract the filename from the first part, then the actual title, description, etc.
-                    # parts[0] 類似於 '[來源: 1] 檔案名稱.副檔名'
-                    # 我們需要從第一部分提取檔案名稱，然後是實際的標題、描述等。
                     source_and_filename_part = parts[0].strip()
                     first_bracket_end = source_and_filename_part.find(']')
                     
-                    filename = source_and_filename_part[first_bracket_end + 1:].strip() # Get "filename.ext" after "]"
+                    filename = source_and_filename_part[first_bracket_end + 1:].strip()
                     title = parts[1].strip()
                     description = parts[2].strip()
                     date = parts[4].strip()
-                    tags = [t.strip() for t in parts[5].split(',')] # Assuming comma-separated tags
+                    tags = [t.strip() for t in parts[5].split(',')]
                     
-                    slug = f"download{i+1}" # Simple slug generation
+                    # Data for the downloads list page (accessed via `data.processed_downloads`)
+                    downloads_data.append({
+                        "title": title,
+                        "description": description,
+                        "filename": filename,
+                        "url": f"/assets/downloads/{filename}", # Direct URL to the asset
+                        "tags": tags,
+                        "publish_date": date
+                    })
 
-                    permalink_str = f"/downloads/{slug}/"
-                    
-                    md_content = f'''---
-layout: layouts/download.njk
-title: "{title}"
-description: "{description}"
-filename: "{filename}"
-slug: {slug}
-permalink: {permalink_str}
-tags: {json.dumps(tags, ensure_ascii=False)}
-publish_date: "{date}"
----
-'''
-                    md_path = os.path.join(output_dir, f"{slug}.md")
-                    with open(md_path, 'w', encoding='utf-8') as out_f:
-                        out_f.write(md_content)
-
+                    # Data for the search index (points to the main downloads list page)
+                    # 搜尋索引的數據（指向主下載列表頁面）
                     downloads_for_search.append({
                         "title": title,
                         "description": description,
-                        "url": permalink_str,
+                        "url": "/downloads/", # Point to the main downloads list page for search results
                         "image": "", # No image provided in the data
                         "date": date,
                         "category": "downloads",
                         "tags": tags
                     })
     except Exception as e:
-        print(f"Error processing downloads.txt: {e}")
+        print(f"Error processing downloads.txt for data: {e}")
+
+    # Write processed download data to a JSON file in src/_data
+    # 將處理後的下載數據寫入 src/_data 中的 JSON 檔案
+    output_data_path = os.path.join('src', '_data', 'processed_downloads.json')
+    try:
+        with open(output_data_path, 'w', encoding='utf-8') as f:
+            json.dump(downloads_data, f, ensure_ascii=False, indent=2)
+        print(f"Processed download data written to {output_data_path}")
+    except Exception as e:
+        print(f"Error writing processed_downloads.json: {e}")
 
     print("Download processing finished.")
     return downloads_for_search
@@ -275,8 +280,16 @@ def process_faqs_for_search():
 
 def main():
     all_content_for_search = process_articles()
-    all_content_for_search.extend(process_videos())
-    all_content_for_search.extend(process_downloads()) # Add downloads to search data
+    
+    # process_videos now returns only search data
+    # process_videos 現在只返回搜尋數據
+    videos_search_data = process_videos()
+    all_content_for_search.extend(videos_search_data)
+
+    # process_downloads now returns only search data
+    # process_downloads 現在只返回搜尋數據
+    downloads_search_data = process_downloads()
+    all_content_for_search.extend(downloads_search_data)
     
     faqs_for_search = process_faqs_for_search()
 
@@ -289,9 +302,12 @@ def main():
     final_search_data = all_content_for_search + faqs_for_search
 
     all_content_json_path = os.path.join(output_site_dir, 'all-content.json')
-    with open(all_content_json_path, 'w', encoding='utf-8') as f:
-        json.dump(final_search_data, f, ensure_ascii=False, indent=2)
-    print(f"Consolidated search data written to {all_content_json_path}")
+    try:
+        with open(all_content_json_path, 'w', encoding='utf-8') as f:
+            json.dump(final_search_data, f, ensure_ascii=False, indent=2)
+        print(f"Consolidated search data written to {all_content_json_path}")
+    except Exception as e:
+        print(f"Error writing all-content.json: {e}")
 
 
 if __name__ == '__main__':

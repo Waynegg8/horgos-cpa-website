@@ -5,8 +5,8 @@
   "main": ".eleventy.js",
   "scripts": {
     "start": "npm run dev",
-    "dev": "npm run build:css-watch & npx @11ty/eleventy --serve",
-    "build": "npx @11ty/eleventy && npm run build:css",
+    "dev": "npm run build:css-watch & python scripts/process_json.py && npx @11ty/eleventy --serve",
+    "build": "python scripts/process_json.py && npx @11ty/eleventy && npm run build:css",
     "build:css": "tailwindcss -i ./assets/css/styles.css -o ./_site/assets/css/styles.css --minify",
     "build:css-watch": "tailwindcss -i ./assets/css/styles.css -o ./_site/assets/css/styles.css --watch"
   },

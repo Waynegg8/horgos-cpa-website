@@ -1,0 +1,22 @@
+[
+  {
+    "title": "記帳表格",
+    "description": "簡易記帳模板",
+    "filename": "記帳表格.xlsx",
+    "url": "/assets/downloads/記帳表格.xlsx",
+    "tags": [
+      "記帳技巧"
+    ],
+    "publish_date": "2025-07-13"
+  },
+  {
+    "title": "公司設立指南",
+    "description": "詳細的公司設立流程指南",
+    "filename": "公司設立指南.pdf",
+    "url": "/assets/downloads/公司設立指南.pdf",
+    "tags": [
+      "工商登記"
+    ],
+    "publish_date": "2025-07-13"
+  }
+]
