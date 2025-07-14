@@ -4,7 +4,7 @@ title: 影片總覽
 permalink: /videos/
 description: 觀看我們的財稅教學影片
 pagination:
-  data: collections.videosPaginated # Reverted to use pagination for individual video pages
+  data: collections.videosPaginated
   size: 10
   alias: items
 structuredData: |
@@ -37,12 +37,25 @@ structuredData: |
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  {% for item in items %} {# Loop through paginated collection items #}
-    <a href="{{ item.url }}" class="card" data-track="video:{{ item.data.slug }}">
-      <img src="{{ item.data.image or '/assets/images/videos/default-video-thumbnail.webp' }}" alt="{{ item.data.title }}" class="w-full h-48 object-cover rounded-t-lg">
+  {% for item in items %}
+    {# Debugging: Output the full item and item.data objects to console to inspect structure #}
+    {# 調試：輸出完整的 item 和 item.data 對象到控制台以檢查結構 #}
+    {# <script>console.log('Video Item:', {{ item | dump | safe }});</script> #}
+    {# <script>console.log('Video Item Data:', {{ item.data | dump | safe }});</script> #}
+
+    <a href="{{ item.url }}" class="card" data-track="video:{{ item.data.slug or item.slug or item.title }}">
+      {# Use item.data.image first, then fallback to item.image, then default thumbnail #}
+      {# 優先使用 item.data.image，然後是 item.image，最後是默認縮略圖 #}
+      <img src="{{ item.data.image or item.image or '/assets/images/videos/default-video-thumbnail.webp' }}" 
+           alt="{{ item.data.title or item.title }}" 
+           class="w-full h-48 object-cover rounded-t-lg">
       <div class="p-4">
-        <h3 class="text-lg font-semibold">{{ item.data.title }}</h3>
-        <p class="text-gray-600">{{ item.data.description }}</p>
+        {# Use item.data.title first, then fallback to item.title #}
+        {# 優先使用 item.data.title，然後是 item.title #}
+        <h3 class="text-lg font-semibold">{{ item.data.title or item.title }}</h3>
+        {# Use item.data.description first, then fallback to item.description #}
+        {# 優先使用 item.data.description，然後是 item.description #}
+        <p class="text-gray-600">{{ item.data.description or item.description }}</p>
       </div>
     </a>
   {% endfor %}
