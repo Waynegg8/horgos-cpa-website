@@ -2,11 +2,10 @@ import json
 import os
 from datetime import datetime
 
-def process_json_files():
+def process_articles():
     """
-    讀取 content-json 目錄下的 JSON 檔案，
-    並將其內容轉換為 Eleventy 可讀取的 Markdown 檔案，
-    輸出路徑為 src/generated-articles/ 下對應的分類資料夾。
+    Reads content-json articles and converts them to Eleventy-ready Markdown.
+    讀取內容 JSON 文章並將其轉換為 Eleventy 可用的 Markdown。
     """
     content_dirs = [
         'content-json/entrepreneurship-tax',
@@ -14,69 +13,286 @@ def process_json_files():
         'content-json/standalone'
     ]
     
-    print("Starting content processing...")
+    print("Starting article processing...")
+    all_content_for_search = []
 
     for content_dir in content_dirs:
         source_file_name = 'series.json' if 'standalone' not in content_dir else 'articles.json'
-        series_file_path = os.path.join(content_dir, source_file_name)
+        json_file_path = os.path.join(content_dir, source_file_name)
         
-        if not os.path.exists(series_file_path):
+        if not os.path.exists(json_file_path):
             continue
 
         try:
-            with open(series_file_path, 'r', encoding='utf-8') as f:
-                articles = json.load(f)
+            with open(json_file_path, 'r', encoding='utf-8') as f:
+                items = json.load(f)
         except (FileNotFoundError, json.JSONDecodeError) as e:
-            print(f"Error reading {series_file_path}: {e}")
+            print(f"Error reading {json_file_path}: {e}")
             continue
         
-        for article in articles:
+        for item in items:
             try:
-                # 準備輸出路徑和分類
                 category_slug = content_dir.split('/')[-1].replace('\\', '/')
                 output_dir = os.path.join('src', 'generated-articles', category_slug)
                 
-                # 建立輸出資料夾
                 if not os.path.exists(output_dir):
                     os.makedirs(output_dir)
                     
-                md_path = os.path.join(output_dir, f"{article['slug']}.md")
+                md_path = os.path.join(output_dir, f"{item['slug']}.md")
                 
-                print(f"Generating '{md_path}'...")
+                print(f"Generating article '{md_path}'...")
                 
-                # 組裝 front matter
-                permalink_str = f"/articles/{category_slug}/{article['slug']}/"
+                permalink_str = f"/articles/{category_slug}/{item['slug']}/"
                 structured_data_block = f'''  {{
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "{article['title']}",
-    "description": "{article['description']}",
-    "image": "{article['image']}"
+    "headline": "{item['title']}",
+    "description": "{item['description']}",
+    "image": "{item['image']}"
   }}'''
                 
                 md_content = f'''---
 layout: layouts/article.njk
-title: "{article['title']}"
-description: "{article['description']}"
-slug: {article['slug']}
+title: "{item['title']}"
+description: "{item['description']}"
+slug: {item['slug']}
 permalink: {permalink_str}
 category: {category_slug}
-series_progress: "{article.get('series_progress', '')}"
-image: {article['image']}
-keywords: {json.dumps(article['keywords'], ensure_ascii=False)}
+series_progress: "{item.get('series_progress', '')}"
+image: {item['image']}
+keywords: {json.dumps(item['keywords'], ensure_ascii=False)}
 structuredData: |
 {structured_data_block}
-relatedFaqs: {json.dumps(article.get('related_faqs', []), ensure_ascii=False)}
+relatedFaqs: {json.dumps(item.get('related_faqs', []), ensure_ascii=False)}
 ---
-{article['content']}
+{item['content']}
 '''
                 with open(md_path, 'w', encoding='utf-8') as f:
                     f.write(md_content)
-            except Exception as e:
-                print(f"Error processing article {article.get('slug', 'unknown')}: {e}")
-                continue
 
-    print("Content processing finished.")
+                # Add to all_content_for_search
+                all_content_for_search.append({
+                    "title": item['title'],
+                    "description": item['description'],
+                    "url": permalink_str,
+                    "image": item['image'],
+                    "date": item.get('publish_date', ''),
+                    "category": "articles",
+                    "tags": item['keywords']
+                })
+            except Exception as e:
+                print(f"Error processing article {item.get('slug', 'unknown')}: {e}")
+                continue
+    print("Article processing finished.")
+    return all_content_for_search
+
+def process_videos():
+    """
+    Reads videos.txt and converts them to Eleventy-ready Markdown and a combined JSON.
+    讀取 videos.txt 並將其轉換為 Eleventy 可用的 Markdown 和合併的 JSON。
+    """
+    video_file_path = os.path.join('src', '_data', 'videos.txt')
+    output_dir = os.path.join('src', 'generated-videos')
+    
+    if not os.path.exists(video_file_path):
+        return []
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    print("Starting video processing...")
+    videos_for_search = []
+    
+    try:
+        with open(video_file_path, 'r', encoding='utf-8') as f:
+            for i, line in enumerate(f):
+                line = line.strip()
+                if not line:
+                    continue
+                
+                # Expected format: [source: X] Title|Description|VideoURL
+                # 預期格式: [來源: X] 標題|描述|影片URL
+                parts = line.split('|')
+                if len(parts) >= 3:
+                    source_ref_and_title_part = parts[0].strip()
+                    title_start = source_ref_and_title_part.find(']') + 1
+                    title = source_ref_and_title_part[title_start:].strip()
+                    description = parts[1].strip()
+                    video_url = parts[2].strip()
+                    
+                    slug = f"video{i+1}" # Simple slug generation
+                    
+                    permalink_str = f"/videos/{slug}/"
+                    
+                    md_content = f'''---
+layout: layouts/video.njk
+title: "{title}"
+description: "{description}"
+url: "{video_url}"
+slug: {slug}
+permalink: {permalink_str}
+image: /assets/images/videos/default-video-thumbnail.webp # Placeholder, update as needed if specific images are available
+structuredData: |
+  {{
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "{title}",
+    "description": "{description}",
+    "thumbnailUrl": "/assets/images/videos/default-video-thumbnail.webp"
+  }}
+---
+'''
+                    md_path = os.path.join(output_dir, f"{slug}.md")
+                    with open(md_path, 'w', encoding='utf-8') as out_f:
+                        out_f.write(md_content)
+
+                    videos_for_search.append({
+                        "title": title,
+                        "description": description,
+                        "url": permalink_str,
+                        "image": "/assets/images/videos/default-video-thumbnail.webp",
+                        "date": "", # Not available in current format
+                        "category": "videos",
+                        "tags": [] # Not available in current format
+                    })
+    except Exception as e:
+        print(f"Error processing videos.txt: {e}")
+    
+    print("Video processing finished.")
+    return videos_for_search
+
+def process_downloads():
+    """
+    Reads downloads.txt and converts them to Eleventy-ready Markdown and a combined JSON.
+    讀取 downloads.txt 並將其轉換為 Eleventy 可用的 Markdown 和合併的 JSON。
+    """
+    download_file_path = os.path.join('src', '_data', 'downloads.txt')
+    output_dir = os.path.join('src', 'generated-downloads')
+
+    if not os.path.exists(download_file_path):
+        return []
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    print("Starting download processing...")
+    downloads_for_search = []
+
+    try:
+        with open(download_file_path, 'r', encoding='utf-8') as f:
+            for i, line in enumerate(f):
+                line = line.strip()
+                if not line:
+                    continue
+                
+                # Expected format: [source: X] filename.ext|Title|Description|Tag1,Tag2|YYYY-MM-DD|Clicks
+                # 預期格式: [來源: X] 檔案名稱.副檔名|標題|描述|標籤1,標籤2|YYYY-MM-DD|點擊數
+                parts = line.split('|')
+                if len(parts) >= 6:
+                    # parts[0] is like '[source: 1] filename.ext'
+                    # We need to extract the filename from the first part, then the actual title, description, etc.
+                    # parts[0] 類似於 '[來源: 1] 檔案名稱.副檔名'
+                    # 我們需要從第一部分提取檔案名稱，然後是實際的標題、描述等。
+                    source_and_filename_part = parts[0].strip()
+                    first_bracket_end = source_and_filename_part.find(']')
+                    
+                    filename = source_and_filename_part[first_bracket_end + 1:].strip() # Get "filename.ext" after "]"
+                    title = parts[1].strip()
+                    description = parts[2].strip()
+                    date = parts[4].strip()
+                    tags = [t.strip() for t in parts[5].split(',')] # Assuming comma-separated tags
+                    
+                    slug = f"download{i+1}" # Simple slug generation
+
+                    permalink_str = f"/downloads/{slug}/"
+                    
+                    md_content = f'''---
+layout: layouts/download.njk
+title: "{title}"
+description: "{description}"
+filename: "{filename}"
+slug: {slug}
+permalink: {permalink_str}
+tags: {json.dumps(tags, ensure_ascii=False)}
+publish_date: "{date}"
+---
+'''
+                    md_path = os.path.join(output_dir, f"{slug}.md")
+                    with open(md_path, 'w', encoding='utf-8') as out_f:
+                        out_f.write(md_content)
+
+                    downloads_for_search.append({
+                        "title": title,
+                        "description": description,
+                        "url": permalink_str,
+                        "image": "", # No image provided in the data
+                        "date": date,
+                        "category": "downloads",
+                        "tags": tags
+                    })
+    except Exception as e:
+        print(f"Error processing downloads.txt: {e}")
+
+    print("Download processing finished.")
+    return downloads_for_search
+
+def process_faqs_for_search():
+    """
+    Reads FAQ JSON files and consolidates them into a single JSON for search.
+    讀取 FAQ JSON 檔案並將其整合到一個單一的 JSON 中供搜尋使用。
+    """
+    faq_dir = os.path.join('faqs')
+    all_faqs = []
+
+    if not os.path.exists(faq_dir):
+        return []
+
+    print("Starting FAQ processing for search...")
+    try:
+        categories = os.listdir(faq_dir)
+        for category in categories:
+            category_path = os.path.join(faq_dir, category)
+            if os.path.isdir(category_path):
+                faq_file = os.path.join(category_path, 'faq.json')
+                if os.path.exists(faq_file):
+                    with open(faq_file, 'r', encoding='utf-8') as f:
+                        faq_data = json.load(f)
+                        for item in faq_data:
+                            # Use question as a simple anchor ID for now
+                            # 目前使用問題作為簡單的錨點 ID
+                            anchor_id = item['question'].replace(' ', '-').replace('?', '').replace('？', '')
+                            all_faqs.append({
+                                "title": item['question'], # Use question as title for search
+                                "description": item['answer'], # Use answer as description
+                                "url": f"/faq/#{anchor_id}", # Simple anchor for FAQ
+                                "category": "faqs",
+                                "tags": item.get('tags', []),
+                                "date": "", # No date for FAQs
+                                "image": "" # No image for FAQs
+                            })
+    except Exception as e:
+        print(f"Error processing FAQ files: {e}")
+    print("FAQ processing for search finished.")
+    return all_faqs
+
+def main():
+    all_content_for_search = process_articles()
+    all_content_for_search.extend(process_videos())
+    all_content_for_search.extend(process_downloads()) # Add downloads to search data
+    
+    faqs_for_search = process_faqs_for_search()
+
+    # Consolidate all search data and write to a single JSON file in _site
+    # 合併所有搜尋資料並寫入 _site 中的單一 JSON 檔案
+    output_site_dir = os.path.join('_site', 'content-json')
+    if not os.path.exists(output_site_dir):
+        os.makedirs(output_site_dir)
+    
+    final_search_data = all_content_for_search + faqs_for_search
+
+    all_content_json_path = os.path.join(output_site_dir, 'all-content.json')
+    with open(all_content_json_path, 'w', encoding='utf-8') as f:
+        json.dump(final_search_data, f, ensure_ascii=False, indent=2)
+    print(f"Consolidated search data written to {all_content_json_path}")
+
 
 if __name__ == '__main__':
-    process_json_files()
+    main()

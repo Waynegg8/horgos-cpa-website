@@ -36,37 +36,39 @@ module.exports = function(eleventyConfig) {
   // =================================================================
   //  客製化設定
   // =================================================================
-  // Passthrough copy - 我們不再需要複製或忽略 assets/css
+  // Passthrough copy
+  // 傳遞複製
   eleventyConfig.addPassthroughCopy("assets/images");
   eleventyConfig.addPassthroughCopy("assets/js");
-  eleventyConfig.addPassthroughCopy("assets/downloads");
+  eleventyConfig.addPassthroughCopy("assets/downloads"); // 確保原始下載檔案也能被複製
   eleventyConfig.addPassthroughCopy({ "scripts": "scripts" });
+  eleventyConfig.addPassthroughCopy({ "faqs": "faqs" }); // 確保原始 FAQ JSON 檔案也能被複製
 
   // Watch targets
+  // 監聽目標
   eleventyConfig.addWatchTarget("./assets/css/styles.css"); // 監看原始CSS
   eleventyConfig.addWatchTarget("./content-json/");
   eleventyConfig.addWatchTarget("./faqs/");
+  eleventyConfig.addWatchTarget("./src/_data/videos.txt"); // 監看原始影片資料
+  eleventyConfig.addWatchTarget("./src/_data/downloads.txt"); // 監看原始下載資料
 
 
   // =================================================================
   //  內容集合 (Collections)
   // =================================================================
   eleventyConfig.addCollection("articlesPaginated", function(collectionApi) {
-    const articles = [];
-    const contentDirs = ['content-json/entrepreneurship-tax', 'content-json/company-setup', 'content-json/standalone'];
-    for (const contentDir of contentDirs) {
-      const sourceFileName = contentDir.includes('standalone') ? 'articles.json' : 'series.json';
-      const jsonFilePath = path.join(__dirname, contentDir, sourceFileName);
-      if (fs.existsSync(jsonFilePath)) {
-        const jsonData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
-        for (const article of jsonData) {
-          const categorySlug = contentDir.split('/').pop();
-          article.url = `/articles/${categorySlug}/${article.slug}/`;
-          articles.push({ data: article, url: article.url });
-        }
-      }
-    }
-    return articles;
+    // 獲取所有在 src/generated-articles/**/ 目錄下的 .md 檔案
+    return collectionApi.getFilteredByGlob("src/generated-articles/**/*.md");
+  });
+
+  eleventyConfig.addCollection("videosPaginated", function(collectionApi) {
+    // 獲取所有在 src/generated-videos/ 目錄下的 .md 檔案
+    return collectionApi.getFilteredByGlob("src/generated-videos/**/*.md");
+  });
+
+  eleventyConfig.addCollection("downloadsPaginated", function(collectionApi) {
+    // 獲取所有在 src/generated-downloads/ 目錄下的 .md 檔案
+    return collectionApi.getFilteredByGlob("src/generated-downloads/**/*.md");
   });
 
   eleventyConfig.addCollection("faqsPaginated", function(collectionApi) {
@@ -81,8 +83,9 @@ module.exports = function(eleventyConfig) {
             if (fs.existsSync(faqFile)) {
               const faqData = JSON.parse(fs.readFileSync(faqFile, 'utf8'));
               faqData.forEach(item => {
+                // 為每個 FAQ 項目添加 category 和一個簡單的 ID
                 item.category = category;
-                item.id = `${category}/${item.question.slice(0, 10)}`;
+                item.id = `${category}/${item.question.slice(0, 10).replace(/[^a-zA-Z0-9]/g, '')}`; // 創建一個簡短ID
                 faqs.push(item);
               });
             }
@@ -90,10 +93,6 @@ module.exports = function(eleventyConfig) {
         }
     }
     return faqs;
-  });
-
-  eleventyConfig.addCollection("videosPaginated", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/pages/videos/**/*.md").filter(item => item.inputPath !== './src/pages/videos/videos.md');
   });
 
 
