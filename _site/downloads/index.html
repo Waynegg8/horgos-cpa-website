@@ -39,24 +39,77 @@
 <body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
 
   
-  <header class="bg-blue-900 text-white py-4">
-  <nav class="container mx-auto px-4 flex justify-between items-center">
-    <a href="/" class="text-xl font-bold">Horgos CPA</a>
-    <ul class="flex space-x-4">
-      <li><a href="/" class="hover:underline">首頁</a></li>
-      <li><a href="/services/" class="hover:underline">服務介紹</a></li>
-      <li><a href="/team/" class="hover:underline">人員介紹</a></li>
-      <li><a href="/articles/" class="hover:underline">文章總覽</a></li>
-      <li><a href="/videos/" class="hover:underline">影片總覽</a></li>
-      <li><a href="/faq/" class="hover:underline">常見問題</a></li>
-      <li><a href="/downloads/" class="hover:underline">下載中心</a></li>
-      <li><a href="/calculators/" class="hover:underline">常用工具</a></li>
-      <li><a href="/contact/" class="hover:underline">聯繫我們</a></li>
-      <li><a href="/booking/" class="cta-button">預約諮詢</a></li>
-    </ul>
-  </nav>
+  <header class="bg-white shadow-md sticky top-0 z-50">
+  <div class="container mx-auto px-4">
+    <nav class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0">
+        <a href="/" class="text-2xl font-bold text-gray-800">霍爾果斯會計師事務所</a>
+      </div>
+      <div class="hidden md:block">
+        <ul class="flex items-center space-x-4"><li>
+              <a href="/" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">首頁</a>
+            </li><li>
+              <a href="/services/" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">服務介紹</a>
+            </li><li>
+              <a href="/team/" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">人員介紹</a>
+            </li><li>
+              <a href="/articles/" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">文章總覽</a>
+            </li><li>
+              <a href="/videos/" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">影片總覽</a>
+            </li><li>
+              <a href="/faq/" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">常見問題</a>
+            </li><li>
+              <a href="/downloads/" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">下載中心</a>
+            </li><li>
+              <a href="/calculators/" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">常用工具</a>
+            </li><li>
+              <a href="/contact/" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">聯繫我們</a>
+            </li><li>
+              <a href="/booking/" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">預約諮詢</a>
+            </li></ul>
+      </div>
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-800 focus:outline-none">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div id="mobile-menu" class="md:hidden hidden">
+    <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3"><li>
+          <a href="/" class="text-gray-600 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">首頁</a>
+        </li><li>
+          <a href="/services/" class="text-gray-600 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">服務介紹</a>
+        </li><li>
+          <a href="/team/" class="text-gray-600 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">人員介紹</a>
+        </li><li>
+          <a href="/articles/" class="text-gray-600 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">文章總覽</a>
+        </li><li>
+          <a href="/videos/" class="text-gray-600 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">影片總覽</a>
+        </li><li>
+          <a href="/faq/" class="text-gray-600 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">常見問題</a>
+        </li><li>
+          <a href="/downloads/" class="text-gray-600 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">下載中心</a>
+        </li><li>
+          <a href="/calculators/" class="text-gray-600 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">常用工具</a>
+        </li><li>
+          <a href="/contact/" class="text-gray-600 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">聯繫我們</a>
+        </li><li>
+          <a href="/booking/" class="text-gray-600 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">預約諮詢</a>
+        </li></ul>
+  </div>
 </header>
 
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
 
   
   <main class="container mx-auto px-4 py-8 flex-grow">
@@ -69,68 +122,53 @@
   </main>
 
   
-  <footer class="bg-blue-900 text-white py-8">
-  <div class="container mx-auto px-4">
+  <footer class="bg-gray-800 text-white">
+  <div class="container mx-auto py-8 px-4">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
       <div>
-        <h3 class="text-lg font-semibold mb-4">快速連結</h3>
-        <ul class="space-y-2">
-          <li><a href="/" class="hover:underline">首頁</a></li>
-          <li><a href="/services/" class="hover:underline">服務介紹</a></li>
-          <li><a href="/team/" class="hover:underline">人員介紹</a></li>
-          <li><a href="/articles/" class="hover:underline">文章總覽</a></li>
-          <li><a href="/videos/" class="hover:underline">影片總覽</a></li>
-          <li><a href="/faq/" class="hover:underline">常見問題</a></li>
-          <li><a href="/downloads/" class="hover:underline">下載中心</a></li>
-          <li><a href="/calculators/" class="hover:underline">常用工具</a></li>
-          <li><a href="/contact/" class="hover:underline">聯繫我們</a></li>
+        <h3 class="text-xl font-bold mb-4">霍爾果斯會計師事務所</h3>
+        <p class="text-gray-400">專業、誠信、創新的財稅顧問夥伴，致力於提供企業與個人最優質的財務與稅務解決方案。</p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-bold mb-4">服務項目</h3>
+        <ul class="space-y-2 text-gray-300">
+          <li>
+            <a href="/services/#accounting" class="hover:text-blue-400">會計與帳務處理</a>
+          </li>
+          <li>
+            <a href="/services/#tax" class="hover:text-blue-400">稅務諮詢與申報</a>
+          </li>
+          <li>
+            <a href="/services/#consulting" class="hover:text-blue-400">工商顧問與設立代辦</a>
+          </li>
+          <li>
+            <a href="/services/#audit" class="hover:text-blue-400">資本簽證與驗資</a>
+          </li>
         </ul>
       </div>
+
       <div>
-        <h3 class="text-lg font-semibold mb-4">服務項目</h3>
-        <ul class="space-y-2">
-          
-            <li>
-              <a href="/services/accounting" class="hover:underline">
-                <i class="fas fa-book mr-2"></i>
-                會計與帳務處理
-              </a>
-            </li>
-          
-            <li>
-              <a href="/services/tax" class="hover:underline">
-                <i class="fas fa-book mr-2"></i>
-                稅務諮詢與申報
-              </a>
-            </li>
-          
-            <li>
-              <a href="/services/consulting" class="hover:underline">
-                <i class="fas fa-book mr-2"></i>
-                工商顧問與設立代辦
-              </a>
-            </li>
-          
-            <li>
-              <a href="/services/audit" class="hover:underline">
-                <i class="fas fa-book mr-2"></i>
-                資本簽證與驗資
-              </a>
-            </li>
-          
+        <h3 class="text-xl font-bold mb-4">聯繫方式</h3>
+        <ul class="space-y-2 text-gray-300">
+          <li>地址：台中市西區建國路21號3樓之1</li>
+          <li>電話：<a href="tel:0422205606" class="hover:text-blue-400">04-2220-5606</a></li>
+          <li>營業時間：週一至週五 8:30-17:30</li>
+          <li>
+            <a href="https://line.me/R/ti/p/@208ihted" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400">
+              LINE ID: @208ihted
+            </a>
+          </li>
         </ul>
       </div>
-      <div>
-        <h3 class="text-lg font-semibold mb-4">聯繫我們</h3>
-        <p>電話：(02) 1234-5678</p>
-        <p>Line ID：@horgoscpa</p>
-        <p>地址：台北市中正區忠孝東路 100 號</p>
-        <a href="https://line.me/R/ti/p/@horgoscpa" class="cta-button mt-4 inline-block">加入 Line</a>
-      </div>
+
+    </div>
+    <div class="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500">
+      <p>&copy; 2025 霍爾果斯會計師事務所. All Rights Reserved.</p>
     </div>
   </div>
 </footer>
-
 
   
   <script src="/assets/js/analytics.js"></script>

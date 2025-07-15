@@ -7,5 +7,47 @@
   "lineId": "@208ihted",
   "lineUrl": "https://line.me/R/ti/p/@208ihted",
   "formspreeUrl": "https://formspree.io/f/xwpovnwy",
-  "googleAnalyticsId": "G-RKMC9WVS5"
+  "googleAnalyticsId": "G-RKMC9WVS5",
+  "navbar": [
+    {
+      "text": "首頁",
+      "url": "/"
+    },
+    {
+      "text": "服務介紹",
+      "url": "/services/"
+    },
+    {
+      "text": "人員介紹",
+      "url": "/team/"
+    },
+    {
+      "text": "文章總覽",
+      "url": "/articles/"
+    },
+    {
+      "text": "影片總覽",
+      "url": "/videos/"
+    },
+    {
+      "text": "常見問題",
+      "url": "/faq/"
+    },
+    {
+      "text": "下載中心",
+      "url": "/downloads/"
+    },
+    {
+      "text": "常用工具",
+      "url": "/calculators/"
+    },
+    {
+      "text": "聯繫我們",
+      "url": "/contact/"
+    },
+    {
+      "text": "預約諮詢",
+      "url": "/booking/"
+    }
+  ]
 }
