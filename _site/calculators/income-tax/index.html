@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>遺產稅計算器 | 霍爾果斯會計師事務所</title>
-  <meta name="description" content="計算遺產稅，協助遺囑規劃。">
+  <title>{{ calculator.title }} | 霍爾果斯會計師事務所</title>
+  <meta name="description" content="計算機：{{ calculator.description }}">
 
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -23,16 +23,6 @@
   </script>
   
   
-  
-    <script type="application/ld+json">
-      {
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "遺產稅計算器",
-  "description": "計算遺產稅，協助遺囑規劃。"
-}
-
-    </script>
   
 </head>
 
@@ -113,35 +103,23 @@
 
   
   <main class="container mx-auto px-4 py-8 flex-grow">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-  <div class="col-span-2">
-    <h1>遺產稅計算器</h1>
-    <img src="/assets/images/calculators/inheritance-tax.webp" alt="遺產稅計算器" class="w-full h-64 object-cover rounded-lg mb-4">
-    <p>計算遺產稅，協助遺囑規劃。</p>
-    <div id="calculator-form" class="mt-4">
-      <div id="calculator-inputs"></div>
-      <button id="calculate" class="cta-button">計算</button>
-      <div id="calculator-result" class="mt-4"></div>
-    </div>
-    <a href="/booking" class="cta-button mt-4 inline-block">預約諮詢</a>
-  </div>
-  <aside class="w-full md:w-1/4 p-4">
+    <article class="prose max-w-none">
   
-    <h3 class="text-lg font-semibold mb-4"> 系列</h3>
-    <div class="progress-bar mb-4">
-      <div class="progress-fill" style="width: ;"></div>
-    </div>
-    <p class="text-sm text-gray-600 mb-4">進度：</p>
+<div class="calculator-container">
+  <h1 class="text-3xl font-bold mb-4">所得稅計算器</h1>
+  <p class="mb-6 text-gray-600">計算個人所得稅，快速了解稅務負擔。</p>
+
   
-  <h3 class="text-lg font-semibold mb-4">熱門內容</h3>
-  <div class="space-y-4">
+  <div class="calculator-content">
     
   </div>
-</aside>
 
+  <div class="mt-8">
+    
+    <a href="/calculators/" class="text-blue-600 hover:underline">&larr; 返回常用工具列表</a>
+  </div>
 </div>
-<script src="/assets/js/calculator.js"></script>
-
+</article>
   </main>
 
   

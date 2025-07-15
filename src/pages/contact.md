@@ -23,7 +23,5 @@ permalink: /contact/
 我們提供專業的線上預約服務，讓您輕鬆安排一對一的諮詢時間。點擊下方按鈕，立即前往預約。
 
 <div class="text-center mt-8">
-  <a href="/booking/" class="inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
-    前往預約諮詢
-  </a>
+  {% ctaButton "前往預約諮詢", "/booking/" %}
 </div>

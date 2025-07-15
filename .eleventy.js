@@ -39,6 +39,11 @@ module.exports = function(eleventyConfig) {
 
   // --- SHORTCODES ---
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+  eleventyConfig.addShortcode("ctaButton", function(text, url) {
+    const buttonText = text || "預約諮詢";
+    const buttonUrl = url || "/booking/";
+    return `<a href="${buttonUrl}" class="inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">${buttonText}</a>`;
+  });
 
   // --- COLLECTIONS ---
   eleventyConfig.addCollection("articlesPaginated", function(collectionApi) {
@@ -47,8 +52,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("videosPaginated", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/generated-videos/**/*.md").reverse();
   });
-  
-  // --- THIS IS THE FINAL FIX for FAQs ---
   eleventyConfig.addCollection("faqsPaginated", function() {
     const faqDir = path.join(__dirname, 'faqs');
     let allFaqs = [];
@@ -62,11 +65,7 @@ module.exports = function(eleventyConfig) {
             if (fs.existsSync(faqFile)) {
               const faqData = JSON.parse(fs.readFileSync(faqFile, 'utf8'));
               if (Array.isArray(faqData)) {
-                // 為每個 FAQ 項目添加 category
-                const faqsWithCategory = faqData.map(faq => ({
-                  ...faq,
-                  category: category
-                }));
+                const faqsWithCategory = faqData.map(faq => ({ ...faq, category: category }));
                 allFaqs = allFaqs.concat(faqsWithCategory);
               }
             }
@@ -75,14 +74,13 @@ module.exports = function(eleventyConfig) {
       }
     } catch (e) {
       console.error("Error processing FAQ collection:", e);
-      return []; // Return empty array on error
+      return [];
     }
     return allFaqs;
   });
 
   // --- PASSTHROUGH COPY ---
   eleventyConfig.addPassthroughCopy("assets");
-  eleventyConfig.addPassthroughCopy("faqs");
 
   // --- DIRECTORY CONFIGURATION ---
   return {
