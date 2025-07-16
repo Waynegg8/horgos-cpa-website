@@ -1,6 +1,6 @@
 ---
 title: "影片"
-layout: "base.njk"
+layout: "layouts/base.njk"
 permalink: "/videos/"
 ---
 

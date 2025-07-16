@@ -1,93 +1,74 @@
 const { DateTime } = require("luxon");
-const path = require("path");
-const pluginRss = require("@11ty/eleventy-plugin-rss");
-const pluginNavigation = require("@11ty/eleventy-navigation");
-const criticalCss = require("eleventy-critical-css");
-const Image = require("@11ty/eleventy-img");
+const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
+const { EleventyI18nPlugin } = require("@11ty/eleventy");
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+const markdownIt = require("markdown-it");
+const markdownItAnchor = require("markdown-it-anchor");
+const yaml = require("js-yaml");
 
-async function imageShortcode(src, alt, sizes = "100vw") {
-  if (alt === undefined) {
-    throw new Error(`Missing \`alt\` on responsive image from: ${src}`);
-  }
-  let metadata = await Image(src, {
-    widths: [300, 600, 900, null], 
-    formats: ["webp", "jpeg"],
-    outputDir: "./_site/assets/images/generated/",
-    urlPath: "/assets/images/generated/"
+module.exports = function(eleventyventyConfig) {
+
+  // --- Plugins ---
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+  eleventyConfig.addPlugin(EleventyI18nPlugin, {
+    defaultLanguage: "zh-TW",
   });
-  let lowsrc = metadata.jpeg[0];
-  let highsrc = metadata.jpeg[metadata.jpeg.length - 1];
-  return `<picture>
-    ${Object.values(metadata).map(imageFormat => {
-      return `  <source type="image/${imageFormat[0].format}" srcset="${imageFormat.map(entry => entry.srcset).join(", ")}" sizes="${sizes}">`;
-    }).join("\n")}
-      <img
-        src="${lowsrc.url}"
-        width="${highsrc.width}"
-        height="${highsrc.height}"
-        alt="${alt}"
-        loading="lazy"
-        decoding="async">
-    </picture>`;
-}
 
-module.exports = function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy("src/assets/css");
-  eleventyConfig.addPassthroughCopy("src/assets/js");
-  eleventyConfig.addPassthroughCopy("src/assets/images");
-  eleventyConfig.addPassthroughCopy("src/assets/downloads");
+  // --- Passthrough Copy ---
+  eleventyConfig.addPassthroughCopy("src/css");
+  eleventyConfig.addPassthroughCopy("src/js");
+  eleventyConfig.addPassthroughCopy("src/img");
+  eleventyConfig.addPassthroughCopy("src/downloads");
+  eleventyConfig.addPassthroughCopy({ "src/static": "/" });
 
+  // --- Filters ---
   eleventyConfig.addFilter("readableDate", (dateObj) => {
-    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("yyyy-LL-dd");
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).setLocale('zh-TW').toLocaleString(DateTime.DATE_FULL);
   });
-  eleventyConfig.addFilter("limit", function (arr, limit) {
-    return arr.slice(0, limit);
-  });
-  
-  eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
 
-  eleventyConfig.addCollection("articlesPaginated", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/generated-content/articles/*.md").reverse();
+  eleventyConfig.addFilter('htmlDateString', (dateObj) => {
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
   });
-  eleventyConfig.addCollection("videosPaginated", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/generated-content/videos/*.md").reverse();
+
+  // --- Shortcodes ---
+  eleventyConfig.addShortcode("ctaButton", function(text, url) {
+    return `<a href="${url}" class="inline-block bg-primary text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity duration-300">${text}</a>`;
   });
-  eleventyConfig.addCollection("tagList", function(collectionApi) {
-    let tagSet = new Set();
-    collectionApi.getAll().forEach(function(item) {
-      if( "tags" in item.data ) {
-        let tags = item.data.tags;
-        tags = tags.filter(item => !["all", "nav", "post", "posts"].includes(item));
-        for (const tag of tags) {
-          tagSet.add(tag);
-        }
-      }
-    });
-    return [...tagSet];
+
+  // --- Markdown It ---
+  let markdownLibrary = markdownIt({
+    html: true,
+    breaks: true,
+    linkify: true
+  }).use(markdownItAnchor, {
+    permalink: markdownItAnchor.permalink.ariaHidden({
+      placement: "after",
+      class: "direct-link",
+      symbol: "#",
+      level: [1,2,3,4],
+    }),
+    slugify: eleventyConfig.getFilter("slugify")
   });
-  
-  eleventyConfig.addPlugin(pluginRss);
-  eleventyConfig.addPlugin(pluginNavigation);
+  eleventyConfig.setLibrary("md", markdownLibrary);
 
-  if (process.env.NODE_ENV === 'production') {
-    eleventyConfig.addPlugin(criticalCss, {
-      css: '_site/assets/css/styles.css',
-    });
-  }
+  // --- Data Extensions ---
+  eleventyConfig.addDataExtension("yaml", contents => yaml.load(contents));
 
-  eleventyConfig.addWatchTarget("./src/_data/");
+  // --- Watch Targets ---
+  eleventyConfig.addWatchTarget("./src/js/");
 
+  // --- Return an object of options ---
   return {
-    dir: {
-      input: "src",
-      output: "_site",
-      includes: "_includes",
-      data: "_data",
-      // === 修改點: 我們在這裡徹底移除了 layouts: "_includes/layouts" 這一行 ===
-    },
-    templateFormats: ["html", "md", "njk"],
+    templateFormats: [ "md", "njk", "html", "liquid" ],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
+    dir: {
+      input: "src",
+      includes: "_includes",
+      data: "_data",
+      output: "_site"
+    }
   };
 };

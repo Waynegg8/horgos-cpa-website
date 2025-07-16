@@ -1,5 +1,5 @@
 ---
-layout: article.njk
+layout: layouts/article.njk
 title: 創業稅務入門
 description: 介紹創業初期的稅務基礎知識。
 slug: ep1

@@ -1,5 +1,5 @@
 ---
-layout: article.njk
+layout: layouts/article.njk
 title: 公司設立流程
 description: 詳細介紹台灣公司設立的步驟。
 slug: ep1

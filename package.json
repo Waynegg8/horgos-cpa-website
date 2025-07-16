@@ -26,6 +26,7 @@
     "cross-env": "^7.0.3",
     "eleventy-critical-css": "^2.0.0",
     "luxon": "^3.4.4",
+    "markdown-it-anchor": "^9.2.0",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3"
   }

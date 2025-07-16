@@ -1,5 +1,5 @@
 ---
-layout: article.njk
+layout: layouts/article.njk
 title: 稅務小貼士
 description: 簡單的稅務管理技巧，提升效率。
 slug: general-tax-tips
