@@ -1,4 +1,4 @@
 {
-  "layout": "_includes/layouts/page.njk",
+  "layout": "layouts/page.njk",
   "tags": "pages"
 }

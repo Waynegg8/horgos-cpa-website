@@ -1,4 +1,4 @@
 {
-  "layout": "_includes/layouts/video.njk",
+  "layout": "layouts/video.njk",
   "tags": "videos"
 }

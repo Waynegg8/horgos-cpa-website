@@ -1,5 +1,5 @@
 ---
-layout: _includes/layouts/index.njk
+layout: layouts/index.njk
 title: 首頁
 permalink: /
 description: Horgos CPA 提供專業會計與稅務服務

@@ -1,5 +1,5 @@
 ---
-layout: _includes/layouts/articles.njk
+layout: layouts/articles.njk
 title: 文章總覽
 permalink: /articles/
 description: 閱讀我們的專業財稅文章

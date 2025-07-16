@@ -38,7 +38,7 @@ def process_articles():
             series_name = series_map.get(article_meta.get('series_id'), '')
             front_matter = {
                 # === 修改點: 使用完整的、不會出錯的路徑 ===
-                'layout': '_includes/layouts/article.njk',
+                'layout': 'layouts/article.njk',
                 'permalink': f"/articles/{slug}/index.html",
                 'title': article_meta.get('title', ''),
                 'description': article_meta.get('description', ''),
@@ -83,7 +83,7 @@ def process_videos():
         if not re.match(r'^[a-zA-Z0-9_-]+$', video_id): continue
         front_matter = {
             # === 修改點: 使用完整的、不會出錯的路徑 ===
-            'layout': '_includes/layouts/video.njk',
+            'layout': 'layouts/video.njk',
             'permalink': f"/videos/{video_id}/index.html",
             'video_id': video_id,
             'title': title,
