@@ -1,3 +1,0 @@
-node_modules/
-# 忽略由 Python 腳本自動生成的內容
-src/generated-content/
