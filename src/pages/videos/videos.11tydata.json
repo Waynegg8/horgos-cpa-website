@@ -1,3 +1,4 @@
 {
-  "permalink": "/videos/{{ category }}/{{ page.fileSlug }}/"
+  "layout": "_includes/layouts/video.njk",
+  "tags": "videos"
 }

@@ -1,16 +1,25 @@
----
-layout: layouts/base.njk
----
-<h1>常見問題</h1>
-{% include "partials/search.njk" %}
-<button id="toggle-all" class="cta-button mb-4">全部展開</button>
-<div class="space-y-4">
-  {% for faq in pagination.items %}
-    <div class="faq-item" data-track="faq:{{ faq.id }}">
-      <div class="faq-question">{{ faq.question }}</div>
-      <div class="faq-answer hidden">{{ faq.answer }}</div>
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<article class="prose lg:prose-xl mx-auto px-4 py-8">
+  <h1>{{ title }}</h1>
+
+  {# 讀取由 Python 腳本生成的 faqs.json #}
+  {% for category in faqs %}
+  <section id="{{ category.category_id }}" class="mb-8">
+    <h2 class="text-2xl font-bold border-b pb-2">{{ category.category_name }}</h2>
+    <div class="space-y-4 mt-4">
+      {% for item in category.items %}
+      <details>
+        <summary class="font-semibold cursor-pointer">{{ item.q }}</summary>
+        <div class="mt-2 pl-4 border-l-2 border-primary">
+          <p>{{ item.a | safe }}</p>
+        </div>
+      </details>
+      {% endfor %}
     </div>
+  </section>
   {% endfor %}
-</div>
-{% include "partials/pagination.njk" %}
-<a href="/booking" class="cta-button mt-8 inline-block">預約諮詢</a>
+
+</article>
+{% endblock %}

@@ -1,3 +1,4 @@
 {
-  "permalink": "/{{ page.fileSlug }}/"
+  "layout": "_includes/layouts/page.njk",
+  "tags": "pages"
 }

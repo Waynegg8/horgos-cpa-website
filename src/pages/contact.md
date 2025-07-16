@@ -1,5 +1,4 @@
 ---
-layout: layouts/page.njk
 title: 聯繫我們
 description: 與霍爾果斯會計師事務所聯繫，獲取專業的財稅建議與服務。
 permalink: /contact/

@@ -1,6 +1,5 @@
 
 ---
-layout: layouts/service.njk
 title: 稅務諮詢與申報
 description: 營業稅、營所稅申報及專業的節稅規劃。
 image: /assets/images/services/tax.webp

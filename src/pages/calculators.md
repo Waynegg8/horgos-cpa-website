@@ -1,5 +1,4 @@
 ---
-layout: layouts/page.njk
 title: 常用工具
 description: 提供多種實用的線上財稅計算機。
 permalink: /calculators/

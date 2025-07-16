@@ -1,41 +1,59 @@
----
-layout: layouts/base.njk
----
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-  <div class="col-span-2">
-    <h1 class="text-4xl font-bold mb-4">歡迎來到 Horgos CPA</h1>
-    <p class="mb-4 text-lg text-gray-600">提供專業會計與稅務服務，助您輕鬆創業與管理財務。</p>
+{% extends "layouts/base.njk" %}
 
-    <img src="/assets/images/layout/hero-banner.webp" alt="霍爾果斯會計師事務所專業服務" class="w-full h-auto rounded-lg shadow-md mb-8">
+{% block content %}
+<div class="p-4 md:p-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {# === 主要內容欄 (左側) === #}
+        <div class="col-span-2">
+            <h1 class="text-4xl font-bold mb-4">歡迎來到 Horgos CPA</h1>
+            <p class="mb-4 text-lg text-gray-600">提供專業會計與稅務服務，助您輕鬆創業與管理財務。</p>
+            
+            {# --- 修改點 1: 主視覺圖片 --- #}
+            {# 使用 image shortcode，不懶加載，並提供 sizes 提示 #}
+            {% image "/assets/images/layout/hero-banner.webp", "霍爾果斯會計師事務所專業服務", "(min-width: 768px) 67vw, 100vw" %}
 
-    <a href="/booking/" class="cta-button">立即預約諮詢</a>
-    
-    <h2 class="text-3xl font-bold mt-12 mb-4">熱門服務</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {% for service in services %}
-        <a href="/services/{{ service.id }}" class="card" data-track="service:{{ service.id }}">
-          <img src="{{ service.image }}" alt="{{ service.title }}" class="w-full h-48 object-cover rounded-t-lg">
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">{{ service.title }}</h3>
-            <p class="text-gray-600">{{ service.description }}</p>
-          </div>
-        </a>
-      {% endfor %}
+            <div class="my-8">
+                <a href="/booking/" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">立即預約諮詢</a>
+            </div>
+
+            <h2 class="text-3xl font-bold mt-12 mb-4">熱門服務</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {% for service in services %}
+                    <a href="/services/{{ service.id }}" class="block border rounded-lg hover:shadow-lg transition-shadow">
+                        {# --- 修改點 2: 服務項目圖片 --- #}
+                        {% image service.image, service.title, "(min-width: 768px) 33vw, 100vw" %}
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold">{{ service.title }}</h3>
+                            <p class="text-gray-600 text-sm mt-1">{{ service.description }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            
+            <h2 class="text-3xl font-bold mt-12 mb-4">最新文章</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {% for article in collections.articlesPaginated | limit(4) %}
+                    <a href="{{ article.url }}" class="block border rounded-lg hover:shadow-lg transition-shadow">
+                        {# --- 修改點 3: 最新文章圖片 --- #}
+                        {# 檢查圖片是否存在，再呼叫 shortcode #}
+                        {% if article.data.image %}
+                            {% image article.data.image, article.data.title, "(min-width: 768px) 33vw, 100vw" %}
+                        {% endif %}
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold">{{ article.data.title }}</h3>
+                            <p class="text-gray-600 text-sm mt-1">{{ article.data.description | truncate(100) }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        {# === 側邊欄 (右側) === #}
+        {% include "partials/sidebar.njk" %}
     </div>
-    
-    <h2 class="text-3xl font-bold mt-12 mb-4">最新文章</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {% for article in collections.articlesPaginated | sortBy('data.clicks') | reverse | slice(0, 4) %}
-        <a href="{{ article.url }}" class="card" data-track="article:{{ article.data.slug }}">
-          <img src="{{ article.data.image }}" alt="{{ article.data.title }}" class="w-full h-48 object-cover rounded-t-lg">
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">{{ article.data.title }}</h3>
-            <p class="text-gray-600">{{ article.data.description | truncate(100) }}</p>
-          </div>
-        </a>
-      {% endfor %}
-    </div>
-  </div>
 
-  {% include "partials/sidebar.njk" %}
+    {# 客戶見證區塊 #}
+    {% include "partials/testimonials.njk" %}
+
 </div>
+{% endblock %}

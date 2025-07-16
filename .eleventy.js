@@ -1,96 +1,91 @@
 const { DateTime } = require("luxon");
-const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+const path = require("path");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
-const fs = require('fs');
-const path = require('path');
+const pluginNavigation = require("@11ty/eleventy-navigation");
+const criticalCss = require("eleventy-critical-css");
+const Image = require("@11ty/eleventy-img");
+
+async function imageShortcode(src, alt, sizes = "100vw") {
+  if (alt === undefined) {
+    throw new Error(`Missing \`alt\` on responsive image from: ${src}`);
+  }
+  let metadata = await Image(src, {
+    widths: [300, 600, 900, null], 
+    formats: ["webp", "jpeg"],
+    outputDir: "./_site/assets/images/generated/",
+    urlPath: "/assets/images/generated/"
+  });
+  let lowsrc = metadata.jpeg[0];
+  let highsrc = metadata.jpeg[metadata.jpeg.length - 1];
+  return `<picture>
+    ${Object.values(metadata).map(imageFormat => {
+      return `  <source type="image/${imageFormat[0].format}" srcset="${imageFormat.map(entry => entry.srcset).join(", ")}" sizes="${sizes}">`;
+    }).join("\n")}
+      <img
+        src="${lowsrc.url}"
+        width="${highsrc.width}"
+        height="${highsrc.height}"
+        alt="${alt}"
+        loading="lazy"
+        decoding="async">
+    </picture>`;
+}
 
 module.exports = function(eleventyConfig) {
+  eleventyConfig.addPassthroughCopy("src/assets/css");
+  eleventyConfig.addPassthroughCopy("src/assets/js");
+  eleventyConfig.addPassthroughCopy("src/assets/images");
+  eleventyConfig.addPassthroughCopy("src/assets/downloads");
 
-  // --- PLUGINS ---
-  eleventyConfig.addPlugin(eleventyNavigationPlugin);
-  eleventyConfig.addPlugin(pluginRss);
-
-  // --- CUSTOM FILTERS ---
-  eleventyConfig.addFilter("readableDate", dateObj => {
+  eleventyConfig.addFilter("readableDate", (dateObj) => {
     return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("yyyy-LL-dd");
   });
-  eleventyConfig.addFilter("year", (dateObj) => {
-    return new Date(dateObj).getFullYear();
-  });
-  eleventyConfig.addFilter("sortBy", (arr, key) => {
-    if (!Array.isArray(arr)) return arr;
-    return arr.slice().sort((a, b) => {
-      const valA = a[key] || (a.data && a.data[key]);
-      const valB = b[key] || (b.data && b.data[key]);
-      if (valA < valB) return -1;
-      if (valA > valB) return 1;
-      return 0;
-    });
-  });
-  eleventyConfig.addFilter("filterBy", (arr, key, value) => {
-    return arr.filter(item => {
-      const val = item[key] || (item.data && item.data[key]);
-      return val === value;
-    });
-  });
-  eleventyConfig.addFilter("limit", (arr, limit) => {
+  eleventyConfig.addFilter("limit", function (arr, limit) {
     return arr.slice(0, limit);
   });
+  
+  eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
 
-  // --- SHORTCODES ---
-  eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
-  eleventyConfig.addShortcode("ctaButton", function(text, url) {
-    const buttonText = text || "預約諮詢";
-    const buttonUrl = url || "/booking/";
-    return `<a href="${buttonUrl}" class="inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">${buttonText}</a>`;
-  });
-
-  // --- COLLECTIONS ---
   eleventyConfig.addCollection("articlesPaginated", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/generated-articles/**/*.md").reverse();
+    return collectionApi.getFilteredByGlob("src/generated-content/articles/*.md").reverse();
   });
   eleventyConfig.addCollection("videosPaginated", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/generated-videos/**/*.md").reverse();
+    return collectionApi.getFilteredByGlob("src/generated-content/videos/*.md").reverse();
   });
-  eleventyConfig.addCollection("faqsPaginated", function() {
-    const faqDir = path.join(__dirname, 'faqs');
-    let allFaqs = [];
-    try {
-      if (fs.existsSync(faqDir)) {
-        const categories = fs.readdirSync(faqDir);
-        for (const category of categories) {
-          const categoryDir = path.join(faqDir, category);
-          if (fs.statSync(categoryDir).isDirectory()) {
-            const faqFile = path.join(categoryDir, 'faq.json');
-            if (fs.existsSync(faqFile)) {
-              const faqData = JSON.parse(fs.readFileSync(faqFile, 'utf8'));
-              if (Array.isArray(faqData)) {
-                const faqsWithCategory = faqData.map(faq => ({ ...faq, category: category }));
-                allFaqs = allFaqs.concat(faqsWithCategory);
-              }
-            }
-          }
+  eleventyConfig.addCollection("tagList", function(collectionApi) {
+    let tagSet = new Set();
+    collectionApi.getAll().forEach(function(item) {
+      if( "tags" in item.data ) {
+        let tags = item.data.tags;
+        tags = tags.filter(item => !["all", "nav", "post", "posts"].includes(item));
+        for (const tag of tags) {
+          tagSet.add(tag);
         }
       }
-    } catch (e) {
-      console.error("Error processing FAQ collection:", e);
-      return [];
-    }
-    return allFaqs;
+    });
+    return [...tagSet];
   });
+  
+  eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(pluginNavigation);
 
-  // --- PASSTHROUGH COPY ---
-  eleventyConfig.addPassthroughCopy("assets");
+  if (process.env.NODE_ENV === 'production') {
+    eleventyConfig.addPlugin(criticalCss, {
+      css: '_site/assets/css/styles.css',
+    });
+  }
 
-  // --- DIRECTORY CONFIGURATION ---
+  eleventyConfig.addWatchTarget("./src/_data/");
+
   return {
     dir: {
       input: "src",
+      output: "_site",
       includes: "_includes",
       data: "_data",
-      output: "_site"
+      // === 修改點: 我們在這裡徹底移除了 layouts: "_includes/layouts" 這一行 ===
     },
-    templateFormats: ["md", "njk", "html"],
+    templateFormats: ["html", "md", "njk"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",

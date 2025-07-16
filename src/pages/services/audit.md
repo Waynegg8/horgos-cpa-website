@@ -1,5 +1,4 @@
 ---
-layout: layouts/service.njk
 title: 資本簽證與驗資
 description: 提供快速且合規的公司設立、增資驗資服務。
 image: /assets/images/services/audit.webp

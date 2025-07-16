@@ -1,6 +1,5 @@
 
 ---
-layout: layouts/service.njk
 title: 工商顧問與設立代辦
 description: 公司設立、變更登記及相關法律顧問服務。
 image: /assets/images/services/consulting.webp

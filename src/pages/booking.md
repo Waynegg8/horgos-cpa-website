@@ -1,5 +1,4 @@
 ---
-layout: layouts/page.njk
 title: 預約諮詢
 description: 透過線上表單預約霍爾果斯會計師事務所的專業諮詢服務。
 permalink: /booking/

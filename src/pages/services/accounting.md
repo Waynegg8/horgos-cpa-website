@@ -1,6 +1,5 @@
 
 ---
-layout: layouts/service.njk
 title: 會計與帳務處理
 description: 提供精確的日常記帳、憑證整理與財務報表服務。
 image: /assets/images/services/accounting.webp

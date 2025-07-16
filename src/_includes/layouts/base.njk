@@ -1,52 +1,46 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>{{ title }} | {{ site_meta.companyName }}</title>
-  <meta name="description" content="{{ description or site_meta.footerTagline }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {# 頁面標題會動態載入，並在後面加上網站名稱 #}
+    <title>{{ title }} | {{ site_meta.name }}</title>
+    
+    {# 網站描述，優先使用頁面本身的 description，若無則使用全站預設值 #}
+    <meta name="description" content="{{ description or site_meta.description }}">
+    
+    {# 引入編譯後的 Tailwind CSS 檔案 #}
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | url }}">
+    
+    {# 未來可用於放置網站圖示、GA分析碼等 #}
+    <link rel="icon" href="/favicon.ico">
 
-  {# Google Material Symbols (取代 Font Awesome) #}
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-  {# 網站主要樣式表 #}
-  <link rel="stylesheet" href="/assets/css/styles.css">
-
-  {# Google Analytics #}
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site_meta.googleAnalyticsId }}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '{{ site_meta.googleAnalyticsId }}');
-  </script>
-  
-  {# 結構化資料 (會由各頁面傳入) #}
-  {% if structuredData %}
-    <script type="application/ld+json">
-      {{ structuredData | safe }}
-    </script>
-  {% endif %}
 </head>
+<body class="bg-white text-gray-800 font-sans">
 
-<body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
+    {# 網站頂部導航列 #}
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      {% include "partials/header.njk" %}
+    </header>
 
-  {# 引入共用的頁首 #}
-  {% include "partials/header.njk" %}
+    {# 主要內容區塊 #}
+    <main>
+        {# 所有繼承此版型的頁面內容，都會被插入到這裡 #}
+        {{ content | safe }}
+    </main>
 
-  {# 主要內容區塊 #}
-  <main class="container mx-auto px-4 py-8 flex-grow">
-    {{ content | safe }}
-  </main>
+    {# === [任務 3.3 新增] === #}
+    {# 在頁尾正上方，引入 SEO 內容區塊 #}
+    {% include "partials/seo-footer-block.njk" %}
 
-  {# 引入共用的頁尾 #}
-  {% include "partials/footer.njk" %}
+    {# 網站頁尾 #}
+    <footer class="bg-gray-800 text-white p-8">
+      {% include "partials/footer.njk" %}
+    </footer>
 
-  {# 網站分析或其他全域腳本 #}
-  <script src="/assets/js/analytics.js"></script>
-  {# 如果有其他全域 JS，可以在此引入，例如 main.js #}
-  <script src="/assets/js/main.js"></script> 
+    {# 引入主要的 JavaScript 檔案 #}
+    <script src="{{ '/assets/js/main.js' | url }}"></script>
 
 </body>
 </html>
