@@ -1,0 +1,59 @@
+# .github/workflows/update-popular-data.yml
+name: 自動更新熱門數據
+
+on:
+  schedule:
+    # 每天凌晨 02:00 UTC (台灣時間 10:00) 運行
+    # 請根據實際需求調整時間，例如藍圖提到的 CST 10:33
+    # 藍圖提到每天凌晨 03:00 CST，這裡轉換為 UTC+8，即 UTC 19:00 (前一天)
+    - cron: '33 2 * * *' # UTC Time (e.g., 2:33 AM UTC daily)
+  workflow_dispatch: # 允許手動觸發
+
+jobs:
+  update-popular-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 檢查程式碼
+        uses: actions/checkout@v4
+        with:
+          # 允許工作流程推送更改到倉庫
+          persist-credentials: false
+          fetch-depth: 0 # 獲取完整的提交歷史，以便推送
+
+      - name: 設定 Python 環境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9' # 或您專案使用的 Python 版本
+
+      - name: 安裝 Python 依賴
+        run: |
+          python -m pip install --upgrade pip
+          # 安裝 Google Analytics Data API 用戶端程式庫 (您需要自行安裝)
+          # pip install google-analytics-data
+
+      - name: 運行熱門數據更新腳本
+        env:
+          # 這裡需要您的 Google Analytics 服務帳戶憑證
+          # GITHUB_TOKEN 是自動提供的，用於推送更改
+          # GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} # 如果使用憑證檔案
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }} # 您的 Google Analytics 4 資源 ID
+          # 更多 GA 相關環境變數...
+        run: |
+          python src/scripts/update_popular_data.py
+
+      - name: 檢查並提交更改
+        id: commit_changes
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "github-actions-bot@users.noreply.github.com"
+          git add src/_data/popular.json
+          git diff --staged --quiet || git commit -m "chore: 自動更新熱門數據 (由 GitHub Actions 觸發)"
+
+      - name: 推送更改
+        if: steps.commit_changes.outcome == 'success'
+        run: git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 使用內建的 GITHUB_TOKEN
+
+      # 藍圖中提到更新後需清除 Cloudflare 快取，這部分可以在 scan-update.yml 中處理
+      # 或者在此處新增 Cloudflare Purge Cache API 調用，但通常建議在主要部署後清除

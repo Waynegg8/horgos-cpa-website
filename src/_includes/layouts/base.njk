@@ -1,66 +1,87 @@
-<!DOCTYPE html>
-<html lang="zh-Hant-TW">
+{# src/_includes/layouts/base.njk #}
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>{{ title }} | {{ site.name }}</title>
-  <meta name="description" content="{{ description or site.description }}">
-  
-  {# ▼▼▼ 我們在 CDN 網址後方加上 ?plugins=typography ▼▼▼ #}
-  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-  
-  {# 載入我們的自訂設定 #}
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'brand-blue': {
-              50: '#eef7ff',
-              100: '#d9ecff',
-              200: '#bbdfff',
-              300: '#8ecbff',
-              400: '#5aaeff',
-              500: '#368fff',
-              600: '#2575ff',
-              700: '#1960f0',
-              800: '#184fcd',
-              900: '#1a45a1',
-              950: '#122b68',
-            },
-            'brand-gold': '#FFD700',
-          },
-          fontFamily: {
-            'heading': ['"kaleko-105-bold"', 'sans-serif'],
-            'sans': ['"TouchMeSans-PetiteRegular"', 'sans-serif'],
-          },
-        },
-      },
+  <title>{{ title or seo.defaultTitle }}</title> {# 使用頁面標題或預設 SEO 標題 #}
+  <meta name="description" content="{{ description or seo.defaultDescription }}"> {# 使用頁面描述或預設 SEO 描述 #}
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> {# 引入 Google Material Icons #}
+
+  {# 字體預加載與 font-display: swap #}
+  <link rel="preload" href="/assets/fonts/kaleko-105-bold.woff2" as="font" type="font/woff2" crossorigin> {# 標題字體 #}
+  <link rel="preload" href="/assets/fonts/TouchMeSans-PetiteRegular.woff2" as="font" type="font/woff2" crossorigin> {# 內文字體 #}
+  <style>
+    /* 確保字體載入前顯示系統預設字體 */
+    @font-face {
+      font-family: 'kaleko-105-bold';
+      src: url('/assets/fonts/kaleko-105-bold.woff2') format('woff2');
+      font-weight: bold;
+      font-style: normal;
+      font-display: swap; /* 確保字體載入前先顯示系統預設字體 */
     }
-  </script>
+    @font-face {
+      font-family: 'TouchMeSans-PetiteRegular';
+      src: url('/assets/fonts/TouchMeSans-PetiteRegular.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap; /* 確保字體載入前先顯示系統預設字體 */
+    }
+    /* 為避免 FOUC，可以在 body 或 html 應用初始字體，並在字體載入後替換 */
+    body {
+      font-family: 'TouchMeSans-PetiteRegular', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'kaleko-105-bold', serif;
+    }
+  </style>
 
-  <link rel="preload" href="/assets/fonts/kaleko-105-bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/TouchMeSans-PetiteRegular.woff2" as="font" type="font/woff2" crossorigin>
+  {# JSON-LD 結構化資料 - 確保此檔案存在於 _includes/partials/structured-data.njk #}
+  {% include "partials/structured-data.njk" %}
 
-</head><body class="bg-white text-gray-800 flex flex-col min-h-screen">
+  {# 開放圖譜 (Open Graph) 和 Twitter Cards - 確保圖片路徑正確，並從 EleventyComputed 或 SEO 數據中獲取 #}
+  <meta property="og:title" content="{{ title or seo.defaultTitle }}">
+  <meta property="og:description" content="{{ description or seo.defaultDescription }}">
+  <meta property="og:url" content="{{ site.baseUrl }}{{ page.url }}">
+  {# 使用 EleventyComputed 的 'image' 變數，若無則回退到預設的社群分享圖片 #}
+  <meta property="og:image" content="{{ site.baseUrl }}{{ image or seo.defaultImage }}">
+  <meta property="og:type" content="website"> {# 可根據頁面類型調整為 'article', 'video.other' 等 #}
+  <meta property="og:site_name" content="{{ site.name }}">
 
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title or seo.defaultTitle }}">
+  <meta name="twitter:description" content="{{ description or seo.defaultDescription }}">
+  <meta name="twitter:image" content="{{ site.baseUrl }}{{ image or seo.defaultImage }}">
+</head>
+<body>
+  {# 導航欄 - 確保 partials/nav.njk 存在 #}
   {% include "partials/nav.njk" %}
 
-  <main class="flex-grow">
-    {{ content | safe }}
-  </main>
+  {# 主要內容區域 #}
+  {{ content | safe }}
 
-  {% include "partials/seo-footer-block.njk" %}
+  {# 頁尾 - 確保 partials/footer.njk 存在 #}
   {% include "partials/footer.njk" %}
 
-  {# 載入全域與頁面指定的 JS 腳本 #}
-  <script src="/assets/js/mobile-menu.js" defer></script>
-  {% if pageScripts %}
-    {% for script in pageScripts %}
-      <script src="{{ script }}" defer></script>
-    {% endfor %}
-  {% endif %}
+  {# SEO 頁尾區塊 - 確保 partials/seo-footer-block.njk 存在 #}
+  {% include "partials/seo-footer-block.njk" %}
 
+  {# 網站通用的 JavaScript #}
+  <script src="/assets/js/mobile-menu.js" defer></script> {# 假設有手機選單腳本 #}
+  <script src="/assets/js/appointment.js" defer></script> {# 預約表單腳本 #}
+  {# search.js 和 faq-toggle.js 已整合到 search.js 中，並由 search-results-container 上的 data-page-type 控制 #}
+  {# testimonial-slider.js 通常只在首頁載入，可以在 homepage.json 或首頁 template 中控制 #}
+  <script src="/assets/js/search.js" defer></script> {# 搜索功能腳本 #}
+
+  {# Cookie 同意彈窗 - 確保 partials/cookie-consent.njk 和 assets/js/cookie-consent.js 存在 #}
+  {% include "partials/cookie-consent.njk" %}
+  <script src="/assets/js/cookie-consent.js" defer></script>
+
+  {# 頁面特有的 JavaScript，從 EleventyComputed.scriptContent 注入 #}
+  {% if scriptContent %}
+  <script>{{ scriptContent | safe }}</script>
+  {% endif %}
 </body>
 </html>

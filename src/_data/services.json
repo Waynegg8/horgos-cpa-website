@@ -1,41 +1,166 @@
-[
-  {
-    "id": "tax",
-    "title": "專業稅務申報服務",
-    "slug": "tax",
-    "sections": [
-      {
-        "type": "generic",
-        "heading": "財稅合規，經營無憂",
-        "content": "我們提供全面且精準的稅務申報服務，涵蓋營業稅、營利事業所得稅及各類所得扣繳申報。我們的目標是確保您的企業完全符合現行稅法規定，同時透過合法的稅務規劃，優化您的稅務負擔，讓您能專注於業務發展，無需為繁雜的稅務問題煩心。"
-      },
-      {
-        "type": "process-steps",
-        "heading": "我們的服務流程",
-        "data": {
-          "items": [
+{
+  "services": [
+    {
+      "id": "tax",
+      "title": "稅務申報與規劃",
+      "slug": "tax",
+      "sections": [
+        {
+          "heading": "我們的稅務服務",
+          "content": "提供專業的個人所得稅、營利事業所得稅申報服務，並提供全面的稅務規劃建議，合法降低稅負。",
+          "type": "generic-text-block"
+        },
+        {
+          "heading": "服務費用說明",
+          "type": "pricing-card-list",
+          "data": [
             {
-              "step_number": 1,
-              "title": "初步諮詢與資料收集",
-              "description": "我們會先與您進行初步溝通，了解您的營業狀況，並提供需要準備的進銷項憑證、帳冊等資料清單。"
+              "title": "基礎申報方案",
+              "price": "NT$ 2,500/月",
+              "features": [
+                { "text": "每月傳票整理", "icon": "check_circle" },
+                { "text": "營業稅申報", "icon": "check_circle" }
+              ],
+              "button_text": "諮詢此方案",
+              "button_link": "/appointment/",
+              "is_featured": false
             },
             {
-              "step_number": 2,
-              "title": "帳務整理與稅額試算",
-              "description": "收到您的資料後，我們的專業團隊會進行帳務整理與登錄，並精確試算出當期應納或留抵的營業稅額。"
-            },
+              "title": "全方位稅務管家",
+              "price": "NT$ 5,000/月",
+              "features": [
+                { "text": "包含基礎方案所有內容", "icon": "check_circle" },
+                { "text": "年度營所稅申報", "icon": "check_circle" },
+                { "text": "專屬節稅規劃", "icon": "check_circle" },
+                { "text": "稅務風險評估", "icon": "check_circle" }
+              ],
+              "button_text": "立即預約",
+              "button_link": "/appointment/",
+              "is_featured": true,
+              "feature_badge": "推薦"
+            }
+          ]
+        },
+        {
+          "heading": "稅務規劃流程",
+          "type": "process-steps",
+          "data": [
+            { "step_number": 1, "title": "需求評估", "description": "深入了解您的財務狀況與稅務需求。" },
+            { "step_number": 2, "title": "方案制定", "description": "依據法規為您制定最佳節稅方案。" },
+            { "step_number": 3, "title": "執行與追蹤", "description": "協助執行規劃並持續追蹤效果。" }
+          ]
+        },
+        {
+          "heading": "稅務問答精選",
+          "content": [
+            { "question": "公司剛成立，多久要申報第一次稅？", "answer": "新設立公司首次申報營利事業所得稅的時程會根據成立月份有所不同，通常會在次年度5月。建議諮詢會計師以確保時程正確。" }
+          ],
+          "type": "faq-section"
+        }
+      ],
+      "relatedLinks": [
+        {"text": "最新稅務文章", "url": "/articles/?tag=稅務"},
+        {"text": "預約稅務諮詢", "url": "/appointment/"}
+      ]
+    },
+    {
+      "id": "audit",
+      "title": "審計與簽證",
+      "slug": "audit",
+      "sections": [
+        {
+          "heading": "我們的審計服務範圍",
+          "content": "我們提供獨立、客觀的財務報表審計服務，確保企業財務透明與合規。服務範圍涵蓋年度財務報表簽證、內部控制審閱、特殊目的審計等。",
+          "type": "generic-text-block"
+        },
+        {
+          "heading": "審計服務流程",
+          "type": "process-steps",
+          "data": [
+            { "step_number": 1, "title": "審計前溝通", "description": "與客戶確認審計範圍與時程。" },
+            { "step_number": 2, "title": "資料收集與查核", "description": "進行現場查核、文件審閱與訪談。" },
+            { "step_number": 3, "title": "出具審計報告", "description": "完成審計工作並提交專業報告。" }
+          ]
+        },
+        {
+          "heading": "審計費用方案",
+          "type": "pricing-card-list",
+          "data": [
             {
-              "step_number": 3,
-              "title": "申報確認與送件",
-              "description": "我們會將試算結果提供給您確認，經您同意後，在法定申報期限內完成網路申報，並提供申報完成證明。"
+              "title": "標準審計方案",
+              "price": "NT$ 30,000 起",
+              "features": [
+                { "text": "年度財務報表簽證", "icon": "check_circle" },
+                { "text": "內部控制審閱", "icon": "check_circle" }
+              ],
+              "button_text": "了解方案",
+              "button_link": "/appointment/"
             }
           ]
         }
-      }
-    ],
-    "relatedLinks": [
-      { "text": "前往常見問題", "url": "/faq/" },
-      { "text": "立即預約諮詢", "url": "/appointment/" }
-    ]
-  }
-]
+      ],
+      "relatedLinks": [
+        {"text": "審計常見問題", "url": "/faq/?category=審計服務"},
+        {"text": "聯繫審計團隊", "url": "/contact/"}
+      ]
+    },
+    {
+      "id": "consulting",
+      "title": "會計諮詢服務",
+      "slug": "consulting",
+      "sections": [
+        {
+          "heading": "我們的諮詢範圍",
+          "content": "提供財務管理、成本控制、內部控制等專業諮詢服務，助您提升營運效率與決策品質。",
+          "type": "generic-text-block"
+        },
+        {
+          "heading": "諮詢費用",
+          "type": "pricing-card-list",
+          "data": [
+            {
+              "title": "一小時線上諮詢",
+              "price": "NT$ 1,500/小時",
+              "features": [
+                { "text": "財務疑問解答", "icon": "check_circle" },
+                { "text": "初步問題診斷", "icon": "check_circle" }
+              ],
+              "button_text": "立即預約",
+              "button_link": "/appointment/"
+            }
+          ]
+        }
+      ],
+      "relatedLinks": [
+        {"text": "諮詢服務案例", "url": "/articles/?tag=諮詢"},
+        {"text": "預約諮詢", "url": "/appointment/"}
+      ]
+    },
+    {
+      "id": "registration",
+      "title": "工商登記設立",
+      "slug": "registration",
+      "sections": [
+        {
+          "heading": "我們的工商登記服務",
+          "content": "協助您從公司設立、變更登記到解散清算，提供一站式服務，讓您創業無憂，專注於核心業務發展。",
+          "type": "generic-text-block"
+        },
+        {
+          "heading": "設立流程",
+          "type": "process-steps",
+          "data": [
+            { "step_number": 1, "title": "公司名稱預查", "description": "協助您進行公司名稱預查，確保名稱可用。" },
+            { "step_number": 2, "title": "準備文件", "description": "專業協助您準備設立所需的所有文件與資料。" },
+            { "step_number": 3, "title": "送件與核准", "description": "代為向相關主管機關送件，追蹤進度直至核准。" },
+            { "step_number": 4, "title": "後續記帳報稅", "description": "設立完成後，無縫接軌提供後續會計記帳、稅務申報服務。" }
+          ]
+        }
+      ],
+      "relatedLinks": [
+        {"text": "公司設立常見問題", "url": "/faq/?category=工商登記服務"},
+        {"text": "預約公司設立諮詢", "url": "/appointment/"}
+      ]
+    }
+  ]
+}

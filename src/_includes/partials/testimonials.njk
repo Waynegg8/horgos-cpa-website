@@ -1,0 +1,50 @@
+{# src/_includes/partials/testimonials.njk #}
+{#
+  客戶見證區塊，配合 testimonial-slider.js 實現輪播效果。
+  接收一個 `testimonials` 變數 (通常是 src/_data/testimonials.json)。
+  符合藍圖的卡片視覺設計和輪播動畫要求。
+#}
+<section class="py-12 md:py-16 bg-brand-blue-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-heading font-bold text-center text-brand-blue-700 mb-10">客戶見證</h2>
+
+    <div class="relative max-w-2xl mx-auto">
+      <div id="testimonial-slider-container" class="overflow-hidden">
+        <div id="testimonial-slider" class="flex transition-transform duration-500 ease-in-out">
+          {% for testimonial in testimonials %}
+          <div class="w-full flex-shrink-0 p-4">
+            <div class="bg-white p-8 rounded-lg shadow-xl text-center">
+              {# 客戶見證內容 #}
+              <p class="text-gray-700 text-lg md:text-xl leading-relaxed italic mb-6">"{{ testimonial.content }}"</p>
+              {# 星級評分 (金色點綴) #}
+              <div class="flex justify-center mb-4">
+                {% for i in range(testimonial.rating) %}
+                  <span class="material-icons text-brand-gold text-2xl">star</span>
+                {% endfor %}
+                {% for i in range(5 - testimonial.rating) %}
+                  <span class="material-icons text-gray-300 text-2xl">star</span>
+                {% endfor %}
+              </div>
+              {# 客戶名稱 #}
+              <p class="text-brand-blue-700 font-semibold text-lg">{{ testimonial.clientName }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {# 導航按鈕 #}
+      <button id="testimonial-prev-btn" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg text-brand-blue-700 hover:bg-gray-100 transition-colors duration-200 z-10 -ml-4" aria-label="上一則見證">
+        <span class="material-icons text-3xl">chevron_left</span>
+      </button>
+      <button id="testimonial-next-btn" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg text-brand-blue-700 hover:bg-gray-100 transition-colors duration-200 z-10 -mr-4" aria-label="下一則見證">
+        <span class="material-icons text-3xl">chevron_right</span>
+      </button>
+
+      {# 圓點指示器 (可選) #}
+      <div id="testimonial-dots" class="flex justify-center space-x-2 mt-6">
+        {# 由 JavaScript 動態生成圓點 #}
+      </div>
+    </div>
+  </div>
+</section>

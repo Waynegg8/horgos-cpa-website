@@ -1,12 +1,16 @@
 {
-  "address": "402 台中市南區福平里興大路145號",
-  "phone": "04-1234-5678",
-  "lineUrl": "#",
+  "address": "台中市南區忠明南路123號10樓之8",
+  "phone": "04-12345678",
+  "lineUrl": "https://line.me/ti/p/@your-line-id",
   "businessHours": [
     {
       "day": "週一至週五",
       "time": "09:00 - 18:00"
+    },
+    {
+      "day": "週六、週日",
+      "time": "休息"
     }
   ],
-  "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3641.344078536838!2d120.67223037630737!3d24.12453537841923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693cfcec5965cd%3A0x2024545d4f3b5c64!2z5ZyL56uL5Lit6IiI5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1721277688451!5m2!1szh-TW!2stw"
+  "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.4077!2d120.66986!3d24.13715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ5JzAxLjciTiAxMjDCsDQxJzAyLjMiRTA!5e0!3m2!1sen!2stw!4v1678901234567!5m2!1sen!2stw"
 }

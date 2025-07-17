@@ -1,39 +1,39 @@
----
-layout: layouts/list.njk
-title: 最新文章
-permalink: /articles/
-pagination:
-  data: articles
-  size: 6
-  alias: articlesOnPage
-  reverse: true # 因為我們的資料是按日期降序，為了讓分頁第一頁是最新文章，需要反轉
-pageScripts:
-  - https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js
-  - /assets/js/search.js
----
-
-{# 搜尋框 #}
-<div class="mb-8">
-  <input type="search" id="search-input" data-page-type="文章" placeholder="搜尋文章..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-brand-blue-500 focus:border-brand-blue-500">
-</div>
-
-{# 搜尋結果容器 #}
-<div id="search-results-container"></div>
-
-{# 預設的文章列表與分頁 #}
-<div id="default-list-container">
-  {# 文章卡片列表 #}
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {# ▼▼▼ 修正點：迴圈變數現在直接就是文章物件 ▼▼▼ #}
-    {% for article in articlesOnPage %}
-      {% include "partials/card-article.njk" %}
-    {% endfor %}
+<main>
+  {# 搜尋欄 #}
+  <div class="search-bar-wrapper">
+    {% include "partials/search-bar.njk" %} {# 您的搜尋欄 partial #}
   </div>
 
-  {# 分頁導航 #}
-  <nav class="mt-12 flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
-    <div class="flex w-0 flex-1">{% if pagination.href.previous %}<a href="{{ pagination.href.previous }}" class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"><span class="material-icons mr-3">arrow_back</span>上一頁</a>{% endif %}</div>
-    <div class="hidden md:flex">{% for pageEntry in pagination.pages %}<a href="{{ pagination.hrefs[loop.index0] }}" class="{% if page.url == pagination.hrefs[loop.index0] %}border-brand-blue-500 text-brand-blue-600{% else %}border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300{% endif %} inline-flex items-center border-t-2 px-4 pt-4 text-sm font-medium">{{ loop.index }}</a>{% endfor %}</div>
-    <div class="flex w-0 flex-1 justify-end">{% if pagination.href.next %}<a href="{{ pagination.href.next }}" class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">下一頁<span class="material-icons ml-3">arrow_forward</span></a>{% endif %}</div>
-  </nav>
-</div>
+  <div class="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8">
+    {# 初始內容區塊 (無搜尋時顯示) #}
+    <div id="initial-content-container" class="w-full lg:w-3/4">
+      {# 這裡放置文章總覽的原始內容，例如 Eleventy Collection 的分頁迴圈 #}
+      {# 這是 Eleventy 生成的原始文章列表 #}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for article in collections.articles %} {# 假設 Eleventy 已經為您設定了分頁 #}
+          {% include "partials/card-article.njk", item: article %}
+        {% endfor %}
+      </div>
+      {# Eleventy 內建的分頁控制（如果 collections.articles 是分頁集合）#}
+      {% include "partials/pagination.njk" %}
+    </div>
+
+    {# 搜尋結果顯示區塊 (有搜尋時顯示) #}
+    <div id="search-results-container" class="w-full lg:w-3/4 hidden" data-page-type="articles" data-items-per-page="10">
+      {# 這裡的內容將由 search.js 動態填充 #}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {# 搜尋結果卡片將在這裡由 JavaScript 插入 #}
+      </div>
+    </div>
+
+    {# 側邊欄 #}
+    <aside class="w-full lg:w-1/4 lg:sticky lg:top-8 self-start">
+      {% include "partials/sidebar.njk" %} {# 您的側邊欄 partial #}
+    </aside>
+  </div>
+
+  {# 分頁按鈕容器 (由 search.js 控制) #}
+  <div id="pagination-container" class="mt-8">
+    {# 分頁按鈕將由 JavaScript 插入 #}
+  </div>
+</main>

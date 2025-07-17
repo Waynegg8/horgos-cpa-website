@@ -1,23 +1,30 @@
 [
   {
-    "id": "registration",
-    "title": "公司設立",
-    "icon": "business_center",
-    "description": "從零到一，我們引導您完成所有繁瑣的公司設立流程，確保您的事業合法、順利地啟航。",
-    "link": "/services/registration/"
-  },
-  {
     "id": "tax",
-    "title": "稅務申報",
-    "icon": "account_balance",
-    "description": "精準、及時的稅務申報服務，我們助您符合法規，最大化您的財務效益，稅務無憂。",
+    "title": "稅務申報與規劃",
+    "icon": "calculate",
+    "description": "提供專業的個人所得稅、營利事業所得稅申報，以及全面的稅務規劃建議。",
     "link": "/services/tax/"
   },
   {
+    "id": "audit",
+    "title": "審計與簽證",
+    "icon": "insights",
+    "description": "獨立、客觀的財務報表審計服務，確保企業財務透明與合規。",
+    "link": "/services/audit/"
+  },
+  {
+    "id": "registration",
+    "title": "工商登記設立",
+    "icon": "business_center",
+    "description": "協助您從公司設立、變更登記到解散清算，提供一站式服務。",
+    "link": "/services/registration/"
+  },
+  {
     "id": "consulting",
-    "title": "專業諮詢",
-    "icon": "support_agent",
-    "description": "面對複雜的財稅問題，我們的專家團隊提供清晰、可行的建議，成為您最信賴的顧問。",
+    "title": "會計諮詢服務",
+    "icon": "forum",
+    "description": "提供財務管理、成本控制、內部控制等專業諮詢，助您提升營運效率。",
     "link": "/services/consulting/"
   }
 ]

@@ -1,0 +1,41 @@
+{# src/_includes/components/highlight-quote.njk #}
+{#
+  引言/強調區塊組件。
+  接收 `data` 物件，包含 `quote_text` (字串), `author` (字串), `style` (字串, 可選 "blockquote", "card", "plain")。
+  符合藍圖的組件視覺設計。
+#}
+{% if data and data.quote_text %}
+<div class="my-8">
+  {% set componentClass = "" %}
+  {% set quoteTextClass = "text-xl md:text-2xl italic leading-relaxed text-gray-700" %} {# 預設樣式 #}
+  {% set authorClass = "text-gray-600 text-base mt-4" %} {# 預設樣式 #}
+
+  {% if data.style == "blockquote" %}
+    {# 帶有品牌藍色左側粗邊框 #}
+    {% set componentClass = "border-l-4 border-brand-blue-500 bg-brand-blue-50 p-6 rounded-r-lg shadow-sm" %}
+    {% set quoteTextClass = "text-xl md:text-2xl italic leading-relaxed text-gray-700" %}
+    <blockquote class="{{ componentClass }}">
+      <p class="{{ quoteTextClass }}">"{{ data.quote_text }}"</p>
+      {% if data.author %}
+        <footer class="{{ authorClass }}">&mdash; {{ data.author }}</footer>
+      {% endif %}
+    </blockquote>
+  {% elif data.style == "card" %}
+    {# 卡片式樣式 #}
+    {% set componentClass = "bg-white p-8 rounded-lg shadow-lg text-center" %}
+    {% set quoteTextClass = "text-xl md:text-2xl italic leading-relaxed text-gray-700" %}
+    <div class="{{ componentClass }}">
+      <span class="material-icons text-brand-gold text-6xl mb-4">format_quote</span> {# 大型引號圖標 #}
+      <p class="{{ quoteTextClass }}">"{{ data.quote_text }}"</p>
+      {% if data.author %}
+        <p class="{{ authorClass }}">{{ data.author }}</p>
+      {% endif %}
+    </div>
+  {% else %} {# 預設為 "plain" 或未指定樣式 #}
+    <p class="{{ quoteTextClass }}">"{{ data.quote_text }}"</p>
+    {% if data.author %}
+      <p class="{{ authorClass }}">&mdash; {{ data.author }}</p>
+    {% endif %}
+  {% endif %}
+</div>
+{% endif %}

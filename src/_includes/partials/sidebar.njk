@@ -1,33 +1,62 @@
-<aside class="w-full md:w-1/4 lg:w-1/3 md:pl-8 lg:pl-12">
-  <div class="space-y-8 sticky top-24">
-    
-    {# 分享按鈕區塊 #}
-    <div class="bg-gray-50 p-4 rounded-lg">
-      <h3 class="font-bold font-heading text-lg mb-2">分享這篇文章</h3>
-      <div class="flex space-x-2">
-        <a href="#" class="text-gray-500 hover:text-brand-blue-700">Line</a>
-        <a href="#" class="text-gray-500 hover:text-brand-blue-700">Facebook</a>
-      </div>
-    </div>
+{# src/_includes/partials/sidebar.njk #}
+{#
+  通用側邊欄組件，用於顯示推薦內容、分類、相關服務連結等。
+  它的內容會根據頁面類型和可用的數據而變化。
+#}
+<aside class="w-full lg:w-1/4 lg:sticky lg:top-8 self-start space-y-6">
 
-    {# 熱門項目區塊 (佔位符) #}
-    <div class="bg-gray-50 p-4 rounded-lg">
-      <h3 class="font-bold font-heading text-lg mb-2">熱門項目</h3>
-      <ul class="space-y-2">
-        <li><a href="#" class="text-brand-blue-700 hover:underline">熱門文章標題一</a></li>
-        <li><a href="#" class="text-brand-blue-700 hover:underline">熱門文章標題二</a></li>
-        <li><a href="#" class="text-brand-blue-700 hover:underline">熱門影片標題</a></li>
-      </ul>
-    </div>
-
-    {# 預約諮詢 CTA #}
-    <div class="bg-brand-blue-700 text-white p-6 rounded-lg text-center">
-        <h3 class="font-bold font-heading text-xl">需要專業協助？</h3>
-        <p class="mt-2 text-sm">立即預約，讓我們的專家為您解惑。</p>
-        <a href="/appointment/" class="mt-4 inline-block bg-white text-brand-blue-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200">
-          預約諮詢
-        </a>
-    </div>
-
+  {# 預約諮詢按鈕 - 藍圖要求在側邊欄顯示 #}
+  <div class="bg-brand-blue-700 text-white p-6 rounded-lg shadow-lg text-center">
+    <h3 class="text-xl font-heading font-bold mb-4">需要專業諮詢？</h3>
+    <p class="mb-4 text-sm">我們的專業團隊隨時準備為您服務。</p>
+    <a href="/appointment/" class="inline-block bg-brand-gold hover:bg-yellow-600 text-brand-blue-900 font-bold py-3 px-6 rounded-lg transition duration-200 shadow-md">立即預約</a>
   </div>
+
+  {# 熱門項目推薦 - 來自 _data/popular.json #}
+  {% if popular.items and popular.items.length %}
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    <h3 class="text-xl font-heading font-bold text-brand-blue-700 mb-4">熱門項目</h3>
+    <ul class="space-y-3">
+      {% for item in popular.items | slice(0, 5) %} {# 顯示前 5 個熱門項目 #}
+      <li><a href="{{ item.url }}" class="text-brand-blue-600 hover:text-brand-blue-800 hover:underline text-base">{{ item.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {# 相關服務連結 - 可根據上下文提供，或顯示所有服務 #}
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    <h3 class="text-xl font-heading font-bold text-brand-blue-700 mb-4">我們的服務</h3>
+    <ul class="space-y-3">
+      {% for service in site.services_overview %} {# 假設 site.services_overview 包含所有服務項目 #}
+        <li><a href="{{ service.link }}" class="text-brand-blue-600 hover:text-brand-blue-800 hover:underline text-base">{{ service.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {# 文章分類 / 影片分類 / 下載分類 (視當前頁面類型而定) #}
+  {# 這裡需要根據具體頁面傳入 active_categories 或 collections #}
+  {% if currentCategories %} {# 假設從頁面 Front Matter 傳入當前集合的分類 #}
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    <h3 class="text-xl font-heading font-bold text-brand-blue-700 mb-4">分類</h3>
+    <ul class="space-y-3">
+      {% for category in currentCategories %}
+        <li><a href="/{{ page.fileSlug }}/category/{{ category.slug }}/" class="text-brand-blue-600 hover:text-brand-blue-800 hover:underline text-base">{{ category.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {# 最新下載 (僅在下載頁面顯示) #}
+  {% if page.fileSlug == 'downloads' and collections.downloads %}
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    <h3 class="text-xl font-heading font-bold text-brand-blue-700 mb-4">最新下載</h3>
+    <ul class="space-y-3">
+      {% for item in collections.downloads | reverse | slice(0, 3) %} {# 顯示最新 3 個下載 #}
+      <li><a href="{{ item.url }}" class="text-brand-blue-600 hover:text-brand-blue-800 hover:underline text-base">{{ item.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
 </aside>

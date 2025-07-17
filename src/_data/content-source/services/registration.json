@@ -1,0 +1,43 @@
+{
+  "id": "registration",
+  "title": "工商登記設立",
+  "slug": "registration",
+  "sections": [
+    {
+      "heading": "我們的工商登記服務",
+      "content": "協助您從公司設立、變更登記到解散清算，提供一站式服務，讓您創業無憂，專注於核心業務發展。服務涵蓋有限公司、股份有限公司、獨資、合夥等各類組織型態。",
+      "type": "generic-text-block"
+    },
+    {
+      "heading": "公司設立流程",
+      "type": "process-steps",
+      "data": [
+        { "step_number": 1, "title": "公司名稱預查與業務洽談", "description": "協助您進行公司名稱預查，並與會計師洽談業務範圍、資本額、股權結構等細節。" },
+        { "step_number": 2, "title": "設立文件準備與簽署", "description": "專業協助您準備設立所需的所有文件，包括公司章程、股東名冊、董監事同意書等，並協助文件簽署。" },
+        { "step_number": 3, "title": "代辦送件與核准取得", "description": "代為向經濟部或地方政府送件，並持續追蹤審核進度，直至取得公司設立核准函。" },
+        { "step_number": 4, "title": "稅籍登記與銀行開戶輔導", "description": "協助辦理稅籍登記，並提供銀行開戶輔導與後續會計記帳、稅務申報的無縫接軌服務。" }
+      ]
+    },
+    {
+      "heading": "工商登記費用方案",
+      "type": "pricing-card-list",
+      "data": [
+        {
+          "title": "公司設立基本方案",
+          "price": "NT$ 8,000 起",
+          "features": [
+            { "text": "公司名稱預查", "icon": "check_circle" },
+            { "text": "設立文件代辦", "icon": "check_circle" },
+            { "text": "稅籍登記輔導", "icon": "check_circle" }
+          ],
+          "button_text": "了解方案",
+          "button_link": "/appointment/"
+        }
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {"text": "公司設立常見問題", "url": "/faq/?category=工商登記服務"},
+    {"text": "預約工商登記諮詢", "url": "/appointment/"}
+  ]
+}

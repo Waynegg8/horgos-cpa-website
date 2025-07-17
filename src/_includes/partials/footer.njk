@@ -1,50 +1,82 @@
-<footer class="bg-gray-800 text-white">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      
-      <div class="space-y-4">
-        <a href="/" title="{{ site.name }}">
-            <img class="h-8 w-auto" src="{{ site.logoPath }}" alt="{{ site.name }} Logo">
-        </a>
-        <p class="text-sm text-gray-400">© <span class="text-brand-gold">{{ '' | getYear }}</span> {{ site.name }}. All Rights Reserved.</p>
-        <div class="flex space-x-4">
-          <a href="{{ site.socialLinks.line }}" class="text-gray-400 hover:text-white">LINE</a>
-          <a href="{{ site.socialLinks.threads }}" class="text-gray-400 hover:text-white">Threads</a>
-        </div>
-      </div>
+{# src/_includes/partials/footer.njk #}
+{#
+  網站頁尾。
+  包含 Logo、版權資訊、服務項目連結、快速連結、社交媒體連結。
+#}
+<footer class="bg-brand-blue-900 text-white py-12 md:py-16 mt-12">
+  <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-      <div>
-        <h3 class="text-sm font-semibold tracking-wider uppercase">服務項目</h3>
-        <ul class="mt-4 space-y-2">
-          <li><a href="/services/registration/" class="text-base text-gray-300 hover:text-white">公司設立</a></li>
-          <li><a href="/services/tax/" class="text-base text-gray-300 hover:text-white">稅務申報</a></li>
-          <li><a href="/services/audit/" class="text-base text-gray-300 hover:text-white">審計服務</a></li>
-          <li><a href="/services/consulting/" class="text-base text-gray-300 hover:text-white">諮詢服務</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-semibold tracking-wider uppercase">快速連結</h3>
-        <ul class="mt-4 space-y-2">
-          <li><a href="/faq/" class="text-base text-gray-300 hover:text-white">常見問題</a></li>
-          <li><a href="/articles/" class="text-base text-gray-300 hover:text-white">最新文章</a></li>
-          <li><a href="/downloads/" class="text-base text-gray-300 hover:text-white">資源下載</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-semibold tracking-wider uppercase">聯絡資訊</h3>
-        <ul class="mt-4 space-y-2 text-base text-gray-300">
-          <li>{{ contact.address }}</li>
-          <li>{{ contact.phone }}</li>
-          <li><a href="mailto:{{ site.socialLinks.email }}" class="hover:text-white">{{ site.socialLinks.email }}</a></li>
-        </ul>
-      </div>
+    {# 事務所資訊區塊 #}
+    <div class="col-span-1 lg:col-span-1">
+      <a href="/" class="block mb-4" aria-label="回首頁 - 霍爾果斯會計師事務所">
+        {% if site.logoPath %}
+          {% image site.logoPath, site.name + " Logo", [100, 200], "100px", "eager", "async", "h-12 md:h-16 w-auto filter invert" %} {# invert 讓深色 Logo 在深色背景下可見 #}
+        {% else %}
+          <span class="text-white text-3xl font-heading font-extrabold">{{ site.name }}</span>
+        {% endif %}
+      </a>
+      <p class="text-gray-300 text-sm mb-2">專業、誠信、效率，您的會計稅務首選。</p>
+      <p class="text-gray-300 text-sm mb-2">地址：{{ contact.address }}</p>
+      <p class="text-gray-300 text-sm mb-2">電話：<a href="tel:{{ contact.phone | replace(' ', '') }}" class="hover:underline">{{ contact.phone }}</a></p>
+      <p class="text-gray-300 text-sm mb-2">Email：<a href="mailto:{{ contact.email }}" class="hover:underline">{{ contact.email }}</a></p>
+      <p class="text-gray-300 text-sm">服務時間：{{ contact.businessHours[0].day }} {{ contact.businessHours[0].time }}</p> {# 假設只顯示第一條時間 #}
     </div>
-    <div class="mt-8 border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
-      {% for link in site.legalLinks %}
-        <a href="{{ link.url }}" class="hover:text-white mx-2">{{ link.text }}</a>
-      {% endfor %}
+
+    {# 服務項目連結 #}
+    <div class="col-span-1">
+      <h3 class="text-lg font-heading font-bold mb-4 text-brand-gold">服務項目</h3>
+      <ul class="space-y-2">
+        {% for service in site.services %}
+          <li><a href="{{ service.url }}" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">{{ service.text }}</a></li>
+        {% endfor %}
+      </ul>
     </div>
+
+    {# 快速連結 #}
+    <div class="col-span-1">
+      <h3 class="text-lg font-heading font-bold mb-4 text-brand-gold">快速連結</h3>
+      <ul class="space-y-2">
+        {% for link in site.quickLinks %}
+          <li><a href="{{ link.url }}" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">{{ link.text }}</a></li>
+        {% endfor %}
+        {# 法律文件連結 #}
+        {% for legal in site.legalLinks %}
+          <li><a href="{{ legal.url }}" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">{{ legal.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {# 社交媒體與地圖連結 #}
+    <div class="col-span-1">
+      <h3 class="text-lg font-heading font-bold mb-4 text-brand-gold">聯絡我們</h3>
+      <div class="flex space-x-4 mb-6">
+        {% if site.socialLinks.threads %}
+          <a href="{{ site.socialLinks.threads }}" target="_blank" rel="noopener noreferrer" aria-label="Threads" class="text-gray-300 hover:text-white transition-colors duration-200">
+            {# 假設您有 Threads 的 SVG 或 Material Icon #}
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 15.5h-2v-7h2v7zm3 0h-2v-7h2v7zm3 0h-2v-7h2v7zM12 6a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/>
+            </svg>
+          </a>
+        {% endif %}
+        {% if site.socialLinks.line %}
+          <a href="{{ site.socialLinks.line }}" target="_blank" rel="noopener noreferrer" aria-label="Line" class="text-gray-300 hover:text-white transition-colors duration-200">
+            {# 假設您有 Line 的 SVG 或 Material Icon #}
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.5 13.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h2c.55 0 1 .45 1 1v4c0 .55-.45 1-1 1h-2zm-6 0c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h2c.55 0 1 .45 1 1v4c0 .55-.45 1-1 1h-2zm-6 0c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h2c.55 0 1 .45 1 1v4c0 .55-.45 1-1 1h-2z"/>
+            </svg>
+          </a>
+        {% endif %}
+        {# 如果有更多社交媒體，請在此處添加 #}
+      </div>
+      <a href="{{ contact.mapEmbedUrl }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-brand-gold text-brand-blue-900 font-bold py-3 px-6 rounded-lg hover:bg-yellow-600 transition duration-200 shadow-md">
+        <span class="material-icons mr-2">location_on</span> 在地圖上查看
+      </a>
+    </div>
+
+  </div>
+
+  {# 版權資訊 #}
+  <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+    <p>&copy; {{ site.name }} {{ now.getFullYear() }} 版權所有。</p>
   </div>
 </footer>

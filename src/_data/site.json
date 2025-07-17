@@ -1,22 +1,17 @@
 {
   "name": "霍爾果斯會計師事務所",
   "logoPath": "/assets/images/logo.png",
-  "baseUrl": "https://www.your-domain.com",
-  "description": "霍爾果斯會計師事務所深耕台中在地，精通法規。從台中公司設立到稅務申報，我們提供最專業的服務，助您在台中穩健成長，財稅無憂。",
-  "keywords": [
-    "台中會計師事務所",
-    "台中公司設立",
-    "稅務申報",
-    "霍爾果斯"
-  ],
+  "baseUrl": "https://www.horgos-cpa.com",
+  "description": "霍爾果斯會計師事務所深耕台中在地，提供專業的公司設立、稅務申報、審計與諮詢服務。助您事業穩健成長，財稅無憂。",
+  "keywords": ["台中會計師事務所", "公司設立", "稅務申報", "審計服務", "會計諮詢"],
   "author": "霍爾果斯會計師事務所",
   "socialLinks": {
-    "threads": "#",
-    "line": "#",
-    "email": "service@example.com"
+    "threads": "https://www.threads.net/@your-threads-account",
+    "line": "https://line.me/ti/p/@your-line-id",
+    "email": "contact@horgos-cpa.com"
   },
-  "formspreeUrl": "https://formspree.io/f/xwpovnwy",
-  "googleAnalyticsId": "G-XXXXXXXXXX",
+  "formspreeUrl": "https://formspree.io/f/your-formspree-id",
+  "googleAnalyticsId": "G-YOURANALYTICSID",
   "legalLinks": [
     {
       "text": "隱私權政策",
@@ -30,6 +25,20 @@
       "text": "免責聲明",
       "url": "/disclaimer/"
     }
+  ],
+  "navigation": [
+    {"text": "首頁", "url": "/"},
+    {"text": "服務", "url": "/services/tax/"},
+    {"text": "文章", "url": "/articles/"},
+    {"text": "影片", "url": "/videos/"},
+    {"text": "團隊", "url": "/team/"},
+    {"text": "FAQ", "url": "/faq/"},
+    {"text": "下載", "url": "/downloads/"},
+    {"text": "聯絡我們", "url": "/contact/"},
+    {"text": "預約", "url": "/appointment/"}
+  ],
+  "quickLinks": [
+    {"text": "關於我們", "url": "/about/"},
+    {"text": "最新消息", "url": "/articles/"}
   ]
 }
-

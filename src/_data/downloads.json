@@ -1,20 +1,20 @@
 [
   {
-    "id": "doc-001",
-    "title": "2025 年度稅務行事曆 (PDF)",
-    "date": "2025-01-10",
-    "slug": "tax-calendar-2025",
-    "tags": ["稅務", "行事曆", "PDF"],
-    "excerpt": "為您整理 2025 全年度重要的稅務申報時程，包含營業稅、營所稅、扣繳申報等，助您提前規劃，不錯過任何一個重要日期。",
+    "id": "tax-checklist-2025",
+    "title": "2025年度企業稅務申報清單",
+    "date": "2025-07-01T00:00:00+08:00",
+    "slug": "tax-checklist-2025",
+    "tags": ["稅務", "清單", "企業"],
+    "excerpt": "這份清單詳細列出了2025年度企業稅務申報所需準備的所有文件和注意事項，助您輕鬆完成申報。",
     "downloadUrl": "/assets/downloads/sample-document.pdf"
   },
   {
-    "id": "doc-002",
-    "title": "公司設立流程檢核表 (DOCX)",
-    "date": "2025-02-05",
-    "slug": "startup-checklist",
-    "tags": ["公司設立", "檢核表", "DOCX"],
-    "excerpt": "一份實用的 Word 檢核清單，涵蓋從公司名稱預查到銀行開戶的所有步驟，確保您在設立公司的過程中沒有遺漏。",
+    "id": "company-registration-flowchart",
+    "title": "公司設立流程圖：一步步教您完成登記",
+    "date": "2025-06-20T00:00:00+08:00",
+    "slug": "company-registration-flowchart",
+    "tags": ["公司設立", "流程圖", "登記"],
+    "excerpt": "透過這份簡潔明瞭的流程圖，您可以清晰地了解公司設立的每一個步驟，從名稱預查到營業登記，讓您創業無憂。",
     "downloadUrl": "/assets/downloads/brochure.pdf"
   }
 ]

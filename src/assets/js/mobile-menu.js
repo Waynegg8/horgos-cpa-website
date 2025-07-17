@@ -1,18 +1,20 @@
+// src/assets/js/mobile-menu.js
 document.addEventListener('DOMContentLoaded', () => {
-  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
-  const menuIcon = document.getElementById('mobile-menu-icon');
+  const menuIcon = document.getElementById('menu-icon'); // Assuming the icon inside the button has this ID
 
-  if (menuButton && mobileMenu && menuIcon) {
-    menuButton.addEventListener('click', () => {
-      const isHidden = mobileMenu.classList.contains('hidden');
-      
-      if (isHidden) {
+  if (mobileMenuButton && mobileMenu && menuIcon) {
+    mobileMenuButton.addEventListener('click', () => {
+      const isMenuOpen = mobileMenu.classList.contains('hidden');
+      if (isMenuOpen) {
         mobileMenu.classList.remove('hidden');
-        menuIcon.textContent = 'close'; // 將圖示從「選單」變為「關閉」
+        menuIcon.textContent = 'close'; // 改變圖標為關閉
+        mobileMenuButton.setAttribute('aria-expanded', 'true');
       } else {
         mobileMenu.classList.add('hidden');
-        menuIcon.textContent = 'menu'; // 將圖示變回「選單」
+        menuIcon.textContent = 'menu'; // 改變圖標為選單
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
       }
     });
   }

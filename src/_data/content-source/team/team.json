@@ -1,16 +1,23 @@
 [
   {
-    "id": "john-doe",
+    "id": "accountant-chen",
     "name": "陳會計師",
     "title": "資深會計師",
     "bio": "陳會計師在稅務規劃和審計方面擁有超過15年的豐富經驗，致力於為客戶提供最精準的財務建議。",
     "imageUrl": "/assets/images/team/member-avatar.jpg"
   },
   {
-    "id": "jane-smith",
-    "name": "林稅務顧問",
+    "id": "consultant-lin",
+    "name": "林顧問",
     "title": "稅務規劃師",
     "bio": "林顧問專精於個人與企業的稅務申報與節稅策略，幫助客戶合法降低稅負。",
+    "imageUrl": "/assets/images/team/member-avatar.jpg"
+  },
+  {
+    "id": "auditor-wang",
+    "name": "王審計師",
+    "title": "審計經理",
+    "bio": "王審計師以其嚴謹細緻的查核能力，確保客戶財務報表的真實性與合規性。",
     "imageUrl": "/assets/images/team/member-avatar.jpg"
   }
 ]

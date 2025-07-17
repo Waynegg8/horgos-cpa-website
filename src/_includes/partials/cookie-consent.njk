@@ -1,0 +1,22 @@
+{# src/_includes/partials/cookie-consent.njk #}
+{#
+  Cookie 同意彈窗的 HTML 結構。
+  這個彈窗預設為隱藏，由 src/assets/js/cookie-consent.js 腳本控制顯示和行為。
+  它應該放在頁面底部，且具備可及性。
+#}
+<div id="cookie-consent-banner" class="hidden fixed bottom-0 left-0 right-0 bg-brand-blue-900 text-white p-4 z-50 shadow-lg md:flex md:items-center md:justify-between flex-wrap">
+  <div class="flex-grow mb-4 md:mb-0 md:mr-4">
+    <p class="text-sm md:text-base leading-relaxed">
+      本網站使用 Cookie 以提升您的瀏覽體驗。繼續使用本網站即表示您同意我們的 <a href="{{ site.legalLinks[0].url }}" id="cookie-learn-more" class="underline hover:text-brand-gold transition-colors duration-200" aria-label="了解更多關於隱私權政策">隱私權政策</a>。
+    </p>
+  </div>
+  <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+    <button id="cookie-accept" class="bg-brand-gold text-brand-blue-900 font-bold py-2 px-5 rounded-lg hover:bg-yellow-600 transition duration-200 shadow-md">
+      我同意
+    </button>
+    {# 藍圖提到可選的「拒絕」按鈕，但通常「同意」後就不再顯示，或提供「了解更多」 #}
+    {# <button id="cookie-reject" class="text-white border border-white py-2 px-5 rounded-lg hover:bg-white hover:text-brand-blue-900 transition duration-200">
+      拒絕
+    </button> #}
+  </div>
+</div>
