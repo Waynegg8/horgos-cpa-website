@@ -1,0 +1,23 @@
+{
+  "name": "horgos-cpa-website",
+  "version": "1.0.0",
+  "description": "霍爾果斯會計師事務所官方網站，基於 Eleventy 與 Tailwind CSS。",
+  "main": ".eleventy.js",
+  "scripts": {
+    "start": "eleventy --serve",
+    "serve": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0-alpha.11",
+    "@11ty/eleventy-img": "^4.0.2",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "eleventy-critical-css": "^2.0.1",
+    "eleventy-plugin-robotstxt": "^1.0.0",
+    "eleventy-plugin-sitemap": "file:local_packages/eleventy-plugin-sitemap-main",
+    "markdown-it": "^14.1.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
+  }
+}

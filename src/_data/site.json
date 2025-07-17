@@ -1,0 +1,35 @@
+{
+  "name": "霍爾果斯會計師事務所",
+  "logoPath": "/assets/images/logo.png",
+  "baseUrl": "https://www.your-domain.com",
+  "description": "霍爾果斯會計師事務所深耕台中在地，精通法規。從台中公司設立到稅務申報，我們提供最專業的服務，助您在台中穩健成長，財稅無憂。",
+  "keywords": [
+    "台中會計師事務所",
+    "台中公司設立",
+    "稅務申報",
+    "霍爾果斯"
+  ],
+  "author": "霍爾果斯會計師事務所",
+  "socialLinks": {
+    "threads": "#",
+    "line": "#",
+    "email": "service@example.com"
+  },
+  "formspreeUrl": "https://formspree.io/f/xwpovnwy",
+  "googleAnalyticsId": "G-XXXXXXXXXX",
+  "legalLinks": [
+    {
+      "text": "隱私權政策",
+      "url": "/privacy-policy/"
+    },
+    {
+      "text": "服務條款",
+      "url": "/terms-of-service/"
+    },
+    {
+      "text": "免責聲明",
+      "url": "/disclaimer/"
+    }
+  ]
+}
+

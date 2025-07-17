@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>{{ title }} | {{ site.name }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  
+  {# ▼▼▼ 我們在 CDN 網址後方加上 ?plugins=typography ▼▼▼ #}
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  
+  {# 載入我們的自訂設定 #}
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-blue': {
+              50: '#eef7ff',
+              100: '#d9ecff',
+              200: '#bbdfff',
+              300: '#8ecbff',
+              400: '#5aaeff',
+              500: '#368fff',
+              600: '#2575ff',
+              700: '#1960f0',
+              800: '#184fcd',
+              900: '#1a45a1',
+              950: '#122b68',
+            },
+            'brand-gold': '#FFD700',
+          },
+          fontFamily: {
+            'heading': ['"kaleko-105-bold"', 'sans-serif'],
+            'sans': ['"TouchMeSans-PetiteRegular"', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <link rel="preload" href="/assets/fonts/kaleko-105-bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/TouchMeSans-PetiteRegular.woff2" as="font" type="font/woff2" crossorigin>
+
+</head><body class="bg-white text-gray-800 flex flex-col min-h-screen">
+
+  {% include "partials/nav.njk" %}
+
+  <main class="flex-grow">
+    {{ content | safe }}
+  </main>
+
+  {% include "partials/seo-footer-block.njk" %}
+  {% include "partials/footer.njk" %}
+
+  {# 載入全域與頁面指定的 JS 腳本 #}
+  <script src="/assets/js/mobile-menu.js" defer></script>
+  {% if pageScripts %}
+    {% for script in pageScripts %}
+      <script src="{{ script }}" defer></script>
+    {% endfor %}
+  {% endif %}
+
+</body>
+</html>

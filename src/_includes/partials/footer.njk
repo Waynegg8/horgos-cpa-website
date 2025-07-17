@@ -1,0 +1,50 @@
+<footer class="bg-gray-800 text-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <div class="space-y-4">
+        <a href="/" title="{{ site.name }}">
+            <img class="h-8 w-auto" src="{{ site.logoPath }}" alt="{{ site.name }} Logo">
+        </a>
+        <p class="text-sm text-gray-400">© <span class="text-brand-gold">{{ '' | getYear }}</span> {{ site.name }}. All Rights Reserved.</p>
+        <div class="flex space-x-4">
+          <a href="{{ site.socialLinks.line }}" class="text-gray-400 hover:text-white">LINE</a>
+          <a href="{{ site.socialLinks.threads }}" class="text-gray-400 hover:text-white">Threads</a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold tracking-wider uppercase">服務項目</h3>
+        <ul class="mt-4 space-y-2">
+          <li><a href="/services/registration/" class="text-base text-gray-300 hover:text-white">公司設立</a></li>
+          <li><a href="/services/tax/" class="text-base text-gray-300 hover:text-white">稅務申報</a></li>
+          <li><a href="/services/audit/" class="text-base text-gray-300 hover:text-white">審計服務</a></li>
+          <li><a href="/services/consulting/" class="text-base text-gray-300 hover:text-white">諮詢服務</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold tracking-wider uppercase">快速連結</h3>
+        <ul class="mt-4 space-y-2">
+          <li><a href="/faq/" class="text-base text-gray-300 hover:text-white">常見問題</a></li>
+          <li><a href="/articles/" class="text-base text-gray-300 hover:text-white">最新文章</a></li>
+          <li><a href="/downloads/" class="text-base text-gray-300 hover:text-white">資源下載</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold tracking-wider uppercase">聯絡資訊</h3>
+        <ul class="mt-4 space-y-2 text-base text-gray-300">
+          <li>{{ contact.address }}</li>
+          <li>{{ contact.phone }}</li>
+          <li><a href="mailto:{{ site.socialLinks.email }}" class="hover:text-white">{{ site.socialLinks.email }}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-8 border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
+      {% for link in site.legalLinks %}
+        <a href="{{ link.url }}" class="hover:text-white mx-2">{{ link.text }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</footer>

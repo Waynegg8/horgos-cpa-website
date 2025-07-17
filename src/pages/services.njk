@@ -1,0 +1,49 @@
+---
+pagination:
+  data: services
+  size: 1
+  alias: service
+permalink: "/services/{{ service.slug }}/"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ service.title }}"
+---
+
+<div class="bg-white py-16 sm:py-24">
+  <div class="container mx-auto max-w-4xl px-6 lg:px-8">
+    
+    <div class="text-center">
+      <h1 class="text-3xl font-bold font-heading tracking-tight text-gray-900 sm:text-4xl">{{ service.title }}</h1>
+    </div>
+
+    <div class="mt-12 space-y-16">
+      {% for section in service.sections %}
+        <section>
+          <h2 class="text-2xl font-bold font-heading text-gray-800">{{ section.heading }}</h2>
+          
+          {% if section.type == 'generic' %}
+            {# ▼▼▼ 在這裡加上 prose class ▼▼▼ #}
+            <div class="mt-4 text-lg text-gray-600 leading-relaxed prose lg:prose-xl max-w-none">
+              <p>{{ section.content }}</p>
+            </div>
+          {% elif section.type == 'process-steps' %}
+            {% set data = section.data %}
+            {% include "components/process-steps.njk" %}
+          {% endif %}
+        </section>
+      {% endfor %}
+    </div>
+
+    <div class="mt-16 text-center border-t pt-8">
+       <h3 class="text-xl font-semibold">下一步</h3>
+       <div class="mt-4 space-x-4">
+        {% for link in service.relatedLinks %}
+          <a href="{{ link.url }}" class="inline-block bg-brand-blue-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-brand-blue-800 transition-colors duration-300">
+            {{ link.text }}
+          </a>
+        {% endfor %}
+       </div>
+    </div>
+
+  </div>
+</div>

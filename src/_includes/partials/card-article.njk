@@ -1,0 +1,15 @@
+<div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+  {# ▼▼▼ 修正點：使用 article.url 來確保連結正確 ▼▼▼ #}
+  <a href="{{ article.url }}" class="block h-full">
+    <div class="p-6 flex flex-col h-full">
+      <div class="flex-grow">
+        <div class="uppercase tracking-wide text-sm text-brand-blue-700 font-semibold">{{ article.category.name }}</div>
+        <h3 class="block mt-1 text-lg leading-tight font-bold text-gray-900 hover:underline">{{ article.title }}</h3>
+        <p class="mt-2 text-gray-500">{{ article.excerpt }}</p>
+      </div>
+      <div class="mt-4 text-xs text-gray-400">
+        <span>{{ article.date | formatDate }}</span>
+      </div>
+    </div>
+  </a>
+</div>

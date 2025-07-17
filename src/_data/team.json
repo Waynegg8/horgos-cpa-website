@@ -1,0 +1,23 @@
+[
+  {
+    "id": "cpa-01",
+    "name": "林會計師",
+    "title": "主持會計師",
+    "bio": "擁有超過十五年的執業經驗，專精於中小企業稅務規劃與新創事業輔導。致力於以專業、細心的服務，成為客戶最信賴的事業夥伴。",
+    "imageUrl": "/assets/images/team/team-member-avatar.jpg"
+  },
+  {
+    "id": "cpa-02",
+    "name": "陳經理",
+    "title": "專案經理 / 審計部",
+    "bio": "熟悉各產業的帳務處理與內部控制流程。擅長為企業導入數位化帳務系統，提升財務管理效率，確保財報的準確性與合規性。",
+    "imageUrl": "/assets/images/team/team-member-avatar.jpg"
+  },
+  {
+    "id": "cpa-03",
+    "name": "張專員",
+    "title": "工商登記專員",
+    "bio": "負責處理公司設立、變更登記等各項行政事務。以耐心和專業，協助客戶順利完成所有繁瑣的登記流程。",
+    "imageUrl": "/assets/images/team/team-member-avatar.jpg"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "id": "video-tax-intro",
+  "title": "影片教學：三分鐘了解營業稅是什麼？",
+  "date": "2025-07-16",
+  "slug": "video-tax-intro",
+  "strategy": "single_video",
+  "series_title": "",
+  "series_description": "",
+  "episode": 1,
+  "tags": ["影片", "稅務", "營業稅"],
+  "category": {
+    "slug": "tax",
+    "name": "稅務新知"
+  },
+  "excerpt": "營業稅是每個創業者都會遇到的課題。這支短片用三分鐘的時間，帶您快速了解營業稅的基本概念與計算方式。",
+  "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+  "thumbnailUrl": "/assets/images/hero-video-poster.jpg",
+  "content": "<p>在這支影片中，我們將會探討：</p><ul><li>什麼是營業稅？</li><li>誰需要繳納營業稅？</li><li>進項稅額與銷項稅額的差別。</li></ul><p>希望對您有所幫助！</p>"
+}

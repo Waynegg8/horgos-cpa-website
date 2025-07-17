@@ -1,0 +1,104 @@
+[
+  {
+    "id": "tax-guide-2025",
+    "title": "2025 年中小企業稅務全攻略",
+    "date": "2025-07-15",
+    "slug": "tax-guide-2025",
+    "strategy": "single_article",
+    "series_title": "",
+    "series_description": "",
+    "episode": 1,
+    "tags": [
+      "稅務",
+      "中小企業",
+      "年度攻略"
+    ],
+    "category": {
+      "slug": "tax",
+      "name": "稅務新知"
+    },
+    "thumbnail_image": {
+      "generate_from_category": true,
+      "alt_text": "計算機與稅務文件的俯視圖"
+    },
+    "excerpt": "本文為您完整解析 2025 年中小企業主必須知道的稅務法規與申報技巧，從營業稅到營所稅，一篇文章讓您掌握所有關鍵。",
+    "body_markdown": "## 前言\n\n身為中小企業主，每年最頭痛的問題之一莫過於稅務申報。法規不斷更新，細節繁瑣，一不小心就可能導致罰款或錯失節稅機會。\n\n### 營業稅重點\n\n營業稅是每兩個月申報一次，重點在於正確分類進項與銷項憑證...\n\n### 營所稅規劃\n\n年度的營利事業所得稅結算申報，則是檢視公司整年營運成果的時刻。除了計算課稅所得額，更重要的是提前進行規劃...",
+    "faq_section": [],
+    "prev_article": {
+      "title": "創業必修課(二)：資本額該如何規劃？",
+      "url": "/startup-lesson-capital/"
+    },
+    "next_article": {
+      "title": "2025 年中小企業稅務全攻略",
+      "url": "/tax-guide-2025/"
+    }
+  },
+  {
+    "id": "tax-series-ep2",
+    "title": "創業必修課(二)：資本額該如何規劃？",
+    "date": "2025-07-06",
+    "slug": "startup-lesson-capital",
+    "strategy": "article_series",
+    "series_title": "創業者必修財稅課",
+    "series_description": "從零開始，帶您一步步了解創業者必須面對的各種財稅挑戰與應對策略。",
+    "episode": 2,
+    "tags": [
+      "創業",
+      "公司設立",
+      "資本額"
+    ],
+    "category": {
+      "slug": "registration",
+      "name": "工商登記"
+    },
+    "thumbnail_image": {
+      "generate_from_category": true,
+      "alt_text": "桌上的計算機與錢幣"
+    },
+    "excerpt": "資本額不是越高越好，也不是越低越沒問題。合理的資本額規劃，能讓公司在初期營運更順暢，也避免不必要的稅務風險。",
+    "body_markdown": "## 資本額登記不實的風險\n\n過低的資本額可能讓客戶或銀行對公司的償債能力產生疑慮。而過高的資本額若與實際狀況不符，則可能涉及驗資不實等法律問題。因此，建議根據您的初期營運規劃（如辦公室租金、人事成本、初期進貨成本等）來估算一個合理的數字。",
+    "faq_section": [],
+    "prev_article": {
+      "title": "創業必修課(一)：如何選擇公司型態？",
+      "url": "/startup-lesson-company-type/"
+    },
+    "next_article": {
+      "title": "2025 年中小企業稅務全攻略",
+      "url": "/tax-guide-2025/"
+    }
+  },
+  {
+    "id": "tax-series-ep1",
+    "title": "創業必修課(一)：如何選擇公司型態？",
+    "date": "2025-07-04",
+    "slug": "startup-lesson-company-type",
+    "strategy": "article_series",
+    "series_title": "創業者必修財稅課",
+    "series_description": "從零開始，帶您一步步了解創業者必須面對的各種財稅挑戰與應對策略。",
+    "episode": 1,
+    "tags": [
+      "創業",
+      "公司設立",
+      "工商登記"
+    ],
+    "category": {
+      "slug": "registration",
+      "name": "工商登記"
+    },
+    "thumbnail_image": {
+      "generate_from_category": true,
+      "alt_text": "一位創業者正在辦公桌前規劃事業藍圖"
+    },
+    "excerpt": "踏出創業的第一步，就是決定公司的法律型態。有限公司？股份有限公司？還是行號？不同的選擇將深深影響您的稅務、責任與未來的擴展性。",
+    "body_markdown": "## 獨資、合夥還是公司？\n\n在台灣，常見的商業組織型態主要分為「行號」（獨資、合夥）與「公司」（有限公司、股份有限公司）。它們最大的差異在於**法人資格**與**責任範圍**。\n\n- **行號**：責任是無限的，也就是說，如果商號有債務，負責人需要用個人財產來清償。\n- **公司**：責任是有限的，股東僅以其出資額為限，對公司債務負責。\n\n下一集，我們將討論「資本額」該如何規劃。",
+    "faq_section": [],
+    "prev_article": {
+      "title": "創業必修課(一)：如何選擇公司型態？",
+      "url": "/startup-lesson-company-type/"
+    },
+    "next_article": {
+      "title": "創業必修課(二)：資本額該如何規劃？",
+      "url": "/startup-lesson-capital/"
+    }
+  }
+]

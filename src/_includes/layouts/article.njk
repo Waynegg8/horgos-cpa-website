@@ -1,0 +1,45 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<div class="bg-white py-16 sm:py-24">
+  <div class="container mx-auto px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row">
+      
+      <article class="w-full md:w-3/4 lg:w-2/3 prose lg:prose-lg max-w-none">
+        <h1 class="font-heading">{{ title }}</h1>
+        {# ▼▼▼ 修正點：直接從 article 物件取資料 ▼▼▼ #}
+        <div class="text-sm text-gray-500 mb-8">
+          <span>發布於：{{ article.date | formatDate }}</span> / 
+          <span>分類：<a href="/category/{{ article.category.slug }}" class="text-brand-blue-700 hover:underline">{{ article.category.name }}</a></span>
+        </div>
+        
+        {{ content | safe }}
+      </article>
+
+      {% include "partials/sidebar.njk" %}
+    </div>
+
+    <div class="mt-16 border-t pt-8 flex justify-between font-semibold">
+      <div>
+        {# ▼▼▼ 修正點：直接從 article 物件取資料 ▼▼▼ #}
+        {% if article.prev_article and article.prev_article.url %}
+          <a href="{{ article.prev_article.url }}" class="text-brand-blue-700 hover:underline">
+            <span class="block text-xs text-gray-500">上一篇</span>
+            <span>&larr; {{ article.prev_article.title }}</span>
+          </a>
+        {% endif %}
+      </div>
+      <div class="text-right">
+        {# ▼▼▼ 修正點：直接從 article 物件取資料 ▼▼▼ #}
+        {% if article.next_article and article.next_article.url %}
+          <a href="{{ article.next_article.url }}" class="text-brand-blue-700 hover:underline">
+            <span class="block text-xs text-gray-500">下一篇</span>
+            <span>{{ article.next_article.title }} &rarr;</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
