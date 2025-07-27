@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <section class="search-section container" style="padding-top:80px;">
+    <h2>網站搜尋</h2>
+    <div class="search-bar">
+      <input type="text" id="search-input" class="search-input" placeholder="輸入關鍵字搜尋..." aria-label="搜尋關鍵字">
+    </div>
+    <ul id="search-results" class="search-results"></ul>
+  </section>
+  <section class="cta-section">
+    <h2>需要更多協助？</h2>
+    <p>若您未找到想要的資訊，歡迎預約諮詢或直接聯絡我們。</p>
+    <a href="{{ "appointment" | relURL }}" class="cta-button">預約諮詢</a>
+  </section>
+{{ end }}

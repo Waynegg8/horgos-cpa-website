@@ -1,0 +1,107 @@
+{{ define "main" }}
+  <!-- Hero 輪播區 -->
+  <section class="hero-slider">
+    <div class="hero-slide active" style="background-image:url('{{ "assets/images/hero.png" | relURL }}');">
+      <a href="{{ "services" | relURL }}" class="slide-link" aria-label="了解我們的服務"></a>
+    </div>
+    <div class="hero-slide" style="background-image:url('{{ "assets/images/hero2.png" | relURL }}');">
+      <a href="{{ "about" | relURL }}" class="slide-link" aria-label="關於我們"></a>
+    </div>
+    <div class="hero-slide" style="background-image:url('{{ "assets/images/hero3.png" | relURL }}');">
+      <a href="{{ "articles" | relURL }}" class="slide-link" aria-label="閱讀知識文章"></a>
+    </div>
+    <div class="slider-controls">
+      <button class="prev" aria-label="上一張">&#10094;</button>
+      <button class="next" aria-label="下一張">&#10095;</button>
+    </div>
+    <div class="slider-dots">
+      <button class="dot active" aria-label="第一張"></button>
+      <button class="dot" aria-label="第二張"></button>
+      <button class="dot" aria-label="第三張"></button>
+    </div>
+  </section>
+
+  <!-- 創業專區 -->
+  <section class="startup-section container">
+    <h2>創業專區</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>創業指南</h3>
+        <p>掌握創業過程中的關鍵財稅知識。</p>
+        <a href="{{ "articles" | relURL }}" class="card-link" aria-label="閱讀創業指南"></a>
+      </div>
+      <div class="card">
+        <h3>公司設立</h3>
+        <p>從名稱預查到登記，我們為您提供專業代辦服務。</p>
+        <a href="{{ "services/registration" | relURL }}" class="card-link" aria-label="查看公司設立服務"></a>
+      </div>
+      <div class="card">
+        <h3>常見問答</h3>
+        <p>解答創業與營運中常見的財稅問題。</p>
+        <a href="{{ "faq" | relURL }}" class="card-link" aria-label="前往常見問題"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 關於我們簡介 -->
+  <section class="about-section">
+    <div class="container about-content">
+      <div class="about-text">
+        <h2>關於我們</h2>
+        <p>霍爾果斯會計師事務所致力於為中小企業、新創公司、電商與創業者提供專業、保密、可靠且誠信的財稅服務。我們整合國內外會計師資源，提供記帳報稅、公司設立、財稅簽證、勞健保及財務顧問等一站式解決方案。</p>
+        <p>秉持客戶至上的服務理念，我們協助您合法節稅、健全帳務並規劃企業成長。無論是首次創業者或成熟企業，皆能在這裡獲得專業支持。</p>
+        <a href="{{ "about" | relURL }}" class="cta-button" style="margin-top:1rem;">了解更多</a>
+      </div>
+      <div class="about-image">
+        <img src="{{ "assets/images/about.png" | relURL }}" alt="辦公室插畫">
+      </div>
+    </div>
+  </section>
+
+  <!-- 主要服務區 -->
+  <section class="services container" id="services">
+    <h2>我們的服務</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <a href="{{ "services/tax" | relURL }}" class="card-link">
+          <div class="service-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+          <h3>稅務暨帳務服務</h3>
+          <p>每月記帳報稅，專業團隊確保您的帳務正確並符合法規，協助節稅與風險控管。</p>
+        </a>
+      </div>
+      <div class="service-card">
+        <a href="{{ "services/registration" | relURL }}" class="card-link">
+          <div class="service-icon"><i class="fas fa-building"></i></div>
+          <h3>公司設立與登記</h3>
+          <p>從公司名稱預查、資本額規劃到營業登記，我們提供全程代辦，讓您輕鬆成立公司。</p>
+        </a>
+      </div>
+      <div class="service-card">
+        <a href="{{ "services/attestation" | relURL }}" class="card-link">
+          <div class="service-icon"><i class="fas fa-stamp"></i></div>
+          <h3>財稅簽證服務</h3>
+          <p>透過專業會計師簽證財務報表，提升財報公信力，符合銀行、投資人與主管機關要求。</p>
+        </a>
+      </div>
+      <div class="service-card">
+        <a href="{{ "services/advisory" | relURL }}" class="card-link">
+          <div class="service-icon"><i class="fas fa-hand-holding-usd"></i></div>
+          <h3>財務顧問與諮詢</h3>
+          <p>提供財務規劃、資金預算、現金流管理等顧問服務，助您做出明智決策。</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA 區 -->
+  <section class="cta-section">
+    <h2>準備好讓我們為您服務了嗎？</h2>
+    <p>立即預約免費諮詢，由專業會計師為您打造量身訂製的財稅方案。</p>
+    <a href="{{ "appointment" | relURL }}" class="cta-button">立即預約</a>
+  </section>
+
+  <!-- SEO 文字區 -->
+  <section class="seo-section container">
+    <p>霍爾果斯會計師事務所位於台中西區，專注於為中小企業、新創團隊和個人創業者提供專業會計與稅務服務。我們的服務涵蓋 <a href="{{ "services" | relURL }}">公司設立</a>、<a href="{{ "services" | relURL }}">記帳報稅</a>、<a href="{{ "services" | relURL }}">稅務規劃</a>、<a href="{{ "services" | relURL }}">財務顧問</a> 等，並定期發佈 <a href="{{ "articles" | relURL }}">稅務與創業知識文章</a>、<a href="{{ "videos" | relURL }}">財稅教學影片</a> 和 <a href="{{ "faq" | relURL }}">常見問題解答</a>，協助您掌握最新政策與趨勢。立即聯繫我們，體驗專業可靠的財稅服務。</p>
+  </section>
+{{ end }}

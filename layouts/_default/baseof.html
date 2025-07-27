@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{ if .Title }}{{ .Title }} | {{ .Site.Title }}{{ else }}{{ .Site.Title }}{{ end }}</title>
+  {{ if .Params.description }}<meta name="description" content="{{ .Params.description }}">{{ else }}<meta name="description" content="{{ .Site.Params.description }}">{{ end }}
+  <link rel="stylesheet" href="{{ "assets/css/style.css" | relURL }}">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-z5vnoDrRvUWT1rQA5b/5x2zip7ecd7gWJSf8dlN2rD+aT8dCE2p+5hgUEIOYU1SmhnQqEA9JMaXG0Bj9sNkWAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <!-- 導覽列 -->
+  <header>
+    {{ partial "header.html" . }}
+  </header>
+
+  <!-- 主內容 -->
+  {{ block "main" . }}{{ end }}
+
+  <!-- 回頂端按鈕 -->
+  <div class="back-to-top" aria-label="回到頂端"><i class="fas fa-arrow-up"></i></div>
+
+  <!-- 頁腳 -->
+  {{ partial "footer.html" . }}
+
+  <!-- 外部 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+  <script src="{{ "assets/js/script.js" | relURL }}"></script>
+  <script src="{{ "assets/js/search.js" | relURL }}"></script>
+</body>
+</html>

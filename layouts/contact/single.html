@@ -1,0 +1,39 @@
+{{ define "main" }}
+<section class="container contact-page" style="padding-top:80px;">
+  <h1>{{ .Title }}</h1>
+  <div class="contact-flex">
+    <!-- 左側：聯絡資訊與交通資訊 -->
+    <div class="contact-details">
+      <div class="contact-cards-grid">
+        <div class="contact-card">
+          <h3>地址</h3>
+          <p>台中市西區建國路21號3樓之1</p>
+        </div>
+        <div class="contact-card">
+          <h3>電話</h3>
+          <p><a href="tel:0422205606">04-2220-5606</a></p>
+        </div>
+        <div class="contact-card">
+          <h3>LINE</h3>
+          <p>@horgoscpa</p>
+        </div>
+        <div class="contact-card">
+          <h3>營業時間</h3>
+          <p>週一至週五 08:30–12:30 ， 13:30–17:30</p>
+          <p>目前狀態：<span id="business-status">--</span></p>
+        </div>
+      </div>
+      <div class="contact-traffic-card">
+        <h3>交通資訊</h3>
+        <p>我們位於台中市西區市中心，鄰近公車站與停車場，距離台中火車站約 10 分鐘車程。歡迎提前來電預約，以便安排專人接待。</p>
+      </div>
+    </div>
+    <!-- 右側：地圖 -->
+    <div class="contact-map">
+      <iframe src="https://www.google.com/maps?q=24.142268,120.67588&hl=zh-TW&z=17&output=embed" loading="lazy" allowfullscreen></iframe>
+    </div>
+  </div>
+  <!-- SEO 區塊 -->
+  {{ partial "seo.html" . }}
+</section>
+{{ end }}

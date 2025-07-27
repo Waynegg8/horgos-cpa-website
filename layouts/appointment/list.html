@@ -1,0 +1,60 @@
+{{ define "main" }}
+<section class="container appointment-page" style="padding-top:80px;">
+  <h1>{{ .Title }}</h1>
+  <div class="appointment-grid">
+    <!-- 預約表單區 -->
+    <div class="appointment-form">
+      <form action="https://formspree.io/f/mwkzvrbe" method="POST" onsubmit="return validateCaptcha(event);">
+        <div class="form-group">
+          <label for="name">姓名 *</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">聯絡電話 *</label>
+          <input type="text" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label>諮詢主題 *</label>
+          <div class="topic-buttons">
+            <label class="topic-option"><input type="radio" name="topic" value="公司設立" required> 公司設立</label>
+            <label class="topic-option"><input type="radio" name="topic" value="記帳報稅" required> 記帳報稅</label>
+            <label class="topic-option"><input type="radio" name="topic" value="財稅簽證" required> 財稅簽證</label>
+            <label class="topic-option"><input type="radio" name="topic" value="財務顧問" required> 財務顧問</label>
+            <label class="topic-option"><input type="radio" name="topic" value="其他" required> 其他</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">諮詢內容</label>
+          <textarea id="message" name="message"></textarea>
+        </div>
+        <div class="form-group privacy-check">
+          <label><input type="checkbox" id="privacy" required> 我已閱讀並同意隱私政策</label>
+        </div>
+        <div class="form-group captcha-group">
+          <label for="captcha">驗證碼：<span id="captcha-question"></span></label>
+          <input type="text" id="captcha" required>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="cta-button">送出預約</button>
+        </div>
+      </form>
+    </div>
+    <!-- 注意事項區 -->
+    <div class="appointment-notes">
+      <h2>預約注意事項</h2>
+      <ul>
+        <li>諮詢服務採預約制，請先填寫表單或透過 LINE 與我們聯繫。</li>
+        <li>為提供精準建議，請簡述您的需求，例如公司設立、帳務規劃或節稅策略。</li>
+        <li>我們將於一個工作日內與您確認諮詢時段。</li>
+        <li>您亦可將姓名、聯絡電話、Email 及諮詢內容寄送至 <a href="mailto:horgoscpa@gmail.com">horgoscpa@gmail.com</a>，或加入 LINE ID <strong>@horgoscpa</strong> 聯絡我們。</li>
+      </ul>
+    </div>
+  </div>
+  <!-- SEO 區塊 -->
+  {{ partial "seo.html" . }}
+</section>
+{{ end }}

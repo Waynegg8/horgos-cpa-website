@@ -1,0 +1,30 @@
+{{/*
+  側邊欄 partial 用於文章、常見問題、影音、下載列表頁。
+  顯示熱門項目、系列與關鍵字。
+*/}}
+<div class="sidebar-block">
+  <h3>熱門</h3>
+  <ul class="sidebar-list">
+    {{/* 取最新 5 篇同一 Section 內容作為熱門推薦 */}}
+    {{ $pages := where .Site.RegularPages "Section" .Section }}
+    {{ range first 5 ($pages.ByDate.Reverse) }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+</div>
+<div class="sidebar-block">
+  <h3>系列</h3>
+  <ul class="sidebar-list">
+    {{ range $name, $pages := .Site.Taxonomies.series }}
+    <li><a href="{{ (print "/series/" (urlize $name) "/") | relURL }}">{{ $name }}</a></li>
+    {{ end }}
+  </ul>
+</div>
+<div class="sidebar-block">
+  <h3>關鍵字</h3>
+  <ul class="sidebar-list">
+    {{ range $name, $pages := .Site.Taxonomies.tags }}
+    <li><a href="{{ (print "/tags/" (urlize $name) "/") | relURL }}">{{ $name }}</a></li>
+    {{ end }}
+  </ul>
+</div>

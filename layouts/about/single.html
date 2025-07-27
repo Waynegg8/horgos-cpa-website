@@ -1,0 +1,36 @@
+{{ define "main" }}
+<section class="container about-page" style="padding-top:80px;">
+  <h1>{{ .Title }}</h1>
+  <div class="about-content-wrapper">
+    {{ .Content }}
+  </div>
+  <!-- 團隊成員介紹 -->
+  <section class="team-section">
+    <h2>團隊成員</h2>
+    <div class="team-grid">
+      <!-- 第一位成員：文字在左、照片在右 -->
+      <div class="team-member lr">
+        <div class="member-info">
+          <h3>張會計師</h3>
+          <p>擁有多年稅務規劃與公司設立經驗，專長於企業節稅策略與財務規劃。</p>
+        </div>
+        <div class="member-photo">
+          <img src="{{ "assets/images/team1.png" | relURL }}" alt="張會計師肖像">
+        </div>
+      </div>
+      <!-- 第二位成員：照片在左、文字在右 -->
+      <div class="team-member rl">
+        <div class="member-photo">
+          <img src="{{ "assets/images/team2.png" | relURL }}" alt="李會計師肖像">
+        </div>
+        <div class="member-info">
+          <h3>李會計師</h3>
+          <p>專長於財務報表簽證與國際會計準則，協助客戶提升財報公信力。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- SEO 區塊 -->
+  {{ partial "seo.html" . }}
+</section>
+{{ end }}

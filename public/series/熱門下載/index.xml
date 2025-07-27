@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>熱門下載 on 霍爾果斯會計師事務所</title>
+    <link>//localhost:1313/series/%E7%86%B1%E9%96%80%E4%B8%8B%E8%BC%89/</link>
+    <description>Recent content in 熱門下載 on 霍爾果斯會計師事務所</description>
+    <generator>Hugo</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Sat, 13 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/series/%E7%86%B1%E9%96%80%E4%B8%8B%E8%BC%89/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>範例articles 13</title>
+      <link>//localhost:1313/articles/sample-13/</link>
+      <pubDate>Sat, 13 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/articles/sample-13/</guid>
+      <description>&lt;h2 id=&#34;範例articles-13&#34;&gt;範例articles 13&lt;/h2&gt;&#xA;&lt;p&gt;範例內容，僅供測試列表與分頁功能。&lt;/p&gt;&#xA;&lt;h3 id=&#34;小節&#34;&gt;小節&lt;/h3&gt;&#xA;&lt;p&gt;這裡是本文的小節內容。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>範例articles 8</title>
+      <link>//localhost:1313/articles/sample-8/</link>
+      <pubDate>Mon, 08 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/articles/sample-8/</guid>
+      <description>&lt;h2 id=&#34;範例articles-8&#34;&gt;範例articles 8&lt;/h2&gt;&#xA;&lt;p&gt;範例內容，僅供測試列表與分頁功能。&lt;/p&gt;&#xA;&lt;h3 id=&#34;小節&#34;&gt;小節&lt;/h3&gt;&#xA;&lt;p&gt;這裡是本文的小節內容。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>範例videos 8</title>
+      <link>//localhost:1313/videos/sample-8/</link>
+      <pubDate>Mon, 08 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/videos/sample-8/</guid>
+      <description>&lt;h2 id=&#34;範例videos-8&#34;&gt;範例videos 8&lt;/h2&gt;&#xA;&lt;p&gt;範例內容，僅供測試列表與分頁功能。&lt;/p&gt;&#xA;&lt;h3 id=&#34;小節&#34;&gt;小節&lt;/h3&gt;&#xA;&lt;p&gt;這裡是本文的小節內容。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>範例videos 6</title>
+      <link>//localhost:1313/videos/sample-6/</link>
+      <pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/videos/sample-6/</guid>
+      <description>&lt;h2 id=&#34;範例videos-6&#34;&gt;範例videos 6&lt;/h2&gt;&#xA;&lt;p&gt;範例內容，僅供測試列表與分頁功能。&lt;/p&gt;&#xA;&lt;h3 id=&#34;小節&#34;&gt;小節&lt;/h3&gt;&#xA;&lt;p&gt;這裡是本文的小節內容。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>範例articles 5</title>
+      <link>//localhost:1313/articles/sample-5/</link>
+      <pubDate>Fri, 05 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/articles/sample-5/</guid>
+      <description>&lt;h2 id=&#34;範例articles-5&#34;&gt;範例articles 5&lt;/h2&gt;&#xA;&lt;p&gt;範例內容，僅供測試列表與分頁功能。&lt;/p&gt;&#xA;&lt;h3 id=&#34;小節&#34;&gt;小節&lt;/h3&gt;&#xA;&lt;p&gt;這裡是本文的小節內容。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>範例videos 3</title>
+      <link>//localhost:1313/videos/sample-3/</link>
+      <pubDate>Wed, 03 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/videos/sample-3/</guid>
+      <description>&lt;h2 id=&#34;範例videos-3&#34;&gt;範例videos 3&lt;/h2&gt;&#xA;&lt;p&gt;範例內容，僅供測試列表與分頁功能。&lt;/p&gt;&#xA;&lt;h3 id=&#34;小節&#34;&gt;小節&lt;/h3&gt;&#xA;&lt;p&gt;這裡是本文的小節內容。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

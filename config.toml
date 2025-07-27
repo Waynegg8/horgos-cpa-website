@@ -1,0 +1,26 @@
+baseURL = ""
+languageCode = "zh-tw"
+title = "霍爾果斯會計師事務所"
+defaultContentLanguage = "zh-hant"
+enableRobotsTXT = true
+
+# 定義分類 taxonomy，讓文章可透過 categories 產生分類列表與標籤連結
+## 定義網站分類與標籤 taxonomy
+[taxonomies]
+  # 文章與內容使用的分類，例如「稅務」、「創業」、「財務」等
+  category = "categories"
+  # 標籤 taxonomy，用於細分文章關鍵字
+  tag = "tags"
+  # 系列 taxonomy，用於影音或文章的系列分類（例如「教學影片」、「熱門問答」等）
+  series = "series"
+
+## 分頁設定：每頁顯示 10 筆內容，用於文章、常見問題、影音與下載列表頁
+paginate = 10
+
+[params]
+  description = "霍爾果斯會計師事務所官方網站，提供公司設立、記帳報稅、財稅簽證、財務顧問等專業服務，協助台灣中小企業與創業者合法節稅與財務規劃。"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

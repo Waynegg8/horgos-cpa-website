@@ -1,0 +1,25 @@
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "static/uploads"
+public_folder: "/uploads"
+collections:
+  - name: "articles"
+    label: "知識文章"
+    folder: "content/articles"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "標題", name: "title", widget: "string" }
+      - { label: "日期", name: "date", widget: "datetime" }
+      - { label: "摘要", name: "description", widget: "string" }
+      - { label: "內容", name: "body", widget: "markdown" }
+  - name: "services"
+    label: "服務項目"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "標題", name: "title", widget: "string" }
+      - { label: "摘要", name: "description", widget: "string" }
+      - { label: "內容", name: "body", widget: "markdown" }

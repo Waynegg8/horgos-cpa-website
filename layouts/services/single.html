@@ -1,0 +1,10 @@
+{{ define "main" }}
+<section class="container service-page" style="padding-top:80px;">
+  <h1>{{ .Title }}</h1>
+  <div class="service-detail-card">
+    {{ .Content }}
+  </div>
+  <!-- SEO 區塊 -->
+  {{ partial "seo.html" . }}
+</section>
+{{ end }}

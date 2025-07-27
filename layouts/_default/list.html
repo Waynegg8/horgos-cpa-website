@@ -1,0 +1,84 @@
+{{ define "main" }}
+<section class="container list-section" style="padding-top:80px;">
+  <h1>{{ .Title }}</h1>
+  {{ if .Content }}<div class="list-intro">{{ .Content }}</div>{{ end }}
+
+  {{/* 決定是否顯示搜尋與分類標籤：適用於文章、常見問題、影音、下載列表與分類頁 */}}
+  {{ $searchSections := slice "articles" "faq" "videos" "downloads" }}
+  {{ if or (in $searchSections .Section) (or (eq .Kind "taxonomy") (eq .Kind "term")) }}
+  <div class="list-search-bar">
+    <input type="text" class="list-search" placeholder="搜尋{{ .Title }}..." aria-label="搜尋{{ .Title }}">
+  </div>
+  <div class="category-tags">
+    {{ range $name, $pages := .Site.Taxonomies.categories }}
+      <a href="{{ (print "/categories/" (urlize $name) "/") | relURL }}" class="tag">{{ $name }}</a>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ if eq .Section "services" }}
+  {{/* 服務列表 */}}
+  <div class="service-grid">
+    {{ range .Pages }}
+    <a href="{{ .RelPermalink }}" class="service-card">
+      <div class="service-icon">
+        {{ $icon := "" }}
+        {{- if eq .File.BaseFileName "tax" }}{{ $icon = "fa-file-invoice-dollar" }}
+        {{- else if eq .File.BaseFileName "registration" }}{{ $icon = "fa-building" }}
+        {{- else if eq .File.BaseFileName "attestation" }}{{ $icon = "fa-stamp" }}
+        {{- else if eq .File.BaseFileName "advisory" }}{{ $icon = "fa-hand-holding-usd" }}
+        {{- end }}
+        <i class="fas {{ $icon }}"></i>
+      </div>
+      <h3>{{ .Title }}</h3>
+      {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+    </a>
+    {{ end }}
+  </div>
+  {{ else }}
+  {{/* 其他列表：包裝成主內容與側邊欄 */}}
+  <div class="list-wrapper">
+    <div class="main-content">
+      <div class="list-cards">
+        {{/* 使用 Hugo 的分頁功能列出內容 */}}
+        {{ $paginator := .Paginate (.Pages) }}
+        {{ range $paginator.Pages }}
+        <div class="list-card">
+          <a href="{{ .RelPermalink }}" class="card-link">
+            <h3>{{ .Title }}</h3>
+            {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+            <div class="card-meta">
+              {{ with .Date }}<span class="date">{{ . | dateFormat "2006-01-02" }}</span>{{ end }}
+              {{ with .Params.categories }}
+                <span class="categories">
+                  {{ range . }}
+                    <a href="{{ (print "/categories/" (urlize .) "/") | relURL }}" class="tag">{{ . }}</a>
+                  {{ end }}
+                </span>
+              {{ end }}
+            </div>
+          </a>
+        </div>
+        {{ end }}
+      </div>
+      {{/* 分頁功能 */}}
+      {{ if gt ($paginator.TotalPages) 1 }}
+      <nav class="pagination">
+        {{ if $paginator.HasPrev }}<a href="{{ $paginator.Prev.URL }}" class="prev-page">上一頁</a>{{ end }}
+        {{ range $paginator.Pagers }}
+          {{ $isCurrent := eq . $paginator }}
+          <a href="{{ .URL }}" class="page-number{{ if $isCurrent }} current{{ end }}">{{ .PageNumber }}</a>
+        {{ end }}
+        {{ if $paginator.HasNext }}<a href="{{ $paginator.Next.URL }}" class="next-page">下一頁</a>{{ end }}
+      </nav>
+      {{ end }}
+    </div>
+    <aside class="sidebar">
+      {{ partial "sidebar-list.html" . }}
+    </aside>
+  </div>
+  {{ end }}
+  <!-- SEO 區塊 -->
+  {{ partial "seo.html" . }}
+</section>
+{{ end }}
