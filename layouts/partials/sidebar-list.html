@@ -15,16 +15,26 @@
 <div class="sidebar-block">
   <h3>系列</h3>
   <ul class="sidebar-list">
-    {{ range $name, $pages := .Site.Taxonomies.series }}
-    <li><a href="{{ (print "/series/" (urlize $name) "/") | relURL }}">{{ $name }}</a></li>
+    {{/* 僅列出屬於當前 Section 的系列，並連結到該 Section 的列表頁並帶上 series 參數 */}}
+    {{ $currentSection := .Section }}
+    {{ range $seriesName, $pages := .Site.Taxonomies.series }}
+      {{ $sectionPages := where $pages "Section" $currentSection }}
+      {{ if gt (len $sectionPages) 0 }}
+        <li><a href="{{ (print "/" $currentSection "?series=" $seriesName) | relURL }}">{{ $seriesName }}</a></li>
+      {{ end }}
     {{ end }}
   </ul>
 </div>
 <div class="sidebar-block">
   <h3>關鍵字</h3>
   <ul class="sidebar-list">
-    {{ range $name, $pages := .Site.Taxonomies.tags }}
-    <li><a href="{{ (print "/tags/" (urlize $name) "/") | relURL }}">{{ $name }}</a></li>
+    {{/* 僅列出當前 Section 有使用的標籤 */}}
+    {{ $currentSection := .Section }}
+    {{ range $tagName, $tagPages := .Site.Taxonomies.tags }}
+      {{ $sectionTagPages := where $tagPages "Section" $currentSection }}
+      {{ if gt (len $sectionTagPages) 0 }}
+        <li><a href="{{ (print "/" $currentSection "?tag=" $tagName) | relURL }}">{{ $tagName }}</a></li>
+      {{ end }}
     {{ end }}
   </ul>
 </div>

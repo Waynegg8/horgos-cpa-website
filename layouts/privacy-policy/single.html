@@ -1,0 +1,9 @@
+{{ define "main" }}
+<section class="container static-page" style="padding-top:80px;">
+  <h1>{{ .Title }}</h1>
+  <div class="static-content">
+    {{ .Content }}
+  </div>
+  {{ partial "seo.html" . }}
+</section>
+{{ end }}

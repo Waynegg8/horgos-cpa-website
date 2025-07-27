@@ -16,49 +16,18 @@
     {{ .Content }}
     {{/* 上一篇/下一篇導覽：僅在文章、常見問題、影音、下載頁顯示；若超出邊界則採用首尾輪循 */}}
     {{ if or (eq .Section "articles") (eq .Section "faq") (eq .Section "videos") (eq .Section "downloads") }}
-    {{/* 決定上一頁與下一頁邏輯：優先採用同系列內的上一筆/下一筆；若不存在，則使用同 Section 其他系列的文章，並採輪循方式確保始終有連結 */}}
+    {{/* 決定上一頁與下一頁邏輯：使用同 Section 中的文章形成環狀輪循，確保永遠有上一筆與下一筆 */}}
     {{ $sectionPages := where .Site.RegularPages "Section" .Section }}
-    {{/* 取得目前頁面的系列名稱（若存在） */}}
-    {{ $seriesName := "" }}
-    {{ with .Params.series }}
-      {{ $seriesName = index . 0 }}
+    {{ $prev := .PrevInSection }}
+    {{ $next := .NextInSection }}
+    {{/* 若上一頁為空或等於自身，則取本 Section 最後一篇作為上一頁 */}}
+    {{ if or (not $prev) (eq $prev.RelPermalink .RelPermalink) }}
+      {{ $prev = (index (last 1 $sectionPages) 0) }}
     {{ end }}
-    {{/* 使用 Scratch 儲存 prev 與 next 以便重新賦值 */}}
-    {{ $.Scratch.Set "prev" .PrevInSection }}
-    {{ $.Scratch.Set "next" .NextInSection }}
-    {{ $prevPage := $.Scratch.Get "prev" }}
-    {{ $nextPage := $.Scratch.Get "next" }}
-    {{/* 若上一頁不存在或指向自身，則嘗試從其他系列取得最後一篇；若仍無，則取本 Section 最後一篇 */}}
-    {{ if or (not $prevPage) (eq $prevPage.RelPermalink .RelPermalink) }}
-      {{ if $seriesName }}
-        {{ $otherSeries := where $sectionPages ".Params.series" "ne" $seriesName }}
-        {{ if gt (len $otherSeries) 0 }}
-          {{ $tmp := last 1 $otherSeries }}
-          {{ $.Scratch.Set "prev" (index $tmp 0) }}
-        {{ else }}
-          {{ $tmp := last 1 $sectionPages }}
-          {{ $.Scratch.Set "prev" (index $tmp 0) }}
-        {{ end }}
-      {{ else }}
-        {{ $tmp := last 1 $sectionPages }}
-        {{ $.Scratch.Set "prev" (index $tmp 0) }}
-      {{ end }}
+    {{/* 若下一頁為空或等於自身，則取本 Section 第一篇作為下一頁 */}}
+    {{ if or (not $next) (eq $next.RelPermalink .RelPermalink) }}
+      {{ $next = (index $sectionPages 0) }}
     {{ end }}
-    {{/* 若下一頁不存在或指向自身，則嘗試從其他系列取得第一篇；若仍無，則取本 Section 第一篇 */}}
-    {{ if or (not $nextPage) (eq $nextPage.RelPermalink .RelPermalink) }}
-      {{ if $seriesName }}
-        {{ $otherSeries := where $sectionPages ".Params.series" "ne" $seriesName }}
-        {{ if gt (len $otherSeries) 0 }}
-          {{ $.Scratch.Set "next" (index $otherSeries 0) }}
-        {{ else }}
-          {{ $.Scratch.Set "next" (index $sectionPages 0) }}
-        {{ end }}
-      {{ else }}
-        {{ $.Scratch.Set "next" (index $sectionPages 0) }}
-      {{ end }}
-    {{ end }}
-    {{ $prev := $.Scratch.Get "prev" }}
-    {{ $next := $.Scratch.Get "next" }}
     <nav class="prev-next">
       {{ if and $prev (ne $prev.RelPermalink .RelPermalink) }}<a href="{{ $prev.RelPermalink }}" class="prev-article">上一篇：{{ $prev.Title }}</a>{{ end }}
       {{ if and $next (ne $next.RelPermalink .RelPermalink) }}<a href="{{ $next.RelPermalink }}" class="next-article">下一篇：{{ $next.Title }}</a>{{ end }}

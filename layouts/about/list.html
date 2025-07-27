@@ -1,0 +1,56 @@
+{{ define "main" }}
+    <section class="container about-page" style="padding-top:80px;">
+      <h1>{{ .Title }}</h1>
+      <div class="about-content-wrapper">
+        {{ .Content }}
+      </div>
+      <!-- 團隊成員介紹：一行 2 卡片，左右交錯排列 -->
+      <section class="team-section">
+        <h2>團隊成員</h2>
+        <div class="team-grid">
+          <!-- 第一位成員：文字在左、照片在右 -->
+          <div class="team-member lr">
+            <div class="member-info">
+              <h3>張會計師</h3>
+              <p>具備超過 15 年企業稅務規劃與公司設立經驗，協助眾多中小企業合法節稅並優化財務結構。</p>
+            </div>
+            <div class="member-photo">
+              <img src="{{ "assets/images/team1.png" | relURL }}" alt="張會計師肖像">
+            </div>
+          </div>
+          <!-- 第二位成員：照片在左、文字在右 -->
+          <div class="team-member rl">
+            <div class="member-photo">
+              <img src="{{ "assets/images/team2.png" | relURL }}" alt="李會計師肖像">
+            </div>
+            <div class="member-info">
+              <h3>李會計師</h3>
+              <p>專精財務報表簽證與國際會計準則，協助企業提升財務資訊透明度與公信力。</p>
+            </div>
+          </div>
+          <!-- 第三位成員：文字在左、照片在右 -->
+          <div class="team-member lr">
+            <div class="member-info">
+              <h3>王會計師</h3>
+              <p>擅長勞健保申報與人資流程規劃，提供企業完善的員工福利制度與法規遵循建議。</p>
+            </div>
+            <div class="member-photo">
+              <img src="{{ "assets/images/team3.png" | relURL }}" alt="王會計師肖像">
+            </div>
+          </div>
+          <!-- 第四位成員：照片在左、文字在右 -->
+          <div class="team-member rl">
+            <div class="member-photo">
+              <img src="{{ "assets/images/team4.png" | relURL }}" alt="陳會計師肖像">
+            </div>
+            <div class="member-info">
+              <h3>陳會計師</h3>
+              <p>擁有豐富跨國營運經驗，專注於國際稅務與投資結構設計，協助企業拓展海外市場。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SEO 區塊 -->
+      {{ partial "seo.html" . }}
+    </section>
+{{ end }}
