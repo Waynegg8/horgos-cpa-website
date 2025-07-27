@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>稅務問題 on 霍爾果斯會計師事務所</title>
+    <link>//localhost:1313/series/%E7%A8%85%E5%8B%99%E5%95%8F%E9%A1%8C/</link>
+    <description>Recent content in 稅務問題 on 霍爾果斯會計師事務所</description>
+    <generator>Hugo</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Mon, 01 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/series/%E7%A8%85%E5%8B%99%E5%95%8F%E9%A1%8C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>哪些營業費用可以列為稅前扣除？</title>
+      <link>//localhost:1313/faq/deductible-expenses/</link>
+      <pubDate>Mon, 01 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/faq/deductible-expenses/</guid>
+      <description>&lt;p&gt;企業在編製所得稅申報時，可列報與營業活動直接相關的費用作為稅前扣除，例如薪資、租金、進貨成本等。但以下事項需要留意：&lt;/p&gt;&#xA;&lt;h2 id=&#34;憑證完整性&#34;&gt;憑證完整性&lt;/h2&gt;&#xA;&lt;p&gt;所有列支的費用必須有合法憑證，例如統一發票或收據，並註明支出用途，以備稅捐機關查核。&lt;/p&gt;&#xA;&lt;h2 id=&#34;與營業相關&#34;&gt;與營業相關&lt;/h2&gt;&#xA;&lt;p&gt;費用必須與公司營運有直接關聯，例如辦公室租金、員工薪資、業務招待費等。私人支出不可列為營業費用。&lt;/p&gt;&#xA;&lt;h2 id=&#34;法定限制&#34;&gt;法定限制&lt;/h2&gt;&#xA;&lt;p&gt;部分費用在列報時有比例限制，如交際費不得超過年度營收的一定百分比，捐贈支出也須符合所得稅法規定。&lt;/p&gt;&#xA;&lt;p&gt;若對於費用列支有疑問，建議諮詢專業會計師，以確保申報合規並降低稅務風險。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

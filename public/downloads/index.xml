@@ -6,8 +6,22 @@
     <description>Recent content in 下載專區 on 霍爾果斯會計師事務所</description>
     <generator>Hugo</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Mon, 15 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/downloads/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>熱門人事薪資試算表</title>
+      <link>//localhost:1313/downloads/popular-template/</link>
+      <pubDate>Thu, 18 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/downloads/popular-template/</guid>
+      <description>&lt;p&gt;本試算表可協助企業快速計算員工薪資、加班費以及應代扣的勞健保與所得稅。內建常見的薪資計算公式與勞保級距，自動化程度高。&lt;/p&gt;&#xA;&lt;h3 id=&#34;功能包含&#34;&gt;功能包含&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;基本薪資與津貼計算&lt;/li&gt;&#xA;&lt;li&gt;加班費計算與勞基法規定檢查&lt;/li&gt;&#xA;&lt;li&gt;勞健保與勞退費用自動帶入&lt;/li&gt;&#xA;&lt;li&gt;所得稅預扣額估算&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;此試算表為 Excel 格式，可自訂欄位與公式，下載後按照說明修改即可使用。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;#&#34;&gt;下載薪資試算表&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>發票管理試算表下載</title>
+      <link>//localhost:1313/downloads/invoice-template/</link>
+      <pubDate>Fri, 05 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/downloads/invoice-template/</guid>
+      <description>&lt;p&gt;為了讓您更方便管理發票，我們準備了一份簡易的 Excel 試算表模板，可記錄每月的進項與銷項發票，並自動計算稅額。&lt;/p&gt;&#xA;&lt;h3 id=&#34;模板特色&#34;&gt;模板特色&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;區分進銷項發票並統計金額&lt;/li&gt;&#xA;&lt;li&gt;自動計算營業稅及應稅項目&lt;/li&gt;&#xA;&lt;li&gt;可自訂科目與費用分類&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;點擊下方連結即可下載，使用過程若有問題，歡迎聯繫我們。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;#&#34;&gt;下載 Excel 模板&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>範例downloads 15</title>
       <link>//localhost:1313/downloads/sample-15/</link>

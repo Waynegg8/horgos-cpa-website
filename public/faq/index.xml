@@ -6,8 +6,22 @@
     <description>Recent content in 常見問題 on 霍爾果斯會計師事務所</description>
     <generator>Hugo</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Mon, 15 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/faq/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>公司名稱預查需要注意什麼？</title>
+      <link>//localhost:1313/faq/company-name-check/</link>
+      <pubDate>Tue, 02 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/faq/company-name-check/</guid>
+      <description>&lt;p&gt;公司名稱預查是公司設立的重要第一步，透過預查可以避免與現有商號重複或與註冊商標相似。進行預查時，可注意以下幾點：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;名稱不得違反法令&lt;/strong&gt;：名稱不得包含不當或違反公共秩序善良風俗的字詞。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;避免與商標近似&lt;/strong&gt;：若名稱與他人商標相同或相近，可能涉及侵權，建議同時查詢商標資料。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多備選擇&lt;/strong&gt;：建議準備數個候選名稱，若首選名稱被駁回，可加速申請流程。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;預查核准後，仍需於一定期間內完成登記程序，否則名稱保留可能失效。建議委託專業人員辦理，可提高通過率與效率。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>哪些營業費用可以列為稅前扣除？</title>
+      <link>//localhost:1313/faq/deductible-expenses/</link>
+      <pubDate>Mon, 01 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/faq/deductible-expenses/</guid>
+      <description>&lt;p&gt;企業在編製所得稅申報時，可列報與營業活動直接相關的費用作為稅前扣除，例如薪資、租金、進貨成本等。但以下事項需要留意：&lt;/p&gt;&#xA;&lt;h2 id=&#34;憑證完整性&#34;&gt;憑證完整性&lt;/h2&gt;&#xA;&lt;p&gt;所有列支的費用必須有合法憑證，例如統一發票或收據，並註明支出用途，以備稅捐機關查核。&lt;/p&gt;&#xA;&lt;h2 id=&#34;與營業相關&#34;&gt;與營業相關&lt;/h2&gt;&#xA;&lt;p&gt;費用必須與公司營運有直接關聯，例如辦公室租金、員工薪資、業務招待費等。私人支出不可列為營業費用。&lt;/p&gt;&#xA;&lt;h2 id=&#34;法定限制&#34;&gt;法定限制&lt;/h2&gt;&#xA;&lt;p&gt;部分費用在列報時有比例限制，如交際費不得超過年度營收的一定百分比，捐贈支出也須符合所得稅法規定。&lt;/p&gt;&#xA;&lt;p&gt;若對於費用列支有疑問，建議諮詢專業會計師，以確保申報合規並降低稅務風險。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>範例faq 15</title>
       <link>//localhost:1313/faq/sample-15/</link>
