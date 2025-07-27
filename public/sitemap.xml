@@ -334,6 +334,8 @@
   </url><url>
     <loc>//localhost:1313/10/</loc>
   </url><url>
+    <loc>//localhost:1313/cookies-policy/</loc>
+  </url><url>
     <loc>//localhost:1313/services/registration/</loc>
   </url><url>
     <loc>//localhost:1313/services/</loc>
@@ -349,6 +351,8 @@
     <loc>//localhost:1313/appointment/</loc>
   </url><url>
     <loc>//localhost:1313/contact/</loc>
+  </url><url>
+    <loc>//localhost:1313/privacy-policy/</loc>
   </url><url>
     <loc>//localhost:1313/about/</loc>
   </url>

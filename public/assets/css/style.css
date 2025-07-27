@@ -83,8 +83,9 @@ header {
   align-items: center;
   justify-content: space-between;
   /* 調整 navbar 高度，讓高度不會是 logo 的兩倍，並以 logo 大小為主 */
+  /* 減少高度，提升閱讀空間 */
   padding: 0.2rem 0;
-  min-height: 72px;
+  min-height: 60px;
 }
 .navbar-brand {
   font-size: 1.2rem;
@@ -94,9 +95,8 @@ header {
 
 /* Logo image sizing */
 .navbar-brand img {
-  /* 將 logo 調整為更大尺寸，以提升辨識度 */
-  /* 調整 logo 尺寸略大以提升識別度，並保持自動寬度 */
-  height: 72px;
+  /* 將 logo 調整為與 Navbar 相稱的尺寸 */
+  height: 60px;
   width: auto;
   display: block;
 }
@@ -665,6 +665,109 @@ textarea {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
 }
+
+/* ================================ */
+/* List page controls (搜尋與分類) */
+/* 提供搜尋輸入框與分類標籤，方便使用者快速篩選列表內容 */
+.list-controls {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.list-controls input[type="text"] {
+  flex: 1 1 250px;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.category-tag {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 16px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.category-tag.active,
+.category-tag:hover {
+  background-color: var(--color-accent);
+}
+
+/* 列表頁內容區塊：左右佈局 */
+.list-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2rem;
+}
+.list-main {
+  flex: 1 1 70%;
+}
+.list-sidebar {
+  flex: 1 1 30%;
+  max-width: 280px;
+}
+
+/* 使文章頁的目錄固定在畫面上方，在捲動時仍然可視 */
+.single-sidebar .table-of-contents {
+  position: sticky;
+  top: 100px;
+  overflow: auto;
+  max-height: calc(100vh - 120px);
+}
+
+/* 調整 footer 中社交圖示的外觀，使用品牌顏色與圓形背景 */
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  color: var(--color-white);
+  font-size: 1.2rem;
+}
+.social-icons a.facebook { background-color: #1877f2; }
+.social-icons a.line { background-color: #06c755; }
+.social-icons a.instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.social-icons a.threads { background-color: #000; }
+
+/* 浮動社交按鈕區域，與回頂端按鈕搭配使用 */
+.social-float {
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 999;
+}
+.social-float.show {
+  display: flex;
+}
+.social-float a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--color-white);
+  font-size: 1.2rem;
+}
+.social-float a.line { background-color: #06c755; }
+.social-float a.instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.social-float a.threads { background-color: #000; }
 
 /* 搜尋頁面樣式 */
 .search-section {

@@ -229,3 +229,63 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 });
+
+// --------------------------------------------------------------------
+// 新增互動：滾動載入動畫、表單提交載入狀態與頂部進度條
+// 為保持 Hugo 模板不變，直接在主腳本中註冊新的 DOMContentLoaded 監聽
+document.addEventListener('DOMContentLoaded', function() {
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+      }
+    });
+  }, observerOptions);
+  const animateElements = document.querySelectorAll('.service-card, .post-card, .contact-card, .team-member');
+  animateElements.forEach((el, index) => {
+    el.classList.add(`stagger-${(index % 4) + 1}`);
+    observer.observe(el);
+  });
+
+  // 表單提交載入狀態
+  const forms = document.querySelectorAll('form');
+  forms.forEach(form => {
+    form.addEventListener('submit', function() {
+      const submitBtn = form.querySelector('[type="submit"]');
+      if (submitBtn) {
+        submitBtn.classList.add('btn-loading');
+        submitBtn.textContent = '送出中...';
+      }
+    });
+  });
+
+  // 頁面載入進度條
+  function showProgress() {
+    const progressBar = document.createElement('div');
+    progressBar.className = 'progress-bar';
+    document.body.appendChild(progressBar);
+    let width = 0;
+    const interval = setInterval(() => {
+      width += Math.random() * 15;
+      if (width >= 90) {
+        clearInterval(interval);
+        width = 100;
+      }
+      progressBar.style.width = width + '%';
+      if (width >= 100) {
+        setTimeout(() => {
+          progressBar.style.opacity = '0';
+          setTimeout(() => progressBar.remove(), 300);
+        }, 200);
+      }
+    }, 200);
+  }
+  if (document.readyState === 'loading') {
+    showProgress();
+  }
+});

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>範本下載 on 霍爾果斯會計師事務所</title>
+    <link>//localhost:1313/series/%E7%AF%84%E6%9C%AC%E4%B8%8B%E8%BC%89/</link>
+    <description>Recent content in 範本下載 on 霍爾果斯會計師事務所</description>
+    <generator>Hugo</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Fri, 05 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/series/%E7%AF%84%E6%9C%AC%E4%B8%8B%E8%BC%89/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>發票管理試算表下載</title>
+      <link>//localhost:1313/downloads/invoice-template/</link>
+      <pubDate>Fri, 05 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/downloads/invoice-template/</guid>
+      <description>&lt;p&gt;為了讓您更方便管理發票，我們準備了一份簡易的 Excel 試算表模板，可記錄每月的進項與銷項發票，並自動計算稅額。&lt;/p&gt;&#xA;&lt;h3 id=&#34;模板特色&#34;&gt;模板特色&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;區分進銷項發票並統計金額&lt;/li&gt;&#xA;&lt;li&gt;自動計算營業稅及應稅項目&lt;/li&gt;&#xA;&lt;li&gt;可自訂科目與費用分類&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;點擊下方連結即可下載，使用過程若有問題，歡迎聯繫我們。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;#&#34;&gt;下載 Excel 模板&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

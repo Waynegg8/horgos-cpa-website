@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>稅務申報 on 霍爾果斯會計師事務所</title>
+    <link>//localhost:1313/categories/%E7%A8%85%E5%8B%99%E7%94%B3%E5%A0%B1/</link>
+    <description>Recent content in 稅務申報 on 霍爾果斯會計師事務所</description>
+    <generator>Hugo</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Sat, 10 Jun 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/categories/%E7%A8%85%E5%8B%99%E7%94%B3%E5%A0%B1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>營利事業所得稅申報教學</title>
+      <link>//localhost:1313/videos/sample/</link>
+      <pubDate>Sat, 10 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/videos/sample/</guid>
+      <description>&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/dQw4w9WgXcQ&#34; title=&#34;營利事業所得稅申報教學&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;&#xA;&lt;p&gt;影片中將詳細解說營利事業所得稅申報流程、注意事項與常見錯誤，協助公司負責人或會計人員在繳稅季節順利完成申報。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
