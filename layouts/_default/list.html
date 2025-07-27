@@ -51,8 +51,7 @@
       <div class="list-controls">
         <input type="text" id="list-search" placeholder="搜尋{{ .Title }}..." aria-label="搜尋 {{ .Title }}...">
         <div class="category-tags">
-          <button class="category-tag active" data-category="全部">全部</button>
-          {{/* 根據 Section 顯示相應分類 */}}
+          {{/* 根據 Section 顯示相應分類；預設不顯示「全部」，使用空白代表全部 */}}
           {{ if eq .Section "articles" }}
             <button class="category-tag" data-category="稅務規劃">稅務規劃</button>
             <button class="category-tag" data-category="創業指南">創業指南</button>

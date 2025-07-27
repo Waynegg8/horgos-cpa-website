@@ -1,12 +1,13 @@
 /* 自訂覆寫樣式檔：調整導覽列高度、頁腳間距、內容卡片樣式等 */
 
 /* Navbar 高度與 Logo 大小 */
+/* 調整導覽列為 64px 高度，對應新版設計 */
 header .navbar {
-  padding: 0.1rem 0;
-  min-height: 60px;
+  padding: 0.5rem 0;
+  min-height: 64px;
 }
 header .navbar-brand img {
-  height: 60px;
+  height: 64px;
   width: auto;
   display: block;
 }
@@ -27,7 +28,8 @@ footer .container {
 /* 文章頁目錄固定在視窗頂部，提供方便閱讀 */
 .table-of-contents {
   position: sticky;
-  top: 100px;
+  /* 目錄固定高度 = 導覽列高度 64px + 16px 邊距 */
+  top: 80px;
 }
 
 /* 響應式調整：在手機上適度縮小 logo */
@@ -65,6 +67,32 @@ footer .container {
   border-radius: 4px;
 }
 .pagination .page-link.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/*
+ * 分類標籤樣式調整
+ * 使用 flex-wrap 讓標籤自動換行，並採用圓角設計以提升可讀性
+ */
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.category-tag {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--color-muted);
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  background: var(--color-white);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.category-tag:hover,
+.category-tag.active {
   background-color: var(--color-primary);
   color: var(--color-white);
 }

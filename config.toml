@@ -20,6 +20,24 @@ paginate = 10
 [params]
   description = "霍爾果斯會計師事務所官方網站，提供公司設立、記帳報稅、財稅簽證、財務顧問等專業服務，協助台灣中小企業與創業者合法節稅與財務規劃。"
 
+  # Google Analytics 4 追蹤 ID，可由 CMS 介面設定
+  ga_id = "G-XXXXXXXXXX"
+
+  [params.imaging]
+    # 啟用 WebP 圖片輸出
+    webp = true
+    # 啟用圖片 lazy loading
+    lazyload = true
+
+## 圖像處理全局配置
+[imaging]
+  # 使用高品質縮放濾鏡
+  resampleFilter = "lanczos"
+  # 預設圖片品質
+  quality = 85
+  # 智慧裁切錨點
+  anchor = "smart"
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

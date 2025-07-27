@@ -131,14 +131,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /**
    * 浮動社交按鈕顯示/隱藏邏輯
-   * 在回頂按鈕與社交按鈕區域上移入/移出時，切換 .show 類別
+   * 為了避免滑鼠剛移出就立即隱藏，加入防抖延遲與觸發區域放大。
    */
   const socialFloat = document.querySelector('.social-float');
   if (backToTopBtn && socialFloat) {
-    const showFloat = () => socialFloat.classList.add('show');
-    const hideFloat = () => socialFloat.classList.remove('show');
-    backToTopBtn.addEventListener('mouseenter', showFloat);
-    backToTopBtn.addEventListener('mouseleave', hideFloat);
+    let socialTimeout;
+    let isHovering = false;
+    const showFloat = () => {
+      clearTimeout(socialTimeout);
+      isHovering = true;
+      socialFloat.classList.add('show');
+    };
+    const hideFloat = () => {
+      isHovering = false;
+      socialTimeout = setTimeout(() => {
+        if (!isHovering) {
+          socialFloat.classList.remove('show');
+        }
+      }, 800);
+    };
+    // 建立一個較大的觸發區域覆蓋回頂按鈕，以方便使用者移動滑鼠
+    const triggerArea = document.createElement('div');
+    triggerArea.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 80px;
+      height: 120px;
+      z-index: 998;
+    `;
+    document.body.appendChild(triggerArea);
+    triggerArea.addEventListener('mouseenter', showFloat);
+    triggerArea.addEventListener('mouseleave', hideFloat);
     socialFloat.addEventListener('mouseenter', showFloat);
     socialFloat.addEventListener('mouseleave', hideFloat);
   }
@@ -150,7 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const listSearchEl = document.querySelector('#list-search');
   const categoryTags = document.querySelectorAll('.category-tag');
   const postCards = document.querySelectorAll('.post-card');
-  let activeCategory = '全部';
+  // 將預設分類設為空字串，表示不進行分類篩選
+  let activeCategory = '';
 
   function filterPosts() {
     const query = listSearchEl ? listSearchEl.value.trim().toLowerCase() : '';
@@ -160,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const categories = card.dataset.categories ? card.dataset.categories.toLowerCase() : '';
       const series = card.dataset.series ? card.dataset.series.toLowerCase() : '';
       const matchQuery = query === '' || title.includes(query);
-      const matchCategory = activeCategory === '全部' || categories.includes(activeCategory.toLowerCase()) || series.includes(activeCategory.toLowerCase());
+      const matchCategory = !activeCategory || categories.includes(activeCategory.toLowerCase()) || series.includes(activeCategory.toLowerCase());
       if (matchQuery && matchCategory) {
         card.style.display = '';
       } else {
@@ -202,6 +227,29 @@ document.addEventListener('DOMContentLoaded', () => {
   if (tagParam && listSearchEl) {
     listSearchEl.value = tagParam;
     filterPosts();
+  }
+
+  // --------------------------------------------------------------
+  // 單篇文章閱讀進度條
+  // 如果當前頁面為單篇文章（single），在頁頂添加閱讀進度條
+  function addReadingProgress() {
+    const progressWrapper = document.createElement('div');
+    progressWrapper.className = 'reading-progress';
+    progressWrapper.innerHTML = '<div class="reading-progress-bar"></div>';
+    document.body.appendChild(progressWrapper);
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      const bar = progressWrapper.firstElementChild;
+      if (bar) {
+        bar.style.width = progress + '%';
+      }
+    });
+  }
+  // 若頁面包含單篇文章容器，顯示閱讀進度條
+  if (document.querySelector('.single-wrapper')) {
+    addReadingProgress();
   }
 
   // 初始化預約頁驗證碼功能

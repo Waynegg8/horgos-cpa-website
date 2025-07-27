@@ -4,13 +4,40 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      
+      <meta name="theme-color" content="#1e40af">
       <title>熱門文章 | 霍爾果斯會計師事務所</title>
       <meta name="description" content="霍爾果斯會計師事務所官方網站，提供公司設立、記帳報稅、財稅簽證、財務顧問等專業服務，協助台灣中小企業與創業者合法節稅與財務規劃。">
-      <link rel="stylesheet" href="/assets/css/style.css">
       
-      <link rel="stylesheet" href="/assets/css/custom.css">
+      <link rel="preload" href="/assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <noscript><link rel="stylesheet" href="/assets/css/style.css"></noscript>
+      
+      <link rel="preload" href="/assets/css/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <noscript><link rel="stylesheet" href="/assets/css/custom.css"></noscript>
       
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-z5vnoDrRvUWT1rQA5b/5x2zip7ecd7gWJSf8dlN2rD+aT8dCE2p+5hgUEIOYU1SmhnQqEA9JMaXG0Bj9sNkWAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+      
+      
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      </script>
+      
+
+      
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "AccountingService",
+          "name": "霍爾果斯會計師事務所",
+          "url": "\/\/localhost:1313\/",
+          "description": "霍爾果斯會計師事務所官方網站，提供公司設立、記帳報稅、財稅簽證、財務顧問等專業服務，協助台灣中小企業與創業者合法節稅與財務規劃。"
+        }
+      </script>
     </head>
     <body>
       
@@ -96,7 +123,6 @@
       <div class="list-controls">
         <input type="text" id="list-search" placeholder="搜尋熱門文章..." aria-label="搜尋 熱門文章...">
         <div class="category-tags">
-          <button class="category-tag active" data-category="全部">全部</button>
           
           
         </div>
@@ -298,8 +324,9 @@
 </footer>
 
       
-      <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
-      <script src="/assets/js/script.js"></script>
-      <script src="/assets/js/search.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2" defer></script>
+      
+      <script defer src="/assets/js/script.js"></script>
+      <script defer src="/assets/js/search.js"></script>
     </body>
     </html>

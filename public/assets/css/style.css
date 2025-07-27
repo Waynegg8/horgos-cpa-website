@@ -6,13 +6,43 @@
 
 /* 色彩變數 */
 :root {
-  --color-primary: #204b6e; /* 主色 – 深藍 */
-  --color-secondary: #f18f42; /* 輔色 – 橘 */
-  --color-accent: #25c16f; /* 重點色/CTA – 綠 */
+  /*
+   * 調整色彩配置以符合新版設計系統。主色採用深藍，輔色採用亮黃，重點色採用清新的綠色。
+   * 同時保留舊有變數名稱以兼容既有樣式。
+   */
+  --color-primary: #1e40af; /* 主色 – 深藍 */
+  --color-secondary: #f59e0b; /* 輔色 – 黃 */
+  --color-accent: #10b981; /* 重點色/CTA – 綠 */
   --color-text: #333333; /* 正文文字 */
-  --color-bg: #f9f9f9; /* 頁面背景 */
-  --color-muted: #cccccc; /* 次要元素 */
+  --color-bg: #f9fafb; /* 頁面背景 */
+  --color-muted: #9ca3af; /* 次要元素 */
   --color-white: #ffffff;
+
+  /* 新增灰階與狀態色階變數供日後擴充使用 */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  /* 陰影系統 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* 動畫過渡 */
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 全局排版設定 */
@@ -30,6 +60,10 @@ body {
   line-height: 1.7;
   color: var(--color-text);
   background-color: var(--color-bg);
+  /* 讓頁腳可以貼齊底部：body 變為彈性容器，最小高度為視窗高度 */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -82,10 +116,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* 調整 navbar 高度，讓高度不會是 logo 的兩倍，並以 logo 大小為主 */
-  /* 減少高度，提升閱讀空間 */
-  padding: 0.2rem 0;
-  min-height: 60px;
+  /* 統一導覽列高度為 64px，與後續頁面間距相互匹配 */
+  padding: 0.5rem 0;
+  min-height: 64px;
 }
 .navbar-brand {
   font-size: 1.2rem;
@@ -95,8 +128,8 @@ header {
 
 /* Logo image sizing */
 .navbar-brand img {
-  /* 將 logo 調整為與 Navbar 相稱的尺寸 */
-  height: 60px;
+  /* 調整 Logo 與導覽列高度一致 */
+  height: 64px;
   width: auto;
   display: block;
 }
@@ -154,7 +187,8 @@ header {
 @media (max-width: 768px) {
   .navbar-nav {
     position: absolute;
-    top: 60px;
+    /* 與導覽列高度保持一致，避免遮擋內容 */
+    top: 64px;
     right: 0;
     background-color: var(--color-primary);
     flex-direction: column;
@@ -1256,5 +1290,76 @@ textarea {
 }
 .contact-form button:hover {
   background-color: #1ea65e;
+}
+
+/*
+ * 新增：主內容區塊彈性擴展，使頁腳固定於頁面底部。
+ */
+main {
+  flex: 1;
+}
+
+/*
+ * 新增：滾動觸發動畫類別與延遲階梯。
+ * 元素在進入視口時會緩慢向上滑入並淡入，營造現代化動態感。
+ */
+.animate-in {
+  animation: slideInUp 0.6s ease-out forwards;
+}
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 新增：進度條樣式，顯示文章閱讀進度 */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: transparent;
+  z-index: 9999;
+}
+.reading-progress-bar {
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transition: width 0.2s ease;
+}
+
+/* 新增：響應式斷點調整 */
+@media (max-width: 640px) {
+  /* 手機螢幕：調整排版與間距 */
+  .container {
+    width: 95%;
+    padding-bottom: 40px;
+  }
+}
+@media (min-width: 641px) and (max-width: 768px) {
+  /* 小平板：可在此新增樣式 */
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* 大平板：可在此新增樣式 */
+}
+@media (min-width: 1025px) {
+  /* 桌面：可在此新增樣式 */
+}
+
+/* 統一頁面頂部間距：第一個容器預留導覽列高度與額外間距 */
+section.container:first-of-type,
+main.container:first-of-type {
+  padding-top: 80px; /* 64px navbar + 16px spacing */
 }
 
