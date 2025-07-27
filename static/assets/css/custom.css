@@ -1,0 +1,70 @@
+/* 自訂覆寫樣式檔：調整導覽列高度、頁腳間距、內容卡片樣式等 */
+
+/* Navbar 高度與 Logo 大小 */
+header .navbar {
+  padding: 0.1rem 0;
+  min-height: 60px;
+}
+header .navbar-brand img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+header .navbar-nav a {
+  padding: 0.4rem 0;
+}
+
+/* 頁腳容器去除底部內距，避免出現多餘空白 */
+footer .container {
+  padding-bottom: 0;
+}
+
+/* 調整服務詳細頁卡片背景為白色，增強層次感 */
+.service-detail-card {
+  background-color: var(--color-white);
+}
+
+/* 文章頁目錄固定在視窗頂部，提供方便閱讀 */
+.table-of-contents {
+  position: sticky;
+  top: 100px;
+}
+
+/* 響應式調整：在手機上適度縮小 logo */
+@media (max-width: 768px) {
+  header .navbar-brand img {
+    height: 50px;
+  }
+}
+
+/* 卡片列表樣式，用於服務與文章/常見問題/影音/下載列表 */
+.service-list,
+.post-list {
+  margin-top: 1.5rem;
+}
+.service-card,
+.post-card {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+.service-icon {
+  margin-right: 1rem;
+  font-size: 2rem;
+  color: var(--color-secondary);
+}
+.post-meta {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+.pagination .page-link {
+  color: var(--color-primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+}
+.pagination .page-link.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}

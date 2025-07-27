@@ -1,84 +1,81 @@
 {{ define "main" }}
-<section class="container list-section" style="padding-top:80px;">
-  <h1>{{ .Title }}</h1>
-  {{ if .Content }}<div class="list-intro">{{ .Content }}</div>{{ end }}
-
-  {{/* 決定是否顯示搜尋與分類標籤：適用於文章、常見問題、影音、下載列表與分類頁 */}}
-  {{ $searchSections := slice "articles" "faq" "videos" "downloads" }}
-  {{ if or (in $searchSections .Section) (or (eq .Kind "taxonomy") (eq .Kind "term")) }}
-  <div class="list-search-bar">
-    <input type="text" class="list-search" placeholder="搜尋{{ .Title }}..." aria-label="搜尋{{ .Title }}">
-  </div>
-  <div class="category-tags">
-    {{ range $name, $pages := .Site.Taxonomies.categories }}
-      <a href="{{ (print "/categories/" (urlize $name) "/") | relURL }}" class="tag">{{ $name }}</a>
+  <section class="container list-page" style="padding-top:80px;">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}
+    <div class="list-intro">
+      {{ . }}
+    </div>
     {{ end }}
-  </div>
-  {{ end }}
 
-  {{ if eq .Section "services" }}
-  {{/* 服務列表 */}}
-  <div class="service-grid">
-    {{ range .Pages }}
-    <a href="{{ .RelPermalink }}" class="service-card">
-      <div class="service-icon">
-        {{ $icon := "" }}
-        {{- if eq .File.BaseFileName "tax" }}{{ $icon = "fa-file-invoice-dollar" }}
-        {{- else if eq .File.BaseFileName "registration" }}{{ $icon = "fa-building" }}
-        {{- else if eq .File.BaseFileName "attestation" }}{{ $icon = "fa-stamp" }}
-        {{- else if eq .File.BaseFileName "advisory" }}{{ $icon = "fa-hand-holding-usd" }}
-        {{- end }}
-        <i class="fas {{ $icon }}"></i>
+    {{/* 特殊處理：服務列表採用卡片樣式呈現 */}}
+    {{ if eq .Section "services" }}
+      <div class="service-list">
+        {{ range .Pages }}
+          {{ $icon := "" }}
+          {{- if eq .File.BaseFileName "tax" }}{{ $icon = "fa-file-invoice-dollar" }}{{ else if eq .File.BaseFileName "registration" }}{{ $icon = "fa-building" }}{{ else if eq .File.BaseFileName "attestation" }}{{ $icon = "fa-stamp" }}{{ else if eq .File.BaseFileName "advisory" }}{{ $icon = "fa-hand-holding-usd" }}{{ end }}
+          <div class="service-card" style="background-color: var(--color-white); border-radius: 8px; padding:1.5rem; box-shadow:0 2px 6px rgba(0,0,0,0.05); display:flex; align-items:flex-start; margin-bottom:1.5rem;">
+            <div class="service-icon" style="margin-right:1rem; font-size:2rem; color: var(--color-secondary);">
+              <i class="fas {{ $icon }}"></i>
+            </div>
+            <div class="service-info">
+              <h2 style="margin-top:0;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+              {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+            </div>
+          </div>
+        {{ end }}
       </div>
-      <h3>{{ .Title }}</h3>
-      {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-    </a>
-    {{ end }}
-  </div>
-  {{ else }}
-  {{/* 其他列表：包裝成主內容與側邊欄 */}}
-  <div class="list-wrapper">
-    <div class="main-content">
-      <div class="list-cards">
-        {{/* 使用 Hugo 的分頁功能列出內容 */}}
-        {{ $paginator := .Paginate (.Pages) }}
+    {{ else }}
+      {{/* 其他列表：文章、常見問題、影音與下載。若為系列 taxonomy 頁，僅顯示對應 Section 的內容。*/}}
+      {{ $pages := .Pages }}
+      {{ if eq .Kind "term" }}
+        {{/* 將系列名稱對應至 Section，過濾頁面以防不同 Section 混合 */}}
+        {{ $seriesSection := dict
+          "稅務規劃" "articles"
+          "創業指南" "articles"
+          "熱門文章" "articles"
+          "稅務問題" "faq"
+          "創業問題" "faq"
+          "熱門問答" "faq"
+          "教學影片" "videos"
+          "熱門影片" "videos"
+          "範本下載" "downloads"
+          "熱門下載" "downloads"
+        }}
+        {{ $targetSection := index $seriesSection .Title }}
+        {{ if $targetSection }}
+          {{ $pages = where .Pages "Section" $targetSection }}
+        {{ end }}
+      {{ end }}
+      {{ $paginator := .Paginate $pages }}
+      <div class="post-list">
         {{ range $paginator.Pages }}
-        <div class="list-card">
-          <a href="{{ .RelPermalink }}" class="card-link">
-            <h3>{{ .Title }}</h3>
+          <div class="post-card" style="background-color: var(--color-white); border-radius: 8px; padding:1.5rem; box-shadow:0 2px 6px rgba(0,0,0,0.05); margin-bottom:1.5rem;">
+            <h2 style="margin-top:0;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
             {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-            <div class="card-meta">
-              {{ with .Date }}<span class="date">{{ . | dateFormat "2006-01-02" }}</span>{{ end }}
+            <div class="post-meta" style="font-size:0.85rem; color:var(--color-muted);">
+              {{ with .Date }}<span class="post-date">{{ . | dateFormat "2006-01-02" }}</span>{{ end }}
               {{ with .Params.categories }}
-                <span class="categories">
-                  {{ range . }}
-                    <a href="{{ (print "/categories/" (urlize .) "/") | relURL }}" class="tag">{{ . }}</a>
-                  {{ end }}
-                </span>
+                <span class="post-categories">｜{{ delimit . ", " }}</span>
               {{ end }}
             </div>
-          </a>
-        </div>
+          </div>
         {{ end }}
       </div>
-      {{/* 分頁功能 */}}
       {{ if gt ($paginator.TotalPages) 1 }}
-      <nav class="pagination">
-        {{ if $paginator.HasPrev }}<a href="{{ $paginator.Prev.URL }}" class="prev-page">上一頁</a>{{ end }}
-        {{ range $paginator.Pagers }}
-          {{ $isCurrent := eq . $paginator }}
-          <a href="{{ .URL }}" class="page-number{{ if $isCurrent }} current{{ end }}">{{ .PageNumber }}</a>
-        {{ end }}
-        {{ if $paginator.HasNext }}<a href="{{ $paginator.Next.URL }}" class="next-page">下一頁</a>{{ end }}
-      </nav>
+        <nav class="pagination" style="display:flex; gap:0.5rem; justify-content:center; margin:2rem 0;">
+          {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="page-link">上一頁</a>
+          {{ end }}
+          {{ range $paginator.Pagers }}
+            <a href="{{ .URL }}" class="page-link {{ if eq . $paginator }}active{{ end }}">{{ .PageNumber }}</a>
+          {{ end }}
+          {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="page-link">下一頁</a>
+          {{ end }}
+        </nav>
       {{ end }}
-    </div>
-    <aside class="sidebar">
       {{ partial "sidebar-list.html" . }}
-    </aside>
-  </div>
-  {{ end }}
-  <!-- SEO 區塊 -->
-  {{ partial "seo.html" . }}
-</section>
+    {{ end }}
+    {{ partial "seo.html" . }}
+  </section>
 {{ end }}
