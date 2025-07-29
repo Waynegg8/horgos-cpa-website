@@ -1,44 +1,136 @@
-baseURL = ""
-languageCode = "zh-tw"
-title = "霍爾果斯會計師事務所"
-defaultContentLanguage = "zh-hant"
-enableRobotsTXT = true
+baseURL = 'https://your-site.pages.dev'
+languageCode = 'zh-tw'
+title = '專業會計事務所'
+theme = 'apple-style'
 
-# 定義分類 taxonomy，讓文章可透過 categories 產生分類列表與標籤連結
-## 定義網站分類與標籤 taxonomy
-[taxonomies]
-  # 文章與內容使用的分類，例如「稅務」、「創業」、「財務」等
-  category = "categories"
-  # 標籤 taxonomy，用於細分文章關鍵字
-  tag = "tags"
-  # 系列 taxonomy，用於影音或文章的系列分類（例如「教學影片」、「熱門問答」等）
-  series = "series"
+# 建置設定
+buildFuture = false
+buildDrafts = false
+buildExpired = false
 
-## 分頁設定：每頁顯示 10 筆內容，用於文章、常見問題、影音與下載列表頁
-paginate = 10
+# 分頁設定
+paginate = 12
+paginatePath = "page"
+
+# 多語言支援
+defaultContentLanguage = "zh-tw"
+defaultContentLanguageInSubdir = false
 
 [params]
-  description = "霍爾果斯會計師事務所官方網站，提供公司設立、記帳報稅、財稅簽證、財務顧問等專業服務，協助台灣中小企業與創業者合法節稅與財務規劃。"
+  # 網站基本資訊
+  description = "專業的會計、稅務、創業諮詢服務，您值得信賴的財務夥伴"
+  keywords = "會計師,稅務,創業,公司設立,記帳,財務規劃"
+  author = "專業會計師團隊"
+  
+  # 聯絡資訊
+  phone = "02-1234-5678"
+  email = "info@your-domain.com"
+  address = "台北市信義區信義路五段7號"
+  
+  # 社群媒體
+  facebook = "https://facebook.com/your-page"
+  line = "https://line.me/ti/p/your-line-id"
+  
+  # 預約發布設定
+  scheduledPublishing = true
+  timezone = "Asia/Taipei"
+  
+  # Google Analytics
+  googleAnalytics = "G-XXXXXXXXXX"
+  
+  # SEO 設定
+  images = ["/images/og-image.jpg"]
 
-  # Google Analytics 4 追蹤 ID，可由 CMS 介面設定
-  ga_id = "G-XXXXXXXXXX"
+[frontmatter]
+  publishDate = "publishDate"
+  lastmod = ":fileModTime"
+  date = "date"
+  expiryDate = "expiryDate"
 
-  [params.imaging]
-    # 啟用 WebP 圖片輸出
-    webp = true
-    # 啟用圖片 lazy loading
-    lazyload = true
+[permalinks]
+  articles = "/articles/:sections[1:]/:slug/"
+  videos = "/videos/:sections[1:]/:slug/"
+  faq = "/faq/:sections[1:]/:slug/"
+  downloads = "/downloads/:sections[1:]/:slug/"
 
-## 圖像處理全局配置
-[imaging]
-  # 使用高品質縮放濾鏡
-  resampleFilter = "lanczos"
-  # 預設圖片品質
-  quality = 85
-  # 智慧裁切錨點
-  anchor = "smart"
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  series = "series"
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.highlight]
+    style = "github"
+    lineNos = true
+    codeFences = true
+    guessSyntax = true
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[privacy]
+  [privacy.googleAnalytics]
+    respectDoNotTrack = true
+
+[security]
+  enableInlineShortcodes = false
+  [security.exec]
+    allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$']
+
+[imaging]
+  resampleFilter = "CatmullRom"
+  quality = 85
+  anchor = "smart"
+
+# 選單定義
+[menu]
+  [[menu.main]]
+    name = "首頁"
+    url = "/"
+    weight = 10
+    
+  [[menu.main]]
+    name = "關於我們"
+    url = "/about/"
+    weight = 20
+    
+  [[menu.main]]
+    name = "服務項目"
+    url = "/services/"
+    weight = 30
+    
+  [[menu.main]]
+    name = "知識文章"
+    url = "/articles/"
+    weight = 40
+    
+  [[menu.main]]
+    name = "影音專區"
+    url = "/videos/"
+    weight = 50
+    
+  [[menu.main]]
+    name = "常見問題"
+    url = "/faq/"
+    weight = 60
+    
+  [[menu.main]]
+    name = "下載專區"
+    url = "/downloads/"
+    weight = 70
+    
+  [[menu.main]]
+    name = "聯絡我們"
+    url = "/contact/"
+    weight = 80
+    
+  [[menu.main]]
+    name = "預約諮詢"
+    url = "/appointment/"
+    weight = 90
+    pre = "cta"

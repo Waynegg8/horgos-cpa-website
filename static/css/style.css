@@ -1,0 +1,25 @@
+/* Apple Style CSS */
+/* TODO: 實現完整的蘋果風格 CSS */
+
+:root {
+  /* 色彩系統 */
+  --nav-bg: #1D1D1F;
+  --nav-text: #FFFFFF;
+  --nav-text-hover: #007AFF;
+  --color-primary: #1D1D1F;
+  --color-accent: #007AFF;
+  --color-bg-primary: #FBFBFD;
+  --color-white: #FFFFFF;
+  --color-text-primary: #1D1D1F;
+  
+  /* 字體系統 */
+  --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", 
+                 "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", 
+                 system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-system);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}

@@ -1,0 +1,17 @@
+{{- define "main" -}}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">{{ .Title | default "專業會計服務" }}</h1>
+        <p class="hero-subtitle">{{ .Description | default "創業路上的最佳夥伴" }}</p>
+        <a href="/appointment/" class="hero-cta">立即預約諮詢</a>
+    </div>
+</div>
+
+<section class="services-section">
+    <!-- 服務內容 -->
+</section>
+
+<section class="featured-content">
+    <!-- 精選內容 -->
+</section>
+{{- end -}}

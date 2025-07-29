@@ -1,112 +1,203 @@
+locale: 'zh_Hant'
 backend:
   name: git-gateway
   branch: main
 
-# 媒體資料夾與公開資料夾設定
-media_folder: "static/uploads"
-public_folder: "/uploads"
+media_folder: static/uploads
+public_folder: /uploads
 
-# 集合定義：文章、常見問題、影音、下載、服務、頁面與設定
+show_preview_links: true
+display_url: https://your-site.pages.dev
+
+editor:
+  preview: true
+  immediate_preview: true
+
+site_url: https://your-site.pages.dev
+logo_url: /admin/logo.png
+
 collections:
   - name: "articles"
-    label: "知識文章"
+    label: "📝 知識文章"
+    label_singular: "文章"
     folder: "content/articles"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "articles/{{slug}}"
     fields:
-      - { label: "標題", name: "title", widget: "string" }
-      - { label: "日期", name: "date", widget: "datetime" }
-      - { label: "描述", name: "description", widget: "text" }
-      - { label: "分類", name: "categories", widget: "list", default: ["稅務"] }
-      - { label: "系列", name: "series", widget: "list", required: false }
-      - { label: "標籤", name: "tags", widget: "list", required: false }
-      - { label: "特色圖片", name: "image", widget: "image", required: false }
-      - { label: "內容", name: "body", widget: "markdown" }
+      - label: "📄 文章標題"
+        name: "title"
+        widget: "string"
+        hint: "建議20-60字，包含主要關鍵字"
+        
+      - label: "📅 發布日期"
+        name: "publishDate"
+        widget: "datetime"
+        default: "{{now}}"
+        hint: "設定未來時間可預約發布"
+        
+      - label: "📅 建立日期"
+        name: "date"
+        widget: "datetime"
+        default: "{{now}}"
+        
+      - label: "📝 文章摘要"
+        name: "description"
+        widget: "text"
+        hint: "80-160字的文章摘要，會顯示在搜尋結果和社群分享"
+        
+      - label: "🏷️ 文章分類"
+        name: "category"
+        widget: "select"
+        options: 
+          - { label: "📚 創業教室", value: "創業教室" }
+          - { label: "💰 稅務指南", value: "稅務指南" }
+          - { label: "📊 會計實務", value: "會計實務" }
+          - { label: "📋 法規更新", value: "法規更新" }
+        hint: "選擇最適合的分類"
+        
+      - label: "🏷️ 標籤"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+        hint: "3-7個相關標籤，有助於讀者找到相關內容"
+        
+      - label: "🖼️ 特色圖片"
+        name: "featured_image"
+        widget: "image"
+        hint: "建議尺寸 1200x630，會顯示在列表和社群分享"
+        
+      - label: "👤 作者"
+        name: "author"
+        widget: "select"
+        options:
+          - "資深會計師團隊"
+          - "稅務專家"
+          - "創業顧問"
+        default: "資深會計師團隊"
+        
+      - label: "📝 草稿狀態"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        hint: "勾選後文章不會在網站顯示"
+        
+      - label: "📄 文章內容"
+        name: "body"
+        widget: "markdown"
+        hint: "使用Markdown格式撰寫文章內容"
+
+  - name: "videos"
+    label: "🎥 影音專區"
+    label_singular: "影片"
+    folder: "content/videos"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "videos/{{slug}}"
+    fields:
+      - { label: "🎬 影片標題", name: "title", widget: "string" }
+      - { label: "📅 發布日期", name: "publishDate", widget: "datetime", default: "{{now}}" }
+      - { label: "📅 建立日期", name: "date", widget: "datetime", default: "{{now}}" }
+      - { label: "📝 影片描述", name: "description", widget: "text" }
+      - label: "🏷️ 影片分類"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "📹 教學影片", value: "教學影片" }
+          - { label: "🎤 專家講座", value: "專家講座" }
+          - { label: "💡 實務分享", value: "實務分享" }
+      - { label: "🎥 影片網址", name: "video_url", widget: "string", hint: "YouTube、Vimeo等影片網址" }
+      - { label: "⏱️ 影片長度", name: "duration", widget: "string", hint: "例如：15:30" }
+      - { label: "🖼️ 縮圖", name: "thumbnail", widget: "image", hint: "建議尺寸 1280x720" }
+      - { label: "🏷️ 標籤", name: "tags", widget: "list", allow_add: true }
+      - { label: "👤 講者", name: "speaker", widget: "string", required: false }
+      - { label: "📝 草稿狀態", name: "draft", widget: "boolean", default: false }
+      - { label: "📄 影片說明", name: "body", widget: "markdown" }
 
   - name: "faq"
-    label: "常見問題"
+    label: "❓ 常見問題"
+    label_singular: "問題"
     folder: "content/faq"
     create: true
     slug: "{{slug}}"
+    preview_path: "faq/{{slug}}"
     fields:
-      - { label: "標題", name: "title", widget: "string" }
-      - { label: "日期", name: "date", widget: "datetime" }
-      - { label: "描述", name: "description", widget: "text" }
-      - { label: "分類", name: "categories", widget: "list", default: ["常見問題"] }
-      - { label: "系列", name: "series", widget: "list", required: false }
-      - { label: "標籤", name: "tags", widget: "list", required: false }
-      - { label: "內容", name: "body", widget: "markdown" }
-
-  - name: "videos"
-    label: "影音專區"
-    folder: "content/videos"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "標題", name: "title", widget: "string" }
-      - { label: "日期", name: "date", widget: "datetime" }
-      - { label: "描述", name: "description", widget: "text" }
-      - { label: "分類", name: "categories", widget: "list", default: ["影音"] }
-      - { label: "系列", name: "series", widget: "list", required: false }
-      - { label: "標籤", name: "tags", widget: "list", required: false }
-      - { label: "YouTube ID", name: "youtube_id", widget: "string", required: false }
-      - { label: "縮圖", name: "thumbnail", widget: "image", required: false }
-      - { label: "內容", name: "body", widget: "markdown" }
+      - { label: "❓ 問題", name: "title", widget: "string", hint: "以問句形式撰寫" }
+      - { label: "📅 發布日期", name: "publishDate", widget: "datetime", default: "{{now}}" }
+      - { label: "📅 建立日期", name: "date", widget: "datetime", default: "{{now}}" }
+      - label: "🏷️ 問題分類"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "💼 創業問題", value: "創業問題" }
+          - { label: "💰 稅務問題", value: "稅務問題" }
+          - { label: "📊 會計問題", value: "會計問題" }
+      - { label: "🏷️ 標籤", name: "tags", widget: "list", allow_add: true }
+      - label: "📊 重要程度"
+        name: "priority"
+        widget: "select"
+        options:
+          - { label: "🔥 高", value: "high" }
+          - { label: "📌 中", value: "medium" }
+          - { label: "📝 低", value: "low" }
+        default: "medium"
+      - { label: "📝 草稿狀態", name: "draft", widget: "boolean", default: false }
+      - { label: "💡 解答內容", name: "body", widget: "markdown", hint: "詳細回答問題" }
 
   - name: "downloads"
-    label: "下載專區"
+    label: "⬇️ 下載專區"
+    label_singular: "檔案"
     folder: "content/downloads"
     create: true
     slug: "{{slug}}"
+    preview_path: "downloads/{{slug}}"
     fields:
-      - { label: "標題", name: "title", widget: "string" }
-      - { label: "日期", name: "date", widget: "datetime" }
-      - { label: "描述", name: "description", widget: "text" }
-      - { label: "分類", name: "categories", widget: "list", default: ["下載"] }
-      - { label: "系列", name: "series", widget: "list", required: false }
-      - { label: "標籤", name: "tags", widget: "list", required: false }
-      - { label: "檔案", name: "file", widget: "file", required: false }
-      - { label: "檔案大小", name: "file_size", widget: "string", required: false }
-      - { label: "內容", name: "body", widget: "markdown" }
-
-  - name: "services"
-    label: "服務項目"
-    folder: "content/services"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "標題", name: "title", widget: "string" }
-      - { label: "描述", name: "description", widget: "text" }
-      - { label: "圖示", name: "icon", widget: "string", hint: "FontAwesome 圖示類名" }
-      - { label: "特色圖片", name: "image", widget: "image", required: false }
-      - { label: "排序", name: "weight", widget: "number", default: 1 }
-      - { label: "內容", name: "body", widget: "markdown" }
+      - { label: "📄 檔案名稱", name: "title", widget: "string" }
+      - { label: "📅 發布日期", name: "publishDate", widget: "datetime", default: "{{now}}" }
+      - { label: "📅 建立日期", name: "date", widget: "datetime", default: "{{now}}" }
+      - { label: "📝 檔案描述", name: "description", widget: "text" }
+      - label: "🏷️ 檔案分類"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "📋 範本下載", value: "範本下載" }
+          - { label: "📊 表格下載", value: "表格下載" }
+          - { label: "🔧 工具下載", value: "工具下載" }
+      - { label: "📁 下載檔案", name: "download_file", widget: "file", hint: "支援PDF、DOC、XLS等格式" }
+      - { label: "📏 檔案大小", name: "file_size", widget: "string", hint: "例如：2.5MB" }
+      - label: "📋 檔案格式"
+        name: "file_format"
+        widget: "select"
+        options: ["PDF", "DOC", "DOCX", "XLS", "XLSX", "ZIP"]
+      - { label: "🏷️ 標籤", name: "tags", widget: "list", allow_add: true }
+      - { label: "📊 重要程度", name: "featured", widget: "boolean", default: false, hint: "勾選後會在首頁顯示" }
+      - { label: "📝 草稿狀態", name: "draft", widget: "boolean", default: false }
+      - { label: "📄 使用說明", name: "body", widget: "markdown", hint: "檔案的使用方法和注意事項" }
 
   - name: "pages"
-    label: "頁面管理"
+    label: "📄 頁面管理"
     files:
+      - label: "首頁"
+        name: "homepage"
+        file: "content/_index.md"
+        fields:
+          - { label: "標題", name: "title", widget: "string" }
+          - { label: "內容", name: "body", widget: "markdown" }
       - label: "關於我們"
         name: "about"
         file: "content/about/_index.md"
         fields:
           - { label: "標題", name: "title", widget: "string" }
-          - { label: "描述", name: "description", widget: "text" }
+          - { label: "內容", name: "body", widget: "markdown" }
+      - label: "服務項目"
+        name: "services"
+        file: "content/services/_index.md"
+        fields:
+          - { label: "標題", name: "title", widget: "string" }
           - { label: "內容", name: "body", widget: "markdown" }
       - label: "聯絡我們"
         name: "contact"
         file: "content/contact/_index.md"
         fields:
           - { label: "標題", name: "title", widget: "string" }
-          - { label: "描述", name: "description", widget: "text" }
           - { label: "內容", name: "body", widget: "markdown" }
-
-  - name: "settings"
-    label: "網站設定"
-    files:
-      - label: "網站配置"
-        name: "config"
-        file: "config.toml"
-        fields:
-          - { label: "網站標題", name: "title", widget: "string" }
-          - { label: "網站描述", name: "params.description", widget: "text" }
-          - { label: "GA追蹤ID", name: "params.ga_id", widget: "string", required: false }

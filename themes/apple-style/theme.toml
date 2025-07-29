@@ -1,0 +1,12 @@
+name = "Apple Style Theme"
+license = "MIT"
+licenselink = "https://github.com/your-username/hugo-apple-style/blob/main/LICENSE"
+description = "蘋果風格的 Hugo 主題，專為會計事務所設計"
+homepage = "https://github.com/your-username/hugo-apple-style"
+tags = ["business", "corporate", "apple", "minimal", "responsive"]
+features = ["responsive", "dark-mode", "seo", "multilingual"]
+min_version = "0.120.0"
+
+[author]
+  name = "Your Name"
+  homepage = "https://your-website.com"

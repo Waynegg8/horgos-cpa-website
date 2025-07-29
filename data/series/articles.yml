@@ -1,0 +1,13 @@
+series:
+  startup_guide:
+    title: 創業設立完全指南
+    category: 創業教室
+    description: 從零開始的創業設立全方位指南
+    cover_image: /uploads/series/startup-guide-cover.webp
+    author: 資深會計師團隊
+  tax_planning:
+    title: 中小企業稅務規劃寶典
+    category: 稅務指南
+    description: 專為中小企業設計的稅務優化策略
+    cover_image: /uploads/series/tax-planning-cover.webp
+    author: 資深會計師團隊

@@ -1,59 +1,110 @@
-# 霍爾果斯會計師事務所網站
+# Hugo 蘋果風格會計事務所網站
 
-這是一個採用 **Hugo** 建立的靜態網站專案，提供稅務、創業與財務相關資訊。專案採用現代化風格、最佳化效能並內建 Netlify CMS 以便管理內容。
+專業的會計事務所網站，採用 Hugo 靜態網站生成器和蘋果風格設計。
 
-## 環境需求
+## 🚀 快速開始
 
-* [Hugo Extended](https://gohugo.io/getting-started/installing/) 版本 ≥ `0.115.0`。建議安裝 Extended 版以支援 SCSS/資產管線功能。
-* Git 用於版本控制與與 CMS 的 Git Gateway。
+### 環境需求
 
-## 安裝步驟
+- Hugo Extended v0.120.0 或以上版本
+- Node.js 18+ (用於開發工具)
+- Git
 
-1. 下載或 clone 此專案：
+### 安裝與運行
 
+1. **克隆專案**
    ```bash
-   git clone <你的倉庫位址>
-   cd horgos-cpa-website-master
+   git clone https://github.com/your-username/hugo-accounting-site.git
+   cd hugo-accounting-site
    ```
 
-2. 在本機啟動預覽伺服器：
-
+2. **安裝依賴**
    ```bash
-   hugo server -D
+   npm install
    ```
 
-   `-D` 選項會包含草稿文章。啟動後瀏覽器將在 `http://localhost:1313` 呈現網站。
-
-3. 建立正式環境版本：
-
+3. **本地開發**
    ```bash
-   hugo --minify -b "https://你的網域/"
+   npm run dev
+   ```
+   
+   網站將在 http://localhost:1313 開啟
+
+4. **建置網站**
+   ```bash
+   npm run build
    ```
 
-   產出檔案將位於 `public/` 目錄，可直接部署至 Cloudflare Pages、Netlify 等靜態網站服務。
+## 📁 專案結構
 
-## 專案結構簡介
+```
+hugo-accounting-site/
+├── content/              # 內容檔案
+│   ├── articles/        # 知識文章
+│   ├── videos/          # 影音專區
+│   ├── faq/             # 常見問題
+│   └── downloads/       # 下載專區
+├── data/                # 資料檔案
+│   ├── series/          # 系列管理
+│   └── tags.yml         # 標籤管理
+├── layouts/             # 模板檔案
+├── static/              # 靜態資源
+│   ├── admin/           # CMS 管理介面
+│   ├── uploads/         # 上傳檔案
+│   └── images/          # 圖片資源
+├── themes/              # 主題
+│   └── apple-style/     # 自訂蘋果風格主題
+└── workers/             # Cloudflare Workers
+    └── src/             # Worker 原始碼
+```
 
-| 目錄 / 檔案        | 說明                                                |
-|--------------------|-------------------------------------------------------|
-| `config.toml`      | Hugo 站點設定，包括描述、導航、影像處理等             |
-| `content/`         | Markdown 內容：文章、常見問題、影音、下載與頁面       |
-| `layouts/`         | 頁面模板，包含列表頁、單篇頁、頁首、頁腳等            |
-| `static/assets/`   | 靜態資源：CSS、JavaScript、圖檔                       |
-| `static/admin/`    | Netlify CMS 配置，包含登入介面與後端設定            |
-| `static/_headers`  | Cloudflare / Netlify 平台的安全與快取標頭設定          |
-| `static/_redirects`| Cloudflare / Netlify 的 URL 重定向規則                |
+## 🎨 設計特色
 
-## 調整網站設定
+- **蘋果風格設計**: 採用蘋果設計語言，簡潔優雅
+- **深色導航欄**: 深色背景配白色 Logo 和文字
+- **響應式設計**: 完美支援桌面、平板、手機
+- **快速搜尋**: 即時搜尋建議和結果高亮
+- **系列管理**: 智慧的內容系列組織
+- **預約發布**: 支援內容預約發布功能
 
-* **Google Analytics**：編輯 `config.toml` 中的 `params.ga_id`，填入你的 GA4 測量 ID，例如 `G-XXXXXYYY`。GA 代碼會自動嵌入每個頁面。
-* **影像處理**：`config.toml` 的 `[imaging]` 與 `[params.imaging]` 區塊可以調整圖片品質、WebP 與 Lazy Loading 設定。
-* **網站描述**：`config.toml` 中的 `params.description` 用於 meta description 與結構化資料。
+## ⚙️ 功能特色
 
-## 編輯內容
+- **內容管理**: Decap CMS 易用管理介面
+- **多媒體支援**: 文章、影片、下載檔案
+- **討論功能**: Cloudflare Workers 驅動的留言系統
+- **表單處理**: 預約諮詢和聯絡表單
+- **SEO 優化**: 完整的 SEO 配置
+- **高效能**: 靜態網站，載入速度極快
 
-建議透過 Netlify CMS （詳見 `CMS.md`）管理文章、常見問題、影音與下載，這樣可以避免直接編輯 Markdown 檔案造成格式錯誤。如果需要手動調整，可在 `content/` 目錄中新增或編輯相應的 `.md` 檔案。
+## 🔧 開發指南
 
-## 授權
+### 新增內容
 
-本專案的源碼與內容僅用於示範與教學用途，請勿未經授權將其用於商業部署。若需商業使用，請洽詢原作者取得授權。
+1. **使用 CMS 管理介面**: 訪問 `/admin` 進行內容管理
+2. **手動建立**: 在對應的 `content/` 目錄下建立 Markdown 檔案
+
+### 客製化主題
+
+主題檔案位於 `themes/apple-style/`，包含：
+- `layouts/`: HTML 模板
+- `assets/`: SCSS 和 JS 原始檔
+- `static/`: 靜態資源
+
+### 部署
+
+詳細部署指南請參考 `docs/deployment-guide.md`
+
+## 📖 更多文件
+
+- [部署指南](docs/deployment-guide.md)
+- [CMS 使用手冊](docs/cms-guide.md)
+- [Cloudflare 設定](docs/cloudflare-setup.md)
+- [自訂指南](docs/customization-guide.md)
+
+## 🤝 貢獻
+
+歡迎提交 Issue 和 Pull Request 來改善這個專案。
+
+## 📄 授權
+
+MIT License - 詳情請參考 LICENSE 檔案

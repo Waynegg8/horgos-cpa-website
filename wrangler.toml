@@ -1,0 +1,29 @@
+name = "hugo-accounting-site"
+main = "src/index.js"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "hugo-accounting-site-prod"
+
+[env.staging]
+name = "hugo-accounting-site-staging"
+
+[[kv_namespaces]]
+binding = "APPOINTMENTS"
+id = "your-kv-namespace-id"
+preview_id = "your-preview-kv-namespace-id"
+
+[[kv_namespaces]]
+binding = "CONTACTS"
+id = "your-kv-namespace-id"
+preview_id = "your-preview-kv-namespace-id"
+
+[[kv_namespaces]]
+binding = "COMMENTS"
+id = "your-kv-namespace-id"
+preview_id = "your-preview-kv-namespace-id"
+
+[vars]
+SITE_URL = "https://your-site.pages.dev"
+EMAIL_TO = "info@your-domain.com"
