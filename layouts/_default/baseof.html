@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
-    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+    <title>{{ with .Params.seo_title }}{{ . }}{{ else }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}{{ end }}</title>
+    <meta name="description" content="{{ with .Params.seo_description }}{{ . }}{{ else }}{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . | plainify | safeHTML | truncate 160 }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}{{ end }}">
     
     <!-- SEO Meta Tags -->
     {{ if .Params.seo_title }}<meta property="og:title" content="{{ .Params.seo_title }}">{{ else }}<meta property="og:title" content="{{ .Title }} - {{ .Site.Title }}">{{ end }}
