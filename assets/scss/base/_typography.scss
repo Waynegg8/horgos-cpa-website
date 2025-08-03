@@ -98,7 +98,7 @@ small, .text-small {
 }
 
 .text-light {
-  color: $color-text-light;
+  color: $color-text-primary;
 }
 
 /* 文字截斷 */
@@ -127,14 +127,14 @@ blockquote {
 /* 代碼樣式 */
 code {
   font-family: "Consolas", "Monaco", "Courier New", monospace;
-  background-color: $color-bg-light;
+  background-color: $color-bg-secondary;
   padding: $spacing-1 $spacing-2;
   border-radius: $border-radius-sm;
   font-size: 0.9em;
 }
 
 pre {
-  background-color: $color-bg-light;
+  background-color: $color-bg-secondary;
   padding: $spacing-4;
   border-radius: $border-radius-md;
   overflow-x: auto;

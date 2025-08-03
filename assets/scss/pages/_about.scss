@@ -97,7 +97,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: $spacing-4;
-    background-color: $color-bg-light;
+    background-color: $color-bg-primary;
     padding: $spacing-4;
     border-radius: $border-radius-md;
     
@@ -158,7 +158,7 @@
   min-width: 150px;
   text-align: center;
   padding: $spacing-6;
-  background-color: $color-bg-white;
+  background-color: $color-bg-secondary;
   border-radius: $border-radius-lg;
   box-shadow: $shadow-md;
   transition: transform $transition-base;

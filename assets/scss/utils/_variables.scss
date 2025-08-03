@@ -6,19 +6,18 @@ $color-secondary: #2C5F7F;
 $color-accent: #22c55e;
 
 // 背景色彩
-$color-bg-light: #F5F6F5;
-$color-bg-white: #FFFFFF;
-$color-bg-dark: #1F2937;
+$color-bg-primary: #0A0A0A;
+$color-bg-secondary: #141414;
 
 // 文字色彩
-$color-text-primary: #374151;
-$color-text-secondary: #6B7280;
-$color-text-light: #9CA3AF;
-$color-text-muted: #9CA3AF;
+$color-text-primary: #F0F0F0;
+$color-text-secondary: #A1A1A1;
+$color-text-tertiary: #525252;
+$color-text-muted: $color-text-tertiary; // 保持兼容性
 
 // 邊框和分隔色彩
-$color-border: #E5E7EB;
-$color-divider: #F3F4F6;
+$color-border-primary: #262626;
+$color-divider: $color-border-primary; // 保持兼容性
 
 // 狀態指示色彩
 $color-success: #10B981;
@@ -77,9 +76,7 @@ $container-padding: 1rem;
 
 // 斷點
 $breakpoint-sm: 640px;
-$breakpoint-md: 768px;
 $breakpoint-lg: 1024px;
-$breakpoint-xl: 1280px;
 $breakpoint-2xl: 1440px;
 
 // 動畫時間

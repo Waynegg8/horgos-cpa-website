@@ -200,7 +200,7 @@
   }
   
   &__meta {
-    color: $color-text-light;
+    color: $color-text-primary;
     font-size: $font-size-sm;
     margin-bottom: $spacing-3;
     display: flex;
@@ -252,7 +252,7 @@
   }
   
   &__read-time {
-    color: $color-text-light;
+    color: $color-text-primary;
     font-size: $font-size-sm;
   }
 }

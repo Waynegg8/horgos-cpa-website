@@ -66,6 +66,19 @@ googleAnalytics = "G-RKMCS9WVS5"
   line = "@208ihted"
   email = "admin@horgoscpa.com"
 
+[Params.organization]
+  name = "霍爾果斯會計師事務所"
+  url = "https://horgoscpa.com/"
+  logo = "/uploads/images/general/general-logo.png"
+  telephone = "04-2220-5606"
+  email = "admin@horgoscpa.com"
+  description = "專業的會計師事務所，提供工商登記、稅務申報、財稅簽證與諮詢服務。"
+  streetAddress = "台中市西區建國路21號3樓之1"
+  addressLocality = "台中市"
+  addressRegion = "台中市"
+  postalCode = "403"
+  addressCountry = "TW"
+
 [menu]
   [[menu.main]]
     name = "關於我們"
@@ -234,10 +247,12 @@ googleAnalytics = "G-RKMCS9WVS5"
 
   [[menu.footer]]
     name = "隱私權政策"
+    identifier = "privacy-policy"
     url = "/privacy-policy/"
     weight = 1
 
   [[menu.footer]]
     name = "Cookies政策"
+    identifier = "cookies-policy"
     url = "/cookies-policy/"
     weight = 2

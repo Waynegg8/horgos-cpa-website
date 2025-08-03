@@ -130,14 +130,12 @@ async function getCurrentStatus(env) {
     
     return new Response(JSON.stringify({
       success: true,
-      data: {
-        status,
-        message,
-        nextChangeTime,
-        currentTime: taipeiTime.toISOString(),
-        isHoliday: isHoliday.isHoliday,
-        holidayName: isHoliday.name
-      }
+      status,
+      message,
+      nextChangeTime,
+      currentTime: taipeiTime.toISOString(),
+      isHoliday: isHoliday.isHoliday,
+      holidayName: isHoliday.name
     }));
   } catch (error) {
     console.error('Error getting business status:', error);

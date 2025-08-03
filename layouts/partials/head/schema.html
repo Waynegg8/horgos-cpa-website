@@ -2,37 +2,40 @@
 {{ $schema := dict }}
 
 <!-- 基本組織資訊 -->
-{{ $organization := dict 
-  "@type" "AccountingService" 
-  "name" "霍爾果斯會計師事務所" 
-  "url" "https://hugo-accounting.com/" 
-  "logo" "https://hugo-accounting.com/logo.png" 
-  "telephone" "(04) 2345-6789" 
-  "email" "contact@hugo-accounting.com" 
-  "description" "專業的會計師事務所，提供工商登記、稅務申報、財稅簽證與諮詢服務。"
-  "address" (dict 
-    "@type" "PostalAddress" 
-    "streetAddress" "台中市西區民生路123號5樓" 
-    "addressLocality" "台中市" 
-    "addressRegion" "台中市" 
-    "postalCode" "40341" 
-    "addressCountry" "TW"
-  )
-  "openingHoursSpecification" (slice 
-    (dict 
-      "@type" "OpeningHoursSpecification" 
-      "dayOfWeek" (slice "Monday" "Tuesday" "Wednesday" "Thursday" "Friday") 
-      "opens" "08:30" 
-      "closes" "12:30"
+{{ $organization := dict }}
+{{ with .Site.Params.organization }}
+  {{ $organization = dict 
+    "@type" "AccountingService" 
+    "name" .name
+    "url" .url
+    "logo" (.logo | absURL)
+    "telephone" .telephone
+    "email" .email
+    "description" .description
+    "address" (dict 
+      "@type" "PostalAddress" 
+      "streetAddress" .streetAddress
+      "addressLocality" .addressLocality
+      "addressRegion" .addressRegion
+      "postalCode" .postalCode
+      "addressCountry" .addressCountry
     )
-    (dict 
-      "@type" "OpeningHoursSpecification" 
-      "dayOfWeek" (slice "Monday" "Tuesday" "Wednesday" "Thursday" "Friday") 
-      "opens" "13:30" 
-      "closes" "17:30"
+    "openingHoursSpecification" (slice 
+      (dict 
+        "@type" "OpeningHoursSpecification" 
+        "dayOfWeek" (slice "Monday" "Tuesday" "Wednesday" "Thursday" "Friday") 
+        "opens" "08:30" 
+        "closes" "12:30"
+      )
+      (dict 
+        "@type" "OpeningHoursSpecification" 
+        "dayOfWeek" (slice "Monday" "Tuesday" "Wednesday" "Thursday" "Friday") 
+        "opens" "13:30" 
+        "closes" "17:30"
+      )
     )
-  )
-}}
+  }}
+{{ end }}
 
 <!-- 根據頁面類型設置不同的結構化資料 -->
 {{ if .IsHome }}

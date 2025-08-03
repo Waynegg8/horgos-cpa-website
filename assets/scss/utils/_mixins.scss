@@ -89,7 +89,7 @@
 
 // 卡片混合器
 @mixin card {
-  background-color: $color-bg-white;
+  background-color: $color-bg-secondary;
   border-radius: $border-radius-lg;
   box-shadow: $shadow-md;
   padding: $spacing-6;

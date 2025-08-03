@@ -88,9 +88,16 @@
                 <p>&copy; <span id="current-year">2024</span> {{ .Site.Params.copyright }} 版權所有</p>
             </div>
             <div class="site-footer__legal-links">
-                {{ range .Site.Menus.footer }}
-                <a href="{{ .URL }}">{{ .Name }}</a>
-                {{ if ne .Name (index $.Site.Menus.footer (sub (len $.Site.Menus.footer) 1)).Name }}
+                {{ range $index, $element := .Site.Menus.footer }}
+                <a href="{{ .URL }}">
+                    {{ if eq .Identifier "privacy-policy" }}
+                        <i class="fas fa-shield-alt"></i>
+                    {{ else if eq .Identifier "cookies-policy" }}
+                        <i class="fas fa-cookie-bite"></i>
+                    {{ end }}
+                    {{ .Name }}
+                </a>
+                {{ if ne $index (sub (len $.Site.Menus.footer) 1) }}
                 <span class="separator">|</span>
                 {{ end }}
                 {{ end }}
@@ -98,45 +105,3 @@
         </div>
     </div>
 </footer>
-
-<script>
-    // 更新年份
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-    
-    // 營業狀態檢查（簡化版）
-    function checkBusinessStatus() {
-        const now = new Date();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
-        const day = now.getDay(); // 0 是週日，6 是週六
-        
-        const indicator = document.getElementById('business-status-indicator');
-        const text = document.getElementById('business-status-text');
-        
-        // 週一至週五
-        if (day >= 1 && day <= 5) {
-            // 上午營業時間：8:30 - 12:30
-            const isMorningHours = (hours > 8 || (hours === 8 && minutes >= 30)) && (hours < 12 || (hours === 12 && minutes <= 30));
-            // 下午營業時間：13:30 - 17:30
-            const isAfternoonHours = (hours > 13 || (hours === 13 && minutes >= 30)) && (hours < 17 || (hours === 17 && minutes <= 30));
-            
-            if (isMorningHours || isAfternoonHours) {
-                indicator.classList.add('status-open');
-                text.textContent = '營業中';
-            } else {
-                indicator.classList.add('status-closed');
-                text.textContent = '休息中';
-            }
-        } else {
-            // 週末休息
-            indicator.classList.add('status-closed');
-            text.textContent = '休息中';
-        }
-    }
-    
-    // 初始化檢查營業狀態
-    checkBusinessStatus();
-    
-    // 每分鐘更新一次
-    setInterval(checkBusinessStatus, 60000);
-</script>

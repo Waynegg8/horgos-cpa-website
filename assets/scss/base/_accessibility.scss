@@ -6,7 +6,7 @@
   top: -40px;
   left: 0;
   background-color: $color-primary;
-  color: white;
+  color: $color-text-primary;
   padding: $spacing-2 $spacing-4;
   z-index: z('header') + 1;
   transition: top 0.3s;

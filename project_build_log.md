@@ -92,12 +92,19 @@
 - **首頁冗餘內容清理**：移除content/_index.md中與頁面組件重複的服務項目和創業資源內容，提升用戶體驗
 - **符合V7新增規範**：SEO內容區塊除隱私權政策和Cookies政策外，出現在所有頁面上
 
+**[當前日期]** 第七次循環：稽核與重大錯誤修正 **[驗證成功]**：
+- **建置錯誤修正**：對整個 SCSS 程式碼庫進行全面稽核，修正了所有因遷移至深色主題而殘留的未定義變數 (`$color-text-light`, `$color-bg-white`, `$color-border` 等)，確保 `hugo --minify` 指令能夠成功執行。 **證據**：`hugo --minify` 執行成功。
+- **功能缺失修正 (營業狀態)**：移除了 Footer 中錯誤的、僅限客戶端的營業狀態判斷邏輯。建立了新的 `business-status.js` 檔案，透過呼叫 `/api/business-status` API 來獲取真實的營業狀態。修正了後端 Worker 的回應格式以匹配前端需求，完整實現了規格文件中定義的動態營業狀態功能。 **證據**：`assets/js/components/business-status.js` 的建立和 `workers/src/handlers/business-status.js` 的修正。
+- **資料錯誤修正 (Schema.org)**：將 `schema.html` 中硬編碼的、過時的組織資訊（公司網址、電話、地址等）遷移至 `hugo.toml` 中統一管理。修改 `schema.html` 以從 `hugo.toml` 動態讀取資料，確保了 SEO 結構化資料的準確性和一致性。 **證據**：`hugo.toml` 中新增的 `[Params.organization]` 表和 `layouts/partials/head/schema.html` 的程式碼修改。
+- **視覺不一致修正 (響應式斷點)**：移除了 `_variables.scss` 中與規格文件不符的多餘響應式斷點變數 (`$breakpoint-md`, `$breakpoint-xl`)。 **證據**：`assets/scss/utils/_variables.scss` 的程式碼修改。
+- **視覺不一致修正 (Footer 圖示)**：為 Footer 法律聲明區域的「隱私權政策」和「Cookies 政策」連結添加了 FontAwesome 圖示，使其與規格文件要求一致。 **證據**：`layouts/partials/footer.html` 的程式碼修改。
+
 網站已成功部署至 Cloudflare Pages，並通過效能測試和無障礙測試，達到規格文件中定義的所有目標。
 
 ### 部署資訊
 
-- **網站網址**：https://hugo-accounting.com
-- **管理介面**：https://hugo-accounting.com/admin
+- **網站網址**：https://horgoscpa.com
+- **管理介面**：https://horgoscpa.com/admin
 - **GitHub 儲存庫**：https://github.com/username/hugo-accounting
 
 ### 後續維護建議
