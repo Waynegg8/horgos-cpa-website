@@ -1,0 +1,40 @@
+{{ $pag := $.Paginator }}
+{{ if gt $pag.TotalPages 1 }}
+<div class="pagination">
+  {{ if $pag.HasPrev }}
+    <a href="{{ $pag.Prev.URL }}" class="pagination__item pagination__item--prev">&laquo;</a>
+  {{ else }}
+    <span class="pagination__item pagination__item--prev pagination__item--disabled">&laquo;</span>
+  {{ end }}
+  
+  {{ $ellipsed := false }}
+  {{ $shouldEllipse := false }}
+  {{ range $pag.Pagers }}
+    {{ $right := sub .TotalPages .PageNumber }}
+    {{ $showNumber := or (le .PageNumber 3) (eq .PageNumber $pag.PageNumber) (le $right 2) }}
+    {{ if $showNumber }}
+      {{ $ellipsed = false }}
+      {{ $shouldEllipse = false }}
+    {{ else }}
+      {{ $shouldEllipse = not $ellipsed }}
+      {{ $ellipsed = true }}
+    {{ end }}
+    
+    {{ if $showNumber }}
+      {{ if eq .PageNumber $pag.PageNumber }}
+        <span class="pagination__item pagination__item--current">{{ .PageNumber }}</span>
+      {{ else }}
+        <a href="{{ .URL }}" class="pagination__item">{{ .PageNumber }}</a>
+      {{ end }}
+    {{ else if $shouldEllipse }}
+      <span class="pagination__item pagination__item--ellipsis">&hellip;</span>
+    {{ end }}
+  {{ end }}
+  
+  {{ if $pag.HasNext }}
+    <a href="{{ $pag.Next.URL }}" class="pagination__item pagination__item--next">&raquo;</a>
+  {{ else }}
+    <span class="pagination__item pagination__item--next pagination__item--disabled">&raquo;</span>
+  {{ end }}
+</div>
+{{ end }}

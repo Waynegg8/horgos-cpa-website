@@ -4,7 +4,8 @@ languageCode = "zh-tw"
 defaultContentLanguage = "zh-tw"
 hasCJKLanguage = true
 theme = "mainroad"
-paginate = 10
+[pagination]
+  pagerSize = 10
 enableEmoji = true
 enableRobotsTXT = true
 disqusShortname = "hugo-accounting"
