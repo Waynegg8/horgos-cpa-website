@@ -66,6 +66,16 @@
         {{ block "main" . }}{{ end }}
     </main>
     
+    <!-- SEO內容區塊 (位於Footer上方，除隱私權政策和Cookies政策外的所有頁面) -->
+    {{ if not (or (eq .RelPermalink "/privacy-policy/") (eq .RelPermalink "/cookies-policy/")) }}
+    <section class="seo-content-section" aria-labelledby="seo-content-title">
+        <div class="container">
+            <h2 id="seo-content-title" class="sr-only">相關資訊</h2>
+            {{ partial "seo-content.html" . }}
+        </div>
+    </section>
+    {{ end }}
+    
     <!-- 頁腳 -->
     <footer id="footer" aria-labelledby="aria-footer-desc">
         {{ partial "footer.html" . }}
