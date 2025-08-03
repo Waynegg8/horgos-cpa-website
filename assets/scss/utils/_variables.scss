@@ -14,6 +14,7 @@ $color-bg-dark: #1F2937;
 $color-text-primary: #374151;
 $color-text-secondary: #6B7280;
 $color-text-light: #9CA3AF;
+$color-text-muted: #9CA3AF;
 
 // 邊框和分隔色彩
 $color-border: #E5E7EB;
@@ -24,6 +25,7 @@ $color-success: #10B981;
 $color-warning: #F59E0B;
 $color-error: #EF4444;
 $color-info: #3B82F6;
+$color-line: #00B900;
 
 // 字體系統
 $font-family-base: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -36,6 +38,14 @@ $font-size-xl: 1.25rem;
 $font-size-2xl: 1.5rem;
 $font-size-3xl: 2rem;
 $font-size-4xl: 2.5rem;
+
+// 標題字體大小（向後兼容）
+$font-size-h1: $font-size-4xl;
+$font-size-h2: $font-size-3xl;
+$font-size-h3: $font-size-2xl;
+$font-size-h4: $font-size-xl;
+$font-size-h5: $font-size-lg;
+$font-size-h6: $font-size-base;
 
 // 字重
 $font-weight-normal: 400;

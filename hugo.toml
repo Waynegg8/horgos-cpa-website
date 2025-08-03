@@ -1,5 +1,5 @@
 baseURL = "https://hugo-accounting.com/"
-title = "Hugo會計師事務所"
+title = "霍爾果斯會計師事務所"
 languageCode = "zh-tw"
 defaultContentLanguage = "zh-tw"
 hasCJKLanguage = true
@@ -8,17 +8,17 @@ theme = "mainroad"
   pagerSize = 10
 enableEmoji = true
 enableRobotsTXT = true
-disqusShortname = "hugo-accounting"
 googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
 
 [Author]
-  name = "Hugo會計師事務所"
+  name = "霍爾果斯會計師事務所"
   bio = "專業會計師事務所，提供工商登記、稅務申報、財稅簽證和諮詢服務"
   avatar = "img/logo.webp"
 
 [Params]
-  description = "Hugo會計師事務所提供專業的會計、稅務和工商登記服務，協助企業合規經營並優化稅務規劃。"
-  copyright = "Hugo會計師事務所"
+  disqusShortname = "hugo-accounting"
+  description = "霍爾果斯會計師事務所提供專業的會計、稅務和工商登記服務，協助企業合規經營並優化稅務規劃。"
+  copyright = "霍爾果斯會計師事務所"
   opengraph = true
   schema = true
   twitter_cards = true
@@ -35,7 +35,7 @@ googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
 
 [Params.logo]
   image = "img/logo.webp"
-  title = "Hugo會計師事務所"
+  title = "霍爾果斯會計師事務所"
   subtitle = "專業會計服務，值得信賴"
 
 [Params.sidebar]
