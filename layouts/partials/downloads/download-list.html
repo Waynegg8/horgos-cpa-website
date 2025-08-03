@@ -1,0 +1,62 @@
+<!-- 下載列表頁 -->
+<div class="download-list">
+    <!-- 分類篩選 -->
+    <div class="download-categories">
+        <div class="category-filters">
+            <a href="/downloads/" class="category-filter {{ if eq .RelPermalink "/downloads/" }}active{{ end }}">全部</a>
+            <a href="/downloads/templates/" class="category-filter {{ if eq .RelPermalink "/downloads/templates/" }}active{{ end }}">範本下載</a>
+            <a href="/downloads/forms/" class="category-filter {{ if eq .RelPermalink "/downloads/forms/" }}active{{ end }}">表格下載</a>
+            <a href="/downloads/checklists/" class="category-filter {{ if eq .RelPermalink "/downloads/checklists/" }}active{{ end }}">檢查清單</a>
+            <a href="/downloads/regulations/" class="category-filter {{ if eq .RelPermalink "/downloads/regulations/" }}active{{ end }}">法規文件</a>
+        </div>
+    </div>
+    
+    <!-- 下載列表 -->
+    <div class="download-cards">
+        {{ $paginator := .Paginate (where .Pages "Type" "downloads") 10 }}
+        {{ range $paginator.Pages }}
+        <div class="download-card">
+            <div class="download-card__icon">
+                {{ if eq .Params.filetype "pdf" }}
+                <i class="far fa-file-pdf"></i>
+                {{ else if eq .Params.filetype "docx" }}
+                <i class="far fa-file-word"></i>
+                {{ else if eq .Params.filetype "xlsx" }}
+                <i class="far fa-file-excel"></i>
+                {{ else if eq .Params.filetype "zip" }}
+                <i class="far fa-file-archive"></i>
+                {{ else }}
+                <i class="far fa-file"></i>
+                {{ end }}
+            </div>
+            <div class="download-card__content">
+                <h2 class="download-card__title">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </h2>
+                <div class="download-card__meta">
+                    <span class="download-card__type"><i class="fas fa-file"></i> {{ .Params.filetype }}</span>
+                    <span class="download-card__size"><i class="fas fa-weight"></i> {{ .Params.filesize }}</span>
+                    <span class="download-card__date"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+                    {{ with .Params.updated }}
+                    <span class="download-card__updated"><i class="fas fa-sync-alt"></i> {{ . }}</span>
+                    {{ end }}
+                </div>
+                <div class="download-card__description">
+                    {{ .Description }}
+                </div>
+                <div class="download-card__tags">
+                    {{ range .Params.tags }}
+                    <a href="/tags/{{ . | urlize }}" class="download-card__tag">{{ . }}</a>
+                    {{ end }}
+                </div>
+                <div class="download-card__footer">
+                    <a href="{{ .RelPermalink }}" class="download-card__button">查看詳情</a>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    
+    <!-- 分頁導航 -->
+    {{ template "_internal/pagination.html" . }}
+</div>

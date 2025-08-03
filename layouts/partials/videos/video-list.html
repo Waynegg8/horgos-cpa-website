@@ -1,0 +1,55 @@
+<!-- 影片列表頁 -->
+<div class="video-list">
+    <!-- 分類篩選 -->
+    <div class="video-categories">
+        <div class="category-filters">
+            <a href="/videos/" class="category-filter {{ if eq .RelPermalink "/videos/" }}active{{ end }}">全部</a>
+            <a href="/videos/popular/" class="category-filter {{ if eq .RelPermalink "/videos/popular/" }}active{{ end }}">熱門影片</a>
+            <a href="/videos/tutorials/" class="category-filter {{ if eq .RelPermalink "/videos/tutorials/" }}active{{ end }}">教學影片</a>
+            <a href="/videos/case-studies/" class="category-filter {{ if eq .RelPermalink "/videos/case-studies/" }}active{{ end }}">案例分享</a>
+            <a href="/videos/legal-explanation/" class="category-filter {{ if eq .RelPermalink "/videos/legal-explanation/" }}active{{ end }}">法規解說</a>
+        </div>
+    </div>
+    
+    <!-- 影片列表 -->
+    <div class="video-cards">
+        {{ $paginator := .Paginate (where .Pages "Type" "videos") 10 }}
+        {{ range $paginator.Pages }}
+        <div class="video-card">
+            <div class="video-card__thumbnail">
+                {{ with .Params.thumbnail }}
+                <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+                {{ else }}
+                <img src="/uploads/images/videos/default-thumbnail.webp" alt="{{ $.Title }}" loading="lazy">
+                {{ end }}
+                {{ with .Params.duration }}
+                <span class="video-card__duration">{{ . }}</span>
+                {{ end }}
+            </div>
+            <div class="video-card__content">
+                <h2 class="video-card__title">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </h2>
+                <div class="video-card__meta">
+                    <span class="video-card__date"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+                    {{ with .Params.category }}
+                    <span class="video-card__category"><i class="fas fa-folder"></i> {{ . }}</span>
+                    {{ end }}
+                    {{ with .Params.series }}
+                    <span class="video-card__series"><i class="fas fa-bookmark"></i> {{ . }}</span>
+                    {{ end }}
+                </div>
+                <div class="video-card__excerpt">
+                    {{ .Summary }}
+                </div>
+                <div class="video-card__footer">
+                    <a href="{{ .RelPermalink }}" class="video-card__watch">觀看影片</a>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    
+    <!-- 分頁導航 -->
+    {{ template "_internal/pagination.html" . }}
+</div>

@@ -1,0 +1,50 @@
+<!-- FAQ列表頁 -->
+<div class="faq-list">
+    <!-- 分類篩選 -->
+    <div class="faq-categories">
+        <div class="category-filters">
+            <a href="/faq/" class="category-filter {{ if eq .RelPermalink "/faq/" }}active{{ end }}">全部</a>
+            <a href="/faq/startup/" class="category-filter {{ if eq .RelPermalink "/faq/startup/" }}active{{ end }}">創業問題</a>
+            <a href="/faq/tax/" class="category-filter {{ if eq .RelPermalink "/faq/tax/" }}active{{ end }}">稅務問題</a>
+            <a href="/faq/accounting/" class="category-filter {{ if eq .RelPermalink "/faq/accounting/" }}active{{ end }}">記帳問題</a>
+            <a href="/faq/others/" class="category-filter {{ if eq .RelPermalink "/faq/others/" }}active{{ end }}">其他問題</a>
+        </div>
+    </div>
+    
+    <!-- FAQ列表 -->
+    <div class="faq-cards">
+        {{ $paginator := .Paginate (where .Pages "Type" "faq") 10 }}
+        {{ range $paginator.Pages }}
+        <div class="faq-card">
+            <div class="faq-card__content">
+                <h2 class="faq-card__title">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </h2>
+                <div class="faq-card__meta">
+                    <span class="faq-card__date"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+                    {{ with .Params.category }}
+                    <span class="faq-card__category"><i class="fas fa-folder"></i> {{ . }}</span>
+                    {{ end }}
+                    {{ with .Params.series }}
+                    <span class="faq-card__series"><i class="fas fa-bookmark"></i> {{ . }}</span>
+                    {{ end }}
+                </div>
+                <div class="faq-card__excerpt">
+                    {{ .Summary }}
+                </div>
+                <div class="faq-card__tags">
+                    {{ range .Params.tags }}
+                    <a href="/tags/{{ . | urlize }}" class="faq-card__tag">{{ . }}</a>
+                    {{ end }}
+                </div>
+                <div class="faq-card__footer">
+                    <a href="{{ .RelPermalink }}" class="faq-card__read-more">查看解答</a>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    
+    <!-- 分頁導航 -->
+    {{ template "_internal/pagination.html" . }}
+</div>
