@@ -1,0 +1,290 @@
+{{ define "main" }}
+<div class="container">
+    <div class="contact-container">
+        <div class="contact-header">
+            <h1>{{ .Title }}</h1>
+            <div class="contact-description">{{ .Content }}</div>
+        </div>
+        
+        <!-- 聯絡資訊卡片 -->
+        <div class="contact-grid">
+            <div class="contact-card">
+                <i class="fas fa-phone-alt"></i>
+                <h3>電話聯絡</h3>
+                <p>代表號：<a href="tel:+886223456789">02-2345-6789</a></p>
+                <p>專線：<a href="tel:+886223456780">02-2345-6780</a></p>
+                <p>傳真：02-2345-6788</p>
+            </div>
+            
+            <div class="contact-card">
+                <i class="fab fa-line"></i>
+                <h3>LINE官方帳號</h3>
+                <p>LINE ID: @hugoaccounting</p>
+                <p><a href="https://line.me/R/ti/p/@hugoaccounting" class="line-btn">加入LINE好友</a></p>
+            </div>
+            
+            <div class="contact-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>公司地址</h3>
+                <p>台北市信義區松仁路100號10樓</p>
+                <p>郵遞區號：11073</p>
+                <p><a href="https://maps.google.com/?q=台北市信義區松仁路100號10樓" target="_blank">在Google地圖開啟</a></p>
+            </div>
+            
+            <div class="contact-card">
+                <i class="fas fa-clock"></i>
+                <h3>營業狀態</h3>
+                <div id="business-status">
+                    <p class="status-indicator"><span class="status-dot"></span><span id="status-text">載入中...</span></p>
+                    <p>營業時間：</p>
+                    <p>週一至週五 08:30–12:30、13:30–17:30</p>
+                    <p>週六、週日及國定假日休息</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 地圖 -->
+        <div class="map-section">
+            <h2>地圖位置</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.7635725087626!2d121.56442287605861!3d25.033632877778995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abb6e9d7f17d%3A0xd508f7b3aa02d539!2zMTEw5Y-w5YyX5biC5L-h576p5Y2A5p2-5LuB6LevMTAw6Jmf!5e0!3m2!1szh-TW!2stw!4v1716534000000!5m2!1szh-TW!2stw" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        
+        <!-- 交通資訊 -->
+        <div class="transportation-section">
+            <h2>交通資訊</h2>
+            {{ .Content }}
+        </div>
+        
+        <!-- CTA按鈕 -->
+        <div class="cta-section">
+            <h2>立即聯繫我們</h2>
+            <div class="cta-buttons">
+                <a href="/appointment/" class="btn btn-primary">立即預約諮詢</a>
+                <a href="https://line.me/R/ti/p/@hugoaccounting" class="btn btn-secondary">加入Line諮詢</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  updateBusinessStatus();
+  setInterval(updateBusinessStatus, 60000); // 每分鐘更新一次
+});
+
+function updateBusinessStatus() {
+  const now = new Date();
+  const taipeiTime = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Taipei',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  }).format(now);
+  
+  const day = now.getDay(); // 0 = 週日, 1-5 = 週一至週五, 6 = 週六
+  const hour = parseInt(taipeiTime.split(':')[0]);
+  const minute = parseInt(taipeiTime.split(':')[1]);
+  const currentTime = hour * 60 + minute; // 轉換為分鐘計算
+  
+  const morningStart = 8 * 60 + 30; // 08:30
+  const morningEnd = 12 * 60 + 30;  // 12:30
+  const afternoonStart = 13 * 60 + 30; // 13:30
+  const afternoonEnd = 17 * 60 + 30;  // 17:30
+  
+  const statusText = document.getElementById('status-text');
+  const statusDot = document.querySelector('.status-dot');
+  
+  // 判斷是否為工作日
+  if (day >= 1 && day <= 5) {
+    // 判斷是否在營業時間內
+    if ((currentTime >= morningStart && currentTime < morningEnd) || 
+        (currentTime >= afternoonStart && currentTime < afternoonEnd)) {
+      statusText.textContent = '營業中';
+      statusDot.classList.add('open');
+      statusDot.classList.remove('closed');
+    } else if (currentTime >= morningEnd && currentTime < afternoonStart) {
+      statusText.textContent = '午休中 (13:30恢復營業)';
+      statusDot.classList.add('lunch');
+      statusDot.classList.remove('open', 'closed');
+    } else if (currentTime < morningStart) {
+      statusText.textContent = '休息中 (今日08:30開始營業)';
+      statusDot.classList.add('closed');
+      statusDot.classList.remove('open', 'lunch');
+    } else {
+      statusText.textContent = '休息中 (明日08:30開始營業)';
+      statusDot.classList.add('closed');
+      statusDot.classList.remove('open', 'lunch');
+    }
+  } else {
+    statusText.textContent = '休息中 (週一08:30開始營業)';
+    statusDot.classList.add('closed');
+    statusDot.classList.remove('open', 'lunch');
+  }
+}
+</script>
+
+<style>
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.contact-header {
+  margin-bottom: 2rem;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.contact-card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.contact-card i {
+  font-size: 2rem;
+  color: #204B6E;
+  margin-bottom: 1rem;
+}
+
+.contact-card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.contact-card p {
+  margin-bottom: 0.5rem;
+}
+
+.contact-card a {
+  color: #204B6E;
+  text-decoration: none;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}
+
+.map-section, 
+.transportation-section,
+.cta-section {
+  margin-bottom: 3rem;
+}
+
+.map-container {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-dot.open {
+  background-color: #10B981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.status-dot.closed {
+  background-color: #EF4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+.status-dot.lunch {
+  background-color: #F59E0B;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #204B6E;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2C5F7F;
+}
+
+.btn-secondary {
+  background-color: #00B900;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #00a000;
+}
+
+.line-btn {
+  display: inline-block;
+  background-color: #00B900;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.line-btn:hover {
+  background-color: #00a000;
+  color: white;
+  text-decoration: none;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+  }
+}
+</style>
+{{ end }}

@@ -1,240 +1,192 @@
 /**
- * 目錄功能管理器
- * 自動生成目錄，並支援平滑滾動和當前位置高亮
+ * 目錄功能
  */
 
-class TableOfContents {
-  constructor() {
-    this.tocContainer = document.getElementById('toc-container');
-    this.contentContainer = document.querySelector('.single-content');
-    this.headings = [];
-    this.activeClass = 'is-active';
-    this.tocItemTemplate = `<li class="toc-item toc-item--{level}"><a href="#{id}" class="toc-link">{text}</a></li>`;
-    this.offsetTop = 20; // 頂部偏移量，用於固定目錄
-    
-    this.init();
+document.addEventListener('DOMContentLoaded', function() {
+  initTableOfContents();
+});
+
+function initTableOfContents() {
+  const tocContainer = document.getElementById('toc-container');
+  if (!tocContainer) return;
+  
+  const article = document.querySelector('.article-content');
+  if (!article) return;
+  
+  // 獲取所有標題
+  const headings = article.querySelectorAll('h2, h3, h4');
+  if (headings.length === 0) {
+    tocContainer.style.display = 'none';
+    return;
   }
   
-  /**
-   * 初始化目錄功能
-   */
-  init() {
-    if (!this.tocContainer || !this.contentContainer) return;
-    
-    // 收集標題
-    this.collectHeadings();
-    
-    // 如果沒有標題，隱藏目錄容器
-    if (this.headings.length === 0) {
-      this.tocContainer.style.display = 'none';
-      return;
+  // 創建目錄
+  const tocList = document.createElement('ul');
+  tocList.className = 'toc-list';
+  
+  // 標題層級映射
+  const levelMap = {
+    'H2': 1,
+    'H3': 2,
+    'H4': 3
+  };
+  
+  // 為每個標題創建目錄項
+  headings.forEach((heading, index) => {
+    // 為標題添加ID，如果沒有的話
+    if (!heading.id) {
+      heading.id = `heading-${index}`;
     }
     
-    // 生成目錄
-    this.generateToc();
+    const listItem = document.createElement('li');
+    listItem.className = `toc-item toc-level-${levelMap[heading.tagName]}`;
     
-    // 綁定事件
-    this.bindEvents();
-  }
-  
-  /**
-   * 收集文章中的標題
-   */
-  collectHeadings() {
-    // 只收集 h2 和 h3 標題
-    const headingElements = this.contentContainer.querySelectorAll('h2, h3');
+    const link = document.createElement('a');
+    link.href = `#${heading.id}`;
+    link.textContent = heading.textContent;
+    link.className = 'toc-link';
     
-    headingElements.forEach(heading => {
-      // 為標題生成ID
-      if (!heading.id) {
-        heading.id = this.generateId(heading.textContent);
-      }
+    listItem.appendChild(link);
+    tocList.appendChild(listItem);
+    
+    // 添加點擊事件，平滑滾動
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
       
-      this.headings.push({
-        id: heading.id,
-        text: heading.textContent,
-        level: heading.tagName.toLowerCase()
-      });
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 100,
+          behavior: 'smooth'
+        });
+      }
     });
-  }
+  });
   
-  /**
-   * 生成目錄
-   */
-  generateToc() {
-    if (this.headings.length === 0) return;
-    
-    let tocHtml = '<ul class="toc-list">';
-    
-    this.headings.forEach(heading => {
-      tocHtml += this.tocItemTemplate
-        .replace('{level}', heading.level)
-        .replace('{id}', heading.id)
-        .replace('{text}', heading.text);
-    });
-    
-    tocHtml += '</ul>';
-    
-    this.tocContainer.innerHTML = tocHtml;
-  }
+  // 添加目錄到容器
+  tocContainer.appendChild(tocList);
   
-  /**
-   * 綁定事件
-   */
-  bindEvents() {
-    // 點擊目錄項目，平滑滾動到對應標題
-    const tocLinks = this.tocContainer.querySelectorAll('.toc-link');
+  // 設置目錄滾動跟隨
+  setupStickyTOC();
+  
+  // 設置目錄項高亮
+  setupTOCHighlight();
+}
+
+function setupStickyTOC() {
+  const tocContainer = document.getElementById('toc-container');
+  const sidebar = document.querySelector('.sidebar');
+  if (!tocContainer || !sidebar) return;
+  
+  const tocTitle = tocContainer.querySelector('.sidebar-widget__title');
+  const tocList = tocContainer.querySelector('.toc-list');
+  
+  // 創建折疊/展開按鈕
+  const toggleBtn = document.createElement('button');
+  toggleBtn.className = 'toc-toggle';
+  toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+  tocTitle.appendChild(toggleBtn);
+  
+  // 初始狀態
+  let isCollapsed = false;
+  let isSticky = false;
+  
+  // 折疊/展開功能
+  toggleBtn.addEventListener('click', function() {
+    isCollapsed = !isCollapsed;
     
-    tocLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        const targetId = link.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-          // 平滑滾動到目標位置
-          window.scrollTo({
-            top: targetElement.offsetTop - 100, // 減去頁頭高度
-            behavior: 'smooth'
-          });
-          
-          // 更新 URL 錨點
-          history.pushState(null, null, `#${targetId}`);
-        }
-      });
-    });
+    if (isCollapsed) {
+      tocList.style.maxHeight = '0';
+      toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+    } else {
+      tocList.style.maxHeight = '500px';
+      toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+    }
+  });
+  
+  // 滾動事件處理
+  window.addEventListener('scroll', function() {
+    const scrollY = window.scrollY;
+    const sidebarBottom = sidebar.offsetTop + sidebar.offsetHeight;
     
-    // 滾動時更新當前位置
-    window.addEventListener('scroll', this.debounce(() => {
-      this.updateActiveItem();
-    }, 100));
-    
-    // 頁面載入時檢查 URL 錨點
-    window.addEventListener('load', () => {
-      if (window.location.hash) {
-        const targetId = window.location.hash.substring(1);
-        const targetElement = document.getElementById(targetId);
+    // 當滾動超過側邊欄底部時，固定目錄
+    if (scrollY > sidebarBottom - 300) {
+      if (!isSticky) {
+        tocContainer.classList.add('toc-sticky');
+        isSticky = true;
         
-        if (targetElement) {
-          // 延遲滾動，確保頁面完全載入
-          setTimeout(() => {
-            window.scrollTo({
-              top: targetElement.offsetTop - 100,
-              behavior: 'smooth'
-            });
-          }, 300);
+        // 如果不是已經折疊，則自動折疊
+        if (!isCollapsed) {
+          isCollapsed = true;
+          tocList.style.maxHeight = '0';
+          toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
         }
       }
-      
-      // 初始化當前位置
-      this.updateActiveItem();
-    });
-    
-    // 實現目錄的固定定位
-    this.initStickyToc();
-  }
+    } else {
+      if (isSticky) {
+        tocContainer.classList.remove('toc-sticky');
+        isSticky = false;
+        
+        // 如果是折疊狀態，則自動展開
+        if (isCollapsed) {
+          isCollapsed = false;
+          tocList.style.maxHeight = '500px';
+          toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+        }
+      }
+    }
+  });
+}
+
+function setupTOCHighlight() {
+  const tocLinks = document.querySelectorAll('.toc-link');
+  if (tocLinks.length === 0) return;
   
-  /**
-   * 更新當前位置
-   */
-  updateActiveItem() {
-    // 獲取當前滾動位置
-    const scrollPosition = window.scrollY;
+  // 獲取所有標題元素
+  const headingElements = Array.from(document.querySelectorAll('h2, h3, h4')).filter(heading => {
+    // 只包含有對應目錄項的標題
+    return document.querySelector(`.toc-link[href="#${heading.id}"]`);
+  });
+  
+  // 滾動事件處理
+  window.addEventListener('scroll', function() {
+    // 當前滾動位置
+    const scrollPosition = window.scrollY + 150;
     
-    // 找到當前位置對應的標題
+    // 找到當前可見的標題
     let currentHeading = null;
     
-    for (let i = 0; i < this.headings.length; i++) {
-      const heading = this.headings[i];
-      const headingElement = document.getElementById(heading.id);
+    for (let i = 0; i < headingElements.length; i++) {
+      const heading = headingElements[i];
+      const nextHeading = headingElements[i + 1];
       
-      if (headingElement.offsetTop - 120 <= scrollPosition) {
+      // 檢查是否在當前標題和下一個標題之間
+      if (
+        heading.offsetTop <= scrollPosition &&
+        (!nextHeading || nextHeading.offsetTop > scrollPosition)
+      ) {
         currentHeading = heading;
-      } else {
         break;
       }
     }
     
-    // 更新目錄項目的高亮狀態
-    const tocLinks = this.tocContainer.querySelectorAll('.toc-link');
+    // 如果沒有找到當前標題，並且滾動位置在第一個標題之前
+    if (!currentHeading && headingElements.length > 0 && scrollPosition < headingElements[0].offsetTop) {
+      currentHeading = headingElements[0];
+    }
     
+    // 移除所有活動狀態
     tocLinks.forEach(link => {
-      link.classList.remove(this.activeClass);
+      link.classList.remove('active');
     });
     
+    // 添加活動狀態到當前標題對應的目錄項
     if (currentHeading) {
-      const activeLink = this.tocContainer.querySelector(`a[href="#${currentHeading.id}"]`);
-      
+      const activeLink = document.querySelector(`.toc-link[href="#${currentHeading.id}"]`);
       if (activeLink) {
-        activeLink.classList.add(this.activeClass);
+        activeLink.classList.add('active');
       }
     }
-  }
-  
-  /**
-   * 實現目錄的固定定位
-   */
-  initStickyToc() {
-    // 獲取目錄容器的初始位置
-    const tocRect = this.tocContainer.getBoundingClientRect();
-    const initialOffsetTop = tocRect.top + window.scrollY;
-    
-    // 監聽滾動事件
-    window.addEventListener('scroll', this.debounce(() => {
-      const scrollPosition = window.scrollY;
-      
-      // 當滾動位置超過目錄容器的初始位置時，固定目錄
-      if (scrollPosition > initialOffsetTop - this.offsetTop) {
-        this.tocContainer.classList.add('is-sticky');
-        this.tocContainer.style.top = `${this.offsetTop}px`;
-      } else {
-        this.tocContainer.classList.remove('is-sticky');
-        this.tocContainer.style.top = '';
-      }
-    }, 10));
-  }
-  
-  /**
-   * 為標題生成ID
-   * @param {string} text - 標題文字
-   * @returns {string} - 生成的ID
-   */
-  generateId(text) {
-    // 將中文轉換為拼音或其他方式處理
-    // 這裡採用簡單的方式，將文字轉換為小寫，並替換空格為連字符
-    return text
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-\-+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '');
-  }
-  
-  /**
-   * 防抖函數
-   * @param {Function} func - 要執行的函數
-   * @param {number} wait - 等待時間（毫秒）
-   * @returns {Function} - 防抖後的函數
-   */
-  debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
+  });
 }
-
-// 當文檔載入完成後初始化目錄功能
-document.addEventListener('DOMContentLoaded', () => {
-  // 只在文章頁面初始化目錄功能
-  if (document.body.classList.contains('articles') && document.querySelector('.single-content')) {
-    new TableOfContents();
-  }
-});

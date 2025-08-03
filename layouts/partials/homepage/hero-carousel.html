@@ -4,44 +4,50 @@
         <div class="hero-carousel__slides">
             <!-- 輪播項目1 -->
             <div class="hero-carousel__slide active">
-                <picture>
-                    <source media="(min-width: 1025px)" srcset="/uploads/images/hero/hero-slide-1-desktop.webp">
-                    <source media="(min-width: 641px)" srcset="/uploads/images/hero/hero-slide-1-tablet.webp">
-                    <img src="/uploads/images/hero/hero-slide-1-mobile.webp" alt="霍爾果斯會計師事務所專業服務" loading="lazy">
-                </picture>
-                <div class="hero-carousel__content">
-                    <h2>專業會計服務，值得信賴</h2>
-                    <p>提供全方位的會計、稅務和工商登記服務，協助企業合規經營並優化稅務規劃</p>
-                    <a href="/services/" class="btn btn-primary">了解我們的服務</a>
-                </div>
+                <a href="/services/" class="hero-carousel__link">
+                    <picture>
+                        <source media="(min-width: 1025px)" srcset="/uploads/images/hero/hero-slide-1-desktop.webp">
+                        <source media="(min-width: 641px)" srcset="/uploads/images/hero/hero-slide-1-tablet.webp">
+                        <img src="/uploads/images/hero/hero-slide-1-mobile.webp" alt="霍爾果斯會計師事務所專業服務" loading="lazy">
+                    </picture>
+                    <div class="hero-carousel__content">
+                        <h2>專業會計服務，值得信賴</h2>
+                        <p>提供全方位的會計、稅務和工商登記服務，協助企業合規經營並優化稅務規劃</p>
+                        <span class="btn btn-primary">了解我們的服務</span>
+                    </div>
+                </a>
             </div>
             
             <!-- 輪播項目2 -->
             <div class="hero-carousel__slide">
-                <picture>
-                    <source media="(min-width: 1025px)" srcset="/uploads/images/hero/hero-slide-2-desktop.webp">
-                    <source media="(min-width: 641px)" srcset="/uploads/images/hero/hero-slide-2-tablet.webp">
-                    <img src="/uploads/images/hero/hero-slide-2-mobile.webp" alt="工商登記服務" loading="lazy">
-                </picture>
-                <div class="hero-carousel__content">
-                    <h2>工商登記服務</h2>
-                    <p>提供公司設立、變更登記、解散清算等全方位工商登記服務</p>
-                    <a href="/services/business-registration/" class="btn btn-primary">了解更多</a>
-                </div>
+                <a href="/services/business-registration/" class="hero-carousel__link">
+                    <picture>
+                        <source media="(min-width: 1025px)" srcset="/uploads/images/hero/hero-slide-2-desktop.webp">
+                        <source media="(min-width: 641px)" srcset="/uploads/images/hero/hero-slide-2-tablet.webp">
+                        <img src="/uploads/images/hero/hero-slide-2-mobile.webp" alt="工商登記服務" loading="lazy">
+                    </picture>
+                    <div class="hero-carousel__content">
+                        <h2>工商登記服務</h2>
+                        <p>提供公司設立、變更登記、解散清算等全方位工商登記服務</p>
+                        <span class="btn btn-primary">了解更多</span>
+                    </div>
+                </a>
             </div>
             
             <!-- 輪播項目3 -->
             <div class="hero-carousel__slide">
-                <picture>
-                    <source media="(min-width: 1025px)" srcset="/uploads/images/hero/hero-slide-3-desktop.webp">
-                    <source media="(min-width: 641px)" srcset="/uploads/images/hero/hero-slide-3-tablet.webp">
-                    <img src="/uploads/images/hero/hero-slide-3-mobile.webp" alt="稅務申報服務" loading="lazy">
-                </picture>
-                <div class="hero-carousel__content">
-                    <h2>稅務申報服務</h2>
-                    <p>提供營業稅、營所稅、綜所稅等各類稅務申報服務</p>
-                    <a href="/services/tax-filing/" class="btn btn-primary">了解更多</a>
-                </div>
+                <a href="/services/tax-filing/" class="hero-carousel__link">
+                    <picture>
+                        <source media="(min-width: 1025px)" srcset="/uploads/images/hero/hero-slide-3-desktop.webp">
+                        <source media="(min-width: 641px)" srcset="/uploads/images/hero/hero-slide-3-tablet.webp">
+                        <img src="/uploads/images/hero/hero-slide-3-mobile.webp" alt="稅務申報服務" loading="lazy">
+                    </picture>
+                    <div class="hero-carousel__content">
+                        <h2>稅務申報服務</h2>
+                        <p>提供營業稅、營所稅、綜所稅等各類稅務申報服務</p>
+                        <span class="btn btn-primary">了解更多</span>
+                    </div>
+                </a>
             </div>
         </div>
         
@@ -61,3 +67,23 @@
         </div>
     </div>
 </div>
+
+<style>
+.hero-carousel__link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+}
+
+.hero-carousel__slide {
+    position: relative;
+    display: none;
+}
+
+.hero-carousel__slide.active {
+    display: block;
+}
+</style>
