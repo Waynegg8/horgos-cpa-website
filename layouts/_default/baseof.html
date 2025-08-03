@@ -78,6 +78,11 @@
         </div>
     </div>
     
+    <!-- 回到頂端按鈕 -->
+    <button id="back-to-top" class="back-to-top" aria-label="回到頂端">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
     <!-- Main JavaScript -->
     {{ $script := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $script.RelPermalink }}"></script>
@@ -86,6 +91,10 @@
     <!-- 載入狀態系統 -->
     {{ $loadingScript := resources.Get "js/components/loading.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $loadingScript.RelPermalink }}"></script>
+    
+    <!-- 回到頂端按鈕 -->
+    {{ $backToTopScript := resources.Get "js/components/back-to-top.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $backToTopScript.RelPermalink }}"></script>
     
     {{ if or (eq .Section "articles") (eq .Section "videos") (eq .Section "faq") (eq .Section "downloads") }}
     {{ $searchScript := resources.Get "js/components/search.js" | resources.Minify | resources.Fingerprint }}

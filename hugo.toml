@@ -1,4 +1,4 @@
-baseURL = "https://hugo-accounting.com/"
+baseURL = "https://horgoscpa.com/"
 title = "霍爾果斯會計師事務所"
 languageCode = "zh-tw"
 defaultContentLanguage = "zh-tw"
@@ -8,7 +8,7 @@ theme = "mainroad"
   pagerSize = 10
 enableEmoji = true
 enableRobotsTXT = true
-googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
+googleAnalytics = "G-RKMCS9WVS5"
 
 [Author]
   name = "霍爾果斯會計師事務所"
@@ -16,7 +16,7 @@ googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
   avatar = "img/logo.webp"
 
 [Params]
-  disqusShortname = "hugo-accounting"
+  disqusShortname = "horgoscpa"
   description = "霍爾果斯會計師事務所提供專業的會計、稅務和工商登記服務，協助企業合規經營並優化稅務規劃。"
   copyright = "霍爾果斯會計師事務所"
   opengraph = true
@@ -50,10 +50,10 @@ googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
   tags_counter = true
 
 [Params.widgets.social]
-  facebook = "hugo.accounting"
-  instagram = "hugo.accounting"
-  line = "@hugo.accounting"
-  email = "contact@hugo-accounting.com"
+  facebook = "horgoscpa"
+  instagram = "horgoscpa"
+  line = "@208ihted"
+  email = "admin@horgoscpa.com"
 
 [menu]
   [[menu.main]]
@@ -64,7 +64,8 @@ googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
   [[menu.main]]
     identifier = "services"
     name = "服務項目"
-    weight = 3
+    url = "/services/"
+    weight = 2
 
   [[menu.main]]
     parent = "services"
@@ -93,7 +94,8 @@ googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
   [[menu.main]]
     identifier = "articles"
     name = "知識文章"
-    weight = 4
+    url = "/articles/"
+    weight = 3
 
   [[menu.main]]
     parent = "articles"
@@ -122,7 +124,8 @@ googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
   [[menu.main]]
     identifier = "videos"
     name = "影音專區"
-    weight = 5
+    url = "/videos/"
+    weight = 4
 
   [[menu.main]]
     parent = "videos"
@@ -151,7 +154,8 @@ googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
   [[menu.main]]
     identifier = "faq"
     name = "常見問題"
-    weight = 6
+    url = "/faq/"
+    weight = 5
 
   [[menu.main]]
     parent = "faq"
@@ -180,7 +184,8 @@ googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
   [[menu.main]]
     identifier = "downloads"
     name = "下載專區"
-    weight = 7
+    url = "/downloads/"
+    weight = 6
 
   [[menu.main]]
     parent = "downloads"
@@ -209,12 +214,12 @@ googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
   [[menu.main]]
     name = "聯絡我們"
     url = "/contact/"
-    weight = 8
+    weight = 7
 
   [[menu.main]]
     name = "預約諮詢"
     url = "/appointment/"
-    weight = 9
+    weight = 8
 
   [[menu.footer]]
     name = "隱私權政策"

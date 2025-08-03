@@ -1,0 +1,89 @@
+/* 回到頂端按鈕樣式 */
+
+.back-to-top {
+  position: fixed;
+  bottom: $spacing-6;
+  right: $spacing-6;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 50%;
+  background-color: $color-primary;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: z('floating');
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-base;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  
+  &:hover {
+    background-color: darken($color-primary, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:focus {
+    outline: 2px solid $color-accent;
+    outline-offset: 2px;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &.visible {
+    animation: fadeInUp 0.3s ease-out;
+  }
+  
+  /* 響應式設計 */
+  @include mobile {
+    width: 2.5rem;
+    height: 2.5rem;
+    bottom: $spacing-4;
+    right: $spacing-4;
+    font-size: 1rem;
+  }
+  
+  /* 暗色模式支援 */
+  @media (prefers-color-scheme: dark) {
+    background-color: $color-secondary;
+    
+    &:hover {
+      background-color: lighten($color-secondary, 10%);
+    }
+  }
+}
+
+/* 回到頂端按鈕動畫 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 無障礙設計 - 減少動畫偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {
+    transition: none;
+    
+    &.visible {
+      animation: none;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from,
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

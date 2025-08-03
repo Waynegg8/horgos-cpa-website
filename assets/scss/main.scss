@@ -7,6 +7,7 @@
 
 // 基礎樣式
 @import "base/reset";
+@import "base/fonts";
 @import "base/typography";
 @import "base/accessibility";
 
@@ -22,6 +23,7 @@
 @import "components/search";
 @import "components/toc";
 @import "components/loading";
+@import "components/back-to-top";
 
 // 頁面特定樣式
 @import "pages/articles";

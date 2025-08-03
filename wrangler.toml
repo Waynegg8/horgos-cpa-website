@@ -1,5 +1,5 @@
 # Cloudflare Pages 配置
-name = "hugo-accounting"
+name = "horgoscpa"
 compatibility_date = "2024-01-01"
 
 [build]
@@ -7,4 +7,17 @@ command = "hugo --minify"
 output_dir = "public"
 
 [build.environment]
-HUGO_VERSION = "0.147.0" 
+HUGO_VERSION = "0.147.0"
+
+# KV 命名空間配置
+[[kv_namespaces]]
+binding = "HUGO_CMS_KV"
+id = "HUGO_CMS_KV"
+
+# 環境變數（需要在Cloudflare Dashboard中設置實際值）
+[vars]
+RECAPTCHA_SITE_KEY = "6LdOlZkrAAAAAJUXslB2aaWOKbAbOt_DRx5aea-"
+
+# 敏感環境變數（在Cloudflare Dashboard的Settings > Environment variables中設置）
+# RECAPTCHA_SECRET_KEY = "6LdOlZkrAAAAAMISudyFizqlhGlLkHJM0YHwmulS"
+# ADMIN_EMAIL = "admin@horgoscpa.com" 

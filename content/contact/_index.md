@@ -16,24 +16,21 @@ seo_description: "Hugo會計師事務所聯絡資訊、地址、營業時間與�
   <div class="contact-card">
     <i class="fas fa-phone-alt"></i>
     <h3>電話聯絡</h3>
-    <p>代表號：<a href="tel:+886223456789">02-2345-6789</a></p>
-    <p>專線：<a href="tel:+886223456780">02-2345-6780</a></p>
-    <p>傳真：02-2345-6788</p>
+    <p>代表號：<a href="tel:+886422205606">04-2220-5606</a></p>
   </div>
   
   <div class="contact-card">
     <i class="fab fa-line"></i>
     <h3>LINE官方帳號</h3>
-    <p>LINE ID: @hugoaccounting</p>
-    <p><a href="https://line.me/R/ti/p/@hugoaccounting" class="line-btn">加入LINE好友</a></p>
+    <p>LINE ID: @208ihted</p>
+    <p><a href="https://line.me/R/ti/p/@208ihted" class="line-btn">加入LINE好友</a></p>
   </div>
   
   <div class="contact-card">
     <i class="fas fa-map-marker-alt"></i>
     <h3>公司地址</h3>
-    <p>台北市信義區松仁路100號10樓</p>
-    <p>郵遞區號：11073</p>
-    <p><a href="https://maps.google.com/?q=台北市信義區松仁路100號10樓" target="_blank">在Google地圖開啟</a></p>
+    <p>台中市西區建國路21號3樓之1</p>
+    <p><a href="https://maps.google.com/?q=台中市西區建國路21號3樓之1" target="_blank">在Google地圖開啟</a></p>
   </div>
   
   <div class="contact-card">

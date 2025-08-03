@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // 檢查reCAPTCHA是否已載入
       if (typeof grecaptcha !== 'undefined' && grecaptcha.execute) {
         grecaptcha.ready(function() {
-          grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'appointment_submit' })
+          grecaptcha.execute('6LdOlZkrAAAAAJUXslB2aaWOKbAbOt_DRx5aea-', { action: 'appointment_submit' })
             .then(resolve)
             .catch(reject);
         });

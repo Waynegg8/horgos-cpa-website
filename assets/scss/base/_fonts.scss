@@ -1,0 +1,36 @@
+/* 自定義字體 */
+
+/* Kaleko 105 Bold 字體 */
+@font-face {
+  font-family: 'Kaleko 105';
+  src: url('/fonts/kaleko-105-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* TouchMe Sans Petite Regular 字體 */
+@font-face {
+  font-family: 'TouchMe Sans';
+  src: url('/fonts/TouchMeSans-PetiteRegular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 定義字體變量 */
+:root {
+  --font-heading: 'Kaleko 105', 'Noto Sans TC', sans-serif;
+  --font-accent: 'TouchMe Sans', 'Noto Sans TC', sans-serif;
+}
+
+/* 應用字體到元素 */
+h1, h2, h3, .section-title {
+  font-family: var(--font-heading);
+}
+
+.hero-carousel__content h2,
+.service-card__title,
+.accent-text {
+  font-family: var(--font-accent);
+}
