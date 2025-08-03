@@ -16,10 +16,10 @@
     "@axe-core/puppeteer": "^4.8.1",
     "chalk": "^4.1.2",
     "glob": "^10.3.10",
-    "puppeteer": "^21.6.1"
+    "puppeteer": "^22.8.2"
   },
   "devDependencies": {
-    "lighthouse": "^11.4.0",
-    "wrangler": "^3.22.1"
+    "lighthouse": "^12.8.1",
+    "wrangler": "^4.27.0"
   }
 }
