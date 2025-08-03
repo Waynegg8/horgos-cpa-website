@@ -14,3 +14,18 @@
 - **目標**：成功為專案奠定了符合 `linear.app` 美學的新視覺基礎。
 
 網站已成功部署至 Cloudflare Pages。
+
+**[當前日期]** 第十二次循環：全站模板稽核與類別替換 **[驗證成功]**：
+- **任務描述**：全面稽核 `layouts/` 目錄下的所有 `.html` 模板與 `partials`，將舊的、自訂的樣式類別替換為 `STYLE_GUIDE.md` 中定義的標準化元件類別 (如 `.btn`, `.card` 等)。
+- **更新的檔案**：
+  - `layouts/partials/header.html`
+  - `layouts/partials/footer.html`
+  - `layouts/_default/single.html`
+  - `layouts/partials/services/service-cards.html`
+  - `layouts/partials/articles/article-list.html`
+  - `assets/scss/layouts/_navigation.scss`
+  - `assets/scss/layouts/_footer.scss`
+  - `assets/scss/base/_reset.scss`
+  - `assets/scss/utils/_variables.scss`
+- **合規證據**：`hugo --minify` 建置成功證明。
+- **目標**：成功將全站模板與新的視覺設計系統對齊。
