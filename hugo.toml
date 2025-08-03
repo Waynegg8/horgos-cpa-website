@@ -34,9 +34,14 @@ googleAnalytics = "G-RKMCS9WVS5"
   customJS = ["js/custom.js"]
 
 [Params.logo]
-  image = "/uploads/images/logo.png"
+  image = "/uploads/images/general/general-logo.png"
   title = "霍爾果斯會計師事務所"
   subtitle = "專業會計稅務服務"
+
+[Params.favicon]
+  icon16 = "/uploads/images/general/general-favicon-16x16.png"
+  icon32 = "/uploads/images/general/general-favicon-32x32.png"
+  ico = "/uploads/images/general/general-favicon.ico"
 
 [Params.sidebar]
   home = "right"

@@ -20,8 +20,10 @@
     {{ with .Params.cover }}<meta name="twitter:image" content="{{ . | absURL }}">{{ end }}
     
     <!-- Favicon -->
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" sizes="16x16" href="{{ $.Site.Params.favicon.icon16 | default "/uploads/images/general/general-favicon-16x16.png" }}">
+    <link rel="icon" sizes="32x32" href="{{ $.Site.Params.favicon.icon32 | default "/uploads/images/general/general-favicon-32x32.png" }}">
+    <link rel="icon" href="{{ $.Site.Params.favicon.ico | default "/uploads/images/general/general-favicon.ico" }}">
+    <link rel="apple-touch-icon" href="{{ $.Site.Params.favicon.ico | default "/uploads/images/general/general-favicon.ico" }}">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
