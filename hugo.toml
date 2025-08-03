@@ -35,8 +35,8 @@ googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
 
 [Params.logo]
   image = "img/logo.webp"
-  title = "霍爾果斯會計師事務所"
-  subtitle = "專業會計服務，值得信賴"
+  title = "Horgoscpa"
+  subtitle = "Professional Accounting Services"
 
 [Params.sidebar]
   home = "right"

@@ -1,16 +1,5 @@
 <!-- 文章側邊欄 -->
 <div class="sidebar">
-    <!-- 側邊欄搜尋 -->
-    <div class="sidebar-widget sidebar-search">
-        <h3 class="sidebar-widget__title">搜尋</h3>
-        {{ partial "search/sidebar-search.html" . }}
-    </div>
-    
-    <!-- 目錄 (僅在單篇文章頁面顯示) -->
-    {{ if and (eq .Kind "page") (eq .Section "articles") }}
-    {{ partial "sidebar/table-of-contents.html" . }}
-    {{ end }}
-    
     <!-- 分類列表 -->
     <div class="sidebar-widget sidebar-categories">
         <h3 class="sidebar-widget__title">文章分類</h3>
@@ -102,4 +91,9 @@
             <a href="/tags/財報/" class="sidebar-tags__tag" style="font-size: 1.2em;">財報</a>
         </div>
     </div>
+    
+    <!-- 目錄 (僅在單篇文章頁面顯示，放在最後) -->
+    {{ if and (eq .Kind "page") (eq .Section "articles") }}
+    {{ partial "sidebar/table-of-contents.html" . }}
+    {{ end }}
 </div>
