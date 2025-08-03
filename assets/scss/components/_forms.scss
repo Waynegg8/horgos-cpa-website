@@ -1,0 +1,338 @@
+// 表單樣式
+// 定義網站的表單樣式
+
+// 表單容器
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: $color-bg-white;
+  border-radius: $border-radius-md;
+  padding: 2rem;
+  box-shadow: $shadow-sm;
+  
+  @include mobile {
+    padding: 1.5rem;
+  }
+}
+
+// 表單標題
+.form-title {
+  font-size: $font-size-h3;
+  color: $color-primary;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+// 表單描述
+.form-description {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+// 表單群組
+.form-group {
+  margin-bottom: 1.5rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// 表單標籤
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: $color-text-primary;
+  
+  &.required::after {
+    content: "*";
+    color: $color-error;
+    margin-left: 0.25rem;
+  }
+}
+
+// 表單控制項
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: $font-size-base;
+  line-height: 1.5;
+  color: $color-text-primary;
+  background-color: $color-bg-white;
+  background-clip: padding-box;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-md;
+  @include transition(border-color);
+  
+  &:focus {
+    border-color: $color-primary;
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.25);
+  }
+  
+  &::placeholder {
+    color: $color-text-muted;
+  }
+  
+  &:disabled,
+  &[readonly] {
+    background-color: lighten($color-border, 5%);
+    opacity: 1;
+  }
+  
+  &.is-invalid {
+    border-color: $color-error;
+    
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($color-error, 0.25);
+    }
+  }
+}
+
+// 表單選擇控制項
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23343a40' d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 16px 12px;
+  padding-right: 2.5rem;
+}
+
+// 文本區域
+textarea.form-control {
+  min-height: 150px;
+  resize: vertical;
+}
+
+// 表單幫助文本
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+// 表單錯誤訊息
+.form-error {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: $font-size-sm;
+  color: $color-error;
+}
+
+// 表單成功訊息
+.form-success {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: $font-size-sm;
+  color: $color-success;
+}
+
+// 表單檢查項
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// 表單檢查輸入
+.form-check-input {
+  margin-right: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+// 表單檢查標籤
+.form-check-label {
+  font-size: $font-size-base;
+  color: $color-text-primary;
+}
+
+// 表單行
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -0.75rem;
+  margin-left: -0.75rem;
+  
+  > .form-group {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+    flex: 1 0 0%;
+  }
+  
+  @include mobile {
+    flex-direction: column;
+    margin-right: 0;
+    margin-left: 0;
+    
+    > .form-group {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+// 表單操作區域
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  
+  .btn {
+    margin-left: 1rem;
+    
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  
+  @include mobile {
+    flex-direction: column;
+    
+    .btn {
+      margin-left: 0;
+      margin-bottom: 1rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// 表單分隔線
+.form-divider {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+  
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid $color-border;
+  }
+  
+  .divider-text {
+    padding: 0 1rem;
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+  }
+}
+
+// 自定義單選按鈕
+.custom-radio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  
+  .radio-item {
+    position: relative;
+    
+    input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      
+      &:checked + .radio-label {
+        background-color: $color-primary;
+        color: white;
+        border-color: $color-primary;
+      }
+      
+      &:focus + .radio-label {
+        box-shadow: 0 0 0 3px rgba($color-primary, 0.25);
+      }
+    }
+    
+    .radio-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 120px;
+      padding: 0.75rem 1.5rem;
+      background-color: $color-bg-white;
+      border: 1px solid $color-border;
+      border-radius: $border-radius-md;
+      font-weight: 500;
+      cursor: pointer;
+      @include transition;
+      
+      &:hover {
+        border-color: $color-primary;
+      }
+      
+      .icon {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+  
+  @include mobile {
+    flex-direction: column;
+    
+    .radio-item {
+      width: 100%;
+      
+      .radio-label {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+// 預約表單特定樣式
+.appointment-form {
+  .service-selection {
+    margin-bottom: 2rem;
+  }
+  
+  .privacy-agreement {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: lighten($color-primary, 60%);
+    border-radius: $border-radius-md;
+    
+    .form-check-label {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// 表單反饋訊息
+.form-feedback {
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: $border-radius-md;
+  
+  &.success {
+    background-color: lighten($color-success, 45%);
+    border: 1px solid lighten($color-success, 35%);
+    color: darken($color-success, 10%);
+  }
+  
+  &.error {
+    background-color: lighten($color-error, 45%);
+    border: 1px solid lighten($color-error, 35%);
+    color: darken($color-error, 10%);
+  }
+  
+  .feedback-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .feedback-message {
+    margin-bottom: 0;
+  }
+}

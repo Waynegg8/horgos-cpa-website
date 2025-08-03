@@ -1,0 +1,60 @@
+{{ define "main" }}
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-header__title">{{ .Title }}</h1>
+        {{ with .Description }}
+        <p class="page-header__description">{{ . }}</p>
+        {{ end }}
+    </div>
+</div>
+
+<div class="container">
+    <div class="two-column">
+        <div class="two-column__main">
+            {{ if or (eq .Section "articles") (eq .Section "videos") (eq .Section "faq") (eq .Section "downloads") }}
+            {{ partial "search/list-search.html" . }}
+            {{ end }}
+            
+            {{ .Content }}
+            
+            {{ if eq .Section "about" }}
+            <!-- 關於我們頁面內容 -->
+            {{ else if eq .Section "services" }}
+            <!-- 服務項目頁面內容 -->
+            {{ partial "services/service-cards.html" . }}
+            {{ else if eq .Section "articles" }}
+            <!-- 文章列表頁面內容 -->
+            {{ partial "articles/article-list.html" . }}
+            {{ else if eq .Section "videos" }}
+            <!-- 影片列表頁面內容 -->
+            {{ partial "videos/video-list.html" . }}
+            {{ else if eq .Section "faq" }}
+            <!-- FAQ列表頁面內容 -->
+            {{ partial "faq/faq-list.html" . }}
+            {{ else if eq .Section "downloads" }}
+            <!-- 下載列表頁面內容 -->
+            {{ partial "downloads/download-list.html" . }}
+            {{ end }}
+        </div>
+        
+        {{ if or (eq .Section "articles") (eq .Section "videos") (eq .Section "faq") (eq .Section "downloads") }}
+        <aside class="two-column__sidebar">
+            {{ if eq .Section "articles" }}
+            {{ partial "sidebar/articles-sidebar.html" . }}
+            {{ else if eq .Section "videos" }}
+            {{ partial "sidebar/videos-sidebar.html" . }}
+            {{ else if eq .Section "faq" }}
+            {{ partial "sidebar/faq-sidebar.html" . }}
+            {{ else if eq .Section "downloads" }}
+            {{ partial "sidebar/downloads-sidebar.html" . }}
+            {{ end }}
+        </aside>
+        {{ end }}
+    </div>
+    
+    {{ if or (eq .Section "services") (eq .Section "about") }}
+    <!-- 雙CTA行動呼籲區域 -->
+    {{ partial "shared/dual-cta.html" . }}
+    {{ end }}
+</div>
+{{ end }}

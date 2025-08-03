@@ -1,0 +1,183 @@
+{{ define "main" }}
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-header__title">{{ .Title }}</h1>
+        {{ with .Description }}
+        <p class="page-header__description">{{ . }}</p>
+        {{ end }}
+    </div>
+</div>
+
+<div class="container">
+    <div class="service-detail">
+        <!-- 服務特色圖片 -->
+        {{ with .Params.cover }}
+        <div class="service-detail__image">
+            <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+        </div>
+        {{ end }}
+        
+        <!-- 服務詳情 -->
+        <div class="service-detail__content">
+            {{ .Content }}
+        </div>
+        
+        <!-- 服務內容清單 -->
+        <div class="service-detail__list">
+            <h2>主要服務內容</h2>
+            <ul class="service-items">
+                {{ if eq .File.ContentBaseName "business-registration" }}
+                <li><i class="fas fa-check"></i> 公司設立登記</li>
+                <li><i class="fas fa-check"></i> 公司變更登記</li>
+                <li><i class="fas fa-check"></i> 公司解散清算</li>
+                <li><i class="fas fa-check"></i> 分公司設立登記</li>
+                <li><i class="fas fa-check"></i> 外商公司登記</li>
+                <li><i class="fas fa-check"></i> 商業登記</li>
+                <li><i class="fas fa-check"></i> 工廠登記</li>
+                <li><i class="fas fa-check"></i> 商標註冊申請</li>
+                {{ else if eq .File.ContentBaseName "tax-filing" }}
+                <li><i class="fas fa-check"></i> 營業稅申報</li>
+                <li><i class="fas fa-check"></i> 營所稅申報</li>
+                <li><i class="fas fa-check"></i> 綜所稅申報</li>
+                <li><i class="fas fa-check"></i> 扣繳申報</li>
+                <li><i class="fas fa-check"></i> 房地合一稅申報</li>
+                <li><i class="fas fa-check"></i> 遺產稅申報</li>
+                <li><i class="fas fa-check"></i> 贈與稅申報</li>
+                <li><i class="fas fa-check"></i> 稅務規劃諮詢</li>
+                {{ else if eq .File.ContentBaseName "audit-services" }}
+                <li><i class="fas fa-check"></i> 財務報表簽證</li>
+                <li><i class="fas fa-check"></i> 稅務簽證</li>
+                <li><i class="fas fa-check"></i> 工商憑證申請</li>
+                <li><i class="fas fa-check"></i> 內部控制制度設計</li>
+                <li><i class="fas fa-check"></i> 財務報表編製</li>
+                <li><i class="fas fa-check"></i> 會計制度設計</li>
+                <li><i class="fas fa-check"></i> 資本額查核</li>
+                <li><i class="fas fa-check"></i> 專案查核</li>
+                {{ else if eq .File.ContentBaseName "consulting" }}
+                <li><i class="fas fa-check"></i> 會計諮詢</li>
+                <li><i class="fas fa-check"></i> 稅務諮詢</li>
+                <li><i class="fas fa-check"></i> 法律諮詢</li>
+                <li><i class="fas fa-check"></i> 企業併購諮詢</li>
+                <li><i class="fas fa-check"></i> 投資規劃諮詢</li>
+                <li><i class="fas fa-check"></i> 財務分析諮詢</li>
+                <li><i class="fas fa-check"></i> 成本控制諮詢</li>
+                <li><i class="fas fa-check"></i> 風險管理諮詢</li>
+                {{ end }}
+            </ul>
+        </div>
+        
+        <!-- 服務流程 -->
+        <div class="service-detail__process">
+            <h2>服務流程</h2>
+            <div class="process-flow">
+                <div class="process-flow__step">
+                    <div class="process-flow__number">1</div>
+                    <div class="process-flow__content">
+                        <h3>需求諮詢</h3>
+                        <p>與客戶溝通，了解需求和目標</p>
+                    </div>
+                </div>
+                
+                <div class="process-flow__arrow">
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                </div>
+                
+                <div class="process-flow__step">
+                    <div class="process-flow__number">2</div>
+                    <div class="process-flow__content">
+                        <h3>方案提供</h3>
+                        <p>提供客製化服務方案和報價</p>
+                    </div>
+                </div>
+                
+                <div class="process-flow__arrow">
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                </div>
+                
+                <div class="process-flow__step">
+                    <div class="process-flow__number">3</div>
+                    <div class="process-flow__content">
+                        <h3>執行服務</h3>
+                        <p>專業團隊執行服務內容</p>
+                    </div>
+                </div>
+                
+                <div class="process-flow__arrow">
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                </div>
+                
+                <div class="process-flow__step">
+                    <div class="process-flow__number">4</div>
+                    <div class="process-flow__content">
+                        <h3>成果交付</h3>
+                        <p>交付服務成果，提供後續支援</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 相關資源連結 -->
+        <div class="service-detail__resources">
+            <h2>相關資源</h2>
+            <div class="resource-links">
+                {{ if eq .File.ContentBaseName "business-registration" }}
+                <a href="/articles/startup-guide/" class="resource-link">
+                    <i class="fas fa-book"></i>
+                    <span>創業教室</span>
+                </a>
+                <a href="/downloads/forms/" class="resource-link">
+                    <i class="fas fa-file-download"></i>
+                    <span>表格下載</span>
+                </a>
+                <a href="/faq/startup/" class="resource-link">
+                    <i class="fas fa-question-circle"></i>
+                    <span>創業問題</span>
+                </a>
+                {{ else if eq .File.ContentBaseName "tax-filing" }}
+                <a href="/articles/tax-planning/" class="resource-link">
+                    <i class="fas fa-book"></i>
+                    <span>稅務指南</span>
+                </a>
+                <a href="/downloads/forms/" class="resource-link">
+                    <i class="fas fa-file-download"></i>
+                    <span>表格下載</span>
+                </a>
+                <a href="/faq/tax/" class="resource-link">
+                    <i class="fas fa-question-circle"></i>
+                    <span>稅務問題</span>
+                </a>
+                {{ else if eq .File.ContentBaseName "audit-services" }}
+                <a href="/articles/accounting-basics/" class="resource-link">
+                    <i class="fas fa-book"></i>
+                    <span>會計實務</span>
+                </a>
+                <a href="/downloads/checklists/" class="resource-link">
+                    <i class="fas fa-file-download"></i>
+                    <span>檢查清單</span>
+                </a>
+                <a href="/faq/accounting/" class="resource-link">
+                    <i class="fas fa-question-circle"></i>
+                    <span>記帳問題</span>
+                </a>
+                {{ else if eq .File.ContentBaseName "consulting" }}
+                <a href="/articles/legal-updates/" class="resource-link">
+                    <i class="fas fa-book"></i>
+                    <span>法規更新</span>
+                </a>
+                <a href="/downloads/templates/" class="resource-link">
+                    <i class="fas fa-file-download"></i>
+                    <span>範本下載</span>
+                </a>
+                <a href="/faq/others/" class="resource-link">
+                    <i class="fas fa-question-circle"></i>
+                    <span>其他問題</span>
+                </a>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    
+    <!-- 雙CTA行動呼籲區域 -->
+    {{ partial "shared/dual-cta.html" . }}
+</div>
+{{ end }}

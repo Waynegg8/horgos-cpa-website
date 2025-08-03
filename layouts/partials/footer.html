@@ -1,0 +1,142 @@
+<footer class="site-footer">
+    <div class="container">
+        <div class="site-footer__main">
+            <!-- LOGO與SEO區域 -->
+            <div class="site-footer__logo-section">
+                <a href="{{ .Site.BaseURL }}" class="footer-logo">
+                    <img src="{{ .Site.Params.logo.image | relURL }}" alt="{{ .Site.Title }}">
+                </a>
+                <div class="site-footer__seo-text">
+                    <p>Hugo會計師事務所提供專業的會計、稅務和工商登記服務，包含公司設立、變更登記、稅務申報、財稅簽證等全方位服務，協助企業合規經營並優化稅務規劃。我們的專業團隊擁有豐富經驗，致力於為客戶提供高品質的會計服務，成為您值得信賴的會計夥伴。</p>
+                </div>
+            </div>
+            
+            <!-- 公司資訊區域 -->
+            <div class="site-footer__company-info">
+                <h3 class="site-footer__heading"><i class="fas fa-building"></i> 公司資訊</h3>
+                <ul class="site-footer__info-list">
+                    <li><i class="fas fa-map-marker-alt"></i> 地址：408台中市南屯區文心路一段378號7樓</li>
+                    <li><i class="fas fa-phone"></i> 電話：<a href="tel:+886422201234">04-2220-1234</a></li>
+                    <li><i class="fas fa-envelope"></i> 信箱：<a href="mailto:contact@hugo-accounting.com">contact@hugo-accounting.com</a></li>
+                    <li><i class="fas fa-clock"></i> 營業時間：週一至週五 08:30–12:30、13:30–17:30</li>
+                </ul>
+                
+                <!-- 營業狀態 -->
+                <div class="site-footer__business-status">
+                    <span id="business-status-indicator" class="status-indicator"></span>
+                    <span id="business-status-text">營業狀態載入中...</span>
+                </div>
+                
+                <!-- 社群媒體連結 -->
+                <div class="site-footer__social">
+                    {{ with .Site.Params.widgets.social.facebook }}
+                    <a href="https://facebook.com/{{ . }}" class="social-link facebook" target="_blank" rel="noopener" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    {{ end }}
+                    
+                    {{ with .Site.Params.widgets.social.instagram }}
+                    <a href="https://instagram.com/{{ . }}" class="social-link instagram" target="_blank" rel="noopener" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    {{ end }}
+                    
+                    {{ with .Site.Params.widgets.social.line }}
+                    <a href="https://line.me/R/ti/p/{{ . }}" class="social-link line" target="_blank" rel="noopener" aria-label="LINE">
+                        <i class="fab fa-line"></i>
+                    </a>
+                    {{ end }}
+                    
+                    {{ with .Site.Params.widgets.social.email }}
+                    <a href="mailto:{{ . }}" class="social-link email" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    {{ end }}
+                </div>
+            </div>
+            
+            <!-- 服務項目區域 -->
+            <div class="site-footer__services">
+                <h3 class="site-footer__heading"><i class="fas fa-briefcase"></i> 服務項目</h3>
+                <ul class="site-footer__links">
+                    <li><a href="/services/business-registration/"><i class="fas fa-angle-right"></i> 工商登記</a></li>
+                    <li><a href="/services/tax-filing/"><i class="fas fa-angle-right"></i> 稅務申報</a></li>
+                    <li><a href="/services/audit-services/"><i class="fas fa-angle-right"></i> 財稅簽證</a></li>
+                    <li><a href="/services/consulting/"><i class="fas fa-angle-right"></i> 諮詢服務</a></li>
+                </ul>
+            </div>
+            
+            <!-- 快速連結區域 -->
+            <div class="site-footer__quick-links">
+                <h3 class="site-footer__heading"><i class="fas fa-link"></i> 快速連結</h3>
+                <ul class="site-footer__links">
+                    <li><a href="/about/"><i class="fas fa-angle-right"></i> 關於我們</a></li>
+                    <li><a href="/articles/"><i class="fas fa-angle-right"></i> 知識文章</a></li>
+                    <li><a href="/videos/"><i class="fas fa-angle-right"></i> 影音專區</a></li>
+                    <li><a href="/downloads/"><i class="fas fa-angle-right"></i> 下載專區</a></li>
+                    <li><a href="/contact/"><i class="fas fa-angle-right"></i> 聯絡我們</a></li>
+                    <li><a href="/appointment/"><i class="fas fa-angle-right"></i> 預約諮詢</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部法律聲明區域 -->
+    <div class="site-footer__bottom">
+        <div class="container">
+            <div class="site-footer__copyright">
+                <p>&copy; <span id="current-year">2024</span> {{ .Site.Params.copyright }} 版權所有</p>
+            </div>
+            <div class="site-footer__legal-links">
+                {{ range .Site.Menus.footer }}
+                <a href="{{ .URL }}">{{ .Name }}</a>
+                {{ if ne .Name (index $.Site.Menus.footer (sub (len $.Site.Menus.footer) 1)).Name }}
+                <span class="separator">|</span>
+                {{ end }}
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // 更新年份
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // 營業狀態檢查（簡化版）
+    function checkBusinessStatus() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const day = now.getDay(); // 0 是週日，6 是週六
+        
+        const indicator = document.getElementById('business-status-indicator');
+        const text = document.getElementById('business-status-text');
+        
+        // 週一至週五
+        if (day >= 1 && day <= 5) {
+            // 上午營業時間：8:30 - 12:30
+            const isMorningHours = (hours > 8 || (hours === 8 && minutes >= 30)) && (hours < 12 || (hours === 12 && minutes <= 30));
+            // 下午營業時間：13:30 - 17:30
+            const isAfternoonHours = (hours > 13 || (hours === 13 && minutes >= 30)) && (hours < 17 || (hours === 17 && minutes <= 30));
+            
+            if (isMorningHours || isAfternoonHours) {
+                indicator.classList.add('status-open');
+                text.textContent = '營業中';
+            } else {
+                indicator.classList.add('status-closed');
+                text.textContent = '休息中';
+            }
+        } else {
+            // 週末休息
+            indicator.classList.add('status-closed');
+            text.textContent = '休息中';
+        }
+    }
+    
+    // 初始化檢查營業狀態
+    checkBusinessStatus();
+    
+    // 每分鐘更新一次
+    setInterval(checkBusinessStatus, 60000);
+</script>

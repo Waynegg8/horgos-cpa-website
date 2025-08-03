@@ -1,0 +1,115 @@
+// 響應式斷點混合器
+@mixin mobile {
+  @media (max-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-sm + 1px}) and (max-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-lg + 1px}) and (max-width: #{$breakpoint-2xl}) {
+    @content;
+  }
+}
+
+@mixin widescreen {
+  @media (min-width: #{$breakpoint-2xl + 1px}) {
+    @content;
+  }
+}
+
+// 通用響應式混合器
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == "mobile" {
+    @include mobile { @content; }
+  } @else if $breakpoint == "tablet" {
+    @include tablet { @content; }
+  } @else if $breakpoint == "desktop" {
+    @include desktop { @content; }
+  } @else if $breakpoint == "widescreen" {
+    @include widescreen { @content; }
+  }
+}
+
+// 彈性盒混合器
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+// 網格混合器
+@mixin grid($columns: 1, $gap: $spacing-4) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+// 定位混合器
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin absolute-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+// 文字截斷混合器
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// 過渡效果混合器
+@mixin transition($property: all, $duration: $transition-base, $timing: ease-in-out) {
+  transition: $property $duration $timing;
+}
+
+// 卡片混合器
+@mixin card {
+  background-color: $color-bg-white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-6;
+}
+
+// 按鈕混合器
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-3 $spacing-6;
+  border-radius: $border-radius-md;
+  font-weight: $font-weight-medium;
+  text-align: center;
+  cursor: pointer;
+  @include transition;
+}
+
+// 無障礙焦點混合器
+@mixin focus-outline {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}

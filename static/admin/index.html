@@ -1,25 +1,83 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
-  <title>Content Manager</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-  <!-- Include the script that builds the page and powers Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hugo會計事務所 - 內容管理系統</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    
+    <!-- Sveltia CMS Styles -->
+    <style>
+      body {
+        font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      }
+      
+      /* 載入中樣式 */
+      .cms-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        background-color: #f5f6f5;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+      }
+      
+      .cms-loading-logo {
+        width: 200px;
+        margin-bottom: 20px;
+      }
+      
+      .cms-loading-spinner {
+        border: 4px solid rgba(32, 75, 110, 0.3);
+        border-radius: 50%;
+        border-top: 4px solid #204b6e;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 載入中顯示 -->
+    <div class="cms-loading">
+      <img class="cms-loading-logo" src="/logo.svg" alt="Hugo會計事務所" />
+      <div class="cms-loading-spinner"></div>
+    </div>
+    
+    <!-- Sveltia CMS 腳本 -->
+    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+    
+    <script>
+      // 初始化 Sveltia CMS
+      window.addEventListener('DOMContentLoaded', () => {
+        // 移除載入中顯示
+        const removeLoading = () => {
+          const loadingEl = document.querySelector('.cms-loading');
+          if (loadingEl) {
+            loadingEl.style.opacity = '0';
+            loadingEl.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+              loadingEl.remove();
+            }, 500);
+          }
+        };
+        
+        // 監聽 CMS 載入完成事件
+        window.addEventListener('sveltia-cms:loaded', removeLoading);
+        
+        // 如果 5 秒後還沒載入完成，也移除載入中顯示
+        setTimeout(removeLoading, 5000);
       });
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>

@@ -1,0 +1,351 @@
+/* 服務項目頁面樣式 */
+
+/* 服務頁面容器 */
+.services-page {
+  padding: $spacing-8 0;
+}
+
+/* 服務項目網格 */
+.services-grid {
+  @include grid(4, $spacing-6);
+  margin: $spacing-8 0 $spacing-16;
+  
+  @include desktop {
+    @include grid(4, $spacing-4);
+  }
+  
+  @include tablet {
+    @include grid(2, $spacing-4);
+  }
+  
+  @include mobile {
+    @include grid(1, $spacing-4);
+  }
+}
+
+/* 服務特色 */
+.services-features {
+  margin-bottom: $spacing-16;
+  
+  @include mobile {
+    margin-bottom: $spacing-8;
+  }
+}
+
+.features-grid {
+  @include grid(4, $spacing-6);
+  
+  @include desktop {
+    @include grid(4, $spacing-4);
+  }
+  
+  @include tablet {
+    @include grid(2, $spacing-4);
+  }
+  
+  @include mobile {
+    @include grid(1, $spacing-4);
+  }
+}
+
+.feature {
+  @include card;
+  text-align: center;
+  padding: $spacing-6;
+  
+  &__icon {
+    font-size: 2rem;
+    color: $color-primary;
+    margin-bottom: $spacing-4;
+    
+    i {
+      background-color: rgba($color-primary, 0.1);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+  }
+  
+  &__title {
+    margin-bottom: $spacing-2;
+    font-size: $font-size-lg;
+  }
+  
+  &__description {
+    color: $color-text-secondary;
+    font-size: $font-size-base;
+  }
+}
+
+/* 服務流程 */
+.services-process {
+  margin-bottom: $spacing-16;
+  
+  @include mobile {
+    margin-bottom: $spacing-8;
+  }
+}
+
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+}
+
+.process-step {
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+  background-color: $color-bg-white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-4;
+  box-shadow: $shadow-md;
+  
+  &__number {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: $color-primary;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    flex-shrink: 0;
+  }
+  
+  &__content {
+    flex: 1;
+  }
+  
+  &__title {
+    margin-bottom: $spacing-1;
+    font-size: $font-size-lg;
+    color: $color-primary;
+  }
+  
+  &__description {
+    color: $color-text-secondary;
+  }
+}
+
+/* 服務承諾 */
+.services-commitment {
+  margin-bottom: $spacing-16;
+  
+  @include mobile {
+    margin-bottom: $spacing-8;
+  }
+}
+
+.commitment-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+}
+
+.commitment {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-4;
+  background-color: $color-bg-white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-4;
+  box-shadow: $shadow-md;
+  
+  &__icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba($color-primary, 0.1);
+    color: $color-primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-xl;
+    flex-shrink: 0;
+  }
+  
+  &__content {
+    flex: 1;
+  }
+  
+  &__title {
+    margin-bottom: $spacing-1;
+    font-size: $font-size-lg;
+    color: $color-primary;
+  }
+  
+  &__description {
+    color: $color-text-secondary;
+  }
+}
+
+/* 服務詳細頁面 */
+.service-detail {
+  padding: $spacing-8 0;
+  
+  &__image {
+    margin-bottom: $spacing-8;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-md;
+    
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+  
+  &__content {
+    margin-bottom: $spacing-8;
+  }
+  
+  &__list {
+    margin-bottom: $spacing-8;
+    
+    h2 {
+      margin-bottom: $spacing-4;
+      color: $color-primary;
+    }
+  }
+  
+  .service-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-2 $spacing-8;
+    list-style: none;
+    padding: 0;
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+    
+    li {
+      display: flex;
+      align-items: center;
+      
+      i {
+        color: $color-primary;
+        margin-right: $spacing-2;
+      }
+    }
+  }
+  
+  &__process {
+    margin-bottom: $spacing-8;
+    
+    h2 {
+      margin-bottom: $spacing-4;
+      color: $color-primary;
+    }
+  }
+  
+  .process-flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $spacing-2;
+    
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    &__step {
+      display: flex;
+      align-items: center;
+      gap: $spacing-3;
+      background-color: $color-bg-white;
+      border-radius: $border-radius-lg;
+      padding: $spacing-3;
+      box-shadow: $shadow-md;
+      flex: 1;
+      min-width: 200px;
+      
+      @include mobile {
+        width: 100%;
+      }
+    }
+    
+    &__number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: $color-primary;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: $font-weight-bold;
+      flex-shrink: 0;
+    }
+    
+    &__content {
+      h3 {
+        margin: 0 0 $spacing-1;
+        font-size: $font-size-base;
+      }
+      
+      p {
+        margin: 0;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+      }
+    }
+    
+    &__arrow {
+      font-size: $font-size-xl;
+      color: $color-primary;
+      
+      @include mobile {
+        transform: rotate(90deg);
+        margin: $spacing-1 0;
+      }
+    }
+  }
+  
+  &__resources {
+    margin-bottom: $spacing-8;
+    
+    h2 {
+      margin-bottom: $spacing-4;
+      color: $color-primary;
+    }
+  }
+  
+  .resource-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-4;
+    
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+  
+  .resource-link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    background-color: $color-bg-light;
+    padding: $spacing-3 $spacing-4;
+    border-radius: $border-radius-md;
+    color: $color-primary;
+    transition: background-color $transition-base;
+    
+    &:hover {
+      background-color: rgba($color-primary, 0.1);
+    }
+    
+    i {
+      font-size: $font-size-lg;
+    }
+  }
+}

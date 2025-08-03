@@ -1,0 +1,187 @@
+/* 排版樣式 */
+
+/* 標題樣式 */
+h1, .h1 {
+  font-size: $font-size-4xl;
+  margin-bottom: $spacing-6;
+  
+  @include mobile {
+    font-size: $font-size-3xl;
+  }
+}
+
+h2, .h2 {
+  font-size: $font-size-3xl;
+  margin-bottom: $spacing-5;
+  
+  @include mobile {
+    font-size: $font-size-2xl;
+  }
+}
+
+h3, .h3 {
+  font-size: $font-size-2xl;
+  margin-bottom: $spacing-4;
+  
+  @include mobile {
+    font-size: $font-size-xl;
+  }
+}
+
+h4, .h4 {
+  font-size: $font-size-xl;
+  margin-bottom: $spacing-3;
+  
+  @include mobile {
+    font-size: $font-size-lg;
+  }
+}
+
+h5, .h5 {
+  font-size: $font-size-lg;
+  margin-bottom: $spacing-2;
+}
+
+h6, .h6 {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $spacing-2;
+}
+
+/* 段落樣式 */
+p {
+  margin-bottom: $spacing-4;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* 強調文字 */
+strong, b {
+  font-weight: $font-weight-bold;
+}
+
+em, i {
+  font-style: italic;
+}
+
+/* 小文字 */
+small, .text-small {
+  font-size: $font-size-sm;
+}
+
+/* 文字對齊 */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* 文字顏色 */
+.text-primary {
+  color: $color-primary;
+}
+
+.text-secondary {
+  color: $color-secondary;
+}
+
+.text-accent {
+  color: $color-accent;
+}
+
+.text-light {
+  color: $color-text-light;
+}
+
+/* 文字截斷 */
+.text-truncate {
+  @include text-truncate;
+}
+
+/* 文字行數限制 */
+.line-clamp-2 {
+  @include line-clamp(2);
+}
+
+.line-clamp-3 {
+  @include line-clamp(3);
+}
+
+/* 引用樣式 */
+blockquote {
+  border-left: 4px solid $color-primary;
+  padding-left: $spacing-4;
+  margin: $spacing-6 0;
+  color: $color-text-secondary;
+  font-style: italic;
+}
+
+/* 代碼樣式 */
+code {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  background-color: $color-bg-light;
+  padding: $spacing-1 $spacing-2;
+  border-radius: $border-radius-sm;
+  font-size: 0.9em;
+}
+
+pre {
+  background-color: $color-bg-light;
+  padding: $spacing-4;
+  border-radius: $border-radius-md;
+  overflow-x: auto;
+  margin: $spacing-6 0;
+  
+  code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+}
+
+/* 分隔線 */
+hr {
+  border: 0;
+  border-top: 1px solid $color-divider;
+  margin: $spacing-8 0;
+}
+
+/* 標題區塊 */
+.section-title {
+  text-align: center;
+  margin-bottom: $spacing-8;
+  position: relative;
+  
+  &:after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: $color-primary;
+    margin: $spacing-4 auto 0;
+  }
+}
+
+.section-description {
+  text-align: center;
+  color: $color-text-secondary;
+  max-width: 800px;
+  margin: -$spacing-6 auto $spacing-8;
+  font-size: $font-size-lg;
+  
+  @include mobile {
+    font-size: $font-size-base;
+  }
+}
+}
+}
+}
+}

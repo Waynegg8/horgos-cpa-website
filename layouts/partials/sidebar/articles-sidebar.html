@@ -1,0 +1,105 @@
+<!-- 文章側邊欄 -->
+<div class="sidebar">
+    <!-- 側邊欄搜尋 -->
+    <div class="sidebar-widget sidebar-search">
+        <h3 class="sidebar-widget__title">搜尋</h3>
+        {{ partial "search/sidebar-search.html" . }}
+    </div>
+    
+    <!-- 目錄 (僅在單篇文章頁面顯示) -->
+    {{ if and (eq .Kind "page") (eq .Section "articles") }}
+    {{ partial "sidebar/table-of-contents.html" . }}
+    {{ end }}
+    
+    <!-- 分類列表 -->
+    <div class="sidebar-widget sidebar-categories">
+        <h3 class="sidebar-widget__title">文章分類</h3>
+        <ul class="sidebar-categories__list">
+            <li class="sidebar-categories__item">
+                <a href="/articles/startup-guide/" class="sidebar-categories__link">
+                    創業教室
+                    <span class="sidebar-categories__count">{{ len (where .Site.RegularPages "Section" "articles") }}</span>
+                </a>
+            </li>
+            <li class="sidebar-categories__item">
+                <a href="/articles/tax-planning/" class="sidebar-categories__link">
+                    稅務指南
+                    <span class="sidebar-categories__count">{{ len (where .Site.RegularPages "Section" "articles") }}</span>
+                </a>
+            </li>
+            <li class="sidebar-categories__item">
+                <a href="/articles/accounting-basics/" class="sidebar-categories__link">
+                    會計實務
+                    <span class="sidebar-categories__count">{{ len (where .Site.RegularPages "Section" "articles") }}</span>
+                </a>
+            </li>
+            <li class="sidebar-categories__item">
+                <a href="/articles/legal-updates/" class="sidebar-categories__link">
+                    法規更新
+                    <span class="sidebar-categories__count">{{ len (where .Site.RegularPages "Section" "articles") }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- 系列列表 -->
+    <div class="sidebar-widget sidebar-series">
+        <h3 class="sidebar-widget__title">系列文章</h3>
+        <ul class="sidebar-series__list">
+            <li class="sidebar-series__item">
+                <a href="/articles/startup-guide/" class="sidebar-series__link">
+                    公司設立系列
+                </a>
+            </li>
+            <li class="sidebar-series__item">
+                <a href="/articles/tax-planning/" class="sidebar-series__link">
+                    稅務規劃系列
+                </a>
+            </li>
+            <li class="sidebar-series__item">
+                <a href="/articles/accounting-basics/" class="sidebar-series__link">
+                    會計入門系列
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- 最新文章 -->
+    <div class="sidebar-widget sidebar-recent">
+        <h3 class="sidebar-widget__title">最新文章</h3>
+        <ul class="sidebar-recent__list">
+            {{ range first 5 (where .Site.RegularPages "Section" "articles") }}
+            <li class="sidebar-recent__item">
+                <a href="{{ .RelPermalink }}" class="sidebar-recent__link">
+                    <div class="sidebar-recent__image">
+                        {{ with .Params.cover }}
+                        <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+                        {{ else }}
+                        <img src="/uploads/images/articles/default-article-thumb.webp" alt="{{ $.Title }}" loading="lazy">
+                        {{ end }}
+                    </div>
+                    <div class="sidebar-recent__content">
+                        <h4 class="sidebar-recent__title">{{ .Title }}</h4>
+                        <span class="sidebar-recent__date">{{ .Date.Format "2006-01-02" }}</span>
+                    </div>
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+    
+    <!-- 標籤雲 -->
+    <div class="sidebar-widget sidebar-tags">
+        <h3 class="sidebar-widget__title">標籤雲</h3>
+        <div class="sidebar-tags__cloud">
+            <a href="/tags/創業/" class="sidebar-tags__tag" style="font-size: 1.4em;">創業</a>
+            <a href="/tags/公司設立/" class="sidebar-tags__tag" style="font-size: 1.3em;">公司設立</a>
+            <a href="/tags/稅務/" class="sidebar-tags__tag" style="font-size: 1.5em;">稅務</a>
+            <a href="/tags/節稅/" class="sidebar-tags__tag" style="font-size: 1.2em;">節稅</a>
+            <a href="/tags/會計/" class="sidebar-tags__tag" style="font-size: 1.4em;">會計</a>
+            <a href="/tags/記帳/" class="sidebar-tags__tag" style="font-size: 1.1em;">記帳</a>
+            <a href="/tags/法規/" class="sidebar-tags__tag" style="font-size: 1.3em;">法規</a>
+            <a href="/tags/財報/" class="sidebar-tags__tag" style="font-size: 1.2em;">財報</a>
+        </div>
+    </div>
+</div>

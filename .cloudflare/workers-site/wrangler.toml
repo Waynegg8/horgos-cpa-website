@@ -1,0 +1,44 @@
+# Cloudflare Pages 部署配置
+
+name = "hugo-accounting"
+type = "webpack"
+account_id = "your-account-id"
+workers_dev = true
+route = "hugo-accounting.com/*"
+zone_id = "your-zone-id"
+
+[site]
+bucket = "./public"
+entry-point = "workers-site"
+
+[env.production]
+name = "hugo-accounting-prod"
+route = "hugo-accounting.com/*"
+
+[env.staging]
+name = "hugo-accounting-staging"
+route = "staging.hugo-accounting.com/*"
+
+[build]
+command = "hugo --minify -b $CF_PAGES_URL"
+output_dir = "public"
+upload.format = "service-worker"
+
+[build.environment]
+HUGO_VERSION = "0.147.0"
+
+# KV 命名空間綁定
+kv_namespaces = [
+  { binding = "KV_STORAGE", id = "your-kv-namespace-id", preview_id = "your-preview-kv-namespace-id" }
+]
+
+# 環境變數
+[vars]
+RECAPTCHA_SITE_KEY = "your-recaptcha-site-key"
+EMAIL_API_URL = "https://api.mailchannels.net/tx/v1/send"
+EMAIL_FROM = "noreply@hugo-accounting.com"
+ADMIN_EMAIL = "admin@hugo-accounting.com"
+
+# 保密環境變數（需要在 Cloudflare Dashboard 中設置）
+# RECAPTCHA_SECRET_KEY
+# EMAIL_API_KEY

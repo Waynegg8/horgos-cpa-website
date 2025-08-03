@@ -1,0 +1,87 @@
+<header class="site-header">
+    <div class="container">
+        <div class="site-header__inner">
+            <!-- Logo -->
+            <div class="site-header__logo">
+                <a href="{{ .Site.BaseURL }}" class="logo">
+                    <img src="{{ .Site.Params.logo.image | relURL }}" alt="{{ .Site.Title }}">
+                    <div class="logo__text">
+                        <span class="logo__title">{{ .Site.Params.logo.title }}</span>
+                        <span class="logo__subtitle">{{ .Site.Params.logo.subtitle }}</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- 桌面版導航 -->
+            <nav class="main-nav desktop-nav">
+                <ul class="main-nav__list">
+                    {{ $currentPage := . }}
+                    {{ range .Site.Menus.main }}
+                        {{ if .HasChildren }}
+                        <li class="main-nav__item has-dropdown {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
+                            <a href="{{ .URL }}" class="main-nav__link">
+                                {{ .Name }}
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {{ range .Children }}
+                                <li class="dropdown-menu__item {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+                                    <a href="{{ .URL }}" class="dropdown-menu__link">{{ .Name }}</a>
+                                </li>
+                                {{ end }}
+                            </ul>
+                        </li>
+                        {{ else }}
+                        <li class="main-nav__item {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+                            <a href="{{ .URL }}" class="main-nav__link">{{ .Name }}</a>
+                        </li>
+                        {{ end }}
+                    {{ end }}
+                </ul>
+            </nav>
+            
+            <!-- 行動版導航開關 -->
+            <button class="mobile-nav-toggle" aria-label="開啟選單">
+                <span class="mobile-nav-toggle__bar"></span>
+                <span class="mobile-nav-toggle__bar"></span>
+                <span class="mobile-nav-toggle__bar"></span>
+            </button>
+            
+            <!-- 行動版導航 -->
+            <div class="mobile-nav">
+                <div class="mobile-nav__overlay"></div>
+                <div class="mobile-nav__container">
+                    <button class="mobile-nav__close" aria-label="關閉選單">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    
+                    <nav class="mobile-nav__menu">
+                        <ul class="mobile-nav__list">
+                            {{ range .Site.Menus.main }}
+                                {{ if .HasChildren }}
+                                <li class="mobile-nav__item has-dropdown">
+                                    <button class="mobile-nav__link mobile-nav__dropdown-toggle">
+                                        {{ .Name }}
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <ul class="mobile-nav__dropdown">
+                                        {{ range .Children }}
+                                        <li class="mobile-nav__dropdown-item">
+                                            <a href="{{ .URL }}" class="mobile-nav__dropdown-link">{{ .Name }}</a>
+                                        </li>
+                                        {{ end }}
+                                    </ul>
+                                </li>
+                                {{ else }}
+                                <li class="mobile-nav__item">
+                                    <a href="{{ .URL }}" class="mobile-nav__link">{{ .Name }}</a>
+                                </li>
+                                {{ end }}
+                            {{ end }}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

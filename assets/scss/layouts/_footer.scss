@@ -1,0 +1,208 @@
+/* 頁腳樣式 */
+
+/* 網站頁腳 */
+.site-footer {
+  background-color: $color-primary;
+  color: white;
+  margin-top: $spacing-16;
+  
+  @include mobile {
+    margin-top: $spacing-8;
+  }
+  
+  a {
+    color: rgba(255, 255, 255, 0.9);
+    
+    &:hover {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+  
+  &__main {
+    padding: $spacing-12 0;
+    display: grid;
+    grid-template-columns: 2fr 2fr 1.5fr 1.5fr;
+    gap: $spacing-8;
+    
+    @include desktop {
+      grid-template-columns: 2fr 2fr 1.5fr 1.5fr;
+      gap: $spacing-6;
+    }
+    
+    @include tablet {
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-8 $spacing-4;
+    }
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+      padding: $spacing-8 0;
+    }
+  }
+  
+  &__heading {
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-4;
+    padding-bottom: $spacing-2;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    
+    i {
+      margin-right: $spacing-2;
+    }
+  }
+  
+  &__logo-section {
+    .footer-logo {
+      display: block;
+      margin-bottom: $spacing-4;
+      
+      img {
+        height: 60px;
+        width: auto;
+      }
+    }
+  }
+  
+  &__seo-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: $font-size-sm;
+    line-height: $line-height-lg;
+  }
+  
+  &__info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      margin-bottom: $spacing-3;
+      display: flex;
+      align-items: flex-start;
+      
+      i {
+        margin-right: $spacing-2;
+        margin-top: 0.25em;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+  
+  &__business-status {
+    margin-top: $spacing-4;
+    margin-bottom: $spacing-4;
+    display: flex;
+    align-items: center;
+    
+    .status-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: $spacing-2;
+      
+      &.status-open {
+        background-color: $color-success;
+      }
+      
+      &.status-closed {
+        background-color: $color-error;
+      }
+    }
+  }
+  
+  &__social {
+    display: flex;
+    gap: $spacing-3;
+    margin-top: $spacing-4;
+    
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      transition: transform $transition-base, background-color $transition-base;
+      
+      &:hover {
+        transform: scale(1.1);
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      &.facebook:hover {
+        background-color: #1877F2;
+      }
+      
+      &.instagram:hover {
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      }
+      
+      &.line:hover {
+        background-color: #00B900;
+      }
+      
+      &.email:hover {
+        background-color: $color-secondary;
+      }
+    }
+  }
+  
+  &__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      margin-bottom: $spacing-2;
+    }
+    
+    a {
+      display: block;
+      padding: $spacing-1 0;
+      
+      i {
+        margin-right: $spacing-2;
+        font-size: 0.8em;
+      }
+    }
+  }
+  
+  &__bottom {
+    background-color: darken($color-primary, 10%);
+    padding: $spacing-4 0;
+    font-size: $font-size-sm;
+    
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      @include mobile {
+        flex-direction: column;
+        gap: $spacing-2;
+        text-align: center;
+      }
+    }
+  }
+  
+  &__copyright {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  &__legal-links {
+    a {
+      color: rgba(255, 255, 255, 0.8);
+      
+      &:hover {
+        color: white;
+      }
+    }
+    
+    .separator {
+      margin: 0 $spacing-2;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}

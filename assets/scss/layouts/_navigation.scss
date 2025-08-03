@@ -1,0 +1,338 @@
+/* 導航樣式 */
+
+/* 網站頭部 */
+.site-header {
+  background-color: $color-primary;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: z('header');
+  box-shadow: $shadow-md;
+  
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+  }
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  
+  img {
+    height: 50px;
+    width: auto;
+    margin-right: $spacing-3;
+  }
+  
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    line-height: 1.2;
+  }
+  
+  &__subtitle {
+    font-size: $font-size-sm;
+    opacity: 0.8;
+  }
+}
+
+/* 桌面版導航 */
+.desktop-nav {
+  display: block;
+  
+  @include mobile {
+    display: none;
+  }
+}
+
+.main-nav {
+  &__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  &__item {
+    position: relative;
+    
+    &.has-dropdown {
+      .main-nav__link {
+        padding-right: $spacing-6;
+        
+        i {
+          position: absolute;
+          right: $spacing-2;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 0.8em;
+          transition: transform $transition-base;
+        }
+      }
+      
+      &:hover {
+        .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+        
+        .main-nav__link i {
+          transform: translateY(-50%) rotate(180deg);
+        }
+      }
+    }
+    
+    &.active {
+      .main-nav__link {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+  
+  &__link {
+    display: block;
+    padding: $spacing-4 $spacing-4;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: color $transition-base, background-color $transition-base;
+    position: relative;
+    
+    &:hover {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+/* 下拉選單 */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba($color-bg-dark, 0.95);
+  min-width: 200px;
+  border-radius: 0 0 $border-radius-md $border-radius-md;
+  box-shadow: $shadow-lg;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity $transition-base, visibility $transition-base, transform $transition-base;
+  z-index: z('dropdown');
+  
+  &__item {
+    &.active {
+      .dropdown-menu__link {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+  
+  &__link {
+    display: block;
+    padding: $spacing-3 $spacing-4;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: color $transition-base, background-color $transition-base;
+    
+    &:hover {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+/* 行動版導航開關 */
+.mobile-nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  width: 44px;
+  height: 44px;
+  padding: $spacing-2;
+  cursor: pointer;
+  position: relative;
+  z-index: z('header') + 1;
+  
+  @include mobile {
+    display: block;
+  }
+  
+  &__bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    margin: 6px 0;
+    transition: transform $transition-base, opacity $transition-base;
+  }
+  
+  &.active {
+    .mobile-nav-toggle__bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    
+    .mobile-nav-toggle__bar:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .mobile-nav-toggle__bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+  }
+}
+
+/* 行動版導航 */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: z('dropdown');
+  
+  @include mobile {
+    display: block;
+    pointer-events: none;
+  }
+  
+  &.active {
+    pointer-events: auto;
+    
+    .mobile-nav__overlay {
+      opacity: 1;
+    }
+    
+    .mobile-nav__container {
+      transform: translateX(0);
+    }
+  }
+  
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+  
+  &__container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80%;
+    max-width: 300px;
+    height: 100%;
+    background-color: $color-bg-white;
+    box-shadow: $shadow-xl;
+    transform: translateX(100%);
+    transition: transform $transition-slow ease-out;
+    overflow-y: auto;
+    padding: $spacing-8 0;
+  }
+  
+  &__close {
+    position: absolute;
+    top: $spacing-4;
+    right: $spacing-4;
+    background: transparent;
+    border: none;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-xl;
+    color: $color-text-primary;
+    cursor: pointer;
+  }
+  
+  &__menu {
+    padding: $spacing-4 0;
+  }
+  
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  &__item {
+    border-bottom: 1px solid $color-divider;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  &__link {
+    display: block;
+    padding: $spacing-4 $spacing-6;
+    color: $color-text-primary;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    
+    &.mobile-nav__dropdown-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background: transparent;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      
+      i {
+        transition: transform $transition-base;
+      }
+      
+      &.active {
+        i {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+  
+  &__dropdown {
+    display: none;
+    background-color: rgba($color-bg-light, 0.5);
+    
+    &.active {
+      display: block;
+    }
+  }
+  
+  &__dropdown-item {
+    border-top: 1px solid $color-divider;
+  }
+  
+  &__dropdown-link {
+    display: block;
+    padding: $spacing-3 $spacing-8;
+    color: $color-text-secondary;
+    text-decoration: none;
+    
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}

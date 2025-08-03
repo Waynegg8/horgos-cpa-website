@@ -1,0 +1,354 @@
+/* 布局樣式 */
+
+/* 主要布局 */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  padding-top: 80px; // 為固定導航欄留出空間
+}
+
+.container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+  
+  @include mobile {
+    padding: 0 $spacing-4;
+  }
+}
+
+/* 頁面標題區 */
+.page-header {
+  background-color: $color-primary;
+  color: white;
+  padding: $spacing-12 0;
+  margin-bottom: $spacing-8;
+  
+  @include mobile {
+    padding: $spacing-8 0;
+  }
+  
+  &__title {
+    font-size: $font-size-4xl;
+    margin-bottom: $spacing-4;
+    
+    @include mobile {
+      font-size: $font-size-3xl;
+    }
+  }
+  
+  &__description {
+    font-size: $font-size-lg;
+    max-width: 800px;
+    opacity: 0.9;
+    
+    @include mobile {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+/* 兩欄布局 */
+.two-column {
+  display: flex;
+  gap: $spacing-8;
+  
+  @include mobile {
+    flex-direction: column;
+  }
+  
+  &__main {
+    flex: 1;
+  }
+  
+  &__sidebar {
+    flex: 0 0 300px;
+    
+    @include mobile {
+      flex: 1;
+    }
+  }
+}
+
+/* 首頁布局 */
+.homepage-container {
+  .homepage-content {
+    padding: $spacing-12 0;
+    
+    @include mobile {
+      padding: $spacing-8 0;
+    }
+  }
+}
+
+/* 雙CTA區域 */
+.dual-cta {
+  background-color: $color-primary;
+  color: white;
+  padding: $spacing-12 0;
+  margin: $spacing-16 0;
+  
+  @include mobile {
+    padding: $spacing-8 0;
+    margin: $spacing-8 0;
+  }
+  
+  &__content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  &__title {
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-4;
+    
+    @include mobile {
+      font-size: $font-size-2xl;
+    }
+  }
+  
+  &__description {
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-8;
+    opacity: 0.9;
+    
+    @include mobile {
+      font-size: $font-size-base;
+      margin-bottom: $spacing-6;
+    }
+  }
+  
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-4;
+    
+    @include mobile {
+      flex-direction: column;
+      gap: $spacing-3;
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/* Hero輪播區 */
+.hero-carousel {
+  position: relative;
+  overflow: hidden;
+  
+  &__container {
+    position: relative;
+  }
+  
+  &__slides {
+    position: relative;
+    height: 500px;
+    
+    @include tablet {
+      height: 400px;
+    }
+    
+    @include mobile {
+      height: 300px;
+    }
+  }
+  
+  &__slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity $transition-slow ease;
+    
+    &.active {
+      opacity: 1;
+      z-index: 1;
+    }
+    
+    picture {
+      width: 100%;
+      height: 100%;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  
+  &__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: $spacing-8;
+    background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+    color: white;
+    
+    @include mobile {
+      padding: $spacing-4;
+      background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+    }
+    
+    h2 {
+      font-size: $font-size-4xl;
+      margin-bottom: $spacing-4;
+      max-width: 600px;
+      
+      @include mobile {
+        font-size: $font-size-2xl;
+      }
+    }
+    
+    p {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-6;
+      max-width: 500px;
+      
+      @include mobile {
+        font-size: $font-size-base;
+        margin-bottom: $spacing-4;
+      }
+    }
+  }
+  
+  &__control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background-color: rgba(255,255,255,0.2);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: $font-size-xl;
+    cursor: pointer;
+    transition: background-color $transition-base;
+    
+    &:hover {
+      background-color: rgba(255,255,255,0.4);
+    }
+    
+    @include mobile {
+      width: 40px;
+      height: 40px;
+      font-size: $font-size-lg;
+    }
+    
+    &--prev {
+      left: $spacing-4;
+    }
+    
+    &--next {
+      right: $spacing-4;
+    }
+  }
+  
+  &__indicators {
+    position: absolute;
+    bottom: $spacing-4;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: $spacing-2;
+    z-index: 2;
+  }
+  
+  &__indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.5);
+    border: none;
+    cursor: pointer;
+    transition: background-color $transition-base;
+    
+    &:hover, &.active {
+      background-color: white;
+    }
+  }
+}
+
+/* Cookie同意條款 */
+.cookie-consent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba($color-bg-dark, 0.95);
+  color: white;
+  padding: $spacing-4;
+  z-index: z('modal');
+  transform: translateY(100%);
+  transition: transform $transition-base;
+  
+  &.show {
+    transform: translateY(0);
+  }
+  
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: $container-max-width;
+    margin: 0 auto;
+    
+    @include mobile {
+      flex-direction: column;
+      gap: $spacing-4;
+      text-align: center;
+    }
+    
+    p {
+      margin-bottom: 0;
+      margin-right: $spacing-4;
+      
+      @include mobile {
+        margin-right: 0;
+      }
+      
+      a {
+        color: white;
+        text-decoration: underline;
+        
+        &:hover {
+          color: darken(white, 10%);
+        }
+      }
+    }
+  }
+}
+
+/* 頁面載入進度條 */
+#page-loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(to right, $color-primary, $color-accent);
+  z-index: z('modal') + 1;
+  transition: width $transition-base ease-out;
+}

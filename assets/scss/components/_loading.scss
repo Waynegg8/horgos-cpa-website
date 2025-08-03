@@ -1,0 +1,312 @@
+// 載入樣式
+// 定義網站的載入狀態樣式
+
+// 頁面載入進度條
+.page-loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, $color-primary, $color-accent);
+  z-index: 9999;
+  width: 0;
+  transition: width 0.3s ease-out;
+}
+
+// 表單提交載入
+.form-loading {
+  position: relative;
+  pointer-events: none;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid rgba($color-primary, 0.3);
+    border-top-color: $color-primary;
+    animation: spin 1s linear infinite;
+    z-index: 2;
+  }
+}
+
+// 內容載入骨架屏
+.skeleton {
+  background-color: $color-bg-light;
+  border-radius: $border-radius-sm;
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0) 0%, 
+      rgba(255, 255, 255, 0.5) 50%, 
+      rgba(255, 255, 255, 0) 100%);
+    animation: skeleton-loading 1.5s infinite;
+  }
+}
+
+// 骨架屏動畫
+@keyframes skeleton-loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// 骨架屏標題
+.skeleton-title {
+  @extend .skeleton;
+  height: 24px;
+  margin-bottom: 1rem;
+  width: 70%;
+}
+
+// 骨架屏文字
+.skeleton-text {
+  @extend .skeleton;
+  height: 16px;
+  margin-bottom: 0.75rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+    width: 80%;
+  }
+}
+
+// 骨架屏圖片
+.skeleton-image {
+  @extend .skeleton;
+  width: 100%;
+  padding-top: 56.25%; // 16:9 比例
+}
+
+// 骨架屏卡片
+.skeleton-card {
+  background-color: $color-bg-white;
+  border-radius: $border-radius-md;
+  padding: 1.5rem;
+  box-shadow: $shadow-sm;
+  margin-bottom: 1.5rem;
+}
+
+// 骨架屏圓形
+.skeleton-circle {
+  @extend .skeleton;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+// 圖片漸進式載入
+.progressive-image-container {
+  position: relative;
+  overflow: hidden;
+  background-color: $color-bg-light;
+  
+  .preview-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(10px);
+    transform: scale(1.1);
+    transition: opacity 0.3s ease-out;
+    opacity: 1;
+  }
+  
+  .full-image {
+    position: relative;
+    transition: opacity 0.3s ease-out;
+    opacity: 0;
+  }
+  
+  &.loaded {
+    .preview-image {
+      opacity: 0;
+    }
+    
+    .full-image {
+      opacity: 1;
+    }
+  }
+}
+
+// 旋轉載入動畫
+.spinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba($color-primary, 0.3);
+  border-radius: 50%;
+  border-top-color: $color-primary;
+  animation: spin 1s linear infinite;
+}
+
+// 旋轉動畫
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// 脈動載入動畫
+.pulse {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-color: $color-primary;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+// 脈動動畫
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+}
+
+// 波浪載入動畫
+.wave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  
+  .wave-item {
+    display: inline-block;
+    width: 4px;
+    height: 100%;
+    margin: 0 2px;
+    background-color: $color-primary;
+    border-radius: 2px;
+    animation: wave 1s ease-in-out infinite;
+    
+    &:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    
+    &:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    
+    &:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+    
+    &:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+// 波浪動畫
+@keyframes wave {
+  0%, 100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+// 內容載入中覆蓋
+.content-loading {
+  position: relative;
+  min-height: 200px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+  }
+  
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    z-index: 2;
+  }
+}
+
+// 載入中文字
+.loading-text {
+  display: inline-flex;
+  align-items: center;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  
+  .spinner {
+    margin-right: 0.5rem;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+// 全頁面載入覆蓋
+.page-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;
+  
+  .spinner {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
+  }
+  
+  .loading-text {
+    font-size: $font-size-base;
+    color: $color-primary;
+  }
+}

@@ -1,0 +1,44 @@
+<div class="video-card">
+  <a href="{{ .RelPermalink }}" class="video-card-link">
+    <div class="video-thumbnail">
+      {{ if .Params.thumbnail }}
+      <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" loading="lazy">
+      {{ else }}
+      <div class="video-thumbnail-placeholder"></div>
+      {{ end }}
+      
+      {{ with .Params.duration }}
+      <span class="video-duration-badge">{{ . }}</span>
+      {{ end }}
+    </div>
+    
+    <div class="video-card-content">
+      <h3 class="video-title">{{ .Title }}</h3>
+      
+      <div class="video-meta">
+        <span class="video-date">
+          <i class="fas fa-calendar-alt"></i>
+          {{ .Date.Format "2006-01-02" }}
+        </span>
+        
+        {{ with .Params.category }}
+        <span class="video-category">
+          <i class="fas fa-folder"></i>
+          {{ . }}
+        </span>
+        {{ end }}
+        
+        {{ if .Params.series }}
+        <span class="video-series">
+          <i class="fas fa-list-ol"></i>
+          系列: {{ .Params.series }}
+        </span>
+        {{ end }}
+      </div>
+      
+      <div class="video-description">
+        {{ .Description }}
+      </div>
+    </div>
+  </a>
+</div>

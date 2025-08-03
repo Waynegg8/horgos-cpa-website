@@ -1,0 +1,187 @@
+/* 關於我們頁面樣式 */
+
+/* 關於頁面容器 */
+.about-page {
+  padding: $spacing-8 0;
+}
+
+/* 事務所介紹區域 */
+.about-intro {
+  margin-bottom: $spacing-16;
+  
+  @include mobile {
+    margin-bottom: $spacing-8;
+  }
+}
+
+/* 團隊介紹區域 */
+.team-section {
+  margin-bottom: $spacing-16;
+  
+  @include mobile {
+    margin-bottom: $spacing-8;
+  }
+}
+
+.team-members {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-12;
+  
+  @include mobile {
+    gap: $spacing-8;
+  }
+}
+
+.team-member {
+  display: flex;
+  gap: $spacing-8;
+  
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-4;
+  }
+  
+  /* 偶數團隊成員（右圖左文） */
+  &.even {
+    flex-direction: row-reverse;
+    
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+  
+  &__image {
+    flex: 0 0 30%;
+    max-width: 30%;
+    
+    @include mobile {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: $border-radius-lg;
+      box-shadow: $shadow-md;
+    }
+  }
+  
+  &__info {
+    flex: 1;
+  }
+  
+  &__name {
+    color: $color-primary;
+    margin-bottom: $spacing-3;
+    font-size: $font-size-2xl;
+    
+    @include mobile {
+      font-size: $font-size-xl;
+      margin-top: $spacing-4;
+    }
+  }
+  
+  &__description {
+    margin-bottom: $spacing-4;
+    color: $color-text-secondary;
+    font-size: $font-size-lg;
+    
+    @include mobile {
+      font-size: $font-size-base;
+    }
+  }
+  
+  &__details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-4;
+    background-color: $color-bg-light;
+    padding: $spacing-4;
+    border-radius: $border-radius-md;
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+    
+    h4 {
+      color: $color-primary;
+      margin-bottom: $spacing-2;
+      font-size: $font-size-base;
+    }
+    
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      
+      li {
+        position: relative;
+        padding-left: $spacing-4;
+        margin-bottom: $spacing-1;
+        
+        &:before {
+          content: "•";
+          color: $color-primary;
+          position: absolute;
+          left: 0;
+        }
+      }
+    }
+  }
+}
+
+/* 專業實力展示 */
+.strength-section {
+  margin-bottom: $spacing-16;
+  
+  @include mobile {
+    margin-bottom: $spacing-8;
+  }
+}
+
+.strength-stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $spacing-4;
+  
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.strength-stat {
+  flex: 1;
+  min-width: 150px;
+  text-align: center;
+  padding: $spacing-6;
+  background-color: $color-bg-white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
+  transition: transform $transition-base;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-lg;
+  }
+  
+  @include mobile {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  &__number {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+    margin-bottom: $spacing-2;
+  }
+  
+  &__label {
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+  }
+}

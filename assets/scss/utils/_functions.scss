@@ -1,0 +1,41 @@
+// 顏色函數
+
+// 調亮顏色
+@function lighten-color($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+// 調暗顏色
+@function darken-color($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+// 轉換px為rem
+@function rem($pixels) {
+  @return ($pixels / 16) * 1rem;
+}
+
+// 轉換px為em
+@function em($pixels, $context: 16) {
+  @return ($pixels / $context) * 1em;
+}
+
+// z-index層級管理
+$z-layers: (
+  "modal": 100,
+  "dropdown": 90,
+  "header": 80,
+  "footer": 70,
+  "tooltip": 60,
+  "default": 1,
+  "below": -1
+);
+
+@function z($layer) {
+  @if map-has-key($z-layers, $layer) {
+    @return map-get($z-layers, $layer);
+  }
+  
+  @warn "未知的 z-index 層級: #{$layer}";
+  @return 1;
+}

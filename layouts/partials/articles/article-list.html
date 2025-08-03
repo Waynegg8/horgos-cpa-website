@@ -1,0 +1,68 @@
+<!-- 文章列表頁 -->
+<div class="article-list">
+    <!-- 搜尋欄 -->
+    <div class="article-search">
+        <form class="search-form" action="{{ .RelPermalink }}" method="get">
+            <input type="text" name="search" placeholder="搜尋文章..." class="search-input" value="{{ with .Params.search }}{{ . }}{{ end }}">
+            <button type="submit" class="search-button">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+    
+    <!-- 分類篩選 -->
+    <div class="article-categories">
+        <div class="category-filters">
+            <a href="{{ .RelPermalink }}" class="category-filter {{ if eq .RelPermalink "/articles/" }}active{{ end }}">全部</a>
+            <a href="/articles/startup-guide/" class="category-filter {{ if eq .RelPermalink "/articles/startup-guide/" }}active{{ end }}">創業教室</a>
+            <a href="/articles/tax-planning/" class="category-filter {{ if eq .RelPermalink "/articles/tax-planning/" }}active{{ end }}">稅務指南</a>
+            <a href="/articles/accounting-basics/" class="category-filter {{ if eq .RelPermalink "/articles/accounting-basics/" }}active{{ end }}">會計實務</a>
+            <a href="/articles/legal-updates/" class="category-filter {{ if eq .RelPermalink "/articles/legal-updates/" }}active{{ end }}">法規更新</a>
+        </div>
+    </div>
+    
+    <!-- 文章列表 -->
+    <div class="article-cards">
+        {{ $paginator := .Paginate (where .Pages "Type" "articles") 10 }}
+        {{ range $paginator.Pages }}
+        <div class="article-card">
+            <div class="article-card__image">
+                {{ with .Params.cover }}
+                <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+                {{ else }}
+                <img src="/uploads/images/articles/default-article.webp" alt="{{ $.Title }}" loading="lazy">
+                {{ end }}
+            </div>
+            <div class="article-card__content">
+                <h2 class="article-card__title">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </h2>
+                <div class="article-card__meta">
+                    <span class="article-card__date"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+                    {{ with .Params.category }}
+                    <span class="article-card__category"><i class="fas fa-folder"></i> {{ . }}</span>
+                    {{ end }}
+                    {{ with .Params.series }}
+                    <span class="article-card__series"><i class="fas fa-bookmark"></i> {{ . }}</span>
+                    {{ end }}
+                </div>
+                <div class="article-card__excerpt">
+                    {{ .Summary }}
+                </div>
+                <div class="article-card__tags">
+                    {{ range .Params.tags }}
+                    <a href="/tags/{{ . | urlize }}" class="article-card__tag">{{ . }}</a>
+                    {{ end }}
+                </div>
+                <div class="article-card__footer">
+                    <a href="{{ .RelPermalink }}" class="article-card__read-more">閱讀更多</a>
+                    <span class="article-card__read-time"><i class="fas fa-clock"></i> {{ div (countwords .Content) 300 | add 1 }} 分鐘閱讀</span>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    
+    <!-- 分頁導航 -->
+    {{ template "_internal/pagination.html" . }}
+</div>

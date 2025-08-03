@@ -1,0 +1,49 @@
+<!-- SEO內容顯示模板 -->
+<div class="seo-content">
+  {{ if .IsHome }}
+    <!-- 首頁SEO內容 -->
+    {{ with .Site.Data.seo.home }}
+      <div class="seo-text">{{ . | markdownify }}</div>
+    {{ end }}
+  {{ else if eq .Section "about" }}
+    <!-- 關於我們SEO內容 -->
+    {{ with .Site.Data.seo.about }}
+      <div class="seo-text">{{ . | markdownify }}</div>
+    {{ end }}
+  {{ else if eq .Section "services" }}
+    <!-- 服務項目SEO內容 -->
+    {{ with .Site.Data.seo.services }}
+      <div class="seo-text">{{ . | markdownify }}</div>
+    {{ end }}
+  {{ else if eq .Section "articles" }}
+    <!-- 知識文章SEO內容 -->
+    {{ with .Site.Data.seo.articles }}
+      <div class="seo-text">{{ . | markdownify }}</div>
+    {{ end }}
+  {{ else if eq .Section "videos" }}
+    <!-- 影音專區SEO內容 -->
+    {{ with .Site.Data.seo.videos }}
+      <div class="seo-text">{{ . | markdownify }}</div>
+    {{ end }}
+  {{ else if eq .Section "faq" }}
+    <!-- 常見問題SEO內容 -->
+    {{ with .Site.Data.seo.faq }}
+      <div class="seo-text">{{ . | markdownify }}</div>
+    {{ end }}
+  {{ else if eq .Section "downloads" }}
+    <!-- 下載專區SEO內容 -->
+    {{ with .Site.Data.seo.downloads }}
+      <div class="seo-text">{{ . | markdownify }}</div>
+    {{ end }}
+  {{ else if eq .Section "contact" }}
+    <!-- 聯絡我們SEO內容 -->
+    {{ with .Site.Data.seo.contact }}
+      <div class="seo-text">{{ . | markdownify }}</div>
+    {{ end }}
+  {{ else if eq .Section "appointment" }}
+    <!-- 預約諮詢SEO內容 -->
+    {{ with .Site.Data.seo.appointment }}
+      <div class="seo-text">{{ . | markdownify }}</div>
+    {{ end }}
+  {{ end }}
+</div>

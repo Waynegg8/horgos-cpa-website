@@ -1,0 +1,36 @@
+<div class="video-metadata">
+  <div class="video-info">
+    <span class="video-date">
+      <i class="fas fa-calendar-alt"></i>
+      {{ .Date.Format "2006-01-02" }}
+    </span>
+    
+    <span class="video-duration">
+      <i class="fas fa-clock"></i>
+      {{ .Params.duration }}
+    </span>
+    
+    {{ with .Params.category }}
+    <span class="video-category">
+      <i class="fas fa-folder"></i>
+      <a href="{{ "/videos/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+    </span>
+    {{ end }}
+    
+    {{ if .Params.series }}
+    <span class="video-series">
+      <i class="fas fa-list-ol"></i>
+      系列: {{ .Params.series }} ({{ .Params.series_order }})
+    </span>
+    {{ end }}
+  </div>
+  
+  {{ with .Params.tags }}
+  <div class="video-tags">
+    <i class="fas fa-tags"></i>
+    {{ range . }}
+    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>

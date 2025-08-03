@@ -1,0 +1,197 @@
+{{ define "main" }}
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-header__title">{{ .Title }}</h1>
+        {{ with .Description }}
+        <p class="page-header__description">{{ . }}</p>
+        {{ end }}
+    </div>
+</div>
+
+<div class="container">
+    <div class="services-page">
+        <!-- 服務項目內容 -->
+        <section class="services-intro">
+            {{ .Content }}
+        </section>
+        
+        <!-- 服務項目卡片展示 -->
+        <section class="services-grid">
+            {{ range .Pages }}
+            <div class="service-card">
+                <div class="service-card__icon">
+                    {{ if eq .File.ContentBaseName "business-registration" }}
+                    <i class="fas fa-building"></i>
+                    {{ else if eq .File.ContentBaseName "tax-filing" }}
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    {{ else if eq .File.ContentBaseName "audit-services" }}
+                    <i class="fas fa-stamp"></i>
+                    {{ else if eq .File.ContentBaseName "consulting" }}
+                    <i class="fas fa-comments"></i>
+                    {{ else }}
+                    <i class="fas fa-briefcase"></i>
+                    {{ end }}
+                </div>
+                <h3 class="service-card__title">{{ .Title }}</h3>
+                <p class="service-card__description">{{ .Description }}</p>
+                <a href="{{ .Permalink }}" class="service-card__link">了解更多</a>
+            </div>
+            {{ end }}
+        </section>
+        
+        <!-- 服務特色 -->
+        <section class="services-features">
+            <h2 class="section-title">服務特色</h2>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature__icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature__title">專業團隊</h3>
+                    <p class="feature__description">我們的團隊由經驗豐富的會計師、稅務專家和法律顧問組成，擁有豐富的專業知識和實務經驗，能夠為客戶提供全方位的服務。</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature__icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="feature__title">客製化服務</h3>
+                    <p class="feature__description">我們根據客戶的需求提供客製化的服務方案，確保服務品質和效率，協助客戶解決各種財務和稅務問題。</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature__icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="feature__title">即時回應</h3>
+                    <p class="feature__description">我們重視客戶的需求，提供即時的回應和解決方案，建立長期的合作關係，成為客戶值得信賴的會計夥伴。</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature__icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="feature__title">數位化服務</h3>
+                    <p class="feature__description">我們引進數位化系統，提升服務效率和品質，為客戶提供更便捷的服務體驗，符合現代企業的需求。</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 服務流程 -->
+        <section class="services-process">
+            <h2 class="section-title">服務流程</h2>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-step__number">1</div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">初步諮詢</h3>
+                        <p class="process-step__description">了解客戶需求，提供初步建議和服務方案。</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-step__number">2</div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">方案制定</h3>
+                        <p class="process-step__description">根據客戶需求制定客製化的服務方案，包含服務內容、時程和費用。</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-step__number">3</div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">資料收集</h3>
+                        <p class="process-step__description">收集相關資料和文件，確保服務過程順利進行。</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-step__number">4</div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">服務執行</h3>
+                        <p class="process-step__description">專業團隊執行服務方案，確保服務品質和效率。</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-step__number">5</div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">成果交付</h3>
+                        <p class="process-step__description">完成服務後交付成果，並提供後續建議和支援。</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-step__number">6</div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">持續服務</h3>
+                        <p class="process-step__description">提供持續的服務和支援，建立長期的合作關係。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 服務承諾 -->
+        <section class="services-commitment">
+            <h2 class="section-title">服務承諾</h2>
+            
+            <div class="commitment-list">
+                <div class="commitment">
+                    <div class="commitment__icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="commitment__content">
+                        <h3 class="commitment__title">專業品質</h3>
+                        <p class="commitment__description">提供專業、準確的服務，確保服務品質和客戶滿意度。</p>
+                    </div>
+                </div>
+                
+                <div class="commitment">
+                    <div class="commitment__icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="commitment__content">
+                        <h3 class="commitment__title">保密承諾</h3>
+                        <p class="commitment__description">嚴格保護客戶資料和隱私，確保資料安全和保密。</p>
+                    </div>
+                </div>
+                
+                <div class="commitment">
+                    <div class="commitment__icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="commitment__content">
+                        <h3 class="commitment__title">效率保證</h3>
+                        <p class="commitment__description">確保服務流程順利進行，按時完成服務，提高效率。</p>
+                    </div>
+                </div>
+                
+                <div class="commitment">
+                    <div class="commitment__icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="commitment__content">
+                        <h3 class="commitment__title">持續支援</h3>
+                        <p class="commitment__description">提供持續的服務和支援，解決客戶在服務過程中遇到的問題。</p>
+                    </div>
+                </div>
+                
+                <div class="commitment">
+                    <div class="commitment__icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="commitment__content">
+                        <h3 class="commitment__title">誠信經營</h3>
+                        <p class="commitment__description">以誠信為本，建立長期的合作關係，成為客戶值得信賴的會計夥伴。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- 雙CTA行動呼籲區域 -->
+    {{ partial "shared/dual-cta.html" . }}
+</div>
+{{ end }}

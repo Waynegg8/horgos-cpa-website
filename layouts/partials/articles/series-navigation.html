@@ -1,0 +1,103 @@
+{{ if .Params.series }}
+<!-- 系列導航 -->
+<div class="series-navigation">
+    <div class="series-navigation__header">
+        <h3 class="series-navigation__title">{{ .Params.series }} 系列</h3>
+        
+        {{ $series := .Params.series }}
+        {{ $seriesOrder := .Params.series_order }}
+        {{ $category := .Params.category }}
+        
+        <!-- 查找同系列文章 -->
+        {{ $seriesPosts := where (where .Site.RegularPages "Params.series" $series) "Params.draft" "!=" true }}
+        {{ $seriesCount := len $seriesPosts }}
+        
+        <span class="series-navigation__progress">{{ $seriesOrder }}/{{ $seriesCount }}</span>
+    </div>
+    
+    <div class="series-navigation__links">
+        {{ if gt $seriesOrder 1 }}
+            <!-- 查找上一篇文章 (同系列) -->
+            {{ $prevPost := where (where .Site.RegularPages "Params.series" $series) "Params.series_order" (sub $seriesOrder 1) }}
+            {{ with index $prevPost 0 }}
+                <a href="{{ .RelPermalink }}" class="series-navigation__prev">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>{{ .Title }}</span>
+                </a>
+            {{ end }}
+        {{ else }}
+            <!-- 查找其他系列的第一篇文章 (同分類) -->
+            {{ $otherSeries := where (where (where .Site.RegularPages "Params.category" $category) "Params.series_order" 1) "Params.series" "!=" $series }}
+            {{ with index $otherSeries 0 }}
+                <a href="{{ .RelPermalink }}" class="series-navigation__prev">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>{{ .Title }}</span>
+                </a>
+            {{ else }}
+                <!-- 查找其他分類的系列第一篇文章 -->
+                {{ $otherCategorySeries := where (where .Site.RegularPages "Params.series_order" 1) "Params.series" "!=" $series }}
+                {{ with index $otherCategorySeries 0 }}
+                    <a href="{{ .RelPermalink }}" class="series-navigation__prev">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>{{ .Title }}</span>
+                    </a>
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        
+        {{ if lt $seriesOrder $seriesCount }}
+            <!-- 查找下一篇文章 (同系列) -->
+            {{ $nextPost := where (where .Site.RegularPages "Params.series" $series) "Params.series_order" (add $seriesOrder 1) }}
+            {{ with index $nextPost 0 }}
+                <a href="{{ .RelPermalink }}" class="series-navigation__next">
+                    <span>{{ .Title }}</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            {{ end }}
+        {{ else }}
+            <!-- 查找其他系列的第一篇文章 (同分類) -->
+            {{ $otherSeries := where (where (where .Site.RegularPages "Params.category" $category) "Params.series_order" 1) "Params.series" "!=" $series }}
+            {{ with index $otherSeries 0 }}
+                <a href="{{ .RelPermalink }}" class="series-navigation__next">
+                    <span>{{ .Title }}</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            {{ else }}
+                <!-- 查找其他分類的系列第一篇文章 -->
+                {{ $otherCategorySeries := where (where .Site.RegularPages "Params.series_order" 1) "Params.series" "!=" $series }}
+                {{ with index $otherCategorySeries 0 }}
+                    <a href="{{ .RelPermalink }}" class="series-navigation__next">
+                        <span>{{ .Title }}</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    </div>
+    
+    <!-- 查找系列第一篇文章 -->
+    {{ $firstPost := index (where (where .Site.RegularPages "Params.series" $series) "Params.series_order" 1) 0 }}
+    {{ with $firstPost }}
+        <a href="{{ .RelPermalink }}" class="series-navigation__all">查看完整系列</a>
+    {{ end }}
+</div>
+{{ else }}
+<!-- 非系列文章的導航 -->
+<div class="article-navigation">
+    <div class="article-navigation__links">
+        {{ with .PrevInSection }}
+            <a href="{{ .RelPermalink }}" class="article-navigation__prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>{{ .Title }}</span>
+            </a>
+        {{ end }}
+        
+        {{ with .NextInSection }}
+            <a href="{{ .RelPermalink }}" class="article-navigation__next">
+                <span>{{ .Title }}</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

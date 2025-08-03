@@ -1,0 +1,85 @@
+{{ define "main" }}
+<main class="main list" role="main">
+  <div class="content">
+    <header class="page-header">
+      <h1 class="page-header__title">{{ .Title }}</h1>
+    </header>
+    
+    {{ with .Content }}
+    <div class="page-content">
+      {{ . }}
+    </div>
+    {{ end }}
+    
+    <div class="search-container">
+      <input type="text" id="video-search" class="search-input" placeholder="搜尋影片..." aria-label="搜尋影片">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    
+    <div class="category-filter">
+      <span class="filter-label">分類篩選:</span>
+      <a href="{{ .RelPermalink }}" class="filter-item {{ if eq .RelPermalink .CurrentSection.RelPermalink }}active{{ end }}">全部</a>
+      {{ range .Sections }}
+      <a href="{{ .RelPermalink }}" class="filter-item {{ if eq .RelPermalink $.Permalink }}active{{ end }}">{{ .Title }}</a>
+      {{ end }}
+    </div>
+    
+    <div class="videos-list">
+      {{ $paginator := .Paginate (where .Pages "Type" "videos") }}
+      {{ range $paginator.Pages }}
+        {{ partial "videos/card.html" . }}
+      {{ end }}
+    </div>
+    
+    {{ partial "pagination.html" . }}
+  </div>
+  
+  {{ partial "sidebar.html" . }}
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('video-search');
+  const searchResults = document.getElementById('search-results');
+  const videosList = document.querySelector('.videos-list');
+  
+  // 簡化版前端搜尋功能
+  searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    
+    if (query.length < 2) {
+      searchResults.style.display = 'none';
+      videosList.style.display = 'block';
+      return;
+    }
+    
+    // 這裡將來整合 Fuse.js 搜尋
+    // 目前先實現簡單的前端篩選
+    const videos = document.querySelectorAll('.video-card');
+    let results = [];
+    
+    videos.forEach(video => {
+      const title = video.querySelector('.video-title').textContent.toLowerCase();
+      const description = video.querySelector('.video-description').textContent.toLowerCase();
+      
+      if (title.includes(query) || description.includes(query)) {
+        results.push(video.cloneNode(true));
+      }
+    });
+    
+    if (results.length > 0) {
+      searchResults.innerHTML = '';
+      results.forEach(result => {
+        searchResults.appendChild(result);
+      });
+      searchResults.style.display = 'block';
+      videosList.style.display = 'none';
+    } else {
+      searchResults.innerHTML = '<div class="no-results">沒有找到相關影片</div>';
+      searchResults.style.display = 'block';
+      videosList.style.display = 'none';
+    }
+  });
+});
+</script>
+{{ end }}

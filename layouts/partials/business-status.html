@@ -1,0 +1,187 @@
+<!-- 營業狀態顯示模板 -->
+<div class="business-status-container">
+  <div class="business-status" id="business-status">
+    <div class="status-indicator">
+      <span class="status-dot" id="status-dot"></span>
+      <span class="status-text" id="status-text">載入中...</span>
+    </div>
+    <div class="business-hours">
+      <p>營業時間：週一至週五 08:30–12:30、13:30–17:30</p>
+      <p>週末及國定假日休息</p>
+    </div>
+    <div class="next-status" id="next-status"></div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 初始化
+    updateBusinessStatus();
+    
+    // 每分鐘更新一次
+    setInterval(updateBusinessStatus, 60000);
+    
+    /**
+     * 更新營業狀態
+     */
+    function updateBusinessStatus() {
+      // 獲取台北時間
+      const now = new Date();
+      const taipeiTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Taipei' }));
+      
+      // 檢查是否為工作日（週一至週五）
+      const day = taipeiTime.getDay();
+      const isWeekday = day >= 1 && day <= 5;
+      
+      // 檢查是否在營業時間內
+      const hour = taipeiTime.getHours();
+      const minute = taipeiTime.getMinutes();
+      const currentTime = hour * 60 + minute;
+      
+      // 早上營業時間：8:30-12:30 (510-750分鐘)
+      const morningStart = 8 * 60 + 30;
+      const morningEnd = 12 * 60 + 30;
+      
+      // 下午營業時間：13:30-17:30 (810-1050分鐘)
+      const afternoonStart = 13 * 60 + 30;
+      const afternoonEnd = 17 * 60 + 30;
+      
+      // 判斷是否營業中
+      let isOpen = isWeekday && (
+        (currentTime >= morningStart && currentTime < morningEnd) || 
+        (currentTime >= afternoonStart && currentTime < afternoonEnd)
+      );
+      
+      // 檢查是否為國定假日（從API獲取）
+      checkHoliday(taipeiTime).then(holidayInfo => {
+        // 如果是假日但標記為工作日，則覆蓋週末設定
+        if (holidayInfo.isHoliday && holidayInfo.isWorkingDay) {
+          isOpen = (currentTime >= morningStart && currentTime < morningEnd) || 
+                  (currentTime >= afternoonStart && currentTime < afternoonEnd);
+        } 
+        // 如果是假日且不是工作日，則一定休息
+        else if (holidayInfo.isHoliday && !holidayInfo.isWorkingDay) {
+          isOpen = false;
+        }
+        
+        // 更新UI
+        updateStatusUI(isOpen, taipeiTime, holidayInfo);
+      }).catch(error => {
+        console.error('獲取假日資訊失敗:', error);
+        // 發生錯誤時，使用預設邏輯
+        updateStatusUI(isOpen, taipeiTime, { isHoliday: false, holidayName: '' });
+      });
+    }
+    
+    /**
+     * 檢查是否為假日
+     * @param {Date} date - 要檢查的日期
+     * @returns {Promise} 假日資訊
+     */
+    async function checkHoliday(date) {
+      try {
+        // 格式化日期為YYYY-MM-DD
+        const dateString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+        
+        // 調用API
+        const response = await fetch(`/api/business-status?date=${dateString}`);
+        
+        if (!response.ok) {
+          throw new Error('API請求失敗');
+        }
+        
+        const data = await response.json();
+        
+        return {
+          isHoliday: data.isHoliday,
+          holidayName: data.holidayName || '',
+          isWorkingDay: data.isWorkingDay || false
+        };
+      } catch (error) {
+        console.error('檢查假日失敗:', error);
+        return {
+          isHoliday: false,
+          holidayName: '',
+          isWorkingDay: false
+        };
+      }
+    }
+    
+    /**
+     * 更新狀態UI
+     * @param {boolean} isOpen - 是否營業中
+     * @param {Date} taipeiTime - 台北時間
+     * @param {Object} holidayInfo - 假日資訊
+     */
+    function updateStatusUI(isOpen, taipeiTime, holidayInfo) {
+      const statusDot = document.getElementById('status-dot');
+      const statusText = document.getElementById('status-text');
+      const nextStatus = document.getElementById('next-status');
+      
+      if (isOpen) {
+        // 營業中
+        statusDot.classList.add('open');
+        statusDot.classList.remove('closed');
+        statusText.textContent = '營業中';
+        
+        // 計算下次關閉時間
+        const hour = taipeiTime.getHours();
+        const minute = taipeiTime.getMinutes();
+        const currentTime = hour * 60 + minute;
+        
+        if (currentTime < 12 * 60 + 30) {
+          // 早上營業，下次關閉時間為12:30
+          nextStatus.textContent = '今日12:30休息，13:30重新營業';
+        } else {
+          // 下午營業，下次關閉時間為17:30
+          nextStatus.textContent = '今日17:30結束營業，明日8:30重新營業';
+        }
+      } else {
+        // 休息中
+        statusDot.classList.add('closed');
+        statusDot.classList.remove('open');
+        statusText.textContent = '休息中';
+        
+        // 計算下次開放時間
+        const day = taipeiTime.getDay();
+        const hour = taipeiTime.getHours();
+        const minute = taipeiTime.getMinutes();
+        const currentTime = hour * 60 + minute;
+        
+        if (day >= 1 && day <= 5) {
+          // 平日
+          if (currentTime < 8 * 60 + 30) {
+            // 早上開始前
+            nextStatus.textContent = '今日8:30開始營業';
+          } else if (currentTime >= 12 * 60 + 30 && currentTime < 13 * 60 + 30) {
+            // 午休時間
+            nextStatus.textContent = '今日13:30重新營業';
+          } else {
+            // 下班後
+            if (day === 5) {
+              // 週五，下次開放時間為下週一
+              nextStatus.textContent = '下週一8:30重新營業';
+            } else {
+              // 其他平日，下次開放時間為明天
+              nextStatus.textContent = '明日8:30重新營業';
+            }
+          }
+        } else {
+          // 週末
+          if (day === 6) {
+            // 週六，下次開放時間為下週一
+            nextStatus.textContent = '下週一8:30重新營業';
+          } else {
+            // 週日，下次開放時間為明天
+            nextStatus.textContent = '明日8:30重新營業';
+          }
+        }
+        
+        // 如果是假日，顯示假日名稱
+        if (holidayInfo.isHoliday) {
+          statusText.textContent = `休息中 (${holidayInfo.holidayName})`;
+        }
+      }
+    }
+  });
+</script>

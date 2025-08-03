@@ -1,0 +1,31 @@
+{{/* 
+  Progressive Image Shortcode
+  
+  Usage:
+  {{< progressive-image src="path/to/image.webp" placeholder="path/to/placeholder.webp" alt="Alt text" class="optional-class" >}}
+  
+  Parameters:
+  - src: The source path to the full image (required)
+  - placeholder: The source path to the placeholder image (required)
+  - alt: The alt text for the image (required)
+  - class: Additional CSS classes (optional)
+*/}}
+
+{{ $src := .Get "src" }}
+{{ $placeholder := .Get "placeholder" }}
+{{ $alt := .Get "alt" }}
+{{ $class := .Get "class" }}
+
+<div class="progressive-image {{ $class }}">
+  <img 
+    src="{{ $placeholder }}" 
+    alt="{{ $alt }}" 
+    class="placeholder-image"
+  >
+  <img 
+    src="{{ $src }}" 
+    alt="{{ $alt }}" 
+    class="full-image" 
+    loading="lazy"
+  >
+</div>

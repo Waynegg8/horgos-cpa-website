@@ -1,0 +1,29 @@
+{{/* ARIA標籤模板 */}}
+
+{{/* 主要區域ARIA標籤 */}}
+<div class="sr-only" id="aria-main-desc">網站主要內容區域</div>
+<div class="sr-only" id="aria-nav-desc">網站主要導航選單</div>
+<div class="sr-only" id="aria-search-desc">搜尋網站內容</div>
+<div class="sr-only" id="aria-footer-desc">網站頁腳區域，包含聯絡資訊和快速連結</div>
+
+{{/* 無障礙鍵盤快速鍵說明 */}}
+<div class="sr-only" id="aria-keyboard-shortcuts">
+  <h2>鍵盤快速鍵</h2>
+  <ul>
+    <li>Alt+1: 跳至主要內容</li>
+    <li>Alt+2: 跳至主導航</li>
+    <li>Alt+3: 跳至搜尋框</li>
+    <li>Alt+4: 跳至頁腳</li>
+    <li>按 / 鍵: 聚焦搜尋框</li>
+    <li>Tab: 在頁面元素間移動焦點</li>
+    <li>Shift+Tab: 反向移動焦點</li>
+    <li>Enter/Space: 啟動按鈕或連結</li>
+    <li>Esc: 關閉對話框或選單</li>
+  </ul>
+</div>
+
+{{/* 動態內容更新區域 */}}
+<div aria-live="polite" id="aria-live-region" class="sr-only"></div>
+
+{{/* 錯誤訊息區域 */}}
+<div aria-live="assertive" id="aria-error-region" class="sr-only"></div>

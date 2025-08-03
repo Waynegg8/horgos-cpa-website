@@ -1,0 +1,133 @@
+/* 按鈕樣式 */
+
+/* 基本按鈕 */
+.btn {
+  @include button-base;
+  font-weight: $font-weight-medium;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.5;
+  font-size: $font-size-base;
+  min-height: 44px;
+  min-width: 100px;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+/* 主要按鈕 - 立即預約諮詢 */
+.btn-primary {
+  background-color: $color-primary;
+  color: white;
+  
+  &:hover, &:focus {
+    background-color: darken-color($color-primary, 10%);
+    color: white;
+  }
+  
+  &:active {
+    background-color: darken-color($color-primary, 15%);
+  }
+}
+
+/* 次要按鈕 - 加入Line諮詢 */
+.btn-secondary {
+  background-color: #00B900; // LINE品牌綠色
+  color: white;
+  
+  &:hover, &:focus {
+    background-color: darken-color(#00B900, 10%);
+    color: white;
+  }
+  
+  &:active {
+    background-color: darken-color(#00B900, 15%);
+  }
+}
+
+/* 輪廓按鈕 */
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid $color-primary;
+  color: $color-primary;
+  
+  &:hover, &:focus {
+    background-color: $color-primary;
+    color: white;
+  }
+  
+  &:active {
+    background-color: darken-color($color-primary, 10%);
+    border-color: darken-color($color-primary, 10%);
+  }
+}
+
+/* 文字按鈕 */
+.btn-text {
+  background-color: transparent;
+  color: $color-primary;
+  padding: $spacing-2;
+  min-width: auto;
+  
+  &:hover, &:focus {
+    color: $color-secondary;
+    background-color: rgba($color-primary, 0.05);
+  }
+}
+
+/* 按鈕尺寸 */
+.btn-sm {
+  padding: $spacing-1 $spacing-3;
+  font-size: $font-size-sm;
+  min-height: 32px;
+  min-width: 80px;
+}
+
+.btn-lg {
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-lg;
+  min-height: 52px;
+  min-width: 120px;
+}
+
+/* 全寬按鈕 */
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+/* 帶圖示的按鈕 */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  i, svg {
+    margin-right: $spacing-2;
+  }
+  
+  &.icon-right {
+    i, svg {
+      margin-right: 0;
+      margin-left: $spacing-2;
+    }
+  }
+}
+
+/* 按鈕群組 */
+.btn-group {
+  display: flex;
+  gap: $spacing-4;
+  
+  @include mobile {
+    flex-direction: column;
+    width: 100%;
+    
+    .btn {
+      width: 100%;
+    }
+  }
+}

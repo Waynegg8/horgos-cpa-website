@@ -1,4 +1,14 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://hugo-accounting.com/sitemap.xml
+
+# 禁止爬取管理介面
+User-agent: *
+Disallow: /admin/
+Disallow: /admin/*
+
+# 禁止爬取隱私政策和Cookies政策的打印版本
+User-agent: *
+Disallow: /privacy-policy/print/
+Disallow: /cookies-policy/print/

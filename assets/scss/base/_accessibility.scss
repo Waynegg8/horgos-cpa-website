@@ -1,0 +1,90 @@
+/* 無障礙樣式 */
+
+/* 跳過導航連結 */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background-color: $color-primary;
+  color: white;
+  padding: $spacing-2 $spacing-4;
+  z-index: z('header') + 1;
+  transition: top 0.3s;
+  
+  &:focus {
+    top: 0;
+    outline: none;
+  }
+}
+
+/* 鍵盤焦點樣式 */
+:focus {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+/* 滑鼠用戶焦點樣式 */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* 鍵盤用戶焦點樣式 */
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+/* 螢幕閱讀器專用文字 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* 螢幕閱讀器專用文字（可聚焦時顯示） */
+.sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* 高對比模式適配 */
+@media (forced-colors: active) {
+  button, a {
+    border: 1px solid ButtonText;
+  }
+  
+  img {
+    forced-color-adjust: none;
+  }
+}
+
+/* 減少動畫模式適配 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ARIA 活動區域 */
+[aria-live="polite"],
+[aria-live="assertive"] {
+  position: relative;
+}

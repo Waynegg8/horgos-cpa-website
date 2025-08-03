@@ -1,0 +1,231 @@
+baseURL = "https://hugo-accounting.com/"
+title = "Hugo會計師事務所"
+languageCode = "zh-tw"
+defaultContentLanguage = "zh-tw"
+hasCJKLanguage = true
+theme = "mainroad"
+paginate = 10
+enableEmoji = true
+enableRobotsTXT = true
+disqusShortname = "hugo-accounting"
+googleAnalytics = "G-XXXXXXXXXX" # 需要替換為實際的 GA4 ID
+
+[Author]
+  name = "Hugo會計師事務所"
+  bio = "專業會計師事務所，提供工商登記、稅務申報、財稅簽證和諮詢服務"
+  avatar = "img/logo.webp"
+
+[Params]
+  description = "Hugo會計師事務所提供專業的會計、稅務和工商登記服務，協助企業合規經營並優化稅務規劃。"
+  copyright = "Hugo會計師事務所"
+  opengraph = true
+  schema = true
+  twitter_cards = true
+  readmore = true
+  authorbox = false
+  toc = true
+  pager = true
+  post_meta = ["date", "categories", "tags"]
+  mainSections = ["articles", "videos", "faq", "downloads"]
+  dateformat = "2006-01-02"
+  mathjax = false
+  customCSS = ["css/custom.css"]
+  customJS = ["js/custom.js"]
+
+[Params.logo]
+  image = "img/logo.webp"
+  title = "Hugo會計師事務所"
+  subtitle = "專業會計服務，值得信賴"
+
+[Params.sidebar]
+  home = "right"
+  list = "right"
+  single = "right"
+  widgets = ["search", "recent", "categories", "taglist", "social"]
+
+[Params.widgets]
+  recent_num = 5
+  categories_counter = true
+  tags_counter = true
+
+[Params.widgets.social]
+  facebook = "hugo.accounting"
+  instagram = "hugo.accounting"
+  line = "@hugo.accounting"
+  email = "contact@hugo-accounting.com"
+
+[menu]
+  [[menu.main]]
+    name = "首頁"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    name = "關於我們"
+    url = "/about/"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "services"
+    name = "服務項目"
+    weight = 3
+
+  [[menu.main]]
+    parent = "services"
+    name = "工商登記"
+    url = "/services/business-registration/"
+    weight = 1
+
+  [[menu.main]]
+    parent = "services"
+    name = "稅務申報"
+    url = "/services/tax-filing/"
+    weight = 2
+
+  [[menu.main]]
+    parent = "services"
+    name = "財稅簽證"
+    url = "/services/audit-services/"
+    weight = 3
+
+  [[menu.main]]
+    parent = "services"
+    name = "諮詢服務"
+    url = "/services/consulting/"
+    weight = 4
+
+  [[menu.main]]
+    identifier = "articles"
+    name = "知識文章"
+    weight = 4
+
+  [[menu.main]]
+    parent = "articles"
+    name = "創業教室"
+    url = "/articles/startup-guide/"
+    weight = 1
+
+  [[menu.main]]
+    parent = "articles"
+    name = "稅務指南"
+    url = "/articles/tax-planning/"
+    weight = 2
+
+  [[menu.main]]
+    parent = "articles"
+    name = "會計實務"
+    url = "/articles/accounting-basics/"
+    weight = 3
+
+  [[menu.main]]
+    parent = "articles"
+    name = "法規更新"
+    url = "/articles/legal-updates/"
+    weight = 4
+
+  [[menu.main]]
+    identifier = "videos"
+    name = "影音專區"
+    weight = 5
+
+  [[menu.main]]
+    parent = "videos"
+    name = "熱門影片"
+    url = "/videos/popular/"
+    weight = 1
+
+  [[menu.main]]
+    parent = "videos"
+    name = "教學影片"
+    url = "/videos/tutorials/"
+    weight = 2
+
+  [[menu.main]]
+    parent = "videos"
+    name = "案例分享"
+    url = "/videos/case-studies/"
+    weight = 3
+
+  [[menu.main]]
+    parent = "videos"
+    name = "法規解說"
+    url = "/videos/legal-explanation/"
+    weight = 4
+
+  [[menu.main]]
+    identifier = "faq"
+    name = "常見問題"
+    weight = 6
+
+  [[menu.main]]
+    parent = "faq"
+    name = "創業問題"
+    url = "/faq/startup/"
+    weight = 1
+
+  [[menu.main]]
+    parent = "faq"
+    name = "稅務問題"
+    url = "/faq/tax/"
+    weight = 2
+
+  [[menu.main]]
+    parent = "faq"
+    name = "記帳問題"
+    url = "/faq/accounting/"
+    weight = 3
+
+  [[menu.main]]
+    parent = "faq"
+    name = "其他問題"
+    url = "/faq/others/"
+    weight = 4
+
+  [[menu.main]]
+    identifier = "downloads"
+    name = "下載專區"
+    weight = 7
+
+  [[menu.main]]
+    parent = "downloads"
+    name = "範本下載"
+    url = "/downloads/templates/"
+    weight = 1
+
+  [[menu.main]]
+    parent = "downloads"
+    name = "表格下載"
+    url = "/downloads/forms/"
+    weight = 2
+
+  [[menu.main]]
+    parent = "downloads"
+    name = "檢查清單"
+    url = "/downloads/checklists/"
+    weight = 3
+
+  [[menu.main]]
+    parent = "downloads"
+    name = "法規文件"
+    url = "/downloads/regulations/"
+    weight = 4
+
+  [[menu.main]]
+    name = "聯絡我們"
+    url = "/contact/"
+    weight = 8
+
+  [[menu.main]]
+    name = "預約諮詢"
+    url = "/appointment/"
+    weight = 9
+
+  [[menu.footer]]
+    name = "隱私權政策"
+    url = "/privacy-policy/"
+    weight = 1
+
+  [[menu.footer]]
+    name = "Cookies政策"
+    url = "/cookies-policy/"
+    weight = 2

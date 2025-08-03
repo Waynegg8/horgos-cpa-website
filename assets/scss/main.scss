@@ -1,0 +1,31 @@
+// 主SCSS文件 - 匯入所有子文件
+
+// 工具類
+@import "utils/variables";
+@import "utils/mixins";
+@import "utils/functions";
+
+// 基礎樣式
+@import "base/reset";
+@import "base/typography";
+@import "base/accessibility";
+
+// 布局
+@import "layouts/layout";
+@import "layouts/navigation";
+@import "layouts/footer";
+
+// 元件
+@import "components/buttons";
+@import "components/cards";
+@import "components/forms";
+@import "components/search";
+@import "components/toc";
+@import "components/loading";
+
+// 頁面特定樣式
+@import "pages/articles";
+@import "pages/contact";
+@import "pages/services";
+@import "pages/about";
+@import "pages/videos";

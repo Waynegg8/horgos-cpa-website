@@ -1,0 +1,32 @@
+{{ $youtube_id := .Params.youtube_id }}
+{{ $vimeo_id := .Params.vimeo_id }}
+
+<div class="video-player-container">
+  {{ if $youtube_id }}
+    <div class="video-responsive">
+      <iframe 
+        src="https://www.youtube.com/embed/{{ $youtube_id }}" 
+        title="{{ .Title }}"
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+  {{ else if $vimeo_id }}
+    <div class="video-responsive">
+      <iframe 
+        src="https://player.vimeo.com/video/{{ $vimeo_id }}" 
+        title="{{ .Title }}"
+        frameborder="0" 
+        allow="autoplay; fullscreen; picture-in-picture" 
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+  {{ else }}
+    <div class="video-placeholder">
+      <p>影片載入中...</p>
+    </div>
+  {{ end }}
+</div>

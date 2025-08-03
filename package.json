@@ -1,28 +1,25 @@
 {
-  "name": "hugo-accounting-site",
+  "name": "hugo-accounting",
   "version": "1.0.0",
-  "description": "Hugo 蘋果風格會計事務所網站",
+  "description": "Hugo會計事務所網站",
   "scripts": {
-    "dev": "hugo server -D --disableFastRender",
+    "dev": "hugo server -D",
     "build": "hugo --minify",
-    "preview": "hugo server --minify --disableFastRender",
-    "clean": "rm -rf public resources",
-    "lint": "htmlhint public/**/*.html",
-    "deploy": "npm run build && wrangler pages publish public"
+    "test:performance": "node scripts/performance-test.js",
+    "test:accessibility": "node scripts/accessibility-test.js",
+    "test:final": "node scripts/final-check.js",
+    "test": "npm run test:performance && npm run test:accessibility && npm run test:final",
+    "deploy": "wrangler publish",
+    "clean": "rm -rf public resources"
+  },
+  "dependencies": {
+    "@axe-core/puppeteer": "^4.8.1",
+    "chalk": "^4.1.2",
+    "glob": "^10.3.10",
+    "puppeteer": "^21.6.1"
   },
   "devDependencies": {
-    "htmlhint": "^1.1.4",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.32",
-    "postcss-cli": "^11.0.0"
-  },
-  "keywords": [
-    "hugo",
-    "static-site",
-    "accounting",
-    "taiwan",
-    "apple-style"
-  ],
-  "author": "Your Name",
-  "license": "MIT"
+    "lighthouse": "^11.4.0",
+    "wrangler": "^3.22.1"
+  }
 }
