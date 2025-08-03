@@ -10,6 +10,12 @@ enableEmoji = true
 enableRobotsTXT = true
 googleAnalytics = "G-RKMCS9WVS5"
 
+# 允許 Raw HTML 內容，解決建置警告
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 [Author]
   name = "霍爾果斯會計師事務所"
   bio = "專業會計師事務所，提供工商登記、稅務申報、財稅簽證和諮詢服務"
