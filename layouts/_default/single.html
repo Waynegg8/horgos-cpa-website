@@ -53,17 +53,17 @@
                 <!-- 社群分享功能 -->
                 <div class="article-share">
                     <span class="article-share__title">分享文章：</span>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | safeURL }}" class="article-share__link article-share__link--facebook" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-facebook-f"></i>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | safeURL }}" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f"></i> Facebook
                     </a>
-                    <a href="https://line.me/R/msg/text/?{{ .Title }}%0D%0A{{ .Permalink | safeURL }}" class="article-share__link article-share__link--line" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-line"></i>
+                    <a href="https://line.me/R/msg/text/?{{ .Title }}%0D%0A{{ .Permalink | safeURL }}" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-line"></i> Line
                     </a>
-                    <a href="mailto:?subject={{ .Title }}&body={{ .Permalink | safeURL }}" class="article-share__link article-share__link--email">
-                        <i class="fas fa-envelope"></i>
+                    <a href="mailto:?subject={{ .Title }}&body={{ .Permalink | safeURL }}" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-envelope"></i> Email
                     </a>
-                    <button class="article-share__link article-share__link--copy" data-url="{{ .Permalink | safeURL }}">
-                        <i class="fas fa-link"></i>
+                    <button class="btn btn-secondary btn-sm" data-url="{{ .Permalink | safeURL }}">
+                        <i class="fas fa-link"></i> 複製連結
                     </button>
                 </div>
                 
@@ -73,20 +73,20 @@
                 <!-- 相關文章推薦 -->
                 <div class="article-related">
                     <h3 class="article-related__title">相關文章</h3>
-                    <div class="article-related__list">
+                    <div class="card-deck">
                         {{ $related := .Site.RegularPages.Related . | first 3 }}
                         {{ with $related }}
                         {{ range . }}
-                        <div class="article-related__item">
-                            <a href="{{ .RelPermalink }}" class="article-related__link">
-                                <div class="article-related__image">
-                                    {{ with .Params.cover }}
-                                    <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
-                                    {{ else }}
-                                    <img src="/uploads/images/articles/default-article-thumb.webp" alt="{{ $.Title }}" loading="lazy">
-                                    {{ end }}
+                        <div class="card">
+                            <a href="{{ .RelPermalink }}" class="card-link">
+                                {{ with .Params.cover }}
+                                <img src="{{ . }}" class="card-img-top" alt="{{ $.Title }}" loading="lazy">
+                                {{ else }}
+                                <img src="/uploads/images/articles/default-article-thumb.webp" class="card-img-top" alt="{{ $.Title }}" loading="lazy">
+                                {{ end }}
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ .Title }}</h4>
                                 </div>
-                                <h4 class="article-related__item-title">{{ .Title }}</h4>
                             </a>
                         </div>
                         {{ end }}

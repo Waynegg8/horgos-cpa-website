@@ -18,22 +18,20 @@
                     {{ $currentPage := . }}
                     {{ range .Site.Menus.main }}
                         {{ if .HasChildren }}
-                        <li class="main-nav__item has-dropdown {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
-                            <a href="{{ .URL }}" class="main-nav__link">
+                        <li class="nav-item has-dropdown {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
+                            <a href="{{ .URL }}" class="nav-link">
                                 {{ .Name }}
                                 <i class="fas fa-chevron-down"></i>
                             </a>
-                            <ul class="dropdown-menu">
+                            <div class="dropdown-menu">
                                 {{ range .Children }}
-                                <li class="dropdown-menu__item {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
-                                    <a href="{{ .URL }}" class="dropdown-menu__link">{{ .Name }}</a>
-                                </li>
+                                <a href="{{ .URL }}" class="dropdown-item {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">{{ .Name }}</a>
                                 {{ end }}
-                            </ul>
+                            </div>
                         </li>
                         {{ else }}
-                        <li class="main-nav__item {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
-                            <a href="{{ .URL }}" class="main-nav__link">{{ .Name }}</a>
+                        <li class="nav-item {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+                            <a href="{{ .URL }}" class="nav-link">{{ .Name }}</a>
                         </li>
                         {{ end }}
                     {{ end }}

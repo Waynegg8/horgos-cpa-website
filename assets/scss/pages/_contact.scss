@@ -79,11 +79,11 @@
     margin-right: 0.5rem;
     
     &.open {
-      background-color: $color-success;
+      background-color: $color-status-success;
     }
     
     &.closed {
-      background-color: $color-error;
+      background-color: $color-status-error;
     }
   }
   
@@ -92,11 +92,11 @@
     margin-bottom: 1rem;
     
     &.open {
-      color: $color-success;
+      color: $color-status-success;
     }
     
     &.closed {
-      color: $color-error;
+      color: $color-status-error;
     }
   }
   
@@ -133,7 +133,7 @@
   }
   
   .next-business-day {
-    font-size: $font-size-sm;
+    font-size: $font-size-small;
     color: $color-text-secondary;
   }
 }

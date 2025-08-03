@@ -2,8 +2,8 @@
 
 /* 網站頁腳 */
 .site-footer {
-  background-color: $color-primary;
-  color: white;
+  background-color: $color-bg-secondary;
+  color: $color-text-secondary;
   margin-top: $spacing-16;
   
   @include mobile {
@@ -11,10 +11,10 @@
   }
   
   a {
-    color: rgba(255, 255, 255, 0.9);
+    color: $color-text-secondary;
     
     &:hover {
-      color: white;
+      color: $color-text-primary;
       text-decoration: underline;
     }
   }
@@ -41,15 +41,12 @@
     }
   }
   
-  &__heading {
+  .footer-heading {
     font-size: $font-size-lg;
+    color: $color-text-primary;
     margin-bottom: $spacing-4;
     padding-bottom: $spacing-2;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    
-    i {
-      margin-right: $spacing-2;
-    }
+    border-bottom: 1px solid $color-border-primary;
   }
   
   &__logo-section {
@@ -65,12 +62,12 @@
   }
   
   &__seo-text {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: $font-size-sm;
-    line-height: $line-height-lg;
+    color: $color-text-secondary;
+    font-size: $font-size-small;
+    line-height: $line-height-base;
   }
   
-  &__info-list {
+  .footer-info-list {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -83,7 +80,7 @@
       i {
         margin-right: $spacing-2;
         margin-top: 0.25em;
-        color: rgba(255, 255, 255, 0.8);
+        color: $color-text-secondary;
       }
     }
   }
@@ -102,11 +99,11 @@
       margin-right: $spacing-2;
       
       &.status-open {
-        background-color: $color-success;
+        background-color: $color-status-success;
       }
       
       &.status-closed {
-        background-color: $color-error;
+        background-color: $color-status-error;
       }
     }
   }
@@ -123,12 +120,12 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: lighten($color-bg-secondary, 5%);
       transition: transform $transition-base, background-color $transition-base;
       
       &:hover {
         transform: scale(1.1);
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: lighten($color-bg-secondary, 10%);
       }
       
       &.facebook:hover {
@@ -144,12 +141,12 @@
       }
       
       &.email:hover {
-        background-color: $color-secondary;
+        background-color: $color-accent-highlight;
       }
     }
   }
   
-  &__links {
+  .footer-links {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -161,18 +158,14 @@
     a {
       display: block;
       padding: $spacing-1 0;
-      
-      i {
-        margin-right: $spacing-2;
-        font-size: 0.8em;
-      }
     }
   }
   
   &__bottom {
-    background-color: darken($color-primary, 10%);
+    background-color: $color-bg-primary;
     padding: $spacing-4 0;
-    font-size: $font-size-sm;
+    font-size: $font-size-small;
+    border-top: 1px solid $color-border-primary;
     
     .container {
       display: flex;
@@ -188,21 +181,21 @@
   }
   
   &__copyright {
-    color: rgba(255, 255, 255, 0.8);
+    color: $color-text-secondary;
   }
   
   &__legal-links {
     a {
-      color: rgba(255, 255, 255, 0.8);
+      color: $color-text-secondary;
       
       &:hover {
-        color: white;
+        color: $color-text-primary;
       }
     }
     
     .separator {
       margin: 0 $spacing-2;
-      color: rgba(255, 255, 255, 0.5);
+      color: $color-text-tertiary;
     }
   }
 }
