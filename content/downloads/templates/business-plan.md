@@ -8,8 +8,8 @@ file_type: "docx"
 file_size: "1.2 MB"
 last_updated: "2024-05-15"
 download_link: "/uploads/files/templates-business-plan.docx"
-seo_title: "創業計畫書範本下載 - Hugo會計事務所"
-seo_description: "免費下載專業創業計畫書範本，包含完整的市場分析、財務預測和風險評估章節，幫助創業者規劃成功的創業藍圖。立即下載 https://hugo-accounting.com/downloads/templates/business-plan/"
+seo_title: "創業計畫書範本下載 - 霍爾果斯會計師事務所"
+seo_description: "免費下載專業創業計畫書範本，包含完整的市場分析、財務預測和風險評估章節，幫助創業者規劃成功的創業藍圖。立即下載 https://horgoscpa.com/downloads/templates/business-plan/"
 draft: false
 ---
 

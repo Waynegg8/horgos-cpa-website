@@ -134,6 +134,12 @@
     {{ $backToTopScript := resources.Get "js/components/back-to-top.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $backToTopScript.RelPermalink }}"></script>
     
+    <!-- Hero 輪播功能 (僅首頁) -->
+    {{ if .IsHome }}
+    {{ $heroCarouselScript := resources.Get "js/components/hero-carousel.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $heroCarouselScript.RelPermalink }}"></script>
+    {{ end }}
+    
     {{ if or (eq .Section "articles") (eq .Section "videos") (eq .Section "faq") (eq .Section "downloads") }}
     {{ $searchScript := resources.Get "js/components/search.js" | resources.Minify | resources.Fingerprint }}
     <script src="{{ $searchScript.RelPermalink }}"></script>
