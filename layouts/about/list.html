@@ -18,126 +18,64 @@
         <!-- 團隊介紹區域 -->
         <section class="team-section">
             <h2 class="section-title">我們的團隊</h2>
-            
             <div class="team-members">
-                <!-- 團隊成員 1 -->
-                <div class="team-member">
+                {{ range $index, $member := .Site.Data.team }}
+                <div class="team-member {{ if (modBool $index 2) }}even{{ else }}odd{{ end }}">
                     <div class="team-member__image">
-                        <img src="/uploads/images/team/team-accountant-liu.jpg" alt="劉韋辰會計師" loading="lazy">
+                        <img src="{{ $member.image | relURL }}" alt="{{ $member.name }}" loading="lazy">
                     </div>
                     <div class="team-member__info">
-                        <h3 class="team-member__name">劉韋辰會計師</h3>
-                        <div class="team-member__title">稅務規劃與企業顧問專家</div>
-                        
+                        <h3 class="team-member__name">{{ $member.name }}</h3>
+                        <div class="team-member__title">{{ $member.title }}</div>
                         <div class="team-member__details">
+                            {{ with $member.education }}
                             <div class="team-member__education">
-                                <h4>學歷</h4>
+                                <h4>{{ .title }}</h4>
                                 <ul>
-                                    <li>德克薩斯大學達拉斯分校 會計學碩士</li>
-                                    <li>國立成功大學 會計學學士</li>
+                                    {{ range .items }}
+                                    <li>{{ . }}</li>
+                                    {{ end }}
                                 </ul>
                             </div>
-                            
+                            {{ end }}
+                            {{ with $member.certificates }}
                             <div class="team-member__certificates">
-                                <h4>專業證照與職務</h4>
+                                <h4>{{ .title }}</h4>
                                 <ul>
-                                    <li>中華民國高考會計師</li>
-                                    <li>美國會計師執照(AICPA)</li>
-                                    <li>中華民國會計師公會全國聯合會國際事務委員會委員</li>
-                                    <li>法院檢查人</li>
+                                    {{ range .items }}
+                                    <li>{{ . }}</li>
+                                    {{ end }}
                                 </ul>
                             </div>
-                            
+                            {{ end }}
+                            {{ with $member.expertise }}
                             <div class="team-member__expertise">
-                                <h4>專長領域</h4>
+                                <h4>{{ .title }}</h4>
                                 <div class="skill-tags">
-                                    <span class="skill-tag">稅務規劃</span>
-                                    <span class="skill-tag">工商登記</span>
-                                    <span class="skill-tag">法院檢查人</span>
-                                    <span class="skill-tag">製造業</span>
-                                    <span class="skill-tag">買賣業</span>
-                                    <span class="skill-tag">行號登記</span>
-                                    <span class="skill-tag">營所稅</span>
-                                    <span class="skill-tag">家族傳承</span>
+                                    {{ range .tags }}
+                                    <span class="skill-tag">{{ . }}</span>
+                                    {{ end }}
                                 </div>
                             </div>
+                            {{ end }}
                         </div>
-                        
-                        <p class="team-member__bio">
-                            專精於製造業、買賣業、服務業與科技業等各行業的稅務規劃與申報，包括公司、行號、個人獨資與合夥等各類組織型態。深入了解不同產業特性，提供營業稅申報與減免、營所稅節稅方案、稅務行政救濟、未分配盈餘與房地合一稅等全方位稅務服務。協助客戶進行投資架構規劃、股東借貸處理及關係企業交易審視，設計最佳化稅務解決方案。提供工商登記、財務報表查核簽證與稅務簽證，確保企業財務運作符合法規要求。擔任法院檢查人，運用財務分析專業，協助企業股東了解公司真實財務狀況及營運績效。具備家族傳承規劃經驗，針對不同產業特性提供量身定制的資產配置建議。職業生涯橫跨多家知名機構，曾任職台達電子，並在深圳安永華明會計師事務所參與電信、媒體與科技產業上市審計，在勤業眾信與廉風聯合會計師事務所累積多年審計經驗，了解各行各業的財稅需求與挑戰，能為不同規模與產業的企業提供最適切的專業服務。
-                        </p>
+                        <p class="team-member__bio">{{ $member.bio | markdownify }}</p>
                     </div>
                 </div>
-                
-                <!-- 團隊成員 2 -->
-                <div class="team-member even">
-                    <div class="team-member__info">
-                        <h3 class="team-member__name">田稚萱協理</h3>
-                        <div class="team-member__title">企業財務顧問</div>
-                        
-                        <div class="team-member__details">
-                            <div class="team-member__education">
-                                <h4>學歷</h4>
-                                <ul>
-                                    <li>國立政治大學 會計學博士班</li>
-                                    <li>香港中文大學 理學碩士</li>
-                                    <li>北京交通大學 會計學學士</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="team-member__certificates">
-                                <h4>專業經歷</h4>
-                            </div>
-                            
-                            <div class="team-member__expertise">
-                                <h4>專長領域</h4>
-                                <div class="skill-tags">
-                                    <span class="skill-tag">工商登記</span>
-                                    <span class="skill-tag">金融業</span>
-                                    <span class="skill-tag">科技業</span>
-                                    <span class="skill-tag">財務規劃</span>
-                                    <span class="skill-tag">籌資方案規劃</span>
-                                    <span class="skill-tag">估值</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <p class="team-member__bio">
-                            具備會計與市場行銷雙學位背景及香港投資銀行多年實務經驗，專長於企業財務規劃、資金運用策略、工商登記、價值評估、公司治理與永續發展制度規劃。針對企業不同成長階段，從企業設立到資本結構優化，協助客戶制定完整的財務策略與方案，提升財務決策效率與透明度。過往長期參與企業籌資、上市與併購相關專案，熟悉資本結構規劃、風險控管與財務資訊揭露。曾參與多宗香港主板上市籌資專案，包括但不限於：宜搜科技（2550.HK）、天圖資本（1973.HK）、匯通達網絡（9878.HK）、諾亞控股（6686.HK）、晶泰科技（2228.HK）等，擁有豐富的跨境籌資與合規經驗。
-                        </p>
-                    </div>
-                    <div class="team-member__image">
-                        <img src="/uploads/images/team/team-accountant-tian.jpg" alt="田稚萱協理" loading="lazy">
-                    </div>
-                </div>
-
+                {{ end }}
             </div>
         </section>
-        
+
         <!-- 專業實力展示 -->
         <section class="strength-section">
             <h2 class="section-title">專業實力</h2>
-            
             <div class="strength-stats">
+                {{ range .Site.Data.strengths }}
                 <div class="strength-stat">
-                    <div class="strength-stat__number">10+</div>
-                    <div class="strength-stat__label">服務年資</div>
+                    <div class="strength-stat__number">{{ .number }}</div>
+                    <div class="strength-stat__label">{{ .label }}</div>
                 </div>
-                
-                <div class="strength-stat">
-                    <div class="strength-stat__number">200+</div>
-                    <div class="strength-stat__label">客戶數量</div>
-                </div>
-                
-                <div class="strength-stat">
-                    <div class="strength-stat__number">2</div>
-                    <div class="strength-stat__label">專業會計師</div>
-                </div>
-                
-                <div class="strength-stat">
-                    <div class="strength-stat__number">5+</div>
-                    <div class="strength-stat__label">專業認證</div>
-                </div>
+                {{ end }}
             </div>
         </section>
     </div>
