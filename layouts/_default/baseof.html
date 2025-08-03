@@ -78,10 +78,46 @@
         </div>
     </div>
     
-    <!-- 回到頂端按鈕 -->
-    <button id="back-to-top" class="back-to-top" aria-label="回到頂端">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <!-- 浮動按鈕組 -->
+    <div class="floating-buttons">
+        <!-- 回到頂端按鈕 -->
+        <button id="back-to-top" class="back-to-top" aria-label="回到頂端">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <!-- 社群媒體按鈕組 -->
+        <div class="social-buttons">
+            <button id="social-toggle" class="social-toggle" aria-label="社群媒體連結" aria-expanded="false">
+                <i class="fas fa-share-alt"></i>
+            </button>
+            
+            <div class="social-buttons__menu" aria-hidden="true">
+                {{ with .Site.Params.widgets.social.line }}
+                <a href="https://line.me/R/ti/p/{{ . }}" class="social-button line" target="_blank" rel="noopener" aria-label="LINE">
+                    <i class="fab fa-line"></i>
+                </a>
+                {{ end }}
+                
+                {{ with .Site.Params.widgets.social.facebook }}
+                <a href="https://facebook.com/{{ . }}" class="social-button facebook" target="_blank" rel="noopener" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                {{ end }}
+                
+                {{ with .Site.Params.widgets.social.instagram }}
+                <a href="https://instagram.com/{{ . }}" class="social-button instagram" target="_blank" rel="noopener" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                {{ end }}
+                
+                {{ with .Site.Params.widgets.social.email }}
+                <a href="mailto:{{ . }}" class="social-button email" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                {{ end }}
+            </div>
+        </div>
+    </div>
     
     <!-- Main JavaScript -->
     {{ $script := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint }}

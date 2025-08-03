@@ -1,9 +1,23 @@
-/* 回到頂端按鈕樣式 */
+/* 浮動按鈕組樣式 */
 
-.back-to-top {
+.floating-buttons {
   position: fixed;
   bottom: $spacing-6;
   right: $spacing-6;
+  z-index: z('floating');
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: $spacing-3;
+  
+  @include mobile {
+    bottom: $spacing-4;
+    right: $spacing-4;
+  }
+}
+
+/* 回到頂端按鈕 */
+.back-to-top {
   width: 3rem;
   height: 3rem;
   border: none;
@@ -12,7 +26,6 @@
   color: white;
   font-size: 1.2rem;
   cursor: pointer;
-  z-index: z('floating');
   display: none;
   align-items: center;
   justify-content: center;
@@ -42,48 +55,148 @@
   @include mobile {
     width: 2.5rem;
     height: 2.5rem;
-    bottom: $spacing-4;
-    right: $spacing-4;
     font-size: 1rem;
   }
+}
+
+/* 社群媒體按鈕組 */
+.social-buttons {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   
-  /* 暗色模式支援 */
-  @media (prefers-color-scheme: dark) {
-    background-color: $color-secondary;
+  &__menu {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: $spacing-2;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all $transition-base;
     
-    &:hover {
-      background-color: lighten($color-secondary, 10%);
+    &.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
   }
 }
 
-/* 回到頂端按鈕動畫 */
+.social-toggle {
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 50%;
+  background-color: $color-accent;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-base;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  
+  &:hover {
+    background-color: darken($color-accent, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+  
+  &.active {
+    background-color: darken($color-accent, 15%);
+    
+    i {
+      transform: rotate(45deg);
+    }
+  }
+  
+  i {
+    transition: transform $transition-base;
+  }
+  
+  @include mobile {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+.social-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all $transition-base;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  color: white;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  &.line {
+    background-color: #00C300;
+    
+    &:hover {
+      background-color: darken(#00C300, 10%);
+    }
+  }
+  
+  &.facebook {
+    background-color: #1877F2;
+    
+    &:hover {
+      background-color: darken(#1877F2, 10%);
+    }
+  }
+  
+  &.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    
+    &:hover {
+      filter: brightness(110%);
+    }
+  }
+  
+  &.email {
+    background-color: #374151;
+    
+    &:hover {
+      background-color: #4B5563;
+    }
+  }
+  
+  @include mobile {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* 動畫效果 */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(1rem);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* 無障礙設計 - 減少動畫偏好 */
-@media (prefers-reduced-motion: reduce) {
-  .back-to-top {
-    transition: none;
-    
-    &.visible {
-      animation: none;
-    }
-  }
-  
-  @keyframes fadeInUp {
-    from,
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 }

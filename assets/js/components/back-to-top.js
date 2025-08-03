@@ -1,10 +1,11 @@
 /**
- * 回到頂端按鈕功能
+ * 浮動按鈕功能（回到頂端 + 社群媒體）
  */
 
 // 當DOM載入完成後執行
 document.addEventListener('DOMContentLoaded', function() {
     initBackToTop();
+    initSocialButtons();
 });
 
 /**
@@ -44,6 +45,56 @@ function initBackToTop() {
                 top: 0,
                 behavior: 'smooth'
             });
+        }
+    });
+}
+
+/**
+ * 初始化社群媒體按鈕
+ */
+function initSocialButtons() {
+    const socialToggle = document.getElementById('social-toggle');
+    const socialMenu = document.querySelector('.social-buttons__menu');
+    
+    if (!socialToggle || !socialMenu) return;
+
+    let isOpen = false;
+
+    // 切換社群媒體選單
+    function toggleSocialMenu() {
+        isOpen = !isOpen;
+        
+        socialToggle.classList.toggle('active', isOpen);
+        socialMenu.classList.toggle('active', isOpen);
+        socialToggle.setAttribute('aria-expanded', isOpen);
+        socialMenu.setAttribute('aria-hidden', !isOpen);
+    }
+
+    // 點擊切換按鈕
+    socialToggle.addEventListener('click', toggleSocialMenu);
+
+    // 鍵盤支援
+    socialToggle.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleSocialMenu();
+        }
+    });
+
+    // 點擊外部關閉選單
+    document.addEventListener('click', function(e) {
+        if (!socialToggle.contains(e.target) && !socialMenu.contains(e.target)) {
+            if (isOpen) {
+                toggleSocialMenu();
+            }
+        }
+    });
+
+    // ESC鍵關閉選單
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isOpen) {
+            toggleSocialMenu();
+            socialToggle.focus();
         }
     });
 }

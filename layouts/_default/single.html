@@ -105,11 +105,42 @@
             </article>
         </div>
         
-        {{ if eq .Section "articles" }}
         <aside class="two-column__sidebar">
-            {{ partial "sidebar/articles-sidebar.html" . }}
+            {{ if eq .Section "articles" }}
+                {{ partial "sidebar/articles-sidebar.html" . }}
+            {{ else if eq .Section "videos" }}
+                {{ partial "sidebar/videos-sidebar.html" . }}
+            {{ else if eq .Section "faq" }}
+                {{ partial "sidebar/faq-sidebar.html" . }}
+            {{ else if eq .Section "downloads" }}
+                {{ partial "sidebar/downloads-sidebar.html" . }}
+            {{ else }}
+                <!-- 一般頁面側邊欄 -->
+                <div class="sidebar-widget">
+                    <h3 class="sidebar-widget__title">目錄</h3>
+                    {{ partial "sidebar/table-of-contents.html" . }}
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3 class="sidebar-widget__title">相關服務</h3>
+                    <ul class="sidebar-links">
+                        <li><a href="/services/business-registration/">工商登記</a></li>
+                        <li><a href="/services/tax-filing/">稅務申報</a></li>
+                        <li><a href="/services/audit-services/">財稅簽證</a></li>
+                        <li><a href="/services/consulting/">諮詢服務</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3 class="sidebar-widget__title">聯絡我們</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> 04-2220-5606</p>
+                        <p><i class="fas fa-envelope"></i> admin@horgoscpa.com</p>
+                        <p><i class="fab fa-line"></i> @208ihted</p>
+                    </div>
+                </div>
+            {{ end }}
         </aside>
-        {{ end }}
     </div>
     
     {{ if eq .Section "services" }}

@@ -34,9 +34,9 @@ googleAnalytics = "G-RKMCS9WVS5"
   customJS = ["js/custom.js"]
 
 [Params.logo]
-  image = "img/logo.webp"
-  title = "Horgoscpa"
-  subtitle = "Professional Accounting Services"
+  image = "/uploads/images/logo.png"
+  title = "霍爾果斯會計師事務所"
+  subtitle = "專業會計稅務服務"
 
 [Params.sidebar]
   home = "right"
