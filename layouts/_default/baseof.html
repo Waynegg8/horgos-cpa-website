@@ -143,6 +143,14 @@
     <!-- 回到頂端按鈕 -->
     {{ $backToTopScript := resources.Get "js/components/back-to-top.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $backToTopScript.RelPermalink }}"></script>
+
+    <!-- Header滾動效果 -->
+    {{ $headerScrollScript := resources.Get "js/components/headerScroll.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $headerScrollScript.RelPermalink }}"></script>
+
+    <!-- 行動版導覽 -->
+    {{ $mobileNavScript := resources.Get "js/components/mobileNav.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $mobileNavScript.RelPermalink }}"></script>
     
     <!-- Hero 輪播功能 (僅首頁) -->
     {{ if .IsHome }}

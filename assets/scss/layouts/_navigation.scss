@@ -1,84 +1,315 @@
-/* 導航樣式 */
+// =============================================================================
+// Site Navigation - Refactored to match Linear.app
+// =============================================================================
 
+// 1. Main Header Styling
+// -----------------------------------------------------------------------------
 .site-header {
-  // ... (保留現有結構)
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 64px; // Standard header height
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  
+  // Scrolled state
+  &.is-scrolled {
+    background-color: rgba(11, 11, 15, 0.8); // #0B0B0F with 80% opacity
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__logo {
+    flex-shrink: 0;
+    a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    img {
+      height: 24px; // Adjust as needed
+      width: auto;
+    }
+    // Simple dark/light mode for logo
+    .logo-dark { display: block; }
+    .logo-light { display: none; }
+    // In a real dark mode scenario, you'd toggle this
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; // Space between buttons
+  }
 }
 
-/* Logo */
-.logo {
-  // ... (保留現有結構)
-}
+// 2. Desktop Navigation
+// -----------------------------------------------------------------------------
+.site-header__nav--desktop {
+  @media (max-width: 992px) {
+    display: none; // Hide on tablets and mobile
+  }
+  
+  .nav-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem; // Space between nav items
+  }
 
-/* 桌面版導航 */
-.desktop-nav {
   .nav-item {
     position: relative;
-    margin: 0 $spacing-3;
   }
 
   .nav-link {
-    display: block;
-    padding: $spacing-3 $spacing-2;
-    color: $color-text-secondary;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem; // 8px 12px
+    color: #A1A1A9; // Secondary text color
     text-decoration: none;
-    transition: color $transition-fast;
+    font-size: 0.9375rem; // 15px
+    font-weight: 500;
+    border-radius: 6px;
+    transition: color 0.2s ease, background-color 0.2s ease;
 
     &:hover {
-      color: $color-text-primary;
+      color: #FFFFFF;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    &__icon {
+      margin-left: 0.25rem;
+      transition: transform 0.2s ease;
+    }
+  }
+  
+  // Active state for current page
+  .nav-item.is-active > .nav-link {
+    color: #FFFFFF;
+  }
+
+  // Dropdown-specific adjustments
+  .has-dropdown:hover {
+    .nav-link {
+      color: #FFFFFF;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .nav-link__icon {
+      transform: rotate(180deg);
+    }
+    .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
   }
 }
 
-/* 下拉選單 - 蘋果風格設計 (來自 STYLE_GUIDE.md) */
-.has-dropdown {
-  position: relative;
+// 4. Dropdown Menu
+// -----------------------------------------------------------------------------
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px); // Position below the nav-item with 8px gap
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 220px;
+  background: #1A1A1F; // Slightly lighter than body
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem; // 8px
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  z-index: 1001;
 
-  .dropdown-menu {
-    position: absolute;
-    top: 120%; // 稍微遠離觸發器
-    left: 50%;
-    transform: translateX(-50%);
-    width: 240px;
-    padding: $spacing-2; // 8px
-    background: rgba(20, 20, 20, 0.8); // 半透明背景
-    backdrop-filter: blur(16px); // 毛玻璃效果
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid $color-border-primary;
-    border-radius: $border-radius-lg;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transform: translateX(-50%) translateY(10px);
-    visibility: hidden;
-    transition: all $transition-base;
-    z-index: 1000;
-  }
-
-  &:hover > .dropdown-menu {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-    visibility: visible;
+  &__content {
+    display: flex;
+    flex-direction: column;
   }
 }
 
 .dropdown-item {
   display: block;
-  padding: $spacing-3 $spacing-4; // 12px 16px
-  color: $color-text-secondary;
+  padding: 0.625rem 0.75rem; // 10px 12px
+  color: #E8E8E8;
   text-decoration: none;
-  border-radius: $border-radius-base;
-  transition: all 0.2s ease;
+  font-size: 0.9375rem; // 15px
+  font-weight: 500;
+  border-radius: 4px;
+  transition: color 0.2s ease, background-color 0.2s ease;
 
-  &:hover {
-    color: $color-text-primary;
+  &:hover, &.is-active {
     background-color: rgba(255, 255, 255, 0.05);
+    color: #FFFFFF;
   }
 }
 
-/* 行動版導航 (保留現有結構) */
-.mobile-nav-toggle {
-  // ...
+// Placeholder for btn styles, assuming they exist elsewhere
+// If not, a basic style is needed
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  height: 36px;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &--primary {
+    background-color: #5E5CE6; // Example primary color
+    color: #FFFFFF;
+    &:hover {
+      background-color: lighten(#5E5CE6, 5%);
+    }
+  }
+  &--small {
+    height: 32px;
+    padding: 0 0.75rem;
+  }
 }
 
-.mobile-nav {
-  // ...
+// 3. Mobile Navigation Toggle (Hamburger)
+// -----------------------------------------------------------------------------
+.site-header__mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1010; // Above the header itself
+
+  @media (max-width: 992px) {
+    display: flex;
+  }
+
+  .line {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: #FFFFFF;
+    border-radius: 1px;
+    transition: all 0.25s ease-in-out;
+  }
 }
+
+// We will add mobile navigation styles in the next step.
+// 5. Mobile Navigation
+// -----------------------------------------------------------------------------
+.mobile-nav {
+  display: none; // Hidden by default
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0B0B0F; // Same as body
+  z-index: 1005; // Below the toggle, above the page content
+  overflow-y: auto;
+  padding: 80px 2rem 2rem; // Top padding to avoid header
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+
+  @media (max-width: 992px) {
+    display: block;
+  }
+}
+
+.mobile-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav__item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav__link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  color: #E8E8E8;
+  text-decoration: none;
+  font-size: 1.125rem; // 18px
+  font-weight: 500;
+  
+  .nav-link__icon {
+    transition: transform 0.2s ease;
+  }
+}
+
+.mobile-nav__dropdown {
+  list-style: none;
+  padding-left: 1rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.mobile-nav__dropdown-link {
+  display: block;
+  padding: 0.75rem 0;
+  color: #A1A1A9;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+// "Open" state for mobile nav
+body.mobile-nav-is-open {
+  overflow: hidden; // Prevent scrolling of the body
+
+  .site-header__mobile-toggle {
+    .line--1 {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .line--2 {
+      opacity: 0;
+    }
+    .line--3 {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+  
+  .mobile-nav {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mobile-nav__item.is-open {
+    .mobile-nav__link .nav-link__icon {
+      transform: rotate(180deg);
+    }
+    .mobile-nav__dropdown {
+      max-height: 500px; // Or a large enough value
+    }
+  }
+}
+
