@@ -102,6 +102,14 @@ googleAnalytics = "G-RKMCS9WVS5"
   postalCode = "403"
   addressCountry = "TW"
 
+# 聯絡資訊配置
+[Params.contact]
+  phone = "04-2220-5606"
+  email = "admin@horgoscpa.com"
+  address = "台中市西區建國路21號3樓之1"
+  line_id = "@208ihted"
+  opening_hours = "週一至週五 08:30-17:30"
+
 [menu]
   # Main Menu
   [[menu.main]]

@@ -1,9 +1,11 @@
 {{ define "main" }}
-<div class="contact-header">
+<!-- 統一頁面標題設計 -->
+<div class="page-header">
   <div class="container">
-    <div class="contact-header-content">
-      <h1>{{ .Title }}</h1>
-      <p>歡迎透過以下方式與霍爾果斯會計師事務所聯繫，我們的專業團隊將竭誠為您提供優質的會計、稅務與商業諮詢服務。</p>
+    <div class="page-header__content">
+      <h1 class="page-header__title">{{ .Title }}</h1>
+      <div class="page-header__line"></div>
+      <p class="page-header__description">歡迎透過以下方式與霍爾果斯會計師事務所聯繫，我們的專業團隊將竭誠為您提供優質的會計、稅務與商業諮詢服務。</p>
     </div>
   </div>
 </div>
@@ -20,7 +22,7 @@
             </div>
             <h3>電話聯絡</h3>
             <ul class="contact-info-list">
-              <li>代表號：<a href="tel:{{ .Site.Params.phone }}">{{ .Site.Params.phone }}</a></li>
+              <li>代表號：<a href="tel:{{ .Site.Params.contact.phone }}">{{ .Site.Params.contact.phone }}</a></li>
             </ul>
           </div>
           
@@ -30,8 +32,8 @@
               <i class="fab fa-line"></i>
             </div>
             <h3>LINE官方帳號</h3>
-            <p>LINE ID: @208ihted</p>
-            <a href="https://line.me/R/ti/p/@208ihted" class="line-btn">
+            <p>LINE ID: {{ .Site.Params.contact.line_id }}</p>
+            <a href="https://line.me/R/ti/p/{{ .Site.Params.contact.line_id }}" class="line-btn">
               <i class="fab fa-line"></i> 加入LINE好友
             </a>
           </div>
@@ -43,9 +45,9 @@
             </div>
             <h3>公司地址</h3>
             <address>
-              {{ .Site.Params.address }}
+              {{ .Site.Params.contact.address }}
             </address>
-            <a href="https://maps.google.com/?q={{ .Site.Params.address }}" target="_blank" class="map-link">
+            <a href="https://maps.google.com/?q={{ .Site.Params.contact.address }}" target="_blank" class="map-link">
               <i class="fas fa-map"></i> 在Google地圖開啟
             </a>
           </div>

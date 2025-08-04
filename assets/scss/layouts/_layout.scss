@@ -217,16 +217,30 @@
   margin-bottom: $spacing-8;
   border-bottom: 1px solid $color-border-primary;
   
+  &__content {
+    text-align: center;
+  }
+  
   &__title {
     font-size: $font-size-h1;
     margin-bottom: $spacing-3;
     font-weight: 700;
+    color: $color-text-primary;
+  }
+  
+  &__line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, $color-accent-highlight, $color-accent-primary);
+    margin: 0 auto $spacing-4;
+    border-radius: 2px;
   }
   
   &__description {
     font-size: $font-size-lg;
     color: $color-text-secondary;
     max-width: 800px;
+    margin: 0 auto;
   }
   
   @include mobile {
@@ -235,6 +249,11 @@
     
     &__title {
       font-size: $font-size-h2;
+    }
+    
+    &__line {
+      width: 50px;
+      height: 2px;
     }
   }
 }

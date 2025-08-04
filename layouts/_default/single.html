@@ -1,4 +1,17 @@
 {{ define "main" }}
+<!-- 統一頁面標題設計 -->
+<div class="page-header">
+  <div class="container">
+    <div class="page-header__content">
+      <h1 class="page-header__title">{{ .Title }}</h1>
+      <div class="page-header__line"></div>
+      {{ with .Description }}
+      <p class="page-header__description">{{ . }}</p>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
 <div class="container">
     {{ if eq .Section "articles" }}
     <!-- 文章頁面使用兩欄佈局 -->
