@@ -13,6 +13,11 @@
         {{ end }}
       </header>
       
+      <!-- 影片分類卡片 -->
+      {{ if eq .RelPermalink "/videos/" }}
+      {{ partial "videos/video-categories.html" . }}
+      {{ end }}
+      
       <!-- 分類篩選 -->
       <div class="category-nav card-style">
         <div class="category-nav__links">

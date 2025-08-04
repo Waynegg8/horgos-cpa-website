@@ -16,15 +16,23 @@
             <!-- 服務項目頁面內容 -->
             {{ partial "services/service-cards.html" . }}
             {{ else if eq .Section "articles" }}
+            <!-- 文章分類卡片 -->
+            {{ partial "articles/article-categories.html" . }}
             <!-- 文章列表頁面內容 -->
             {{ partial "articles/article-list.html" . }}
             {{ else if eq .Section "videos" }}
             <!-- 影片列表頁面內容 -->
             {{ partial "videos/video-list.html" . }}
             {{ else if eq .Section "faq" }}
+            <!-- FAQ分類卡片 -->
+            {{ partial "faq/faq-categories.html" . }}
             <!-- FAQ列表頁面內容 -->
             {{ partial "faq/faq-list.html" . }}
             {{ else if eq .Section "downloads" }}
+            <!-- 下載分類卡片 -->
+            {{ partial "downloads/download-categories.html" . }}
+            <!-- 下載須知 -->
+            {{ partial "downloads/download-notice.html" . }}
             <!-- 下載列表頁面內容 -->
             {{ partial "downloads/download-list.html" . }}
             {{ end }}
