@@ -178,11 +178,12 @@ body.downloads-single .sidebar {
   display: block !important;
   visibility: visible !important;
   position: static !important;
-  width: 31.66% !important;
+  width: 35% !important; /* 從 31.66% 增加到 35% */
+  min-width: 280px !important; /* 確保最小寬度 */
   height: auto !important;
   opacity: 1 !important;
-  flex: 1 0 31.66% !important;
-  padding-right: 0.5rem !important; /* 增加右側間距 */
+  flex: 1 0 35% !important; /* 從 31.66% 增加到 35% */
+  padding-right: 1rem !important; /* 增加右側間距 */
 }
 
 /* 在特定頁面重新啟用flex佈局 */
@@ -202,7 +203,7 @@ body.faq .primary,
 body.faq-single .primary,
 body.downloads .primary,
 body.downloads-single .primary {
-  flex: 1 0 65.83% !important;
+  flex: 1 0 62% !important; /* 從 65.83% 調整到 62% */
   padding-right: 1rem !important; /* 增加右側間距 */
 }
 
@@ -221,6 +222,9 @@ body.downloads-single .sidebar-categories__link {
   writing-mode: horizontal-tb !important;
   text-orientation: mixed !important;
   padding-right: 0.5rem !important; /* 增加右側間距 */
+  white-space: nowrap !important; /* 防止文字換行 */
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 /* 確保側邊欄分類文字水平排列 */
@@ -264,28 +268,28 @@ p, li, div {
 /* Logo 樣式調整 */
 /* Header Logo 圖片調大 */
 .site-header .logo-img {
-  height: 44px !important; /* 從原本的 36px 調大到 44px */
+  height: 52px !important; /* 從 44px 再調大到 52px */
   width: auto !important;
 }
 
-/* Header Logo 英文字體調小 */
+/* Header Logo 英文字體調小並改為白色 */
 .site-header .site-header__title {
   font-size: 1.125rem !important; /* 從原本的 $font-size-lg 調小一號 */
   font-weight: 700 !important;
-  color: #000 !important;
+  color: #fff !important; /* 改為白色 */
   letter-spacing: 0.5px !important;
 }
 
 /* Footer Logo 圖片也調大一些 */
 .footer-logo__img {
-  height: 40px !important; /* 從原本的 32px 調大到 40px */
+  height: 48px !important; /* 從 40px 調大到 48px */
   width: auto !important;
 }
 
-/* Footer Logo 英文字體調小 */
+/* Footer Logo 英文字體調小並改為白色 */
 .footer-logo__text {
   font-size: 1.125rem !important; /* 從原本的 $font-size-lg 調小一號 */
   font-weight: 700 !important;
-  color: #000 !important;
+  color: #fff !important; /* 改為白色 */
   letter-spacing: 0.5px !important;
 }
