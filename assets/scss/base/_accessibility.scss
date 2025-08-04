@@ -5,7 +5,7 @@
   position: absolute;
   top: -40px;
   left: 0;
-  background-color: $color-primary;
+  background-color: $color-accent-primary;
   color: $color-text-primary;
   padding: $spacing-2 $spacing-4;
   z-index: z('header') + 1;
@@ -19,7 +19,7 @@
 
 /* 鍵盤焦點樣式 */
 :focus {
-  outline: 2px solid $color-primary;
+  outline: 2px solid $color-accent-primary;
   outline-offset: 2px;
 }
 
@@ -30,7 +30,7 @@
 
 /* 鍵盤用戶焦點樣式 */
 :focus-visible {
-  outline: 2px solid $color-primary;
+  outline: 2px solid $color-accent-primary;
   outline-offset: 2px;
 }
 

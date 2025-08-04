@@ -18,15 +18,20 @@ $color-text-tertiary: #525252;   // 淡化文字 (用於不重要的標籤或註
 // 邊框和分隔色彩
 $color-border-primary: #262626;  // 低調的深灰色，用於元件邊框
 
-// 主要色彩定義
-$color-accent-primary: #204B6E;     // 深藍色 (用於主要按鈕)
-$color-accent-highlight: #22c55e; // 綠色 (用於次要 CTA 按鈕和重要提示)
+// 主要色彩定義 (Linear.app 風格)
+$color-primary: #6366f1;           // 主要色彩 (Linear 紫色)
+$color-accent: #6366f1;            // 強調色彩 (Linear 紫色)
+$color-accent-primary: #6366f1;     // Linear 紫色 (用於主要按鈕)
+$color-accent-highlight: #10b981; // 綠色 (用於次要 CTA 按鈕和重要提示)
 
 // 狀態指示色彩
 $color-status-success: #10B981;
 $color-status-warning: #F59E0B;
 $color-status-error: #EF4444;
 $color-status-info: #3B82F6;
+
+// 品牌色彩
+$color-line: #00B900;              // LINE 品牌綠色
 
 
 // 3.3.2 字體系統設計
@@ -40,6 +45,11 @@ $font-size-h1: 2.5rem;    // 40px
 $font-size-h2: 2rem;      // 32px
 $font-size-h3: 1.5rem;    // 24px
 $font-size-h4: 1.25rem;   // 20px
+$font-size-4xl: 2.5rem;   // 40px (與 h1 相同)
+$font-size-3xl: 2rem;     // 32px (與 h2 相同)
+$font-size-2xl: 2rem;     // 32px (與 h2 相同)
+$font-size-xl: 1.5rem;    // 24px (與 h3 相同)
+$font-size-lg: 1.125rem;  // 18px
 $font-size-base: 1rem;      // 16px
 $font-size-small: 0.875rem; // 14px
 
@@ -99,5 +109,13 @@ $container-padding: $spacing-8;
 $border-radius-sm: 4px;
 $border-radius-md: 8px;
 $border-radius-lg: 12px;
+
+// 陰影 (Shadows)
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// 額外圓角變數
 $border-radius-xl: 16px;
 $border-radius-full: 9999px;

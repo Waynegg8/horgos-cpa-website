@@ -3,8 +3,8 @@
 // Source of Truth: hugo-requirements-final-updated.txt
 // =============================================================================
 
-@use "../utils/variables" as var;
-@use "../utils/mixins" as mixins;
+@import "../utils/variables";
+@import "../utils/mixins";
 
 // 1. Core Body & Main Content Layout
 // -----------------------------------------------------------------------------
@@ -23,27 +23,27 @@ main {
 // -----------------------------------------------------------------------------
 .container {
   width: 100%;
-  max-width: var.$container-max-width;
+  max-width: $container-max-width;
   margin-left: auto;
   margin-right: auto;
-  padding-left: var.$container-padding;
-  padding-right: var.$container-padding;
+  padding-left: $container-padding;
+  padding-right: $container-padding;
 
-  @include mixins.mobile {
-    padding-left: var.$spacing-4;
-    padding-right: var.$spacing-4;
+  @include mobile {
+    padding-left: $spacing-4;
+    padding-right: $spacing-4;
   }
 }
 
 // 3. Section Padding
 // -----------------------------------------------------------------------------
 section {
-  padding-top: var.$spacing-24;    // 96px
-  padding-bottom: var.$spacing-24; // 96px
+  padding-top: $spacing-24;    // 96px
+  padding-bottom: $spacing-24; // 96px
 
-  @include mixins.mobile {
-    padding-top: var.$spacing-16;
-    padding-bottom: var.$spacing-16;
+  @include mobile {
+    padding-top: $spacing-16;
+    padding-bottom: $spacing-16;
   }
 }
 
@@ -58,29 +58,29 @@ section {
 
 .page-header {
   background-color: transparent;
-  padding: var.$spacing-16 0;
-  margin-bottom: var.$spacing-16;
+  padding: $spacing-16 0;
+  margin-bottom: $spacing-16;
 
-  @include mixins.mobile {
-    padding: var.$spacing-8 0;
-    margin-bottom: var.$spacing-8;
+  @include mobile {
+    padding: $spacing-8 0;
+    margin-bottom: $spacing-8;
   }
 
   &__description {
-    font-size: var.$font-size-h4;
+    font-size: $font-size-h4;
     max-width: 760px;
-    color: var.$color-text-secondary;
-    line-height: var.$line-height-base;
+    color: $color-text-secondary;
+    line-height: $line-height-base;
   }
 }
 
 .two-column {
   display: flex;
-  gap: var.$spacing-16;
+  gap: $spacing-16;
 
-  @include mixins.mobile {
+  @include mobile {
     flex-direction: column;
-    gap: var.$spacing-8;
+    gap: $spacing-8;
   }
 
   &__main {
@@ -91,22 +91,22 @@ section {
   &__sidebar {
     flex: 0 0 320px;
     
-    @include mixins.mobile {
+    @include mobile {
       flex: 1;
     }
   }
 }
 
 .dual-cta {
-  background-color: var.$color-bg-secondary;
-  color: var.$color-text-primary;
-  padding: var.$spacing-20 0;
-  margin: var.$spacing-20 0;
-  border-radius: var.$border-radius-xl;
+  background-color: $color-bg-secondary;
+  color: $color-text-primary;
+  padding: $spacing-20 0;
+  margin: $spacing-20 0;
+  border-radius: $border-radius-xl;
 
-  @include mixins.mobile {
-    padding: var.$spacing-12 0;
-    margin: var.$spacing-12 0;
+  @include mobile {
+    padding: $spacing-12 0;
+    margin: $spacing-12 0;
   }
 
   &__content {
@@ -116,18 +116,18 @@ section {
   }
 
   &__description {
-    color: var.$color-text-secondary;
-    margin-bottom: var.$spacing-8;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-8;
   }
 
   &__buttons {
     display: flex;
     justify-content: center;
-    gap: var.$spacing-4;
+    gap: $spacing-4;
 
-    @include mixins.mobile {
+    @include mobile {
       flex-direction: column;
-      gap: var.$spacing-3;
+      gap: $spacing-3;
     }
   }
 }
@@ -138,15 +138,15 @@ section {
 // but will be updated in subsequent steps when those components are tackled.
 
 .cookie-consent {
-  background-color: var.$color-bg-secondary;
-  color: var.$color-text-primary;
-  border: 1px solid var.$color-border-primary;
+  background-color: $color-bg-secondary;
+  color: $color-text-primary;
+  border: 1px solid $color-border-primary;
   // ... rest of the styles
 }
 
 #page-loading-bar {
   // Per spec 4.11.2, this should be a gradient
-  background: linear-gradient(to right, var.$color-accent-primary, var.$color-accent-highlight);
+  background: linear-gradient(to right, $color-accent-primary, $color-accent-highlight);
   height: 3px;
   // ... rest of the styles
 }

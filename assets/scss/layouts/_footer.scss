@@ -2,55 +2,55 @@
 // Site Footer - Rebuilt based on hugo-requirements-final-updated.txt (sec 3.2)
 // =============================================================================
 
-@use "../utils/variables" as var;
-@use "../utils/mixins" as mixins;
+@import "../utils/variables";
+@import "../utils/mixins";
 
 .site-footer {
   // Per spec 3.2.1
-  background-color: var.$color-accent-primary;
-  color: rgba(var.$color-text-primary, 0.8);
-  font-size: var.$font-size-small;
-  padding: var.$spacing-20 0 0; // Padding top, bottom is handled by the bottom bar
-  margin-top: var.$spacing-16;
+  background-color: $color-accent-primary;
+  color: rgba($color-text-primary, 0.8);
+  font-size: $font-size-small;
+  padding: $spacing-20 0 0; // Padding top, bottom is handled by the bottom bar
+  margin-top: $spacing-16;
 
   a {
-    color: rgba(var.$color-text-primary, 0.8);
-    transition: color var.$transition-fast var.$ease-out;
+    color: rgba($color-text-primary, 0.8);
+    transition: color $transition-fast $ease-out;
     &:hover {
-      color: var.$color-text-primary;
+      color: $color-text-primary;
     }
   }
 
   &__main {
     display: grid;
-    gap: var.$spacing-12 var.$spacing-8;
-    padding-bottom: var.$spacing-16;
+    gap: $spacing-12 $spacing-8;
+    padding-bottom: $spacing-16;
 
     // Desktop Layout (Spec 3.2.3)
-    @include mixins.desktop {
+    @include desktop {
       grid-template-columns: 2fr 2fr 1.5fr 1.5fr;
     }
 
     // Tablet Layout (Spec 3.2.3)
-    @include mixins.tablet-and-down {
+    @include tablet {
       grid-template-columns: 1fr 1fr;
     }
     
     // Mobile Layout (Spec 3.2.3)
-    @include mixins.mobile {
+    @include mobile {
       grid-template-columns: 1fr;
-      gap: var.$spacing-8;
+      gap: $spacing-8;
     }
   }
 }
 
 .footer-heading {
-  font-size: var.$font-size-base;
+  font-size: $font-size-base;
   font-weight: 600;
-  color: var.$color-text-primary;
-  margin: 0 0 var.$spacing-6 0;
-  padding-bottom: var.$spacing-3;
-  border-bottom: 1px solid rgba(var.$color-text-primary, 0.2);
+  color: $color-text-primary;
+  margin: 0 0 $spacing-6 0;
+  padding-bottom: $spacing-3;
+  border-bottom: 1px solid rgba($color-text-primary, 0.2);
 
   .footer-collapse-toggle {
     display: none; // Hidden on desktop
@@ -74,7 +74,7 @@
     content: '\\f078'; // FontAwesome chevron-down
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    transition: transform var.$transition-base var.$ease-in-out;
+    transition: transform $transition-base $ease-in-out;
   }
 
   &[aria-expanded="false"]::after {
@@ -89,10 +89,10 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var.$spacing-3;
+  gap: $spacing-3;
 
   li i {
-    margin-right: var.$spacing-2;
+    margin-right: $spacing-2;
     width: 1.2em;
     text-align: center;
   }
@@ -100,14 +100,14 @@
 
 .site-footer__social {
   display: flex;
-  gap: var.$spacing-4;
-  margin-top: var.$spacing-6;
+  gap: $spacing-4;
+  margin-top: $spacing-6;
 
   .social-link {
     font-size: 1.5rem;
-    color: rgba(var.$color-text-primary, 0.6);
+    color: rgba($color-text-primary, 0.6);
     &:hover {
-      color: var.$color-text-primary;
+      color: $color-text-primary;
       transform: scale(1.1);
     }
   }
@@ -116,8 +116,8 @@
 // Bottom Bar (Region 5)
 .site-footer__bottom {
   // Per spec 3.2.2, a darker shade
-  background-color: darken(var.$color-accent-primary, 5%);
-  padding: var.$spacing-4 0;
+  background-color: darken($color-accent-primary, 5%);
+  padding: $spacing-4 0;
   font-size: 0.8125rem; // Slightly smaller
 
   &-container {
@@ -125,43 +125,43 @@
     justify-content: space-between;
     align-items: center;
 
-    @include mixins.mobile {
+    @include mobile {
       flex-direction: column;
       align-items: center;
-      gap: var.$spacing-3;
+      gap: $spacing-3;
       text-align: center;
     }
   }
 
   & .copyright p {
     margin: 0;
-    color: rgba(var.$color-text-primary, 0.6);
+    color: rgba($color-text-primary, 0.6);
   }
 
   & .legal-links {
     display: flex;
     align-items: center;
-    gap: var.$spacing-3;
+    gap: $spacing-3;
     
     .separator {
-      color: rgba(var.$color-text-primary, 0.3);
+      color: rgba($color-text-primary, 0.3);
     }
 
     a {
-      color: rgba(var.$color-text-primary, 0.8);
+      color: rgba($color-text-primary, 0.8);
       &:hover {
-        color: var.$color-text-primary;
+        color: $color-text-primary;
         text-decoration: underline;
       }
       i {
-        margin-right: var.$spacing-1;
+        margin-right: $spacing-1;
       }
     }
   }
 }
 
 // Mobile Collapsible Logic
-@include mixins.mobile {
+@include mobile {
   .footer-heading--collapsible .footer-collapse-toggle {
     display: flex;
   }
@@ -169,7 +169,7 @@
   .footer-collapse-content {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows var.$transition-base var.$ease-in-out;
+    transition: grid-template-rows $transition-base $ease-in-out;
     
     > * {
       overflow: hidden;

@@ -3,16 +3,16 @@
 // Source of Truth: hugo-requirements-final-updated.txt (Section 3.3.2)
 // =============================================================================
 
-@use "../utils/variables" as var;
+@import "../utils/variables";
 
 // 1. Global Body & Font Settings
 // -----------------------------------------------------------------------------
 body {
-  font-family: var.$font-family-base;
-  font-size: var.$font-size-base;
-  line-height: var.$line-height-base;
-  color: var.$color-text-primary;
-  background-color: var.$color-bg-primary;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-text-primary;
+  background-color: $color-bg-primary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -23,23 +23,23 @@ h1, .h1,
 h2, .h2,
 h3, .h3,
 h4, .h4 {
-  font-family: var.$font-family-base;
+  font-family: $font-family-base;
   font-weight: 600; // A common semi-bold weight for headings
-  line-height: var.$line-height-heading;
-  color: var.$color-text-primary;
-  margin: 0 0 var.$heading-margin-bottom 0;
+  line-height: $line-height-heading;
+  color: $color-text-primary;
+  margin: 0 0 $heading-margin-bottom 0;
   padding: 0;
 }
 
-h1, .h1 { font-size: var.$font-size-h1; }
-h2, .h2 { font-size: var.$font-size-h2; }
-h3, .h3 { font-size: var.$font-size-h3; }
-h4, .h4 { font-size: var.$font-size-h4; }
+h1, .h1 { font-size: $font-size-h1; }
+h2, .h2 { font-size: $font-size-h2; }
+h3, .h3 { font-size: $font-size-h3; }
+h4, .h4 { font-size: $font-size-h4; }
 
 // h5 and h6 can default to bolded paragraph text
 h5, .h5,
 h6, .h6 {
-  font-size: var.$font-size-base;
+  font-size: $font-size-base;
   font-weight: 600;
 }
 
@@ -47,7 +47,7 @@ h6, .h6 {
 // 3. Body & Paragraphs
 // -----------------------------------------------------------------------------
 p {
-  margin: 0 0 var.$paragraph-spacing 0;
+  margin: 0 0 $paragraph-spacing 0;
   &:last-child {
     margin-bottom: 0;
   }
@@ -58,11 +58,11 @@ p {
 a {
   color: inherit;
   text-decoration: none;
-  transition: color var.$transition-fast var.$ease-out;
+  transition: color $transition-fast $ease-out;
 
   &:hover {
     // A subtle hover effect, could be customized per-component
-    color: var.$color-text-primary; 
+    color: $color-text-primary; 
   }
 }
 
@@ -70,11 +70,11 @@ a {
 // -----------------------------------------------------------------------------
 strong, b {
   font-weight: 600;
-  color: var.$color-text-primary;
+  color: $color-text-primary;
 }
 
 hr {
   border: 0;
-  border-top: 1px solid var.$color-border-primary;
-  margin: var.$spacing-12 0;
+  border-top: 1px solid $color-border-primary;
+  margin: $spacing-12 0;
 }
