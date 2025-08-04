@@ -1,6 +1,8 @@
-/* 重置樣式 */
+/* ============================================================================= */
+/* Reset Styles - Streamlined for modern browsers                            */
+/* ============================================================================= */
 
-/* 盒模型重置 */
+/* 1. Box-sizing reset */
 *,
 *::before,
 *::after {
@@ -9,135 +11,54 @@
   padding: 0;
 }
 
-/* HTML & Body 重置 */
+/* 2. Root and body defaults */
 html {
-  font-size: 16px;
+  font-size: 16px; /* Define base font size for rem units */
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: $font-family-base;
-  font-size: $font-size-base;
-  line-height: $line-height-base;
-  color: $color-text-primary;
-  background-color: $color-bg-primary;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* body defaults are now handled in _typography.scss */
+
+/* 3. Remove default list styles */
+ul,
+ol {
+  list-style: none;
 }
 
-/* 標題重置 */
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  margin-bottom: $spacing-4;
-  line-height: $line-height-heading;
-  font-weight: 700;
-  color: $color-text-primary;
-}
-
-/* 段落重置 */
-p {
-  margin-top: 0;
-  margin-bottom: $spacing-4;
-}
-
-/* 連結重置 */
-a {
-  color: $color-primary;
-  text-decoration: none;
-  @include transition(color);
-  
-  &:hover {
-    color: $color-secondary;
-  }
-  
-  &:focus {
-    @include focus-outline;
-  }
-}
-
-/* 列表重置 */
-ul, ol {
-  margin: 0;
-  padding: 0;
-  list-style-position: inside;
-}
-
-li {
-  margin-bottom: $spacing-2;
-}
-
-/* 圖片重置 */
-img {
+/* 4. Image and media reset */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
   max-width: 100%;
-  height: auto;
-  vertical-align: middle;
 }
 
-/* 表單元素重置 */
-button,
+/* 5. Form elements reset */
 input,
-optgroup,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-}
-
 button,
-input {
-  overflow: visible;
-}
-
-button,
+textarea,
 select {
-  text-transform: none;
+  font: inherit; /* Inherit font styles from parent */
+  border: none;
+  background: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  -webkit-appearance: button;
+button {
+  cursor: pointer;
 }
 
-/* 表格重置 */
+/* 6. Table reset */
 table {
-  width: 100%;
   border-collapse: collapse;
+  border-spacing: 0;
 }
 
-th {
-  text-align: left;
-}
+/* 7. Anchor defaults */
+/* Anchor defaults are now handled in _typography.scss */
 
-/* 容器通用樣式 */
-.container {
-  width: 100%;
-  max-width: $container-max-width;
-  margin: 0 auto;
-  padding: 0 $container-padding;
-}
-
-/* 區塊間距 */
-section {
-  padding: $spacing-16 0;
-  
-  @include mobile {
-    padding: $spacing-8 0;
-  }
-}
-
-/* 可訪問性隱藏 */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
+/* 8. Heading defaults are now handled in _typography.scss */

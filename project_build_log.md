@@ -1,31 +1,23 @@
-# Hugo 會計事務所網站建置日誌
+# Project Build Log
 
-...(保留歷史日誌)
+## [日期] - 步驟 1: 重塑全站佈局與字體排印
 
-**[當前日期]** 第十一次循環：核心視覺系統重構 **[驗證成功]**：
-- **實施視覺施工圖**：嚴格遵循 `STYLE_GUIDE.md`，對專案的核心 SCSS 檔案進行了全面重構。
-- **更新的檔案**：
-  - `assets/scss/utils/_variables.scss`：更新了色彩系統、字體排印與間距。
-  - `assets/scss/base/_typography.scss`：應用了新的基礎文字樣式。
-  - `assets/scss/components/_buttons.scss`：實施了新的按鈕元件樣式。
-  - `assets/scss/components/_cards.scss`：實施了新的卡片元件樣式。
-  - `assets/scss/layouts/_navigation.scss`：整合了新的下拉選單樣式。
-- **合規證據**：本次提交的所有 SCSS 檔案的變更紀錄，以及 `hugo --minify` 建置成功證明。
-- **目標**：成功為專案奠定了符合 `linear.app` 美學的新視覺基礎。
+### 修正內容
 
-網站已成功部署至 Cloudflare Pages。
+1.  **全局樣式重置 (`_reset.scss`)**: 簡化了重置樣式，移除與新設計衝突的規則，為新的排印與佈局系統提供乾淨的基礎。
+2.  **字體排印系統 (`_typography.scss`)**:
+    *   完全重寫，以模仿 [Linear.app](https://linear.app) 的設計語言。
+    *   設定全局字體為 "Inter"，並定義了清晰的標題層級 (h1-h6) 和內文樣式。
+    *   更新了連結、列表和分隔線的樣式，使其更現代、更簡潔。
+    *   設定了符合 Linear 風格的背景色 (`#0B0B0F`) 和文字顏色 (`#E8E8E8`)。
+3.  **核心佈局 (`_layout.scss`)**:
+    *   建立了一個新的、更寬的 `.container` class (max-width: 1200px) 作為核心佈局工具。
+    *   定義了全局的 `section` 垂直間距，以創造更多的留白和呼吸感。
+    *   調整了現有的元件佈局（如 `.page-header`, `.two-column`）以適應新的設計系統。
+4.  **字體引入**: 確認 "Inter" 字體已在 `layouts/_default/baseof.html` 中被正確引入。
 
-**[當前日期]** 第十二次循環：全站模板稽核與類別替換 **[驗證成功]**：
-- **任務描述**：全面稽核 `layouts/` 目錄下的所有 `.html` 模板與 `partials`，將舊的、自訂的樣式類別替換為 `STYLE_GUIDE.md` 中定義的標準化元件類別 (如 `.btn`, `.card` 等)。
-- **更新的檔案**：
-  - `layouts/partials/header.html`
-  - `layouts/partials/footer.html`
-  - `layouts/_default/single.html`
-  - `layouts/partials/services/service-cards.html`
-  - `layouts/partials/articles/article-list.html`
-  - `assets/scss/layouts/_navigation.scss`
-  - `assets/scss/layouts/_footer.scss`
-  - `assets/scss/base/_reset.scss`
-  - `assets/scss/utils/_variables.scss`
-- **合規證據**：`hugo --minify` 建置成功證明。
-- **目標**：成功將全站模板與新的視覺設計系統對齊。
+### 合規證據
+
+*   **視覺對標**: 新的基礎樣式（顏色、字體、間距）在視覺上已朝 `https://linear.app` 的風格靠攏。字體 `Inter`、深色背景、寬鬆的佈局和留白，都直接源於對範本網站的分析。
+*   **程式碼結構**: SCSS 檔案的職責劃分更加清晰。`_reset.scss` 專注重置，`_typography.scss` 專注文字，`_layout.scss` 專注佈局，符合模組化開發的最佳實踐。
+*   **未來可擴展性**: 新的基礎樣式為後續的元件（導航、頁腳、卡片）重塑工作打下了堅實、一致的基礎。
