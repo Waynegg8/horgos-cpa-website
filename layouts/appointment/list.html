@@ -6,84 +6,97 @@
             <div class="appointment-description">{{ .Content }}</div>
         </div>
         
-        <!-- 預約表單 -->
-        <div class="appointment-form-container">
-            <form id="appointment-form" class="appointment-form" aria-labelledby="form-heading" novalidate>
-                <h2 id="form-heading" class="sr-only">預約諮詢表單</h2>
-                <p class="form-description">請填寫以下表單以預約我們的專業諮詢服務。標示 <span class="required">*</span> 為必填欄位。</p>
-                
-                <div class="form-group">
-                    <label for="name" id="name-label">姓名 <span class="required">*</span></label>
-                    <input type="text" id="name" name="name" required minlength="2" maxlength="20" aria-required="true" aria-labelledby="name-label" aria-describedby="name-error">
-                    <div class="error-message" id="name-error" aria-live="polite"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email" id="email-label">電子郵件 <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" required aria-required="true" aria-labelledby="email-label" aria-describedby="email-error">
-                    <div class="error-message" id="email-error" aria-live="polite"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="line" id="line-label">LINE ID <span class="required">*</span></label>
-                    <input type="text" id="line" name="line" required aria-required="true" aria-labelledby="line-label" aria-describedby="line-error">
-                    <div class="error-message" id="line-error" aria-live="polite"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone" id="phone-label">聯絡電話 <span class="required">*</span></label>
-                    <input type="tel" id="phone" name="phone" required pattern="[0-9\-\+]{8,15}" aria-required="true" aria-labelledby="phone-label" aria-describedby="phone-help phone-error">
-                    <div class="error-message" id="phone-error" aria-live="polite"></div>
-                    <small id="phone-help">請輸入有效的台灣手機或市話號碼</small>
-                </div>
-                
-                <fieldset class="form-group">
-                    <legend>諮詢服務類型 <span class="required">*</span></legend>
-                    <div class="service-buttons" role="radiogroup" aria-describedby="service-error">
-                        <input type="radio" id="service-business" name="service" value="工商登記" required aria-required="true">
-                        <label for="service-business" class="service-button">工商登記</label>
-                        
-                        <input type="radio" id="service-tax" name="service" value="稅務申報" required aria-required="true">
-                        <label for="service-tax" class="service-button">稅務申報</label>
-                        
-                        <input type="radio" id="service-audit" name="service" value="財稅簽證" required aria-required="true">
-                        <label for="service-audit" class="service-button">財稅簽證</label>
-                        
-                        <input type="radio" id="service-consulting" name="service" value="諮詢服務" required aria-required="true">
-                        <label for="service-consulting" class="service-button">諮詢服務</label>
-                        
-                        <input type="radio" id="service-other" name="service" value="其他服務" required aria-required="true">
-                        <label for="service-other" class="service-button">其他服務</label>
+        <div class="appointment-layout">
+            <!-- 預約表單 -->
+            <div class="appointment-form-container">
+                <form id="appointment-form" class="appointment-form" aria-labelledby="form-heading" novalidate>
+                    <h2 id="form-heading">預約諮詢表單</h2>
+                    <p class="form-description">請填寫以下表單以預約我們的專業諮詢服務。標示 <span class="required">*</span> 為必填欄位。</p>
+                    
+                    <div class="form-group">
+                        <label for="name" id="name-label">姓名 <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required minlength="2" maxlength="20" aria-required="true" aria-labelledby="name-label" aria-describedby="name-error">
+                        <div class="error-message" id="name-error" aria-live="polite"></div>
                     </div>
-                    <div class="error-message" id="service-error" aria-live="polite"></div>
-                </fieldset>
-                
-                <div class="form-group">
-                    <label for="content" id="content-label">諮詢內容</label>
-                    <textarea id="content" name="content" rows="5" aria-labelledby="content-label" aria-describedby="content-help"></textarea>
-                    <small id="content-help">請簡要描述您的諮詢需求，以便我們更好地為您安排合適的專業人員</small>
+                    
+                    <div class="form-group">
+                        <label for="email" id="email-label">電子郵件 <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required aria-required="true" aria-labelledby="email-label" aria-describedby="email-error">
+                        <div class="error-message" id="email-error" aria-live="polite"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="line" id="line-label">LINE ID <span class="required">*</span></label>
+                        <input type="text" id="line" name="line" required aria-required="true" aria-labelledby="line-label" aria-describedby="line-error">
+                        <div class="error-message" id="line-error" aria-live="polite"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" id="phone-label">聯絡電話 <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required pattern="[0-9\-\+]{8,15}" aria-required="true" aria-labelledby="phone-label" aria-describedby="phone-help phone-error">
+                        <div class="error-message" id="phone-error" aria-live="polite"></div>
+                        <small id="phone-help">請輸入有效的台灣手機或市話號碼</small>
+                    </div>
+                    
+                    <fieldset class="form-group">
+                        <legend>諮詢服務類型 <span class="required">*</span></legend>
+                        <div class="service-buttons" role="radiogroup" aria-describedby="service-error">
+                            <input type="radio" id="service-business" name="service" value="工商登記" required aria-required="true">
+                            <label for="service-business" class="service-button">工商登記</label>
+                            
+                            <input type="radio" id="service-tax" name="service" value="稅務申報" required aria-required="true">
+                            <label for="service-tax" class="service-button">稅務申報</label>
+                            
+                            <input type="radio" id="service-audit" name="service" value="財稅簽證" required aria-required="true">
+                            <label for="service-audit" class="service-button">財稅簽證</label>
+                            
+                            <input type="radio" id="service-consulting" name="service" value="諮詢服務" required aria-required="true">
+                            <label for="service-consulting" class="service-button">諮詢服務</label>
+                            
+                            <input type="radio" id="service-other" name="service" value="其他服務" required aria-required="true">
+                            <label for="service-other" class="service-button">其他服務</label>
+                        </div>
+                        <div class="error-message" id="service-error" aria-live="polite"></div>
+                    </fieldset>
+                    
+                    <div class="form-group">
+                        <label for="content" id="content-label">諮詢內容</label>
+                        <textarea id="content" name="content" rows="5" aria-labelledby="content-label" aria-describedby="content-help"></textarea>
+                        <small id="content-help">請簡要描述您的諮詢需求，以便我們更好地為您安排合適的專業人員</small>
+                    </div>
+                    
+                    <div class="form-group privacy-agreement">
+                        <input type="checkbox" id="privacy" name="privacy" required aria-required="true" aria-describedby="privacy-error">
+                        <label for="privacy">我已閱讀並同意<a href="/privacy-policy/" target="_blank" rel="noopener">隱私權政策</a>，並同意提供個人資料用於預約諮詢服務 <span class="required">*</span></label>
+                        <div class="error-message" id="privacy-error" aria-live="polite"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" id="submit-btn" class="submit-button">送出預約</button>
+                        <div id="form-status" class="form-status" aria-live="assertive"></div>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- 預約須知 -->
+            <div class="appointment-notice">
+                <h2>預約注意事項</h2>
+                <div class="notice-content">
+                    <ol>
+                        <li><strong>回覆時間</strong>：我們將在收到預約後的1個工作日內回覆，請確保您提供的聯絡方式正確無誤。</li>
+                        <li><strong>諮詢方式</strong>：根據您的需求，我們提供面對面諮詢、電話諮詢或視訊諮詢三種方式，將在確認預約時與您確定諮詢方式。</li>
+                        <li><strong>諮詢時間</strong>：一般諮詢時間為週一至週五 09:00-17:00，特殊時段需另行安排。</li>
+                        <li><strong>諮詢費用</strong>：
+                            <ul>
+                                <li>首次諮詢（30分鐘）：免費</li>
+                                <li>一般諮詢（60分鐘）：依諮詢內容複雜度收費</li>
+                                <li>專案諮詢：依專案內容另行報價</li>
+                            </ul>
+                        </li>
+                        <li><strong>取消政策</strong>：如需取消或變更預約，請至少提前24小時通知我們。</li>
+                        <li><strong>資料準備</strong>：為提高諮詢效率，建議您事先準備相關資料，我們將在確認預約時告知需要準備的文件。</li>
+                    </ol>
                 </div>
-                
-                <div class="form-group privacy-agreement">
-                    <input type="checkbox" id="privacy" name="privacy" required aria-required="true" aria-describedby="privacy-error">
-                    <label for="privacy">我已閱讀並同意<a href="/privacy-policy/" target="_blank" rel="noopener">隱私權政策</a>，並同意提供個人資料用於預約諮詢服務 <span class="required">*</span></label>
-                    <div class="error-message" id="privacy-error" aria-live="polite"></div>
-                </div>
-                
-                <div class="form-group">
-                    <button type="submit" id="submit-btn" class="submit-button">送出預約</button>
-                    <div id="form-status" class="form-status" aria-live="assertive"></div>
-                </div>
-            </form>
-        </div>
-        
-        <!-- 雙CTA行動呼籲區域 -->
-        <div class="dual-cta-section">
-            <div class="btn-group">
-                <a href="/appointment/" class="btn btn-primary btn-lg">立即預約諮詢</a>
-                <a href="https://line.me/R/ti/p/@hugo.accounting" target="_blank" rel="noopener" class="btn btn-secondary btn-lg btn-icon">
-                    <i class="fab fa-line"></i>加入Line諮詢
-                </a>
             </div>
         </div>
     </div>
@@ -254,21 +267,69 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <style>
 .appointment-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 0;
 }
 
 .appointment-header {
   margin-bottom: 2rem;
+  text-align: center;
+}
+
+.appointment-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
 }
 
 .appointment-form-container {
   background-color: #f8f9fa;
   border-radius: 8px;
   padding: 2rem;
-  margin: 2rem 0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.appointment-form h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #204B6E;
+}
+
+.appointment-notice {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.appointment-notice h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #204B6E;
+  margin-bottom: 1.5rem;
+}
+
+.notice-content {
+  font-size: 0.95rem;
+}
+
+.notice-content ol {
+  padding-left: 1.5rem;
+}
+
+.notice-content ul {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.notice-content li {
+  margin-bottom: 1rem;
+}
+
+.notice-content li:last-child {
+  margin-bottom: 0;
 }
 
 .form-group {
@@ -426,20 +487,15 @@ button:focus {
   outline-offset: 2px;
 }
 
-/* 雙CTA區域樣式 */
-.dual-cta-section {
-  margin-top: 3rem;
-  padding: 2rem;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.dual-cta-section .btn-group {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
+@media (max-width: 992px) {
+  .appointment-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .appointment-notice {
+    order: -1;
+  }
 }
 
 @media (max-width: 768px) {
@@ -447,7 +503,8 @@ button:focus {
     padding: 1rem 0;
   }
   
-  .appointment-form-container {
+  .appointment-form-container,
+  .appointment-notice {
     padding: 1.5rem;
     margin: 1.5rem 0;
   }
@@ -465,20 +522,6 @@ button:focus {
     width: 100%;
     text-align: center;
     padding: 0.75rem;
-  }
-  
-  .dual-cta-section {
-    padding: 1.5rem;
-    margin-top: 2rem;
-  }
-  
-  .dual-cta-section .btn-group {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .dual-cta-section .btn {
-    width: 100%;
   }
   
   /* 改善觸控體驗 */
@@ -508,7 +551,8 @@ button:focus {
     font-size: 1.75rem;
   }
   
-  .appointment-form-container {
+  .appointment-form-container,
+  .appointment-notice {
     padding: 1.25rem;
   }
   

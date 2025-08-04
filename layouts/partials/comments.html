@@ -13,17 +13,8 @@
       this.page.title = "{{ .Title }}";
     };
     
-    // 載入Disqus
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://hugo-accounting.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-    
     // 延遲載入Disqus
     function loadDisqus() {
-      var disqus_thread = document.getElementById('disqus_thread');
       var disqus_script = document.createElement('script');
       disqus_script.src = 'https://hugo-accounting.disqus.com/embed.js';
       disqus_script.setAttribute('data-timestamp', +new Date());
