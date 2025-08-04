@@ -74,10 +74,9 @@ googleAnalytics = "G-RKMCS9WVS5"
   ico = "/uploads/images/general/general-favicon.ico"
 
 [Params.sidebar]
-  home = "none"
-  list = "none"
-  single = "none"
-  widgets = ["search", "recent", "categories", "taglist", "social"]
+  home = false
+  list = false
+  single = false
 
 [Params.widgets]
   recent_num = 5
