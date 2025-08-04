@@ -30,6 +30,17 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: 0 $container-padding;
+    
+    @include tablet {
+      padding: 0 $spacing-6;
+    }
+    
+    @include mobile {
+      padding: 0 $spacing-4;
+    }
   }
 
   &__logo {
