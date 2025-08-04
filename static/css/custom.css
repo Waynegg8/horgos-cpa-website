@@ -156,6 +156,7 @@ body[data-section="videos"] .primary {
   order: 1;
 }
 
+/* 全域側邊欄預設隱藏 */
 .sidebar {
   display: none !important;
 }
@@ -194,4 +195,40 @@ body.faq-single .primary,
 body.downloads .primary,
 body.downloads-single .primary {
   flex: 1 0 65.83% !important;
+}
+
+/* 修復側邊欄文字垂直排列問題 */
+body.articles .sidebar-categories__link,
+body.articles-single .sidebar-categories__link,
+body.faq .sidebar-categories__link,
+body.faq-single .sidebar-categories__link,
+body.downloads .sidebar-categories__link,
+body.downloads-single .sidebar-categories__link {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  text-align: left !important;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+}
+
+/* 確保側邊欄分類文字水平排列 */
+body.articles .sidebar-categories__list,
+body.articles-single .sidebar-categories__list,
+body.faq .sidebar-categories__list,
+body.faq-single .sidebar-categories__list,
+body.downloads .sidebar-categories__list,
+body.downloads-single .sidebar-categories__list {
+  display: block !important;
+}
+
+body.articles .sidebar-categories__item,
+body.articles-single .sidebar-categories__item,
+body.faq .sidebar-categories__item,
+body.faq-single .sidebar-categories__item,
+body.downloads .sidebar-categories__item,
+body.downloads-single .sidebar-categories__item {
+  display: block !important;
+  margin-bottom: 0.5rem !important;
 }

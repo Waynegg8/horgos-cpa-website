@@ -16,7 +16,7 @@
           <!-- 電話聯絡卡片 -->
           <div class="contact-card">
             <div class="contact-card-icon">
-              <span class="material-symbols-rounded">call</span>
+              <i class="fas fa-phone"></i>
             </div>
             <h3>電話聯絡</h3>
             <ul class="contact-info-list">
@@ -39,21 +39,21 @@
           <!-- 地址卡片 -->
           <div class="contact-card">
             <div class="contact-card-icon">
-              <span class="material-symbols-rounded">location_on</span>
+              <i class="fas fa-map-marker-alt"></i>
             </div>
             <h3>公司地址</h3>
             <address>
               {{ .Site.Params.address }}
             </address>
             <a href="https://maps.google.com/?q={{ .Site.Params.address }}" target="_blank" class="map-link">
-              <span class="material-symbols-rounded">map</span> 在Google地圖開啟
+              <i class="fas fa-map"></i> 在Google地圖開啟
             </a>
           </div>
           
           <!-- 營業時間卡片 -->
           <div class="contact-card">
             <div class="contact-card-icon">
-              <span class="material-symbols-rounded">schedule</span>
+              <i class="fas fa-clock"></i>
             </div>
             <h3>營業狀態</h3>
             <!-- 引入統一的營業狀態模板 -->
