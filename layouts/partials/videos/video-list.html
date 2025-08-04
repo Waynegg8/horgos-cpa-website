@@ -20,7 +20,7 @@
                 {{ with .Params.thumbnail }}
                 <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
                 {{ else }}
-                <img src="/uploads/images/videos/default-thumbnail.webp" alt="{{ $.Title }}" loading="lazy">
+                <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
                 {{ end }}
                 {{ with .Params.duration }}
                 <span class="video-card__duration">{{ . }}</span>
