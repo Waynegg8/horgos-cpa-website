@@ -71,15 +71,17 @@
     
     <!-- 側邊欄區塊 -->
     {{ block "sidebar" . }}
-    <!-- 根據頁面類型顯示不同的側邊欄 -->
-    {{ if eq .Section "articles" }}
-        {{ partial "sidebar/articles-sidebar.html" . }}
-    {{ else if eq .Section "videos" }}
-        {{ partial "sidebar/videos-sidebar.html" . }}
-    {{ else if eq .Section "faq" }}
-        {{ partial "sidebar/faq-sidebar.html" . }}
-    {{ else if eq .Section "downloads" }}
-        {{ partial "sidebar/downloads-sidebar.html" . }}
+    <!-- 根據頁面類型顯示不同的側邊欄，僅在內容頁顯示 -->
+    {{ if and (not .IsHome) (in (slice "articles" "videos" "faq" "downloads") .Section) }}
+        {{ if eq .Section "articles" }}
+            {{ partial "sidebar/articles-sidebar.html" . }}
+        {{ else if eq .Section "videos" }}
+            {{ partial "sidebar/videos-sidebar.html" . }}
+        {{ else if eq .Section "faq" }}
+            {{ partial "sidebar/faq-sidebar.html" . }}
+        {{ else if eq .Section "downloads" }}
+            {{ partial "sidebar/downloads-sidebar.html" . }}
+        {{ end }}
     {{ end }}
     {{ end }}
     
