@@ -6,11 +6,14 @@
             <div class="hero-carousel__slide active">
                 <a href="/services/" class="hero-carousel__link">
                     <picture>
-                        <source media="(min-width: 1025px)" srcset="/uploads/images/services/services-business-registration.jpg">
-                        <source media="(min-width: 641px)" srcset="/uploads/images/services/services-business-registration.jpg">
-                        <img src="/uploads/images/services/services-business-registration.jpg" alt="霍爾果斯會計師事務所專業服務" loading="lazy">
+                        <source media="(min-width: 1025px)" srcset="/uploads/images/hero/hero-main-1200.webp">
+                        <source media="(min-width: 641px)" srcset="/uploads/images/hero/hero-main-768.webp">
+                        <img src="/uploads/images/hero/hero-main-480.webp" alt="霍爾果斯會計師事務所專業服務" class="hero-carousel__image" loading="lazy">
                     </picture>
-
+                    <div class="hero-carousel__content">
+                        <h2>專業會計師事務所</h2>
+                        <p>為您的企業提供全方位的財稅服務，從工商登記到稅務規劃，我們是您最值得信賴的合作夥伴</p>
+                    </div>
                 </a>
             </div>
             
@@ -18,11 +21,14 @@
             <div class="hero-carousel__slide">
                 <a href="/services/business-registration/" class="hero-carousel__link">
                     <picture>
-                        <source media="(min-width: 1025px)" srcset="/uploads/images/services/services-tax-business.jpg">
-                        <source media="(min-width: 641px)" srcset="/uploads/images/services/services-tax-business.jpg">
-                        <img src="/uploads/images/services/services-tax-business.jpg" alt="工商登記服務" loading="lazy">
+                        <source media="(min-width: 1025px)" srcset="/uploads/images/hero/hero-business-1200.webp">
+                        <source media="(min-width: 641px)" srcset="/uploads/images/hero/hero-business-768.webp">
+                        <img src="/uploads/images/hero/hero-business-480.webp" alt="工商登記服務" class="hero-carousel__image" loading="lazy">
                     </picture>
-
+                    <div class="hero-carousel__content">
+                        <h2>工商登記服務</h2>
+                        <p>專業協助公司設立、變更登記，讓您的創業之路更加順暢</p>
+                    </div>
                 </a>
             </div>
             
@@ -30,11 +36,14 @@
             <div class="hero-carousel__slide">
                 <a href="/services/tax-filing/" class="hero-carousel__link">
                     <picture>
-                        <source media="(min-width: 1025px)" srcset="/uploads/images/services/services-tax-personal.jpg">
-                        <source media="(min-width: 641px)" srcset="/uploads/images/services/services-tax-personal.jpg">
-                        <img src="/uploads/images/services/services-tax-personal.jpg" alt="稅務申報服務" loading="lazy">
+                        <source media="(min-width: 1025px)" srcset="/uploads/images/hero/hero-tax-1200.webp">
+                        <source media="(min-width: 641px)" srcset="/uploads/images/hero/hero-tax-768.webp">
+                        <img src="/uploads/images/hero/hero-tax-480.webp" alt="稅務申報服務" class="hero-carousel__image" loading="lazy">
                     </picture>
-
+                    <div class="hero-carousel__content">
+                        <h2>稅務申報服務</h2>
+                        <p>專業的稅務規劃與申報服務，協助您合法節稅，避免稅務風險</p>
+                    </div>
                 </a>
             </div>
         </div>
@@ -48,10 +57,10 @@
         </button>
         
         <!-- 輪播指示器 -->
-        <div class="hero-carousel__indicators">
-            <button class="hero-carousel__indicator active" data-slide="0" aria-label="第1張"></button>
-            <button class="hero-carousel__indicator" data-slide="1" aria-label="第2張"></button>
-            <button class="hero-carousel__indicator" data-slide="2" aria-label="第3張"></button>
+        <div class="hero-carousel__indicators" role="tablist" aria-label="輪播導航">
+            <button class="hero-carousel__indicator active" data-slide="0" aria-label="第1張" role="tab" aria-selected="true"></button>
+            <button class="hero-carousel__indicator" data-slide="1" aria-label="第2張" role="tab" aria-selected="false"></button>
+            <button class="hero-carousel__indicator" data-slide="2" aria-label="第3張" role="tab" aria-selected="false"></button>
         </div>
     </div>
 </div>
