@@ -1,28 +1,30 @@
 <!-- 文章列表頁 -->
 <div class="article-list">
-    <!-- 分類篩選 -->
-    <div class="category-nav card-style">
-        <div class="category-nav__links">
-            <a href="{{ .RelPermalink }}" class="category-nav__link {{ if eq .RelPermalink "/articles/" }}active{{ end }}">
-                <i class="fas fa-th-large"></i>
-                <span>全部文章</span>
-            </a>
-            <a href="/articles/startup-guide/" class="category-nav__link {{ if eq .RelPermalink "/articles/startup-guide/" }}active{{ end }}">
-                <i class="fas fa-rocket"></i>
-                <span>創業教室</span>
-            </a>
-            <a href="/articles/tax-planning/" class="category-nav__link {{ if eq .RelPermalink "/articles/tax-planning/" }}active{{ end }}">
-                <i class="fas fa-file-invoice-dollar"></i>
-                <span>稅務指南</span>
-            </a>
-            <a href="/articles/accounting-basics/" class="category-nav__link {{ if eq .RelPermalink "/articles/accounting-basics/" }}active{{ end }}">
-                <i class="fas fa-calculator"></i>
-                <span>會計實務</span>
-            </a>
-            <a href="/articles/legal-updates/" class="category-nav__link {{ if eq .RelPermalink "/articles/legal-updates/" }}active{{ end }}">
-                <i class="fas fa-gavel"></i>
-                <span>法規更新</span>
-            </a>
+    <!-- 搜索框和分類標籤 -->
+    <div class="search-section card-style">
+        <div class="search-container">
+            <form id="search-form" class="search-form">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    class="search-input" 
+                    placeholder="搜尋文章..." 
+                    aria-label="搜尋文章"
+                    autocomplete="off"
+                >
+                <button type="submit" class="search-button" aria-label="搜尋">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- 分類標籤 -->
+        <div class="category-tags">
+            <button class="category-tag" data-category="all">全部文章</button>
+            <button class="category-tag" data-category="startup-guide">創業教室</button>
+            <button class="category-tag" data-category="tax-planning">稅務指南</button>
+            <button class="category-tag" data-category="accounting-basics">會計實務</button>
+            <button class="category-tag" data-category="legal-updates">法規更新</button>
         </div>
     </div>
     
@@ -36,7 +38,18 @@
                     {{ with .Params.cover }}
                     <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
                     {{ else }}
-                    <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
+                    <!-- 根據文章分類選擇合適的預設圖片 -->
+                    {{ $defaultImage := "/uploads/images/general/general-default.jpg" }}
+                    {{ if eq $.Params.category "創業教室" }}
+                        {{ $defaultImage = "/uploads/images/general/general-business-default.jpg" }}
+                    {{ else if eq $.Params.category "稅務指南" }}
+                        {{ $defaultImage = "/uploads/images/general/general-accounting-default.jpg" }}
+                    {{ else if eq $.Params.category "會計實務" }}
+                        {{ $defaultImage = "/uploads/images/general/general-accounting-desk.jpg" }}
+                    {{ else if eq $.Params.category "法規更新" }}
+                        {{ $defaultImage = "/uploads/images/general/general-legal-default.jpg" }}
+                    {{ end }}
+                    <img src="{{ $defaultImage }}" alt="{{ $.Title }}" loading="lazy">
                     {{ end }}
                 </div>
                 <div class="card-horizontal__content">
@@ -89,3 +102,68 @@
     </nav>
     {{ end }}
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const categoryTags = document.querySelectorAll('.category-tag');
+    const articleGrid = document.querySelector('.article-list__grid');
+    
+    // 分類標籤點擊事件
+    categoryTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+            const category = this.dataset.category;
+            
+            // 更新標籤狀態
+            categoryTags.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 執行搜索
+            if (category === 'all') {
+                searchInput.value = '';
+            } else {
+                searchInput.value = this.textContent;
+            }
+            
+            // 觸發搜索
+            performSearch();
+        });
+    });
+    
+    // 搜索表單提交
+    searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        performSearch();
+    });
+    
+    // 搜索功能
+    function performSearch() {
+        const query = searchInput.value.trim();
+        
+        // 這裡可以實現實際的搜索邏輯
+        // 目前先隱藏所有文章，然後根據搜索條件顯示
+        const articles = articleGrid.querySelectorAll('.card-clickable');
+        
+        articles.forEach(article => {
+            const title = article.querySelector('.article-title').textContent.toLowerCase();
+            const summary = article.querySelector('.article-summary').textContent.toLowerCase();
+            const category = article.querySelector('.article-meta__item:last-child')?.textContent.toLowerCase() || '';
+            
+            const searchText = query.toLowerCase();
+            
+            if (query === '' || 
+                title.includes(searchText) || 
+                summary.includes(searchText) || 
+                category.includes(searchText)) {
+                article.style.display = 'block';
+            } else {
+                article.style.display = 'none';
+            }
+        });
+    }
+    
+    // 初始化：選中"全部文章"
+    document.querySelector('[data-category="all"]').classList.add('active');
+});
+</script>

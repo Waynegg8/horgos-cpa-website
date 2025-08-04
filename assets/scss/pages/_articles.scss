@@ -9,6 +9,107 @@
 .article-list {
   margin-bottom: $spacing-16;
   
+  // 搜索區域
+  .search-section {
+    margin-bottom: $spacing-8;
+    padding: $spacing-6;
+    
+    .search-container {
+      margin-bottom: $spacing-4;
+      
+      .search-form {
+        display: flex;
+        gap: $spacing-2;
+        
+        .search-input {
+          flex: 1;
+          padding: $spacing-3 $spacing-4;
+          border: 1px solid rgba($color-text-primary, 0.2);
+          border-radius: $border-radius-md;
+          background-color: rgba($color-text-primary, 0.05);
+          color: $color-text-primary;
+          font-size: $font-size-base;
+          
+          &:focus {
+            outline: none;
+            border-color: $color-accent-highlight;
+            box-shadow: 0 0 0 3px rgba($color-accent-highlight, 0.2);
+          }
+          
+          &::placeholder {
+            color: $color-text-tertiary;
+          }
+        }
+        
+        .search-button {
+          padding: $spacing-3 $spacing-4;
+          background-color: $color-accent-highlight;
+          border: none;
+          border-radius: $border-radius-md;
+          color: white;
+          cursor: pointer;
+          transition: background-color $transition-base ease;
+          
+          &:hover {
+            background-color: darken($color-accent-highlight, 10%);
+          }
+          
+          i {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    
+    // 分類標籤
+    .category-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-2;
+      
+      .category-tag {
+        padding: $spacing-2 $spacing-4;
+        background-color: rgba($color-text-primary, 0.05);
+        border: 1px solid rgba($color-text-primary, 0.2);
+        border-radius: $border-radius-full;
+        color: $color-text-secondary;
+        font-size: $font-size-small;
+        cursor: pointer;
+        transition: all $transition-base ease;
+        
+        &:hover {
+          background-color: rgba($color-text-primary, 0.1);
+          border-color: rgba($color-text-primary, 0.3);
+          color: $color-text-primary;
+        }
+        
+        &.active {
+          background-color: $color-accent-highlight;
+          border-color: $color-accent-highlight;
+          color: white;
+        }
+      }
+    }
+    
+    @include mobile {
+      padding: $spacing-4;
+      
+      .search-form {
+        flex-direction: column;
+        gap: $spacing-2;
+      }
+      
+      .category-tags {
+        gap: $spacing-1;
+        
+        .category-tag {
+          padding: $spacing-1 $spacing-3;
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+  
   // 搜尋欄
   .article-search {
     margin-bottom: $spacing-6;

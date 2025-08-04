@@ -41,20 +41,24 @@
                     <fieldset class="form-group">
                         <legend>諮詢服務類型 <span class="required">*</span></legend>
                         <div class="service-buttons" role="radiogroup" aria-describedby="service-error">
-                            <input type="radio" id="service-business" name="service" value="工商登記" required aria-required="true">
-                            <label for="service-business" class="service-button">工商登記</label>
-                            
-                            <input type="radio" id="service-tax" name="service" value="稅務申報" required aria-required="true">
-                            <label for="service-tax" class="service-button">稅務申報</label>
-                            
-                            <input type="radio" id="service-audit" name="service" value="財稅簽證" required aria-required="true">
-                            <label for="service-audit" class="service-button">財稅簽證</label>
-                            
-                            <input type="radio" id="service-consulting" name="service" value="諮詢服務" required aria-required="true">
-                            <label for="service-consulting" class="service-button">諮詢服務</label>
-                            
-                            <input type="radio" id="service-other" name="service" value="其他服務" required aria-required="true">
-                            <label for="service-other" class="service-button">其他服務</label>
+                            <div class="service-button-row">
+                                <input type="radio" id="service-business" name="service" value="工商登記" required aria-required="true">
+                                <label for="service-business" class="service-button">工商登記</label>
+                                
+                                <input type="radio" id="service-tax" name="service" value="稅務申報" required aria-required="true">
+                                <label for="service-tax" class="service-button">稅務申報</label>
+                            </div>
+                            <div class="service-button-row">
+                                <input type="radio" id="service-audit" name="service" value="財稅簽證" required aria-required="true">
+                                <label for="service-audit" class="service-button">財稅簽證</label>
+                                
+                                <input type="radio" id="service-consulting" name="service" value="諮詢服務" required aria-required="true">
+                                <label for="service-consulting" class="service-button">諮詢服務</label>
+                            </div>
+                            <div class="service-button-row">
+                                <input type="radio" id="service-other" name="service" value="其他服務" required aria-required="true">
+                                <label for="service-other" class="service-button">其他服務</label>
+                            </div>
                         </div>
                         <div class="error-message" id="service-error" aria-live="polite"></div>
                     </fieldset>
@@ -66,8 +70,13 @@
                     </div>
                     
                     <div class="form-group privacy-agreement">
-                        <input type="checkbox" id="privacy" name="privacy" required aria-required="true" aria-describedby="privacy-error">
-                        <label for="privacy">我已閱讀並同意<a href="/privacy-policy/" target="_blank" rel="noopener">隱私權政策</a>，並同意提供個人資料用於預約諮詢服務 <span class="required">*</span></label>
+                        <div class="privacy-checkbox-container">
+                            <input type="checkbox" id="privacy" name="privacy" required aria-required="true" aria-describedby="privacy-error">
+                            <label for="privacy" class="privacy-label">
+                                <span class="checkbox-custom"></span>
+                                我已閱讀並同意<a href="/privacy-policy/" target="_blank" rel="noopener">隱私權政策</a>，並同意提供個人資料用於預約諮詢服務 <span class="required">*</span>
+                            </label>
+                        </div>
                         <div class="error-message" id="privacy-error" aria-live="polite"></div>
                     </div>
                     
@@ -421,9 +430,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .service-buttons {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.75rem;
   margin-bottom: 0.5rem;
+}
+
+.service-button-row {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.service-button-row:last-child {
+  justify-content: flex-start;
 }
 
 .service-buttons input[type="radio"] {
@@ -456,13 +475,83 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .privacy-agreement {
-  display: flex;
-  align-items: flex-start;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: rgba(34, 197, 94, 0.1);
+  border: 2px solid rgba(34, 197, 94, 0.3);
+  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
-.privacy-agreement input[type="checkbox"] {
-  margin-top: 0.25rem;
-  margin-right: 0.5rem;
+.privacy-agreement:hover {
+  background-color: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+.privacy-checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.privacy-checkbox-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.privacy-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #F0F0F0;
+}
+
+.checkbox-custom {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #22c55e;
+  border-radius: 4px;
+  background-color: transparent;
+  position: relative;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  transition: all 0.3s ease;
+}
+
+.privacy-checkbox-container input[type="checkbox"]:checked + .privacy-label .checkbox-custom {
+  background-color: #22c55e;
+  border-color: #22c55e;
+}
+
+.privacy-checkbox-container input[type="checkbox"]:checked + .privacy-label .checkbox-custom::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.privacy-checkbox-container input[type="checkbox"]:focus + .privacy-label .checkbox-custom {
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3);
+}
+
+.privacy-label a {
+  color: #22c55e;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.privacy-label a:hover {
+  text-decoration: underline;
 }
 
 .submit-button {
@@ -567,10 +656,23 @@ button:focus {
     gap: 0.5rem;
   }
   
+  .service-button-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
   .service-button {
     width: 100%;
     text-align: center;
     padding: 0.75rem;
+  }
+  
+  .privacy-agreement {
+    padding: 1rem;
+  }
+  
+  .privacy-label {
+    font-size: 0.9rem;
   }
   
   /* 改善觸控體驗 */
