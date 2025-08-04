@@ -43,9 +43,16 @@
       font-weight: 600;
     }
     img {
-      height: 24px;
+      height: 28px;
       width: auto;
     }
+  }
+  
+  &__title {
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: $color-text-primary;
+    margin-left: $spacing-1;
   }
 
   &__actions {

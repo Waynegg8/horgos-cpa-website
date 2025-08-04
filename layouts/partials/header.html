@@ -9,13 +9,10 @@
     <!-- Logo -->
     <div class="site-header__logo">
       <a href="{{ .Site.BaseURL | relURL }}">
-        <!-- 建議使用 SVG Logo 以獲得最佳效果 -->
-        {{ with .Site.Params.logo }}
-          <img src="{{ .light | relURL }}" alt="{{ $.Site.Title }} Logo" class="logo-light">
-          <img src="{{ .dark | relURL }}" alt="{{ $.Site.Title }} Logo" class="logo-dark">
-        {{ else }}
-          <span>{{ .Site.Title }}</span>
-        {{ end }}
+        <!-- 使用圖片 Logo -->
+        <img src="/uploads/images/general/general-logo.png" alt="{{ $.Site.Title }} Logo" class="logo-light">
+        <img src="/uploads/images/general/general-logo.png" alt="{{ $.Site.Title }} Logo" class="logo-dark">
+        <span class="site-header__title">HorgosCPA</span>
       </a>
     </div>
 
