@@ -191,13 +191,28 @@
 }
 
 .mobile-nav {
-  // ... (display logic is fine)
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
   background-color: $color-bg-primary;
   padding: 80px $spacing-8 $spacing-8;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(100%);
   transition: opacity $transition-base $ease-out, visibility $transition-base, transform $transition-base $ease-out;
+  z-index: 999;
 
   @include tablet {
     display: block;
+  }
+  
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
   }
 }
 
