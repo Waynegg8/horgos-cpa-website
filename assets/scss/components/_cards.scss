@@ -1,38 +1,49 @@
 // =============================================================================
-// Cards Component
-// 來自 STYLE_GUIDE.md
+// Card Component - Refactored to match Linear.app
 // =============================================================================
 
-.card {
-  background-color: $color-bg-secondary;
-  border: 1px solid $color-border-primary;
-  border-radius: $border-radius-lg;
-  overflow: hidden;
-  transition: all 0.2s ease-out;
+// .card-style
+// A general-purpose card class inspired by Linear's design language.
+// It provides a consistent look for containers holding grouped content.
+//
+// Features:
+// - Subtle background to stand out from the main page.
+// - Delicate, semi-transparent border.
+// - Soft, multi-layered shadow for a gentle lift effect.
+// - Generous padding for content breathability.
+// - Smooth transition for hover effects.
+
+.card-style {
+  background-color: #1A1A1F; // A background slightly lighter than the page body
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px; // Soft, modern rounded corners
+  padding: 2rem; // Generous internal spacing (32px)
+  transition: all 0.25s ease-out;
+  
+  // A subtle, multi-layered shadow for depth.
+  // One layer for a soft ambient glow, another for a more direct key light feel.
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.3), 
+    0 2px 8px rgba(0, 0, 0, 0.2);
 
   &:hover {
     transform: translateY(-4px);
-    border-color: lighten($color-border-primary, 10%);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 12px 32px rgba(0, 0, 0, 0.35), 
+      0 4px 12px rgba(0, 0, 0, 0.25);
   }
+}
 
-  .card-header,
-  .card-body,
-  .card-footer {
-    padding: $spacing-6; // 24px
-  }
+// Example of how it might be used with a grid of services
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem; // 32px
+}
 
-  .card-header {
-    border-bottom: 1px solid $color-border-primary;
-
-    h3 {
-      margin: 0;
-      font-size: $font-size-h4;
-    }
-  }
-  
-  .card-footer {
-    border-top: 1px solid $color-border-primary;
-    background-color: darken($color-bg-secondary, 2%);
-  }
+// You can add more specific card variations if needed,
+// for example, a card with no padding or a different background.
+.card-style--no-padding {
+  padding: 0;
 }
