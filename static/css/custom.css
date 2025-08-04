@@ -1,18 +1,121 @@
-/* 覆蓋主題的側邊欄佈局 */
-.home .wrapper.flex {
+/* 覆蓋主題的側邊欄佈局 - 更強的選擇器 */
+body.home .wrapper.flex {
   display: block !important;
 }
 
-.home .sidebar {
+body.home .sidebar {
   display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
 }
 
 /* 確保主要內容在首頁佔據全寬 */
-.home .primary {
+body.home .primary {
   flex: 1 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
 }
 
 /* 重設 wrapper 在首頁的樣式 */
-.home .wrapper {
+body.home .wrapper {
   display: block !important;
+  padding: 0 !important; /* 移除內邊距 */
+}
+
+/* 為服務項目頁面也應用相同的規則 */
+body.services .wrapper.flex {
+  display: block !important;
+}
+
+body.services .sidebar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+body.services .primary {
+  flex: 1 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+/* 為關於我們頁面也應用相同的規則 */
+body.about .wrapper.flex {
+  display: block !important;
+}
+
+body.about .sidebar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+body.about .primary {
+  flex: 1 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+/* 為聯絡我們頁面也應用相同的規則 */
+body.contact .wrapper.flex {
+  display: block !important;
+}
+
+body.contact .sidebar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+body.contact .primary {
+  flex: 1 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+/* 為預約諮詢頁面也應用相同的規則 */
+body.appointment .wrapper.flex {
+  display: block !important;
+}
+
+body.appointment .sidebar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+body.appointment .primary {
+  flex: 1 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
 }
