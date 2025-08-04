@@ -117,3 +117,28 @@
   outline: 2px solid $color;
   outline-offset: 2px;
 }
+
+// 網格布局 Mixin
+// -----------------------------------------------------------------------------
+
+@mixin grid($columns: 1, $gap: $spacing-6) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+// 卡片樣式 Mixin
+// -----------------------------------------------------------------------------
+
+@mixin card {
+  background-color: $color-bg-secondary;
+  border-radius: $border-radius-lg;
+  padding: $spacing-6;
+  box-shadow: $shadow-sm;
+  transition: all $transition-base ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
