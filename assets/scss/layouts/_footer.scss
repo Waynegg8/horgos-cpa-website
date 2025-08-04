@@ -1,201 +1,154 @@
-/* 頁腳樣式 */
+// =============================================================================
+// Site Footer - Refactored to match Linear.app
+// =============================================================================
 
-/* 網站頁腳 */
 .site-footer {
-  background-color: $color-bg-secondary;
-  color: $color-text-secondary;
-  margin-top: $spacing-16;
+  background-color: #0B0B0F; // Matches the body background
+  color: #A1A1A9; // Secondary text color
+  font-size: 0.9375rem; // 15px
+  padding: 6rem 0 3rem; // Generous padding: 96px top, 48px bottom
   
-  @include mobile {
-    margin-top: $spacing-8;
+  // No extra margin-top needed as the last section on the page provides it
+}
+
+// 1. Main Footer Area (Link Columns)
+// -----------------------------------------------------------------------------
+.site-footer__main {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); // 5 columns layout
+  gap: 2rem; // 32px gap
+  margin-bottom: 4rem; // 64px space before the bottom bar
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.site-footer__column {
+  &--meta {
+    // Pushes the logo/socials column to the end
+    grid-column: 5 / 6;
+    text-align: right;
+    
+    @media (max-width: 992px) {
+      grid-column: auto;
+      text-align: left;
+      grid-column-start: 1;
+      grid-row-start: 1; // Move to top on tablet
+    }
+     @media (max-width: 768px) {
+       grid-column: 1 / -1; // Full width on mobile
+       margin-bottom: 2rem;
+    }
+  }
+}
+
+.footer-heading {
+  font-size: 0.9375rem; // 15px
+  font-weight: 500;
+  color: #FFFFFF; // Brighter color for headings
+  margin: 0 0 1rem 0;
+}
+
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin-bottom: 0.75rem; // 12px
+  }
+
   a {
-    color: $color-text-secondary;
-    
+    color: #A1A1A9;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
     &:hover {
-      color: $color-text-primary;
-      text-decoration: underline;
+      color: #FFFFFF;
     }
   }
+}
+
+.link-tag {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 2px 6px;
+  font-size: 0.75rem; // 12px
+  font-weight: 500;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border-radius: 4px;
+}
+
+// 2. Meta Column Content (Logo & Socials)
+// -----------------------------------------------------------------------------
+.footer-logo {
+  display: inline-block;
+  margin-bottom: 1.5rem;
   
-  &__main {
-    padding: $spacing-12 0;
-    display: grid;
-    grid-template-columns: 2fr 2fr 1.5fr 1.5fr;
-    gap: $spacing-8;
-    
-    @include desktop {
-      grid-template-columns: 2fr 2fr 1.5fr 1.5fr;
-      gap: $spacing-6;
-    }
-    
-    @include tablet {
-      grid-template-columns: 1fr 1fr;
-      gap: $spacing-8 $spacing-4;
-    }
-    
-    @include mobile {
-      grid-template-columns: 1fr;
-      padding: $spacing-8 0;
+  img {
+    height: 28px; // Adjust as needed
+    width: auto;
+  }
+}
+
+.footer-socials {
+  display: flex;
+  gap: 1.25rem; // 20px
+  justify-content: flex-end;
+
+  @media (max-width: 992px) {
+    justify-content: flex-start;
+  }
+
+  a {
+    color: #A1A1A9;
+    font-size: 1.25rem; // Icon size
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #FFFFFF;
     }
   }
-  
-  .footer-heading {
-    font-size: $font-size-lg;
-    color: $color-text-primary;
-    margin-bottom: $spacing-4;
-    padding-bottom: $spacing-2;
-    border-bottom: 1px solid $color-border-primary;
+}
+
+
+// 3. Bottom Bar (Copyright & Legal)
+// -----------------------------------------------------------------------------
+.site-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem; // 32px
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.875rem; // 14px
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
   
-  &__logo-section {
-    .footer-logo {
-      display: block;
-      margin-bottom: $spacing-4;
-      
-      img {
-        height: 60px;
-        width: auto;
-      }
-    }
-  }
-  
-  &__seo-text {
-    color: $color-text-secondary;
-    font-size: $font-size-small;
-    line-height: $line-height-base;
-  }
-  
-  .footer-info-list {
-    list-style: none;
-    padding: 0;
+  .copyright {
     margin: 0;
-    
-    li {
-      margin-bottom: $spacing-3;
-      display: flex;
-      align-items: flex-start;
-      
-      i {
-        margin-right: $spacing-2;
-        margin-top: 0.25em;
-        color: $color-text-secondary;
-      }
-    }
   }
-  
-  &__business-status {
-    margin-top: $spacing-4;
-    margin-bottom: $spacing-4;
-    display: flex;
-    align-items: center;
-    
-    .status-indicator {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-right: $spacing-2;
-      
-      &.status-open {
-        background-color: $color-status-success;
-      }
-      
-      &.status-closed {
-        background-color: $color-status-error;
-      }
-    }
-  }
-  
-  &__social {
-    display: flex;
-    gap: $spacing-3;
-    margin-top: $spacing-4;
-    
-    .social-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: lighten($color-bg-secondary, 5%);
-      transition: transform $transition-base, background-color $transition-base;
-      
-      &:hover {
-        transform: scale(1.1);
-        background-color: lighten($color-bg-secondary, 10%);
-      }
-      
-      &.facebook:hover {
-        background-color: #1877F2;
-      }
-      
-      &.instagram:hover {
-        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      }
-      
-      &.line:hover {
-        background-color: #00B900;
-      }
-      
-      &.email:hover {
-        background-color: $color-accent-highlight;
-      }
-    }
-  }
-  
-  .footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    
-    li {
-      margin-bottom: $spacing-2;
-    }
-    
-    a {
-      display: block;
-      padding: $spacing-1 0;
-    }
-  }
-  
-  &__bottom {
-    background-color: $color-bg-primary;
-    padding: $spacing-4 0;
-    font-size: $font-size-small;
-    border-top: 1px solid $color-border-primary;
-    
-    .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      
-      @include mobile {
-        flex-direction: column;
-        gap: $spacing-2;
-        text-align: center;
-      }
-    }
-  }
-  
-  &__copyright {
-    color: $color-text-secondary;
-  }
-  
-  &__legal-links {
-    a {
-      color: $color-text-secondary;
-      
-      &:hover {
-        color: $color-text-primary;
-      }
-    }
-    
-    .separator {
-      margin: 0 $spacing-2;
-      color: $color-text-tertiary;
+}
+
+.legal-links {
+  display: flex;
+  gap: 1.5rem; // 24px
+
+  a {
+    color: #A1A1A9;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #FFFFFF;
     }
   }
 }
