@@ -1,0 +1,18 @@
+/* 覆蓋主題的側邊欄佈局 */
+.home .wrapper.flex {
+  display: block !important;
+}
+
+.home .sidebar {
+  display: none !important;
+}
+
+/* 確保主要內容在首頁佔據全寬 */
+.home .primary {
+  flex: 1 0 100% !important;
+}
+
+/* 重設 wrapper 在首頁的樣式 */
+.home .wrapper {
+  display: block !important;
+}
