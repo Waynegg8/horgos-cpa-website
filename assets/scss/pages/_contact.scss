@@ -1,272 +1,222 @@
-// 聯絡頁面樣式
-// 定義聯絡我們頁面的樣式
+/* 聯絡頁面特定樣式 */
+.contact-header {
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+  padding: 40px 0 20px;
+  border-bottom: 1px solid #e9ecef;
+}
 
-// 聯絡資訊卡片區域
-.contact-cards {
+.contact-header h1 {
+  font-size: 2.8rem;
+  color: #204B6E;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.contact-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #204B6E, rgba(32, 75, 110, 0.3));
+  border-radius: 2px;
+}
+
+.contact-header p {
+  font-size: 1.2rem;
+  color: #495057;
+  max-width: 800px;
+}
+
+.contact-details-section {
+  padding: 50px 0;
+  background-color: #ffffff;
+}
+
+.contact-info-map {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.contact-cards-wrapper {
+  flex: 1;
+  min-width: 300px;
+}
+
+.contact-cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-  
-  @include mobile {
-    grid-template-columns: 1fr;
-  }
+  gap: 20px;
 }
 
-// 聯絡資訊卡片
-.contact-info-card {
-  background-color: $color-bg-secondary;
-  border-radius: $border-radius-md;
-  padding: 2rem;
-  box-shadow: $shadow-sm;
-  text-align: center;
+.contact-card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
-  @include transition;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: $shadow-md;
-  }
-  
-  .contact-icon {
-    font-size: 2.5rem;
-    color: $color-primary;
-    margin-bottom: 1.5rem;
-  }
-  
-  .contact-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: $color-primary;
-    margin-bottom: 1rem;
-  }
-  
-  .contact-content {
-    color: $color-text-primary;
-    
-    a {
-      color: inherit;
-      
-      &:hover {
-        color: $color-primary;
-      }
-    }
-  }
+  display: flex;
+  flex-direction: column;
 }
 
-// LINE 卡片
-.line-card {
-  .line-qr {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 1.5rem;
-  }
-  
-  .line-id {
-    font-weight: 600;
-    color: $color-line;
-    margin-bottom: 0.5rem;
-  }
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-// 營業狀態卡片
-.business-status-card {
-  .status-indicator {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 0.5rem;
-    
-    &.open {
-      background-color: $color-status-success;
-    }
-    
-    &.closed {
-      background-color: $color-status-error;
-    }
-  }
-  
-  .status-text {
-    font-weight: 600;
-    margin-bottom: 1rem;
-    
-    &.open {
-      color: $color-status-success;
-    }
-    
-    &.closed {
-      color: $color-status-error;
-    }
-  }
-  
-  .business-hours {
-    margin-bottom: 1.5rem;
-    
-    .hours-title {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    
-    .hours-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.25rem;
-      
-      &:last-child {
-        margin-bottom: 0;
-      }
-      
-      .day {
-        font-weight: 500;
-      }
-      
-      .time {
-        color: $color-text-secondary;
-      }
-      
-      &.current {
-        color: $color-primary;
-        font-weight: 600;
-      }
-    }
-  }
-  
-  .next-business-day {
-    font-size: $font-size-small;
-    color: $color-text-secondary;
-  }
+.contact-card-icon {
+  font-size: 2.5rem;
+  color: #204B6E;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(32, 75, 110, 0.1);
+  border-radius: 50%;
 }
 
-// 地圖區域
-.map-section {
-  margin-bottom: 3rem;
-  
-  .section-title {
-    font-size: $font-size-h3;
-    font-weight: 600;
-    color: $color-primary;
-    margin-bottom: 1.5rem;
-    text-align: center;
+.line-icon {
+  background-color: #00B900;
+  color: white;
+}
+
+.contact-card h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #204B6E;
+  font-size: 1.5rem;
+}
+
+.contact-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-info-list li {
+  margin-bottom: 8px;
+}
+
+.contact-card a {
+  color: #204B6E;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-card a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.line-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #00B900;
+  color: white !important;
+  padding: 8px 15px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-decoration: none !important;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.line-btn:hover {
+  background-color: #009900;
+  color: white !important;
+}
+
+.line-btn i {
+  margin-right: 8px;
+}
+
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.map-link span {
+  margin-right: 5px;
+  font-size: 1.2rem;
+}
+
+.map-wrapper {
+  flex: 1;
+  min-width: 300px;
+}
+
+.map-container {
+  height: 100%;
+  min-height: 350px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.status-dot.open {
+  background-color: #10B981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.status-dot.closed {
+  background-color: #EF4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+.status-dot.lunch {
+  background-color: #F59E0B;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+
+.hours-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.hours-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hours-list li {
+  margin-bottom: 5px;
+}
+
+/* 響應式調整 */
+@media (max-width: 992px) {
+  .contact-cards-grid {
+    grid-template-columns: 1fr;
   }
   
   .map-container {
-    height: 400px;
-    border-radius: $border-radius-md;
-    overflow: hidden;
-    box-shadow: $shadow-sm;
-    
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+    min-height: 300px;
   }
 }
 
-// 交通資訊區域
-.transportation-section {
-  margin-bottom: 3rem;
-  
-  .section-title {
-    font-size: $font-size-h3;
-    font-weight: 600;
-    color: $color-primary;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-  
-  .transportation-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    
-    @include mobile {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-  }
-  
-  .transportation-card {
-    background-color: $color-bg-secondary;
-    border-radius: $border-radius-md;
-    padding: 1.5rem;
-    box-shadow: $shadow-sm;
-    
-    .card-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: $color-primary;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      
-      .icon {
-        margin-right: 0.75rem;
-        font-size: 1.5rem;
-      }
-    }
-    
-    .info-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      
-      .info-item {
-        margin-bottom: 0.75rem;
-        padding-left: 1.5rem;
-        position: relative;
-        
-        &:last-child {
-          margin-bottom: 0;
-        }
-        
-        &::before {
-          content: '\f105'; // FontAwesome 右箭頭
-          font-family: 'Font Awesome 5 Free';
-          font-weight: 900;
-          position: absolute;
-          left: 0;
-          top: 0.25rem;
-          color: $color-primary;
-        }
-      }
-    }
-  }
-}
-
-// 雙CTA區域
-.contact-cta {
-  background-color: lighten($color-primary, 60%);
-  border-radius: $border-radius-md;
-  padding: 3rem;
-  text-align: center;
-  
-  .cta-title {
-    font-size: $font-size-h3;
-    font-weight: 600;
-    color: $color-primary;
-    margin-bottom: 1.5rem;
-  }
-  
-  .cta-description {
-    max-width: 600px;
-    margin: 0 auto 2rem;
-  }
-  
-  .cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    
-    @include mobile {
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-  }
-  
-  @include mobile {
-    padding: 2rem 1.5rem;
+@media (max-width: 768px) {
+  .contact-header h1 {
+    font-size: 2.2rem;
   }
 }

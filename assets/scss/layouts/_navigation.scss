@@ -1,5 +1,5 @@
 // =============================================================================
-// Site Navigation - Aligned with Design Tokens
+// Site Navigation - Aligned with linear.app design language
 // =============================================================================
 
 @import "../utils/variables";
@@ -128,7 +128,7 @@
   background: $color-bg-secondary;
   border-radius: $border-radius-lg;
   border: 1px solid $color-border-primary;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: $shadow-lg;
   padding: $spacing-2;
   opacity: 0;
   visibility: hidden;

@@ -13,7 +13,7 @@
     {{ with .Params.category }}
     <span class="video-category">
       <i class="fas fa-folder"></i>
-      <a href="{{ "/videos/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+      <a href="{{ "/videos/" | relURL }}{{ . | urlize }}/">{{ . }}</a>
     </span>
     {{ end }}
     
@@ -29,7 +29,7 @@
   <div class="video-tags">
     <i class="fas fa-tags"></i>
     {{ range . }}
-    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+    <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
     {{ end }}
   </div>
   {{ end }}

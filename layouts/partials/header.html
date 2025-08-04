@@ -8,7 +8,7 @@
 
     <!-- Logo -->
     <div class="site-header__logo">
-      <a href="{{ .Site.BaseURL | relLangURL }}">
+      <a href="{{ .Site.BaseURL | relURL }}">
         <!-- 建議使用 SVG Logo 以獲得最佳效果 -->
         {{ with .Site.Params.logo }}
           <img src="{{ .light | relURL }}" alt="{{ $.Site.Title }} Logo" class="logo-light">
@@ -27,7 +27,7 @@
           {{ $isParent := .HasChildren }}
           {{ $isActive := $currentPage.HasMenuCurrent "main" . }}
           <li class="nav-item {{ if $isParent }}has-dropdown{{ end }} {{ if $isActive }}is-active{{ end }}">
-            <a href="{{ .URL | relLangURL }}" class="nav-link">
+            <a href="{{ .URL | relURL }}" class="nav-link">
               <span>{{ .Name }}</span>
               {{ if $isParent }}
                 <svg class="nav-link__icon" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"></path></svg>
@@ -38,7 +38,7 @@
                 <div class="dropdown-menu__content">
                   {{ range .Children }}
                     {{ $isChildActive := $currentPage.IsMenuCurrent "main" . }}
-                    <a href="{{ .URL | relLangURL }}" class="dropdown-item {{ if $isChildActive }}is-active{{ end }}">
+                    <a href="{{ .URL | relURL }}" class="dropdown-item {{ if $isChildActive }}is-active{{ end }}">
                       {{ .Name }}
                     </a>
                   {{ end }}
@@ -53,7 +53,7 @@
     <!-- Header Actions (e.g., CTA Button) -->
     <div class="site-header__actions">
       {{ with .Site.Params.cta.header }}
-        <a href="{{ .url | relLangURL }}" class="btn btn--primary btn--small">{{ .text }}</a>
+        <a href="{{ .url | relURL }}" class="btn btn--primary btn--small">{{ .text }}</a>
       {{ end }}
 
       <!-- Mobile Nav Toggle -->
@@ -73,7 +73,7 @@
         {{ range .Site.Menus.main }}
           {{ $isParent := .HasChildren }}
            <li class="mobile-nav__item {{ if $isParent }}has-dropdown{{ end }}">
-             <a href="{{ if not $isParent }}{{ .URL | relLangURL }}{{ else }}#{{ end }}" class="mobile-nav__link" {{ if $isParent }}data-toggle-dropdown{{end}}>
+             <a href="{{ if not $isParent }}{{ .URL | relURL }}{{ else }}#{{ end }}" class="mobile-nav__link" {{ if $isParent }}data-toggle-dropdown{{end}}>
                <span>{{ .Name }}</span>
                {{ if $isParent }}
                 <svg class="nav-link__icon" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"></path></svg>
@@ -82,7 +82,7 @@
              {{ if $isParent }}
                <ul class="mobile-nav__dropdown">
                  {{ range .Children }}
-                   <li><a href="{{ .URL | relLangURL }}" class="mobile-nav__dropdown-link">{{ .Name }}</a></li>
+                   <li><a href="{{ .URL | relURL }}" class="mobile-nav__dropdown-link">{{ .Name }}</a></li>
                  {{ end }}
                </ul>
              {{ end }}

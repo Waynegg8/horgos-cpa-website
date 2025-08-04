@@ -1,7 +1,6 @@
 baseURL = "https://horgoscpa.com/"
 title = "霍爾果斯會計師事務所"
 languageCode = "zh-tw"
-defaultContentLanguage = "zh-tw"
 hasCJKLanguage = true
 theme = "mainroad"
 [pagination]
@@ -38,9 +37,34 @@ googleAnalytics = "G-RKMCS9WVS5"
   mathjax = false
   customCSS = ["css/custom.css"]
   customJS = ["js/custom.js"]
+  
+  # Footer 參數
+  [Params.footer]
+    seo_text = "霍爾果斯會計師事務所是您在台中值得信賴的夥伴。我們提供專業的工商登記、稅務申報、財稅簽證及企業管理諮詢服務，協助您的事業穩健成長。"
+  
+  # 公司資訊
+  address = "台中市西區建國路21號3樓之1"
+  phone = "04-2220-5606"
+  email = "admin@horgoscpa.com"
+  opening_hours = "週一至週五 08:30–17:30"
+
+  # 社群媒體
+  [[Params.social]]
+    name = "Facebook"
+    icon = "fab fa-facebook-f"
+    url = "https://www.facebook.com/horgoscpa"
+  [[Params.social]]
+    name = "Line"
+    icon = "fab fa-line"
+    url = "https://line.me/ti/p/@208ihted"
+  [[Params.social]]
+    name = "Instagram"
+    icon = "fab fa-instagram"
+    url = "https://www.instagram.com/horgoscpa"
 
 [Params.logo]
   image = "/uploads/images/general/general-logo.png"
+  dark = "/uploads/images/general/general-logo.png"
   title = "霍爾果斯會計師事務所"
   subtitle = "專業會計稅務服務"
 
@@ -80,183 +104,216 @@ googleAnalytics = "G-RKMCS9WVS5"
   addressCountry = "TW"
 
 [menu]
+  # Main Menu
   [[menu.main]]
     name = "關於我們"
     url = "/about/"
     weight = 1
-
   [[menu.main]]
     identifier = "services"
     name = "服務項目"
     url = "/services/"
     weight = 2
-
   [[menu.main]]
     parent = "services"
     name = "工商登記"
     url = "/services/business-registration/"
     weight = 1
-
   [[menu.main]]
     parent = "services"
     name = "稅務申報"
     url = "/services/tax-filing/"
     weight = 2
-
   [[menu.main]]
     parent = "services"
     name = "財稅簽證"
     url = "/services/audit-services/"
     weight = 3
-
   [[menu.main]]
     parent = "services"
     name = "諮詢服務"
     url = "/services/consulting/"
     weight = 4
-
   [[menu.main]]
     identifier = "articles"
     name = "知識文章"
     url = "/articles/"
     weight = 3
-
   [[menu.main]]
     parent = "articles"
     name = "創業教室"
     url = "/articles/startup-guide/"
     weight = 1
-
   [[menu.main]]
     parent = "articles"
     name = "稅務指南"
     url = "/articles/tax-planning/"
     weight = 2
-
   [[menu.main]]
     parent = "articles"
     name = "會計實務"
     url = "/articles/accounting-basics/"
     weight = 3
-
   [[menu.main]]
     parent = "articles"
     name = "法規更新"
     url = "/articles/legal-updates/"
     weight = 4
-
   [[menu.main]]
     identifier = "videos"
     name = "影音專區"
     url = "/videos/"
     weight = 4
-
   [[menu.main]]
     parent = "videos"
     name = "熱門影片"
     url = "/videos/popular/"
     weight = 1
-
   [[menu.main]]
     parent = "videos"
     name = "教學影片"
     url = "/videos/tutorials/"
     weight = 2
-
   [[menu.main]]
     parent = "videos"
     name = "案例分享"
     url = "/videos/case-studies/"
     weight = 3
-
   [[menu.main]]
     parent = "videos"
     name = "法規解說"
     url = "/videos/legal-explanation/"
     weight = 4
-
   [[menu.main]]
     identifier = "faq"
     name = "常見問題"
     url = "/faq/"
     weight = 5
-
   [[menu.main]]
     parent = "faq"
     name = "創業問題"
     url = "/faq/startup/"
     weight = 1
-
   [[menu.main]]
     parent = "faq"
     name = "稅務問題"
     url = "/faq/tax/"
     weight = 2
-
   [[menu.main]]
     parent = "faq"
     name = "記帳問題"
     url = "/faq/accounting/"
     weight = 3
-
   [[menu.main]]
     parent = "faq"
     name = "其他問題"
     url = "/faq/others/"
     weight = 4
-
   [[menu.main]]
     identifier = "downloads"
     name = "下載專區"
     url = "/downloads/"
     weight = 6
-
   [[menu.main]]
     parent = "downloads"
     name = "範本下載"
     url = "/downloads/templates/"
     weight = 1
-
   [[menu.main]]
     parent = "downloads"
     name = "表格下載"
     url = "/downloads/forms/"
     weight = 2
-
   [[menu.main]]
     parent = "downloads"
     name = "檢查清單"
     url = "/downloads/checklists/"
     weight = 3
-
   [[menu.main]]
     parent = "downloads"
     name = "法規文件"
     url = "/downloads/regulations/"
     weight = 4
-
   [[menu.main]]
     name = "聯絡我們"
     url = "/contact/"
     weight = 7
-
   [[menu.main]]
     name = "預約諮詢"
     url = "/appointment/"
     weight = 8
 
-  [[menu.footer]]
+  # Footer Services Menu
+  [[menu.footer_services]]
+    name = "工商登記"
+    url = "/services/business-registration/"
+    weight = 1
+    [menu.footer_services.params]
+      icon = "fas fa-building"
+  [[menu.footer_services]]
+    name = "稅務申報"
+    url = "/services/tax-filing/"
+    weight = 2
+    [menu.footer_services.params]
+      icon = "fas fa-file-invoice-dollar"
+  [[menu.footer_services]]
+    name = "財稅簽證"
+    url = "/services/audit-services/"
+    weight = 3
+    [menu.footer_services.params]
+      icon = "fas fa-stamp"
+  [[menu.footer_services]]
+    name = "諮詢服務"
+    url = "/services/consulting/"
+    weight = 4
+    [menu.footer_services.params]
+      icon = "fas fa-comments"
+
+  # Footer Quicklinks Menu
+  [[menu.footer_quicklinks]]
+    name = "關於我們"
+    url = "/about/"
+    weight = 1
+    [menu.footer_quicklinks.params]
+      icon = "fas fa-info-circle"
+  [[menu.footer_quicklinks]]
+    name = "知識文章"
+    url = "/articles/"
+    weight = 2
+    [menu.footer_quicklinks.params]
+      icon = "fas fa-book-open"
+  [[menu.footer_quicklinks]]
+    name = "影音專區"
+    url = "/videos/"
+    weight = 3
+    [menu.footer_quicklinks.params]
+      icon = "fas fa-video"
+  [[menu.footer_quicklinks]]
+    name = "常見問題"
+    url = "/faq/"
+    weight = 4
+    [menu.footer_quicklinks.params]
+      icon = "fas fa-question-circle"
+  [[menu.footer_quicklinks]]
+    name = "聯絡我們"
+    url = "/contact/"
+    weight = 5
+    [menu.footer_quicklinks.params]
+      icon = "fas fa-phone-alt"
+
+  # Footer Legal Menu
+  [[menu.footer_legal]]
     name = "隱私權政策"
-    identifier = "privacy-policy"
     url = "/privacy-policy/"
     weight = 1
-
-  [[menu.footer]]
+    [menu.footer_legal.params]
+      icon = "fas fa-shield-alt"
+  [[menu.footer_legal]]
     name = "Cookies政策"
-    identifier = "cookies-policy"
     url = "/cookies-policy/"
     weight = 2
+    [menu.footer_legal.params]
+      icon = "fas fa-cookie-bite"
 
 [outputs]
 home = ["HTML", "JSON"]
-

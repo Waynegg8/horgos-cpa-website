@@ -10,7 +10,7 @@
       <!-- Region 1: LOGO & SEO -->
       <div class="site-footer__region site-footer__region--logo-seo">
         {{ with .Site.Params.logo }}
-        <a href="{{ $.Site.BaseURL | relLangURL }}" class="footer-logo">
+        <a href="{{ $.Site.BaseURL | relURL }}" class="footer-logo">
           <img src="{{ .dark | relURL }}" alt="{{ $.Site.Title }} Logo">
         </a>
         {{ end }}
@@ -59,7 +59,7 @@
           {{ with .Site.Menus.footer_services }}
           <ul class="footer-links">
             {{ range . }}
-            <li><a href="{{ .URL | relLangURL }}"><i class="{{ .Params.icon | default "fas fa-angle-right" }}"></i> {{ .Name }}</a></li>
+            <li><a href="{{ .URL | relURL }}"><i class="{{ .Params.icon | default "fas fa-angle-right" }}"></i> {{ .Name }}</a></li>
             {{ end }}
           </ul>
           {{ end }}
@@ -75,7 +75,7 @@
           {{ with .Site.Menus.footer_quicklinks }}
           <ul class="footer-links">
             {{ range . }}
-            <li><a href="{{ .URL | relLangURL }}"><i class="{{ .Params.icon | default "fas fa-angle-right" }}"></i> {{ .Name }}</a></li>
+            <li><a href="{{ .URL | relURL }}"><i class="{{ .Params.icon | default "fas fa-angle-right" }}"></i> {{ .Name }}</a></li>
             {{ end }}
           </ul>
           {{ end }}
@@ -94,7 +94,7 @@
         {{ with .Site.Menus.footer_legal }}
           {{ range $index, $element := . }}
             {{ if gt $index 0 }}<span class="separator">|</span>{{ end }}
-            <a href="{{ .URL | relLangURL }}">
+            <a href="{{ .URL | relURL }}">
               <i class="{{ .Params.icon }}"></i> {{ .Name }}
             </a>
           {{ end }}

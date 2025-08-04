@@ -116,7 +116,7 @@
 // Bottom Bar (Region 5)
 .site-footer__bottom {
   // Per spec 3.2.2, a darker shade
-  background-color: darken($color-accent-primary, 5%);
+  background-color: $color-accent-darker;
   padding: $spacing-4 0;
   font-size: 0.8125rem; // Slightly smaller
 
