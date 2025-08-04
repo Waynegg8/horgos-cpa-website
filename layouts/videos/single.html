@@ -1,98 +1,106 @@
 {{ define "main" }}
-<main class="main" role="main">
-  <article class="post">
-    <header class="post__header">
-      <h1 class="post__title">{{ .Title }}</h1>
-      {{ partial "videos/metadata.html" . }}
-    </header>
+<div class="container">
+  <!-- 影片頁面使用兩欄佈局 -->
+  <div class="two-column">
+    <div class="two-column__main">
+      <article class="post">
+        <header class="post__header">
+          <h1 class="post__title">{{ .Title }}</h1>
+          {{ partial "videos/metadata.html" . }}
+        </header>
 
-    <div class="post__content">
-      {{ partial "videos/player.html" . }}
-      
-      <div class="video-description-content">
-        {{ .Content }}
-      </div>
-      
-      {{ if .Params.series }}
-      <div class="series-navigation">
-        <h3>系列影片導航</h3>
-        
-        {{ $series := .Params.series }}
-        {{ $currentOrder := .Params.series_order }}
-        {{ $seriesPages := where (where .Site.RegularPages "Params.series" $series) "Type" "videos" }}
-        {{ $totalInSeries := len $seriesPages }}
-        
-        <div class="series-progress">
-          <span>{{ $series }} 系列 {{ $currentOrder }}/{{ $totalInSeries }}</span>
-          <div class="progress-bar">
-            <div class="progress" style="width: {{ mul (div $currentOrder $totalInSeries) 100 }}%;"></div>
+        <div class="post__content">
+          {{ partial "videos/player.html" . }}
+          
+          <div class="video-description-content">
+            {{ .Content }}
+          </div>
+          
+          {{ if .Params.series }}
+          <div class="series-navigation">
+            <h3>系列影片導航</h3>
+            
+            {{ $series := .Params.series }}
+            {{ $currentOrder := .Params.series_order }}
+            {{ $seriesPages := where (where .Site.RegularPages "Params.series" $series) "Type" "videos" }}
+            {{ $totalInSeries := len $seriesPages }}
+            
+            <div class="series-progress">
+              <span>{{ $series }} 系列 {{ $currentOrder }}/{{ $totalInSeries }}</span>
+              <div class="progress-bar">
+                <div class="progress" style="width: {{ mul (div $currentOrder $totalInSeries) 100 }}%;"></div>
+              </div>
+            </div>
+            
+            <div class="series-links">
+              {{ $prevPage := where $seriesPages ".Params.series_order" (sub $currentOrder 1) }}
+              {{ $nextPage := where $seriesPages ".Params.series_order" (add $currentOrder 1) }}
+              
+              {{ if $prevPage }}
+                {{ with index $prevPage 0 }}
+                <a href="{{ .RelPermalink }}" class="prev-link">
+                  <i class="fas fa-arrow-left"></i> 上一部: {{ .Title }}
+                </a>
+                {{ end }}
+              {{ end }}
+              
+              {{ if $nextPage }}
+                {{ with index $nextPage 0 }}
+                <a href="{{ .RelPermalink }}" class="next-link">
+                  下一部: {{ .Title }} <i class="fas fa-arrow-right"></i>
+                </a>
+                {{ end }}
+              {{ end }}
+            </div>
+            
+            <a href="{{ with index (where $seriesPages ".Params.series_order" 1) 0 }}{{ .RelPermalink }}{{ end }}" class="view-series-btn">
+              查看完整系列
+            </a>
+          </div>
+          {{ end }}
+          
+          <div class="cta-section">
+            <a href="/appointment/" class="cta-button primary">立即預約諮詢</a>
+            <a href="https://line.me/R/ti/p/@horgoscpa" class="cta-button secondary">加入Line諮詢</a>
+          </div>
+          
+          <div class="video-comments">
+            <h3>留言討論</h3>
+            <div id="disqus_thread"></div>
+            <script>
+              var disqus_config = function () {
+                this.page.url = {{ .Permalink }};
+                this.page.identifier = {{ .File.UniqueID }};
+              };
+              (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://{{ .Site.Params.disqusShortname }}.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+              })();
+            </script>
+            <noscript>請啟用 JavaScript 以查看 <a href="https://disqus.com/?ref_noscript">Disqus 提供的評論功能</a></noscript>
+          </div>
+          
+          <div class="related-videos">
+            <h3>相關影片</h3>
+            <div class="related-videos-grid">
+              {{ $related := (where .Site.RegularPages "Type" "videos") | intersect (where .Site.RegularPages "Params.tags" "intersect" .Params.tags) | first 3 }}
+              {{ range $related }}
+                {{ if ne .Permalink $.Permalink }}
+                  {{ partial "videos/card.html" . }}
+                {{ end }}
+              {{ end }}
+            </div>
           </div>
         </div>
-        
-        <div class="series-links">
-          {{ $prevPage := where $seriesPages ".Params.series_order" (sub $currentOrder 1) }}
-          {{ $nextPage := where $seriesPages ".Params.series_order" (add $currentOrder 1) }}
-          
-          {{ if $prevPage }}
-            {{ with index $prevPage 0 }}
-            <a href="{{ .RelPermalink }}" class="prev-link">
-              <i class="fas fa-arrow-left"></i> 上一部: {{ .Title }}
-            </a>
-            {{ end }}
-          {{ end }}
-          
-          {{ if $nextPage }}
-            {{ with index $nextPage 0 }}
-            <a href="{{ .RelPermalink }}" class="next-link">
-              下一部: {{ .Title }} <i class="fas fa-arrow-right"></i>
-            </a>
-            {{ end }}
-          {{ end }}
-        </div>
-        
-        <a href="{{ with index (where $seriesPages ".Params.series_order" 1) 0 }}{{ .RelPermalink }}{{ end }}" class="view-series-btn">
-          查看完整系列
-        </a>
-      </div>
-      {{ end }}
-      
-      <div class="cta-section">
-        <a href="/appointment/" class="cta-button primary">立即預約諮詢</a>
-        <a href="https://line.me/R/ti/p/@horgoscpa" class="cta-button secondary">加入Line諮詢</a>
-      </div>
-      
-      <div class="video-comments">
-        <h3>留言討論</h3>
-        <div id="disqus_thread"></div>
-        <script>
-          var disqus_config = function () {
-            this.page.url = {{ .Permalink }};
-            this.page.identifier = {{ .File.UniqueID }};
-          };
-          (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://{{ .Site.Params.disqusShortname }}.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-          })();
-        </script>
-        <noscript>請啟用 JavaScript 以查看 <a href="https://disqus.com/?ref_noscript">Disqus 提供的評論功能</a></noscript>
-      </div>
-      
-      <div class="related-videos">
-        <h3>相關影片</h3>
-        <div class="related-videos-grid">
-          {{ $related := (where .Site.RegularPages "Type" "videos") | intersect (where .Site.RegularPages "Params.tags" "intersect" .Params.tags) | first 3 }}
-          {{ range $related }}
-            {{ if ne .Permalink $.Permalink }}
-              {{ partial "videos/card.html" . }}
-            {{ end }}
-          {{ end }}
-        </div>
-      </div>
+      </article>
     </div>
-  </article>
-  
-  <!-- 側邊欄由 _default/baseof.html 處理 -->
-</main>
+    
+    <!-- 側邊欄 -->
+    <div class="two-column__sidebar">
+      {{ partial "sidebar/videos-sidebar.html" . }}
+    </div>
+  </div>
+</div>
 {{ end }}

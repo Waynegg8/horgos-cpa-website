@@ -1,13 +1,10 @@
 {{ define "main" }}
 <div class="container">
-    <div class="full-width">
-        <div class="full-width__content">
+    {{ if eq .Section "articles" }}
+    <!-- 文章頁面使用兩欄佈局 -->
+    <div class="two-column">
+        <div class="two-column__main">
             <article class="single-content">
-                <!-- 文章目錄 -->
-                {{ if and (eq .Section "articles") (eq .Kind "page") }}
-                {{ partial "sidebar/table-of-contents.html" . }}
-                {{ end }}
-                {{ if eq .Section "articles" }}
                 <!-- 文章標頭資訊區 -->
                 <div class="article-header">
                     <div class="article-meta">
@@ -37,14 +34,12 @@
                         <span class="article-reading-time">閱讀時間：{{ math.Round (div (countwords .Content) 500.0) }}分鐘</span>
                     </div>
                 </div>
-                {{ end }}
                 
-                <!-- 文章內容區域 - 限制寬度提升閱讀體驗 -->
+                <!-- 文章內容區域 -->
                 <div class="article-content">
                     {{ .Content }}
                 </div>
                 
-                {{ if eq .Section "articles" }}
                 <!-- 系列導航 -->
                 {{ partial "articles/series-navigation.html" . }}
                 
@@ -64,9 +59,6 @@
                         <i class="fas fa-link"></i> 複製連結
                     </button>
                 </div>
-                
-                <!-- 雙CTA行動呼籲區域 -->
-                {{ partial "shared/dual-cta.html" . }}
                 
                 <!-- 相關文章推薦 - 精緻卡片式佈局 -->
                 {{ $related := .Site.RegularPages.Related . | first 3 }}
@@ -98,10 +90,32 @@
                     </div>
                 </section>
                 {{ end }}
+            </article>
+        </div>
+        
+        <!-- 側邊欄 -->
+        <div class="two-column__sidebar">
+            {{ partial "sidebar/articles-sidebar.html" . }}
+        </div>
+    </div>
+    {{ else }}
+    <!-- 其他頁面使用全寬佈局 -->
+    <div class="full-width">
+        <div class="full-width__content">
+            <article class="single-content">
+                <!-- 文章目錄 -->
+                {{ if and (eq .Section "articles") (eq .Kind "page") }}
+                {{ partial "sidebar/table-of-contents.html" . }}
                 {{ end }}
+                
+                <!-- 文章內容區域 - 限制寬度提升閱讀體驗 -->
+                <div class="article-content">
+                    {{ .Content }}
+                </div>
             </article>
         </div>
     </div>
+    {{ end }}
     
     {{ if eq .Section "services" }}
     <!-- 雙CTA行動呼籲區域 -->
