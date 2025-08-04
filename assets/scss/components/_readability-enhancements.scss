@@ -1,0 +1,125 @@
+// =============================================================================
+// 易讀性增強組件
+// =============================================================================
+
+// 內容區塊優化
+.content-area {
+  p, li {
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+    word-spacing: 0.05em;
+    
+    &:not(:last-child) {
+      margin-bottom: $spacing-5;
+    }
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: $spacing-8;
+    margin-bottom: $spacing-4;
+    
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  
+  ul, ol {
+    padding-left: $spacing-6;
+    margin-bottom: $spacing-5;
+    
+    li {
+      margin-bottom: $spacing-2;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// 卡片內容優化
+.card-content {
+  h3 {
+    line-height: 1.4;
+    margin-bottom: $spacing-3;
+  }
+  
+  p {
+    line-height: 1.6;
+    margin-bottom: $spacing-3;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// 標題間距優化
+.section-spacing {
+  margin-bottom: $spacing-12;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  @include mobile {
+    margin-bottom: $spacing-8;
+  }
+}
+
+// 文字內容區塊
+.text-block {
+  max-width: 65ch; // 最佳閱讀寬度
+  margin: 0 auto;
+  
+  p {
+    line-height: 1.8;
+    margin-bottom: $spacing-5;
+  }
+  
+  h2, h3 {
+    margin-top: $spacing-10;
+    margin-bottom: $spacing-4;
+  }
+}
+
+// 響應式文字大小
+@include mobile {
+  body {
+    font-size: 0.9rem; // 手機稍微縮小字體
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+// 強調文字樣式
+.highlight-text {
+  color: $color-accent-highlight;
+  font-weight: 600;
+}
+
+.muted-text {
+  color: $color-text-secondary;
+  font-size: $font-size-small;
+}
+
+// 易讀性工具類
+.readable-content {
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  
+  h1, h2, h3, h4 {
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+}

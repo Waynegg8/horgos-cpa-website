@@ -1,0 +1,164 @@
+// =============================================================================
+// 首頁組件優化樣式
+// =============================================================================
+
+// 首頁容器
+.homepage-container {
+  .section {
+    margin-bottom: $spacing-16;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    @include mobile {
+      margin-bottom: $spacing-12;
+    }
+  }
+}
+
+// 服務卡片網格優化
+.service-cards {
+  padding: $spacing-16 0;
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-6;
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: $spacing-4;
+    }
+  }
+}
+
+// 創業專區卡片優化
+.startup-section {
+  padding: $spacing-16 0;
+  background-color: rgba($color-bg-secondary, 0.3);
+  
+  .startup-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-6;
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: $spacing-4;
+    }
+  }
+  
+  .startup-card {
+    @extend .card-style;
+    text-align: center;
+    
+    &__icon {
+      margin-bottom: $spacing-4;
+      
+      i {
+        font-size: 2.5rem;
+        color: $color-accent-highlight;
+      }
+    }
+    
+    &__title {
+      font-size: $font-size-h4;
+      color: $color-text-primary;
+      margin-bottom: $spacing-3;
+      font-weight: 600;
+    }
+    
+    &__description {
+      color: $color-text-secondary;
+      line-height: $line-height-base;
+      margin-bottom: $spacing-4;
+    }
+    
+    &__link {
+      color: $color-accent-highlight;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color $transition-base ease;
+      
+      &:hover {
+        color: lighten($color-accent-highlight, 10%);
+      }
+    }
+  }
+}
+
+// 雙CTA區域優化
+.dual-cta {
+  padding: $spacing-20 0;
+  background: linear-gradient(135deg, rgba($color-accent-highlight, 0.1) 0%, rgba($color-bg-secondary, 0.8) 100%);
+  text-align: center;
+  
+  &__title {
+    font-size: $font-size-h2;
+    color: $color-text-primary;
+    margin-bottom: $spacing-4;
+    font-weight: 600;
+    
+    @include mobile {
+      font-size: $font-size-h3;
+    }
+  }
+  
+  &__description {
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-8;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: $line-height-base;
+    
+    @include mobile {
+      font-size: $font-size-base;
+      margin-bottom: $spacing-6;
+    }
+  }
+  
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-4;
+    
+    @include mobile {
+      flex-direction: column;
+      align-items: center;
+      gap: $spacing-3;
+    }
+  }
+}
+
+// CTA按鈕樣式
+.btn-cta-primary {
+  @extend .btn;
+  background-color: $color-accent-primary;
+  color: #ffffff;
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-lg;
+  border-radius: $border-radius-lg;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($color-accent-primary, 0.3);
+  }
+}
+
+.btn-cta-secondary {
+  @extend .btn;
+  background-color: $color-line;
+  color: #ffffff;
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-lg;
+  border-radius: $border-radius-lg;
+  
+  &:hover:not(:disabled) {
+    background-color: darken($color-line, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($color-line, 0.3);
+  }
+}

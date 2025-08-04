@@ -48,8 +48,21 @@ h6, .h6 {
 // -----------------------------------------------------------------------------
 p {
   margin: 0 0 $paragraph-spacing 0;
+  line-height: $line-height-base;
+  
   &:last-child {
     margin-bottom: 0;
+  }
+  
+  // 提升段落內容易讀性
+  &.large-text {
+    font-size: $font-size-lg;
+    line-height: 1.8;
+  }
+  
+  &.small-text {
+    font-size: $font-size-small;
+    line-height: 1.6;
   }
 }
 

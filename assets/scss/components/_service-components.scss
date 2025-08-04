@@ -1,0 +1,142 @@
+// =============================================================================
+// 服務頁面組件樣式
+// =============================================================================
+
+// 服務特色組件
+.service-features {
+  padding: $spacing-16 0;
+  
+  .service-feature__icon {
+    text-align: center;
+    margin-bottom: $spacing-4;
+    
+    i {
+      font-size: 2.5rem;
+      color: $color-accent-highlight;
+    }
+  }
+  
+  .service-feature__title {
+    font-size: $font-size-h4;
+    color: $color-text-primary;
+    margin-bottom: $spacing-3;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  .service-feature__description {
+    color: $color-text-secondary;
+    text-align: center;
+    line-height: $line-height-base;
+  }
+}
+
+// 服務流程組件
+.service-process {
+  padding: $spacing-16 0;
+  background-color: rgba($color-bg-secondary, 0.5);
+  
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-6;
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: $spacing-4;
+    }
+  }
+  
+  .process-step {
+    position: relative;
+    
+    &__number {
+      position: absolute;
+      top: -$spacing-3;
+      left: $spacing-4;
+      width: 40px;
+      height: 40px;
+      background-color: $color-accent-highlight;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: $font-size-lg;
+      z-index: 2;
+    }
+    
+    &__content {
+      padding-top: $spacing-6;
+      min-height: 120px;
+    }
+    
+    &__title {
+      font-size: $font-size-h4;
+      color: $color-text-primary;
+      margin-bottom: $spacing-3;
+      font-weight: 600;
+    }
+    
+    &__description {
+      color: $color-text-secondary;
+      line-height: $line-height-base;
+    }
+  }
+}
+
+// 服務承諾組件
+.service-commitment {
+  padding: $spacing-16 0;
+  
+  .commitment-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-6;
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: $spacing-4;
+    }
+  }
+  
+  .commitment-card {
+    text-align: center;
+    
+    &__icon {
+      margin-bottom: $spacing-4;
+      
+      i {
+        font-size: 2.5rem;
+        color: $color-accent-highlight;
+      }
+    }
+    
+    &__title {
+      font-size: $font-size-h4;
+      color: $color-text-primary;
+      margin-bottom: $spacing-3;
+      font-weight: 600;
+    }
+    
+    &__description {
+      color: $color-text-secondary;
+      line-height: $line-height-base;
+    }
+  }
+}
+
+// 區塊標題樣式
+.section-title {
+  font-size: $font-size-h2;
+  color: $color-text-primary;
+  text-align: center;
+  margin-bottom: $spacing-8;
+  font-weight: 600;
+  
+  @include mobile {
+    font-size: $font-size-h3;
+    margin-bottom: $spacing-6;
+  }
+}

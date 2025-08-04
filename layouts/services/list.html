@@ -27,8 +27,14 @@
             </div>
         </section>
 
-        <!-- All other sections (features, process, commitment) are removed -->
-        <!-- as they belong on detailed service pages or the about page. -->
+        <!-- 服務特色區 -->
+        {{ partial "services/service-features.html" . }}
+        
+        <!-- 服務流程區 -->
+        {{ partial "services/service-process.html" . }}
+        
+        <!-- 服務承諾區 -->
+        {{ partial "services/service-commitment.html" . }}
 
     </div>
     
