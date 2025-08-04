@@ -1,0 +1,229 @@
+/* 圖片優化樣式 */
+
+// 響應式圖片
+.responsive-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  
+  &__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.3s ease;
+    
+    &.loaded {
+      opacity: 1;
+    }
+  }
+  
+  // 載入狀態
+  &:not(.loaded) {
+    .responsive-image__img {
+      opacity: 0.7;
+    }
+  }
+  
+  // 錯誤狀態
+  &.error {
+    .responsive-image__img {
+      opacity: 0.5;
+      filter: grayscale(100%);
+    }
+  }
+}
+
+// 漸進式圖片容器
+.progressive-image-container {
+  position: relative;
+  overflow: hidden;
+  background-color: $color-border-primary;
+  border-radius: $border-radius-md;
+  
+  .preview-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(10px);
+    transform: scale(1.1);
+    transition: opacity 0.3s ease-out;
+    opacity: 1;
+    object-fit: cover;
+  }
+  
+  .full-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease-out;
+    opacity: 0;
+    object-fit: cover;
+  }
+  
+  &.loaded {
+    .preview-image {
+      opacity: 0;
+    }
+    
+    .full-image {
+      opacity: 1;
+    }
+  }
+  
+  // 載入狀態
+  &:not(.loaded) {
+    .full-image {
+      opacity: 0;
+    }
+  }
+  
+  // 錯誤狀態
+  &.error {
+    .preview-image,
+    .full-image {
+      opacity: 0.5;
+      filter: grayscale(100%);
+    }
+  }
+}
+
+// 延遲載入圖片
+.lazy-image {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+// 圖片載入骨架屏
+.image-skeleton {
+  background-color: $color-border-primary;
+  border-radius: $border-radius-sm;
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+      rgba($color-bg-primary, 0) 0%, 
+      rgba($color-bg-primary, 0.5) 50%, 
+      rgba($color-bg-primary, 0) 100%);
+    animation: skeleton-loading 1.5s infinite;
+  }
+}
+
+// 圖片載入動畫
+@keyframes image-loading {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// 圖片載入完成動畫
+.image-loaded {
+  animation: image-loading 0.3s ease-out;
+}
+
+// 圖片錯誤狀態
+.image-error {
+  position: relative;
+  
+  &::before {
+    content: '圖片載入失敗';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $color-text-secondary;
+    font-size: $font-size-small;
+    text-align: center;
+    z-index: 1;
+  }
+  
+  img {
+    opacity: 0.3;
+    filter: grayscale(100%);
+  }
+}
+
+// 圖片優化工具類
+.image-optimized {
+  // 確保圖片不會超出容器
+  max-width: 100%;
+  height: auto;
+  
+  // 保持寬高比
+  aspect-ratio: attr(width) / attr(height);
+}
+
+// 響應式圖片尺寸
+.image-responsive {
+  width: 100%;
+  height: auto;
+  
+  // 桌面版
+  @media (min-width: 1025px) {
+    max-width: 1200px;
+  }
+  
+  // 平板版
+  @media (min-width: 641px) and (max-width: 1024px) {
+    max-width: 768px;
+  }
+  
+  // 手機版
+  @media (max-width: 640px) {
+    max-width: 480px;
+  }
+}
+
+// 圖片載入指示器
+.image-loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba($color-primary, 0.3);
+    border-radius: 50%;
+    border-top-color: $color-primary;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// 減少動畫模式
+@media (prefers-reduced-motion: reduce) {
+  .responsive-image__img,
+  .progressive-image-container .preview-image,
+  .progressive-image-container .full-image,
+  .lazy-image {
+    transition: none;
+  }
+  
+  .image-loaded {
+    animation: none;
+  }
+  
+  .image-skeleton::after {
+    animation: none;
+  }
+} 

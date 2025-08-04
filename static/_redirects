@@ -1,19 +1,16 @@
-# Cloudflare Pages 重定向配置
+# Cloudflare Pages 重定向規則
 
-# 強制使用HTTPS
-http://:project.pages.dev/* https://:project.pages.dev/:splat 301!
-http://hugo-accounting.com/* https://hugo-accounting.com/:splat 301!
-http://www.hugo-accounting.com/* https://hugo-accounting.com/:splat 301!
+# 舊版 URL 重定向到新版
+/old-page /new-page 301
 
-# 舊路徑重定向
-/blog/* /articles/:splat 301
-/news/* /articles/:splat 301
-/services.html /services/ 301
-/about.html /about/ 301
-/contact.html /contact/ 301
-
-# API 請求重定向到 Cloudflare Workers
-/api/* https://api.hugo-accounting.com/api/:splat 200
+# 移除尾部斜線
+/* /:splat 301!
 
 # 404 頁面
 /* /404.html 404
+
+# API 路由重定向到 Cloudflare Workers
+/api/* https://api.yourdomain.com/:splat 200
+
+# 管理介面重定向
+/admin/* https://admin.yourdomain.com/:splat 200

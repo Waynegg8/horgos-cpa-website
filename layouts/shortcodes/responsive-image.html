@@ -9,22 +9,26 @@
   - alt: The alt text for the image (required)
   - class: Additional CSS classes (optional)
   - lazy: Whether to use lazy loading, default is true (optional)
+  - sizes: Custom sizes attribute (optional)
 */}}
 
 {{ $src := .Get "src" }}
 {{ $alt := .Get "alt" }}
 {{ $class := .Get "class" }}
 {{ $lazy := default "true" (.Get "lazy") }}
+{{ $sizes := default "100vw" (.Get "sizes") }}
 
-{{ $desktop := replace $src ".webp" "-desktop.webp" }}
-{{ $tablet := replace $src ".webp" "-tablet.webp" }}
-{{ $mobile := replace $src ".webp" "-mobile.webp" }}
+{{/* 生成響應式圖片路徑 */}}
+{{ $desktop := replace $src ".webp" "-1200.webp" }}
+{{ $tablet := replace $src ".webp" "-768.webp" }}
+{{ $mobile := replace $src ".webp" "-480.webp" }}
 
+{{/* 檢查檔案是否存在 */}}
 {{ $desktopExists := fileExists (printf "static%s" $desktop) }}
 {{ $tabletExists := fileExists (printf "static%s" $tablet) }}
 {{ $mobileExists := fileExists (printf "static%s" $mobile) }}
 
-<picture class="responsive-image {{ $class }}">
+<picture class="responsive-image {{ $class }}" {{ if eq $lazy "true" }}data-lazy="true"{{ end }}>
   {{ if $desktopExists }}
   <source media="(min-width: 1025px)" srcset="{{ $desktop }}">
   {{ end }}
@@ -37,9 +41,12 @@
   <source media="(max-width: 640px)" srcset="{{ $mobile }}">
   {{ end }}
   
-  {{ if eq $lazy "true" }}
-  <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" class="lazy-image">
-  {{ else }}
-  <img src="{{ $src }}" alt="{{ $alt }}">
-  {{ end }}
+  <img 
+    src="{{ $src }}" 
+    alt="{{ $alt }}" 
+    {{ if eq $lazy "true" }}loading="lazy"{{ end }}
+    {{ if ne $sizes "100vw" }}sizes="{{ $sizes }}"{{ end }}
+    class="responsive-image__img"
+    {{ if eq $lazy "true" }}data-src="{{ $src }}"{{ end }}
+  >
 </picture>

@@ -1,68 +1,54 @@
-# Cloudflare Pages 快取配置
+# Cloudflare 快取配置
+# 靜態資源快取策略
 
-# 所有頁面的基本設置
-/*
-  X-Frame-Options: DENY
+# 靜態資源 - 1年快取
+/static/*
+  Cache-Control: public, max-age=31536000, immutable
   X-Content-Type-Options: nosniff
+
+# 字體檔案 - 1年快取
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# 圖片檔案 - 1年快取
+/uploads/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# CSS 和 JS 檔案 - 1年快取
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# HTML 頁面 - 4小時 CDN 快取，1小時瀏覽器快取
+/*
+  Cache-Control: public, max-age=3600, s-maxage=14400
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
+
+# API 響應 - 5分鐘快取
+/api/*
+  Cache-Control: public, max-age=300, s-maxage=300
+  X-Content-Type-Options: nosniff
+
+# 搜尋索引 - 1小時快取
+/index.json
+  Cache-Control: public, max-age=3600, s-maxage=3600
+  Content-Type: application/json
+
+# Sitemap - 1天快取
+/sitemap.xml
+  Cache-Control: public, max-age=86400, s-maxage=86400
+  Content-Type: application/xml
+
+# Robots.txt - 1天快取
+/robots.txt
+  Cache-Control: public, max-age=86400, s-maxage=86400
+  Content-Type: text/plain
+
+# 安全性標頭
+/*
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://*.disquscdn.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://*.disqus.com https://*.disquscdn.com https://i.ytimg.com https://i.vimeocdn.com; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; connect-src 'self' https://www.google-analytics.com https://*.disqus.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://disqus.com https://www.google.com; object-src 'none';
-  Cache-Control: public, max-age=3600
-
-# HTML 頁面
-/*.html
-  Cache-Control: public, max-age=3600
-
-# 首頁和主要頁面
-/
-  Cache-Control: public, max-age=14400
-
-# CSS 和 JavaScript 檔案
-/*.css
-  Cache-Control: public, max-age=31536000
-/*.js
-  Cache-Control: public, max-age=31536000
-
-# 圖片和媒體檔案
-/*.jpg
-  Cache-Control: public, max-age=31536000
-/*.jpeg
-  Cache-Control: public, max-age=31536000
-/*.png
-  Cache-Control: public, max-age=31536000
-/*.gif
-  Cache-Control: public, max-age=31536000
-/*.webp
-  Cache-Control: public, max-age=31536000
-/*.svg
-  Cache-Control: public, max-age=31536000
-/*.ico
-  Cache-Control: public, max-age=31536000
-
-# 字體檔案
-/*.woff
-  Cache-Control: public, max-age=31536000
-/*.woff2
-  Cache-Control: public, max-age=31536000
-/*.ttf
-  Cache-Control: public, max-age=31536000
-/*.eot
-  Cache-Control: public, max-age=31536000
-/*.otf
-  Cache-Control: public, max-age=31536000
-
-# 下載檔案
-/uploads/files/*
-  Cache-Control: public, max-age=31536000
-
-# API 端點
-/api/*
-  Cache-Control: public, max-age=300
-
-# 管理介面 - 不快取
-/admin/*
-  Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
-  Pragma: no-cache
-  Expires: 0
-  Surrogate-Control: no-store

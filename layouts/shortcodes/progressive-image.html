@@ -9,23 +9,27 @@
   - placeholder: The source path to the placeholder image (required)
   - alt: The alt text for the image (required)
   - class: Additional CSS classes (optional)
+  - lazy: Whether to use lazy loading, default is true (optional)
 */}}
 
 {{ $src := .Get "src" }}
 {{ $placeholder := .Get "placeholder" }}
 {{ $alt := .Get "alt" }}
 {{ $class := .Get "class" }}
+{{ $lazy := default "true" (.Get "lazy") }}
 
-<div class="progressive-image {{ $class }}">
+<div class="progressive-image-container {{ $class }}" {{ if eq $lazy "true" }}data-lazy="true"{{ end }}>
   <img 
     src="{{ $placeholder }}" 
     alt="{{ $alt }}" 
-    class="placeholder-image"
+    class="preview-image"
+    {{ if eq $lazy "true" }}loading="lazy"{{ end }}
   >
   <img 
     src="{{ $src }}" 
     alt="{{ $alt }}" 
     class="full-image" 
-    loading="lazy"
+    {{ if eq $lazy "true" }}loading="lazy"{{ end }}
+    data-src="{{ $src }}"
   >
 </div>

@@ -1,131 +1,178 @@
 /**
- * 圖片優化腳本
- * 實現延遲載入和漸進式載入效果
+ * 圖片優化系統
+ * 實現延遲載入、漸進式載入、響應式圖片等功能
  */
 
-document.addEventListener('DOMContentLoaded', function() {
-  // 初始化延遲載入
-  initLazyLoading();
-  
-  // 初始化漸進式載入
-  initProgressiveLoading();
-});
+class ImageOptimization {
+  constructor() {
+    this.initialized = false;
+    this.intersectionObserver = null;
+    this.lazyImages = [];
+  }
 
-/**
- * 初始化延遲載入
- */
-function initLazyLoading() {
-  // 檢查瀏覽器是否支援 Intersection Observer
-  if ('IntersectionObserver' in window) {
-    // 獲取所有需要延遲載入的圖片
-    const lazyImages = document.querySelectorAll('img.lazy-image');
+  /**
+   * 初始化圖片優化系統
+   */
+  init() {
+    if (this.initialized) return;
     
-    // 創建 Intersection Observer
-    const imageObserver = new IntersectionObserver((entries) => {
+    this.setupIntersectionObserver();
+    this.setupLazyLoading();
+    this.setupProgressiveLoading();
+    this.initialized = true;
+  }
+
+  /**
+   * 設置 Intersection Observer
+   */
+  setupIntersectionObserver() {
+    if (!('IntersectionObserver' in window)) {
+      // 降級處理：直接載入所有圖片
+      this.loadAllImages();
+      return;
+    }
+
+    this.intersectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const img = entry.target;
-          
-          // 如果圖片有 data-src 屬性，則設置 src
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-          }
-          
-          // 如果圖片有 data-srcset 屬性，則設置 srcset
-          if (img.dataset.srcset) {
-            img.srcset = img.dataset.srcset;
-            img.removeAttribute('data-srcset');
-          }
-          
-          // 移除 lazy-image 類別
-          img.classList.remove('lazy-image');
-          
-          // 停止觀察此圖片
-          imageObserver.unobserve(img);
+          this.loadImage(entry.target);
+          this.intersectionObserver.unobserve(entry.target);
         }
       });
+    }, {
+      rootMargin: '50px 0px',
+      threshold: 0.1
     });
-    
-    // 開始觀察所有圖片
-    lazyImages.forEach(img => {
-      imageObserver.observe(img);
+  }
+
+  /**
+   * 設置延遲載入
+   */
+  setupLazyLoading() {
+    // 觀察所有延遲載入的圖片
+    document.querySelectorAll('img[loading="lazy"], [data-lazy="true"]').forEach(img => {
+      this.intersectionObserver.observe(img);
     });
-  } else {
-    // 不支援 Intersection Observer，使用備用方案
-    const lazyImages = document.querySelectorAll('img.lazy-image');
-    
-    // 簡單的滾動事件處理
-    function lazyLoad() {
-      const scrollTop = window.pageYOffset;
-      const viewportHeight = window.innerHeight;
-      
-      lazyImages.forEach(img => {
-        const rect = img.getBoundingClientRect();
-        
-        // 檢查圖片是否在視口中
-        if (rect.top >= -viewportHeight && rect.top <= viewportHeight * 2) {
-          // 如果圖片有 data-src 屬性，則設置 src
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-          }
-          
-          // 如果圖片有 data-srcset 屬性，則設置 srcset
-          if (img.dataset.srcset) {
-            img.srcset = img.dataset.srcset;
-            img.removeAttribute('data-srcset');
-          }
-          
-          // 移除 lazy-image 類別
-          img.classList.remove('lazy-image');
-        }
-      });
-      
-      // 如果所有圖片都已載入，移除滾動事件監聽器
-      if (lazyImages.length === 0) {
-        window.removeEventListener('scroll', lazyLoad);
-        window.removeEventListener('resize', lazyLoad);
-        window.removeEventListener('orientationChange', lazyLoad);
+
+    // 觀察響應式圖片
+    document.querySelectorAll('.responsive-image[data-lazy="true"]').forEach(picture => {
+      this.intersectionObserver.observe(picture);
+    });
+  }
+
+  /**
+   * 設置漸進式載入
+   */
+  setupProgressiveLoading() {
+    document.querySelectorAll('.progressive-image-container').forEach(container => {
+      this.intersectionObserver.observe(container);
+    });
+  }
+
+  /**
+   * 載入圖片
+   */
+  loadImage(img) {
+    if (img.dataset.src) {
+      img.src = img.dataset.src;
+      img.classList.add('loaded');
+    }
+
+    // 處理漸進式圖片
+    if (img.classList.contains('full-image')) {
+      const container = img.closest('.progressive-image-container');
+      if (container) {
+        container.classList.add('loaded');
       }
     }
+
+    // 處理響應式圖片
+    if (img.closest('.responsive-image')) {
+      const picture = img.closest('.responsive-image');
+      picture.classList.add('loaded');
+    }
+  }
+
+  /**
+   * 載入所有圖片（降級處理）
+   */
+  loadAllImages() {
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      this.loadImage(img);
+    });
+  }
+
+  /**
+   * 預載入圖片
+   */
+  preloadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+      img.src = src;
+    });
+  }
+
+  /**
+   * 優化圖片載入順序
+   */
+  optimizeLoadingOrder() {
+    // 優先載入首屏圖片
+    const viewportImages = document.querySelectorAll('img[data-src]:not(.lazy)');
+    viewportImages.forEach(img => {
+      if (this.isInViewport(img)) {
+        this.loadImage(img);
+      }
+    });
+  }
+
+  /**
+   * 檢查元素是否在視窗內
+   */
+  isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  /**
+   * 處理圖片載入錯誤
+   */
+  handleImageError(img) {
+    img.classList.add('error');
+    img.alt = '圖片載入失敗';
     
-    // 添加事件監聽器
-    window.addEventListener('scroll', lazyLoad);
-    window.addEventListener('resize', lazyLoad);
-    window.addEventListener('orientationChange', lazyLoad);
-    
-    // 初始載入
-    lazyLoad();
+    // 可以設置預設圖片
+    if (img.dataset.fallback) {
+      img.src = img.dataset.fallback;
+    }
+  }
+
+  /**
+   * 銷毀實例
+   */
+  destroy() {
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+      this.intersectionObserver = null;
+    }
+    this.initialized = false;
   }
 }
 
-/**
- * 初始化漸進式載入
- */
-function initProgressiveLoading() {
-  // 獲取所有需要漸進式載入的圖片
-  const progressiveImages = document.querySelectorAll('.progressive-image');
-  
-  progressiveImages.forEach(container => {
-    const placeholder = container.querySelector('.placeholder-image');
-    const fullImage = container.querySelector('.full-image');
-    
-    if (placeholder && fullImage) {
-      // 創建新的圖片元素用於預載入
-      const img = new Image();
-      
-      // 設置載入完成事件
-      img.onload = function() {
-        // 移除佔位圖片的模糊效果
-        placeholder.classList.add('loaded');
-        
-        // 顯示完整圖片
-        fullImage.classList.add('loaded');
-      };
-      
-      // 開始載入完整圖片
-      img.src = fullImage.src;
-    }
-  });
-}
+// 創建並導出圖片優化實例
+const imageOptimization = new ImageOptimization();
+export default imageOptimization;
+
+// 頁面載入時初始化圖片優化系統
+document.addEventListener('DOMContentLoaded', () => {
+  imageOptimization.init();
+});
+
+// 將實例掛載到全局，以便後續操作
+window.imageOptimization = imageOptimization;
