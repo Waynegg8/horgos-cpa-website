@@ -1,70 +1,105 @@
 <!-- 
   ==============================================================================
-  Site Footer - Refactored to match Linear.app's structure
+  Site Footer - Rebuilt based on hugo-requirements-final-updated.txt (sec 3.2)
   ==============================================================================
 -->
 <footer class="site-footer">
   <div class="container">
-    
-    <!-- Footer Main Section: Link Columns -->
     <div class="site-footer__main">
-      {{ range Seq 4 }} <!-- Assuming we have 4 columns, adjust as needed -->
-        {{ $menuName := printf "footer_col_%d" . }}
-        {{ with .Site.Menus.ByWeight.Get (print "menu." $menuName) }}
-          <div class="site-footer__column">
-            {{ with .Name }}
-              <h3 class="footer-heading">{{ . }}</h3>
-            {{ end }}
-            <ul class="footer-links">
-              {{ range .Children.ByWeight }}
-                <li>
-                  <a href="{{ .URL | relLangURL }}">
-                    {{ .Name }}
-                    {{ if .Params.tag }}
-                      <span class="link-tag">{{ .Params.tag }}</span>
-                    {{ end }}
-                  </a>
-                </li>
-              {{ end }}
-            </ul>
-          </div>
-        {{ end }}
-      {{ end }}
 
-      <!-- Column for Social links and Logo (as seen in some Linear versions) -->
-      <div class="site-footer__column site-footer__column--meta">
-        <a href="{{ .Site.BaseURL | relLangURL }}" class="footer-logo">
-          {{ with .Site.Params.logo }}
-            <img src="{{ .dark | relURL }}" alt="{{ $.Site.Title }} Logo">
-          {{ else }}
-            <span>{{ .Site.Title }}</span>
-          {{ end }}
+      <!-- Region 1: LOGO & SEO -->
+      <div class="site-footer__region site-footer__region--logo-seo">
+        {{ with .Site.Params.logo }}
+        <a href="{{ $.Site.BaseURL | relLangURL }}" class="footer-logo">
+          <img src="{{ .dark | relURL }}" alt="{{ $.Site.Title }} Logo">
         </a>
-        <div class="footer-socials">
-          <!-- Social links can be ranged from site params -->
-          {{ with .Site.Params.social }}
-            {{ range . }}
-              <a href="{{ .url }}" aria-label="{{ .name }}" target="_blank" rel="noopener">
-                <i class="{{ .icon }}"></i>
-              </a>
+        {{ end }}
+        {{ with .Site.Params.footer.seo_text }}
+        <div class="site-footer__seo-text">
+          <p>{{ . | safeHTML }}</p>
+        </div>
+        {{ end }}
+      </div>
+
+      <!-- Region 2: Company Info -->
+      <div class="site-footer__region site-footer__region--company-info">
+        <h3 class="footer-heading footer-heading--collapsible">
+          <button class="footer-collapse-toggle" aria-expanded="true">公司資訊</button>
+        </h3>
+        <div class="footer-collapse-content">
+          <ul class="footer-info-list">
+            {{ with .Site.Params.address }}<li><i class="fas fa-map-marker-alt"></i> {{ . }}</li>{{ end }}
+            {{ with .Site.Params.phone }}<li><i class="fas fa-phone"></i> <a href="tel:{{ . }}">{{ . }}</a></li>{{ end }}
+            {{ with .Site.Params.email }}<li><i class="fas fa-envelope"></i> <a href="mailto:{{ . }}">{{ . }}</a></li>{{ end }}
+            {{ with .Site.Params.opening_hours }}<li><i class="fas fa-clock"></i> {{ . }}</li>{{ end }}
+          </ul>
+          <!-- Business Status (dynamic) -->
+          <div class="site-footer__business-status" id="footer-business-status">
+            <!-- JS will populate this -->
+          </div>
+          <!-- Social Media -->
+          <div class="site-footer__social">
+            {{ with .Site.Params.social }}
+              {{ range . }}
+                <a href="{{ .url }}" class="social-link {{ .name | lower }}" target="_blank" rel="noopener" aria-label="{{ .name }}">
+                  <i class="{{ .icon }}"></i>
+                </a>
+              {{ end }}
             {{ end }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Region 3: Services -->
+      <div class="site-footer__region site-footer__region--services">
+        <h3 class="footer-heading footer-heading--collapsible">
+          <button class="footer-collapse-toggle" aria-expanded="true">服務項目</button>
+        </h3>
+        <div class="footer-collapse-content">
+          {{ with .Site.Menus.footer_services }}
+          <ul class="footer-links">
+            {{ range . }}
+            <li><a href="{{ .URL | relLangURL }}"><i class="{{ .Params.icon | default "fas fa-angle-right" }}"></i> {{ .Name }}</a></li>
+            {{ end }}
+          </ul>
+          {{ end }}
+        </div>
+      </div>
+
+      <!-- Region 4: Quick Links -->
+      <div class="site-footer__region site-footer__region--quick-links">
+        <h3 class="footer-heading footer-heading--collapsible">
+          <button class="footer-collapse-toggle" aria-expanded="true">快速連結</button>
+        </h3>
+        <div class="footer-collapse-content">
+          {{ with .Site.Menus.footer_quicklinks }}
+          <ul class="footer-links">
+            {{ range . }}
+            <li><a href="{{ .URL | relLangURL }}"><i class="{{ .Params.icon | default "fas fa-angle-right" }}"></i> {{ .Name }}</a></li>
+            {{ end }}
+          </ul>
           {{ end }}
         </div>
       </div>
     </div>
-
-    <!-- Footer Bottom Section: Copyright and Legal Links -->
-    <div class="site-footer__bottom">
-      <p class="copyright">&copy; {{ now.Format "2006" }} {{ .Site.Params.copyright | default .Site.Title }}</p>
-      
-      <div class="legal-links">
+  </div>
+  
+  <!-- Region 5: Bottom Legal Bar -->
+  <div class="site-footer__bottom">
+    <div class="container site-footer__bottom-container">
+      <div class="site-footer__copyright">
+        <p>&copy; {{ now.Format "2006" }} {{ .Site.Params.copyright | default .Site.Title }} 版權所有</p>
+      </div>
+      <div class="site-footer__legal-links">
         {{ with .Site.Menus.footer_legal }}
-          {{ range . }}
-            <a href="{{ .URL | relLangURL }}">{{ .Name }}</a>
+          {{ range $index, $element := . }}
+            {{ if gt $index 0 }}<span class="separator">|</span>{{ end }}
+            <a href="{{ .URL | relLangURL }}">
+              <i class="{{ .Params.icon }}"></i> {{ .Name }}
+            </a>
           {{ end }}
         {{ end }}
       </div>
     </div>
-
   </div>
 </footer>

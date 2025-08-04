@@ -151,6 +151,10 @@
     <!-- 行動版導覽 -->
     {{ $mobileNavScript := resources.Get "js/components/mobileNav.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $mobileNavScript.RelPermalink }}"></script>
+
+    <!-- 頁腳摺疊 -->
+    {{ $footerCollapseScript := resources.Get "js/components/footerCollapse.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $footerCollapseScript.RelPermalink }}"></script>
     
     <!-- Hero 輪播功能 (僅首頁) -->
     {{ if .IsHome }}

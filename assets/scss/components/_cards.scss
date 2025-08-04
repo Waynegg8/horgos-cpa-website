@@ -1,49 +1,41 @@
 // =============================================================================
-// Card Component - Refactored to match Linear.app
+// Card Component - Aligned with Design Tokens
 // =============================================================================
+
+@use "../utils/variables" as var;
 
 // .card-style
 // A general-purpose card class inspired by Linear's design language.
 // It provides a consistent look for containers holding grouped content.
-//
-// Features:
-// - Subtle background to stand out from the main page.
-// - Delicate, semi-transparent border.
-// - Soft, multi-layered shadow for a gentle lift effect.
-// - Generous padding for content breathability.
-// - Smooth transition for hover effects.
-
 .card-style {
-  background-color: #1A1A1F; // A background slightly lighter than the page body
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px; // Soft, modern rounded corners
-  padding: 2rem; // Generous internal spacing (32px)
-  transition: all 0.25s ease-out;
+  background-color: var.$color-bg-secondary;
+  border: 1px solid var.$color-border-primary;
+  border-radius: var.$border-radius-lg;
+  padding: var.$spacing-8;
+  transition: all var.$transition-fast var.$ease-out;
   
   // A subtle, multi-layered shadow for depth.
-  // One layer for a soft ambient glow, another for a more direct key light feel.
   box-shadow: 
     0 8px 24px rgba(0, 0, 0, 0.3), 
     0 2px 8px rgba(0, 0, 0, 0.2);
 
   &:hover {
     transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(var.$color-text-primary, 0.15); // Use text color for a brighter border on hover
     box-shadow: 
       0 12px 32px rgba(0, 0, 0, 0.35), 
       0 4px 12px rgba(0, 0, 0, 0.25);
   }
 }
 
-// Example of how it might be used with a grid of services
+// Grid for laying out cards
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem; // 32px
+  gap: var.$spacing-8;
 }
 
-// You can add more specific card variations if needed,
-// for example, a card with no padding or a different background.
+// Card variations
 .card-style--no-padding {
   padding: 0;
 }

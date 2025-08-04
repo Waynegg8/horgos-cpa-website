@@ -1,103 +1,103 @@
 // =============================================================================
-// Settings
+// Settings / Design Tokens
+// Source of Truth: hugo-requirements-final-updated.txt (Section 3.3)
 // =============================================================================
 
-// 1. 色彩系統 (Color System)
-// 來自 STYLE_GUIDE.md，基於 linear.app 的設計語言
-// =============================================================================
+// 3.3.1 色彩系統設計 (深色主題修正案)
+// -----------------------------------------------------------------------------
 
-// 1.1. 背景色彩系統
-$color-bg-primary: #0A0A0A;      // 主背景 (近乎純黑)
-$color-bg-secondary: #141414;   // 次要背景 (用於卡片、容器)
+// 背景色彩系統
+$color-bg-primary: #0A0A0A;      // 主背景 (用於頁面 body)
+$color-bg-secondary: #141414;   // 次要背景 (用於卡片、容器等元素)
 
-// 1.2. 文字色彩階層
-$color-text-primary: #F0F0F0;     // 主要文字 (高對比米白)
-$color-text-secondary: #A1A1A1;  // 次要文字 (用於描述、輔助資訊)
-$color-text-tertiary: #525252;   // 淡化文字 (用於不重要的標籤)
+// 文字色彩階層
+$color-text-primary: #F0F0F0;     // 主要文字 (高對比米白色)
+$color-text-secondary: #A1A1A1;  // 次要文字 (用於描述和輔助資訊)
+$color-text-tertiary: #525252;   // 淡化文字 (用於不重要的標籤或註釋)
 
-// 1.3. 邊框與分隔線
-$color-border-primary: #262626;  // 低調的深灰色邊框
-$color-divider: $color-border-primary; // 兼容舊命名
+// 邊框和分隔色彩
+$color-border-primary: #262626;  // 低調的深灰色，用於元件邊框
 
-// 1.4. 主要互動色彩
-$color-accent-primary: #5E5CEE;   // 主色調 (優雅紫，用於主要按鈕、連結懸停、焦點)
-$color-accent-highlight: #22c55e; // 強調色 (綠色，用於次要CTA)
+// 主要色彩定義
+$color-accent-primary: #204B6E;     // 深藍色 (用於主要按鈕)
+$color-accent-highlight: #22c55e; // 綠色 (用於次要 CTA 按鈕和重要提示)
 
-// 1.5. 狀態指示色彩
-$color-status-success: #10B981;  // 成功
-$color-status-warning: #F59E0B;  // 警告
-$color-status-error: #EF4444;    // 錯誤
-$color-status-info: #3B82F6;     // 資訊
-$color-line: #00B900;           // Line 綠色
+// 狀態指示色彩
+$color-status-success: #10B981;
+$color-status-warning: #F59E0B;
+$color-status-error: #EF4444;
+$color-status-info: #3B82F6;
 
-// 1.6. 舊版色彩變數 (為平滑過渡保留，最終將移除)
-$color-primary: $color-accent-primary;
-$color-secondary: darken($color-accent-primary, 10%);
-$color-accent: $color-accent-highlight;
 
-// 2. 字體排印 (Typography)
-// 來自 STYLE_GUIDE.md
-// =============================================================================
+// 3.3.2 字體系統設計
+// -----------------------------------------------------------------------------
 
-// 2.1. 字體棧
-$font-family-sans: "Inter", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-$font-family-base: $font-family-sans; // 兼容舊命名
+// 字體棧定義
+$font-family-base: "Inter", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-// 2.2. 字體大小階層
+// 字體大小階層
 $font-size-h1: 2.5rem;    // 40px
 $font-size-h2: 2rem;      // 32px
 $font-size-h3: 1.5rem;    // 24px
 $font-size-h4: 1.25rem;   // 20px
-$font-size-lg: 1.5rem;      // 24px
-$font-size-xl: 1.75rem;    // 28px
-$font-size-2xl: 2.25rem;   // 36px
-$font-size-3xl: 3rem;      // 48px
-$font-size-4xl: 4.5rem;    // 72px
 $font-size-base: 1rem;      // 16px
 $font-size-small: 0.875rem; // 14px
 
-// 2.3. 行高
-$line-height-base: 1.7;
-$line-height-heading: 1.3;
+// 行高和間距
+$line-height-base: 1.6;
+$line-height-heading: 1.3; // 標題通常行高較緊湊
+$paragraph-spacing: 1.5rem;
+$heading-margin-bottom: 1rem;
 
-// 3. 其他設計 Token
-// =============================================================================
 
-// 3.1. 間距
-$spacing-1: 0.25rem; // 4px
-$spacing-2: 0.5rem;  // 8px
-$spacing-3: 0.75rem; // 12px
-$spacing-4: 1rem;    // 16px
-$spacing-5: 1.25rem; // 20px
-$spacing-6: 1.5rem;  // 24px
-$spacing-8: 2rem;    // 32px
-$spacing-10: 2.5rem; // 40px
-$spacing-12: 3rem;   // 48px
-$spacing-16: 4rem;  // 64px
+// 3.3.3 響應式設計系統
+// -----------------------------------------------------------------------------
 
-// 3.2. 響應式斷點
-$breakpoint-sm: 640px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 1024px;
-$breakpoint-xl: 1280px;
-$breakpoint-2xl: 1536px;
+// 四斷點響應式系統
+$breakpoint-mobile: 640px;
+$breakpoint-tablet: 1024px;
+$breakpoint-desktop: 1440px;
+// wide-screen is >= 1441px
 
-$container-max-width: 1280px;
+
+// 3.3.4 動畫效果系統
+// -----------------------------------------------------------------------------
+
+// 標準動畫時間
+$transition-fast: 0.2s;
+$transition-base: 0.3s;
+$transition-slow: 0.4s;
+
+// 動畫緩動函數
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-out: cubic-bezier(0, 0, 0.2, 1);
+$ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+
+// 其他通用變數
+// -----------------------------------------------------------------------------
+
+// 間距 (Spacing) - 採用 4px 基線網格
+$spacing-1: 0.25rem;  // 4px
+$spacing-2: 0.5rem;   // 8px
+$spacing-3: 0.75rem;  // 12px
+$spacing-4: 1rem;     // 16px
+$spacing-5: 1.25rem;  // 20px
+$spacing-6: 1.5rem;   // 24px
+$spacing-8: 2rem;     // 32px
+$spacing-10: 2.5rem;  // 40px
+$spacing-12: 3rem;    // 48px
+$spacing-16: 4rem;    // 64px
+$spacing-20: 5rem;    // 80px
+$spacing-24: 6rem;    // 96px
+
+// 容器 (Container)
+$container-max-width: 1200px; // 根據普遍設計趨勢設定
 $container-padding: $spacing-8;
 
-// 3.3. 圓角
-$border-radius-sm: 6px;
-$border-radius-base: 8px;
-$border-radius-md: 10px;
+// 圓角 (Border Radius)
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
 $border-radius-lg: 12px;
 $border-radius-xl: 16px;
-
-// 3.4. 動畫
-$transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-$transition-base: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-$transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-// 3.5. 陰影
-$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$border-radius-full: 9999px;
