@@ -95,11 +95,6 @@
     
     <!-- 浮動按鈕組 -->
     <div class="floating-buttons">
-        <!-- 回到頂端按鈕 -->
-        <button id="back-to-top" class="back-to-top" aria-label="回到頂端">
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
         <!-- 社群媒體按鈕組 -->
         <div class="social-buttons">
             <button id="social-toggle" class="social-toggle" aria-label="社群媒體連結" aria-expanded="false">
@@ -107,6 +102,11 @@
             </button>
             
             <div class="social-buttons__menu" aria-hidden="true">
+        
+        <!-- 回到頂端按鈕 (移到社群媒體下方) -->
+        <button id="back-to-top" class="back-to-top" aria-label="回到頂端">
+            <i class="fas fa-arrow-up"></i>
+        </button>
                 {{ with .Site.Params.widgets.social.line }}
                 <a href="https://line.me/R/ti/p/{{ . }}" class="social-button line" target="_blank" rel="noopener" aria-label="LINE">
                     <i class="fab fa-line"></i>

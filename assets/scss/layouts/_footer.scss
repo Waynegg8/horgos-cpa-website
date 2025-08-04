@@ -6,18 +6,18 @@
 @import "../utils/mixins";
 
 .site-footer {
-  // Per spec 3.2.1
-  background-color: $color-accent-primary;
-  color: rgba($color-text-primary, 0.8);
+  // 更新為較淺的背景色
+  background-color: #E0D9FF;
+  color: rgba(#000000, 0.8);
   font-size: $font-size-small;
   padding: $spacing-20 0 0; // Padding top, bottom is handled by the bottom bar
   margin-top: $spacing-16;
 
   a {
-    color: rgba($color-text-primary, 0.8);
+    color: rgba(#000000, 0.8);
     transition: color $transition-fast $ease-out;
     &:hover {
-      color: $color-text-primary;
+      color: #000000;
     }
   }
 
@@ -47,10 +47,10 @@
 .footer-heading {
   font-size: $font-size-base;
   font-weight: 600;
-  color: $color-text-primary;
+  color: #000000;
   margin: 0 0 $spacing-6 0;
   padding-bottom: $spacing-3;
-  border-bottom: 1px solid rgba($color-text-primary, 0.2);
+  border-bottom: 1px solid rgba(#000000, 0.2);
 
   .footer-collapse-toggle {
     display: none; // Hidden on desktop
@@ -115,8 +115,8 @@
 
 // Bottom Bar (Region 5)
 .site-footer__bottom {
-  // Per spec 3.2.2, a darker shade
-  background-color: $color-accent-darker;
+  // 更新為較深的紫色
+  background-color: #6366f1;
   padding: $spacing-4 0;
   font-size: 0.8125rem; // Slightly smaller
 
@@ -135,7 +135,7 @@
 
   & .copyright p {
     margin: 0;
-    color: rgba($color-text-primary, 0.6);
+    color: rgba(#FFFFFF, 0.9);
   }
 
   & .legal-links {
@@ -144,13 +144,13 @@
     gap: $spacing-3;
     
     .separator {
-      color: rgba($color-text-primary, 0.3);
+      color: rgba(#FFFFFF, 0.5);
     }
 
     a {
-      color: rgba($color-text-primary, 0.8);
+      color: rgba(#FFFFFF, 0.9);
       &:hover {
-        color: $color-text-primary;
+        color: #FFFFFF;
         text-decoration: underline;
       }
       i {
