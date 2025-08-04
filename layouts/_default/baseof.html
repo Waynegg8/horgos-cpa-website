@@ -69,7 +69,8 @@
         {{ block "main" . }}{{ end }}
     </main>
     
-    <!-- SEO內容區塊已移除 -->
+    <!-- 側邊欄區塊，覆蓋主題的默認行為 -->
+    {{ define "sidebar" }}{{ end }}
     
     <!-- 頁腳 -->
     <footer id="footer" aria-labelledby="aria-footer-desc">
