@@ -60,7 +60,8 @@
   font-size: $font-size-base;
   line-height: 1.5;
   color: $color-text-primary;
-  background-color: $color-bg-secondary;
+  background-color: rgba(255, 255, 255, 0.05); // 稍微透明的白色背景
+  border: 1px solid $color-border-primary;
   background-clip: padding-box;
   border: 1px solid $color-border-primary;
   border-radius: $border-radius-md;

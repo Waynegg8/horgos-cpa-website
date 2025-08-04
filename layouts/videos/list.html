@@ -1,45 +1,85 @@
 {{ define "main" }}
-<main class="main list" role="main">
-  <div class="content">
-    <header class="page-header">
-      <h1 class="page-header__title">{{ .Title }}</h1>
-    </header>
+<div class="container">
+  <div class="two-column">
+    <div class="two-column__main">
+      <!-- 搜索框 -->
+      {{ partial "search/list-search.html" . }}
+      
+      <!-- 頁面標題和內容 -->
+      <header class="page-header">
+        <h1 class="page-header__title">{{ .Title }}</h1>
+        {{ with .Content }}
+        <div class="page-header__description">{{ . }}</div>
+        {{ end }}
+      </header>
+      
+      <!-- 分類篩選 -->
+      <div class="category-nav card-style">
+        <h2 class="category-nav__title">影片分類</h2>
+        <div class="category-nav__links">
+          <a href="{{ .RelPermalink }}" class="category-nav__link {{ if eq .RelPermalink .CurrentSection.RelPermalink }}active{{ end }}">
+            <i class="fas fa-th-large"></i>
+            <span>全部影片</span>
+          </a>
+          {{ range .Sections }}
+          <a href="{{ .RelPermalink }}" class="category-nav__link {{ if eq .RelPermalink $.Permalink }}active{{ end }}">
+            <i class="fas fa-play-circle"></i>
+            <span>{{ .Title }}</span>
+          </a>
+          {{ end }}
+        </div>
+      </div>
+      
+      <!-- 影片列表 -->
+      <div class="videos-list">
+        {{ $paginator := .Paginate (where .Pages "Type" "videos") }}
+        {{ range $paginator.Pages }}
+          {{ partial "videos/card.html" . }}
+        {{ end }}
+      </div>
     
-    {{ with .Content }}
-    <div class="page-content">
-      {{ . }}
-    </div>
-    {{ end }}
-    
-    <div class="search-container">
-      <input type="text" id="video-search" class="search-input" placeholder="搜尋影片..." aria-label="搜尋影片">
-      <div id="search-results" class="search-results"></div>
-    </div>
-    
-    <div class="category-filter">
-      <span class="filter-label">分類篩選:</span>
-      <a href="{{ .RelPermalink }}" class="filter-item {{ if eq .RelPermalink .CurrentSection.RelPermalink }}active{{ end }}">全部</a>
-      {{ range .Sections }}
-      <a href="{{ .RelPermalink }}" class="filter-item {{ if eq .RelPermalink $.Permalink }}active{{ end }}">{{ .Title }}</a>
+    {{ if gt .Paginator.TotalPages 1 }}
+    <nav class="pagination" role="navigation" aria-label="分頁導航">
+        <div class="pagination__info">
+            第 {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }} 頁，共 {{ .Paginator.TotalNumberOfElements }} 部影片
+        </div>
+        <div class="pagination__controls">
+            {{ if .Paginator.HasPrev }}
+                <a href="{{ .Paginator.Prev.URL }}" class="pagination__link pagination__link--prev" aria-label="上一頁">
+                    <i class="fas fa-chevron-left"></i>
+                    上一頁
+                </a>
+            {{ end }}
+            
+            {{ range .Paginator.Pagers }}
+                {{ if eq . $.Paginator }}
+                    <span class="pagination__link pagination__link--current" aria-current="page">{{ .PageNumber }}</span>
+                {{ else }}
+                    <a href="{{ .URL }}" class="pagination__link">{{ .PageNumber }}</a>
+                {{ end }}
+            {{ end }}
+            
+            {{ if .Paginator.HasNext }}
+                <a href="{{ .Paginator.Next.URL }}" class="pagination__link pagination__link--next" aria-label="下一頁">
+                    下一頁
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            {{ end }}
+        </div>
+    </nav>
       {{ end }}
     </div>
     
-    <div class="videos-list">
-      {{ $paginator := .Paginate (where .Pages "Type" "videos") }}
-      {{ range $paginator.Pages }}
-        {{ partial "videos/card.html" . }}
-      {{ end }}
+    <!-- 側邊欄 -->
+    <div class="two-column__sidebar">
+      {{ partial "sidebar/videos-sidebar.html" . }}
     </div>
-    
-    {{ partial "pagination.html" . }}
   </div>
-  
-  <!-- 側邊欄由 _default/baseof.html 處理 -->
-</main>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const searchInput = document.getElementById('video-search');
+  const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
   const videosList = document.querySelector('.videos-list');
   

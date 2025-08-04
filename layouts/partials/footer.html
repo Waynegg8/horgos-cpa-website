@@ -15,7 +15,7 @@
             <span class="footer-logo__text">HorgosCPA</span>
           </a>
         </div>
-        {{ with .Site.Params.footer.seo_text }}
+        {{ with .Site.Data.seo.global }}
         <div class="site-footer__seo-text">
           <p>{{ . | safeHTML }}</p>
         </div>
@@ -25,14 +25,17 @@
       <!-- Region 2: Company Info -->
       <div class="site-footer__region site-footer__region--company-info">
         <h3 class="footer-heading footer-heading--collapsible">
-          <button class="footer-collapse-toggle" aria-expanded="true">公司資訊</button>
+          <button class="footer-collapse-toggle" aria-expanded="true">
+            <i class="fas fa-building"></i>
+            公司資訊
+          </button>
         </h3>
         <div class="footer-collapse-content">
           <ul class="footer-info-list">
-            {{ with .Site.Params.address }}<li><i class="fas fa-map-marker-alt"></i> {{ . }}</li>{{ end }}
-            {{ with .Site.Params.phone }}<li><i class="fas fa-phone"></i> <a href="tel:{{ . }}">{{ . }}</a></li>{{ end }}
-            {{ with .Site.Params.email }}<li><i class="fas fa-envelope"></i> <a href="mailto:{{ . }}">{{ . }}</a></li>{{ end }}
-            {{ with .Site.Params.opening_hours }}<li><i class="fas fa-clock"></i> {{ . }}</li>{{ end }}
+            <li><i class="fas fa-map-marker-alt"></i> {{ .Site.Params.address | default "台中市西屯區文心路三段288號" }}</li>
+            <li><i class="fas fa-phone"></i> <a href="tel:{{ .Site.Params.phone | default "04-2451-6789" }}">{{ .Site.Params.phone | default "04-2451-6789" }}</a></li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:{{ .Site.Params.email | default "info@horgoscpa.com" }}">{{ .Site.Params.email | default "info@horgoscpa.com" }}</a></li>
+            <li><i class="fas fa-clock"></i> {{ .Site.Params.opening_hours | default "週一至週五 08:30-17:30" }}</li>
           </ul>
           <!-- Business Status (dynamic) -->
           <div class="site-footer__business-status" id="footer-business-status">
@@ -40,13 +43,15 @@
           </div>
           <!-- Social Media -->
           <div class="site-footer__social">
-            {{ with .Site.Params.social }}
-              {{ range . }}
-                <a href="{{ .url }}" class="social-link {{ .name | lower }}" target="_blank" rel="noopener" aria-label="{{ .name }}">
-                  <i class="{{ .icon }}"></i>
-                </a>
-              {{ end }}
-            {{ end }}
+            <a href="https://www.facebook.com/horgoscpa" class="social-link facebook" target="_blank" rel="noopener" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://line.me/R/ti/p/@horgoscpa" class="social-link line" target="_blank" rel="noopener" aria-label="LINE">
+              <i class="fab fa-line"></i>
+            </a>
+            <a href="https://www.instagram.com/horgoscpa" class="social-link instagram" target="_blank" rel="noopener" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -54,7 +59,10 @@
       <!-- Region 3: Services -->
       <div class="site-footer__region site-footer__region--services">
         <h3 class="footer-heading footer-heading--collapsible">
-          <button class="footer-collapse-toggle" aria-expanded="true">服務項目</button>
+          <button class="footer-collapse-toggle" aria-expanded="true">
+            <i class="fas fa-briefcase"></i>
+            服務項目
+          </button>
         </h3>
         <div class="footer-collapse-content">
           {{ with .Site.Menus.footer_services }}
@@ -70,7 +78,10 @@
       <!-- Region 4: Quick Links -->
       <div class="site-footer__region site-footer__region--quick-links">
         <h3 class="footer-heading footer-heading--collapsible">
-          <button class="footer-collapse-toggle" aria-expanded="true">快速連結</button>
+          <button class="footer-collapse-toggle" aria-expanded="true">
+            <i class="fas fa-link"></i>
+            快速連結
+          </button>
         </h3>
         <div class="footer-collapse-content">
           {{ with .Site.Menus.footer_quicklinks }}

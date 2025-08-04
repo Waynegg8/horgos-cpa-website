@@ -5,19 +5,19 @@
 @import "../utils/variables";
 @import "../utils/mixins";
 
-// Container
+// Container - 蘋果風格邊距
 .container {
   max-width: $container-max-width;
   margin: 0 auto;
-  padding: 0 $container-padding;
+  padding: 0 $spacing-12; // 增加邊距，避免貼邊
   width: 100%;
   
   @include tablet {
-    padding: 0 $spacing-6;
+    padding: 0 $spacing-8; // 平板版增加邊距
   }
   
   @include mobile {
-    padding: 0 $spacing-4;
+    padding: 0 $spacing-6; // 手機版增加邊距
   }
 }
 
@@ -33,11 +33,15 @@
   }
 }
 
-// Two Column Layout (Legacy - 保留但不使用)
+// Two Column Layout
 .two-column {
   display: flex;
   gap: $spacing-8;
   margin-bottom: $spacing-16;
+  background-color: $color-bg-secondary;
+  border-radius: $border-radius-lg;
+  padding: $spacing-8;
+  box-shadow: $shadow-sm;
   
   &__main {
     flex: 1;
