@@ -16,7 +16,7 @@
         {{ $paginator := .Paginate (where .Pages "Type" "videos") 10 }}
         {{ range $paginator.Pages }}
         <div class="video-card video-item" 
-             data-category="{{ .Params.category | default 'other' }}" 
+             data-category="{{ .Params.category | default "other" }}" 
              data-title="{{ .Title }}" 
              data-summary="{{ .Summary }}">
             <div class="video-card__thumbnail">

@@ -31,7 +31,7 @@
         {{ $paginator := .Paginate (where .Pages "Type" "faq") 10 }}
         {{ range $paginator.Pages }}
         <a href="{{ .RelPermalink }}" class="card-style card-clickable faq-item" 
-           data-category="{{ .Params.category | default 'other' }}" 
+           data-category="{{ .Params.category | default "other" }}" 
            data-title="{{ .Title }}" 
            data-summary="{{ .Summary }}">
             <div class="faq-card__content">
