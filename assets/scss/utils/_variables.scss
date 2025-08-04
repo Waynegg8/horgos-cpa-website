@@ -56,6 +56,9 @@ $font-size-base: 1rem;    // 16px - 基礎內文
 $font-size-sm: 0.875rem;  // 14px - 小內文
 $font-size-xs: 0.75rem;   // 12px - 極小內文
 
+// 向後兼容性 - 保持舊變數名稱
+$font-size-small: $font-size-sm; // 14px - 小內文 (向後兼容)
+
 // 按鈕字體大小
 $font-size-btn-lg: 1.125rem; // 18px - 大按鈕
 $font-size-btn-base: 1rem;   // 16px - 標準按鈕
@@ -121,6 +124,8 @@ $container-padding: $spacing-8;
 $border-radius-sm: 4px;
 $border-radius-md: 8px;
 $border-radius-lg: 12px;
+$border-radius-xl: 16px;
+$border-radius-full: 9999px;
 
 // 陰影 (Shadows)
 $shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
