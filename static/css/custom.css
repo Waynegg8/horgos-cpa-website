@@ -7,7 +7,8 @@ body.home .sidebar,
 body.services .sidebar,
 body.about .sidebar,
 body.contact .sidebar,
-body.appointment .sidebar {
+body.appointment .sidebar,
+body[data-section=""] .sidebar {
   display: none !important; 
   width: 0 !important;
   height: 0 !important;
@@ -32,7 +33,8 @@ body.home .primary,
 body.services .primary,
 body.about .primary,
 body.contact .primary,
-body.appointment .primary {
+body.appointment .primary,
+body[data-section=""] .primary {
   flex: 1 0 100% !important;
   max-width: 100% !important;
   width: 100% !important;
@@ -44,7 +46,8 @@ body.home .wrapper.flex,
 body.services .wrapper.flex,
 body.about .wrapper.flex,
 body.contact .wrapper.flex,
-body.appointment .wrapper.flex {
+body.appointment .wrapper.flex,
+body[data-section=""] .wrapper.flex {
   display: block !important;
   flex-wrap: nowrap !important;
 }
@@ -54,7 +57,8 @@ body.home .container--outer,
 body.services .container--outer,
 body.about .container--outer,
 body.contact .container--outer,
-body.appointment .container--outer {
+body.appointment .container--outer,
+body[data-section=""] .container--outer {
   max-width: 1500px !important;
 }
 
@@ -63,7 +67,8 @@ body.home .wrapper,
 body.services .wrapper,
 body.about .wrapper,
 body.contact .wrapper,
-body.appointment .wrapper {
+body.appointment .wrapper,
+body[data-section=""] .wrapper {
   padding: 0 !important;
 }
 
