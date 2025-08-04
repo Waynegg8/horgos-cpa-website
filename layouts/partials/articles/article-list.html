@@ -45,12 +45,12 @@
             <div class="card-horizontal">
                 <div class="card-horizontal__image">
                     {{ with .Params.cover }}
-                    <a href="{{ .RelPermalink }}">
+                    <a href="{{ $.RelPermalink }}">
                         <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
                     </a>
                     {{ else }}
-                    <a href="{{ .RelPermalink }}">
-                        <img src="/uploads/images/general/general-default.jpg" alt="{{ .Title }}" loading="lazy">
+                    <a href="{{ $.RelPermalink }}">
+                        <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
                     </a>
                     {{ end }}
                 </div>
