@@ -1,18 +1,30 @@
 {{ define "main" }}
-<div class="page-header">
-    <div class="container">
-        <h1 class="page-header__title">{{ .Title }}</h1>
-        {{ with .Description }}
-        <p class="page-header__description">{{ . }}</p>
-        {{ end }}
-    </div>
-</div>
+<!-- Hero 區域已移除，改為內部標題 -->
 
 <div class="container">
     <div class="about-page">
-        <!-- 事務所介紹區域 -->
+        <!-- 事務所介紹區域 - 左右卡片布局 -->
         <section class="about-intro">
-            {{ .Content }}
+            <div class="split-layout">
+                <div class="about-intro__content">
+                    <h2>關於霍爾果斯會計師事務所</h2>
+                    <p>霍爾果斯會計師事務所是一家專注於提供高品質會計服務的專業事務所。我們的團隊由經驗豐富的會計師和稅務專家組成，致力於為客戶提供全方位的會計、稅務和工商登記服務。</p>
+                    
+                    <h3>經營理念</h3>
+                    <p>我們的經營理念是「專業、誠信、效率」，以客戶需求為中心，提供專業、可靠的服務，協助客戶解決各種財務和稅務問題。</p>
+                    
+                    <h3>為什麼選擇我們</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> <strong>專業團隊</strong>：由具備CPA資格的專業會計師組成</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>豐富經驗</strong>：累積多年各行業服務經驗</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>全方位服務</strong>：提供一站式財稅解決方案</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>客製化服務</strong>：針對不同企業需求提供專屬服務</li>
+                    </ul>
+                </div>
+                <div class="about-intro__image">
+                    <img src="/uploads/images/general/general-accounting-desk.jpg" alt="霍爾果斯會計師事務所辦公室" class="rounded-image">
+                </div>
+            </div>
         </section>
         
         <!-- 團隊介紹區域 -->

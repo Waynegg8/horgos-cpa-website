@@ -9,11 +9,12 @@
 
       <!-- Region 1: LOGO & SEO -->
       <div class="site-footer__region site-footer__region--logo-seo">
-        {{ with .Site.Params.logo }}
-        <a href="{{ $.Site.BaseURL | relURL }}" class="footer-logo">
-          <img src="{{ .dark | relURL }}" alt="{{ $.Site.Title }} Logo">
-        </a>
-        {{ end }}
+        <div class="footer-logo-container">
+          <a href="{{ $.Site.BaseURL | relURL }}" class="footer-logo">
+            <img src="/uploads/images/general/general-logo.png" alt="{{ $.Site.Title }} Logo" class="footer-logo__img">
+            <span class="footer-logo__text">HorgosCPA</span>
+          </a>
+        </div>
         {{ with .Site.Params.footer.seo_text }}
         <div class="site-footer__seo-text">
           <p>{{ . | safeHTML }}</p>

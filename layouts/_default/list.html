@@ -1,16 +1,9 @@
 {{ define "main" }}
-<div class="page-header">
-    <div class="container">
-        <h1 class="page-header__title">{{ .Title }}</h1>
-        {{ with .Description }}
-        <p class="page-header__description">{{ . }}</p>
-        {{ end }}
-    </div>
-</div>
+<!-- Hero 區域已移除，改為內部標題 -->
 
 <div class="container">
-    <div class="two-column">
-        <div class="two-column__main">
+    <div class="full-width">
+        <div class="full-width__content">
             {{ if or (eq .Section "articles") (eq .Section "videos") (eq .Section "faq") (eq .Section "downloads") }}
             {{ partial "search/list-search.html" . }}
             {{ end }}
@@ -37,19 +30,7 @@
             {{ end }}
         </div>
         
-        {{ if or (eq .Section "articles") (eq .Section "videos") (eq .Section "faq") (eq .Section "downloads") }}
-        <aside class="two-column__sidebar">
-            {{ if eq .Section "articles" }}
-            {{ partial "sidebar/articles-sidebar.html" . }}
-            {{ else if eq .Section "videos" }}
-            {{ partial "sidebar/videos-sidebar.html" . }}
-            {{ else if eq .Section "faq" }}
-            {{ partial "sidebar/faq-sidebar.html" . }}
-            {{ else if eq .Section "downloads" }}
-            {{ partial "sidebar/downloads-sidebar.html" . }}
-            {{ end }}
-        </aside>
-        {{ end }}
+        <!-- 側邊欄已移除 -->
     </div>
     
     {{ if or (eq .Section "services") (eq .Section "about") }}

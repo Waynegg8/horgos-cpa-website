@@ -1,25 +1,82 @@
-/* 關於我們頁面樣式 */
+// =============================================================================
+// About Page Styles
+// =============================================================================
 
-/* 關於頁面容器 */
+@import "../utils/variables";
+@import "../utils/mixins";
+
 .about-page {
-  padding: $spacing-8 0;
+  margin-bottom: $spacing-16;
 }
 
-/* 事務所介紹區域 */
+// 關於我們介紹區域
 .about-intro {
   margin-bottom: $spacing-16;
   
-  @include mobile {
-    margin-bottom: $spacing-8;
+  &__content {
+    h2 {
+      font-size: $font-size-h2;
+      margin-bottom: $spacing-4;
+      color: $color-text-primary;
+    }
+    
+    h3 {
+      font-size: $font-size-h3;
+      margin: $spacing-6 0 $spacing-3;
+      color: $color-text-primary;
+    }
+    
+    p {
+      margin-bottom: $spacing-4;
+      color: $color-text-secondary;
+      line-height: $line-height-base;
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: $spacing-4 0;
+      
+      li {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: $spacing-3;
+        
+        i {
+          color: $color-status-success;
+          margin-right: $spacing-2;
+          margin-top: 0.25rem;
+        }
+        
+        strong {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  
+  &__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: $border-radius-lg;
+      box-shadow: $shadow-md;
+    }
   }
 }
 
-/* 團隊介紹區域 */
+// 團隊成員區塊
 .team-section {
   margin-bottom: $spacing-16;
   
-  @include mobile {
+  .section-title {
+    font-size: $font-size-h2;
     margin-bottom: $spacing-8;
+    text-align: center;
   }
 }
 
@@ -27,161 +84,137 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-12;
-  
-  @include mobile {
-    gap: $spacing-8;
-  }
 }
 
 .team-member {
-  display: flex;
-  gap: $spacing-8;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: $spacing-6;
+  background-color: $color-bg-secondary;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-md;
   
-  @include mobile {
-    flex-direction: column;
-    gap: $spacing-4;
-  }
-  
-  /* 偶數團隊成員（右圖左文） */
   &.even {
-    flex-direction: row-reverse;
+    grid-template-columns: 2fr 1fr;
     
-    @include mobile {
-      flex-direction: column;
+    .team-member__image {
+      order: 2;
+    }
+    
+    .team-member__info {
+      order: 1;
     }
   }
   
   &__image {
-    flex: 0 0 30%;
-    max-width: 30%;
-    
-    @include mobile {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
+    height: 100%;
+    overflow: hidden;
     
     img {
       width: 100%;
-      height: auto;
-      border-radius: $border-radius-lg;
-      box-shadow: $shadow-md;
+      height: 100%;
+      object-fit: cover;
     }
   }
   
   &__info {
-    flex: 1;
+    padding: $spacing-6;
   }
   
   &__name {
-    color: $color-primary;
-    margin-bottom: $spacing-3;
-    font-size: $font-size-2xl;
-    
-    @include mobile {
-      font-size: $font-size-xl;
-      margin-top: $spacing-4;
-    }
+    font-size: $font-size-h3;
+    margin: 0 0 $spacing-1;
+    color: $color-text-primary;
   }
   
-  &__description {
-    margin-bottom: $spacing-4;
-    color: $color-text-secondary;
+  &__title {
     font-size: $font-size-lg;
-    
-    @include mobile {
-      font-size: $font-size-base;
-    }
+    color: $color-text-secondary;
+    margin-bottom: $spacing-4;
   }
   
   &__details {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: $spacing-4;
-    background-color: $color-bg-primary;
-    padding: $spacing-4;
-    border-radius: $border-radius-md;
-    
-    @include mobile {
-      grid-template-columns: 1fr;
-    }
+    margin-bottom: $spacing-4;
     
     h4 {
-      color: $color-primary;
-      margin-bottom: $spacing-2;
       font-size: $font-size-base;
+      margin: 0 0 $spacing-2;
+      color: $color-text-primary;
     }
     
     ul {
-      list-style-type: none;
+      list-style: none;
       padding: 0;
       margin: 0;
       
       li {
         position: relative;
         padding-left: $spacing-4;
-        margin-bottom: $spacing-1;
+        margin-bottom: $spacing-2;
+        color: $color-text-secondary;
         
-        &:before {
+        &::before {
           content: "•";
-          color: $color-primary;
           position: absolute;
           left: 0;
+          color: $color-text-tertiary;
         }
       }
     }
   }
-}
-
-/* 專業實力展示 */
-.strength-section {
-  margin-bottom: $spacing-16;
   
-  @include mobile {
-    margin-bottom: $spacing-8;
-  }
-}
-
-.strength-stats {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: $spacing-4;
-  
-  @include mobile {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-.strength-stat {
-  flex: 1;
-  min-width: 150px;
-  text-align: center;
-  padding: $spacing-6;
-  background-color: $color-bg-secondary;
-  border-radius: $border-radius-lg;
-  box-shadow: $shadow-md;
-  transition: transform $transition-base;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: $shadow-lg;
-  }
-  
-  @include mobile {
-    width: 100%;
-    max-width: 250px;
-  }
-  
-  &__number {
-    font-size: $font-size-4xl;
-    font-weight: 700;
-    color: $color-primary;
-    margin-bottom: $spacing-2;
-  }
-  
-  &__label {
-    font-size: $font-size-lg;
+  &__bio {
     color: $color-text-secondary;
+    line-height: $line-height-base;
+    margin: 0;
   }
+  
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-2;
+    
+    .skill-tag {
+      display: inline-block;
+      padding: $spacing-1 $spacing-2;
+      background-color: rgba($color-bg-primary, 0.5);
+      border-radius: $border-radius-sm;
+      font-size: $font-size-small;
+      color: $color-text-secondary;
+    }
+  }
+  
+  @include tablet {
+    grid-template-columns: 1fr;
+    
+    &.even {
+      grid-template-columns: 1fr;
+      
+      .team-member__image {
+        order: 1;
+      }
+      
+      .team-member__info {
+        order: 2;
+      }
+    }
+    
+    &__image {
+      height: 300px;
+    }
+    
+    &__details {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// 圓角圖片
+.rounded-image {
+  border-radius: $border-radius-lg;
+  overflow: hidden;
 }

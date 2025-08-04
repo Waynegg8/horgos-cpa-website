@@ -16,6 +16,23 @@
   // A subtle, multi-layered shadow for depth.
   box-shadow: $shadow-md;
 
+  // 確保卡片內文字與背景有足夠對比
+  color: $color-text-primary;
+  
+  h2, h3, h4, h5, h6 {
+    color: $color-text-primary;
+    margin-top: 0;
+  }
+  
+  p {
+    color: $color-text-secondary;
+    margin-bottom: $spacing-4;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
   &:hover {
     transform: translateY(-4px);
     border-color: rgba($color-text-primary, 0.15); // Use text color for a brighter border on hover
@@ -33,4 +50,62 @@
 // Card variations
 .card-style--no-padding {
   padding: 0;
+}
+
+.card-style--light {
+  background-color: lighten($color-bg-secondary, 5%);
+}
+
+.card-style--dark {
+  background-color: darken($color-bg-secondary, 3%);
+}
+
+// 卡片內容排版
+.card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  
+  &__header {
+    margin-bottom: $spacing-4;
+  }
+  
+  &__body {
+    flex: 1;
+  }
+  
+  &__footer {
+    margin-top: $spacing-4;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+// 左圖右文卡片
+.card-horizontal {
+  display: flex;
+  gap: $spacing-6;
+  
+  &__image {
+    flex: 0 0 35%;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: $border-radius-md;
+    }
+  }
+  
+  &__content {
+    flex: 1;
+  }
+  
+  @include mobile {
+    flex-direction: column;
+    
+    &__image {
+      flex: 0 0 200px;
+    }
+  }
 }

@@ -58,45 +58,41 @@ function initSocialButtons() {
     
     if (!socialToggle || !socialMenu) return;
 
-    let isOpen = false;
-
-    // 切換社群媒體選單
-    function toggleSocialMenu() {
-        isOpen = !isOpen;
-        
-        socialToggle.classList.toggle('active', isOpen);
-        socialMenu.classList.toggle('active', isOpen);
-        socialToggle.setAttribute('aria-expanded', isOpen);
-        socialMenu.setAttribute('aria-hidden', !isOpen);
-    }
-
-    // 點擊切換按鈕
-    socialToggle.addEventListener('click', toggleSocialMenu);
-
-    // 鍵盤支援
+    // 鍵盤無障礙支援
     socialToggle.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            toggleSocialMenu();
+            // 模擬滑鼠懸停效果
+            socialMenu.style.opacity = '1';
+            socialMenu.style.visibility = 'visible';
+            socialMenu.style.transform = 'translateY(0)';
+            
+            // 添加一個臨時的鍵盤事件監聽器來關閉選單
+            const closeMenu = function(event) {
+                if (event.key === 'Escape' || event.key === 'Tab') {
+                    socialMenu.style.opacity = '';
+                    socialMenu.style.visibility = '';
+                    socialMenu.style.transform = '';
+                    document.removeEventListener('keydown', closeMenu);
+                }
+            };
+            
+            document.addEventListener('keydown', closeMenu);
         }
     });
+    
+    // 添加呼吸律動效果
+    addPulseAnimation(socialToggle);
+}
 
-    // 點擊外部關閉選單
-    document.addEventListener('click', function(e) {
-        if (!socialToggle.contains(e.target) && !socialMenu.contains(e.target)) {
-            if (isOpen) {
-                toggleSocialMenu();
-            }
-        }
-    });
-
-    // ESC鍵關閉選單
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && isOpen) {
-            toggleSocialMenu();
-            socialToggle.focus();
-        }
-    });
+/**
+ * 添加呼吸律動效果
+ */
+function addPulseAnimation(element) {
+    if (!element) return;
+    
+    // 添加呼吸律動效果的 CSS 類
+    element.classList.add('pulse-animation');
 }
 
 // 匯出為ES6模組
