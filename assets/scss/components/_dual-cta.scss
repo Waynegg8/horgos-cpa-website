@@ -39,79 +39,64 @@
   }
 
   .btn-cta-primary {
-    background-color: #FFFFFF;
-    color: #000000;
-    padding: 0.875rem 2rem;
+    background-color: #204B6E;
+    color: #FFFFFF;
+    padding: 1rem 2.5rem;
     font-weight: 600;
     font-size: 1.125rem;
-    border-radius: $border-radius-md;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 12px rgba(32, 75, 110, 0.3);
     
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255, 255, 255, 0.15);
-      z-index: -1;
-      transform: scale(0.95);
-      border-radius: $border-radius-md;
-      animation: pulse 2s infinite;
-    }
-
     &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(255, 255, 255, 0.15);
-      
-      &::after {
-        animation: none;
-        transform: scale(1);
-        opacity: 0.2;
-      }
+      background-color: #1a3d5a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(32, 75, 110, 0.4);
+    }
+    
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(32, 75, 110, 0.3);
     }
   }
   
   .btn-cta-secondary {
-    background-color: transparent;
+    background-color: #00B900;
     color: #FFFFFF;
-    border: 2px solid #FFFFFF;
-    padding: 0.875rem 2rem;
+    padding: 1rem 2.5rem;
     font-weight: 600;
     font-size: 1.125rem;
-    border-radius: $border-radius-md;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 185, 0, 0.3);
     
     &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
+      background-color: #009900;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 185, 0, 0.4);
+    }
+    
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(0, 185, 0, 0.3);
     }
   }
 }
 
-// 呼吸律動效果
-@keyframes pulse {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.2;
-  }
-  
-  50% {
-    transform: scale(1.05);
-    opacity: 0.4;
-  }
-  
-  100% {
-    transform: scale(0.95);
-    opacity: 0.2;
-  }
-}
-
-// 響應式調整
-@media (max-width: $breakpoint-mobile) {
+// 響應式設計
+@media (max-width: 768px) {
   .dual-cta {
     padding: 2rem 0;
     margin: 2rem 0 1rem;
@@ -127,15 +112,17 @@
     
     &__buttons {
       flex-direction: column;
-      width: 100%;
-      max-width: 300px;
-      margin: 0 auto;
+      align-items: center;
+      gap: 0.75rem;
     }
     
     .btn-cta-primary,
     .btn-cta-secondary {
       width: 100%;
-      margin-bottom: 0.75rem;
+      max-width: 300px;
+      justify-content: center;
+      padding: 0.875rem 2rem;
+      font-size: 1rem;
     }
   }
 }

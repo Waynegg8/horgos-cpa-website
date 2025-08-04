@@ -2,45 +2,167 @@
 <div class="comments-section" id="comments">
   <h2 class="comments-title">留言討論</h2>
   
-  <!-- Disqus討論區整合 -->
-  <div id="disqus_thread"></div>
+  <!-- 客製化留言表單 -->
+  <div class="comment-form-container">
+    <form id="comment-form" class="comment-form">
+      <div class="form-group">
+        <label for="comment-nickname" class="form-label">暱稱 <span class="required">*</span></label>
+        <input type="text" id="comment-nickname" name="nickname" required class="form-input" placeholder="請輸入您的暱稱">
+      </div>
+      
+      <div class="form-group">
+        <label for="comment-line-id" class="form-label">LINE ID <span class="required">*</span></label>
+        <input type="text" id="comment-line-id" name="lineId" required class="form-input" placeholder="請輸入您的LINE ID">
+        <small class="form-help">此資訊僅供我們聯絡使用，不會公開顯示</small>
+      </div>
+      
+      <div class="form-group">
+        <label for="comment-content" class="form-label">留言內容</label>
+        <textarea id="comment-content" name="content" rows="4" class="form-textarea" placeholder="請分享您的想法或問題..."></textarea>
+      </div>
+      
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary comment-submit-btn">
+          <i class="fas fa-paper-plane"></i>
+          發表留言
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- 留言列表 -->
+  <div class="comments-list" id="comments-list">
+    <!-- 留言將透過JavaScript動態載入 -->
+  </div>
   
   <script>
-    // Disqus配置
-    var disqus_config = function () {
-      this.page.url = "{{ .Permalink }}";
-      this.page.identifier = "{{ .File.UniqueID }}";
-      this.page.title = "{{ .Title }}";
-    };
-    
-    // 延遲載入Disqus
-    function loadDisqus() {
-      var disqus_script = document.createElement('script');
-      disqus_script.src = 'https://horgoscpa.disqus.com/embed.js';
-      disqus_script.setAttribute('data-timestamp', +new Date());
-      (document.head || document.body).appendChild(disqus_script);
+    // 留言表單處理
+    document.addEventListener('DOMContentLoaded', function() {
+      const commentForm = document.getElementById('comment-form');
+      const commentsList = document.getElementById('comments-list');
       
-      // 移除事件監聽器
-      window.removeEventListener('scroll', disqusScrollHandler);
-    }
-    
-    // 監聽滾動事件
-    function disqusScrollHandler() {
-      var disqus_thread = document.getElementById('disqus_thread');
-      if (disqus_thread) {
-        var rect = disqus_thread.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom >= 0) {
-          loadDisqus();
-        }
+      if (commentForm) {
+        commentForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const formData = new FormData(commentForm);
+          const commentData = {
+            nickname: formData.get('nickname'),
+            lineId: formData.get('lineId'),
+            content: formData.get('content'),
+            pageId: window.location.pathname
+          };
+          
+          // 顯示載入狀態
+          const submitBtn = commentForm.querySelector('.comment-submit-btn');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 送出中...';
+          submitBtn.disabled = true;
+          
+          // 提交留言
+          fetch('/api/comments', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(commentData)
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // 清空表單
+              commentForm.reset();
+              
+              // 重新載入留言列表
+              loadComments();
+              
+              // 顯示成功訊息
+              showMessage('留言發表成功！', 'success');
+            } else {
+              showMessage(data.error || '留言發表失敗，請重試', 'error');
+            }
+          })
+          .catch(error => {
+            console.error('提交留言失敗:', error);
+            showMessage('網路錯誤，請稍後重試', 'error');
+          })
+          .finally(() => {
+            // 恢復按鈕狀態
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+          });
+        });
       }
-    }
-    
-    // 添加滾動事件監聽器
-    window.addEventListener('scroll', disqusScrollHandler);
-    
-    // 初始檢查
-    document.addEventListener('DOMContentLoaded', disqusScrollHandler);
+      
+      // 載入留言列表
+      function loadComments() {
+        fetch(`/api/comments${window.location.pathname}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.success && data.comments) {
+              displayComments(data.comments);
+            }
+          })
+          .catch(error => {
+            console.error('載入留言失敗:', error);
+          });
+      }
+      
+      // 顯示留言
+      function displayComments(comments) {
+        if (comments.length === 0) {
+          commentsList.innerHTML = '<p class="no-comments">尚無留言，成為第一個留言的人吧！</p>';
+          return;
+        }
+        
+        const commentsHTML = comments.map(comment => `
+          <div class="comment-item">
+            <div class="comment-header">
+              <span class="comment-author">${escapeHtml(comment.nickname)}</span>
+              <span class="comment-date">${formatDate(comment.timestamp)}</span>
+            </div>
+            <div class="comment-content">
+              ${escapeHtml(comment.content)}
+            </div>
+          </div>
+        `).join('');
+        
+        commentsList.innerHTML = commentsHTML;
+      }
+      
+      // 顯示訊息
+      function showMessage(message, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message message-${type}`;
+        messageDiv.textContent = message;
+        
+        document.body.appendChild(messageDiv);
+        
+        setTimeout(() => {
+          messageDiv.remove();
+        }, 3000);
+      }
+      
+      // 工具函數
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+      
+      function formatDate(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleDateString('zh-TW', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+      
+      // 初始載入留言
+      loadComments();
+    });
   </script>
-  
-  <noscript>請啟用JavaScript以查看 <a href="https://disqus.com/?ref_noscript">由Disqus提供的留言功能</a></noscript>
 </div>

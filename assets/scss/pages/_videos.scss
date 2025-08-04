@@ -256,79 +256,129 @@
   }
 }
 
-// 系列導航
+// 系列導航樣式
 .series-navigation {
-  margin: 2rem 0;
+  background-color: #141414;
+  border: 1px solid #262626;
+  border-radius: 12px;
   padding: 1.5rem;
-  background-color: #F5F6F5;
-  border-radius: 8px;
+  margin: 2rem 0;
   
   h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
+    color: #F0F0F0;
     font-size: 1.25rem;
-    color: #374151;
+    margin-bottom: 1rem;
+    font-weight: 600;
   }
   
   .series-progress {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 1rem;
     
     span {
-      display: block;
-      margin-bottom: 0.5rem;
+      color: #A1A1A1;
       font-size: 0.875rem;
-      color: #6B7280;
+      font-weight: 500;
     }
     
     .progress-bar {
-      height: 8px;
-      background-color: #E5E7EB;
-      border-radius: 4px;
+      flex: 1;
+      height: 6px;
+      background-color: #262626;
+      border-radius: 3px;
       overflow: hidden;
       
       .progress {
         height: 100%;
-        background-color: #204B6E;
+        background: linear-gradient(90deg, #204B6E 0%, #22c55e 100%);
+        border-radius: 3px;
+        transition: width 0.3s ease;
       }
     }
   }
   
   .series-links {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
     
     a {
-      color: #204B6E;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid #262626;
+      border-radius: 8px;
+      color: #F0F0F0;
       text-decoration: none;
       font-size: 0.875rem;
+      transition: all 0.3s ease;
       
       &:hover {
-        text-decoration: underline;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: #204B6E;
+        transform: translateY(-1px);
       }
       
       i {
-        margin: 0 0.25rem;
+        font-size: 0.75rem;
       }
-    }
-    
-    @media (max-width: 640px) {
-      flex-direction: column;
-      gap: 0.5rem;
     }
   }
   
-  .view-series-btn {
-    display: inline-block;
-    background-color: #204B6E;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 0.875rem;
+  .series-all {
+    margin-top: 1rem;
+    text-align: center;
     
-    &:hover {
-      background-color: #2C5F7F;
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #204B6E;
+      color: #FFFFFF;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background-color: #1a3d5a;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// 響應式設計
+@media (max-width: 768px) {
+  .series-navigation {
+    padding: 1rem;
+    margin: 1.5rem 0;
+    
+    h3 {
+      font-size: 1.125rem;
+    }
+    
+    .series-progress {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      
+      .progress-bar {
+        width: 100%;
+      }
+    }
+    
+    .series-links {
+      flex-direction: column;
+      
+      a {
+        justify-content: center;
+      }
     }
   }
 }
