@@ -3,6 +3,7 @@
   background: linear-gradient(135deg, rgba($color-bg-primary, 0.95), $color-bg-secondary);
   padding: $spacing-16 0 $spacing-8;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-right: $spacing-4; // 增加右側間距
 }
 
 .contact-header h1 {
@@ -29,11 +30,14 @@
   color: $color-text-secondary;
   max-width: 800px;
   line-height: 1.6;
+  text-align: justify; // 改善文字對齊
+  word-spacing: 0.05em; // 增加字間距
 }
 
 .contact-details-section {
   padding: $spacing-20 0;
   background-color: $color-bg-primary;
+  padding-right: $spacing-4; // 增加右側間距
 }
 
 .contact-info-map {
@@ -118,6 +122,7 @@
   margin-bottom: $spacing-2;
   color: $color-text-secondary;
   font-size: 0.95rem;
+  line-height: 1.4; // 改善行高
 }
 
 .contact-card a {
@@ -247,6 +252,7 @@
     color: $color-text-secondary;
     font-size: 0.9rem;
     margin: 0;
+    line-height: 1.4; // 改善行高
   }
 }
 

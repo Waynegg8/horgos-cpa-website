@@ -10,6 +10,7 @@
   padding: $spacing-2 $spacing-4;
   z-index: z('header') + 1;
   transition: top 0.3s;
+  margin-right: $spacing-2; // 增加右側間距
   
   &:focus {
     top: 0;
@@ -87,4 +88,5 @@
 [aria-live="polite"],
 [aria-live="assertive"] {
   position: relative;
+  padding-right: $spacing-2; // 增加右側間距
 }

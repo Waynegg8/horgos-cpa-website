@@ -45,3 +45,25 @@
 @import "pages/services";
 @import "pages/about";
 @import "pages/videos";
+
+// 全域間距優化
+// -----------------------------------------------------------------------------
+
+// 為所有主要容器增加右側間距
+.container,
+.main-content,
+.content-area {
+  padding-right: $spacing-4; // 增加右側間距
+}
+
+// 為所有文字內容增加優化
+p, li, div {
+  @include text-optimized;
+}
+
+// 為所有卡片和組件增加間距優化
+.card-style,
+.sidebar-widget,
+.form-container {
+  @include spacing-optimized;
+}

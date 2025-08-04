@@ -8,6 +8,7 @@
   margin: 4rem 0 2rem;
   border-radius: $border-radius-lg;
   color: #FFFFFF;
+  padding-right: $spacing-4; // 增加右側間距
 
   &__content {
     text-align: center;
@@ -29,6 +30,9 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    text-align: justify; // 改善文字對齊
+    word-spacing: 0.05em; // 增加字間距
+    line-height: 1.6; // 改善行高
   }
 
   &__buttons {

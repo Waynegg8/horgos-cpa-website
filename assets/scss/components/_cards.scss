@@ -110,6 +110,7 @@
   &__content {
     flex: 1;
     min-width: 0;
+    padding-right: $spacing-2; // 增加右側間距
     
     .article-title {
       margin: 0 0 $spacing-3 0;
@@ -153,6 +154,8 @@
       color: $color-text-secondary;
       margin-bottom: $spacing-4;
       line-height: $line-height-base;
+      text-align: justify; // 改善文字對齊
+      word-spacing: 0.05em; // 增加字間距
     }
     
     .faq-title,

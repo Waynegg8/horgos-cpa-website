@@ -15,6 +15,7 @@ body {
   background-color: $color-bg-primary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-right: $spacing-2; // 增加右側間距
 }
 
 // 2. Heading Scale
@@ -29,6 +30,7 @@ h4, .h4 {
   color: $color-text-primary;
   margin: 0 0 $heading-margin-bottom 0;
   padding: 0;
+  padding-right: $spacing-2; // 增加右側間距
 }
 
 h1, .h1 { font-size: $font-size-h1; }
@@ -41,6 +43,7 @@ h5, .h5,
 h6, .h6 {
   font-size: $font-size-base;
   font-weight: 600;
+  padding-right: $spacing-2; // 增加右側間距
 }
 
 
@@ -49,6 +52,9 @@ h6, .h6 {
 p {
   margin: 0 0 $paragraph-spacing 0;
   line-height: $line-height-base;
+  text-align: justify; // 改善文字對齊
+  word-spacing: 0.05em; // 增加字間距
+  padding-right: $spacing-2; // 增加右側間距
   
   &:last-child {
     margin-bottom: 0;
@@ -90,4 +96,5 @@ hr {
   border: 0;
   border-top: 1px solid $color-border-primary;
   margin: $spacing-12 0;
+  margin-right: $spacing-2; // 增加右側間距
 }

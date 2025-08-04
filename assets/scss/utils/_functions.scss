@@ -41,3 +41,13 @@ $z-layers: (
   @warn "未知的 z-index 層級: #{$layer}";
   @return 1;
 }
+
+// 間距計算函數
+@function spacing($multiplier: 1) {
+  @return $spacing-4 * $multiplier;
+}
+
+// 文字間距計算函數
+@function text-spacing($multiplier: 1) {
+  @return 0.05em * $multiplier;
+}

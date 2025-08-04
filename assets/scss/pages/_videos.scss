@@ -6,6 +6,7 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding-right: $spacing-4; // 增加右側間距
 }
 
 // 響應式影片容器
@@ -41,6 +42,7 @@
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #262626;
+  padding-right: $spacing-4; // 增加右側間距
   
   .video-info {
     display: flex;
@@ -151,6 +153,7 @@
   .video-card-content {
     padding: 1.5rem;
     flex: 1;
+    padding-right: $spacing-4; // 增加右側間距
     
     .video-title {
       margin: 0 0 0.75rem;
@@ -183,6 +186,8 @@
       color: #A1A1A1;
       font-size: 0.875rem;
       line-height: 1.6;
+      text-align: justify; // 改善文字對齊
+      word-spacing: 0.05em; // 增加字間距
       
       @media (max-width: 640px) {
         display: -webkit-box;

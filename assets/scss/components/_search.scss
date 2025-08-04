@@ -5,6 +5,7 @@
   position: relative;
   margin-bottom: 1.5rem;
   width: 100%;
+  padding-right: $spacing-2; // 增加右側間距
   
   // 列表頁搜尋容器
   &.search-container--list {

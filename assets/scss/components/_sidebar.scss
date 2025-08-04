@@ -45,17 +45,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: $spacing-3;
+      padding: $spacing-3 $spacing-4; // 增加水平內邊距
       color: $color-text-secondary;
       text-decoration: none;
       border-radius: $border-radius-md;
       transition: all $transition-base ease;
       word-wrap: break-word; // 長文字換行
+      line-height: 1.4; // 改善行高
       
       &:hover,
       &.active {
         background-color: rgba(255, 255, 255, 0.05);
         color: $color-accent-highlight;
+        transform: translateX(4px); // 添加懸停效果
       }
     }
     
@@ -65,6 +67,7 @@
       background-color: rgba(255, 255, 255, 0.1);
       padding: $spacing-1 $spacing-2;
       border-radius: $border-radius-sm;
+      margin-left: $spacing-2; // 增加左邊距
     }
   }
   
@@ -86,16 +89,18 @@
     
     &__link {
       display: block;
-      padding: $spacing-2 $spacing-3;
+      padding: $spacing-2 $spacing-4; // 增加水平內邊距
       color: $color-text-secondary;
       text-decoration: none;
       border-radius: $border-radius-md;
       transition: all $transition-base ease;
       font-size: $font-size-small;
+      line-height: 1.4; // 改善行高
       
       &:hover {
         background-color: rgba(255, 255, 255, 0.05);
         color: $color-accent-highlight;
+        transform: translateX(4px); // 添加懸停效果
       }
     }
   }
@@ -122,9 +127,12 @@
       color: $color-text-secondary;
       text-decoration: none;
       transition: all $transition-base ease;
+      padding: $spacing-2; // 增加內邊距
+      border-radius: $border-radius-md;
       
       &:hover {
         color: $color-accent-highlight;
+        background-color: rgba(255, 255, 255, 0.02);
       }
     }
     
@@ -161,6 +169,7 @@
     &__content {
       flex: 1;
       min-width: 0; // 防止內容溢出
+      padding-right: $spacing-2; // 增加右邊距
     }
     
     &__title {
@@ -187,11 +196,12 @@
       display: flex;
       flex-wrap: wrap;
       gap: $spacing-2;
+      padding: $spacing-2 0; // 增加上下內邊距
     }
     
     &__tag {
       display: inline-block;
-      padding: $spacing-1 $spacing-2;
+      padding: $spacing-1 $spacing-3; // 增加水平內邊距
       background-color: rgba(255, 255, 255, 0.05);
       color: $color-text-secondary;
       text-decoration: none;
@@ -202,6 +212,7 @@
       &:hover {
         background-color: $color-accent-highlight;
         color: white;
+        transform: translateY(-1px); // 添加懸停效果
       }
     }
   }
@@ -220,20 +231,24 @@
       display: flex;
       align-items: center;
       gap: $spacing-2;
-      padding: $spacing-2 $spacing-3;
+      padding: $spacing-2 $spacing-4; // 增加水平內邊距
       color: $color-text-secondary;
       text-decoration: none;
       border-radius: $border-radius-md;
       transition: all $transition-base ease;
       font-size: $font-size-small;
+      line-height: 1.4; // 改善行高
       
       i {
         font-size: 1rem;
+        width: 20px; // 固定圖標寬度
+        text-align: center;
       }
       
       &:hover {
         background-color: rgba(255, 255, 255, 0.05);
         color: $color-accent-highlight;
+        transform: translateX(4px); // 添加懸停效果
       }
     }
   }

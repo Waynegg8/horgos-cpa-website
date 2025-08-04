@@ -1,6 +1,7 @@
 // 分類導航樣式
 .category-nav {
   margin-bottom: $spacing-8;
+  padding-right: $spacing-2; // 增加右側間距
   
   &__links {
     display: flex;
@@ -73,6 +74,7 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-6;
+  padding-right: $spacing-2; // 增加右側間距
   
   @include mobile {
     gap: $spacing-4;

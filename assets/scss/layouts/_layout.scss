@@ -19,6 +19,11 @@
   @include mobile {
     padding: 0 $spacing-6; // 手機版增加邊距
   }
+  
+  // 確保內容不會貼邊
+  &--content {
+    padding-right: $spacing-4; // 額外的右側間距
+  }
 }
 
 // Full Width Layout
@@ -36,7 +41,7 @@
 // Two Column Layout
 .two-column {
   display: flex;
-  gap: $spacing-8;
+  gap: $spacing-6; // 減少間距從 $spacing-8 到 $spacing-6
   margin-bottom: $spacing-16;
   
   @include mobile {
@@ -50,25 +55,26 @@
   }
   
   &__sidebar {
-    width: 300px;
+    width: 320px; // 稍微增加側邊欄寬度
     flex-shrink: 0;
     
     @include tablet {
-      width: 240px;
+      width: 280px; // 平板版稍微增加寬度
     }
     
     @include mobile {
-      display: none;
+      width: 100%; // 手機版使用全寬
+      display: block; // 改為顯示而不是隱藏
     }
   }
   
   @include tablet {
-    gap: $spacing-6;
+    gap: $spacing-5; // 平板版減少間距
   }
   
   @include mobile {
     flex-direction: column;
-    gap: $spacing-8;
+    gap: $spacing-6;
   }
 }
 

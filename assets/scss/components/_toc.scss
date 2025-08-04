@@ -7,6 +7,7 @@
   padding: $spacing-6;
   border: 1px solid $color-border-primary;
   box-shadow: $shadow-md;
+  padding-right: $spacing-4; // 增加右側間距
   
   .toc-title {
     margin: 0 0 $spacing-4;
@@ -64,15 +65,20 @@
     text-decoration: none;
     transition: color $transition-fast;
     display: block;
-    padding: $spacing-1 0;
+    padding: $spacing-1 $spacing-2; // 增加水平內邊距
+    border-radius: $border-radius-sm;
+    line-height: 1.4; // 改善行高
     
     &:hover {
       color: $color-text-primary;
+      background-color: rgba(255, 255, 255, 0.05);
+      transform: translateX(4px); // 添加懸停效果
     }
     
     &.active {
       color: $color-accent-highlight;
       font-weight: 600;
+      background-color: rgba($color-accent-highlight, 0.1);
     }
   }
   

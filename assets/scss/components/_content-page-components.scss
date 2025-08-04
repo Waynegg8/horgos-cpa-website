@@ -88,6 +88,7 @@
     max-width: 800px;
     margin: 0 auto;
     text-align: left;
+    padding-right: $spacing-4; // 增加右側間距
     
     &__title {
       font-size: $font-size-h4;
@@ -115,6 +116,8 @@
         margin-bottom: $spacing-3;
         color: $color-text-secondary;
         line-height: $line-height-base;
+        text-align: justify; // 改善文字對齊
+        word-spacing: 0.05em; // 增加字間距
         
         &:before {
           content: '•';

@@ -10,6 +10,7 @@
   z-index: z('cookie');
   transform: translateY(100%);
   transition: transform $transition-base $ease-out;
+  padding-right: $spacing-4; // 增加右側間距
   
   &.show {
     transform: translateY(0);
@@ -22,11 +23,15 @@
     align-items: center;
     justify-content: space-between;
     gap: $spacing-4;
+    padding-right: $spacing-2; // 增加右側間距
     
     p {
       margin: 0;
       color: $color-text-primary;
       font-size: $font-size-small;
+      text-align: justify; // 改善文字對齊
+      word-spacing: 0.05em; // 增加字間距
+      line-height: 1.4; // 改善行高
       
       a {
         color: $color-text-primary;

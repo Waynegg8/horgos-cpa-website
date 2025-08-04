@@ -39,6 +39,7 @@ body[data-section=""] .primary {
   max-width: 100% !important;
   width: 100% !important;
   margin: 0 !important;
+  padding-right: 1rem !important; /* 增加右側間距 */
 }
 
 /* 強力重設flex佈局 */
@@ -60,6 +61,7 @@ body.contact .container--outer,
 body.appointment .container--outer,
 body[data-section=""] .container--outer {
   max-width: 1500px !important;
+  padding-right: 1rem !important; /* 增加右側間距 */
 }
 
 /* 強制wrapper在需要的頁面上取消padding */
@@ -99,6 +101,7 @@ body.videos .primary {
   max-width: 100% !important;
   width: 100% !important;
   margin: 0 !important;
+  padding-right: 1rem !important; /* 增加右側間距 */
 }
 
 /* 修復case-studies頁面的布局，使用!important優先級確保覆蓋主題樣式 */
@@ -116,6 +119,7 @@ body[data-section="videos"] .sidebar {
 body[data-section="videos"] .primary {
   flex: 1 0 100% !important;
   max-width: 100% !important;
+  padding-right: 1rem !important; /* 增加右側間距 */
 }
 
 /* 通用隱藏側邊欄方案 - 全站適用 */
@@ -125,12 +129,14 @@ body[data-section="videos"] .primary {
     width: 100% !important;
     max-width: 100% !important;
     flex: 1 0 100% !important;
+    padding-right: 1rem !important; /* 增加右側間距 */
   }
   
   /* 確保main元素不會被側邊欄影響 */
   main.main {
     display: block !important;
     width: 100% !important;
+    padding-right: 1rem !important; /* 增加右側間距 */
   }
   
   /* 完全重設main.list元素的佈局，刪除任何flex屬性 */
@@ -154,6 +160,7 @@ body[data-section="videos"] .primary {
 .primary {
   flex: 1 0 100% !important;
   order: 1;
+  padding-right: 1rem !important; /* 增加右側間距 */
 }
 
 /* 全域側邊欄預設隱藏 */
@@ -175,6 +182,7 @@ body.downloads-single .sidebar {
   height: auto !important;
   opacity: 1 !important;
   flex: 1 0 31.66% !important;
+  padding-right: 0.5rem !important; /* 增加右側間距 */
 }
 
 /* 在特定頁面重新啟用flex佈局 */
@@ -195,6 +203,7 @@ body.faq-single .primary,
 body.downloads .primary,
 body.downloads-single .primary {
   flex: 1 0 65.83% !important;
+  padding-right: 1rem !important; /* 增加右側間距 */
 }
 
 /* 修復側邊欄文字垂直排列問題 */
@@ -211,6 +220,7 @@ body.downloads-single .sidebar-categories__link {
   text-align: left !important;
   writing-mode: horizontal-tb !important;
   text-orientation: mixed !important;
+  padding-right: 0.5rem !important; /* 增加右側間距 */
 }
 
 /* 確保側邊欄分類文字水平排列 */
@@ -221,6 +231,7 @@ body.faq-single .sidebar-categories__list,
 body.downloads .sidebar-categories__list,
 body.downloads-single .sidebar-categories__list {
   display: block !important;
+  padding-right: 0.5rem !important; /* 增加右側間距 */
 }
 
 body.articles .sidebar-categories__item,
@@ -231,4 +242,21 @@ body.downloads .sidebar-categories__item,
 body.downloads-single .sidebar-categories__item {
   display: block !important;
   margin-bottom: 0.5rem !important;
+  padding-right: 0.5rem !important; /* 增加右側間距 */
+}
+
+/* 改善文字排列和間距 */
+p, li, div {
+  text-align: justify !important;
+  word-spacing: 0.05em !important;
+  line-height: 1.6 !important;
+  padding-right: 0.5rem !important; /* 增加右側間距 */
+}
+
+/* 改善卡片和組件的間距 */
+.card-style,
+.sidebar-widget,
+.form-container {
+  padding-right: 1rem !important; /* 增加右側間距 */
+  margin-right: 0.5rem !important; /* 增加右側間距 */
 }

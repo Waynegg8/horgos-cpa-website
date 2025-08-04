@@ -53,6 +53,7 @@
   border-radius: $border-radius-sm;
   position: relative;
   overflow: hidden;
+  margin-right: $spacing-2; // 增加右側間距
   
   &::after {
     content: '';
@@ -113,6 +114,7 @@
   padding: 1.5rem;
   box-shadow: $shadow-sm;
   margin-bottom: 1.5rem;
+  padding-right: $spacing-4; // 增加右側間距
 }
 
 // 骨架屏圓形
@@ -128,6 +130,7 @@
   position: relative;
   overflow: hidden;
   background-color: $color-border-primary;
+  margin-right: $spacing-2; // 增加右側間距
   
   .preview-image {
     position: absolute;

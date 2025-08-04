@@ -4,10 +4,13 @@
 
 // 內容區塊優化
 .content-area {
+  padding-right: $spacing-4; // 增加右側間距
+  
   p, li {
     line-height: 1.8;
     letter-spacing: 0.02em;
     word-spacing: 0.05em;
+    text-align: justify; // 改善文字對齊
     
     &:not(:last-child) {
       margin-bottom: $spacing-5;
@@ -39,6 +42,8 @@
 
 // 卡片內容優化
 .card-content {
+  padding-right: $spacing-2; // 增加右側間距
+  
   h3 {
     line-height: 1.4;
     margin-bottom: $spacing-3;
@@ -47,6 +52,8 @@
   p {
     line-height: 1.6;
     margin-bottom: $spacing-3;
+    text-align: justify; // 改善文字對齊
+    word-spacing: 0.05em; // 增加字間距
     
     &:last-child {
       margin-bottom: 0;
@@ -71,10 +78,13 @@
 .text-block {
   max-width: 720px; // 設定合理的最大寬度避免過寬難讀
   margin: 0 auto;
+  padding-right: $spacing-4; // 增加右側間距
   
   p {
     line-height: 1.8;
     margin-bottom: $spacing-5;
+    text-align: justify; // 改善文字對齊
+    word-spacing: 0.05em; // 增加字間距
   }
   
   h2, h3 {
@@ -88,6 +98,7 @@
   max-width: 720px; // 限制文章寬度提升閱讀體驗
   margin: 0 auto;
   padding: 0 $spacing-6;
+  padding-right: $spacing-4; // 增加右側間距
   
   @include tablet {
     padding: 0 $spacing-4;
@@ -112,6 +123,8 @@
     margin-bottom: $spacing-5;
     line-height: 1.7;
     font-size: 1.05rem;
+    text-align: justify; // 改善文字對齊
+    word-spacing: 0.05em; // 增加字間距
     
     @include mobile {
       font-size: 1rem;
@@ -127,6 +140,8 @@
     li {
       margin-bottom: $spacing-2;
       line-height: 1.6;
+      text-align: justify; // 改善文字對齊
+      word-spacing: 0.05em; // 增加字間距
     }
   }
 }
@@ -165,9 +180,15 @@
 .readable-content {
   line-height: 1.8;
   letter-spacing: 0.02em;
+  padding-right: $spacing-2; // 增加右側間距
   
   h1, h2, h3, h4 {
     line-height: 1.4;
     letter-spacing: -0.01em;
+  }
+  
+  p {
+    text-align: justify; // 改善文字對齊
+    word-spacing: 0.05em; // 增加字間距
   }
 }

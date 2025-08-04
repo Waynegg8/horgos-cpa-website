@@ -3,6 +3,7 @@
 /* 服務頁面容器 */
 .services-page {
   padding: $spacing-8 0;
+  padding-right: $spacing-4; // 增加右側間距
 }
 
 /* 服務項目網格 */
@@ -78,6 +79,8 @@
   &__description {
     color: $color-text-secondary;
     font-size: $font-size-base;
+    text-align: justify; // 改善文字對齊
+    word-spacing: 0.05em; // 增加字間距
   }
 }
 
@@ -121,6 +124,7 @@
   
   &__content {
     flex: 1;
+    padding-right: $spacing-2; // 增加右側間距
   }
   
   &__title {
@@ -131,6 +135,8 @@
   
   &__description {
     color: $color-text-secondary;
+    text-align: justify; // 改善文字對齊
+    word-spacing: 0.05em; // 增加字間距
   }
 }
 
@@ -173,6 +179,7 @@
   
   &__content {
     flex: 1;
+    padding-right: $spacing-2; // 增加右側間距
   }
   
   &__title {
@@ -183,6 +190,8 @@
   
   &__description {
     color: $color-text-secondary;
+    text-align: justify; // 改善文字對齊
+    word-spacing: 0.05em; // 增加字間距
   }
 }
 

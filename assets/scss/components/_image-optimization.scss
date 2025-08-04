@@ -6,6 +6,7 @@
   display: block;
   width: 100%;
   height: auto;
+  margin-right: $spacing-2; // 增加右側間距
   
   &__img {
     width: 100%;
@@ -40,6 +41,7 @@
   overflow: hidden;
   background-color: $color-border-primary;
   border-radius: $border-radius-md;
+  margin-right: $spacing-2; // 增加右側間距
   
   .preview-image {
     position: absolute;
@@ -94,6 +96,7 @@
 .lazy-image {
   opacity: 0;
   transition: opacity 0.3s ease;
+  margin-right: $spacing-2; // 增加右側間距
   
   &.loaded {
     opacity: 1;
@@ -106,6 +109,7 @@
   border-radius: $border-radius-sm;
   position: relative;
   overflow: hidden;
+  margin-right: $spacing-2; // 增加右側間距
   
   &::after {
     content: '';
@@ -142,6 +146,7 @@
 // 圖片錯誤狀態
 .image-error {
   position: relative;
+  margin-right: $spacing-2; // 增加右側間距
   
   &::before {
     content: '圖片載入失敗';
@@ -166,6 +171,7 @@
   // 確保圖片不會超出容器
   max-width: 100%;
   height: auto;
+  margin-right: $spacing-2; // 增加右側間距
   
   // 保持寬高比
   aspect-ratio: attr(width) / attr(height);
@@ -175,6 +181,7 @@
 .image-responsive {
   width: 100%;
   height: auto;
+  margin-right: $spacing-2; // 增加右側間距
   
   // 桌面版
   @media (min-width: 1025px) {

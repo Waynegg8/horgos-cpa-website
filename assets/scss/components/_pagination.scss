@@ -3,6 +3,7 @@
   margin-top: $spacing-12;
   padding-top: $spacing-8;
   border-top: 1px solid $color-border-primary;
+  padding-right: $spacing-2; // 增加右側間距
   
   &__info {
     text-align: center;
@@ -38,6 +39,7 @@
       background-color: rgba(255, 255, 255, 0.08);
       color: $color-text-primary;
       border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px); // 添加懸停效果
     }
     
     &--current {

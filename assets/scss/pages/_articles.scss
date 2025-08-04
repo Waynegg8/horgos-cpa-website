@@ -131,6 +131,7 @@
 // 單篇文章頁面
 .single-content {
   margin-bottom: $spacing-16;
+  padding-right: $spacing-4; // 增加右側間距
   
   // 文章頭部
   .article-header {
@@ -180,85 +181,92 @@
   }
   
   // 文章內容
-  h1, h2, h3, h4, h5, h6 {
-    color: $color-text-primary;
-    margin-top: $spacing-8;
-    margin-bottom: $spacing-4;
+  .article-content {
+    padding-right: $spacing-2; // 增加內容區域右側間距
     
-    &:first-child {
-      margin-top: 0;
+    h1, h2, h3, h4, h5, h6 {
+      color: $color-text-primary;
+      margin-top: $spacing-8;
+      margin-bottom: $spacing-4;
+      
+      &:first-child {
+        margin-top: 0;
+      }
     }
-  }
-  
-  p {
-    margin-bottom: $spacing-4;
-    color: $color-text-secondary;
-    line-height: $line-height-base;
-  }
-  
-  ul, ol {
-    margin-bottom: $spacing-4;
-    padding-left: $spacing-6;
-    
-    li {
-      margin-bottom: $spacing-2;
-      color: $color-text-secondary;
-    }
-  }
-  
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: $border-radius-md;
-    margin: $spacing-4 0;
-  }
-  
-  blockquote {
-    margin: $spacing-6 0;
-    padding: $spacing-4 $spacing-6;
-    border-left: 4px solid $color-accent-highlight;
-    background-color: rgba($color-accent-highlight, 0.05);
     
     p {
-      margin: 0;
-      font-style: italic;
+      margin-bottom: $spacing-4;
+      color: $color-text-secondary;
+      line-height: $line-height-base;
+      text-align: justify; // 改善文字對齊
+      word-spacing: 0.05em; // 增加字間距
     }
-  }
-  
-  code {
-    font-family: monospace;
-    background-color: rgba($color-text-primary, 0.05);
-    padding: 0.2em 0.4em;
-    border-radius: $border-radius-sm;
-  }
-  
-  pre {
-    margin: $spacing-4 0;
-    padding: $spacing-4;
-    background-color: $color-bg-primary;
-    border-radius: $border-radius-md;
-    overflow-x: auto;
+    
+    ul, ol {
+      margin-bottom: $spacing-4;
+      padding-left: $spacing-6;
+      
+      li {
+        margin-bottom: $spacing-2;
+        color: $color-text-secondary;
+        line-height: $line-height-base;
+      }
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: $border-radius-md;
+      margin: $spacing-4 0;
+    }
+    
+    blockquote {
+      margin: $spacing-6 0;
+      padding: $spacing-4 $spacing-6;
+      border-left: 4px solid $color-accent-highlight;
+      background-color: rgba($color-accent-highlight, 0.05);
+      
+      p {
+        margin: 0;
+        font-style: italic;
+      }
+    }
     
     code {
-      background-color: transparent;
-      padding: 0;
-    }
-  }
-  
-  table {
-    width: 100%;
-    margin: $spacing-4 0;
-    border-collapse: collapse;
-    
-    th, td {
-      padding: $spacing-2 $spacing-3;
-      border: 1px solid $color-border-primary;
-      text-align: left;
-    }
-    
-    th {
+      font-family: monospace;
       background-color: rgba($color-text-primary, 0.05);
-      font-weight: 600;
+      padding: 0.2em 0.4em;
+      border-radius: $border-radius-sm;
+    }
+    
+    pre {
+      margin: $spacing-4 0;
+      padding: $spacing-4;
+      background-color: $color-bg-primary;
+      border-radius: $border-radius-md;
+      overflow-x: auto;
+      
+      code {
+        background-color: transparent;
+        padding: 0;
+      }
+    }
+    
+    table {
+      width: 100%;
+      margin: $spacing-4 0;
+      border-collapse: collapse;
+      
+      th, td {
+        padding: $spacing-2 $spacing-3;
+        border: 1px solid $color-border-primary;
+        text-align: left;
+      }
+      
+      th {
+        background-color: rgba($color-text-primary, 0.05);
+        font-weight: 600;
+      }
     }
   }
 }
