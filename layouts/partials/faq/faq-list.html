@@ -1,28 +1,28 @@
 <!-- FAQ列表頁 -->
 <div class="faq-list">
-    <!-- 分類篩選 -->
+    <!-- 分類搜索標籤 -->
     <div class="category-nav card-style">
         <div class="category-nav__links">
-            <a href="/faq/" class="category-nav__link {{ if eq .RelPermalink "/faq/" }}active{{ end }}">
+            <button class="category-nav__link category-search-btn active" data-category="all">
                 <i class="fas fa-question-circle"></i>
                 <span>全部問題</span>
-            </a>
-            <a href="/faq/startup/" class="category-nav__link {{ if eq .RelPermalink "/faq/startup/" }}active{{ end }}">
+            </button>
+            <button class="category-nav__link category-search-btn" data-category="startup">
                 <i class="fas fa-rocket"></i>
                 <span>創業問題</span>
-            </a>
-            <a href="/faq/tax/" class="category-nav__link {{ if eq .RelPermalink "/faq/tax/" }}active{{ end }}">
+            </button>
+            <button class="category-nav__link category-search-btn" data-category="tax">
                 <i class="fas fa-file-invoice-dollar"></i>
                 <span>稅務問題</span>
-            </a>
-            <a href="/faq/accounting/" class="category-nav__link {{ if eq .RelPermalink "/faq/accounting/" }}active{{ end }}">
+            </button>
+            <button class="category-nav__link category-search-btn" data-category="accounting">
                 <i class="fas fa-calculator"></i>
                 <span>記帳問題</span>
-            </a>
-            <a href="/faq/others/" class="category-nav__link {{ if eq .RelPermalink "/faq/others/" }}active{{ end }}">
+            </button>
+            <button class="category-nav__link category-search-btn" data-category="others">
                 <i class="fas fa-ellipsis-h"></i>
                 <span>其他問題</span>
-            </a>
+            </button>
         </div>
     </div>
     
@@ -30,7 +30,10 @@
     <div class="faq-list__grid">
         {{ $paginator := .Paginate (where .Pages "Type" "faq") 10 }}
         {{ range $paginator.Pages }}
-        <a href="{{ .RelPermalink }}" class="card-style card-clickable">
+        <a href="{{ .RelPermalink }}" class="card-style card-clickable faq-item" 
+           data-category="{{ .Params.category | default 'other' }}" 
+           data-title="{{ .Title }}" 
+           data-summary="{{ .Summary }}">
             <div class="faq-card__content">
                 <h2 class="faq-title">{{ .Title }}</h2>
                 <div class="faq-meta">
@@ -80,3 +83,32 @@
     </nav>
     {{ end }}
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const categoryButtons = document.querySelectorAll('.category-search-btn');
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    // 分類標籤點擊事件
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.dataset.category;
+            
+            // 更新按鈕狀態
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 篩選FAQ項目
+            faqItems.forEach(item => {
+                const itemCategory = item.dataset.category;
+                
+                if (category === 'all' || itemCategory === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>

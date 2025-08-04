@@ -1,28 +1,28 @@
 <!-- 下載列表頁 -->
 <div class="download-list">
-    <!-- 分類篩選 -->
+    <!-- 分類搜索標籤 -->
     <div class="category-nav card-style">
         <div class="category-nav__links">
-            <a href="/downloads/" class="category-nav__link {{ if eq .RelPermalink "/downloads/" }}active{{ end }}">
+            <button class="category-nav__link category-search-btn active" data-category="all">
                 <i class="fas fa-download"></i>
                 <span>全部下載</span>
-            </a>
-            <a href="/downloads/templates/" class="category-nav__link {{ if eq .RelPermalink "/downloads/templates/" }}active{{ end }}">
+            </button>
+            <button class="category-nav__link category-search-btn" data-category="templates">
                 <i class="fas fa-file-word"></i>
                 <span>範本下載</span>
-            </a>
-            <a href="/downloads/forms/" class="category-nav__link {{ if eq .RelPermalink "/downloads/forms/" }}active{{ end }}">
+            </button>
+            <button class="category-nav__link category-search-btn" data-category="forms">
                 <i class="fas fa-file-alt"></i>
                 <span>表格下載</span>
-            </a>
-            <a href="/downloads/checklists/" class="category-nav__link {{ if eq .RelPermalink "/downloads/checklists/" }}active{{ end }}">
+            </button>
+            <button class="category-nav__link category-search-btn" data-category="checklists">
                 <i class="fas fa-tasks"></i>
                 <span>檢查清單</span>
-            </a>
-            <a href="/downloads/regulations/" class="category-nav__link {{ if eq .RelPermalink "/downloads/regulations/" }}active{{ end }}">
+            </button>
+            <button class="category-nav__link category-search-btn" data-category="regulations">
                 <i class="fas fa-gavel"></i>
                 <span>法規文件</span>
-            </a>
+            </button>
         </div>
     </div>
     
@@ -30,7 +30,10 @@
     <div class="download-list__grid">
         {{ $paginator := .Paginate (where .Pages "Type" "downloads") 10 }}
         {{ range $paginator.Pages }}
-        <a href="{{ .RelPermalink }}" class="card-style card-clickable">
+        <a href="{{ .RelPermalink }}" class="card-style card-clickable download-item" 
+           data-category="{{ .Params.category | default 'other' }}" 
+           data-title="{{ .Title }}" 
+           data-summary="{{ .Summary }}">
             <div class="card-horizontal">
                 <div class="card-horizontal__icon">
                     {{ if eq .Params.filetype "pdf" }}
@@ -51,6 +54,7 @@
                         <span class="download-meta__item"><i class="fas fa-file"></i> {{ .Params.filetype | upper }}</span>
                         {{ with .Params.filesize }}<span class="download-meta__item"><i class="fas fa-weight"></i> {{ . }}</span>{{ end }}
                         <span class="download-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+                        {{ with .Params.category }}<span class="download-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>{{ end }}
                     </div>
                     <p class="download-summary">{{ .Summary | truncate 100 }}</p>
                 </div>
@@ -91,3 +95,32 @@
     </nav>
     {{ end }}
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const categoryButtons = document.querySelectorAll('.category-search-btn');
+    const downloadItems = document.querySelectorAll('.download-item');
+    
+    // 分類標籤點擊事件
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.dataset.category;
+            
+            // 更新按鈕狀態
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 篩選下載項目
+            downloadItems.forEach(item => {
+                const itemCategory = item.dataset.category;
+                
+                if (category === 'all' || itemCategory === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>

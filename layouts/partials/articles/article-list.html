@@ -18,13 +18,13 @@
             </form>
         </div>
         
-        <!-- 分類標籤 -->
+        <!-- 分類搜索標籤 -->
         <div class="category-tags">
-            <button class="category-tag" data-category="all">全部文章</button>
-            <button class="category-tag" data-category="startup-guide">創業教室</button>
-            <button class="category-tag" data-category="tax-planning">稅務指南</button>
-            <button class="category-tag" data-category="accounting-basics">會計實務</button>
-            <button class="category-tag" data-category="legal-updates">法規更新</button>
+            <button class="category-tag category-search-btn active" data-category="all">全部文章</button>
+            <button class="category-tag category-search-btn" data-category="startup-guide">創業教室</button>
+            <button class="category-tag category-search-btn" data-category="tax-planning">稅務指南</button>
+            <button class="category-tag category-search-btn" data-category="accounting-basics">會計實務</button>
+            <button class="category-tag category-search-btn" data-category="legal-updates">法規更新</button>
         </div>
     </div>
     
@@ -32,7 +32,10 @@
     <div class="article-list__grid">
         {{ $paginator := .Paginate (where .Pages "Type" "articles") 10 }}
         {{ range $paginator.Pages }}
-        <a href="{{ .RelPermalink }}" class="card-style card-clickable">
+        <a href="{{ .RelPermalink }}" class="card-style card-clickable article-item" 
+           data-category="{{ .Params.category | default 'other' }}" 
+           data-title="{{ .Title }}" 
+           data-summary="{{ .Summary }}">
             <div class="card-horizontal">
                 <div class="card-horizontal__image">
                     {{ with .Params.cover }}
@@ -107,16 +110,16 @@
 document.addEventListener('DOMContentLoaded', function() {
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
-    const categoryTags = document.querySelectorAll('.category-tag');
-    const articleGrid = document.querySelector('.article-list__grid');
+    const categoryButtons = document.querySelectorAll('.category-search-btn');
+    const articleItems = document.querySelectorAll('.article-item');
     
     // 分類標籤點擊事件
-    categoryTags.forEach(tag => {
-        tag.addEventListener('click', function() {
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
             const category = this.dataset.category;
             
             // 更新標籤狀態
-            categoryTags.forEach(t => t.classList.remove('active'));
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
             
             // 執行搜索
@@ -141,21 +144,25 @@ document.addEventListener('DOMContentLoaded', function() {
     function performSearch() {
         const query = searchInput.value.trim();
         
-        // 這裡可以實現實際的搜索邏輯
-        // 目前先隱藏所有文章，然後根據搜索條件顯示
-        const articles = articleGrid.querySelectorAll('.card-clickable');
-        
-        articles.forEach(article => {
+        articleItems.forEach(article => {
             const title = article.querySelector('.article-title').textContent.toLowerCase();
             const summary = article.querySelector('.article-summary').textContent.toLowerCase();
             const category = article.querySelector('.article-meta__item:last-child')?.textContent.toLowerCase() || '';
+            const itemCategory = article.dataset.category;
             
             const searchText = query.toLowerCase();
             
-            if (query === '' || 
+            // 檢查是否匹配搜索條件
+            const matchesSearch = query === '' || 
                 title.includes(searchText) || 
                 summary.includes(searchText) || 
-                category.includes(searchText)) {
+                category.includes(searchText);
+            
+            // 檢查是否匹配分類
+            const activeCategory = document.querySelector('.category-search-btn.active').dataset.category;
+            const matchesCategory = activeCategory === 'all' || itemCategory === activeCategory;
+            
+            if (matchesSearch && matchesCategory) {
                 article.style.display = 'block';
             } else {
                 article.style.display = 'none';

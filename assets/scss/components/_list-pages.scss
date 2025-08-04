@@ -1,0 +1,312 @@
+// =============================================================================
+// 統一列表頁組件樣式
+// 確保所有列表頁（文章、影片、FAQ、下載）使用一致的字體大小
+// =============================================================================
+
+@import "../utils/variables";
+
+// 1. 統一搜索區域樣式
+// -----------------------------------------------------------------------------
+.search-section {
+  margin-bottom: $spacing-8;
+  
+  .search-container {
+    margin-bottom: $spacing-6;
+  }
+  
+  .search-input {
+    font-size: $font-size-base;
+    font-family: $font-family-base;
+    padding: $spacing-3 $spacing-4;
+    border-radius: $border-radius-md;
+    border: 1px solid $color-border-primary;
+    background-color: $color-bg-secondary;
+    color: $color-text-primary;
+    width: 100%;
+    
+    &::placeholder {
+      color: $color-text-tertiary;
+      font-size: $font-size-base;
+    }
+  }
+  
+  .search-button {
+    font-size: $font-size-base;
+    padding: $spacing-3 $spacing-4;
+  }
+}
+
+// 2. 統一分類標籤樣式
+// -----------------------------------------------------------------------------
+.category-tags,
+.category-filters,
+.category-nav__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-3;
+  margin-bottom: $spacing-6;
+  
+  .category-tag,
+  .category-filter,
+  .category-nav__link {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    padding: $spacing-2 $spacing-4;
+    border-radius: $border-radius-md;
+    background-color: $color-bg-secondary;
+    color: $color-text-secondary;
+    border: 1px solid $color-border-primary;
+    cursor: pointer;
+    transition: all $transition-base $ease-in-out;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-2;
+    
+    &:hover {
+      background-color: rgba($color-accent-highlight, 0.1);
+      color: $color-accent-highlight;
+      border-color: $color-accent-highlight;
+    }
+    
+    &.active {
+      background-color: $color-accent-highlight;
+      color: #ffffff;
+      border-color: $color-accent-highlight;
+    }
+    
+    i {
+      font-size: $font-size-sm;
+    }
+    
+    span {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// 3. 統一卡片標題樣式
+// -----------------------------------------------------------------------------
+.article-title,
+.video-card__title,
+.faq-title,
+.download-title {
+  font-size: $font-size-h5;
+  font-weight: 600;
+  line-height: $line-height-heading;
+  color: $color-text-primary;
+  margin: 0 0 $spacing-3 0;
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+    
+    &:hover {
+      color: $color-accent-highlight;
+    }
+  }
+}
+
+// 4. 統一卡片摘要樣式
+// -----------------------------------------------------------------------------
+.article-summary,
+.video-card__excerpt,
+.faq-summary,
+.download-summary {
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-text-secondary;
+  margin: 0;
+}
+
+// 5. 統一元數據樣式
+// -----------------------------------------------------------------------------
+.article-meta,
+.video-card__meta,
+.faq-meta,
+.download-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-4;
+  margin-bottom: $spacing-3;
+  
+  &__item {
+    font-size: $font-size-sm;
+    color: $color-text-tertiary;
+    display: flex;
+    align-items: center;
+    gap: $spacing-1;
+    
+    i {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// 6. 統一卡片內容樣式
+// -----------------------------------------------------------------------------
+.card-horizontal__content,
+.video-card__content,
+.faq-card__content {
+  flex: 1;
+  min-width: 0;
+}
+
+// 7. 統一分頁導航樣式
+// -----------------------------------------------------------------------------
+.pagination {
+  margin-top: $spacing-8;
+  
+  &__info {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    text-align: center;
+    margin-bottom: $spacing-4;
+  }
+  
+  &__controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-2;
+    flex-wrap: wrap;
+  }
+  
+  &__link {
+    font-size: $font-size-sm;
+    padding: $spacing-2 $spacing-4;
+    border-radius: $border-radius-md;
+    background-color: $color-bg-secondary;
+    color: $color-text-secondary;
+    text-decoration: none;
+    transition: all $transition-base $ease-in-out;
+    
+    &:hover {
+      background-color: $color-accent-highlight;
+      color: #ffffff;
+    }
+    
+    &--current {
+      background-color: $color-accent-highlight;
+      color: #ffffff;
+    }
+    
+    &--prev,
+    &--next {
+      display: flex;
+      align-items: center;
+      gap: $spacing-1;
+    }
+  }
+}
+
+// 8. 統一列表網格樣式
+// -----------------------------------------------------------------------------
+.article-list__grid,
+.video-cards,
+.faq-list__grid,
+.download-list__grid {
+  display: grid;
+  gap: $spacing-6;
+  margin-bottom: $spacing-8;
+  
+  @include tablet {
+    gap: $spacing-5;
+  }
+  
+  @include mobile {
+    gap: $spacing-4;
+  }
+}
+
+// 9. 統一卡片樣式
+// -----------------------------------------------------------------------------
+.card-clickable {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: all $transition-base $ease-in-out;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+// 10. 統一按鈕樣式
+// -----------------------------------------------------------------------------
+.video-card__watch {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  padding: $spacing-2 $spacing-4;
+  background-color: $color-accent-highlight;
+  color: #ffffff;
+  border-radius: $border-radius-md;
+  text-decoration: none;
+  display: inline-block;
+  transition: all $transition-base $ease-in-out;
+  
+  &:hover {
+    background-color: darken($color-accent-highlight, 10%);
+    transform: translateY(-1px);
+  }
+}
+
+// 11. 響應式調整
+// -----------------------------------------------------------------------------
+@include mobile {
+  .category-tags,
+  .category-filters,
+  .category-nav__links {
+    gap: $spacing-2;
+    
+    .category-tag,
+    .category-filter,
+    .category-nav__link {
+      font-size: $font-size-xs;
+      padding: $spacing-1 $spacing-3;
+      
+      span {
+        font-size: $font-size-xs;
+      }
+      
+      i {
+        font-size: $font-size-xs;
+      }
+    }
+  }
+  
+  .article-title,
+  .video-card__title,
+  .faq-title,
+  .download-title {
+    font-size: $font-size-h6;
+  }
+  
+  .article-summary,
+  .video-card__excerpt,
+  .faq-summary,
+  .download-summary {
+    font-size: $font-size-sm;
+  }
+  
+  .article-meta,
+  .video-card__meta,
+  .faq-meta,
+  .download-meta {
+    gap: $spacing-2;
+    
+    &__item {
+      font-size: $font-size-xs;
+      
+      i {
+        font-size: $font-size-xs;
+      }
+    }
+  }
+  
+  .pagination__link {
+    font-size: $font-size-xs;
+    padding: $spacing-1 $spacing-3;
+  }
+} 

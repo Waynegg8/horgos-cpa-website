@@ -1,5 +1,5 @@
 // =============================================================================
-// Base Typography Styles
+// Base Typography Styles - 統一字體規範
 // Source of Truth: hugo-requirements-final-updated.txt (Section 3.3.2)
 // =============================================================================
 
@@ -18,83 +18,264 @@ body {
   padding-right: $spacing-2; // 增加右側間距
 }
 
-// 2. Heading Scale
+// 2. 統一標題階層
 // -----------------------------------------------------------------------------
-h1, .h1,
-h2, .h2,
-h3, .h3,
-h4, .h4 {
-  font-family: $font-family-base;
-  font-weight: 600; // A common semi-bold weight for headings
+h1, .h1 {
+  font-size: $font-size-h1;
+  font-weight: 600;
   line-height: $line-height-heading;
   color: $color-text-primary;
   margin: 0 0 $heading-margin-bottom 0;
   padding: 0;
-  padding-right: $spacing-2; // 增加右側間距
+  padding-right: $spacing-2;
 }
 
-h1, .h1 { font-size: $font-size-h1; }
-h2, .h2 { font-size: $font-size-h2; }
-h3, .h3 { font-size: $font-size-h3; }
-h4, .h4 { font-size: $font-size-h4; }
-
-// h5 and h6 can default to bolded paragraph text
-h5, .h5,
-h6, .h6 {
-  font-size: $font-size-base;
+h2, .h2 {
+  font-size: $font-size-h2;
   font-weight: 600;
-  padding-right: $spacing-2; // 增加右側間距
+  line-height: $line-height-heading;
+  color: $color-text-primary;
+  margin: 0 0 $heading-margin-bottom 0;
+  padding: 0;
+  padding-right: $spacing-2;
 }
 
+h3, .h3 {
+  font-size: $font-size-h3;
+  font-weight: 600;
+  line-height: $line-height-heading;
+  color: $color-text-primary;
+  margin: 0 0 $heading-margin-bottom 0;
+  padding: 0;
+  padding-right: $spacing-2;
+}
 
-// 3. Body & Paragraphs
+h4, .h4 {
+  font-size: $font-size-h4;
+  font-weight: 600;
+  line-height: $line-height-heading;
+  color: $color-text-primary;
+  margin: 0 0 $heading-margin-bottom 0;
+  padding: 0;
+  padding-right: $spacing-2;
+}
+
+h5, .h5 {
+  font-size: $font-size-h5;
+  font-weight: 600;
+  line-height: $line-height-heading;
+  color: $color-text-primary;
+  margin: 0 0 $heading-margin-bottom 0;
+  padding: 0;
+  padding-right: $spacing-2;
+}
+
+h6, .h6 {
+  font-size: $font-size-h6;
+  font-weight: 600;
+  line-height: $line-height-heading;
+  color: $color-text-primary;
+  margin: 0 0 $heading-margin-bottom 0;
+  padding: 0;
+  padding-right: $spacing-2;
+}
+
+// 3. 統一內文樣式
 // -----------------------------------------------------------------------------
 p {
   margin: 0 0 $paragraph-spacing 0;
   line-height: $line-height-base;
-  text-align: justify; // 改善文字對齊
-  word-spacing: 0.05em; // 增加字間距
-  padding-right: $spacing-2; // 增加右側間距
-  
-  &:last-child {
-    margin-bottom: 0;
-  }
-  
-  // 提升段落內容易讀性
-  &.large-text {
-    font-size: $font-size-lg;
-    line-height: 1.8;
-  }
-  
-  &.small-text {
-    font-size: $font-size-small;
-    line-height: 1.6;
-  }
+  font-size: $font-size-base;
+  color: $color-text-primary;
+  padding-right: $spacing-2;
 }
 
-// 4. Links
+// 大內文
+.text-xl {
+  font-size: $font-size-xl;
+  line-height: $line-height-base;
+}
+
+// 標準內文
+.text-lg {
+  font-size: $font-size-lg;
+  line-height: $line-height-base;
+}
+
+// 基礎內文
+.text-base {
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
+// 小內文
+.text-sm {
+  font-size: $font-size-sm;
+  line-height: $line-height-base;
+}
+
+// 極小內文
+.text-xs {
+  font-size: $font-size-xs;
+  line-height: $line-height-tight;
+}
+
+// 4. 統一按鈕字體樣式
+// -----------------------------------------------------------------------------
+.btn {
+  font-family: $font-family-base;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-base $ease-in-out;
+  padding-right: $spacing-2;
+}
+
+.btn-lg {
+  font-size: $font-size-btn-lg;
+  padding: $spacing-4 $spacing-8;
+}
+
+.btn-base {
+  font-size: $font-size-btn-base;
+  padding: $spacing-3 $spacing-6;
+}
+
+.btn-sm {
+  font-size: $font-size-btn-sm;
+  padding: $spacing-2 $spacing-4;
+}
+
+// 5. 統一標籤字體樣式
+// -----------------------------------------------------------------------------
+.tag, .badge, .label {
+  font-size: $font-size-tag;
+  font-weight: 500;
+  line-height: $line-height-tight;
+  padding: $spacing-1 $spacing-3;
+  border-radius: $border-radius-sm;
+  display: inline-block;
+}
+
+// 6. 統一卡片標題樣式
+// -----------------------------------------------------------------------------
+.card-title {
+  font-size: $font-size-h5;
+  font-weight: 600;
+  line-height: $line-height-heading;
+  color: $color-text-primary;
+  margin: 0 0 $spacing-3 0;
+  padding-right: $spacing-2;
+}
+
+.card-subtitle {
+  font-size: $font-size-base;
+  font-weight: 500;
+  line-height: $line-height-base;
+  color: $color-text-secondary;
+  margin: 0 0 $spacing-2 0;
+  padding-right: $spacing-2;
+}
+
+// 7. 統一列表樣式
+// -----------------------------------------------------------------------------
+ul, ol {
+  margin: 0 0 $paragraph-spacing 0;
+  padding-left: $spacing-6;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-text-primary;
+  padding-right: $spacing-2;
+}
+
+li {
+  margin-bottom: $spacing-2;
+  padding-right: $spacing-2;
+}
+
+// 8. 統一連結樣式
 // -----------------------------------------------------------------------------
 a {
-  color: inherit;
+  color: $color-accent-highlight;
   text-decoration: none;
-  transition: color $transition-fast $ease-out;
-
+  transition: color $transition-base $ease-in-out;
+  padding-right: $spacing-2;
+  
   &:hover {
-    // A subtle hover effect, could be customized per-component
-    color: $color-text-primary; 
+    color: lighten($color-accent-highlight, 10%);
+    text-decoration: underline;
   }
 }
 
-// 5. Misc Text Elements
+// 9. 統一強調文字樣式
 // -----------------------------------------------------------------------------
 strong, b {
   font-weight: 600;
   color: $color-text-primary;
 }
 
-hr {
-  border: 0;
-  border-top: 1px solid $color-border-primary;
-  margin: $spacing-12 0;
-  margin-right: $spacing-2; // 增加右側間距
+em, i {
+  font-style: italic;
+  color: $color-text-secondary;
+}
+
+// 10. 統一引用樣式
+// -----------------------------------------------------------------------------
+blockquote {
+  margin: $spacing-6 0;
+  padding: $spacing-4 $spacing-6;
+  border-left: 4px solid $color-accent-highlight;
+  background-color: rgba($color-accent-highlight, 0.1);
+  font-style: italic;
+  font-size: $font-size-lg;
+  line-height: $line-height-base;
+  color: $color-text-primary;
+  border-radius: $border-radius-md;
+  padding-right: $spacing-2;
+}
+
+// 11. 統一程式碼樣式
+// -----------------------------------------------------------------------------
+code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: $font-size-sm;
+  background-color: $color-bg-secondary;
+  padding: $spacing-1 $spacing-2;
+  border-radius: $border-radius-sm;
+  color: $color-accent-highlight;
+}
+
+pre {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: $font-size-sm;
+  background-color: $color-bg-secondary;
+  padding: $spacing-4;
+  border-radius: $border-radius-md;
+  overflow-x: auto;
+  margin: $spacing-6 0;
+  line-height: $line-height-tight;
+  color: $color-text-primary;
+  padding-right: $spacing-2;
+}
+
+// 12. 響應式字體大小調整
+// -----------------------------------------------------------------------------
+@include mobile {
+  h1, .h1 { font-size: $font-size-h2; }
+  h2, .h2 { font-size: $font-size-h3; }
+  h3, .h3 { font-size: $font-size-h4; }
+  h4, .h4 { font-size: $font-size-h5; }
+  h5, .h5 { font-size: $font-size-h6; }
+  h6, .h6 { font-size: $font-size-base; }
+  
+  .text-xl { font-size: $font-size-lg; }
+  .text-lg { font-size: $font-size-base; }
+  .text-base { font-size: $font-size-sm; }
+  .text-sm { font-size: $font-size-xs; }
+  
+  .btn-lg { font-size: $font-size-btn-base; }
+  .btn-base { font-size: $font-size-btn-sm; }
+  .btn-sm { font-size: $font-size-xs; }
 }
