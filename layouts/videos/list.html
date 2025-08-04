@@ -13,11 +13,6 @@
         {{ end }}
       </header>
       
-      <!-- 影片分類卡片 -->
-      {{ if eq .RelPermalink "/videos/" }}
-      {{ partial "videos/video-categories.html" . }}
-      {{ end }}
-      
       <!-- 分類篩選 -->
       <div class="category-nav card-style">
         <div class="category-nav__links">
@@ -34,23 +29,26 @@
         </div>
       </div>
       
+      <!-- 搜尋結果容器 -->
+      <div id="search-results" class="search-results" style="display: none;"></div>
+      
       <!-- 影片列表 -->
-      <div class="videos-list">
+      <div class="videos-list" id="videos-list">
         {{ $paginator := .Paginate (where .Pages "Type" "videos") 10 }}
         {{ range $paginator.Pages }}
-          <a href="{{ .RelPermalink }}" class="card-style card-clickable">
-            <div class="card-horizontal">
-              <div class="card-horizontal__image">
+          <div class="video-card" data-title="{{ .Title }}" data-description="{{ .Summary }}">
+            <a href="{{ .RelPermalink }}" class="video-card-link">
+              <div class="video-thumbnail">
                 {{ with .Params.thumbnail }}
                 <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
                 {{ else }}
                 <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
                 {{ end }}
-                <div class="video-duration">
+                <div class="video-duration-badge">
                   {{ with .Params.duration }}{{ . }}{{ else }}--:--{{ end }}
                 </div>
               </div>
-              <div class="card-horizontal__content">
+              <div class="video-card-content">
                 <h2 class="video-title">{{ $.Title }}</h2>
                 <div class="video-meta">
                   <span class="video-meta__item"><i class="fas fa-calendar-alt"></i> {{ $.Date.Format "2006-01-02" }}</span>
@@ -61,8 +59,8 @@
                 </div>
                 <p class="video-description">{{ $.Summary | truncate 100 }}</p>
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
         {{ end }}
       </div>
     
@@ -109,45 +107,46 @@
 document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
-  const videosList = document.querySelector('.videos-list');
+  const videosList = document.getElementById('videos-list');
   
-  // 簡化版前端搜尋功能
-  searchInput.addEventListener('input', function() {
-    const query = this.value.toLowerCase();
-    
-    if (query.length < 2) {
-      searchResults.style.display = 'none';
-      videosList.style.display = 'block';
-      return;
-    }
-    
-    // 這裡將來整合 Fuse.js 搜尋
-    // 目前先實現簡單的前端篩選
-    const videos = document.querySelectorAll('.video-card');
-    let results = [];
-    
-    videos.forEach(video => {
-      const title = video.querySelector('.video-title').textContent.toLowerCase();
-      const description = video.querySelector('.video-description').textContent.toLowerCase();
+  if (searchInput && searchResults && videosList) {
+    // 簡化版前端搜尋功能
+    searchInput.addEventListener('input', function() {
+      const query = this.value.toLowerCase();
       
-      if (title.includes(query) || description.includes(query)) {
-        results.push(video.cloneNode(true));
+      if (query.length < 2) {
+        searchResults.style.display = 'none';
+        videosList.style.display = 'block';
+        return;
+      }
+      
+      // 前端篩選
+      const videos = document.querySelectorAll('.video-card');
+      let results = [];
+      
+      videos.forEach(video => {
+        const title = video.querySelector('.video-title').textContent.toLowerCase();
+        const description = video.querySelector('.video-description').textContent.toLowerCase();
+        
+        if (title.includes(query) || description.includes(query)) {
+          results.push(video.cloneNode(true));
+        }
+      });
+      
+      if (results.length > 0) {
+        searchResults.innerHTML = '';
+        results.forEach(result => {
+          searchResults.appendChild(result);
+        });
+        searchResults.style.display = 'block';
+        videosList.style.display = 'none';
+      } else {
+        searchResults.innerHTML = '<div class="no-results card-style">沒有找到相關影片</div>';
+        searchResults.style.display = 'block';
+        videosList.style.display = 'none';
       }
     });
-    
-    if (results.length > 0) {
-      searchResults.innerHTML = '';
-      results.forEach(result => {
-        searchResults.appendChild(result);
-      });
-      searchResults.style.display = 'block';
-      videosList.style.display = 'none';
-    } else {
-      searchResults.innerHTML = '<div class="no-results">沒有找到相關影片</div>';
-      searchResults.style.display = 'block';
-      videosList.style.display = 'none';
-    }
-  });
+  }
 });
 </script>
 {{ end }}

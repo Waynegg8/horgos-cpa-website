@@ -27,12 +27,12 @@
 
 // 影片載入佔位
 .video-placeholder {
-  background-color: #f5f5f5;
+  background-color: #141414;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 400px;
-  color: #6B7280;
+  color: #A1A1A1;
   font-size: 1.2rem;
 }
 
@@ -40,7 +40,7 @@
 .video-metadata {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid #262626;
   
   .video-info {
     display: flex;
@@ -51,7 +51,7 @@
     span {
       display: flex;
       align-items: center;
-      color: #6B7280;
+      color: #A1A1A1;
       font-size: 0.875rem;
       
       i {
@@ -67,37 +67,41 @@
     align-items: center;
     
     i {
-      color: #6B7280;
+      color: #A1A1A1;
       font-size: 0.875rem;
       margin-right: 0.5rem;
     }
     
     .tag {
-      background-color: #F3F4F6;
-      color: #374151;
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #F0F0F0;
       font-size: 0.75rem;
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
       text-decoration: none;
+      border: 1px solid #262626;
       
       &:hover {
-        background-color: #E5E7EB;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: #204B6E;
       }
     }
   }
 }
 
-// 影片卡片 (列表頁)
+// 影片卡片 (列表頁) - 深色主題
 .video-card {
   margin-bottom: 1.5rem;
-  border: 1px solid #E5E7EB;
-  border-radius: 8px;
+  background-color: #141414;
+  border: 1px solid #262626;
+  border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-color: #204B6E;
   }
   
   .video-card-link {
@@ -128,53 +132,57 @@
     .video-thumbnail-placeholder {
       width: 100%;
       height: 100%;
-      background-color: #f5f5f5;
+      background-color: #141414;
     }
     
     .video-duration-badge {
       position: absolute;
       bottom: 8px;
       right: 8px;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.8);
       color: white;
-      padding: 2px 6px;
-      border-radius: 4px;
+      padding: 4px 8px;
+      border-radius: 6px;
       font-size: 0.75rem;
+      font-weight: 500;
     }
   }
   
   .video-card-content {
-    padding: 1rem;
+    padding: 1.5rem;
     flex: 1;
     
     .video-title {
-      margin: 0 0 0.5rem;
+      margin: 0 0 0.75rem;
       font-size: 1.25rem;
-      color: #204B6E;
+      color: #F0F0F0;
+      font-weight: 600;
+      line-height: 1.4;
     }
     
     .video-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
       
-      span {
+      .video-meta__item {
         display: flex;
         align-items: center;
-        color: #6B7280;
-        font-size: 0.75rem;
+        color: #A1A1A1;
+        font-size: 0.875rem;
         
         i {
-          margin-right: 0.25rem;
+          margin-right: 0.5rem;
+          color: #525252;
         }
       }
     }
     
     .video-description {
-      color: #374151;
+      color: #A1A1A1;
       font-size: 0.875rem;
-      line-height: 1.5;
+      line-height: 1.6;
       
       @media (max-width: 640px) {
         display: -webkit-box;
@@ -199,14 +207,21 @@
   .search-input {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 1px solid #E5E7EB;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #262626;
     border-radius: 8px;
     font-size: 1rem;
+    color: #F0F0F0;
+    
+    &::placeholder {
+      color: #525252;
+    }
     
     &:focus {
       outline: none;
       border-color: #204B6E;
-      box-shadow: 0 0 0 3px rgba(32, 75, 110, 0.2);
+      box-shadow: 0 0 0 3px rgba(32, 75, 110, 0.1);
+      background-color: rgba(255, 255, 255, 0.08);
     }
   }
   
@@ -215,9 +230,12 @@
     margin-top: 1rem;
     
     .no-results {
-      padding: 1rem;
+      padding: 2rem;
       text-align: center;
-      color: #6B7280;
+      color: #A1A1A1;
+      background-color: #141414;
+      border: 1px solid #262626;
+      border-radius: 8px;
     }
   }
 }
@@ -229,29 +247,36 @@
   gap: 0.5rem;
   margin: 1rem 0;
   padding: 1rem;
-  background-color: #F5F6F5;
+  background-color: #141414;
+  border: 1px solid #262626;
   border-radius: 8px;
   
   .filter-label {
     font-weight: 600;
     margin-right: 0.5rem;
-    color: #374151;
+    color: #F0F0F0;
   }
   
   .filter-item {
     padding: 0.25rem 0.75rem;
-    border-radius: 4px;
+    border-radius: 6px;
     text-decoration: none;
-    color: #6B7280;
+    color: #A1A1A1;
     font-size: 0.875rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #262626;
+    transition: all 0.3s ease;
     
     &:hover {
-      background-color: #E5E7EB;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: #204B6E;
+      color: #F0F0F0;
     }
     
     &.active {
       background-color: #204B6E;
       color: white;
+      border-color: #204B6E;
     }
   }
 }
@@ -381,6 +406,12 @@
       }
     }
   }
+  
+  .video-card {
+    .video-card-content {
+      padding: 1rem;
+    }
+  }
 }
 
 // 影片描述內容
@@ -388,7 +419,7 @@
   margin: 1.5rem 0;
   
   h1, h2, h3 {
-    color: #204B6E;
+    color: #F0F0F0;
   }
   
   h2 {
@@ -396,7 +427,7 @@
     margin-top: 2rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid #262626;
   }
   
   h3 {
@@ -411,11 +442,12 @@
     
     li {
       margin-bottom: 0.5rem;
+      color: #A1A1A1;
     }
   }
   
   a {
-    color: #204B6E;
+    color: #22c55e;
     text-decoration: none;
     
     &:hover {
@@ -470,7 +502,7 @@
   h3 {
     margin-bottom: 1rem;
     font-size: 1.25rem;
-    color: #374151;
+    color: #F0F0F0;
   }
   
   .related-videos-grid {
