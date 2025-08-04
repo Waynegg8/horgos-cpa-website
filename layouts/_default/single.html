@@ -39,7 +39,10 @@
                 </div>
                 {{ end }}
                 
-                {{ .Content }}
+                <!-- 文章內容區域 - 限制寬度提升閱讀體驗 -->
+                <div class="article-content">
+                    {{ .Content }}
+                </div>
                 
                 {{ if eq .Section "articles" }}
                 <!-- 系列導航 -->
@@ -65,28 +68,35 @@
                 <!-- 雙CTA行動呼籲區域 -->
                 {{ partial "shared/dual-cta.html" . }}
                 
-                <!-- 相關文章推薦 -->
+                <!-- 相關文章推薦 - 精緻卡片式佈局 -->
                 {{ $related := .Site.RegularPages.Related . | first 3 }}
                 {{ if $related }}
-                <div class="article-related">
-                    <h3 class="article-related__title">相關文章</h3>
-                    <div class="card-deck">
-                        {{ range $related }}
-                        <div class="card">
-                            <a href="{{ .RelPermalink }}" class="card-link">
-                                {{ with .Params.cover }}
-                                <img src="{{ . }}" class="card-img-top" alt="{{ $.Title }}" loading="lazy">
-                                {{ else }}
-                                <img src="/uploads/images/general/general-default.jpg" class="card-img-top" alt="{{ $.Title }}" loading="lazy">
-                                {{ end }}
-                                <div class="card-body">
-                                    <h4 class="card-title">{{ .Title }}</h4>
+                <section class="article-related">
+                    <div class="container">
+                        <h3 class="section-title">相關推薦</h3>
+                        <div class="category-cards">
+                            {{ range $related }}
+                            <a href="{{ .RelPermalink }}" class="category-card card-style">
+                                <div class="category-card__icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <h4 class="category-card__title">{{ .Title }}</h4>
+                                <p class="category-card__description">{{ .Summary | truncate 80 }}</p>
+                                <div class="article-meta">
+                                    <span class="article-meta__item">
+                                        <i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}
+                                    </span>
+                                    {{ with .Params.category }}
+                                    <span class="article-meta__item">
+                                        <i class="fas fa-folder"></i> {{ . }}
+                                    </span>
+                                    {{ end }}
                                 </div>
                             </a>
+                            {{ end }}
                         </div>
-                        {{ end }}
                     </div>
-                </div>
+                </section>
                 {{ end }}
                 {{ end }}
             </article>

@@ -67,9 +67,9 @@
   }
 }
 
-// 文字內容區塊
+// 文字內容區塊 - 優化閱讀體驗
 .text-block {
-  max-width: 65ch; // 最佳閱讀寬度
+  max-width: 720px; // 設定合理的最大寬度避免過寬難讀
   margin: 0 auto;
   
   p {
@@ -80,6 +80,54 @@
   h2, h3 {
     margin-top: $spacing-10;
     margin-bottom: $spacing-4;
+  }
+}
+
+// 文章內容區域專門樣式
+.article-content {
+  max-width: 720px; // 限制文章寬度提升閱讀體驗
+  margin: 0 auto;
+  padding: 0 $spacing-6;
+  
+  @include tablet {
+    padding: 0 $spacing-4;
+  }
+  
+  @include mobile {
+    padding: 0 $spacing-3;
+  }
+  
+  // 文章內的標題間距
+  h1, h2, h3, h4 {
+    margin-top: $spacing-10;
+    margin-bottom: $spacing-4;
+    
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  
+  // 段落樣式
+  p {
+    margin-bottom: $spacing-5;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    
+    @include mobile {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  }
+  
+  // 列表樣式
+  ul, ol {
+    margin: $spacing-5 0;
+    padding-left: $spacing-6;
+    
+    li {
+      margin-bottom: $spacing-2;
+      line-height: 1.6;
+    }
   }
 }
 

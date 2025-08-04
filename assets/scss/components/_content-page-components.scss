@@ -5,9 +5,14 @@
 // 通用分類卡片樣式
 .category-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr); // 強制4欄對稱佈局
   gap: $spacing-6;
   margin: $spacing-12 0;
+  
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr); // 平板版改為2x2對稱網格
+    gap: $spacing-5;
+  }
   
   @include mobile {
     grid-template-columns: 1fr;

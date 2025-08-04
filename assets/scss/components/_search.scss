@@ -25,57 +25,78 @@
   position: relative;
 }
 
-// 搜尋輸入框
+// 搜尋輸入框 - 蘋果風格精緻化
 .search-input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  padding-right: 3rem;
-  border: 1px solid #E5E7EB;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
+  padding: 1rem 1.25rem;
+  padding-right: 3.5rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px; // 蘋果風格圓角
+  font-size: 0.95rem;
   line-height: 1.5;
-  color: #374151;
-  background-color: #FFFFFF;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  color: $color-text-primary;
+  background-color: rgba(255, 255, 255, 0.08);
+  font-weight: 400;
+  @include transition(all 0.3s ease);
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
   
   &:focus {
     outline: none;
-    border-color: #2C5F7F;
-    box-shadow: 0 0 0 3px rgba(44, 95, 127, 0.1);
+    border-color: $color-accent-highlight;
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 4px rgba($color-accent-highlight, 0.15);
+    transform: translateY(-1px);
   }
   
   &.is-loading {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%236B7280' d='M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z' opacity='.25'/%3E%3Cpath fill='%236B7280' d='M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z'%3E%3CanimateTransform attributeName='transform' dur='0.75s' repeatCount='indefinite' type='rotate' values='0 12 12;360 12 12'/%3E%3C/animateTransform%3E%3C/path%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z' opacity='.25'/%3E%3Cpath fill='%23ffffff' d='M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z'%3E%3CanimateTransform attributeName='transform' dur='0.75s' repeatCount='indefinite' type='rotate' values='0 12 12;360 12 12'/%3E%3C/animateTransform%3E%3C/path%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 0.75rem center;
+    background-position: right 1rem center;
     background-size: 1.25rem;
   }
 }
 
-// 搜尋按鈕
+// 搜尋按鈕 - 蘋果風格精緻化
 .search-button {
   position: absolute;
-  right: 0.5rem;
+  right: 0.75rem;
   top: 50%;
   transform: translateY(-50%);
   padding: 0.5rem;
   background: none;
   border: none;
-  color: #6B7280;
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
-  transition: color 0.2s ease-in-out;
+  border-radius: 6px;
+  @include transition(all 0.2s ease);
   
   &:hover {
-    color: #374151;
+    color: $color-accent-highlight;
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: translateY(-50%) scale(1.1);
   }
   
-  svg {
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+  
+  svg,
+  i {
     width: 1.25rem;
     height: 1.25rem;
+    font-size: 1.25rem;
   }
 }
 
-// 搜尋結果容器
+// 搜尋結果容器 - 蘋果風格精緻化
 .search-results {
   display: none;
   position: absolute;
@@ -84,87 +105,113 @@
   width: 100%;
   max-height: 24rem;
   overflow-y: auto;
-  background-color: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  border-radius: 0.375rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background-color: $color-bg-secondary;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
   z-index: 50;
-  margin-top: 0.5rem;
-  padding: 0.5rem 0;
+  margin-top: 0.75rem;
+  padding: 0.75rem 0;
   list-style: none;
   
   &.is-active {
     display: block;
+    animation: searchResultsSlideIn 0.2s ease-out;
   }
 }
 
-// 搜尋結果項目
+@keyframes searchResultsSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 搜尋結果項目 - 蘋果風格精緻化
 .search-result-item {
   padding: 0;
-  margin: 0;
+  margin: 0 0.5rem;
+  border-radius: 8px;
+  @include transition(all 0.2s ease);
   
-  &.is-active {
-    background-color: #F3F4F6;
-  }
-  
+  &.is-active,
   &:hover {
-    background-color: #F3F4F6;
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateX(4px);
   }
 }
 
-// 搜尋結果連結
+// 搜尋結果連結 - 蘋果風格精緻化
 .search-result-link {
   display: block;
-  padding: 0.75rem 1rem;
-  color: #374151;
+  padding: 0.875rem 1rem;
+  color: $color-text-primary;
   text-decoration: none;
+  border-radius: 8px;
+  @include transition(all 0.2s ease);
   
   &:hover {
     text-decoration: none;
+    color: $color-text-primary;
   }
 }
 
-// 搜尋結果標題
+// 搜尋結果標題 - 蘋果風格精緻化
 .search-result-title {
   display: block;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0.25rem;
+  color: $color-text-primary;
+  font-size: 0.95rem;
   
   mark {
-    background-color: rgba(34, 197, 94, 0.2);
-    padding: 0.125rem 0;
+    background-color: rgba($color-accent-highlight, 0.3);
+    color: white;
+    padding: 0.125rem 0.25rem;
+    border-radius: 4px;
   }
 }
 
-// 搜尋結果分類
+// 搜尋結果分類 - 蘋果風格精緻化
 .search-result-section {
   display: inline-block;
   font-size: 0.75rem;
-  color: #6B7280;
-  background-color: #F3F4F6;
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.125rem 0.5rem;
+  border-radius: 6px;
   margin-bottom: 0.25rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-// 搜尋結果描述
+// 搜尋結果描述 - 蘋果風格精緻化
 .search-result-description {
   display: block;
-  font-size: 0.875rem;
-  color: #6B7280;
+  font-size: 0.85rem;
+  color: $color-text-secondary;
+  line-height: 1.4;
   
   mark {
-    background-color: rgba(34, 197, 94, 0.2);
-    padding: 0.125rem 0;
+    background-color: rgba($color-accent-highlight, 0.3);
+    color: white;
+    padding: 0.125rem 0.25rem;
+    border-radius: 4px;
   }
 }
 
-// 搜尋結果為空
+// 搜尋結果為空 - 蘋果風格精緻化
 .search-result-empty {
-  padding: 0.75rem 1rem;
-  color: #6B7280;
-  font-size: 0.875rem;
+  padding: 1.5rem 1rem;
+  color: $color-text-tertiary;
+  font-size: 0.9rem;
   text-align: center;
+  font-style: italic;
 }
 
 // 響應式樣式

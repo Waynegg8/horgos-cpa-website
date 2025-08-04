@@ -1,15 +1,16 @@
-/* 聯絡頁面特定樣式 */
+/* 聯絡頁面特定樣式 - 深色主題統一設計 */
 .contact-header {
-  background: linear-gradient(135deg, #f8f9fa, #ffffff);
-  padding: 40px 0 20px;
-  border-bottom: 1px solid #e9ecef;
+  background: linear-gradient(135deg, rgba($color-bg-primary, 0.95), $color-bg-secondary);
+  padding: $spacing-16 0 $spacing-8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .contact-header h1 {
   font-size: 2.8rem;
-  color: #204B6E;
-  margin-bottom: 15px;
+  color: $color-text-primary;
+  margin-bottom: $spacing-4;
   position: relative;
+  font-weight: 700;
 }
 
 .contact-header h1::after {
@@ -19,19 +20,20 @@
   left: 0;
   width: 80px;
   height: 4px;
-  background: linear-gradient(to right, #204B6E, rgba(32, 75, 110, 0.3));
+  background: linear-gradient(to right, $color-accent-highlight, rgba($color-accent-highlight, 0.3));
   border-radius: 2px;
 }
 
 .contact-header p {
   font-size: 1.2rem;
-  color: #495057;
+  color: $color-text-secondary;
   max-width: 800px;
+  line-height: 1.6;
 }
 
 .contact-details-section {
-  padding: 50px 0;
-  background-color: #ffffff;
+  padding: $spacing-20 0;
+  background-color: $color-bg-primary;
 }
 
 .contact-info-map {
@@ -49,69 +51,85 @@
 .contact-cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: $spacing-6;
 }
 
 .contact-card {
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  padding: 25px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: $color-bg-secondary;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $border-radius-lg;
+  padding: $spacing-8;
+  box-shadow: $shadow-lg;
+  transition: all 0.3s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.contact-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
 }
 
 .contact-card-icon {
   font-size: 2.5rem;
-  color: #204B6E;
-  margin-bottom: 15px;
+  color: $color-accent-highlight;
+  margin-bottom: $spacing-4;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
-  background-color: rgba(32, 75, 110, 0.1);
+  width: 70px;
+  height: 70px;
+  background-color: rgba($color-accent-highlight, 0.15);
+  border: 2px solid rgba($color-accent-highlight, 0.3);
   border-radius: 50%;
+  transition: all 0.3s ease;
+  
+  .contact-card:hover & {
+    background-color: rgba($color-accent-highlight, 0.25);
+    border-color: rgba($color-accent-highlight, 0.5);
+    transform: scale(1.1);
+  }
 }
 
 .line-icon {
-  background-color: #00B900;
-  color: white;
+  background-color: #00B900 !important;
+  border-color: #00B900 !important;
+  color: white !important;
 }
 
 .contact-card h3 {
   margin-top: 0;
-  margin-bottom: 15px;
-  color: #204B6E;
+  margin-bottom: $spacing-4;
+  color: $color-text-primary;
   font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .contact-info-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-grow: 1;
 }
 
 .contact-info-list li {
-  margin-bottom: 8px;
+  margin-bottom: $spacing-2;
+  color: $color-text-secondary;
+  font-size: 0.95rem;
 }
 
 .contact-card a {
-  color: #204B6E;
+  color: $color-accent-highlight;
   text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.contact-card a:hover {
-  color: #0056b3;
-  text-decoration: underline;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  
+  &:hover {
+    color: lighten($color-accent-highlight, 10%);
+    text-decoration: underline;
+  }
 }
 
 .line-btn {
@@ -119,32 +137,48 @@
   align-items: center;
   background-color: #00B900;
   color: white !important;
-  padding: 8px 15px;
-  border-radius: 5px;
-  margin-top: 10px;
+  padding: $spacing-3 $spacing-4;
+  border-radius: $border-radius-md;
+  margin-top: $spacing-3;
   text-decoration: none !important;
   font-weight: 500;
-  transition: background-color 0.3s ease;
-}
-
-.line-btn:hover {
-  background-color: #009900;
-  color: white !important;
-}
-
-.line-btn i {
-  margin-right: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 2px solid #00B900;
+  
+  &:hover {
+    background-color: #008800;
+    border-color: #008800;
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 185, 0, 0.3);
+  }
+  
+  i {
+    margin-right: $spacing-2;
+    font-size: 1rem;
+  }
 }
 
 .map-link {
   display: inline-flex;
   align-items: center;
-  margin-top: 10px;
-}
-
-.map-link span {
-  margin-right: 5px;
-  font-size: 1.2rem;
+  margin-top: $spacing-3;
+  color: $color-accent-highlight;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    color: lighten($color-accent-highlight, 10%);
+    transform: translateX(4px);
+  }
+  
+  span {
+    margin-right: $spacing-1;
+    font-size: 1.1rem;
+  }
 }
 
 .map-wrapper {
@@ -155,68 +189,137 @@
 .map-container {
   height: 100%;
   min-height: 350px;
-  border-radius: 10px;
+  border-radius: $border-radius-lg;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: $shadow-lg;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+// 營業狀態區域
+.business-status-container {
+  margin-top: $spacing-4;
+  padding: $spacing-4;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: $border-radius-md;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .status-indicator {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: $spacing-3;
+  
+  .status-text {
+    color: $color-text-primary;
+    font-weight: 600;
+    font-size: 1rem;
+  }
 }
 
 .status-dot {
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: $spacing-3;
+  transition: all 0.3s ease;
+  
+  &.open {
+    background-color: #10B981;
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+  }
+  
+  &.closed {
+    background-color: #EF4444;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
+  }
+  
+  &.lunch {
+    background-color: #F59E0B;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+  }
 }
 
-.status-dot.open {
-  background-color: #10B981;
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+.business-hours {
+  margin-bottom: $spacing-2;
+  
+  p {
+    color: $color-text-secondary;
+    font-size: 0.9rem;
+    margin: 0;
+  }
 }
 
-.status-dot.closed {
-  background-color: #EF4444;
-  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
-}
-
-.status-dot.lunch {
-  background-color: #F59E0B;
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
-}
-
-.hours-title {
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.hours-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.hours-list li {
-  margin-bottom: 5px;
+.next-status {
+  color: $color-text-tertiary;
+  font-size: 0.85rem;
+  font-style: italic;
 }
 
 /* 響應式調整 */
-@media (max-width: 992px) {
+@include desktop {
+  .contact-info-map {
+    gap: $spacing-10;
+  }
+}
+
+@include tablet {
   .contact-cards-grid {
     grid-template-columns: 1fr;
+    gap: $spacing-5;
+  }
+  
+  .contact-info-map {
+    flex-direction: column;
+    gap: $spacing-8;
   }
   
   .map-container {
     min-height: 300px;
   }
+  
+  .contact-header h1 {
+    font-size: 2.4rem;
+  }
+  
+  .contact-header p {
+    font-size: 1.1rem;
+  }
 }
 
-@media (max-width: 768px) {
+@include mobile {
+  .contact-header {
+    padding: $spacing-12 0 $spacing-6;
+  }
+  
   .contact-header h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
+  }
+  
+  .contact-header p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .contact-details-section {
+    padding: $spacing-16 0;
+  }
+  
+  .contact-card {
+    padding: $spacing-6;
+  }
+  
+  .contact-card-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  
+  .contact-card h3 {
+    font-size: 1.3rem;
+  }
+  
+  .map-container {
+    min-height: 250px;
   }
 }
