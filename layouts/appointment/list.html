@@ -247,9 +247,32 @@ document.addEventListener('DOMContentLoaded', function() {
     formStatus.textContent = '';
     formStatus.classList.remove('success', 'error');
     
-    // 模擬表單提交
-    setTimeout(function() {
-      // 模擬成功提交
+    // 實際提交表單至API
+    const formData = {
+      name: name,
+      email: email,
+      line: line,
+      phone: phone,
+      service: service ? service.value : '',
+      content: document.getElementById('content').value.trim(),
+      privacy: privacy
+    };
+    
+    fetch('/api/forms/appointment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('伺服器回應錯誤');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // 成功提交
       submitBtn.disabled = false;
       submitBtn.textContent = '送出預約';
       submitBtn.setAttribute('aria-busy', 'false');
@@ -266,7 +289,20 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // 聚焦到成功訊息
       formStatus.focus();
-    }, 1500);
+    })
+    .catch(error => {
+      // 提交失敗
+      console.error('提交失敗:', error);
+      submitBtn.disabled = false;
+      submitBtn.textContent = '送出預約';
+      submitBtn.setAttribute('aria-busy', 'false');
+      formStatus.textContent = '提交失敗，請稍後再試或直接聯絡我們。';
+      formStatus.classList.add('error');
+      formStatus.setAttribute('role', 'alert');
+      
+      // 聚焦到錯誤訊息
+      formStatus.focus();
+    });
   });
 });
 </script>
