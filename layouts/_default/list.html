@@ -46,7 +46,7 @@
         {{ end }}
     </div>
     
-    {{ if or (eq .Section "services") (eq .Section "about") }}
+    {{ if or (eq .Section "services") (eq .Section "about") (eq .Section "articles") (eq .Section "videos") (eq .Section "faq") (eq .Section "downloads") }}
     <!-- 雙CTA行動呼籲區域 -->
     {{ partial "shared/dual-cta.html" . }}
     {{ end }}

@@ -15,7 +15,6 @@
       
       <!-- 分類篩選 -->
       <div class="category-nav card-style">
-        <h2 class="category-nav__title">影片分類</h2>
         <div class="category-nav__links">
           <a href="{{ .RelPermalink }}" class="category-nav__link {{ if eq .RelPermalink .CurrentSection.RelPermalink }}active{{ end }}">
             <i class="fas fa-th-large"></i>
@@ -32,9 +31,33 @@
       
       <!-- 影片列表 -->
       <div class="videos-list">
-        {{ $paginator := .Paginate (where .Pages "Type" "videos") }}
+        {{ $paginator := .Paginate (where .Pages "Type" "videos") 10 }}
         {{ range $paginator.Pages }}
-          {{ partial "videos/card.html" . }}
+          <a href="{{ .RelPermalink }}" class="card-style card-clickable">
+            <div class="card-horizontal">
+              <div class="card-horizontal__image">
+                {{ with .Params.thumbnail }}
+                <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+                {{ else }}
+                <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
+                {{ end }}
+                <div class="video-duration">
+                  {{ with .Params.duration }}{{ . }}{{ else }}--:--{{ end }}
+                </div>
+              </div>
+              <div class="card-horizontal__content">
+                <h2 class="video-title">{{ $.Title }}</h2>
+                <div class="video-meta">
+                  <span class="video-meta__item"><i class="fas fa-calendar-alt"></i> {{ $.Date.Format "2006-01-02" }}</span>
+                  <span class="video-meta__item"><i class="fas fa-play-circle"></i> 影片</span>
+                  {{ with $.Params.series }}
+                  <span class="video-meta__item"><i class="fas fa-bookmark"></i> {{ . }}</span>
+                  {{ end }}
+                </div>
+                <p class="video-description">{{ $.Summary | truncate 100 }}</p>
+              </div>
+            </div>
+          </a>
         {{ end }}
       </div>
     

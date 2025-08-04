@@ -20,6 +20,34 @@
   }
 }
 
+// 可點擊卡片
+.card-clickable {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+  
+  // 移除文字連結樣式
+  h1, h2, h3, h4, h5, h6, p, span {
+    color: inherit;
+  }
+  
+  .article-title,
+  .video-title {
+    color: $color-text-primary;
+    margin: 0;
+    text-decoration: none;
+    
+    &:hover {
+      color: $color-accent-highlight;
+    }
+  }
+}
+
 // 水平卡片 (左圖右文)
 .card-horizontal {
   display: flex;
@@ -28,6 +56,7 @@
   &__image {
     flex-shrink: 0;
     width: 180px;
+    position: relative;
     
     img {
       width: 100%;
@@ -36,11 +65,44 @@
       border-radius: $border-radius-md;
     }
     
+    // 影片時長顯示
+    .video-duration {
+      position: absolute;
+      bottom: $spacing-1;
+      right: $spacing-1;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: $spacing-1 $spacing-2;
+      border-radius: $border-radius-sm;
+      font-size: $font-size-small;
+      font-weight: 500;
+    }
+    
     @include mobile {
       width: 100px;
       
       img {
         height: 80px;
+      }
+    }
+  }
+  
+  &__icon {
+    flex-shrink: 0;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    i {
+      font-size: 2.5rem;
+    }
+    
+    @include mobile {
+      width: 50px;
+      
+      i {
+        font-size: 2rem;
       }
     }
   }
@@ -64,7 +126,8 @@
       }
     }
     
-    .article-meta {
+    .article-meta,
+    .video-meta {
       display: flex;
       flex-wrap: wrap;
       gap: $spacing-3;
@@ -83,10 +146,45 @@
       }
     }
     
-    .article-summary {
+    .article-summary,
+    .video-description,
+    .faq-summary,
+    .download-summary {
       color: $color-text-secondary;
       margin-bottom: $spacing-4;
       line-height: $line-height-base;
+    }
+    
+    .faq-title,
+    .download-title {
+      color: $color-text-primary;
+      margin: 0 0 $spacing-3 0;
+      font-weight: 600;
+      text-decoration: none;
+      
+      &:hover {
+        color: $color-accent-highlight;
+      }
+    }
+    
+    .faq-meta,
+    .download-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-3;
+      margin-bottom: $spacing-3;
+      font-size: $font-size-small;
+      color: $color-text-secondary;
+      
+      &__item {
+        display: flex;
+        align-items: center;
+        gap: $spacing-1;
+        
+        i {
+          font-size: 0.75rem;
+        }
+      }
     }
   }
   

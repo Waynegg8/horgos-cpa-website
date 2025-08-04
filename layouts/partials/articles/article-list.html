@@ -1,8 +1,7 @@
 <!-- 文章列表頁 -->
 <div class="article-list">
-    <!-- 分類篩選 - 改為卡片式導覽 -->
+    <!-- 分類篩選 -->
     <div class="category-nav card-style">
-        <h2 class="category-nav__title">文章分類</h2>
         <div class="category-nav__links">
             <a href="{{ .RelPermalink }}" class="category-nav__link {{ if eq .RelPermalink "/articles/" }}active{{ end }}">
                 <i class="fas fa-th-large"></i>
@@ -31,38 +30,30 @@
     <div class="article-list__grid">
         {{ $paginator := .Paginate (where .Pages "Type" "articles") 10 }}
         {{ range $paginator.Pages }}
-        <div class="card-style">
+        <a href="{{ .RelPermalink }}" class="card-style card-clickable">
             <div class="card-horizontal">
                 <div class="card-horizontal__image">
                     {{ with .Params.cover }}
-                    <a href="{{ $.RelPermalink }}">
-                        <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
-                    </a>
+                    <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
                     {{ else }}
-                    <a href="{{ $.RelPermalink }}">
-                        <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
-                    </a>
+                    <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
                     {{ end }}
                 </div>
                 <div class="card-horizontal__content">
-                    <h2 class="article-title">
-                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                    </h2>
+                    <h2 class="article-title">{{ $.Title }}</h2>
                     <div class="article-meta">
-                        <span class="article-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
-                        {{ with .Params.category }}
+                        <span class="article-meta__item"><i class="fas fa-calendar-alt"></i> {{ $.Date.Format "2006-01-02" }}</span>
+                        {{ with $.Params.category }}
                         <span class="article-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>
                         {{ end }}
-                        {{ with .Params.series }}
+                        {{ with $.Params.series }}
                         <span class="article-meta__item"><i class="fas fa-bookmark"></i> {{ . }}</span>
                         {{ end }}
-                        <span class="article-meta__item"><i class="fas fa-clock"></i> {{ div (countwords .Content) 300 | add 1 }} 分鐘閱讀</span>
                     </div>
-                    <p class="article-summary">{{ .Summary | truncate 150 }}</p>
-                    <a href="{{ .RelPermalink }}" class="btn btn-secondary">閱讀更多</a>
+                    <p class="article-summary">{{ $.Summary | truncate 100 }}</p>
                 </div>
             </div>
-        </div>
+        </a>
         {{ end }}
     </div>
     

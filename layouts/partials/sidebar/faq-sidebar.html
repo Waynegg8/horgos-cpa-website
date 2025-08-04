@@ -1,7 +1,9 @@
 <!-- FAQ側邊欄 -->
 <div class="sidebar">
-    <!-- 搜尋框 -->
+    <!-- 搜尋框 (僅在單篇頁面顯示) -->
+    {{ if eq .Kind "page" }}
     {{ partial "search/sidebar-search.html" . }}
+    {{ end }}
     
     <!-- 分類列表 -->
     <div class="sidebar-widget">

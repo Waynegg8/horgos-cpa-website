@@ -38,10 +38,11 @@
   display: flex;
   gap: $spacing-8;
   margin-bottom: $spacing-16;
-  background-color: $color-bg-secondary;
-  border-radius: $border-radius-lg;
-  padding: $spacing-8;
-  box-shadow: $shadow-sm;
+  
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-6;
+  }
   
   &__main {
     flex: 1;

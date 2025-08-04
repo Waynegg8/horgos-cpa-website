@@ -1,62 +1,93 @@
 <!-- 下載列表頁 -->
 <div class="download-list">
     <!-- 分類篩選 -->
-    <div class="download-categories">
-        <div class="category-filters">
-            <a href="/downloads/" class="category-filter {{ if eq .RelPermalink "/downloads/" }}active{{ end }}">全部</a>
-            <a href="/downloads/templates/" class="category-filter {{ if eq .RelPermalink "/downloads/templates/" }}active{{ end }}">範本下載</a>
-            <a href="/downloads/forms/" class="category-filter {{ if eq .RelPermalink "/downloads/forms/" }}active{{ end }}">表格下載</a>
-            <a href="/downloads/checklists/" class="category-filter {{ if eq .RelPermalink "/downloads/checklists/" }}active{{ end }}">檢查清單</a>
-            <a href="/downloads/regulations/" class="category-filter {{ if eq .RelPermalink "/downloads/regulations/" }}active{{ end }}">法規文件</a>
+    <div class="category-nav card-style">
+        <div class="category-nav__links">
+            <a href="/downloads/" class="category-nav__link {{ if eq .RelPermalink "/downloads/" }}active{{ end }}">
+                <i class="fas fa-download"></i>
+                <span>全部下載</span>
+            </a>
+            <a href="/downloads/templates/" class="category-nav__link {{ if eq .RelPermalink "/downloads/templates/" }}active{{ end }}">
+                <i class="fas fa-file-word"></i>
+                <span>範本下載</span>
+            </a>
+            <a href="/downloads/forms/" class="category-nav__link {{ if eq .RelPermalink "/downloads/forms/" }}active{{ end }}">
+                <i class="fas fa-file-alt"></i>
+                <span>表格下載</span>
+            </a>
+            <a href="/downloads/checklists/" class="category-nav__link {{ if eq .RelPermalink "/downloads/checklists/" }}active{{ end }}">
+                <i class="fas fa-tasks"></i>
+                <span>檢查清單</span>
+            </a>
+            <a href="/downloads/regulations/" class="category-nav__link {{ if eq .RelPermalink "/downloads/regulations/" }}active{{ end }}">
+                <i class="fas fa-gavel"></i>
+                <span>法規文件</span>
+            </a>
         </div>
     </div>
     
     <!-- 下載列表 -->
-    <div class="download-cards">
+    <div class="download-list__grid">
         {{ $paginator := .Paginate (where .Pages "Type" "downloads") 10 }}
         {{ range $paginator.Pages }}
-        <div class="download-card">
-            <div class="download-card__icon">
-                {{ if eq .Params.filetype "pdf" }}
-                <i class="far fa-file-pdf"></i>
-                {{ else if eq .Params.filetype "docx" }}
-                <i class="far fa-file-word"></i>
-                {{ else if eq .Params.filetype "xlsx" }}
-                <i class="far fa-file-excel"></i>
-                {{ else if eq .Params.filetype "zip" }}
-                <i class="far fa-file-archive"></i>
-                {{ else }}
-                <i class="far fa-file"></i>
-                {{ end }}
-            </div>
-            <div class="download-card__content">
-                <h2 class="download-card__title">
-                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                </h2>
-                <div class="download-card__meta">
-                    <span class="download-card__type"><i class="fas fa-file"></i> {{ .Params.filetype }}</span>
-                    <span class="download-card__size"><i class="fas fa-weight"></i> {{ .Params.filesize }}</span>
-                    <span class="download-card__date"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
-                    {{ with .Params.updated }}
-                    <span class="download-card__updated"><i class="fas fa-sync-alt"></i> {{ . }}</span>
+        <a href="{{ .RelPermalink }}" class="card-style card-clickable">
+            <div class="card-horizontal">
+                <div class="card-horizontal__icon">
+                    {{ if eq .Params.filetype "pdf" }}
+                    <i class="far fa-file-pdf" style="color: #dc3545;"></i>
+                    {{ else if eq .Params.filetype "docx" }}
+                    <i class="far fa-file-word" style="color: #0d6efd;"></i>
+                    {{ else if eq .Params.filetype "xlsx" }}
+                    <i class="far fa-file-excel" style="color: #198754;"></i>
+                    {{ else if eq .Params.filetype "zip" }}
+                    <i class="far fa-file-archive" style="color: #6f42c1;"></i>
+                    {{ else }}
+                    <i class="far fa-file"></i>
                     {{ end }}
                 </div>
-                <div class="download-card__description">
-                    {{ .Description }}
-                </div>
-                <div class="download-card__tags">
-                    {{ range .Params.tags }}
-                    <a href="/tags/{{ . | urlize }}" class="download-card__tag">{{ . }}</a>
-                    {{ end }}
-                </div>
-                <div class="download-card__footer">
-                    <a href="{{ .RelPermalink }}" class="download-card__button">查看詳情</a>
+                <div class="card-horizontal__content">
+                    <h2 class="download-title">{{ .Title }}</h2>
+                    <div class="download-meta">
+                        <span class="download-meta__item"><i class="fas fa-file"></i> {{ .Params.filetype | upper }}</span>
+                        {{ with .Params.filesize }}<span class="download-meta__item"><i class="fas fa-weight"></i> {{ . }}</span>{{ end }}
+                        <span class="download-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+                    </div>
+                    <p class="download-summary">{{ .Summary | truncate 100 }}</p>
                 </div>
             </div>
-        </div>
+        </a>
         {{ end }}
     </div>
     
     <!-- 分頁導航 -->
-    {{ template "_internal/pagination.html" . }}
+    {{ if gt .Paginator.TotalPages 1 }}
+    <nav class="pagination" role="navigation" aria-label="分頁導航">
+        <div class="pagination__info">
+            第 {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }} 頁，共 {{ .Paginator.TotalNumberOfElements }} 個資源
+        </div>
+        <div class="pagination__controls">
+            {{ if .Paginator.HasPrev }}
+                <a href="{{ .Paginator.Prev.URL }}" class="pagination__link pagination__link--prev" aria-label="上一頁">
+                    <i class="fas fa-chevron-left"></i>
+                    上一頁
+                </a>
+            {{ end }}
+            
+            {{ range .Paginator.Pagers }}
+                {{ if eq . $.Paginator }}
+                    <span class="pagination__link pagination__link--current" aria-current="page">{{ .PageNumber }}</span>
+                {{ else }}
+                    <a href="{{ .URL }}" class="pagination__link">{{ .PageNumber }}</a>
+                {{ end }}
+            {{ end }}
+            
+            {{ if .Paginator.HasNext }}
+                <a href="{{ .Paginator.Next.URL }}" class="pagination__link pagination__link--next" aria-label="下一頁">
+                    下一頁
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            {{ end }}
+        </div>
+    </nav>
+    {{ end }}
 </div>
