@@ -79,7 +79,15 @@ function setupStickyTOC() {
   const sidebar = document.querySelector('.sidebar');
   if (!tocContainer || !sidebar) return;
   
-  const tocTitle = tocContainer.querySelector('.sidebar-widget__title');
+  // 創建目錄標題
+  let tocTitle = tocContainer.querySelector('.toc-title');
+  if (!tocTitle) {
+    tocTitle = document.createElement('h3');
+    tocTitle.className = 'toc-title';
+    tocTitle.textContent = '文章目錄';
+    tocContainer.insertBefore(tocTitle, tocContainer.firstChild);
+  }
+  
   const tocList = tocContainer.querySelector('.toc-list');
   
   // 創建折疊/展開按鈕
