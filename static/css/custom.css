@@ -26,3 +26,63 @@
   color: #fff !important; /* 改為白色 */
   letter-spacing: 0.5px !important;
 }
+
+/* 側邊欄寬度調整 */
+/* 根據專案需求，只在特定頁面顯示側邊欄 */
+body.articles .sidebar,
+body.articles-single .sidebar,
+body.faq .sidebar,
+body.faq-single .sidebar,
+body.downloads .sidebar,
+body.downloads-single .sidebar {
+  display: block !important;
+  visibility: visible !important;
+  position: static !important;
+  width: 35% !important; /* 從 31.66% 增加到 35% */
+  min-width: 280px !important; /* 確保最小寬度 */
+  height: auto !important;
+  opacity: 1 !important;
+  flex: 1 0 35% !important; /* 從 31.66% 增加到 35% */
+  padding-right: 1rem !important; /* 增加右側間距 */
+}
+
+/* 在特定頁面重新啟用flex佈局 */
+body.articles .wrapper.flex,
+body.articles-single .wrapper.flex,
+body.faq .wrapper.flex,
+body.faq-single .wrapper.flex,
+body.downloads .wrapper.flex,
+body.downloads-single .wrapper.flex {
+  display: flex !important;
+}
+
+/* 在特定頁面限制主內容寬度 */
+body.articles .primary,
+body.articles-single .primary,
+body.faq .primary,
+body.faq-single .primary,
+body.downloads .primary,
+body.downloads-single .primary {
+  flex: 1 0 62% !important; /* 從 65.83% 調整到 62% */
+  padding-right: 1rem !important; /* 增加右側間距 */
+}
+
+/* 修復側邊欄文字垂直排列問題 */
+body.articles .sidebar-categories__link,
+body.articles-single .sidebar-categories__link,
+body.faq .sidebar-categories__link,
+body.faq-single .sidebar-categories__link,
+body.downloads .sidebar-categories__link,
+body.downloads-single .sidebar-categories__link {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  text-align: left !important;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  padding-right: 0.5rem !important; /* 增加右側間距 */
+  white-space: nowrap !important; /* 防止文字換行 */
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
