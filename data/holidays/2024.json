@@ -5,103 +5,103 @@
       "date": "2024-01-01",
       "name": "元旦",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-02-08",
       "name": "農曆除夕",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-02-09",
       "name": "春節初一",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-02-10",
       "name": "春節初二",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-02-11",
       "name": "春節初三",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-02-12",
       "name": "春節初四",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-02-28",
       "name": "和平紀念日",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-04-04",
       "name": "兒童節",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-04-05",
       "name": "清明節",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-05-01",
       "name": "勞動節",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-06-10",
       "name": "端午節",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-09-17",
       "name": "中秋節",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-10-10",
       "name": "國慶日",
       "type": "national",
-      "is_working": false
+      "isWorkday": false
     },
     {
       "date": "2024-02-17",
       "name": "補班日",
       "type": "makeup",
-      "is_working": true
+      "isWorkday": true
     },
     {
       "date": "2024-03-02",
       "name": "補班日",
       "type": "makeup",
-      "is_working": true
+      "isWorkday": true
     },
     {
       "date": "2024-06-15",
       "name": "補班日",
       "type": "makeup",
-      "is_working": true
+      "isWorkday": true
     },
     {
       "date": "2024-09-21",
       "name": "補班日",
       "type": "makeup",
-      "is_working": true
+      "isWorkday": true
     }
   ]
 }

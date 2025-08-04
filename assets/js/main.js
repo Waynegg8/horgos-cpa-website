@@ -6,7 +6,6 @@
 import loadingSystem from './components/loading.js';
 // 導入鍵盤導航功能
 import keyboardNavigation from './components/keyboard-nav.js';
-import './components/business-status.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     // 初始化載入狀態系統

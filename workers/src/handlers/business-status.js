@@ -92,7 +92,7 @@ async function getCurrentStatus(env) {
       // 國定假日且不上班
       status = 'closed';
       message = `休息中 (${isHoliday.name})`;
-      nextChangeTime = getNextWorkday(taipeiTime, env);
+      nextChangeTime = await getNextWorkday(taipeiTime, env);
     } else if (day >= 1 && day <= 5 || (isHoliday.isHoliday && isHoliday.isWorkday)) {
       // 工作日或補班日
       if (currentTime >= morningStart && currentTime < morningEnd) {
