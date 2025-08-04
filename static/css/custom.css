@@ -1,121 +1,192 @@
-/* 覆蓋主題的側邊欄佈局 - 更強的選擇器 */
-body.home .wrapper.flex {
-  display: block !important;
-}
+/* 全域側邊欄覆蓋 - 更徹底且更有針對性的解決方案 */
 
-body.home .sidebar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: absolute !important;
-  left: -9999px !important;
-}
+/* 針對首頁、服務頁面、關於我們頁面、聯絡我們頁面、預約諮詢頁面，完全移除側邊欄 */
 
-/* 確保主要內容在首頁佔據全寬 */
-body.home .primary {
-  flex: 1 0 100% !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  margin: 0 !important;
-}
-
-/* 重設 wrapper 在首頁的樣式 */
-body.home .wrapper {
-  display: block !important;
-  padding: 0 !important; /* 移除內邊距 */
-}
-
-/* 為服務項目頁面也應用相同的規則 */
-body.services .wrapper.flex {
-  display: block !important;
-}
-
-body.services .sidebar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: absolute !important;
-  left: -9999px !important;
-}
-
-body.services .primary {
-  flex: 1 0 100% !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  margin: 0 !important;
-}
-
-/* 為關於我們頁面也應用相同的規則 */
-body.about .wrapper.flex {
-  display: block !important;
-}
-
-body.about .sidebar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: absolute !important;
-  left: -9999px !important;
-}
-
-body.about .primary {
-  flex: 1 0 100% !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  margin: 0 !important;
-}
-
-/* 為聯絡我們頁面也應用相同的規則 */
-body.contact .wrapper.flex {
-  display: block !important;
-}
-
-body.contact .sidebar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: absolute !important;
-  left: -9999px !important;
-}
-
-body.contact .primary {
-  flex: 1 0 100% !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  margin: 0 !important;
-}
-
-/* 為預約諮詢頁面也應用相同的規則 */
-body.appointment .wrapper.flex {
-  display: block !important;
-}
-
+/* 強力模式：針對任何情況強制隱藏側邊欄 */
+body.home .sidebar,
+body.services .sidebar,
+body.about .sidebar,
+body.contact .sidebar,
 body.appointment .sidebar {
-  display: none !important;
+  display: none !important; 
   width: 0 !important;
   height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
   overflow: hidden !important;
   margin: 0 !important;
   padding: 0 !important;
   position: absolute !important;
+  top: -9999px !important;
   left: -9999px !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  flex: 0 0 0% !important;
+  pointer-events: none !important;
 }
 
+/* 強制primary容器佔用全寬 */
+body.home .primary,
+body.services .primary,
+body.about .primary,
+body.contact .primary,
 body.appointment .primary {
   flex: 1 0 100% !important;
   max-width: 100% !important;
   width: 100% !important;
   margin: 0 !important;
+}
+
+/* 強力重設flex佈局 */
+body.home .wrapper.flex,
+body.services .wrapper.flex,
+body.about .wrapper.flex,
+body.contact .wrapper.flex,
+body.appointment .wrapper.flex {
+  display: block !important;
+  flex-wrap: nowrap !important;
+}
+
+/* 修正container樣式，確保主要內容佔滿寬度 */
+body.home .container--outer,
+body.services .container--outer,
+body.about .container--outer,
+body.contact .container--outer,
+body.appointment .container--outer {
+  max-width: 1500px !important;
+}
+
+/* 強制wrapper在需要的頁面上取消padding */
+body.home .wrapper,
+body.services .wrapper,
+body.about .wrapper,
+body.contact .wrapper,
+body.appointment .wrapper {
+  padding: 0 !important;
+}
+
+/* 完全清除在videos/case-studies頁面上的側邊欄 - 針對截圖中的頁面特別處理 */
+body.videos .sidebar {
+  display: none !important; 
+  width: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  flex: 0 0 0% !important;
+  pointer-events: none !important;
+}
+
+/* 確保videos頁面的主內容佔滿寬度 */
+body.videos .primary {
+  flex: 1 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+/* 修復case-studies頁面的布局，使用!important優先級確保覆蓋主題樣式 */
+body[data-section="videos"] .wrapper.flex {
+  display: block !important;
+}
+
+body[data-section="videos"] .sidebar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  flex: 0 0 0% !important;
+}
+
+body[data-section="videos"] .primary {
+  flex: 1 0 100% !important;
+  max-width: 100% !important;
+}
+
+/* 通用隱藏側邊欄方案 - 全站適用 */
+@media (min-width: 768px) {
+  /* 在768px以上寬度時隱藏視頻頁面側邊欄 */
+  .content {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 0 100% !important;
+  }
+  
+  /* 確保main元素不會被側邊欄影響 */
+  main.main {
+    display: block !important;
+    width: 100% !important;
+  }
+  
+  /* 完全重設main.list元素的佈局，刪除任何flex屬性 */
+  main.main.list {
+    display: block !important;
+  }
+  
+  /* 徹底清除頁面右側的任何浮動元素 */
+  main.main.list:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+/* 最後的終極解決方案 - 通過覆蓋Mainroad主題的核心CSS來修復側邊欄問題 */
+.wrapper.flex {
+  display: block !important;
+}
+
+.primary {
+  flex: 1 0 100% !important;
+  order: 1;
+}
+
+.sidebar {
+  display: none !important;
+}
+
+/* 根據專案需求，只在特定頁面顯示側邊欄 */
+body.articles .sidebar,
+body.articles-single .sidebar,
+body.faq .sidebar,
+body.faq-single .sidebar,
+body.downloads .sidebar,
+body.downloads-single .sidebar {
+  display: block !important;
+  visibility: visible !important;
+  position: static !important;
+  width: 31.66% !important;
+  height: auto !important;
+  opacity: 1 !important;
+  flex: 1 0 31.66% !important;
+}
+
+/* 在特定頁面重新啟用flex佈局 */
+body.articles .wrapper.flex,
+body.articles-single .wrapper.flex,
+body.faq .wrapper.flex,
+body.faq-single .wrapper.flex,
+body.downloads .wrapper.flex,
+body.downloads-single .wrapper.flex {
+  display: flex !important;
+}
+
+/* 在特定頁面限制主內容寬度 */
+body.articles .primary,
+body.articles-single .primary,
+body.faq .primary,
+body.faq-single .primary,
+body.downloads .primary,
+body.downloads-single .primary {
+  flex: 1 0 65.83% !important;
 }
