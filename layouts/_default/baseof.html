@@ -69,8 +69,19 @@
         {{ block "main" . }}{{ end }}
     </main>
     
-    <!-- 側邊欄區塊，覆蓋主題的默認行為 -->
-    {{ define "sidebar" }}{{ end }}
+    <!-- 側邊欄區塊 -->
+    {{ block "sidebar" . }}
+    <!-- 根據頁面類型顯示不同的側邊欄 -->
+    {{ if eq .Section "articles" }}
+        {{ partial "sidebar/articles-sidebar.html" . }}
+    {{ else if eq .Section "videos" }}
+        {{ partial "sidebar/videos-sidebar.html" . }}
+    {{ else if eq .Section "faq" }}
+        {{ partial "sidebar/faq-sidebar.html" . }}
+    {{ else if eq .Section "downloads" }}
+        {{ partial "sidebar/downloads-sidebar.html" . }}
+    {{ end }}
+    {{ end }}
     
     <!-- 頁腳 -->
     <footer id="footer" aria-labelledby="aria-footer-desc">
