@@ -44,6 +44,9 @@
     
     <!-- Google Analytics -->
     {{ template "_internal/google_analytics.html" . }}
+    
+    <!-- 結構化資料 Schema.org -->
+    {{ partial "head/schema.html" . }}
 </head>
 <body class="{{ if .IsHome }}home{{ else }}{{ .Section }}{{ end }}" data-section="{{ .Section }}">
     <!-- 無障礙跳過連結 -->

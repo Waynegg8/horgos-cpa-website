@@ -1,0 +1,21 @@
+[
+  {{- $searchablePages := where .Site.RegularPages "Section" "in" (slice "articles" "videos" "faq" "downloads") -}}
+  {{- $len := len $searchablePages -}}
+  {{- range $index, $page := $searchablePages -}}
+    {{- if ne $page.Type "json" -}}
+      {{- if and $page.Title $page.Content -}}
+      {
+        "uri": "{{ $page.RelPermalink }}",
+        "title": {{ $page.Title | jsonify }},
+        "content": {{ $page.Plain | jsonify }},
+        "description": {{ (cond $page.Description $page.Description ($page.Summary | plainify)) | jsonify }},
+        "section": {{ $page.Section | jsonify }},
+        "tags": {{ $page.Params.tags | jsonify }},
+        "category": {{ (cond $page.Params.category $page.Params.category $page.Section) | jsonify }},
+        "series": {{ (cond $page.Params.series $page.Params.series "") | jsonify }},
+        "date": {{ $page.Date.Format "2006-01-02" | jsonify }}
+      }{{ if ne (add $index 1) $len }},{{ end }}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+]

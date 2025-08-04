@@ -256,3 +256,7 @@ googleAnalytics = "G-RKMCS9WVS5"
     identifier = "cookies-policy"
     url = "/cookies-policy/"
     weight = 2
+
+[outputs]
+home = ["HTML", "JSON"]
+

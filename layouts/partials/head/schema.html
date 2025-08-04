@@ -91,6 +91,7 @@
       "itemListElement" (slice)
     }}
     {{ $services := where .Site.RegularPages "Section" "services" }}
+    {{ $itemListElement := slice }}
     {{ range $index, $service := $services }}
       {{ $listItem := dict 
         "@type" "ListItem" 
@@ -99,8 +100,9 @@
         "name" $service.Title 
         "description" $service.Description
       }}
-      {{ $schema = merge $schema (dict "itemListElement" (append $schema.itemListElement $listItem)) }}
+      {{ $itemListElement = $itemListElement | append $listItem }}
     {{ end }}
+    {{ $schema = merge $schema (dict "itemListElement" $itemListElement) }}
   {{ end }}
 
 {{ else if eq .Section "faq" }}
@@ -132,6 +134,7 @@
       "mainEntity" (slice)
     }}
     {{ $faqs := where .Site.RegularPages "Section" "faq" }}
+    {{ $mainEntity := slice }}
     {{ range $faq := first 10 $faqs }}
       {{ $faqItem := dict 
         "@type" "Question" 
@@ -141,8 +144,9 @@
           "text" (or $faq.Description $faq.Summary)
         )
       }}
-      {{ $schema = merge $schema (dict "mainEntity" (append $schema.mainEntity $faqItem)) }}
+      {{ $mainEntity = $mainEntity | append $faqItem }}
     {{ end }}
+    {{ $schema = merge $schema (dict "mainEntity" $mainEntity) }}
   {{ end }}
 
 {{ else if eq .Section "videos" }}
@@ -180,6 +184,7 @@
       "itemListElement" (slice)
     }}
     {{ $videos := where .Site.RegularPages "Section" "videos" }}
+    {{ $itemListElement := slice }}
     {{ range $index, $video := $videos }}
       {{ $listItem := dict 
         "@type" "ListItem" 
@@ -188,8 +193,9 @@
         "name" $video.Title 
         "description" $video.Description
       }}
-      {{ $schema = merge $schema (dict "itemListElement" (append $schema.itemListElement $listItem)) }}
+      {{ $itemListElement = $itemListElement | append $listItem }}
     {{ end }}
+    {{ $schema = merge $schema (dict "itemListElement" $itemListElement) }}
   {{ end }}
 
 {{ else if eq .Section "downloads" }}
@@ -213,6 +219,7 @@
       "itemListElement" (slice)
     }}
     {{ $downloads := where .Site.RegularPages "Section" "downloads" }}
+    {{ $itemListElement := slice }}
     {{ range $index, $download := $downloads }}
       {{ $listItem := dict 
         "@type" "ListItem" 
@@ -221,8 +228,9 @@
         "name" $download.Title 
         "description" $download.Description
       }}
-      {{ $schema = merge $schema (dict "itemListElement" (append $schema.itemListElement $listItem)) }}
+      {{ $itemListElement = $itemListElement | append $listItem }}
     {{ end }}
+    {{ $schema = merge $schema (dict "itemListElement" $itemListElement) }}
   {{ end }}
 
 {{ else if eq .Section "about" }}
