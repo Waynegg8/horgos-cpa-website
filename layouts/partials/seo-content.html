@@ -1,12 +1,13 @@
 {{/* 按頁面種類輸出 SEO 區塊（依專案文件）：首頁、各 section、其餘通用。
-     僅在確實有內容時渲染區塊，避免出現空白高度。 */}}
+     僅在確實有內容時渲染區塊，避免出現空白高度。
+     若缺少 data/seo 對應內容，退回 global 作為兜底，確保不會消失。 */}}
 {{ if .Site.Data.seo }}
   {{ $seoHTML := "" }}
   {{ if .IsHome }}
     {{ with .Site.Data.seo.homepage }}{{ $seoHTML = . }}{{ end }}
   {{ else if eq .Kind "section" }}
     {{ $sectionKey := printf "%s_section" .Section }}
-    {{ with index .Site.Data.seo $sectionKey }}{{ $seoHTML = . }}{{ end }}
+    {{ with index .Site.Data.seo $sectionKey }}{{ $seoHTML = . }}{{ else }}{{ with .Site.Data.seo.global }}{{ $seoHTML = . }}{{ end }}{{ end }}
   {{ else }}
     {{ with .Site.Data.seo.global }}{{ $seoHTML = . }}{{ end }}
   {{ end }}
