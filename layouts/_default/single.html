@@ -73,30 +73,32 @@
                     </button>
                 </div>
                 
-                <!-- 相關文章推薦 - 精緻卡片式佈局 -->
+                <!-- 相關文章推薦 - 單行一卡，統一字級與間距 -->
                 {{ $related := .Site.RegularPages.Related . | first 3 }}
                 {{ if $related }}
                 <section class="article-related">
                     <div class="container">
                         <h3 class="section-title">相關推薦</h3>
-                        <div class="category-cards">
+                        <div class="article-list__grid">
                             {{ range $related }}
-                            <a href="{{ .RelPermalink }}" class="category-card card-style">
-                                <div class="category-card__icon">
-                                    <i class="fas fa-file-alt"></i>
+                            <a href="{{ .RelPermalink }}" class="card-style card-clickable article-item">
+                              <div class="card-horizontal">
+                                <div class="card-horizontal__image">
+                                  {{ with .Params.image }}
+                                  <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+                                  {{ else }}
+                                  <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
+                                  {{ end }}
                                 </div>
-                                <h4 class="category-card__title">{{ .Title }}</h4>
-                                <p class="category-card__description">{{ .Summary | truncate 80 }}</p>
-                                <div class="article-meta">
-                                    <span class="article-meta__item">
-                                        <i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}
-                                    </span>
-                                    {{ with .Params.category }}
-                                    <span class="article-meta__item">
-                                        <i class="fas fa-folder"></i> {{ . }}
-                                    </span>
-                                    {{ end }}
+                                <div class="card-horizontal__content">
+                                  <h2 class="article-title">{{ .Title }}</h2>
+                                  <div class="article-meta">
+                                    <span class="article-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+                                    {{ with .Params.category }}<span class="article-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>{{ end }}
+                                  </div>
+                                  <p class="article-summary">{{ .Summary | plainify | truncate 100 }}</p>
                                 </div>
+                              </div>
                             </a>
                             {{ end }}
                         </div>
