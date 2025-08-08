@@ -40,7 +40,7 @@
                 {{ range $index, $member := .Site.Data.team }}
                 <div class="team-member {{ if (modBool $index 2) }}even{{ else }}odd{{ end }}">
                     <!-- 照片卡片 -->
-                    <div class="team-member__image card-style team-photo-card">
+                    <div class="team-member__image team-photo-card">
                         <img src="{{ $member.image | relURL }}" alt="{{ $member.name }}" loading="lazy">
                     </div>
                     <!-- 介紹卡片 -->

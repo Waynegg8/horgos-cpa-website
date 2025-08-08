@@ -47,6 +47,9 @@
   
   .certification-card {
     text-align: center;
+    background-color: transparent; // 參考頁面：無邊框卡片
+    border: 1px solid $color-border-primary; // 若需淡框
+    padding: $spacing-6;
     
     &__icon {
       margin-bottom: $spacing-4;
@@ -149,15 +152,18 @@
     }
     
     &__image {
+      // 模仿參考頁：照片卡無邊框、無背景，置中對齊
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      padding: 0;
+      
       img {
         width: 100%;
-        height: auto; // 不裁切，完整呈現
-        object-fit: contain;
-        object-position: center;
+        height: auto; // 不裁切
+        display: block;
         border-radius: $border-radius-md;
-        
-        @include tablet { max-width: 100%; }
-        @include mobile { max-width: 100%; margin: 0 auto; }
       }
     }
     
@@ -230,5 +236,5 @@
   
   // 兩張卡片風格
   .team-photo-card { padding: 0; }
-  .team-info-card { padding: $spacing-6; }
+  .team-info-card { padding: $spacing-6; background-color: $color-bg-secondary; border: 1px solid $color-border-primary; }
 }
