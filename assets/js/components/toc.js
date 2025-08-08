@@ -1,3 +1,56 @@
+// 生成與控制單篇文章 TOC，達到：
+// - 滾到 TOC 區時才吸附（CSS sticky 已處理）
+// - TOC 固定在側邊欄上方；直到文章結束，下面標籤雲才可出現
+// - 自動掃描文章標題生成索引
+
+document.addEventListener('DOMContentLoaded', () => {
+  const article = document.querySelector('.single-content .article-content');
+  const tocContainer = document.querySelector('#toc-container');
+  if (!article || !tocContainer) return;
+
+  const headings = article.querySelectorAll('h2, h3');
+  if (!headings.length) return;
+
+  const list = document.createElement('ul');
+  list.className = 'toc-list';
+  headings.forEach((h, idx) => {
+    if (!h.id) h.id = `h-${idx}`;
+    const li = document.createElement('li');
+    li.className = `toc-item toc-${h.tagName.toLowerCase()}`;
+    const a = document.createElement('a');
+    a.href = `#${h.id}`;
+    a.textContent = h.textContent.trim();
+    li.appendChild(a);
+    list.appendChild(li);
+  });
+
+  const title = document.createElement('div');
+  title.className = 'sidebar-widget__title';
+  title.textContent = '文章目錄';
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'sidebar-widget toc-widget';
+  wrapper.appendChild(title);
+  wrapper.appendChild(list);
+
+  tocContainer.appendChild(wrapper);
+
+  // 高亮當前段落
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = wrapper.querySelector(`a[href="#${id}"]`);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        wrapper.querySelectorAll('a.active').forEach(el => el.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '0px 0px -70% 0px' });
+
+  headings.forEach(h => observer.observe(h));
+});
+
 /**
  * 目錄功能
  */

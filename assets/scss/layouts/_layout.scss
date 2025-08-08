@@ -57,8 +57,8 @@
   &__sidebar {
     width: 320px; // 稍微增加側邊欄寬度
     flex-shrink: 0;
-    position: sticky;
-    top: $spacing-4; // 減少與視窗頂之間的空隙
+    position: sticky; // 讓整體側欄隨滾
+    top: $spacing-4; // 到達視窗頂即吸附
     height: max-content; // 讓 sticky 正常運作，避免被父容器高度限制
     align-self: flex-start;
     
@@ -239,11 +239,13 @@
   }
   
   &__line {
-    width: 60px;
+    width: clamp(120px, 12vw, 180px); // 變長且隨視窗調整
     height: 3px;
     background: linear-gradient(90deg, $color-accent-highlight, $color-accent-primary);
+    background-size: 200% 100%;
     margin: 0 0 $spacing-4 0; // 與標題左對齊
     border-radius: 2px;
+    animation: headerLineFlow 2.4s linear infinite; // 全站動態線
   }
   
   &__description {
@@ -262,10 +264,16 @@
     }
     
     &__line {
-      width: 50px;
+      width: 120px; // 行動裝置仍保持較長
       height: 2px;
     }
   }
+}
+
+// 全站頁頭裝飾線動畫
+@keyframes headerLineFlow {
+  0% { background-position: 0% 0; }
+  100% { background-position: -200% 0; }
 }
 
 // Utility classes

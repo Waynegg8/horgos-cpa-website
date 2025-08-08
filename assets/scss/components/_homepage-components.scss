@@ -69,7 +69,6 @@
 .testimonials {
   padding: $spacing-16 0;
   &__title { text-align:left; margin-bottom:$spacing-6; }
-  &__grid { display:grid; grid-template-columns: repeat(3,1fr); gap:$spacing-6; }
   // 標題下方的裝飾線：加長並加上流動動畫
   .page-header__line {
     width: 140px; // 加長
@@ -87,8 +86,20 @@
   &__quote { color:$color-text-secondary; margin:0; }
   &__author { color:$color-text-primary; font-weight:600; }
 }
-@include tablet { .testimonials__grid { grid-template-columns: repeat(2,1fr); } }
-@include mobile { .testimonials__grid { grid-template-columns: 1fr; } }
+/* 輪播 */
+.tn-carousel { position: relative; }
+.tn-viewport { overflow: hidden; }
+.tn-track { display:flex; gap:$spacing-6; transition: transform 0.5s ease; }
+.tn-slide { flex: 0 0 calc(33.333% - #{$spacing-4}); }
+.tn-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.tn-prev { left:-12px; }
+.tn-next { right:-12px; }
+.tn-dots { display:flex; justify-content:center; gap:$spacing-2; margin-top:$spacing-4; }
+.tn-dots button { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.3); border:none; }
+.tn-dots button.active { background:$color-accent-highlight; }
+
+@include tablet { .tn-slide { flex-basis: calc(50% - #{$spacing-4}); } }
+@include mobile { .tn-slide { flex-basis: 100%; } .tn-prev{left:0;} .tn-next{right:0;} }
 
 // 流動動畫（由左至右）
 @keyframes testimonialLine {
@@ -151,6 +162,24 @@
   &__title { font-size: $font-size-h4; font-weight: 600; margin-bottom: $spacing-2; color: $color-text-primary; }
   &__desc { color: $color-text-secondary; line-height: $line-height-base; }
 }
+
+// 多色圖示主題（首頁卡片、為何選擇我們等）
+.service-card__icon i,
+.why-card__icon i,
+.startup-card__icon i,
+.stat__icon i {
+  // 預設主色
+  color: $color-accent-highlight;
+}
+.service-card:nth-child(4n+1) .service-card__icon i { color: #22C55E; } // 綠
+.service-card:nth-child(4n+2) .service-card__icon i { color: #3B82F6; } // 藍
+.service-card:nth-child(4n+3) .service-card__icon i { color: #F59E0B; } // 橙
+.service-card:nth-child(4n+4) .service-card__icon i { color: #EC4899; } // 粉
+
+.why-us .why-card:nth-child(4n+1) i { color: #22C55E; }
+.why-us .why-card:nth-child(4n+2) i { color: #3B82F6; }
+.why-us .why-card:nth-child(4n+3) i { color: #F59E0B; }
+.why-us .why-card:nth-child(4n+4) i { color: #EC4899; }
 // 創業專區卡片優化
 .startup-section {
   padding: $spacing-16 0;

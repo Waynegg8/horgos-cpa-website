@@ -297,6 +297,8 @@
   }
 }
 
+// 文章頁：當 TOC 出現時，TOC 置頂，標籤雲待在最下方（已透過 .sidebar 內 order 控制）。
+
 // 單一內容頁統一排版（包含下載/FAQ/文章/影片等）
 .single-content {
   .article-content {

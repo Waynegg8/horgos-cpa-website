@@ -17,6 +17,12 @@
   &:nth-child(6n+5){ background: linear-gradient(135deg, #FFE8EF 0%, #FFC5D6 100%);} 
   &:nth-child(6n+6){ background: linear-gradient(135deg, #E8FEFF 0%, #C8F8FF 100%);} 
 }
+
+// 全站 Font Awesome 圖示色彩：依不同區塊給予多色，不影響內文 icon
+.card-style .fa,
+.card-style .fas,
+.card-style .far,
+.card-style .fab { text-rendering: geometricPrecision; }
 // =============================================================================
 // 服務頁面組件樣式
 // =============================================================================

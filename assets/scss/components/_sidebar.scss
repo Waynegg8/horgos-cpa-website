@@ -9,7 +9,7 @@
   z-index: 1;
   
   // 明確排序：確保目錄在最上方、標籤雲在最下方
-  .toc-container { order: 0; }
+  .toc-container { order: 0; position: sticky; top: $spacing-4; }
   .sidebar-search { order: 0; }
   .sidebar-categories { order: 1; }
   .sidebar-series { order: 2; }
@@ -243,6 +243,17 @@
         filter: brightness(1.03);
       }
     }
+  }
+
+  // TOC 樣式
+  .toc-widget {
+    position: relative;
+    .toc-list { list-style: none; margin: 0; padding: 0; }
+    .toc-item { margin: $spacing-2 0; }
+    .toc-h2 a { font-weight: 600; }
+    .toc-h3 { margin-left: $spacing-3; }
+    a { color: $color-text-secondary; text-decoration: none; }
+    a.active { color: $color-accent-highlight; }
   }
   
   // 檔案類型

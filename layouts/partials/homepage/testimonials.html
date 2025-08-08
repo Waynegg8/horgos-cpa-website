@@ -5,26 +5,38 @@
       <h2 class="h3">客戶見證</h2>
       <div class="page-header__line" aria-hidden="true"></div>
     </div>
-    <div class="testimonials__grid">
-      {{/* 讀取 data/testimonials.yml，若無則顯示預設三則 */}}
-      {{ $items := .Site.Data.testimonials }}
-      {{ if not $items }}
-        {{ $items = slice
-          (dict "name" "陳先生 / 創業者" "quote" "從公司設立到稅務申報都由 HorgosCPA 協助，流程清楚又快速。" "avatar" "/uploads/images/general/general-default.jpg")
-          (dict "name" "林會計 / 中小企業主" "quote" "整理帳務與報表的效率很高，讓我們專注在業務拓展。" "avatar" "/uploads/images/general/general-default.jpg")
-          (dict "name" "王小姐 / 人資" "quote" "薪資與稅務問題回覆專業且即時，是值得信賴的夥伴。" "avatar" "/uploads/images/general/general-default.jpg")
-        }}
-      {{ end }}
-      {{ range $items }}
-      <figure class="testimonial card-style">
-        <div class="testimonial__avatar">
-          <img src="{{ .avatar | default "/uploads/images/general/general-default.jpg" }}" alt="{{ .name }}" loading="lazy" decoding="async" width="64" height="64" />
+
+    {{/* 讀取 data/testimonials.yml，若無則顯示預設三則 */}}
+    {{ $items := .Site.Data.testimonials }}
+    {{ if not $items }}
+      {{ $items = slice
+        (dict "name" "陳先生 / 創業者" "quote" "從公司設立到稅務申報都由 HorgosCPA 協助，流程清楚又快速。" "avatar" "/uploads/images/general/general-default.jpg")
+        (dict "name" "林會計 / 中小企業主" "quote" "整理帳務與報表的效率很高，讓我們專注在業務拓展。" "avatar" "/uploads/images/general/general-default.jpg")
+        (dict "name" "王小姐 / 人資" "quote" "薪資與稅務問題回覆專業且即時，是值得信賴的夥伴。" "avatar" "/uploads/images/general/general-default.jpg")
+        (dict "name" "楊經理 / 製造業" "quote" "報表即時且準確，對經營決策很有幫助。" "avatar" "/uploads/images/general/general-default.jpg")
+        (dict "name" "蔡老闆 / 餐飲" "quote" "節稅建議很實用，幫公司省下一大筆成本。" "avatar" "/uploads/images/general/general-default.jpg")
+      }}
+    {{ end }}
+
+    <div class="tn-carousel" data-autoplay="true" data-interval="4500">
+      <button class="tn-nav tn-prev" aria-label="上一則"><i class="fas fa-chevron-left"></i></button>
+      <div class="tn-viewport">
+        <div class="tn-track">
+          {{ range $items }}
+          <figure class="testimonial card-style tn-slide">
+            <div class="testimonial__avatar">
+              <img src="{{ .avatar | default "/uploads/images/general/general-default.jpg" }}" alt="{{ .name }}" loading="lazy" decoding="async" width="80" height="80" />
+            </div>
+            <blockquote class="testimonial__quote">{{ .quote }}</blockquote>
+            <figcaption class="testimonial__author">{{ .name }}</figcaption>
+          </figure>
+          {{ end }}
         </div>
-        <blockquote class="testimonial__quote">{{ .quote }}</blockquote>
-        <figcaption class="testimonial__author">{{ .name }}</figcaption>
-      </figure>
-      {{ end }}
+      </div>
+      <button class="tn-nav tn-next" aria-label="下一則"><i class="fas fa-chevron-right"></i></button>
+      <div class="tn-dots" aria-hidden="true"></div>
     </div>
+
   </div>
-  </section>
+</section>
 

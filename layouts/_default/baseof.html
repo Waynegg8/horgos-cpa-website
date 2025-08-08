@@ -173,6 +173,8 @@
     <script type="module" src="{{ $heroCarouselScript.RelPermalink }}" defer></script>
     {{ $inviewStatsScript := resources.Get "js/components/inview-stats.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $inviewStatsScript.RelPermalink }}" defer></script>
+    {{ $tnCarousel := resources.Get "js/components/testimonials-carousel.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $tnCarousel.RelPermalink }}" defer></script>
     {{ end }}
     
     <!-- About 圖片進場傾斜轉正效果 -->
