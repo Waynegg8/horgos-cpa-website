@@ -28,6 +28,7 @@
     label.form-label { display:block; font-weight:600; margin-bottom:$spacing-2; }
     .form-help { display:block; color:$color-text-tertiary; font-size:$font-size-xs; margin-top:$spacing-1; }
     .form-actions { display:flex; gap:$spacing-2; }
+    #comment-status { color: $color-status-error; }
   }
 
   .comments-list { display:flex; flex-direction:column; gap:$spacing-4; }
@@ -151,9 +152,9 @@
   
   .notice-card {
     max-width: 800px;
-    // 與列表區塊左側對齊：取消水平置中
-    margin: 0; // 取代 0 auto
-    margin-right: auto; // 保留必要時的右側自適應
+    // 與主內容左側對齊（container 內）
+    margin-left: 0;
+    margin-right: auto;
     text-align: left;
     padding-right: $spacing-4; // 增加右側間距
     
@@ -356,6 +357,14 @@
     table { width: 100%; border-collapse: collapse; font-size: $font-size-base; }
     th, td { border: 1px solid $color-border-primary; padding: $spacing-2 $spacing-3; }
   }
+}
+
+// 單一內容頁主標題（影片/文章等）統一縮小，避免換行過多
+.post__title,
+.page-header__title {
+  font-size: $font-size-h2; // 縮小一階
+  line-height: $line-height-heading;
+  word-break: break-word;
 }
 
 // 響應式優化

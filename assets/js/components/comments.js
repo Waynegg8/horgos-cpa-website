@@ -118,13 +118,15 @@ if (section) {
     }
 
     try {
-      if (body.parent_id) await api.reply(body.parent_id, body);
-      else await api.post(body);
+      const res = body.parent_id ? await api.reply(body.parent_id, body) : await api.post(body);
+      if (res && res.error) throw new Error(res.error);
       content.value = '';
       parentId.value = '';
       cancelReply.hidden = true;
       init();
     } catch (e) {
+      const status = document.getElementById('comment-status');
+      if (status) status.textContent = '留言送出失敗：' + (e.message || '請稍後再試');
       console.error('Post comment failed', e);
     }
   });
