@@ -4,7 +4,7 @@
   flex-direction: column;
   gap: $spacing-4; // 縮小側邊欄元件間距
   // 交由父層 `.two-column__sidebar` 做 sticky，避免巢狀 sticky 失效
-  position: static;
+  position: static !important; // 強制避免任何繼承/舊樣式造成 sticky
   z-index: 1;
   max-width: 100%;
   overflow: visible; // 讓內容在容器內自然換行
@@ -196,6 +196,7 @@
       transition: all $transition-base ease;
       padding: $spacing-2; // 增加內邊距
       border-radius: $border-radius-md;
+      overflow: hidden;
       
       &:hover {
         color: $color-accent-highlight;
