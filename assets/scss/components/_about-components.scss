@@ -151,13 +151,13 @@
     &__image {
       img {
         width: 100%;
-        height: 360px;
-        object-fit: cover;
-        object-position: top center; // 以頭像為視覺重心
+        height: auto; // 不裁切，完整呈現
+        object-fit: contain;
+        object-position: center;
         border-radius: $border-radius-md;
         
-        @include tablet { height: 300px; }
-        @include mobile { height: 320px; max-width: 360px; margin: 0 auto; }
+        @include tablet { max-width: 100%; }
+        @include mobile { max-width: 100%; margin: 0 auto; }
       }
     }
     
