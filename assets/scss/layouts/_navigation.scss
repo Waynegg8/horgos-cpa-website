@@ -139,10 +139,10 @@
 // -----------------------------------------------------------------------------
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + #{spacing-2});
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  width: 220px;
+  top: calc(100% + #{$spacing-2});
+  left: 0; // 與父項左緣對齊，避免視覺偏右
+  transform: translateY(10px);
+  min-width: 220px;
   background: $color-bg-secondary;
   border-radius: $border-radius-lg;
   border: 1px solid $color-border-primary;
