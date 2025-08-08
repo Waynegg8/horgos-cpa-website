@@ -34,6 +34,7 @@
   line-height: 1; // 修正 icon 垂直對齊
   transition: all $transition-base;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
 
   i {
     display: inline-flex;
@@ -49,6 +50,18 @@
     background-color: darken($color-primary, 10%);
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  // 外圈光暈
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 60%, rgba(255,255,255,0) 100%);
+    filter: blur(2px);
+    pointer-events: none;
+    z-index: -1;
   }
   
   &:focus {
@@ -116,6 +129,7 @@
   line-height: 1; // 修正圖示基線
   transition: all $transition-base;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
   
   &:hover {
     background-color: darken($color-accent, 10%);
@@ -145,6 +159,19 @@
     height: 1em;
     line-height: 1;
     vertical-align: middle;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  // 外圈光暈
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.06) 60%, rgba(255,255,255,0) 100%);
+    filter: blur(2px);
+    pointer-events: none;
+    z-index: -1;
   }
   
   @include mobile {
@@ -166,11 +193,24 @@
   font-size: 1rem;
   transition: all $transition-base;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  position: relative;
   color: white;
   backdrop-filter: saturate(140%) blur(2px); // 提升清晰度感受
   
   // 提升圖標對比
   &.line i, &.facebook i, &.instagram i, &.email i { filter: drop-shadow(0 1px 1px rgba(0,0,0,0.35)); }
+
+  // 外圈光暈
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.05) 60%, rgba(255,255,255,0) 100%);
+    filter: blur(2px);
+    pointer-events: none;
+    z-index: -1;
+  }
   
   i {
     display: inline-flex;
@@ -225,6 +265,13 @@
     font-size: 0.9rem;
   }
 }
+
+/* 圖示微調（光學置中）*/
+#social-toggle i { transform: translateY(0.5px); }
+.back-to-top i { transform: translateY(0.5px); }
+.social-button .fa-facebook-f { transform: translateX(0.5px); }
+.social-button .fa-envelope { transform: translateY(0.5px); }
+.social-button .fa-instagram { transform: translateY(0.25px); }
 
 /* 動畫效果 */
 @keyframes fadeInUp {
