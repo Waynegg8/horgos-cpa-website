@@ -19,7 +19,10 @@
     
     <!-- 下載列表 -->
     <div class="download-list__grid">
-        {{ $paginator := .Paginate .RegularPages 10 }}
+        {{/* 需遞迴取得子資料夾內的單篇，否則首頁 /downloads/ 會是空的 */}}
+        {{ $all := .RegularPagesRecursive }}
+        {{ $sorted := $all.ByDate.Reverse }}
+        {{ $paginator := .Paginate $sorted 10 }}
         {{ if not (gt (len $paginator.Pages) 0) }}
         <div class="empty-state">目前沒有符合條件的資源。</div>
         {{ end }}
@@ -40,8 +43,8 @@
                 <div class="card-horizontal__content">
                     <h2 class="download-title">{{ .Title }}</h2>
                     <div class="download-meta">
-                        <span class="download-meta__item"><i class="fas fa-file"></i> {{ .Params.filetype | upper }}</span>
-                        {{ with .Params.filesize }}<span class="download-meta__item"><i class="fas fa-weight"></i> {{ . }}</span>{{ end }}
+                        <span class="download-meta__item"><i class="fas fa-file"></i> {{ (or .Params.filetype .Params.file_type) | upper }}</span>
+                        {{ with (or .Params.filesize .Params.file_size) }}<span class="download-meta__item"><i class="fas fa-weight"></i> {{ . }}</span>{{ end }}
                         <span class="download-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
                         {{ with .Params.category }}<span class="download-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>{{ end }}
                     </div>

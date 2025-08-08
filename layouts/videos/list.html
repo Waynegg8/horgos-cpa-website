@@ -13,6 +13,13 @@
 <div class="container">
   <div class="two-column">
     <div class="two-column__main">
+      <!-- 列表頁搜尋（統一樣式，作為主內容第一個項目） -->
+      <div class="list-search" role="search" aria-label="影片搜尋">
+        <label class="search-field">
+          <i class="fas fa-search search-icon" aria-hidden="true"></i>
+          <input id="video-search-input" class="search-input" type="search" placeholder="搜尋影片標題或摘要..." aria-label="搜尋影片" />
+        </label>
+      </div>
       
       <!-- 分類篩選 -->
       <div class="category-nav card-style">
@@ -106,5 +113,21 @@
 
 <!-- CTA 不在本模板插入，統一由 base 模板在 SEO 區塊上方輸出，以避免重複 -->
 
-<script></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('video-search-input');
+    const cards = document.querySelectorAll('.videos-list .video-card');
+    if (!searchInput) return;
+    const norm = s => (s || '').toLowerCase();
+    searchInput.addEventListener('input', function(){
+      const q = norm(this.value);
+      cards.forEach(card => {
+        const title = norm(card.dataset.title);
+        const desc = norm(card.dataset.description);
+        const match = !q || title.includes(q) || desc.includes(q);
+        card.style.display = match ? 'block' : 'none';
+      });
+    });
+  });
+  </script>
 {{ end }}
