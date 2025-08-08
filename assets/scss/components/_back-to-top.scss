@@ -7,7 +7,7 @@
   z-index: z('floating');
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center; // 與按鈕幾何中心對齊
   gap: $spacing-3;
   margin-right: $spacing-2; // 增加右側間距
   
@@ -62,9 +62,7 @@
     transform: translateY(0);
   }
   
-  &.visible {
-    animation: fadeInUp 0.3s ease-out;
-  }
+  &.visible { animation: fadeInUp 0.3s ease-out; }
   
   /* 響應式設計 */
   @include mobile {
