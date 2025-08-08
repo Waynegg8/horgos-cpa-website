@@ -39,9 +39,11 @@
             <div class="team-members">
                 {{ range $index, $member := .Site.Data.team }}
                 <div class="team-member {{ if (modBool $index 2) }}even{{ else }}odd{{ end }}">
+                    <!-- 照片卡片 -->
                     <div class="team-member__image">
                         <img src="{{ $member.image | relURL }}" alt="{{ $member.name }}" loading="lazy">
                     </div>
+                    <!-- 介紹卡片 -->
                     <div class="team-member__info">
                         <h3 class="team-member__name">{{ $member.name }}</h3>
                         <div class="team-member__title">{{ $member.title }}</div>
@@ -66,18 +68,15 @@
                                 </ul>
                             </div>
                             {{ end }}
-                            {{ with $member.expertise }}
-                            <div class="team-member__expertise">
-                                <h4>{{ .title }}</h4>
-                                <div class="skill-tags">
-                                    {{ range .tags }}
-                                    <span class="skill-tag">{{ . }}</span>
-                                    {{ end }}
-                                </div>
-                            </div>
-                            {{ end }}
                         </div>
                         <p class="team-member__bio">{{ $member.bio | markdownify }}</p>
+                        {{ with $member.expertise }}
+                        <div class="skill-tags">
+                            {{ range .tags }}
+                            <span class="skill-tag">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
                     </div>
                 </div>
                 {{ end }}
