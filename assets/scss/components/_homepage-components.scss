@@ -79,18 +79,34 @@
     animation: testimonialLine 2.2s linear infinite;
   }
 }
+// 新版客戶見證卡：大頭像 + 內容區（橫向在桌面、直向在手機）
 .testimonial {
   @extend .card-style;
-  display:flex; flex-direction:column; gap:$spacing-3; text-align:left;
-  &__avatar img { border-radius:50%; width:64px; height:64px; }
-  &__quote { color:$color-text-secondary; margin:0; }
-  &__author { color:$color-text-primary; font-weight:600; }
+  display:grid;
+  grid-template-columns: 160px 1fr;
+  gap: $spacing-5;
+  align-items: center;
+  text-align: left;
+
+  &__media { display:flex; align-items:center; justify-content:center; }
+  &__avatar { width:128px; height:128px; border-radius:50%; object-fit:cover; box-shadow:$shadow-md; }
+  &__content { display:flex; flex-direction:column; gap:$spacing-3; }
+  &__stars { color:#FBBF24; letter-spacing:2px; }
+  &__quote { color: rgba($color-text-primary, 0.92); margin:0; font-size:$font-size-lg; line-height:1.7; }
+  &__author { color:#ffffff; font-weight:700; }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    text-align: left;
+    &__media { justify-content:flex-start; }
+    &__avatar { width:96px; height:96px; }
+  }
 }
 /* 輪播 */
 .tn-carousel { position: relative; }
 .tn-viewport { overflow: hidden; }
-.tn-track { display:flex; gap:$spacing-6; transition: transform 0.5s ease; }
-.tn-slide { flex: 0 0 calc(33.333% - #{$spacing-4}); }
+.tn-track { display:flex; gap:$spacing-6; transition: transform 0.5s ease; will-change: transform; }
+.tn-slide { flex: 0 0 calc(50% - #{$spacing-4}); }
 .tn-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:#fff; border:none; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; }
 .tn-prev { left:-12px; }
 .tn-next { right:-12px; }
@@ -98,7 +114,7 @@
 .tn-dots button { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.3); border:none; }
 .tn-dots button.active { background:$color-accent-highlight; }
 
-@include tablet { .tn-slide { flex-basis: calc(50% - #{$spacing-4}); } }
+@include tablet { .tn-slide { flex-basis: calc(66.666% - #{$spacing-4}); } }
 @include mobile { .tn-slide { flex-basis: 100%; } .tn-prev{left:0;} .tn-next{right:0;} }
 
 // 流動動畫（由左至右）
@@ -207,13 +223,19 @@
     
     &__icon {
       margin-bottom: $spacing-4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;   // 使用 grid 完整置中避免字型基線影響
+      place-items: center;
+      height: 72px;    // 固定圖示容器高度，避免卡片高低不齊
+      line-height: 1;
       
       i {
         font-size: 2.5rem;
         color: $color-accent-highlight;
+        line-height: 1;
+        display: inline-block;
+        vertical-align: middle;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: geometricPrecision;
       }
     }
     

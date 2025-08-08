@@ -10,10 +10,10 @@
 $color-bg-primary: #0A0A0A;      // 主背景 (用於頁面 body)
 $color-bg-secondary: #141414;   // 次要背景 (用於卡片、容器等元素)
 
-// 文字色彩階層
-$color-text-primary: #F0F0F0;     // 主要文字 (高對比米白色)
-$color-text-secondary: #A1A1A1;  // 次要文字 (用於描述和輔助資訊)
-$color-text-tertiary: #525252;   // 淡化文字 (用於不重要的標籤或註釋)
+// 文字色彩階層（提升對比度以改善可讀性）
+$color-text-primary: #FFFFFF;     // 主要文字（純白，提高對比）
+$color-text-secondary: #D1D5DB;   // 次要文字（亮灰）
+$color-text-tertiary: #9CA3AF;    // 第三級文字（中灰）
 
 // 邊框和分隔色彩
 $color-border-primary: #262626;  // 低調的深灰色，用於元件邊框

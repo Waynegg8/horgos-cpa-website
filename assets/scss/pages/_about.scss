@@ -182,29 +182,8 @@
     word-spacing: 0.05em; // 增加字間距
   }
   
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $spacing-2;
-    
-    .skill-tag {
-      display: inline-block;
-      padding: $spacing-2 $spacing-3;
-      border-radius: $border-radius-full;
-      font-size: $font-size-base;
-      font-weight: 600;
-      color: #0B1520; // 深色字，清晰
-      background: linear-gradient(135deg, #E0F2FF 0%, #B2EAFF 100%);
-      filter: none; // 取消任何模糊
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      &:nth-child(6n+2){ background: linear-gradient(135deg, #E6FFED 0%, #B7F5C3 100%);} 
-      &:nth-child(6n+3){ background: linear-gradient(135deg, #FFF4E6 0%, #FFD6A8 100%);} 
-      &:nth-child(6n+4){ background: linear-gradient(135deg, #F3E8FF 0%, #D9C8FF 100%);} 
-      &:nth-child(6n+5){ background: linear-gradient(135deg, #FFE8EF 0%, #FFC5D6 100%);} 
-      &:nth-child(6n+6){ background: linear-gradient(135deg, #E8FEFF 0%, #C8F8FF 100%);} 
-    }
-  }
+  .skill-tags { display:flex; flex-wrap:wrap; gap:$spacing-2; }
+  .skill-tags .skill-tag { @extend .skill-tag; }
   
   @include tablet {
     grid-template-columns: 1fr;

@@ -86,7 +86,7 @@ p {
   margin: 0 0 $paragraph-spacing 0;
   line-height: $line-height-base;
   font-size: $font-size-base;
-  color: $color-text-primary;
+  color: rgba($color-text-primary, 0.94); // 內文稍加強對比
   padding-right: 0;
 }
 

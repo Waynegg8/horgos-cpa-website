@@ -41,7 +41,7 @@
   }
   .comment-meta { display:flex; gap:$spacing-3; align-items:center; color:$color-text-tertiary; font-size:$font-size-sm; margin-bottom:$spacing-2; }
   .comment-actions { display:flex; gap:$spacing-3; }
-  .comment-content { margin:0 0 $spacing-2 0; }
+  .comment-content { margin:0 0 $spacing-2 0; color: rgba($color-text-primary, 0.96); }
   .replies { margin-left: $spacing-5; display:flex; flex-direction:column; gap:$spacing-3; }
 }
 // =============================================================================
@@ -289,7 +289,7 @@
   margin-bottom: $spacing-8;
   
   &__title {
-    color: $color-text-primary;
+      color: #FFFFFF;
     margin-bottom: $spacing-4;
   }
   

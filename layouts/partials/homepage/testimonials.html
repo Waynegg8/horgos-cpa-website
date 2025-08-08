@@ -1,4 +1,4 @@
-<!-- 客戶見證區 -->
+<!-- 客戶見證區（全新設計：大圖、橫向卡片、滑動輪播） -->
 <section class="testimonials section" aria-label="客戶見證">
   <div class="container">
     <div class="testimonials__title">
@@ -24,11 +24,16 @@
         <div class="tn-track">
           {{ range $items }}
           <figure class="testimonial card-style tn-slide">
-            <div class="testimonial__avatar">
-              <img src="{{ .avatar | default "/uploads/images/general/general-default.jpg" }}" alt="{{ .name }}" loading="lazy" decoding="async" width="80" height="80" />
+            <div class="testimonial__media">
+              <img class="testimonial__avatar" src="{{ .avatar | default "/uploads/images/general/general-default.jpg" }}" alt="{{ .name }}" loading="lazy" decoding="async" width="128" height="128" />
             </div>
-            <blockquote class="testimonial__quote">{{ .quote }}</blockquote>
-            <figcaption class="testimonial__author">{{ .name }}</figcaption>
+            <figcaption class="testimonial__content">
+              <div class="testimonial__stars" aria-label="五星好評">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <blockquote class="testimonial__quote">{{ .quote }}</blockquote>
+              <div class="testimonial__author">{{ .name }}</div>
+            </figcaption>
           </figure>
           {{ end }}
         </div>

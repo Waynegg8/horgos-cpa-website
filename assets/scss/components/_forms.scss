@@ -563,14 +563,14 @@ textarea.form-control {
       }
     }
     
-    .form-input,
-    .form-textarea {
+      .form-input,
+      .form-textarea {
       width: 100%;
       padding: 0.75rem;
-      background-color: rgba(255, 255, 255, 0.05);
+        background-color: rgba(255, 255, 255, 0.06);
       border: 1px solid #262626;
       border-radius: 8px;
-      color: #F0F0F0;
+        color: #FFFFFF;
       font-size: 0.875rem;
       transition: all 0.3s ease;
       
@@ -578,11 +578,11 @@ textarea.form-control {
         color: #525252;
       }
       
-      &:focus {
+        &:focus {
         outline: none;
         border-color: #204B6E;
         box-shadow: 0 0 0 3px rgba(32, 75, 110, 0.1);
-        background-color: rgba(255, 255, 255, 0.08);
+          background-color: rgba(255, 255, 255, 0.1);
       }
       
       &:hover {

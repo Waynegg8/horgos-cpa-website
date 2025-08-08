@@ -27,8 +27,8 @@ function initCarousel(root){
 
   function visibleCount(){
     if (window.innerWidth < 640) return 1; // mobile
-    if (window.innerWidth < 1024) return 2; // tablet
-    return 3; // desktop
+    if (window.innerWidth < 1024) return 1; // tablet 顯示更大卡片
+    return 2; // desktop 顯示兩張大卡
   }
 
   function goTo(i){

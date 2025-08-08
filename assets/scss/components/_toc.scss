@@ -1,7 +1,7 @@
 /* 目錄樣式 */
 .toc-container {
   margin-bottom: $spacing-8;
-  position: relative; // 讓整個側邊欄負責 sticky，避免 TOC 蓋住下方元件
+  position: relative; // 不 sticky，由父側欄捲動
   top: auto;
   background-color: $color-bg-secondary;
   border-radius: $border-radius-lg;

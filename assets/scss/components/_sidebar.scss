@@ -7,8 +7,8 @@
   position: static;
   z-index: 1;
   
-  // 明確排序：確保目錄在最上方、標籤雲在最下方
-  .toc-container { order: 0; position: sticky; top: $spacing-4; }
+  // 明確排序：確保目錄在最上方、標籤雲在最下方（TOC 不再個別 sticky，避免蓋住其他小工具）
+  .toc-container { order: 0; position: static; top: auto; }
   .sidebar-search { order: 0; }
   // 側邊欄搜尋框（單一內容頁會出現）
   .sidebar-search {

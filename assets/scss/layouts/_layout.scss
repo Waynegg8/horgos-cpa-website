@@ -235,17 +235,37 @@
     font-size: $font-size-h1;
     margin-bottom: $spacing-3;
     font-weight: 700;
-    color: $color-text-primary;
+    color: #FFFFFF; // 標題使用純白，提升對比
   }
   
   &__line {
-    width: clamp(120px, 12vw, 180px); // 變長且隨視窗調整
+    position: relative;
+    width: clamp(120px, 14vw, 220px);
     height: 3px;
-    background: linear-gradient(90deg, $color-accent-highlight, $color-accent-primary);
-    background-size: 200% 100%;
+    border-radius: 999px;
     margin: 0 0 $spacing-4 0; // 與標題左對齊
-    border-radius: 2px;
-    animation: headerLineFlow 2.4s linear infinite; // 全站動態線
+    background: linear-gradient(
+      90deg,
+      rgba($color-accent-highlight, 0) 0%,
+      rgba($color-accent-highlight, 0.9) 50%,
+      rgba($color-accent-primary, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmerFlow 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: background-position;
+    overflow: hidden;
+
+    // 柔光暈尾
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: inherit;
+      filter: blur(6px);
+      opacity: 0.45;
+      animation: shimmerFlow 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
   }
   
   &__description {
@@ -281,10 +301,17 @@
   padding-top: 0 !important;  // 取消任何可能的頂部內距
 }
 
-// 全站頁頭裝飾線動畫
-@keyframes headerLineFlow {
-  0% { background-position: 0% 0; }
+// 全站頁頭裝飾線動畫（更現代的柔順掃光）
+@keyframes shimmerFlow {
+  0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-header__line,
+  .page-header__line::after {
+    animation: none !important;
+  }
 }
 
 // Utility classes

@@ -333,33 +333,33 @@
     
     .skill-tag {
       position: relative;
-      /* 深到淺的藍色系漸層（左深右淺） */
       background: linear-gradient(135deg, #0a3d62 0%, #3c8dbc 100%);
       color: #ffffff;
-      padding: $spacing-1 $spacing-3;
+      padding: $spacing-2 $spacing-4;
       border-radius: $border-radius-full;
-      font-size: $font-size-small;
-      font-weight: 600;
-      border: none;
-      box-shadow: 0 6px 16px rgba(10,61,98,0.25);
+      font-size: $font-size-base;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.08); // 銳利邊界
+      box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+      letter-spacing: .02em;
+      text-shadow: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       overflow: hidden;
       transition: transform $transition-base $ease-in-out, filter $transition-base $ease-in-out;
-      
-      // 亮面掃描效果
-      &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -150%;
-        height: 100%;
-        width: 150%;
-        background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
-        transform: skewX(-20deg);
-        animation: shine-sweep 1.8s $ease-in-out infinite; /* 漸層更強、更快 */
-      }
-      &:hover {
-        transform: translateY(-1px);
-      }
+
+      // 取消掃光，避免文字霧化
+      &:before { display: none; }
+
+      // 多色藍綠系（避免紫色）
+      &:nth-child(6n+1) { background: linear-gradient(135deg, #0a3d62 0%, #3c8dbc 100%); }
+      &:nth-child(6n+2) { background: linear-gradient(135deg, #0e5e6f 0%, #3aa6b9 100%); }
+      &:nth-child(6n+3) { background: linear-gradient(135deg, #064e87 0%, #00b2ff 100%); }
+      &:nth-child(6n+4) { background: linear-gradient(135deg, #0b6ef3 0%, #66b2ff 100%); }
+      &:nth-child(6n+5) { background: linear-gradient(135deg, #0f766e 0%, #34d399 100%); }
+      &:nth-child(6n+6) { background: linear-gradient(135deg, #0d5c63 0%, #33cccc 100%); }
+
+      &:hover { transform: translateY(-1px); }
     }
   }
   

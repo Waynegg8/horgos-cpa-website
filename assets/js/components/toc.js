@@ -3,53 +3,7 @@
 // - TOC 固定在側邊欄上方；直到文章結束，下面標籤雲才可出現
 // - 自動掃描文章標題生成索引
 
-document.addEventListener('DOMContentLoaded', () => {
-  const article = document.querySelector('.single-content .article-content');
-  const tocContainer = document.querySelector('#toc-container');
-  if (!article || !tocContainer) return;
-
-  const headings = article.querySelectorAll('h2, h3');
-  if (!headings.length) return;
-
-  const list = document.createElement('ul');
-  list.className = 'toc-list';
-  headings.forEach((h, idx) => {
-    if (!h.id) h.id = `h-${idx}`;
-    const li = document.createElement('li');
-    li.className = `toc-item toc-${h.tagName.toLowerCase()}`;
-    const a = document.createElement('a');
-    a.href = `#${h.id}`;
-    a.textContent = h.textContent.trim();
-    li.appendChild(a);
-    list.appendChild(li);
-  });
-
-  const title = document.createElement('div');
-  title.className = 'sidebar-widget__title';
-  title.textContent = '文章目錄';
-
-  const wrapper = document.createElement('div');
-  wrapper.className = 'sidebar-widget toc-widget';
-  wrapper.appendChild(title);
-  wrapper.appendChild(list);
-
-  tocContainer.appendChild(wrapper);
-
-  // 高亮當前段落
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const id = entry.target.getAttribute('id');
-      const link = wrapper.querySelector(`a[href="#${id}"]`);
-      if (!link) return;
-      if (entry.isIntersecting) {
-        wrapper.querySelectorAll('a.active').forEach(el => el.classList.remove('active'));
-        link.classList.add('active');
-      }
-    });
-  }, { rootMargin: '0px 0px -70% 0px' });
-
-  headings.forEach(h => observer.observe(h));
-});
+// 移除舊的初始化邏輯，避免與下方 initTableOfContents 重複生成 TOC
 
 /**
  * 目錄功能
@@ -131,8 +85,17 @@ function initTableOfContents() {
     });
   });
   
-  // 添加目錄到容器
-  tocContainer.appendChild(tocList);
+  // 清空容器，避免重複
+  tocContainer.innerHTML = '';
+  // 包一層 sidebar widget，並置入標題（避免標題出現兩次）
+  const widget = document.createElement('div');
+  widget.className = 'sidebar-widget toc-widget';
+  const title = document.createElement('div');
+  title.className = 'sidebar-widget__title';
+  title.textContent = '文章目錄';
+  widget.appendChild(title);
+  widget.appendChild(tocList);
+  tocContainer.appendChild(widget);
   
   // 置頂與自動收合
   setupAutoCollapseTOC();

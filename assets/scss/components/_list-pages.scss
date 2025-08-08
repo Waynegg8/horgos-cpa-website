@@ -166,7 +166,7 @@
 .download-summary {
   font-size: $font-size-base;
   line-height: $line-height-base;
-  color: $color-text-secondary;
+  color: rgba($color-text-primary, 0.9); // 列表摘要提高對比
   margin: 0;
   display: -webkit-box; // 行數限制統一
   -webkit-line-clamp: 3;
