@@ -6,13 +6,16 @@
   background-color: $color-bg-secondary;
   border-radius: $border-radius-lg;
   padding: $spacing-6;
-  box-shadow: $shadow-sm;
+  border: 1px solid $color-border-primary; // 增加細邊框以柔化塊狀感
+  box-shadow: none; // 預設移除陰影，減少厚重感
   transition: all $transition-base ease;
   color: $color-text-primary; // 確保卡片內文字顏色正確
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: $shadow-md;
+    box-shadow: $shadow-sm; // hover 時僅給予輕微陰影
+    border-color: lighten($color-border-primary, 6%);
+    background-color: darken($color-bg-secondary, 1%);
   }
   
   @include mobile {
@@ -156,6 +159,10 @@
       line-height: $line-height-base;
       text-align: justify; // 改善文字對齊
       word-spacing: 0.05em; // 增加字間距
+      display: -webkit-box; // 行數限制
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     
     .faq-title,

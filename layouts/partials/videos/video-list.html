@@ -1,5 +1,35 @@
 <!-- 影片列表頁 -->
 <div class="video-list">
+    <!-- 精選影片 -->
+    {{ $all := where .Pages "Type" "videos" }}
+    {{ $sorted := $all.ByDate.Reverse }}
+    {{ if gt (len $sorted) 0 }}
+    {{ $featured := index $sorted 0 }}
+    <section class="featured-article card-style">
+        <a href="{{ $featured.RelPermalink }}" class="featured-article__link">
+            <div class="featured-article__media">
+                {{ with $featured.Params.thumbnail }}
+                <img src="{{ . }}" alt="{{ $featured.Title }}" loading="lazy">
+                {{ else }}
+                <img src="/uploads/images/general/general-default.jpg" alt="{{ $featured.Title }}" loading="lazy">
+                {{ end }}
+            </div>
+            <div class="featured-article__content">
+                <h2 class="featured-article__title">{{ $featured.Title }}</h2>
+                <div class="video-card__meta">
+                    <span class="video-card__date"><i class="fas fa-calendar-alt"></i> {{ $featured.Date.Format "2006-01-02" }}</span>
+                    {{ with $featured.Params.category }}<span class="video-card__category"><i class="fas fa-folder"></i> {{ . }}</span>{{ end }}
+                    {{ with $featured.Params.series }}<span class="video-card__series"><i class="fas fa-bookmark"></i> {{ . }}</span>{{ end }}
+                </div>
+                <div class="video-card__excerpt">{{ with $featured.Summary }}{{ . | truncate 140 }}{{ end }}</div>
+                <div>
+                    <span class="btn btn-primary btn-sm">觀看影片</span>
+                </div>
+            </div>
+        </a>
+    </section>
+    {{ end }}
+
     <!-- 分類搜索標籤 -->
     <div class="video-categories">
         <div class="category-filters">
@@ -13,7 +43,8 @@
     
     <!-- 影片列表 -->
     <div class="video-cards">
-        {{ $paginator := .Paginate (where .Pages "Type" "videos") 10 }}
+        {{ $rest := after 1 $sorted }}
+        {{ $paginator := .Paginate $rest 10 }}
         {{ range $paginator.Pages }}
         <div class="video-card video-item" 
              data-category="{{ .Params.category | default "other" }}" 
