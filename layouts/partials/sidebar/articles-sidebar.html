@@ -57,7 +57,8 @@
         </ul>
     </div>
     
-    <!-- 最新文章 -->
+    {{ if ne .Kind "page" }}
+    <!-- 最新文章：僅列表頁顯示，單一文章頁不顯示 -->
     <div class="sidebar-widget sidebar-recent">
         <h3 class="sidebar-widget__title">最新文章</h3>
         <ul class="sidebar-recent__list">
@@ -80,6 +81,7 @@
             {{ end }}
         </ul>
     </div>
+    {{ end }}
     
     <!-- 標籤雲 -->
     <div class="sidebar-widget sidebar-tags">

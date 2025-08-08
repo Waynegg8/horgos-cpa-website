@@ -4,6 +4,13 @@
   flex-direction: column;
   gap: $spacing-4; // 縮小側邊欄元件間距
   
+  // 明確排序：確保目錄在最上方、標籤雲在最下方
+  .toc-container { order: 0; }
+  .sidebar-categories { order: 1; }
+  .sidebar-series { order: 2; }
+  .sidebar-recent { order: 3; }
+  .sidebar-tags { order: 99; }
+  
   // 側邊欄小工具
   &-widget {
     background-color: $color-bg-secondary;
@@ -34,7 +41,7 @@
     }
     
     &__item {
-      margin-bottom: $spacing-2;
+      margin-bottom: $spacing-1; // 縮小分類項目間距
       
       &:last-child {
         margin-bottom: 0;
@@ -45,13 +52,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: $spacing-3 $spacing-4; // 增加水平內邊距
+      padding: $spacing-2 $spacing-3; // 收斂內邊距
       color: $color-text-secondary;
       text-decoration: none;
       border-radius: $border-radius-md;
       transition: all $transition-base ease;
       word-wrap: break-word; // 長文字換行
-      line-height: 1.4; // 改善行高
+      line-height: 1.3; // 更緊湊
       
       &:hover,
       &.active {
