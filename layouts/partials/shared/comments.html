@@ -1,28 +1,26 @@
-{{ if .Site.Params.disqusShortname }}
-<section class="comments-section" aria-label="留言討論">
-  <h3>留言討論</h3>
-  <div id="disqus_thread"></div>
-  <script>
-    var disqus_config = function () {
-      this.page.url = {{ .Permalink }};
-      this.page.identifier = {{ .File.UniqueID }};
-    };
-    // 延遲載入 Disqus（使用者滾動到留言區才載入腳本）
-    const loadDisqus = () => {
-      if (window.disqusLoaded) return;
-      window.disqusLoaded = true;
-      var d = document, s = d.createElement('script');
-      s.src = 'https://{{ .Site.Params.disqusShortname }}.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      s.defer = true;
-      (d.head || d.body).appendChild(s);
-    };
-    const disqusObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) { loadDisqus(); disqusObserver.disconnect(); } });
-    }, { rootMargin: '200px' });
-    disqusObserver.observe(document.getElementById('disqus_thread'));
-  </script>
-  <noscript>請啟用 JavaScript 以查看 <a href="https://disqus.com/?ref_noscript">Disqus 提供的評論功能</a></noscript>
+<section class="comments-section" aria-label="留言討論"
+  data-page-id="{{ .File.UniqueID }}" data-page-url="{{ .Permalink }}">
+  <div class="comments-header">
+    <h3 class="comments-title"><i class="fas fa-comments"></i> 留言討論</h3>
+    <p class="comments-sub">歡迎就本文提出想法與問題，理性交流。</p>
+  </div>
+
+  <div id="comments-list" class="comments-list" aria-live="polite"></div>
+
+  <form id="comment-form" class="comment-form" novalidate>
+    <div class="form-row">
+      <input type="text" id="nickname" name="nickname" placeholder="顯示名稱 *" required>
+      <input type="email" id="email" name="email" placeholder="Email（選填）">
+    </div>
+    <textarea id="content" name="content" rows="4" placeholder="寫下您的留言..." required></textarea>
+    <input type="hidden" id="parentId" name="parentId" value="">
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> 發佈留言</button>
+      <button type="button" id="cancel-reply" class="btn btn-secondary" hidden>取消回覆</button>
+    </div>
+  </form>
+
+  {{ $commentsScript := resources.Get "js/components/comments.js" | resources.Minify | resources.Fingerprint }}
+  <script type="module" src="{{ $commentsScript.RelPermalink }}" defer></script>
 </section>
-{{ end }}
 
