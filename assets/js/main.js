@@ -6,8 +6,6 @@
 import loadingSystem from './components/loading.js';
 // 導入鍵盤導航功能
 import keyboardNavigation from './components/keyboard-nav.js';
-// 文章目錄（單一文章頁）
-import './components/toc.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     // 初始化載入狀態系統
@@ -19,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化導航選單
     initNavigation();
     
-    // 初始化輪播
-    initCarousel();
+    // 初始化輪播（首頁才會載入對應元件，此處跳過以減少執行成本）
+    // initCarousel();
     
     // 初始化Cookie同意條款
     initCookieConsent();
@@ -110,8 +108,8 @@ function initNavigation() {
  * 初始化輪播
  */
 function initCarousel() {
-    const carousel = document.querySelector('.hero-carousel');
-    if (!carousel) return;
+  const carousel = document.querySelector('.hero-carousel');
+  if (!carousel) return;
     
     const slides = carousel.querySelectorAll('.hero-carousel__slide');
     const prevBtn = carousel.querySelector('.hero-carousel__control--prev');

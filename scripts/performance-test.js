@@ -22,7 +22,7 @@ const pagesToTest = [
 
 // 測試配置
 const config = {
-  baseUrl: 'https://hugo-accounting.com',
+  baseUrl: 'https://horgoscpa.com',
   outputDir: './lighthouse-reports',
   categories: ['performance', 'accessibility', 'best-practices', 'seo'],
   device: 'mobile', // 'mobile' 或 'desktop'

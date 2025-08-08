@@ -36,9 +36,9 @@
            data-summary="{{ .Summary }}">
             <div class="video-card__thumbnail">
                 {{ with .Params.thumbnail }}
-                <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async" width="640" height="360">
+                <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async" width="640" height="360" sizes="(max-width: 1024px) 100vw, 640px">
                 {{ else }}
-                <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy" decoding="async" width="640" height="360">
+                <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy" decoding="async" width="640" height="360" sizes="(max-width: 1024px) 100vw, 640px">
                 {{ end }}
                 {{ with .Params.duration }}
                 <span class="video-card__duration">{{ . }}</span>

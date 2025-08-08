@@ -56,7 +56,7 @@ async function checkRateLimit(ip, env) {
   try {
     // 獲取IP的請求計數
     const key = `rate_limit:${ip}`;
-    const countData = await env.KV_STORAGE.get(key, { type: 'json' });
+    const countData = await env.HUGO_CMS_KV.get(key, { type: 'json' });
     
     const now = Date.now();
     const windowMs = 60 * 1000; // 1分鐘窗口
@@ -82,7 +82,7 @@ async function checkRateLimit(ip, env) {
     }
     
     // 更新計數
-    await env.KV_STORAGE.put(key, JSON.stringify({ count, timestamp }), {
+    await env.HUGO_CMS_KV.put(key, JSON.stringify({ count, timestamp }), {
       expirationTtl: 60 // 60秒後自動過期
     });
     

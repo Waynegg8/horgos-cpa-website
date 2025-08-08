@@ -8,7 +8,7 @@
   {{ if $yt_valid }}
     <div class="video-responsive">
       <iframe 
-        src="https://www.youtube.com/embed/{{ $youtube_id }}" 
+        data-src="https://www.youtube.com/embed/{{ $youtube_id }}" 
         title="{{ .Title }}"
         frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -21,7 +21,7 @@
   {{ else if $vimeo_valid }}
     <div class="video-responsive">
       <iframe 
-        src="https://player.vimeo.com/video/{{ $vimeo_id }}" 
+        data-src="https://player.vimeo.com/video/{{ $vimeo_id }}" 
         title="{{ .Title }}"
         frameborder="0" 
         allow="autoplay; fullscreen; picture-in-picture" 

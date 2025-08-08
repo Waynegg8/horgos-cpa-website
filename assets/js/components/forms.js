@@ -55,6 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // 添加reCAPTCHA令牌
         getReCaptchaToken().then(token => {
           formDataObject.recaptcha_token = token;
+          // 後端容錯：同時提供駝峰欄位，避免後端尚未更新時失配
+          formDataObject.recaptchaToken = token;
           
           // 發送表單數據
           submitForm(formDataObject, form);
@@ -185,12 +187,13 @@ document.addEventListener('DOMContentLoaded', function() {
    * 獲取reCAPTCHA令牌
    * @returns {Promise} 包含令牌的Promise
    */
-  function getReCaptchaToken() {
+    function getReCaptchaToken() {
     return new Promise((resolve, reject) => {
       // 檢查reCAPTCHA是否已載入
-      if (typeof grecaptcha !== 'undefined' && grecaptcha.execute) {
+        const siteKey = (document.body && document.body.dataset && document.body.dataset.recaptchaSiteKey) || window.__RECAPTCHA_SITE_KEY__ || '6LdOlZkrAAAAAJUXslB2aaWOKbAbOt_DRx5aea-';
+        if (typeof grecaptcha !== 'undefined' && grecaptcha.execute) {
         grecaptcha.ready(function() {
-          grecaptcha.execute('6LdOlZkrAAAAAJUXslB2aaWOKbAbOt_DRx5aea-', { action: 'appointment_submit' })
+          grecaptcha.execute(siteKey, { action: 'appointment_submit' })
             .then(resolve)
             .catch(reject);
         });

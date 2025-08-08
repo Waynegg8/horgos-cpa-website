@@ -140,7 +140,7 @@ if (section) {
 
   function getRecaptchaToken() {
     return new Promise((resolve) => {
-      const siteKey = window.__RECAPTCHA_SITE_KEY__ || '';
+      const siteKey = (document.body && document.body.dataset && document.body.dataset.recaptchaSiteKey) || window.__RECAPTCHA_SITE_KEY__ || '';
       if (typeof grecaptcha !== 'undefined' && grecaptcha.execute && siteKey) {
         grecaptcha.ready(function() {
           grecaptcha.execute(siteKey, { action: 'comment_submit' }).then(resolve).catch(() => resolve(''));

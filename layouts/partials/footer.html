@@ -40,9 +40,7 @@
             <li><i class="fas fa-clock"></i> {{ $hours | default "週一至週五 08:30-17:30" }}</li>
           </ul>
           <!-- Business Status (dynamic) -->
-          <div class="site-footer__business-status" id="footer-business-status">
-            <!-- JS will populate this -->
-          </div>
+          <div class="site-footer__business-status" id="footer-business-status"></div>
           <!-- Social Media -->
           <div class="site-footer__social">
             {{ $threads := or .Site.Params.widgets.social.threads "horgoscpa" }}

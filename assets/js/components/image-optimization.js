@@ -58,6 +58,11 @@ class ImageOptimization {
     document.querySelectorAll('.responsive-image[data-lazy="true"]').forEach(picture => {
       this.intersectionObserver.observe(picture);
     });
+
+    // 觀察影片 iframe 延遲載入（data-src -> src）
+    document.querySelectorAll('iframe[data-src]').forEach(iframe => {
+      this.intersectionObserver.observe(iframe);
+    });
   }
 
   /**
@@ -87,9 +92,15 @@ class ImageOptimization {
     }
 
     // 處理響應式圖片
-    if (img.closest('.responsive-image')) {
+    if (img.closest && img.closest('.responsive-image')) {
       const picture = img.closest('.responsive-image');
       picture.classList.add('loaded');
+    }
+
+    // 處理 iframe lazy
+    if (img.tagName === 'IFRAME' && img.dataset.src) {
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
     }
   }
 

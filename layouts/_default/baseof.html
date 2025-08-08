@@ -24,39 +24,75 @@
     <link rel="icon" sizes="32x32" href="{{ $.Site.Params.favicon.icon32 | default "/uploads/images/general/general-favicon-32x32.png" }}">
     <link rel="icon" href="{{ $.Site.Params.favicon.ico | default "/uploads/images/general/general-favicon.ico" }}">
     <link rel="apple-touch-icon" href="{{ $.Site.Params.favicon.ico | default "/uploads/images/general/general-favicon.ico" }}">
+
+    <!-- Preload local fonts -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/kaleko-105-bold.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/TouchMeSans-PetiteRegular.woff2" crossorigin>
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://www.youtube.com" crossorigin>
-    <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    </noscript>
+    {{ $perf := .Site.Params.performance_mode | default false }}
+    {{ if not $perf }}
+      <!-- Google Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+      {{ if eq .Section "videos" }}
+      <link rel="preconnect" href="https://www.youtube.com" crossorigin>
+      <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+      {{ end }}
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+      <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+      </noscript>
+    {{ end }}
+
+    <!-- Preload LCP image on homepage -->
+    {{ if .IsHome }}
+    <link rel="preload" as="image" href="/uploads/images/general/hero-office.webp" imagesrcset="/uploads/images/general/hero-office.webp 1200w" fetchpriority="high">
+    {{ end }}
     
-    <!-- Font Awesome -->
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">
+    {{ if not $perf }}
+      <!-- Font Awesome -->
+      <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">
+    {{ end }}
     
-    <!-- Main CSS -->
+    <!-- Main CSS + Critical CSS inline（首頁抽取） -->
     {{ $style := resources.Get "scss/main.scss" | css.Sass | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+    {{ if .IsHome }}
+    <style>
+      /* Critical CSS (首頁 Above-the-fold 簡版) */
+      body{background:#0A0A0A;color:#fff;font-family:"Inter","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.7;margin:0;padding-top:64px}
+      .site-header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center}
+      .site-header__container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 2rem}
+      .site-header__title{font-weight:700}
+      .hero-split{padding:4rem 0 3rem;background:radial-gradient(1200px 600px at 85% -100px,rgba(255,255,255,.06),transparent),linear-gradient(180deg,rgba(255,255,255,.03),transparent 60%)}
+      .hero-split__container{display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center;max-width:1200px;margin:0 auto;padding:0 2rem}
+      .hero-split__title{font-size:2.5rem;margin:0 0 1rem}
+      .hero-split__subtitle{color:#D1D5DB;margin:0 0 1.5rem;max-width:56ch}
+      .hero-split__actions{display:flex;gap:.75rem}
+      .btn-cta-primary,.btn-cta-secondary{display:inline-flex;align-items:center;justify-content:center;padding:1rem 2rem;border-radius:12px;font-weight:500;text-decoration:none}
+      .btn-cta-primary{background:#000;color:#fff}
+      .btn-cta-secondary{background:#00B900;color:#fff}
+      .hero-split__media img{width:100%;height:auto;border-radius:12px}
+      @media(max-width:1024px){.hero-split__container{grid-template-columns:1fr}}
+    </style>
+    {{ end }}
+    <link rel="preload" as="style" href="{{ $style.RelPermalink }}">
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ $style.RelPermalink }}"></noscript>
     
     <!-- Custom CSS -->
     {{ range .Site.Params.customCSS }}
     <link rel="stylesheet" href="{{ . | relURL }}">
     {{ end }}
     
-    <!-- Google Analytics -->
-    {{ template "_internal/google_analytics.html" . }}
+    <!-- Google Analytics 延後載入（依 Cookie 同意）由 analytics.js 控制 -->
     
     <!-- 結構化資料 Schema.org -->
     {{ partial "head/schema.html" . }}
 </head>
-<body class="{{ if .IsHome }}home{{ else }}{{ .Section }}{{ end }}" data-section="{{ .Section }}" data-kind="{{ .Kind }}" data-template="custom-baseof">
+<body class="{{ if .IsHome }}home{{ else }}{{ .Section }}{{ end }}" data-section="{{ .Section }}" data-kind="{{ .Kind }}" data-template="custom-baseof" data-recaptcha-site-key="{{ .Site.Params.recaptcha.site_key }}" data-ga-id="{{ .Site.GoogleAnalytics }}">
     <!-- 無障礙跳過連結 -->
     {{ partial "skip-links.html" . }}
     
@@ -141,9 +177,10 @@
     {{ $script := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $script.RelPermalink }}" defer></script>
     
-    <!-- 全站保底載入 reCAPTCHA（供留言/預約等需要時使用） -->
-    <script>window.__RECAPTCHA_SITE_KEY__ = "{{ .Site.Params.recaptcha.site_key }}";</script>
+    <!-- reCAPTCHA 僅在需要頁面載入（預約、或含留言的內容頁） -->
+    {{ if or (eq .Section "appointment") (and (in (slice "articles" "faq" "downloads") .Section) (eq .Kind "page")) }}
     <script src="https://www.google.com/recaptcha/api.js?render={{ .Site.Params.recaptcha.site_key }}" defer></script>
+    {{ end }}
     
     <!-- Component JavaScript -->
     <!-- 載入狀態系統 -->
@@ -167,6 +204,10 @@
     <script type="module" src="{{ $footerCollapseScript.RelPermalink }}" defer></script>
     {{ $videoFallbackScript := resources.Get "js/components/video-fallback.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $videoFallbackScript.RelPermalink }}" defer></script>
+    {{ $businessStatus := resources.Get "js/components/business-status.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $businessStatus.RelPermalink }}" defer></script>
+    {{ $analytics := resources.Get "js/components/analytics.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $analytics.RelPermalink }}" defer></script>
     
     <!-- Hero 輪播功能 & 首頁進場動畫 (僅首頁) -->
     {{ if .IsHome }}

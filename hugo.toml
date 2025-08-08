@@ -36,7 +36,10 @@ googleAnalytics = "G-RKMCS9WVS5"
   dateformat = "2006-01-02"
   mathjax = false
   customCSS = ["css/custom.css"]
-  customJS = ["js/custom.js"]
+  # customJS 已移除避免 404，如需自訂腳本請在 static/js/custom.js 建立後再啟用
+  # customJS = ["js/custom.js"]
+  # 極致效能模式：true 時關閉第三方字體與 Font Awesome 的初始載入
+  performance_mode = true
   
   # Footer 參數
   [Params.footer]

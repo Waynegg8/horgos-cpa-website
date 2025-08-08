@@ -29,9 +29,9 @@
   X-XSS-Protection: 1; mode=block
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests; img-src 'self' data: https:; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; connect-src 'self'; frame-src https://www.youtube.com https://player.vimeo.com; media-src 'self' https:; worker-src 'self'; require-trusted-types-for 'script'; trusted-types default
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests; img-src 'self' data: https:; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.google.com https://www.gstatic.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; connect-src 'self' https://www.google.com https://www.gstatic.com; frame-src https://www.youtube.com https://player.vimeo.com https://www.google.com; media-src 'self' https:; worker-src 'self'
 
 # API 響應 - 5分鐘快取
 /api/*

@@ -35,7 +35,7 @@ export default {
     
     // API 路由處理
     if (path.startsWith('/api/')) {
-      // 驗證請求
+      // 驗證請求（GET 亦需通過速率限制與基本檢查）
       const validationResult = await validateRequest(request, env);
       if (!validationResult.valid) {
         return new Response(JSON.stringify({ 
@@ -116,8 +116,8 @@ function getCORSHeaders(request) {
   
   // 允許的域名列表
   const allowedOrigins = [
-    'https://hugo-accounting.com',
-    'https://www.hugo-accounting.com',
+    'https://horgoscpa.com',
+    'https://www.horgoscpa.com',
     'http://localhost:1313' // 開發環境
   ];
   

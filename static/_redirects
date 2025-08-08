@@ -9,8 +9,9 @@
 # 404 頁面
 /* /404.html 404
 
-# API 路由重定向到 Cloudflare Workers
-/api/* https://api.yourdomain.com/:splat 200
+# API 由 Cloudflare Workers（或 Workers for Pages 路由）處理
+# 若已在 Cloudflare 後台設定路由，此處不再覆寫，以免轉向至佔位網域。
+# /api/*  保留給 Workers；請於 Cloudflare 後台設定對應路由。
 
 # 管理介面重定向
 /admin/* https://admin.yourdomain.com/:splat 200

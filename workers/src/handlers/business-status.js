@@ -158,7 +158,7 @@ async function checkIfHoliday(date, env) {
   
   // 獲取當年假日
   const year = date.getFullYear();
-  const holidays = await getData(`holidays:${year}`, env) || [];
+  const holidays = (await getData(`holidays:${year}`, env, { type: 'json' })) || [];
   
   // 查找當天是否為假日
   const holiday = holidays.find(h => h.date === dateStr);
@@ -257,8 +257,8 @@ async function getAllHolidays(env) {
     const nextYear = currentYear + 1;
     
     // 獲取假日數據
-    const currentYearHolidays = await getData(`holidays:${currentYear}`, env) || [];
-    const nextYearHolidays = await getData(`holidays:${nextYear}`, env) || [];
+    const currentYearHolidays = (await getData(`holidays:${currentYear}`, env, { type: 'json' })) || [];
+    const nextYearHolidays = (await getData(`holidays:${nextYear}`, env, { type: 'json' })) || [];
     
     // 合併數據
     const allHolidays = [...currentYearHolidays, ...nextYearHolidays];
@@ -311,7 +311,7 @@ async function addHoliday(request, env) {
     const year = date.split('-')[0];
     
     // 獲取當年假日
-    const holidays = await getData(`holidays:${year}`, env) || [];
+    const holidays = (await getData(`holidays:${year}`, env, { type: 'json' })) || [];
     
     // 檢查是否已存在
     if (holidays.some(h => h.date === date)) {
@@ -371,7 +371,7 @@ async function updateHoliday(request, env) {
     const year = date.split('-')[0];
     
     // 獲取當年假日
-    const holidays = await getData(`holidays:${year}`, env) || [];
+    const holidays = (await getData(`holidays:${year}`, env, { type: 'json' })) || [];
     
     // 查找假日
     const index = holidays.findIndex(h => h.date === date);

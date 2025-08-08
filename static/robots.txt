@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hugo-accounting.com/sitemap.xml
+Sitemap: https://horgoscpa.com/sitemap.xml
 
 # 禁止爬取管理介面
 User-agent: *

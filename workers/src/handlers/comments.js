@@ -58,7 +58,7 @@ export async function handleComments(request, env, ctx) {
 async function getComments(pageId, env) {
   try {
     // 從KV存儲中獲取留言
-    const comments = await getData(`comments:${pageId}`, env) || [];
+    const comments = (await getData(`comments:${pageId}`, env, { type: 'json' })) || [];
     
     // 按時間排序，最新的在前
     comments.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
@@ -88,7 +88,7 @@ async function getComments(pageId, env) {
 async function addComment(request, env) {
   try {
     // 解析請求體
-    const { pageId, nickname, lineId, content, recaptchaToken } = await request.json();
+    const { pageId, nickname, lineId, content, recaptcha_token, recaptchaToken } = await request.json();
     
     // 驗證必填欄位
     if (!pageId || !nickname || !lineId || !content) {
@@ -99,7 +99,7 @@ async function addComment(request, env) {
     }
     
     // 驗證reCAPTCHA
-    const recaptchaValid = await verifyRecaptcha(recaptchaToken, env);
+    const recaptchaValid = await verifyRecaptcha(recaptchaToken || recaptcha_token, env);
     if (!recaptchaValid) {
       return new Response(JSON.stringify({
         success: false,
@@ -120,7 +120,7 @@ async function addComment(request, env) {
     };
     
     // 從KV存儲中獲取現有留言
-    const comments = await getData(`comments:${pageId}`, env) || [];
+    const comments = (await getData(`comments:${pageId}`, env, { type: 'json' })) || [];
     
     // 添加新留言
     comments.push(comment);
@@ -164,7 +164,7 @@ async function addComment(request, env) {
 async function replyComment(commentId, request, env) {
   try {
     // 解析請求體
-    const { pageId, nickname, lineId, content, recaptchaToken } = await request.json();
+    const { pageId, nickname, lineId, content, recaptcha_token, recaptchaToken } = await request.json();
     
     // 驗證必填欄位
     if (!pageId || !nickname || !lineId || !content) {
@@ -175,7 +175,7 @@ async function replyComment(commentId, request, env) {
     }
     
     // 驗證reCAPTCHA
-    const recaptchaValid = await verifyRecaptcha(recaptchaToken, env);
+    const recaptchaValid = await verifyRecaptcha(recaptchaToken || recaptcha_token, env);
     if (!recaptchaValid) {
       return new Response(JSON.stringify({
         success: false,
@@ -184,7 +184,7 @@ async function replyComment(commentId, request, env) {
     }
     
     // 從KV存儲中獲取現有留言
-    const comments = await getData(`comments:${pageId}`, env) || [];
+    const comments = (await getData(`comments:${pageId}`, env, { type: 'json' })) || [];
     
     // 檢查父留言是否存在
     const parentComment = comments.find(c => c.id === commentId);

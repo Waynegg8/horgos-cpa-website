@@ -37,7 +37,7 @@ export async function handleAppointments(request, env, ctx) {
     }
     
     // 驗證reCAPTCHA
-    const recaptchaValid = await verifyRecaptcha(formData.recaptchaToken, env);
+    const recaptchaValid = await verifyRecaptcha(formData.recaptchaToken || formData.recaptcha_token, env);
     if (!recaptchaValid) {
       return new Response(JSON.stringify({
         success: false,
@@ -55,7 +55,7 @@ export async function handleAppointments(request, env, ctx) {
       email: formData.email,
       lineId: formData.lineId,
       phone: formData.phone,
-      service: formData.service,
+      service: formData.service || formData.service_type,
       content: formData.content || '',
       status: 'pending', // pending, confirmed, completed, cancelled
       createdAt: new Date().toISOString(),
@@ -94,7 +94,10 @@ export async function handleAppointments(request, env, ctx) {
  */
 function validateAppointmentForm(formData) {
   // 檢查必填欄位
-  const requiredFields = ['name', 'email', 'lineId', 'phone', 'service', 'privacy'];
+  const requiredFields = ['name', 'email', 'lineId', 'phone'];
+  // service / service_type 二擇一
+  const hasService = !!(formData.service || formData.service_type);
+  const hasPrivacy = formData.privacy === true || formData.privacy_consent === true;
   for (const field of requiredFields) {
     if (!formData[field]) {
       return {
@@ -102,6 +105,12 @@ function validateAppointmentForm(formData) {
         error: `Missing required field: ${field}`
       };
     }
+  }
+  if (!hasService) {
+    return { valid: false, error: 'Missing required field: service' };
+  }
+  if (!hasPrivacy) {
+    return { valid: false, error: 'Privacy policy agreement is required' };
   }
   
   // 驗證姓名長度
@@ -132,20 +141,14 @@ function validateAppointmentForm(formData) {
   
   // 驗證服務類型
   const validServices = ['工商登記', '稅務申報', '財稅簽證', '諮詢服務', '其他服務'];
-  if (!validServices.includes(formData.service)) {
+  const svc = formData.service || formData.service_type;
+  if (!validServices.includes(svc)) {
     return {
       valid: false,
       error: 'Invalid service type'
     };
   }
   
-  // 驗證隱私權同意
-  if (formData.privacy !== true) {
-    return {
-      valid: false,
-      error: 'Privacy policy agreement is required'
-    };
-  }
   
   return { valid: true };
 }
