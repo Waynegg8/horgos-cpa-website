@@ -17,7 +17,9 @@
 <div class="container container--content">
     <div class="two-column">
         <div class="two-column__main">
+            {{ if not (in (slice "articles" "videos" "faq" "downloads") .Section) }}
             {{ .Content }}
+            {{ end }}
             
             {{ if eq .Section "about" }}
             <!-- 關於我們頁面內容 -->
@@ -27,6 +29,22 @@
             {{ else if eq .Section "articles" }}
             <!-- 文章列表頁面內容 -->
             {{ partial "articles/article-list.html" . }}
+            <script>
+            // 列表頁自動帶入 q 參數並觸發在地搜尋（文章/影片/FAQ/下載）
+            document.addEventListener('DOMContentLoaded', function() {
+              const params = new URLSearchParams(window.location.search);
+              const q = params.get('q');
+              if (!q) return;
+              const ids = ['article-search-input','video-search-input','faq-search-input','download-search-input'];
+              ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                  el.value = q;
+                  el.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+              });
+            });
+            </script>
             {{ else if eq .Section "videos" }}
             <!-- 影片列表頁面內容 -->
             {{ partial "videos/video-list.html" . }}

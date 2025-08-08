@@ -38,6 +38,26 @@
   }
 }
 
+// 側邊欄搜尋樣式（單一文章頁）
+.sidebar-search {
+  display: flex;
+  gap: $spacing-2;
+  margin-bottom: $spacing-4;
+  
+  &__input {
+    flex: 1;
+    padding: $spacing-2 $spacing-3;
+    border-radius: $border-radius-md;
+    border: 1px solid $color-border-primary;
+    background-color: $color-bg-secondary;
+    color: $color-text-primary;
+  }
+  
+  &__btn {
+    white-space: nowrap;
+  }
+}
+
 // 2. 統一分類標籤樣式
 // -----------------------------------------------------------------------------
 .category-tags,

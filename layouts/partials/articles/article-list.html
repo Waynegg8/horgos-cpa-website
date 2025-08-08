@@ -14,40 +14,12 @@
         <button class="category-tag category-search-btn" data-category="legal-updates">法規更新</button>
     </div>
     
-    <!-- 精選文章 -->
     {{ $all := where .Site.RegularPages "Section" "articles" }}
     {{ $sorted := $all.ByDate.Reverse }}
-    {{ if gt (len $sorted) 0 }}
-    {{ $featured := index $sorted 0 }}
-    <section class="featured-article card-style">
-        <a href="{{ $featured.RelPermalink }}" class="featured-article__link">
-            <div class="featured-article__media">
-                {{ with $featured.Params.image }}
-                <img src="{{ . }}" alt="{{ $featured.Title }}" loading="lazy">
-                {{ else }}
-                <img src="/uploads/images/general/general-default.jpg" alt="{{ $featured.Title }}" loading="lazy">
-                {{ end }}
-            </div>
-            <div class="featured-article__content">
-                <h2 class="featured-article__title">{{ $featured.Title }}</h2>
-                <div class="article-meta">
-                    <span class="article-meta__item"><i class="fas fa-calendar-alt"></i> {{ $featured.Date.Format "2006-01-02" }}</span>
-                    {{ with $featured.Params.category }}<span class="article-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>{{ end }}
-                    {{ with $featured.Params.series }}<span class="article-meta__item"><i class="fas fa-bookmark"></i> {{ . }}</span>{{ end }}
-                </div>
-                <p class="article-summary">{{ with $featured.Summary }}{{ . | plainify | truncate 140 }}{{ end }}</p>
-                <div>
-                    <span class="btn btn-primary btn-sm">閱讀更多</span>
-                </div>
-            </div>
-        </a>
-    </section>
-    {{ end }}
 
     <!-- 文章列表 - 左圖右文卡片布局 -->
     <div class="article-list__grid">
-        {{ $rest := after 1 $sorted }}
-        {{ $paginator := .Paginate $rest 10 }}
+        {{ $paginator := .Paginate $sorted 10 }}
         {{ if not (gt (len $paginator.Pages) 0) }}
         <div class="empty-state">目前沒有符合條件的文章。</div>
         {{ end }}

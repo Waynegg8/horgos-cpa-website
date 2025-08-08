@@ -1,5 +1,10 @@
 <!-- 下載列表頁 -->
 <div class="download-list">
+    <!-- 搜索框（僅搜索本頁下載） -->
+    <div class="list-search" role="search" aria-label="下載搜尋">
+        <input id="download-search-input" type="search" placeholder="搜尋檔案標題或摘要..." aria-label="搜尋下載" />
+    </div>
+
     <!-- 分類搜索標籤 -->
     <div class="category-nav card-style">
         <div class="category-nav__links">
@@ -98,6 +103,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const categoryButtons = document.querySelectorAll('.category-search-btn');
     const downloadItems = document.querySelectorAll('.download-item');
+    const searchInput = document.getElementById('download-search-input');
     
     // 分類標籤點擊事件
     categoryButtons.forEach(button => {
@@ -120,5 +126,23 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+    
+    // 搜尋
+    if (searchInput) {
+      const normalize = (s) => (s || '').toLowerCase();
+      searchInput.addEventListener('input', function() {
+        const query = normalize(this.value);
+        downloadItems.forEach(item => {
+          const title = normalize(item.dataset.title);
+          const summary = normalize(item.dataset.summary);
+          const match = !query || title.includes(query) || summary.includes(query);
+          if (match) {
+            if (item.getAttribute('data-filter-hidden') !== 'true') item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    }
 });
 </script>

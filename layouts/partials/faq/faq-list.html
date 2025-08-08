@@ -1,5 +1,10 @@
 <!-- FAQ列表頁 -->
 <div class="faq-list">
+    <!-- 搜索框（僅搜索本頁FAQ） -->
+    <div class="list-search" role="search" aria-label="FAQ搜尋">
+        <input id="faq-search-input" type="search" placeholder="搜尋問題標題或摘要..." aria-label="搜尋FAQ" />
+    </div>
+
     <!-- 分類搜索標籤 -->
     <div class="category-nav card-style">
         <div class="category-nav__links">
@@ -101,6 +106,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const categoryButtons = document.querySelectorAll('.category-search-btn');
     const faqItems = document.querySelectorAll('.faq-item');
+    const searchInput = document.getElementById('faq-search-input');
     
     // 分類標籤點擊事件
     categoryButtons.forEach(button => {
@@ -123,5 +129,23 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+    
+    // 搜尋
+    if (searchInput) {
+      const normalize = (s) => (s || '').toLowerCase();
+      searchInput.addEventListener('input', function() {
+        const query = normalize(this.value);
+        faqItems.forEach(item => {
+          const title = normalize(item.dataset.title);
+          const summary = normalize(item.dataset.summary);
+          const match = !query || title.includes(query) || summary.includes(query);
+          if (match) {
+            if (item.getAttribute('data-filter-hidden') !== 'true') item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    }
 });
 </script>

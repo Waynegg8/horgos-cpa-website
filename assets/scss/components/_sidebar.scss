@@ -6,6 +6,7 @@
   
   // 明確排序：確保目錄在最上方、標籤雲在最下方
   .toc-container { order: 0; }
+  .sidebar-search { order: 0; }
   .sidebar-categories { order: 1; }
   .sidebar-series { order: 2; }
   .sidebar-recent { order: 3; }

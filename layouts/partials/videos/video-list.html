@@ -1,34 +1,12 @@
 <!-- 影片列表頁 -->
 <div class="video-list">
-    <!-- 精選影片 -->
     {{ $all := where .Site.RegularPages "Section" "videos" }}
     {{ $sorted := $all.ByDate.Reverse }}
-    {{ if gt (len $sorted) 0 }}
-    {{ $featured := index $sorted 0 }}
-    <section class="featured-article card-style">
-        <a href="{{ $featured.RelPermalink }}" class="featured-article__link">
-            <div class="featured-article__media">
-                {{ with $featured.Params.thumbnail }}
-                <img src="{{ . }}" alt="{{ $featured.Title }}" loading="lazy">
-                {{ else }}
-                <img src="/uploads/images/general/general-default.jpg" alt="{{ $featured.Title }}" loading="lazy">
-                {{ end }}
-            </div>
-            <div class="featured-article__content">
-                <h2 class="featured-article__title">{{ $featured.Title }}</h2>
-                <div class="video-card__meta">
-                    <span class="video-card__date"><i class="fas fa-calendar-alt"></i> {{ $featured.Date.Format "2006-01-02" }}</span>
-                    {{ with $featured.Params.category }}<span class="video-card__category"><i class="fas fa-folder"></i> {{ . }}</span>{{ end }}
-                    {{ with $featured.Params.series }}<span class="video-card__series"><i class="fas fa-bookmark"></i> {{ . }}</span>{{ end }}
-                </div>
-                <div class="video-card__excerpt">{{ with $featured.Summary }}{{ . | truncate 140 }}{{ end }}</div>
-                <div>
-                    <span class="btn btn-primary btn-sm">觀看影片</span>
-                </div>
-            </div>
-        </a>
-    </section>
-    {{ end }}
+
+    <!-- 搜索框（僅搜索本頁影片） -->
+    <div class="list-search" role="search" aria-label="影片搜尋">
+        <input id="video-search-input" type="search" placeholder="搜尋影片標題或摘要..." aria-label="搜尋影片" />
+    </div>
 
     <!-- 分類標籤（無全域搜尋） -->
     <div class="video-categories">
@@ -43,8 +21,7 @@
     
     <!-- 影片列表（僅分類篩選，不依賴全域搜尋） -->
     <div class="video-cards">
-        {{ $rest := after 1 $sorted }}
-        {{ $paginator := .Paginate $rest 10 }}
+        {{ $paginator := .Paginate $sorted 10 }}
         {{ if not (gt (len $paginator.Pages) 0) }}
         <div class="empty-state">目前沒有符合條件的影片。</div>
         {{ end }}
@@ -91,6 +68,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const categoryButtons = document.querySelectorAll('.category-search-btn');
     const videoItems = document.querySelectorAll('.video-item');
+    const searchInput = document.getElementById('video-search-input');
     
     // 分類標籤點擊事件
     categoryButtons.forEach(button => {
@@ -113,5 +91,23 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+    
+    // 搜尋（僅針對本頁影片卡片）
+    if (searchInput) {
+      const normalize = (s) => (s || '').toLowerCase();
+      searchInput.addEventListener('input', function() {
+        const query = normalize(this.value);
+        videoItems.forEach(item => {
+          const title = normalize(item.dataset.title);
+          const summary = normalize(item.dataset.summary);
+          const match = !query || title.includes(query) || summary.includes(query);
+          if (match) {
+            if (item.getAttribute('data-filter-hidden') !== 'true') item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    }
 });
 </script>
