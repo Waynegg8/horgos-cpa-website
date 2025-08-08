@@ -142,12 +142,14 @@
   top: calc(100% + #{$spacing-2});
   left: 0; // 與父項左緣對齊，避免視覺偏右
   transform: translateY(10px);
-  min-width: 220px;
+  min-width: 160px; // 更緊湊的最小寬
+  max-width: 220px; // 上限，避免過寬
+  width: max-content; // 依內容自適應
   background: $color-bg-secondary;
   border-radius: $border-radius-lg;
   border: 1px solid $color-border-primary;
   box-shadow: $shadow-lg;
-  padding: $spacing-2;
+  padding: $spacing-1; // 減少內距
   opacity: 0;
   visibility: hidden;
   transition: opacity $transition-fast $ease-out, transform $transition-fast $ease-out, visibility $transition-fast;
@@ -168,6 +170,9 @@
   font-weight: 500;
   border-radius: $border-radius-sm;
   transition: color $transition-fast $ease-out, background-color $transition-fast $ease-out;
+  white-space: nowrap; // 單行顯示
+  overflow: hidden;
+  text-overflow: ellipsis; // 內容太長時截斷
 
   &:hover, &.is-active {
     background-color: rgba($color-text-primary, 0.05);

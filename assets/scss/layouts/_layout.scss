@@ -58,8 +58,10 @@
   &__sidebar {
     width: 320px; // 稍微增加側邊欄寬度
     flex-shrink: 0;
-    // 預設不 sticky，避免非文章單頁造成視覺干擾
-    position: static;
+    // 預設：列表頁期望 sticky；單頁另用 --sticky 控制
+    position: sticky;
+    top: $spacing-4;
+    height: max-content;
     align-self: flex-start;
     
     @include tablet {
@@ -72,7 +74,7 @@
     }
   }
 
-  // 僅對需要的頁面開啟 sticky（例如：文章單頁）
+  // 需要明確 sticky 的情境（例如：文章單頁）
   &__sidebar--sticky {
     position: sticky;
     top: $spacing-4;

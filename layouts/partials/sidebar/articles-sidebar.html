@@ -12,25 +12,21 @@
     {{ end }}
     {{/* 單一文章頁不再顯示「熱門標籤」，避免與主內容重複與視覺擁擠 */}}
     
-    <!-- 系列列表（series 有自己獨立列表頁） -->
-    <div class="sidebar-widget sidebar-series">
+    <!-- 系列文章：滾到此區才 sticky，並保持輕量（移除多餘 padding） -->
+    <div class="sidebar-widget sidebar-series" style="position: sticky; top: 16px;">
         <h3 class="sidebar-widget__title">系列文章</h3>
         <ul class="sidebar-series__list">
-            <li class="sidebar-series__item">
-                <a href="/articles/startup-guide/" class="sidebar-series__link">
-                    公司設立系列
-                </a>
-            </li>
-            <li class="sidebar-series__item">
-                <a href="/articles/tax-planning/" class="sidebar-series__link">
-                    稅務規劃系列
-                </a>
-            </li>
-            <li class="sidebar-series__item">
-                <a href="/articles/accounting-basics/" class="sidebar-series__link">
-                    會計入門系列
-                </a>
-            </li>
+            {{ $currentSeries := .Params.series }}
+            {{ if $currentSeries }}
+              {{ $section := .Section }}
+              {{ range where .Site.RegularPages "Section" $section }}
+                {{ if and (eq .Params.series $currentSeries) (eq .Params.series_order 1) }}
+                  <li class="sidebar-series__item"><a href="{{ .RelPermalink }}" class="sidebar-series__link">{{ $currentSeries }}</a></li>
+                {{ end }}
+              {{ end }}
+            {{ else }}
+              <li class="sidebar-series__item"><span class="sidebar-series__link">未分系列</span></li>
+            {{ end }}
         </ul>
     </div>
 
@@ -65,7 +61,8 @@
     </div>
     {{ end }}
     
-    <!-- 標籤雲 -->
+    {{/* 單一內容頁不顯示熱門標籤（標籤雲）；僅列表頁可顯示 */}}
+    {{ if ne .Kind "page" }}
     <div class="sidebar-widget sidebar-tags">
         <h3 class="sidebar-widget__title">標籤雲</h3>
         <div class="sidebar-tags__cloud">
@@ -74,5 +71,6 @@
             {{ end }}
         </div>
     </div>
+    {{ end }}
     
 </div>

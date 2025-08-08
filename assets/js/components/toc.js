@@ -21,6 +21,7 @@ function initTableOfContents() {
   if (!article) return;
   
   // 獲取所有標題
+  // 僅從內容中抓取（排除文章首個大標題 h1）
   const headings = article.querySelectorAll('h2, h3, h4');
   if (headings.length === 0) {
     tocContainer.style.display = 'none';
@@ -31,7 +32,7 @@ function initTableOfContents() {
   const tocList = document.createElement('ul');
   tocList.className = 'toc-list';
   
-  // 標題層級映射
+  // 標題層級映射（起點為 h2）
   const levelMap = {
     'H2': 1,
     'H3': 2,
@@ -87,11 +88,11 @@ function initTableOfContents() {
   
   // 清空容器，避免重複
   tocContainer.innerHTML = '';
-  // 包一層 sidebar widget，並置入標題（避免標題出現兩次）
+  // 包一層 sidebar widget，並置入標題（避免標題重複）
   const widget = document.createElement('div');
   widget.className = 'sidebar-widget toc-widget';
-  const title = document.createElement('div');
-  title.className = 'sidebar-widget__title';
+  const title = document.createElement('h3');
+  title.className = 'sidebar-widget__title toc-title';
   title.textContent = '文章目錄';
   widget.appendChild(title);
   widget.appendChild(tocList);

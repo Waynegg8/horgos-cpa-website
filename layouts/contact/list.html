@@ -26,19 +26,18 @@
             </ul>
           </div>
           
-          <!-- LINE聯絡卡片 -->
+          <!-- LINE 聯絡：僅保留加入按鈕，移除顯示 LINE ID -->
           <div class="contact-card">
             <div class="contact-card-icon line-icon">
               <i class="fab fa-line"></i>
             </div>
             <h3>LINE官方帳號</h3>
-            <p>LINE ID: {{ .Site.Params.contact.line_id }}</p>
             <a href="https://line.me/R/ti/p/{{ .Site.Params.contact.line_id }}" class="line-btn">
               <i class="fab fa-line"></i> 加入LINE好友
             </a>
           </div>
           
-          <!-- 地址卡片 -->
+          <!-- 地址卡片：移除額外地圖按鈕（右側已有嵌入地圖） -->
           <div class="contact-card">
             <div class="contact-card-icon">
               <i class="fas fa-map-marker-alt"></i>
@@ -47,9 +46,6 @@
             <address>
               {{ .Site.Params.contact.address }}
             </address>
-            <a href="https://maps.google.com/?q={{ .Site.Params.contact.address }}" target="_blank" class="map-link">
-              <i class="fas fa-map"></i> 在Google地圖開啟
-            </a>
           </div>
           
           <!-- 營業時間卡片 -->

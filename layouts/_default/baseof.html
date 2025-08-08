@@ -56,7 +56,7 @@
     <!-- 結構化資料 Schema.org -->
     {{ partial "head/schema.html" . }}
 </head>
-<body class="{{ if .IsHome }}home{{ else }}{{ .Section }}{{ end }}" data-section="{{ .Section }}" data-template="custom-baseof">
+<body class="{{ if .IsHome }}home{{ else }}{{ .Section }}{{ end }}" data-section="{{ .Section }}" data-kind="{{ .Kind }}" data-template="custom-baseof">
     <!-- 無障礙跳過連結 -->
     {{ partial "skip-links.html" . }}
     
