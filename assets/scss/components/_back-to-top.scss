@@ -19,8 +19,8 @@
 
 /* 回到頂端按鈕 */
 .back-to-top {
-  width: 44px;
-  height: 44px;
+  width: 48px;  // 與社群鈕一致
+  height: 48px;
   border: none;
   border-radius: 50%;
   // 更顯眼：亮色漸層膠囊 + 外發光
@@ -29,15 +29,14 @@
   font-size: 1.2rem;
   cursor: pointer;
   display: none;
-  display: none;
   align-items: center;
   justify-content: center;
-  line-height: 1; // 修正 icon 垂直對齊
+  line-height: 0; // 移除基線干擾
   transition: all $transition-base;
   box-shadow: 0 8px 22px rgba($color-accent-primary, 0.35), 0 2px 8px rgba(0,0,0,0.35);
   position: relative;
 
-  i { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; line-height: 1; vertical-align: middle; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+  i { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 22px; height: 22px; line-height: 0; vertical-align: middle; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; font-size: 22px; }
   
   &:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba($color-accent-highlight, 0.45), 0 3px 10px rgba(0,0,0,0.35); }
 
@@ -65,11 +64,7 @@
   &.visible { animation: fadeInUp 0.3s ease-out; }
   
   /* 響應式設計 */
-  @include mobile {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1rem;
-  }
+  @include mobile { width: 44px; height: 44px; font-size: 1rem; }
 }
 
 /* 社群媒體按鈕組 */
@@ -79,11 +74,7 @@
   flex-direction: column;
   align-items: center; // 以中心線對齊，避免看起來歪
   
-  &:hover .social-buttons__menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
+  // 改為常駐顯示，不需 hover
   
   &__menu {
     position: absolute;
@@ -94,17 +85,17 @@
     flex-direction: column;
     align-items: center; // 每顆都以中心對齊
     gap: $spacing-2;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: all $transition-base;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: none;
     padding-right: 0;
   }
 }
 
 .social-toggle {
-  width: 3rem;
-  height: 3rem;
+  width: 48px; // 與社群鈕一致
+  height: 48px;
   border: none;
   border-radius: 50%;
   background: linear-gradient(135deg, rgba($color-accent-primary, 0.95) 0%, rgba($color-accent-highlight, 0.95) 100%);
@@ -114,7 +105,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 1; // 修正圖示基線
+  line-height: 0; // 移除基線
   transition: all $transition-base;
   box-shadow: 0 8px 22px rgba($color-accent-primary, 0.35), 0 2px 8px rgba(0,0,0,0.35);
   position: relative;
@@ -134,19 +125,7 @@
     }
   }
   
-  i {
-    transition: transform $transition-base;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1em;
-    height: 1em;
-    line-height: 1;
-    vertical-align: middle;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: geometricPrecision;
-  }
+  i { transition: transform $transition-base; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 22px; height: 22px; line-height: 0; vertical-align: middle; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; font-size: 22px; }
 
   // 外圈光暈（與按鈕漸層一致的柔光）
   &::after {
@@ -160,11 +139,7 @@
     z-index: -1;
   }
   
-  @include mobile {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1rem;
-  }
+  @include mobile { width: 44px; height: 44px; font-size: 1rem; }
 }
 
 .social-button {
@@ -187,18 +162,11 @@
   // 品牌色與光暈（僅圖標）
   &.line { background-color: #00C300; }
   /* Threads 在深色背景上增加雙層描邊與內光，保證可見度 */
-  &.threads {
-    background: #000000;
-    // 外圈微亮描邊 + 內圈白色描邊，深底也清楚
-    box-shadow:
-      0 6px 16px rgba(0,0,0,0.25),
-      0 0 0 1px rgba(255,255,255,0.35),
-      inset 0 0 0 2px #ffffff;
-  }
+  &.threads { background: #000000; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
   &.instagram { background: radial-gradient(circle at 30% 110%, #ffdb8b, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc); }
   &.email { background-color: #111827; }
   // 以圖片呈現時，確保水平垂直置中
-  img { width: 22px; height: 22px; display: block; object-fit: contain; }
+  img { width: 22px; height: 22px; display: block; object-fit: contain; image-rendering: -webkit-optimize-contrast; }
 
   // 外圈光暈（暗色柔影）
   &::after {

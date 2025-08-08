@@ -107,29 +107,25 @@
     <div class="floating-buttons">
         <!-- 社群媒體按鈕組 -->
         <div class="social-buttons">
-            <button id="social-toggle" class="social-toggle" aria-label="社群媒體連結" aria-expanded="false">
-                <i class="fas fa-share-alt"></i>
-            </button>
-            
-            <div class="social-buttons__menu" aria-hidden="true">
+            <div class="social-buttons__menu" aria-hidden="false">
                 {{ with .Site.Params.widgets.social.line }}
                 <a href="https://line.me/R/ti/p/{{ . }}" class="social-button line" target="_blank" rel="noopener" aria-label="LINE">
-                    <img src="/uploads/icons/social/line.svg" width="20" height="20" alt="LINE" />
+                    <img src="/uploads/icons/social/line.svg" width="22" height="22" alt="LINE" />
                 </a>
                 {{ end }}
                 {{ with .Site.Params.widgets.social.threads }}
                 <a href="https://www.threads.net/@{{ . }}" class="social-button threads" target="_blank" rel="noopener" aria-label="Threads">
-                    <img src="/uploads/icons/social/threads.svg" width="20" height="20" alt="Threads" />
+                    <img src="/uploads/icons/social/threads.svg" width="22" height="22" alt="Threads" />
                 </a>
                 {{ end }}
                 {{ with .Site.Params.widgets.social.instagram }}
                 <a href="https://instagram.com/{{ . }}" class="social-button instagram" target="_blank" rel="noopener" aria-label="Instagram">
-                    <img src="/uploads/icons/social/instagram.svg" width="20" height="20" alt="Instagram" />
+                    <img src="/uploads/icons/social/instagram.svg" width="22" height="22" alt="Instagram" />
                 </a>
                 {{ end }}
                 {{ with .Site.Params.widgets.social.email }}
                 <a href="mailto:{{ . }}" class="social-button email" aria-label="Email">
-                    <img src="/uploads/icons/social/email.svg" width="20" height="20" alt="Email" />
+                    <img src="/uploads/icons/social/email.svg" width="22" height="22" alt="Email" />
                 </a>
                 {{ end }}
             </div>

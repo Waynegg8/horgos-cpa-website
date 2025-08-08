@@ -29,8 +29,15 @@
       </iframe>
     </div>
   {{ else }}
-    <div class="video-placeholder">
-      <p>影片載入中...</p>
+    <div class="video-fallback" aria-label="本頁暫無可嵌入影片">
+      <div class="video-fallback__media">
+        {{ with .Params.thumbnail }}
+          <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async" />
+        {{ else }}
+          <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy" decoding="async" />
+        {{ end }}
+      </div>
+      <div class="video-fallback__note">本頁目前以圖文說明呈現，影片將於近期上線。</div>
     </div>
   {{ end }}
 </div>
