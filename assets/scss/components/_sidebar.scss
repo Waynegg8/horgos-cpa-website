@@ -15,7 +15,9 @@
   body.articles & .sidebar-recent + .sidebar-tags { margin-top: $spacing-3; }
   
   // 明確排序：確保目錄在最上方、標籤雲在最下方（TOC 不再個別 sticky，避免蓋住其他小工具）
+  // TOC 與標籤雲一起置於同一 sticky 區域：讓兩者同步移動
   .toc-container { order: 0; position: sticky; top: 72px; z-index: 1; }
+  .sidebar-tags { position: sticky; top: calc(72px + 320px); } // 跟著 TOC 之後開始出現
   .sidebar-search { order: 0; }
   // 側邊欄搜尋框（單一內容頁會出現）
   .sidebar-search {
