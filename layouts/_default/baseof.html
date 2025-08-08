@@ -145,6 +145,10 @@
     {{ $script := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $script.RelPermalink }}" defer></script>
     
+    <!-- 全站保底載入 reCAPTCHA（供留言/預約等需要時使用） -->
+    <script>window.__RECAPTCHA_SITE_KEY__ = "{{ .Site.Params.recaptcha.site_key }}";</script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ .Site.Params.recaptcha.site_key }}" defer></script>
+    
     <!-- Component JavaScript -->
     <!-- 載入狀態系統 -->
     {{ $loadingScript := resources.Get "js/components/loading.js" | resources.Minify | resources.Fingerprint }}

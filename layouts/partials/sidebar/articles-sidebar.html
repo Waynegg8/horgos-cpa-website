@@ -61,8 +61,7 @@
     </div>
     {{ end }}
     
-    {{/* 單一內容頁不顯示熱門標籤（標籤雲）；僅列表頁可顯示 */}}
-    {{ if ne .Kind "page" }}
+    <!-- 標籤雲：需要顯示；不顯示所謂「熱門標籤」 -->
     <div class="sidebar-widget sidebar-tags">
         <h3 class="sidebar-widget__title">標籤雲</h3>
         <div class="sidebar-tags__cloud">
@@ -71,6 +70,5 @@
             {{ end }}
         </div>
     </div>
-    {{ end }}
     
 </div>

@@ -107,10 +107,15 @@ if (section) {
     if (!body.nickname) { nickname.focus(); return; }
     if (!body.lineId) { lineId.focus(); return; }
 
-    // 取得 reCAPTCHA v3 token
+    // 取得 reCAPTCHA v3 token（若載入失敗，阻止送出並提示）
     try {
       body.recaptchaToken = await getRecaptchaToken();
     } catch {}
+    if (!body.recaptchaToken) {
+      const status = document.getElementById('comment-status');
+      if (status) status.textContent = 'reCAPTCHA 驗證載入失敗，請重新整理頁面後再送出。';
+      return;
+    }
 
     try {
       if (body.parent_id) await api.reply(body.parent_id, body);
@@ -133,7 +138,8 @@ if (section) {
 
   function getRecaptchaToken() {
     return new Promise((resolve) => {
-      const siteKey = document.querySelector('script[src*="recaptcha"]').src.split('render=')[1] || '';
+      const script = document.querySelector('script[src*="recaptcha"]');
+      const siteKey = script ? (script.src.split('render=')[1] || '') : (window.__RECAPTCHA_SITE_KEY__ || '');
       if (typeof grecaptcha !== 'undefined' && grecaptcha.execute && siteKey) {
         grecaptcha.ready(function() {
           grecaptcha.execute(siteKey, { action: 'comment_submit' }).then(resolve).catch(() => resolve(''));

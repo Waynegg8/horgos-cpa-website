@@ -4,10 +4,17 @@
 {{ if .Site.Data.seo }}
   {{ $seoHTML := "" }}
   {{ if .IsHome }}
-    {{ with .Site.Data.seo.homepage }}{{ $seoHTML = . }}{{ end }}
+    {{ with .Site.Data.seo.homepage }}{{ $seoHTML = . }}{{ else }}{{ with .Site.Data.seo.global }}{{ $seoHTML = . }}{{ end }}{{ end }}
   {{ else if eq .Kind "section" }}
     {{ $sectionKey := printf "%s_section" .Section }}
-    {{ with index .Site.Data.seo $sectionKey }}{{ $seoHTML = . }}{{ else }}{{ with .Site.Data.seo.global }}{{ $seoHTML = . }}{{ end }}{{ end }}
+    {{ with index .Site.Data.seo $sectionKey }}{{ $seoHTML = . }}{{ else }}
+      {{/* 針對 contact 特例：使用 contact_section 作為兜底 */}}
+      {{ if eq .Section "contact" }}
+        {{ with .Site.Data.seo.contact_section }}{{ $seoHTML = . }}{{ else }}{{ with .Site.Data.seo.global }}{{ $seoHTML = . }}{{ end }}{{ end }}
+      {{ else }}
+        {{ with .Site.Data.seo.global }}{{ $seoHTML = . }}{{ end }}
+      {{ end }}
+    {{ end }}
   {{ else }}
     {{ with .Site.Data.seo.global }}{{ $seoHTML = . }}{{ end }}
   {{ end }}
