@@ -16,13 +16,15 @@
   display: flex;
   align-items: center;
   transition: background-color $transition-base $ease-in-out, border-color $transition-base $ease-in-out;
+  // 預先佔位避免滾動時新增邊框造成 CLS
+  border-bottom: 1px solid transparent;
 
   // Scrolled state
   &.is-scrolled {
     background-color: rgba($color-bg-primary, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid $color-border-primary;
+    border-bottom-color: $color-border-primary; // 僅改變顏色，不改變高度
   }
 
   &__container {
