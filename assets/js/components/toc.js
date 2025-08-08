@@ -169,7 +169,7 @@ function setupTOCStickyBoundary() {
     const articleRect = article.getBoundingClientRect();
     const tocRect = toc.getBoundingClientRect();
     const shouldRelease = articleRect.bottom - (tocRect.height + offsetTop) <= 0;
-    // 永遠維持 sticky，但在接近底部時，改用 translateY 模擬停住，以保留「置頂感」直到最底
+    // 維持 sticky；接近底部以 translateY 讓出空間，並交由 z-index 保證標籤雲在上層
     if (shouldRelease) {
       const delta = articleRect.bottom - (tocRect.height + offsetTop);
       toc.style.transform = `translateY(${delta}px)`;

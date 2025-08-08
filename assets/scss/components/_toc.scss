@@ -1,14 +1,14 @@
 /* 目錄樣式 */
 .toc-container {
   margin-bottom: $spacing-8;
-  position: sticky; // 到達此區才吸附
-  top: 72px; // 與固定導覽列高度對齊，避免被覆蓋/抖動
+  position: sticky; // 預設 sticky，由 JS 於文末切換為 absolute
+  top: 72px; // 與固定導覽列高度對齊
   background-color: $color-bg-secondary;
   border-radius: $border-radius-lg;
   padding: $spacing-4;
   border: 1px solid $color-border-primary;
   box-shadow: none;
-  z-index: 1; // 降低一點層級，避免覆蓋標籤雲
+  z-index: 0; // 更低層級，確保不覆蓋標籤雲
   padding-right: $spacing-4; // 增加右側間距
   
   .toc-title {

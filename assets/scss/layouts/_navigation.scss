@@ -163,7 +163,7 @@
 
 .dropdown-item {
   display: block;
-  padding: $spacing-2 $spacing-3;
+  padding: $spacing-2 $spacing-3; // 保持觸控區
   color: $color-text-primary;
   text-decoration: none;
   font-size: $font-size-small;
