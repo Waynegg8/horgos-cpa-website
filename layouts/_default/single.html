@@ -73,42 +73,43 @@
                     </button>
                 </div>
                 
-                <!-- 相關文章推薦（僅推薦相同類型：文章 -> 文章） -->
-                {{ $relatedAll := .Site.RegularPages.Related . }}
-                {{ $related := where $relatedAll "Section" .Section | first 3 }}
-                {{ if $related }}
-                <section class="article-related">
-                    <div class="container">
-                        <h3 class="section-title">相關推薦</h3>
-                        <div class="article-list__grid">
-                            {{ range $related }}
-                            <a href="{{ .RelPermalink }}" class="card-style card-clickable article-item">
-                              <div class="card-horizontal">
-                                <div class="card-horizontal__image">
-                                  {{ $rel := . }}
-                                  {{ with $rel.Params.image }}
-                                  <img src="{{ . }}" alt="{{ $rel.Title }}" loading="lazy" decoding="async" width="640" height="426">
-                                  {{ else }}
-                                  <img src="/uploads/images/general/general-default.jpg" alt="{{ $rel.Title }}" loading="lazy" decoding="async" width="640" height="426">
-                                  {{ end }}
-                                </div>
-                                <div class="card-horizontal__content">
-                                  <h2 class="article-title">{{ .Title }}</h2>
-                                  <div class="article-meta">
-                                    <span class="article-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
-                                    {{ with .Params.category }}<span class="article-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>{{ end }}
-                                  </div>
-                                  <p class="article-summary">{{ .Summary | plainify | truncate 100 }}</p>
-                                </div>
-                              </div>
-                            </a>
-                            {{ end }}
-                        </div>
-                    </div>
-                </section>
-                {{ end }}
             </article>
             {{ partial "shared/comments.html" . }}
+            
+            <!-- 相關文章推薦（僅推薦相同類型：文章 -> 文章） -->
+            {{ $relatedAll := .Site.RegularPages.Related . }}
+            {{ $related := where $relatedAll "Section" .Section | first 3 }}
+            {{ if $related }}
+            <section class="article-related">
+                <div class="container">
+                    <h3 class="section-title">相關推薦</h3>
+                    <div class="article-list__grid">
+                        {{ range $related }}
+                        <a href="{{ .RelPermalink }}" class="card-style card-clickable article-item">
+                          <div class="card-horizontal">
+                            <div class="card-horizontal__image">
+                              {{ $rel := . }}
+                              {{ with $rel.Params.image }}
+                              <img src="{{ . }}" alt="{{ $rel.Title }}" loading="lazy" decoding="async" width="640" height="426">
+                              {{ else }}
+                              <img src="/uploads/images/general/general-default.jpg" alt="{{ $rel.Title }}" loading="lazy" decoding="async" width="640" height="426">
+                              {{ end }}
+                            </div>
+                            <div class="card-horizontal__content">
+                              <h2 class="article-title">{{ .Title }}</h2>
+                              <div class="article-meta">
+                                <span class="article-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+                                {{ with .Params.category }}<span class="article-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>{{ end }}
+                              </div>
+                              <p class="article-summary">{{ .Summary | plainify | truncate 100 }}</p>
+                            </div>
+                          </div>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+            </section>
+            {{ end }}
         </div>
         
         <!-- 側邊欄 -->

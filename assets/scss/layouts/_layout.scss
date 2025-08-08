@@ -43,6 +43,7 @@
   display: flex;
   gap: $spacing-6; // 減少間距從 $spacing-8 到 $spacing-6
   margin-bottom: $spacing-16;
+  align-items: flex-start; // 主欄與側欄頂端對齊，減少滾動卡頓
   
   @include mobile {
     flex-direction: column;
@@ -61,6 +62,7 @@
     top: $spacing-4; // 到達視窗頂即吸附
     height: max-content; // 讓 sticky 正常運作，避免被父容器高度限制
     align-self: flex-start;
+    will-change: top; // 提示瀏覽器優化 sticky 計算
     
     @include tablet {
       width: 280px; // 平板版稍微增加寬度
