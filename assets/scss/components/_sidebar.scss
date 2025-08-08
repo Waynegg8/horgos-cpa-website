@@ -2,13 +2,13 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: $spacing-6;
+  gap: $spacing-4; // 縮小側邊欄元件間距
   
   // 側邊欄小工具
   &-widget {
     background-color: $color-bg-secondary;
     border-radius: $border-radius-lg;
-    padding: $spacing-6;
+    padding: $spacing-5; // 收斂內邊距
     box-shadow: $shadow-sm;
     
     &__title {

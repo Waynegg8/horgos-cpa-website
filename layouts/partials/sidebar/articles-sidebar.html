@@ -60,16 +60,16 @@
             {{ range first 5 (where .Site.RegularPages "Section" "articles") }}
             <li class="sidebar-recent__item">
                 <a href="{{ .RelPermalink }}" class="sidebar-recent__link">
-                    <div class="sidebar-recent__image">
-                        {{ with .Params.cover }}
+                    <div class="sidebar-recent__thumbnail">
+                        {{ with .Params.image }}
                         <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
                         {{ else }}
                         <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
                         {{ end }}
                     </div>
                     <div class="sidebar-recent__content">
-                        <h4 class="sidebar-recent__title">{{ .Title }}</h4>
-                        <span class="sidebar-recent__date">{{ .Date.Format "2006-01-02" }}</span>
+                        <div class="sidebar-recent__title">{{ .Title }}</div>
+                        <div class="sidebar-recent__date">{{ .Date.Format "2006-01-02" }}</div>
                     </div>
                 </a>
             </li>
