@@ -22,8 +22,11 @@
             {{ if eq .Section "about" }}
             <!-- 關於我們頁面內容 -->
             {{ else if eq .Section "services" }}
-            <!-- 服務項目頁面內容 -->
+            <!-- 服務總覽頁：卡片 + 內容敘述區塊 -->
             {{ partial "services/service-cards.html" . }}
+            {{ partial "services/service-features.html" . }}
+            {{ partial "services/service-process.html" . }}
+            {{ partial "services/service-commitment.html" . }}
             {{ else if eq .Section "articles" }}
             <!-- 文章列表頁面內容（支援 ?q= 以標籤或關鍵字搜尋） -->
             {{ partial "articles/article-list.html" . }}
