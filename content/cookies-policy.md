@@ -1,6 +1,6 @@
 ---
 title: "Cookies政策"
-description: "Hugo會計師事務所Cookies使用政策"
+description: "霍爾果斯會計師事務所Cookies使用政策"
 date: 2024-05-24
 ---
 
@@ -134,7 +134,7 @@ Cookies可以分為「暫時性Cookies」和「持久性Cookies」：
 
 如果您對本Cookies政策有任何問題、意見或需求，歡迎透過以下方式與我們聯繫：
 
-- **電子郵件**：privacy@hugo-accounting.com
+- **電子郵件**：privacy@horgoscpa.com
 - **電話**：02-2345-6789
 - **地址**：台北市信義區松仁路100號10樓
 - **聯絡表單**：[聯絡我們](/contact/)

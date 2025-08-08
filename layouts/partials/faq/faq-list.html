@@ -2,7 +2,10 @@
 <div class="faq-list">
     <!-- 搜索框（僅搜索本頁FAQ） -->
     <div class="list-search" role="search" aria-label="FAQ搜尋">
-        <input id="faq-search-input" type="search" placeholder="搜尋問題標題或摘要..." aria-label="搜尋FAQ" />
+        <label class="search-field">
+            <i class="fas fa-search search-icon" aria-hidden="true"></i>
+            <input id="faq-search-input" class="search-input" type="search" placeholder="搜尋問題標題或摘要..." aria-label="搜尋FAQ" />
+        </label>
     </div>
 
     <!-- 分類搜索標籤 -->
@@ -16,7 +19,9 @@
     
     <!-- FAQ列表 -->
     <div class="faq-list__grid">
-        {{ $paginator := .Paginate .RegularPages 10 }}
+        {{/* 取得該 section 下所有單篇 FAQ（含子資料夾），排除 _index */}}
+        {{ $all := .RegularPagesRecursive }}
+        {{ $paginator := .Paginate $all 10 }}
         {{ if not (gt (len $paginator.Pages) 0) }}
         <div class="empty-state">目前沒有符合條件的問題。</div>
         {{ end }}

@@ -9,33 +9,44 @@
 // -----------------------------------------------------------------------------
 .search-section, .list-search {
   margin-bottom: $spacing-8;
-  
+
   .search-container { margin-bottom: $spacing-6; }
-  .search-form { display: flex; align-items: center; gap: $spacing-2; }
-  input[type="search"],
-  
-  .search-input {
+
+  /* 新：帶放大鏡圖示的輸入框 */
+  .search-field {
+    position: relative;
+    display: block;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: $spacing-3;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-text-tertiary;
+    font-size: $font-size-base;
+    pointer-events: none;
+  }
+
+  .search-input,
+  input[type="search"] {
     font-size: $font-size-base;
     font-family: $font-family-base;
-    padding: $spacing-3 $spacing-4;
+    padding: $spacing-3 $spacing-4 $spacing-3 $spacing-8; // 左側為圖示留空
     border-radius: $border-radius-md;
     border: 1px solid $color-border-primary;
     background-color: $color-bg-secondary;
     color: $color-text-primary;
     width: 100%;
-    
+    line-height: 1.2;
+
     &::placeholder {
       color: $color-text-tertiary;
       font-size: $font-size-base;
     }
   }
-  
-  .search-button {
-    font-size: $font-size-base;
-    padding: $spacing-3 $spacing-4;
-    @extend .btn;
-    @extend .btn-secondary;
-  }
+
+  .search-button { display: none; }
 }
 
 // 側邊欄搜尋樣式（單一文章頁）

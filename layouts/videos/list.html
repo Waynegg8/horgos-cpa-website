@@ -1,16 +1,18 @@
 {{ define "main" }}
+<!-- 統一頁首區塊（置於雙欄之外，確保側邊欄從內容處開始） -->
+<div class="page-header">
+  <div class="container">
+    <div class="page-header__content">
+      <h1 class="page-header__title">{{ .Title }}</h1>
+      <div class="page-header__line"></div>
+      {{ with .Description }}<p class="page-header__description">{{ . }}</p>{{ end }}
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="two-column">
     <div class="two-column__main">
-      
-      <!-- 頁面標題和內容 -->
-      <div class="page-header">
-        <div class="page-header__content">
-          <h1 class="page-header__title">{{ .Title }}</h1>
-          <div class="page-header__line"></div>
-          {{ with .Description }}<p class="page-header__description">{{ . }}</p>{{ end }}
-        </div>
-      </div>
       
       <!-- 分類篩選 -->
       <div class="category-nav card-style">
