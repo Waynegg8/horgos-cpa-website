@@ -112,8 +112,8 @@
             {{ end }}
         </div>
         
-        <!-- 側邊欄（文章單頁使用 sticky） -->
-        <div class="two-column__sidebar two-column__sidebar--sticky">
+        <!-- 側邊欄（單頁改為非 sticky，僅 TOC 自身 sticky） -->
+        <div class="two-column__sidebar">
             {{ partial "sidebar/articles-sidebar.html" . }}
         </div>
     </div>

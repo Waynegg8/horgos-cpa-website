@@ -6,7 +6,8 @@
   // 交由父層 `.two-column__sidebar` 做 sticky，避免巢狀 sticky 失效
   position: static;
   z-index: 1;
-  max-height: none; // 避免撐高覆蓋
+  max-width: 100%;
+  overflow: visible; // 讓內容在容器內自然換行
 
   // 列表頁視覺密度與分隔
   body.articles & { .sidebar-widget { margin-bottom: $spacing-4; } }
@@ -45,9 +46,9 @@
       gap: $spacing-1;
     }
   }
-  .sidebar-categories { order: 1; }
+  .sidebar-categories { order: 3; }
   .sidebar-series { order: 2; }
-  .sidebar-recent { order: 3; }
+  .sidebar-recent { order: 1; }
   .sidebar-tags { order: 99; }
   
   // 側邊欄小工具
@@ -57,6 +58,7 @@
     padding: $spacing-4; // 再收斂內邊距，降低總高度
     box-shadow: $shadow-sm;
     &:not(:last-child){ margin-bottom: $spacing-4; }
+    min-width: 0; // 防止內部文字撐破
     
     &__title {
       margin: 0 0 $spacing-4 0;
@@ -231,21 +233,9 @@
       }
     }
     
-    &__content {
-      flex: 1;
-      min-width: 0; // 防止內容溢出
-      padding-right: $spacing-2; // 增加右邊距
-    }
+    &__content { flex: 1; min-width: 0; padding-right: $spacing-2; overflow: hidden; }
     
-    &__title {
-      margin: 0 0 $spacing-1 0;
-      font-size: $font-size-small;
-      font-weight: 500;
-      line-height: 1.3;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap; // 單行顯示，避免擠壓日期
-    }
+    &__title { margin: 0 0 $spacing-1 0; font-size: $font-size-small; font-weight: 500; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
     
     &__date {
       font-size: 0.75rem;

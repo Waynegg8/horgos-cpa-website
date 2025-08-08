@@ -125,7 +125,7 @@
 }
 
 // Sticky 平滑：避免內部元素造成抖動
-.two-column__sidebar, .two-column__sidebar--sticky { contain: layout paint; }
+.two-column__sidebar, .two-column__sidebar--sticky { contain: layout paint; position: static; top: auto; }
 
 // FAQ分類區域
 .faq-categories {

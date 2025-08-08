@@ -344,13 +344,13 @@
       transition: transform .28s ease, box-shadow .28s ease;
       will-change: transform;
 
-      // 深到淺藍系（避免紫色），並增加多色巡迴
-      background: linear-gradient(135deg, #0B72B9 0%, #4FC3F7 100%);
-      &:nth-child(6n+2){ background: linear-gradient(135deg, #0B5FA4 0%, #60A5FA 100%);} 
-      &:nth-child(6n+3){ background: linear-gradient(135deg, #0A4E8E 0%, #93C5FD 100%);} 
-      &:nth-child(6n+4){ background: linear-gradient(135deg, #0A3F78 0%, #BFDBFE 100%);} 
-      &:nth-child(6n+5){ background: linear-gradient(135deg, #093366 0%, #A5B4FC 100%);} 
-      &:nth-child(6n+6){ background: linear-gradient(135deg, #0B5394 0%, #60A5FA 100%);} 
+      // 多色巡迴（避免全部同色系）：藍/綠/橙/青/灰藍/湖藍
+      background: linear-gradient(135deg, #0B72B9 0%, #4FC3F7 100%); // 藍
+      &:nth-child(6n+2){ background: linear-gradient(135deg, #0f766e 0%, #34d399 100%);} // 綠 
+      &:nth-child(6n+3){ background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%);} // 橙 
+      &:nth-child(6n+4){ background: linear-gradient(135deg, #0e7490 0%, #22d3ee 100%);} // 青 
+      &:nth-child(6n+5){ background: linear-gradient(135deg, #1e3a8a 0%, #93c5fd 100%);} // 灰藍 
+      &:nth-child(6n+6){ background: linear-gradient(135deg, #0369a1 0%, #67e8f9 100%);} // 湖藍 
 
       // 斜向掃光動畫（Stripe 風）
       &::after {
