@@ -185,11 +185,17 @@
       font-weight: 600;
     }
     
-    &__title {
-      font-size: $font-size-lg;
-      color: $color-accent-highlight;
+    &__role {
+      display: inline-block;
       margin-bottom: $spacing-4;
-      font-weight: 500;
+      background: linear-gradient(90deg, rgba($color-accent-highlight,0.18), rgba($color-accent-highlight,0.08));
+      color: $color-text-primary;
+      border: 1px solid rgba($color-accent-highlight,0.35);
+      border-radius: $border-radius-full;
+      padding: $spacing-1 $spacing-3;
+      font-size: $font-size-small;
+      line-height: 1.4;
+      white-space: nowrap;
     }
 
     &__header {
@@ -258,15 +264,16 @@
     gap: $spacing-2;
     
     .skill-tag {
-      background-color: rgba($color-accent-highlight, 0.1);
-      color: $color-accent-highlight;
+      // 改為與「企業財務顧問」按鈕風格相近的淺綠色系
+      background-color: rgba(34, 197, 94, 0.12); // #22c55e 12%
+      color: #86efac; // 更亮的綠，避免過暗
       padding: $spacing-1 $spacing-3;
       border-radius: $border-radius-full;
       font-size: $font-size-small;
-      font-weight: 500;
-      border: 1px solid rgba($color-accent-highlight, 0.25);
+      font-weight: 600;
+      border: 1px solid rgba(34, 197, 94, 0.35);
       transition: background-color $transition-base $ease-in-out, color $transition-base $ease-in-out, transform $transition-base $ease-in-out;
-      &:hover { background-color: rgba($color-accent-highlight, 0.2); transform: translateY(-1px); }
+      &:hover { background-color: rgba(34, 197, 94, 0.22); color: #a7f3d0; transform: translateY(-1px); }
     }
   }
   
