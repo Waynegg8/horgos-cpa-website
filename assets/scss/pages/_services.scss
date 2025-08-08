@@ -37,6 +37,12 @@
   }
 }
 
+/* 置中「了解更多」 */
+.service-card-link .service-card__link {
+  justify-content: center;
+  align-self: center;
+}
+
 /* 服務特色 */
 .services-features {
   margin-bottom: $spacing-16;
