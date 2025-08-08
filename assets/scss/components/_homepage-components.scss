@@ -65,6 +65,22 @@
   }
 }
 
+// 客戶見證
+.testimonials {
+  padding: $spacing-16 0;
+  &__title { text-align:left; margin-bottom:$spacing-6; }
+  &__grid { display:grid; grid-template-columns: repeat(3,1fr); gap:$spacing-6; }
+}
+.testimonial {
+  @extend .card-style;
+  display:flex; flex-direction:column; gap:$spacing-3; text-align:left;
+  &__avatar img { border-radius:50%; width:64px; height:64px; }
+  &__quote { color:$color-text-secondary; margin:0; }
+  &__author { color:$color-text-primary; font-weight:600; }
+}
+@include tablet { .testimonials__grid { grid-template-columns: repeat(2,1fr); } }
+@include mobile { .testimonials__grid { grid-template-columns: 1fr; } }
+
 // 服務卡片網格優化
 .service-cards {
   padding: $spacing-16 0;
