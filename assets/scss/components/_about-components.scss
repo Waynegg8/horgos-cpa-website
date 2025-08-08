@@ -72,6 +72,13 @@
 }
 
 // 關於介紹區域
+.about-hero {
+  padding: $spacing-16 0 $spacing-8;
+  .about-hero__title { font-size: $font-size-h1; font-weight: 700; margin-bottom: $spacing-3; }
+  .about-hero__desc { color: $color-text-secondary; max-width: 820px; line-height: $line-height-base; }
+  .about-hero__divider { height: 1px; background: $color-border-primary; margin-top: $spacing-6; }
+}
+
 .about-intro {
   padding: $spacing-16 0;
   
