@@ -54,11 +54,16 @@
 
   // 在桌面也顯示小標題（按鈕外觀僅作為標題容器，不可點擊）
   .footer-collapse-toggle {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: $spacing-2;
+    justify-content: flex-start;
     pointer-events: none; // 桌面不允許點擊切換
     &::after { display: none; } // 桌面隱藏箭頭
+    width: auto;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+    i { width: 1.25em; text-align: center; position: relative; top: 1px; }
   }
 }
 
@@ -190,7 +195,9 @@
 @include mobile {
   .footer-heading--collapsible .footer-collapse-toggle {
     display: flex;
+    width: 100%;
     pointer-events: auto; // 行動版可點擊
+    justify-content: space-between;
     &::after { display: inline-block; } // 行動版顯示箭頭
   }
 
