@@ -20,7 +20,7 @@ function initTableOfContents() {
     return;
   }
   
-  // 創建目錄
+  // 創建目錄（支援巢狀結構）
   const tocList = document.createElement('ul');
   tocList.className = 'toc-list';
   
@@ -31,35 +31,47 @@ function initTableOfContents() {
     'H4': 3
   };
   
-  // 為每個標題創建目錄項
+  // 使用堆疊構建巢狀 UL 結構
+  const stack = [{ level: 0, ul: tocList }];
+  
   headings.forEach((heading, index) => {
-    // 為標題添加ID，如果沒有的話
-    if (!heading.id) {
-      heading.id = `heading-${index}`;
+    // 確保每個標題有 id
+    if (!heading.id) heading.id = `heading-${index}`;
+    const level = levelMap[heading.tagName];
+    
+    // 回到對應層級
+    while (stack.length && stack[stack.length - 1].level >= level) {
+      stack.pop();
     }
     
-    const listItem = document.createElement('li');
-    listItem.className = `toc-item toc-level-${levelMap[heading.tagName]}`;
+    // 目前層級的父 UL
+    const parent = stack[stack.length - 1];
+    const li = document.createElement('li');
+    li.className = `toc-item toc-level-${level}`;
+    li.dataset.target = heading.id;
     
     const link = document.createElement('a');
     link.href = `#${heading.id}`;
     link.textContent = heading.textContent;
     link.className = 'toc-link';
+    li.appendChild(link);
     
-    listItem.appendChild(link);
-    tocList.appendChild(listItem);
+    // 預建子清單（初始收合）
+    const sub = document.createElement('ul');
+    sub.className = 'toc-sublist';
+    li.appendChild(sub);
     
-    // 添加點擊事件，平滑滾動
+    parent.ul.appendChild(li);
+    // 將子層壓入堆疊
+    stack.push({ level, ul: sub });
+    
+    // 點擊滾動
     link.addEventListener('click', function(e) {
       e.preventDefault();
       const targetId = this.getAttribute('href').substring(1);
       const targetElement = document.getElementById(targetId);
-      
       if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 100,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: targetElement.offsetTop - 100, behavior: 'smooth' });
       }
     });
   });
@@ -72,6 +84,9 @@ function initTableOfContents() {
   
   // 設置目錄項高亮
   setupTOCHighlight();
+  // 初始化展開第一個章節
+  const first = tocContainer.querySelector('.toc-item');
+  if (first) first.classList.add('expanded');
 }
 
 function setupAutoCollapseTOC() {
@@ -102,17 +117,20 @@ function setupAutoCollapseTOC() {
     toggleBtn.innerHTML = isCollapsed ? '<i class="fas fa-chevron-down"></i>' : '<i class="fas fa-chevron-up"></i>';
   });
   
-  // 滾動時自動收起子層（僅保留當前區塊）
+  // 滾動時自動展開目前章節、收起其他章節
   window.addEventListener('scroll', () => {
     const active = document.querySelector('.toc-link.active');
-    const items = document.querySelectorAll('.toc-item');
     if (!active) return;
-    const activeItem = active.parentElement;
-    items.forEach(item => {
-      const isParentOrSelf = item === activeItem || item.contains(activeItem);
-      // 僅顯示父層與自身，同層其他子項淡出
-      item.style.opacity = isParentOrSelf ? '1' : '0.6';
-    });
+    const activeItem = active.closest('.toc-item');
+    if (!activeItem) return;
+    // 先移除所有展開
+    tocContainer.querySelectorAll('.toc-item.expanded').forEach(el => el.classList.remove('expanded'));
+    // 由內而外展開父鏈
+    let node = activeItem;
+    while (node && node.classList && node.classList.contains('toc-item')) {
+      node.classList.add('expanded');
+      node = node.parentElement.closest('.toc-item');
+    }
   });
 }
 
@@ -154,15 +172,24 @@ function setupTOCHighlight() {
     }
     
     // 移除所有活動狀態
-    tocLinks.forEach(link => {
-      link.classList.remove('active');
-    });
+    tocLinks.forEach(link => link.classList.remove('active'));
     
     // 添加活動狀態到當前標題對應的目錄項
     if (currentHeading) {
       const activeLink = document.querySelector(`.toc-link[href="#${currentHeading.id}"]`);
       if (activeLink) {
         activeLink.classList.add('active');
+        // 同步展開/收合
+        const activeItem = activeLink.closest('.toc-item');
+        const tocContainer = document.getElementById('toc-container');
+        if (activeItem && tocContainer) {
+          tocContainer.querySelectorAll('.toc-item.expanded').forEach(el => el.classList.remove('expanded'));
+          let node = activeItem;
+          while (node && node.classList && node.classList.contains('toc-item')) {
+            node.classList.add('expanded');
+            node = node.parentElement.closest('.toc-item');
+          }
+        }
       }
     }
   });

@@ -20,6 +20,28 @@
   animation: pulse 1.6s infinite ease-in-out;
 }
 
+// 統計卡片進場
+@keyframes statFadeUp {
+  0% { opacity: 0; transform: translateY(12px) scale(0.985); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+// 較柔和的呼吸效果（專供 CTA 使用）
+@keyframes pulseSoft {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  }
+}
+
 // 淡入上移效果
 @keyframes fadeInUp {
   from {

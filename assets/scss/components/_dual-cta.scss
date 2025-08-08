@@ -42,7 +42,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: $spacing-8; // 與首頁設定一致，避免放大時過近
   }
 
   .btn-cta-primary {
@@ -55,6 +55,7 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
+    animation: pulseSoft 1.6s infinite ease-in-out; // CTA 使用較柔和呼吸
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -83,6 +84,7 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
+    animation: pulseSoft 1.6s infinite ease-in-out; // CTA 使用較柔和呼吸
     text-decoration: none;
     display: inline-flex;
     align-items: center;

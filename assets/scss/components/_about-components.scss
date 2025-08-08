@@ -20,7 +20,20 @@
   .about-feature__icon {
     text-align: center;
     margin-bottom: $spacing-4;
-    i { font-size: 2.5rem; color: $color-accent-highlight; }
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      font-size: 2.5rem;
+      color: $color-accent-highlight;
+      display: inline-block;
+      line-height: 1;
+      margin: 0 auto;
+      vertical-align: middle;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
   }
   .about-feature__title { font-size: $font-size-h4; color: $color-text-primary; margin-bottom: $spacing-3; font-weight: 600; }
   .about-feature__description { color: $color-text-secondary; line-height: $line-height-base; }
@@ -50,10 +63,21 @@
     
     &__icon {
       margin-bottom: $spacing-4;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       
       i {
         font-size: 2.5rem;
         color: $color-accent-highlight;
+        display: inline-block;
+        line-height: 1;
+        margin: 0 auto;
+        vertical-align: middle;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: geometricPrecision;
       }
     }
     

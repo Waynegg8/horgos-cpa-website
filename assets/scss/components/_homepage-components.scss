@@ -24,6 +24,11 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: $spacing-6;
+    // 進場延遲（階梯）
+    .stat:nth-child(1).inview { animation-delay: 0.0s; }
+    .stat:nth-child(2).inview { animation-delay: 0.06s; }
+    .stat:nth-child(3).inview { animation-delay: 0.12s; }
+    .stat:nth-child(4).inview { animation-delay: 0.18s; }
     @include tablet { grid-template-columns: repeat(2, 1fr); }
     @include mobile { grid-template-columns: 1fr; }
   }
@@ -82,7 +87,19 @@
   padding: $spacing-6;
   &__icon {
     margin-bottom: $spacing-4;
-    i { font-size: 2rem; color: $color-accent-highlight; }
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    i {
+      font-size: 2rem;
+      color: $color-accent-highlight;
+      display: inline-block;
+      line-height: 1;
+      margin: 0 auto;
+      vertical-align: middle;
+    }
   }
   &__title { font-size: $font-size-h4; font-weight: 600; margin-bottom: $spacing-2; color: $color-text-primary; }
   &__desc { color: $color-text-secondary; line-height: $line-height-base; }
@@ -191,7 +208,7 @@
   &__buttons {
     display: flex;
     justify-content: center;
-    gap: $spacing-6; // 稍微分開一些
+    gap: $spacing-8; // 增加按鈕間距，避免動畫放大時過近
     
     @include mobile {
       flex-direction: column;
@@ -209,7 +226,7 @@
   padding: $spacing-4 $spacing-8;
   font-size: $font-size-lg;
   border-radius: $border-radius-lg;
-  animation: pulse 1.4s infinite ease-in-out; // 強烈呼吸
+  animation: pulseSoft 1.6s infinite ease-in-out; // CTA 使用較柔和呼吸
   
   &:hover:not(:disabled) {
     transform: translateY(-2px);
@@ -224,7 +241,7 @@
   padding: $spacing-4 $spacing-8;
   font-size: $font-size-lg;
   border-radius: $border-radius-lg;
-  animation: pulse 1.4s infinite ease-in-out; // 強烈呼吸
+  animation: pulseSoft 1.6s infinite ease-in-out; // CTA 使用較柔和呼吸
   
   &:hover:not(:disabled) {
     background-color: darken($color-line, 10%);

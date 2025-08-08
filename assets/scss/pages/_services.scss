@@ -6,6 +6,13 @@
   padding-right: $spacing-4; // 增加右側間距
 }
 
+/* 服務列表頁 Page Header 置左（強化優先度避免舊樣式殘留） */
+.services {
+  .page-header__content { text-align: left; }
+  .page-header__line { margin: 0 0 $spacing-4 0; }
+  .page-header__description { margin: 0; text-align: left; }
+}
+
 // 快速CTA
 .service-quick-cta {
   margin-bottom: $spacing-6; // 縮小區塊間距

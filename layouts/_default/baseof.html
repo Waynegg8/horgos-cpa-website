@@ -154,10 +154,12 @@
     {{ $footerCollapseScript := resources.Get "js/components/footerCollapse.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $footerCollapseScript.RelPermalink }}"></script>
     
-    <!-- Hero 輪播功能 (僅首頁) -->
+    <!-- Hero 輪播功能 & 首頁進場動畫 (僅首頁) -->
     {{ if .IsHome }}
     {{ $heroCarouselScript := resources.Get "js/components/hero-carousel.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $heroCarouselScript.RelPermalink }}"></script>
+    {{ $inviewStatsScript := resources.Get "js/components/inview-stats.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $inviewStatsScript.RelPermalink }}"></script>
     {{ end }}
     
     <!-- About 圖片進場傾斜轉正效果 -->
