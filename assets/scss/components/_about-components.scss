@@ -173,9 +173,17 @@
         height: auto; // 不裁切
         display: block;
         border-radius: $border-radius-lg; // 照片改為明顯圓角
-        transition: transform $transition-base $ease-in-out, box-shadow $transition-base $ease-in-out;
+        // 初始為輕微傾斜與縮放，待進入視窗時轉正
+        transform: rotate(-3deg) scale(0.985);
+        opacity: 0.92;
+        transition: transform $transition-slow $ease-in-out, box-shadow $transition-base $ease-in-out, opacity $transition-base $ease-in-out;
       }
-      &:hover img { transform: scale(1.02); box-shadow: $shadow-md; }
+      // 進入視窗時的最終狀態
+      img.inview {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+        box-shadow: $shadow-md;
+      }
     }
     
     &__name {

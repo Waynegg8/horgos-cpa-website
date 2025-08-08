@@ -160,6 +160,12 @@
     <script type="module" src="{{ $heroCarouselScript.RelPermalink }}"></script>
     {{ end }}
     
+    <!-- About 圖片進場傾斜轉正效果 -->
+    {{ if eq .Section "about" }}
+    {{ $inviewTiltScript := resources.Get "js/components/inview-photo-tilt.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $inviewTiltScript.RelPermalink }}"></script>
+    {{ end }}
+    
     
     
     {{ if and (eq .Section "articles") (eq .Kind "page") }}
