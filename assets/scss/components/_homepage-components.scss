@@ -70,6 +70,15 @@
   padding: $spacing-16 0;
   &__title { text-align:left; margin-bottom:$spacing-6; }
   &__grid { display:grid; grid-template-columns: repeat(3,1fr); gap:$spacing-6; }
+  // 標題下方的裝飾線：加長並加上流動動畫
+  .page-header__line {
+    width: 140px; // 加長
+    height: 3px;
+    background: linear-gradient(90deg, $color-accent-highlight, $color-accent-primary);
+    background-size: 200% 100%;
+    border-radius: 2px;
+    animation: testimonialLine 2.2s linear infinite;
+  }
 }
 .testimonial {
   @extend .card-style;
@@ -80,6 +89,12 @@
 }
 @include tablet { .testimonials__grid { grid-template-columns: repeat(2,1fr); } }
 @include mobile { .testimonials__grid { grid-template-columns: 1fr; } }
+
+// 流動動畫（由左至右）
+@keyframes testimonialLine {
+  0% { background-position: 0% 0; }
+  100% { background-position: -200% 0; }
+}
 
 // 服務卡片網格優化
 .service-cards {

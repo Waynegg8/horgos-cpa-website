@@ -216,20 +216,31 @@
       align-items: center;
       gap: $spacing-2;
       padding: $spacing-2 $spacing-3;
+      // 多色系膠囊，避免整排同色
       background: linear-gradient(135deg, rgba($color-accent-primary, 0.95) 0%, rgba($color-accent-highlight, 0.95) 100%);
-      color: #ffffff;
+      color: #0B1520; // 提升可讀性（深色字）
       border: none;
       text-decoration: none;
       border-radius: $border-radius-full;
-      font-size: $font-size-sm; // 統一字級
+      font-size: $font-size-base; // 放大字級
       line-height: 1;
       transition: transform $transition-base ease, box-shadow $transition-base ease, filter $transition-base ease;
-      box-shadow: 0 6px 16px rgba($color-accent-primary, 0.25);
+      box-shadow: 0 4px 12px rgba($color-accent-primary, 0.22);
+      font-weight: 600;
+      letter-spacing: 0.2px;
+
+      // 巡迴多色（不使用隨機，確保 SSR 一致）
+      &:nth-child(6n+1) { background: linear-gradient(135deg, #E0F2FF 0%, #B2EAFF 100%); }
+      &:nth-child(6n+2) { background: linear-gradient(135deg, #E6FFED 0%, #B7F5C3 100%); }
+      &:nth-child(6n+3) { background: linear-gradient(135deg, #FFF4E6 0%, #FFD6A8 100%); }
+      &:nth-child(6n+4) { background: linear-gradient(135deg, #F3E8FF 0%, #D9C8FF 100%); }
+      &:nth-child(6n+5) { background: linear-gradient(135deg, #FFE8EF 0%, #FFC5D6 100%); }
+      &:nth-child(6n+6) { background: linear-gradient(135deg, #E8FEFF 0%, #C8F8FF 100%); }
 
       &:hover {
         transform: translateY(-1px);
-        box-shadow: 0 10px 22px rgba($color-accent-highlight, 0.35);
-        filter: brightness(1.05);
+        box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+        filter: brightness(1.03);
       }
     }
   }
