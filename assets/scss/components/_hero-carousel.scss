@@ -134,6 +134,17 @@
   }
 }
 
+// 修正控制按鈕內 Font Awesome 圖示的垂直位移
+.hero-carousel__control i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  vertical-align: middle;
+}
+
 .hero-carousel__control--prev {
   left: $spacing-4;
   

@@ -34,6 +34,16 @@
   line-height: 1; // 修正 icon 垂直對齊
   transition: all $transition-base;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+  i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    vertical-align: middle;
+  }
   
   &:hover {
     background-color: darken($color-primary, 10%);
@@ -131,6 +141,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    vertical-align: middle;
   }
   
   @include mobile {
@@ -153,6 +167,16 @@
   transition: all $transition-base;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   color: white;
+  
+  i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    vertical-align: middle;
+  }
   
   &:hover {
     transform: translateY(-2px);
