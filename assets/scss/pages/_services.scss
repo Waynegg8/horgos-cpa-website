@@ -6,6 +6,19 @@
   padding-right: $spacing-4; // 增加右側間距
 }
 
+// 快速CTA
+.service-quick-cta {
+  margin-bottom: $spacing-8;
+  padding: $spacing-6;
+  .service-quick-cta__title { margin: 0 0 $spacing-2 0; font-size: $font-size-h3; }
+  .service-quick-cta__desc { margin: 0; color: $color-text-secondary; }
+  .btn { margin-left: $spacing-2; }
+  @include mobile {
+    .flex-row { flex-direction: column; align-items: stretch; gap: $spacing-3; }
+    .btn { width: 100%; margin-left: 0; }
+  }
+}
+
 /* 服務項目網格 */
 .services-grid {
   @include grid(4, $spacing-6);
@@ -106,7 +119,8 @@
   background-color: $color-bg-secondary;
   border-radius: $border-radius-lg;
   padding: $spacing-4;
-  box-shadow: $shadow-md;
+  border: 1px solid $color-border-primary; // 與全站卡片一致
+  box-shadow: none;
   
   &__number {
     width: 50px;
@@ -162,7 +176,8 @@
   background-color: $color-bg-secondary;
   border-radius: $border-radius-lg;
   padding: $spacing-4;
-  box-shadow: $shadow-md;
+  border: 1px solid $color-border-primary; // 與全站卡片一致
+  box-shadow: none;
   
   &__icon {
     width: 50px;
