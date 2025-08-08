@@ -89,9 +89,10 @@
   </div>
 </div>
 {{ else }}
-<!-- 非系列文章：同分類日期相鄰（若為系列則指向該系列第1篇） -->
+<!-- 非系列文章：遵循推薦邏輯 -->
 {{ $cat := .Params.category }}
-{{ $catPages := where $all "Params.category" $cat }}
+{{/* 1) 先在同分類中找日期相鄰 */}}
+{{ $catPages := cond (ne $cat nil) (where $all "Params.category" $cat) (slice) }}
 {{ $catPages = sort $catPages ".Date" "asc" }}
 {{ $idx := -1 }}
 {{ range $i, $p := $catPages }}
@@ -102,6 +103,37 @@
 {{ if ge $idx 0 }}
   {{ if gt $idx 0 }}{{ $scratch.Set "prev" (index $catPages (sub $idx 1)) }}{{ end }}
   {{ if lt (add $idx 1) (len $catPages) }}{{ $scratch.Set "next" (index $catPages (add $idx 1)) }}{{ end }}
+{{ end }}
+
+{{/* 2) 若同分類沒有前/後，依系列邏輯回退：優先同分類的其他系列第一篇，否則任意系列第一篇，最後以全站同類型最新文章作保底 */}}
+{{ if not ($scratch.Get "prev") }}
+  {{ $sameCatSeriesFirst := (where (where (where $all "Params.series" "!=" nil) "Params.category" $cat) "Params.series_order" 1) }}
+  {{ if gt (len $sameCatSeriesFirst) 0 }}
+    {{ $scratch.Set "prev" (index (sort $sameCatSeriesFirst ".Date" "desc") 0) }}
+  {{ else }}
+    {{ $anySeriesFirst := where $all "Params.series_order" 1 }}
+    {{ if gt (len $anySeriesFirst) 0 }}
+      {{ $scratch.Set "prev" (index (sort $anySeriesFirst ".Date" "desc") 0) }}
+    {{ else }}
+      {{ $fallbackPrev := where (sort $all ".Date" "desc") "RelPermalink" "!=" $current.RelPermalink }}
+      {{ if gt (len $fallbackPrev) 0 }}{{ $scratch.Set "prev" (index $fallbackPrev 0) }}{{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if not ($scratch.Get "next") }}
+  {{ $sameCatSeriesFirstN := (where (where (where $all "Params.series" "!=" nil) "Params.category" $cat) "Params.series_order" 1) }}
+  {{ if gt (len $sameCatSeriesFirstN) 0 }}
+    {{ $scratch.Set "next" (index (sort $sameCatSeriesFirstN ".Date" "desc") 0) }}
+  {{ else }}
+    {{ $anySeriesFirstN := where $all "Params.series_order" 1 }}
+    {{ if gt (len $anySeriesFirstN) 0 }}
+      {{ $scratch.Set "next" (index (sort $anySeriesFirstN ".Date" "desc") 0) }}
+    {{ else }}
+      {{ $fallbackNext := where (sort $all ".Date" "asc") "RelPermalink" "!=" $current.RelPermalink }}
+      {{ if gt (len $fallbackNext) 0 }}{{ $scratch.Set "next" (index $fallbackNext 0) }}{{ end }}
+    {{ end }}
+  {{ end }}
 {{ end }}
 
 {{/* 若推薦到系列文章則改指向其 series_order=1 */}}
