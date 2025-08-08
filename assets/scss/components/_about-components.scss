@@ -38,13 +38,11 @@
   
   .certification-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, 1fr); // 桌面固定四欄，避免 3+1 斷行
     gap: $spacing-6;
     
-    @include mobile {
-      grid-template-columns: 1fr;
-      gap: $spacing-4;
-    }
+    @include tablet { grid-template-columns: repeat(2, 1fr); }
+    @include mobile { grid-template-columns: 1fr; gap: $spacing-4; }
   }
   
   .certification-card {
@@ -133,13 +131,13 @@
   
   .team-member {
     display: grid;
-    grid-template-columns: 320px 1fr; // 放大照片卡片
+    grid-template-columns: 360px 1fr; // 再放大照片欄寬
     gap: $spacing-8;
     padding: $spacing-8;
     background-color: transparent; // 由內部卡片呈現卡片感
     
     @include tablet {
-      grid-template-columns: 240px 1fr;
+      grid-template-columns: 280px 1fr;
       gap: $spacing-6;
       padding: $spacing-6;
     }
@@ -153,12 +151,13 @@
     &__image {
       img {
         width: 100%;
-        height: 280px;
+        height: 360px;
         object-fit: cover;
+        object-position: top center; // 以頭像為視覺重心
         border-radius: $border-radius-md;
         
-        @include tablet { height: 220px; }
-        @include mobile { height: 240px; max-width: 320px; margin: 0 auto; }
+        @include tablet { height: 300px; }
+        @include mobile { height: 320px; max-width: 360px; margin: 0 auto; }
       }
     }
     
