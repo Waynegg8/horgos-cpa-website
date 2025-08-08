@@ -30,9 +30,11 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    text-align: justify; // 改善文字對齊
-    word-spacing: 0.05em; // 增加字間距
-    line-height: 1.6; // 改善行高
+    text-align: center;
+    line-height: 1.6;
+    white-space: nowrap;         // 不換行
+    overflow: hidden;            // 超出隱藏
+    text-overflow: ellipsis;     // 超出以省略號處理
   }
 
   &__buttons {

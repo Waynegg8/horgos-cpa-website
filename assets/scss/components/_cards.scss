@@ -264,6 +264,9 @@
 .service-card {
   text-align: center;
   padding: $spacing-8;
+  display: flex;               // 縱向排列，將連結固定在底部
+  flex-direction: column;
+  justify-content: flex-start;
   
   &__icon {
     font-size: 3rem;
@@ -290,11 +293,21 @@
     text-decoration: none;
     font-weight: 500;
     transition: color $transition-base ease;
+    margin-top: auto;           // 推到卡片底部，確保同列水平
+    display: inline-flex;       // 圖示與文字同列
+    align-items: center;
+    gap: $spacing-2;
+    white-space: nowrap;        // 不換行
     
     &:hover {
       color: lighten($color-accent-highlight, 10%);
     }
   }
+}
+
+// 服務列表頁的卡片（與 .service-card 同步行為）
+.service-card-link {
+  @extend .service-card;
 }
 
 // 分類導航卡片

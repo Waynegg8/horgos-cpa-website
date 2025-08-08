@@ -139,6 +139,10 @@
       text-decoration: none;
       font-weight: 500;
       transition: color $transition-base ease;
+      display: inline-flex;       // 文字+箭頭同列
+      align-items: center;
+      gap: $spacing-2;
+      white-space: nowrap;        // 不換行
       
       &:hover {
         color: lighten($color-accent-highlight, 10%);
