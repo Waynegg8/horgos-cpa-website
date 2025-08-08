@@ -37,18 +37,28 @@
            data-category="{{ .Params.category | default "other" }}" 
            data-title="{{ .Title }}" 
            data-summary="{{ .Summary }}">
-            <div class="faq-card__content">
-                <h2 class="faq-title">{{ .Title }}</h2>
-                <div class="faq-meta">
-                    <span class="faq-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
-                    {{ with .Params.category }}
-                    <span class="faq-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>
-                    {{ end }}
-                    {{ with .Params.series }}
-                    <span class="faq-meta__item"><i class="fas fa-bookmark"></i> {{ . }}</span>
+            <div class="card-horizontal">
+                <div class="card-horizontal__image">
+                    {{ $page := . }}
+                    {{ with .Params.image }}
+                    <img src="{{ . }}" alt="{{ $page.Title }}" loading="lazy">
+                    {{ else }}
+                    <img src="/uploads/images/general/general-default.jpg" alt="{{ $page.Title }}" loading="lazy">
                     {{ end }}
                 </div>
-                <p class="faq-summary">{{ .Summary | truncate 100 }}</p>
+                <div class="card-horizontal__content">
+                    <h2 class="faq-title">{{ .Title }}</h2>
+                    <div class="faq-meta">
+                        <span class="faq-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+                        {{ with .Params.category }}
+                        <span class="faq-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>
+                        {{ end }}
+                        {{ with .Params.series }}
+                        <span class="faq-meta__item"><i class="fas fa-bookmark"></i> {{ . }}</span>
+                        {{ end }}
+                    </div>
+                    <p class="faq-summary">{{ .Summary | truncate 100 }}</p>
+                </div>
             </div>
         </a>
         {{ end }}

@@ -1,31 +1,12 @@
 <!-- 文章列表頁 -->
 <div class="article-list">
-    <!-- 搜索框和分類標籤 -->
-    <div class="search-section card-style">
-        <div class="search-container">
-            <form id="search-form" class="search-form">
-                <input 
-                    type="text" 
-                    id="search-input" 
-                    class="search-input" 
-                    placeholder="搜尋文章..." 
-                    aria-label="搜尋文章"
-                    autocomplete="off"
-                >
-                <button type="submit" class="search-button" aria-label="搜尋">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-        </div>
-        
-        <!-- 分類搜索標籤 -->
-        <div class="category-tags">
-            <button class="category-tag category-search-btn active" data-category="all">全部文章</button>
-            <button class="category-tag category-search-btn" data-category="startup-guide">創業教室</button>
-            <button class="category-tag category-search-btn" data-category="tax-planning">稅務指南</button>
-            <button class="category-tag category-search-btn" data-category="accounting-basics">會計實務</button>
-            <button class="category-tag category-search-btn" data-category="legal-updates">法規更新</button>
-        </div>
+    <!-- 分類標籤（搜尋欄改由全域 search/list-search.html 提供，避免重複） -->
+    <div class="category-tags">
+        <button class="category-tag category-search-btn active" data-category="all">全部文章</button>
+        <button class="category-tag category-search-btn" data-category="startup-guide">創業教室</button>
+        <button class="category-tag category-search-btn" data-category="tax-planning">稅務指南</button>
+        <button class="category-tag category-search-btn" data-category="accounting-basics">會計實務</button>
+        <button class="category-tag category-search-btn" data-category="legal-updates">法規更新</button>
     </div>
     
     <!-- 精選文章 -->
@@ -36,7 +17,7 @@
     <section class="featured-article card-style">
         <a href="{{ $featured.RelPermalink }}" class="featured-article__link">
             <div class="featured-article__media">
-                {{ with $featured.Params.cover }}
+                {{ with $featured.Params.image }}
                 <img src="{{ . }}" alt="{{ $featured.Title }}" loading="lazy">
                 {{ else }}
                 <img src="/uploads/images/general/general-default.jpg" alt="{{ $featured.Title }}" loading="lazy">
@@ -73,21 +54,10 @@
             <div class="card-horizontal">
                 <div class="card-horizontal__image">
                     {{ $page := . }}
-                    {{ with .Params.cover }}
+                    {{ with .Params.image }}
                     <img src="{{ . }}" alt="{{ $page.Title }}" loading="lazy">
                     {{ else }}
-                    <!-- 根據文章分類選擇合適的預設圖片 -->
-                    {{ $defaultImage := "/uploads/images/general/general-default.jpg" }}
-                    {{ if eq .Params.category "創業教室" }}
-                        {{ $defaultImage = "/uploads/images/general/general-business-default.jpg" }}
-                    {{ else if eq .Params.category "稅務指南" }}
-                        {{ $defaultImage = "/uploads/images/general/general-accounting-default.jpg" }}
-                    {{ else if eq .Params.category "會計實務" }}
-                        {{ $defaultImage = "/uploads/images/general/general-accounting-desk.jpg" }}
-                    {{ else if eq .Params.category "法規更新" }}
-                        {{ $defaultImage = "/uploads/images/general/general-legal-default.jpg" }}
-                    {{ end }}
-                    <img src="{{ $defaultImage }}" alt="{{ $page.Title }}" loading="lazy">
+                    <img src="/uploads/images/general/general-default.jpg" alt="{{ $page.Title }}" loading="lazy">
                     {{ end }}
                 </div>
                 <div class="card-horizontal__content">
@@ -143,69 +113,22 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const searchForm = document.getElementById('search-form');
-    const searchInput = document.getElementById('search-input');
-    const categoryButtons = document.querySelectorAll('.category-search-btn');
-    const articleItems = document.querySelectorAll('.article-item');
-    
-    // 分類標籤點擊事件
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.dataset.category;
-            
-            // 更新標籤狀態
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            // 執行搜索
-            if (category === 'all') {
-                searchInput.value = '';
-            } else {
-                searchInput.value = this.textContent;
-            }
-            
-            // 觸發搜索
-            performSearch();
-        });
+  const categoryButtons = document.querySelectorAll('.category-search-btn');
+  const articleItems = document.querySelectorAll('.article-item');
+
+  // 分類切換（只篩選卡片，不覆寫全域搜尋）
+  categoryButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const category = this.dataset.category;
+      categoryButtons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+
+      articleItems.forEach(item => {
+        const itemCategory = item.dataset.category;
+        const visible = category === 'all' || itemCategory === category;
+        item.style.display = visible ? 'block' : 'none';
+      });
     });
-    
-    // 搜索表單提交
-    searchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        performSearch();
-    });
-    
-    // 搜索功能
-    function performSearch() {
-        const query = searchInput.value.trim();
-        
-        articleItems.forEach(article => {
-            const title = article.querySelector('.article-title').textContent.toLowerCase();
-            const summary = article.querySelector('.article-summary').textContent.toLowerCase();
-            const category = article.querySelector('.article-meta__item:last-child')?.textContent.toLowerCase() || '';
-            const itemCategory = article.dataset.category;
-            
-            const searchText = query.toLowerCase();
-            
-            // 檢查是否匹配搜索條件
-            const matchesSearch = query === '' || 
-                title.includes(searchText) || 
-                summary.includes(searchText) || 
-                category.includes(searchText);
-            
-            // 檢查是否匹配分類
-            const activeCategory = document.querySelector('.category-search-btn.active').dataset.category;
-            const matchesCategory = activeCategory === 'all' || itemCategory === activeCategory;
-            
-            if (matchesSearch && matchesCategory) {
-                article.style.display = 'block';
-            } else {
-                article.style.display = 'none';
-            }
-        });
-    }
-    
-    // 初始化：選中"全部文章"
-    document.querySelector('[data-category="all"]').classList.add('active');
+  });
 });
 </script>

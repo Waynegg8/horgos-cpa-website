@@ -38,17 +38,12 @@
            data-title="{{ .Title }}" 
            data-summary="{{ .Summary }}">
             <div class="card-horizontal">
-                <div class="card-horizontal__icon">
-                    {{ if eq .Params.filetype "pdf" }}
-                    <i class="far fa-file-pdf" style="color: #dc3545;"></i>
-                    {{ else if eq .Params.filetype "docx" }}
-                    <i class="far fa-file-word" style="color: #0d6efd;"></i>
-                    {{ else if eq .Params.filetype "xlsx" }}
-                    <i class="far fa-file-excel" style="color: #198754;"></i>
-                    {{ else if eq .Params.filetype "zip" }}
-                    <i class="far fa-file-archive" style="color: #6c757d;"></i>
+                <div class="card-horizontal__image">
+                    {{ $page := . }}
+                    {{ with .Params.image }}
+                    <img src="{{ . }}" alt="{{ $page.Title }}" loading="lazy">
                     {{ else }}
-                    <i class="far fa-file"></i>
+                    <img src="/uploads/images/general/general-default.jpg" alt="{{ $page.Title }}" loading="lazy">
                     {{ end }}
                 </div>
                 <div class="card-horizontal__content">
