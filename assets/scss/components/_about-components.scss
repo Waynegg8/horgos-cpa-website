@@ -43,8 +43,10 @@
   .certification-card {
     text-align: center;
     background-color: transparent; // 參考頁面：無邊框卡片
-    border: 1px solid $color-border-primary; // 若需淡框
+    border: 1px solid $color-border-primary; // 淡框
     padding: $spacing-6;
+    transition: transform $transition-base $ease-in-out, box-shadow $transition-base $ease-in-out;
+    &:hover { transform: translateY(-4px); box-shadow: $shadow-md; }
     
     &__icon {
       margin-bottom: $spacing-4;
@@ -136,6 +138,8 @@
     border: 1px solid $color-border-primary; // 大卡容器邊框
     border-radius: $border-radius-lg;
     box-shadow: $shadow-sm;
+    transition: transform $transition-base $ease-in-out, box-shadow $transition-base $ease-in-out;
+    &:hover { transform: translateY(-2px); box-shadow: $shadow-md; }
     
     @include tablet {
       grid-template-columns: 280px 1fr;
@@ -162,7 +166,9 @@
         height: auto; // 不裁切
         display: block;
         border-radius: $border-radius-lg; // 照片改為明顯圓角
+        transition: transform $transition-base $ease-in-out, box-shadow $transition-base $ease-in-out;
       }
+      &:hover img { transform: scale(1.02); box-shadow: $shadow-md; }
     }
     
     &__name {
@@ -177,6 +183,24 @@
       color: $color-accent-highlight;
       margin-bottom: $spacing-4;
       font-weight: 500;
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-3;
+      margin-bottom: $spacing-3;
+      flex-wrap: wrap;
+    }
+
+    &__title-badge {
+      background-color: rgba($color-accent-highlight, 0.15);
+      color: $color-text-primary;
+      border: 1px solid rgba($color-accent-highlight, 0.35);
+      border-radius: $border-radius-full;
+      padding: $spacing-1 $spacing-3;
+      font-size: $font-size-small;
+      white-space: nowrap;
     }
     
     &__details {
@@ -199,6 +223,10 @@
           margin-bottom: $spacing-1;
           padding-left: $spacing-4;
           position: relative;
+          white-space: nowrap; // 單行顯示，避免換行
+          overflow: hidden; // 超出隱藏
+          text-overflow: ellipsis; // 超出顯示省略號
+          max-width: 100%;
           
           &:before {
             content: '•';
@@ -229,6 +257,9 @@
       border-radius: $border-radius-full;
       font-size: $font-size-small;
       font-weight: 500;
+      border: 1px solid rgba($color-accent-highlight, 0.25);
+      transition: background-color $transition-base $ease-in-out, color $transition-base $ease-in-out, transform $transition-base $ease-in-out;
+      &:hover { background-color: rgba($color-accent-highlight, 0.2); transform: translateY(-1px); }
     }
   }
   
