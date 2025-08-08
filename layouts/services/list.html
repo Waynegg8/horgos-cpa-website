@@ -15,7 +15,8 @@
 <div class="container">
     <div class="services-page">
         
-        <!-- 服務項目卡片展示 (Per Spec 4.6.1) -->
+        <!-- 服務項目卡片展示 (Per Spec 4.6.1) - 僅在有子頁時顯示，避免空白區塊 -->
+        {{ if gt (len .Pages) 0 }}
         <section class="services-grid-section">
             <div class="services-grid">
             {{ range .Pages }}
@@ -30,6 +31,7 @@
             {{ end }}
             </div>
         </section>
+        {{ end }}
     <!-- 服務特色區 -->
         {{ partial "services/service-features.html" . }}
         

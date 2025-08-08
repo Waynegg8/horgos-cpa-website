@@ -174,10 +174,28 @@
   margin-top: $spacing-6;
 
   .social-link {
-    font-size: 1.5rem;
-    color: rgba($color-text-primary, 0.6);
-    transition: transform $transition-base, color $transition-base, text-shadow $transition-base;
-    &:hover { color: $color-text-primary; transform: scale(1.12); text-shadow: 0 0 8px rgba($color-accent-highlight,0.45); }
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    font-size: 1.15rem;
+    color: #ffffff;
+    background-color: rgba(255,255,255,0.08); // default fallback
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    transition: transform $transition-base, box-shadow $transition-base, filter $transition-base, background-color $transition-base;
+
+    // Brand colors
+    &.threads { background-color: #111111; }
+    &.line { background-color: #00C300; }
+    &.instagram { background: radial-gradient(circle at 30% 110%, #ffdb8b, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc); }
+
+    &:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.28);
+      filter: brightness(1.05);
+    }
   }
 }
 

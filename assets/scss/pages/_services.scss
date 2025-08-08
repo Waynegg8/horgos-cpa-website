@@ -16,7 +16,8 @@
 
 // 快速CTA
 .service-quick-cta {
-  margin-bottom: $spacing-4; // 再縮小區塊間距
+  margin-top: 0;              // 與頁首緊貼
+  margin-bottom: $spacing-4;  // 再縮小區塊間距
   padding: $spacing-4;       // 再緊湊
   .service-quick-cta__title { margin: 0 0 $spacing-2 0; font-size: $font-size-h3; }
   .service-quick-cta__desc { margin: 0; color: $color-text-secondary; }

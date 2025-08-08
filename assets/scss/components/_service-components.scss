@@ -29,7 +29,7 @@
 
 // 服務特色組件
 .service-features {
-  padding: $spacing-16 0;
+  padding: $spacing-12 0; // 下修頂部內距，貼近 hero
   
   .service-feature__icon {
     text-align: center;
@@ -65,7 +65,7 @@
 
 // 服務流程組件
 .service-process {
-  padding: $spacing-16 0;
+  padding: $spacing-12 0;
   background-color: rgba($color-bg-secondary, 0.5);
   
   .process-steps {
@@ -120,7 +120,7 @@
 
 // 服務承諾組件
 .service-commitment {
-  padding: $spacing-16 0;
+  padding: $spacing-12 0;
   
   .commitment-cards {
     display: grid;

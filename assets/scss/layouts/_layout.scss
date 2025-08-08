@@ -270,6 +270,17 @@
   }
 }
 
+// 更緊湊的頁面標題（用於服務單頁等需要貼近內容的情境）
+.page-header--compact {
+  padding: $spacing-8 0;         // 再縮小上下 Padding
+  margin-bottom: $spacing-4;     // 再縮小與第一區塊距離
+}
+
+// 特殊容器：頂部更緊
+.container--tight-top {
+  padding-top: 0 !important;  // 取消任何可能的頂部內距
+}
+
 // 全站頁頭裝飾線動畫
 @keyframes headerLineFlow {
   0% { background-position: 0% 0; }
