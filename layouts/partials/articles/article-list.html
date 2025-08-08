@@ -72,35 +72,36 @@
            data-summary="{{ .Summary }}">
             <div class="card-horizontal">
                 <div class="card-horizontal__image">
+                    {{ $page := . }}
                     {{ with .Params.cover }}
-                    <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+                    <img src="{{ . }}" alt="{{ $page.Title }}" loading="lazy">
                     {{ else }}
                     <!-- 根據文章分類選擇合適的預設圖片 -->
                     {{ $defaultImage := "/uploads/images/general/general-default.jpg" }}
-                    {{ if eq $.Params.category "創業教室" }}
+                    {{ if eq .Params.category "創業教室" }}
                         {{ $defaultImage = "/uploads/images/general/general-business-default.jpg" }}
-                    {{ else if eq $.Params.category "稅務指南" }}
+                    {{ else if eq .Params.category "稅務指南" }}
                         {{ $defaultImage = "/uploads/images/general/general-accounting-default.jpg" }}
-                    {{ else if eq $.Params.category "會計實務" }}
+                    {{ else if eq .Params.category "會計實務" }}
                         {{ $defaultImage = "/uploads/images/general/general-accounting-desk.jpg" }}
-                    {{ else if eq $.Params.category "法規更新" }}
+                    {{ else if eq .Params.category "法規更新" }}
                         {{ $defaultImage = "/uploads/images/general/general-legal-default.jpg" }}
                     {{ end }}
-                    <img src="{{ $defaultImage }}" alt="{{ $.Title }}" loading="lazy">
+                    <img src="{{ $defaultImage }}" alt="{{ $page.Title }}" loading="lazy">
                     {{ end }}
                 </div>
                 <div class="card-horizontal__content">
-                    <h2 class="article-title">{{ $.Title }}</h2>
+                    <h2 class="article-title">{{ .Title }}</h2>
                     <div class="article-meta">
-                        <span class="article-meta__item"><i class="fas fa-calendar-alt"></i> {{ $.Date.Format "2006-01-02" }}</span>
-                        {{ with $.Params.category }}
+                        <span class="article-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+                        {{ with .Params.category }}
                         <span class="article-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>
                         {{ end }}
-                        {{ with $.Params.series }}
+                        {{ with .Params.series }}
                         <span class="article-meta__item"><i class="fas fa-bookmark"></i> {{ . }}</span>
                         {{ end }}
                     </div>
-                    <p class="article-summary">{{ $.Summary | truncate 100 }}</p>
+                    <p class="article-summary">{{ .Summary | truncate 100 }}</p>
                 </div>
             </div>
         </a>

@@ -211,6 +211,7 @@
 .faq-list__grid,
 .download-list__grid {
   display: grid;
+  grid-template-columns: 1fr; // 單欄更易讀
   gap: $spacing-6;
   margin-bottom: $spacing-8;
   

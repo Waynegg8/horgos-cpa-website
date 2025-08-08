@@ -55,15 +55,20 @@
 .card-horizontal {
   display: flex;
   gap: $spacing-6;
+  align-items: flex-start;
+  
+  @include tablet {
+    gap: $spacing-5;
+  }
   
   &__image {
     flex-shrink: 0;
-    width: 180px;
+    width: 240px;
     position: relative;
     
     img {
       width: 100%;
-      height: 120px;
+      height: 160px;
       object-fit: cover;
       border-radius: $border-radius-md;
     }
@@ -81,13 +86,8 @@
       font-weight: 500;
     }
     
-    @include mobile {
-      width: 100px;
-      
-      img {
-        height: 80px;
-      }
-    }
+    @include tablet { width: 200px; img { height: 140px; } }
+    @include mobile { width: 100%; img { height: 200px; } }
   }
   
   &__icon {
