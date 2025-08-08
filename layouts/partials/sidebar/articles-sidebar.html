@@ -12,8 +12,8 @@
     {{ end }}
     {{/* 單一文章頁不再顯示「熱門標籤」，避免與主內容重複與視覺擁擠 */}}
     
-    <!-- 系列文章：滾到此區才 sticky，並保持輕量（移除多餘 padding） -->
-    <div class="sidebar-widget sidebar-series" style="position: sticky; top: 16px;">
+    <!-- 系列文章：跟隨頁面自然滾動（不 sticky） -->
+    <div class="sidebar-widget sidebar-series">
         <h3 class="sidebar-widget__title">系列文章</h3>
         <ul class="sidebar-series__list">
             {{ $currentSeries := .Params.series }}

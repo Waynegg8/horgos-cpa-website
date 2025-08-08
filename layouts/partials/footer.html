@@ -15,15 +15,8 @@
             <span class="footer-logo__text">HorgosCPA</span>
           </a>
         </div>
-        {{/* Footer SEO 亦依頁面種類：首頁 > 該 section > 通用 */}}
-        {{ if .IsHome }}
-          {{ with .Site.Data.seo.homepage }}<div class="site-footer__seo-text"><p>{{ . | safeHTML }}</p></div>{{ end }}
-        {{ else if eq .Kind "section" }}
-          {{ $sectionKey := printf "%s_section" .Section }}
-          {{ with index .Site.Data.seo $sectionKey }}<div class="site-footer__seo-text"><p>{{ . | safeHTML }}</p></div>{{ end }}
-        {{ else }}
-          {{ with .Site.Data.seo.global }}<div class="site-footer__seo-text"><p>{{ . | safeHTML }}</p></div>{{ end }}
-        {{ end }}
+        {{/* Footer SEO：全站一致，使用 global（避免缺漏） */}}
+        {{ with .Site.Data.seo.global }}<div class="site-footer__seo-text"><p>{{ . | safeHTML }}</p></div>{{ end }}
       </div>
 
       <!-- Region 2: Company Info -->

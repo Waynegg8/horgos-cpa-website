@@ -16,10 +16,6 @@
 {{ if gt (len $firstList) 0 }}{{ $scratch.Set "firstPost" (index $firstList 0) }}{{ end }}
 
 <div class="series-navigation">
-  <div class="series-navigation__header">
-    <h3 class="series-navigation__title">{{ $series }} 系列</h3>
-    <span class="series-navigation__progress">{{ $series }} {{ $seriesOrder }}/{{ $seriesCount }}</span>
-  </div>
 
   {{/* 智慧型上一篇候選 */}}
   {{ $scratch.Set "prev" false }}
@@ -66,22 +62,28 @@
     {{ $isLast := eq $seriesOrder $seriesCount }}
 
     {{ with $prevSel }}
+      {{ $isSame := and .Params.series (eq .Params.series $series) }}
+      {{ $seriesLabel := cond $isSame "本系列" (humanize .Params.series) }}
+      {{ $order := (int (default 1 .Params.series_order)) }}
       <div class="series-navigation__item">
-        <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__prev" aria-label="上一篇：{{ .Title }}">
-          <span>上一篇：{{ .Title }}</span>
+        <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__prev" aria-label="上一篇：{{ $seriesLabel }} 第 {{ $order }} 篇">
+          <span>上一篇：{{ $seriesLabel }} 第 {{ $order }} 篇</span>
         </a>
-        {{ if ne .Params.series $series }}
+        {{ if not $isSame }}
           <div class="series-navigation__caption">{{ if $isFirst }}本系列第一篇，上一篇內容來自其他系列推薦。{{ else }}上一篇內容來自其他系列推薦。{{ end }}</div>
         {{ end }}
       </div>
     {{ end }}
 
     {{ with $nextSel }}
+      {{ $isSameN := and .Params.series (eq .Params.series $series) }}
+      {{ $seriesLabelN := cond $isSameN "本系列" (humanize .Params.series) }}
+      {{ $orderN := (int (default 1 .Params.series_order)) }}
       <div class="series-navigation__item">
-        <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__next" aria-label="下一篇：{{ .Title }}">
-          <span>下一篇：{{ .Title }}</span>
+        <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__next" aria-label="下一篇：{{ $seriesLabelN }} 第 {{ $orderN }} 篇">
+          <span>下一篇：{{ $seriesLabelN }} 第 {{ $orderN }} 篇</span>
         </a>
-        {{ if ne .Params.series $series }}
+        {{ if not $isSameN }}
           <div class="series-navigation__caption">{{ if $isLast }}本系列最後一篇，接下來將前往其他系列的推薦。{{ else }}下一篇內容來自其他系列推薦。{{ end }}</div>
         {{ end }}
       </div>

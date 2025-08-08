@@ -378,26 +378,10 @@
 }
 
 // 系列導航（改為明確按鈕樣式）
+
 .series-navigation {
   @extend .card-style;
   margin: $spacing-8 0;
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: $spacing-4;
-  }
-
-  &__title {
-    margin: 0;
-    font-size: $font-size-h5;
-  }
-
-  &__progress {
-    color: $color-text-secondary;
-    font-size: $font-size-small;
-  }
 
   &__links {
     display: flex;

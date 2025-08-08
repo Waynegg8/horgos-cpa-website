@@ -1,8 +1,8 @@
 /* 目錄樣式 */
 .toc-container {
   margin-bottom: $spacing-8;
-  position: relative; // 不 sticky，由父側欄捲動
-  top: auto;
+  position: sticky; // 到達此區才吸附
+  top: $spacing-4; // 與側欄頂部對齊
   background-color: $color-bg-secondary;
   border-radius: $border-radius-lg;
   padding: $spacing-6;
