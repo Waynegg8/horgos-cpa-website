@@ -35,7 +35,7 @@
                     {{ with $featured.Params.category }}<span class="article-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>{{ end }}
                     {{ with $featured.Params.series }}<span class="article-meta__item"><i class="fas fa-bookmark"></i> {{ . }}</span>{{ end }}
                 </div>
-                <p class="article-summary">{{ with $featured.Summary }}{{ . | truncate 140 }}{{ end }}</p>
+                <p class="article-summary">{{ with $featured.Summary }}{{ . | plainify | truncate 140 }}{{ end }}</p>
                 <div>
                     <span class="btn btn-primary btn-sm">閱讀更多</span>
                 </div>
@@ -76,7 +76,7 @@
                         <span class="article-meta__item"><i class="fas fa-bookmark"></i> {{ . }}</span>
                         {{ end }}
                     </div>
-                    <p class="article-summary">{{ .Summary | truncate 100 }}</p>
+                    <p class="article-summary">{{ .Summary | plainify | truncate 100 }}</p>
                 </div>
             </div>
         </a>

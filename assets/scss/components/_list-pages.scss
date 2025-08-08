@@ -229,6 +229,7 @@
   grid-template-columns: 1fr; // 默認單欄
   gap: $spacing-6;
   margin-bottom: $spacing-8;
+  overflow: visible; // 防止卡片內容被裁切
   
   @include tablet {
     gap: $spacing-5;
