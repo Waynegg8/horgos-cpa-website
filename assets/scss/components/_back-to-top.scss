@@ -37,9 +37,10 @@
   position: relative;
 
   i {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 1em;
     height: 1em;
     line-height: 1;
@@ -152,9 +153,10 @@
   
   i {
     transition: transform $transition-base;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 1em;
     height: 1em;
     line-height: 1;
@@ -213,9 +215,10 @@
   }
   
   i {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 1em;
     height: 1em;
     line-height: 1;
@@ -266,12 +269,7 @@
   }
 }
 
-/* 圖示微調（光學置中）*/
-#social-toggle i { transform: translateY(0.5px); }
-.back-to-top i { transform: translateY(0.5px); }
-.social-button .fa-facebook-f { transform: translateX(0.5px); }
-.social-button .fa-envelope { transform: translateY(0.5px); }
-.social-button .fa-instagram { transform: translateY(0.25px); }
+/* 移除先前的位移微調，改用絕對置中確保精準居中 */
 
 /* 動畫效果 */
 @keyframes fadeInUp {
