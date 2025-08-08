@@ -4,9 +4,10 @@ if (section) {
   const listEl = document.getElementById('comments-list');
   const form = document.getElementById('comment-form');
   const nickname = document.getElementById('nickname');
-  const email = document.getElementById('email');
+  const lineId = document.getElementById('lineId');
   const content = document.getElementById('content');
   const parentId = document.getElementById('parentId');
+  const recaptchaToken = document.getElementById('recaptchaToken');
   const cancelReply = document.getElementById('cancel-reply');
 
   const api = {
@@ -36,9 +37,9 @@ if (section) {
     item.innerHTML = `
       <div class="comment-meta">
         <strong>${escapeHtml(c.nickname)}</strong>
-        <span>${new Date(c.timestamp || Date.now()).toLocaleString()}</span>
+        <span>${timeAgo(c.timestamp || Date.now())}</span>
       </div>
-      <p class="comment-content">${escapeHtml(c.content)}</p>
+      <div class="comment-content">${renderMarkdown(c.content || '')}</div>
       <div class="comment-actions">
         <button type="button" class="btn btn-secondary btn-xs" data-reply="${c.id}"><i class="fas fa-reply"></i> 回覆</button>
       </div>
@@ -57,12 +58,35 @@ if (section) {
   }
 
   function escapeHtml(s = '') {
-    return s.replace(/[&<>"] /g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',' ':'&nbsp;'}[m]));
+    return s.replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+  }
+
+  function renderMarkdown(text = '') {
+    // 簡易 Markdown：粗體、連結、項目符號與換行
+    let html = escapeHtml(text);
+    html = html.replace(/^\-\s+(.*)$/gm, '<li>$1</li>');
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\[(.*?)\]\((https?:\/\/[^\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // 包裹清單
+    html = html.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+    return html.replace(/\n/g, '<br>');
+  }
+
+  function timeAgo(ts) {
+    const d = new Date(ts);
+    const diff = Math.floor((Date.now() - d.getTime()) / 1000);
+    if (diff < 60) return `${diff} 秒前`;
+    if (diff < 3600) return `${Math.floor(diff/60)} 分鐘前`;
+    if (diff < 86400) return `${Math.floor(diff/3600)} 小時前`;
+    if (diff < 2592000) return `${Math.floor(diff/86400)} 天前`;
+    return d.toLocaleDateString();
   }
 
   async function init() {
     try {
       const comments = await api.get();
+      // 依時間順序（舊到新）
+      comments.sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp));
       render(comments, listEl);
     } catch (e) {
       console.error('Load comments failed', e);
@@ -72,13 +96,22 @@ if (section) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const body = {
-      page_id: pageId,
-      nickname: nickname.value.trim() || '訪客',
-      email: email.value.trim() || '',
+      pageId,
+      nickname: nickname.value.trim(),
+      lineId: lineId.value.trim(),
       content: content.value.trim(),
+      recaptchaToken: '',
       parent_id: parentId.value || null,
     };
-    if (!body.content) return;
+    // 前端驗證
+    if (!body.nickname) { nickname.focus(); return; }
+    if (!body.lineId) { lineId.focus(); return; }
+
+    // 取得 reCAPTCHA v3 token
+    try {
+      body.recaptchaToken = await getRecaptchaToken();
+    } catch {}
+
     try {
       if (body.parent_id) await api.reply(body.parent_id, body);
       else await api.post(body);
@@ -97,5 +130,18 @@ if (section) {
   });
 
   init();
+
+  function getRecaptchaToken() {
+    return new Promise((resolve) => {
+      const siteKey = document.querySelector('script[src*="recaptcha"]').src.split('render=')[1] || '';
+      if (typeof grecaptcha !== 'undefined' && grecaptcha.execute && siteKey) {
+        grecaptcha.ready(function() {
+          grecaptcha.execute(siteKey, { action: 'comment_submit' }).then(resolve).catch(() => resolve(''));
+        });
+      } else {
+        resolve('');
+      }
+    });
+  }
 }
 

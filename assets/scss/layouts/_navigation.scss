@@ -8,10 +8,10 @@
 // 1. Main Header Styling
 // -----------------------------------------------------------------------------
 .site-header {
-  position: sticky;
+  position: fixed; // 改為固定於頂端，始終可見
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: $z-index-sticky; // 使用統一層級變數
   height: 64px;
   display: flex;
   align-items: center;

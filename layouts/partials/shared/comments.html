@@ -9,17 +9,31 @@
 
   <form id="comment-form" class="comment-form" novalidate>
     <div class="form-row">
-      <input type="text" id="nickname" name="nickname" placeholder="顯示名稱 *" required>
-      <input type="email" id="email" name="email" placeholder="Email（選填）">
+      <div class="form-field">
+        <label for="nickname" class="form-label">暱稱 <span class="required">*</span></label>
+        <input type="text" id="nickname" name="nickname" placeholder="請輸入暱稱" required>
+      </div>
+      <div class="form-field">
+        <label for="lineId" class="form-label">LINE ID <span class="required">*</span></label>
+        <input type="text" id="lineId" name="lineId" placeholder="僅供驗證，不公開" required>
+        <span class="form-help">僅作後台驗證使用，不會公開顯示。</span>
+      </div>
     </div>
-    <textarea id="content" name="content" rows="4" placeholder="寫下您的留言..." required></textarea>
+    <div class="form-field">
+      <label for="content" class="form-label">留言內容（選填，支援 Markdown）</label>
+      <textarea id="content" name="content" rows="4" placeholder="支援粗體、連結與清單…"></textarea>
+    </div>
     <input type="hidden" id="parentId" name="parentId" value="">
+    <input type="hidden" id="recaptchaToken" name="recaptchaToken" value="">
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> 發佈留言</button>
+      <button type="submit" class="btn btn-primary comment-submit-btn"><i class="fas fa-paper-plane"></i> 發佈留言</button>
       <button type="button" id="cancel-reply" class="btn btn-secondary" hidden>取消回覆</button>
     </div>
+    <div class="form-status" role="status" aria-live="polite"></div>
   </form>
 
+  <!-- reCAPTCHA v3 -->
+  <script src="https://www.google.com/recaptcha/api.js?render={{ .Site.Params.recaptcha.site_key }}" defer></script>
   {{ $commentsScript := resources.Get "js/components/comments.js" | resources.Minify | resources.Fingerprint }}
   <script type="module" src="{{ $commentsScript.RelPermalink }}" defer></script>
 </section>

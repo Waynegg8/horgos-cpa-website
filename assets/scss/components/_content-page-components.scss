@@ -2,9 +2,10 @@
 .comments-section {
   margin-top: $spacing-8;
   padding: $spacing-6;
-  background: $color-bg-secondary;
+  background: linear-gradient(180deg, rgba($color-bg-secondary,0.9), rgba($color-bg-secondary,0.6));
   border: 1px solid $color-border-primary;
   border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
 
   .comments-header { margin-bottom: $spacing-4; }
   .comments-title { display:flex; align-items:center; gap:$spacing-2; margin:0; }
@@ -15,6 +16,7 @@
     display: flex; flex-direction: column; gap: $spacing-3;
 
     .form-row { display:flex; gap:$spacing-3; flex-wrap:wrap; }
+    .form-field { flex:1 1 260px; }
     input, textarea {
       width: 100%;
       padding: $spacing-3 $spacing-4;
@@ -23,8 +25,8 @@
       background: $color-bg-primary;
       color: $color-text-primary;
     }
-    input[type="text"] { flex: 1 1 220px; }
-    input[type="email"] { flex: 1 1 260px; }
+    label.form-label { display:block; font-weight:600; margin-bottom:$spacing-2; }
+    .form-help { display:block; color:$color-text-tertiary; font-size:$font-size-xs; margin-top:$spacing-1; }
     .form-actions { display:flex; gap:$spacing-2; }
   }
 
@@ -34,10 +36,12 @@
     border: 1px solid $color-border-primary;
     border-radius: $border-radius-md;
     background: $color-bg-primary;
+    position: relative;
+    &:before { content:""; position:absolute; inset:-1px; border-radius:inherit; padding:1px; background:linear-gradient(135deg,#1e3a5f,#0b1520); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
   }
   .comment-meta { display:flex; gap:$spacing-3; align-items:center; color:$color-text-tertiary; font-size:$font-size-sm; margin-bottom:$spacing-2; }
   .comment-actions { display:flex; gap:$spacing-3; }
-  .comment-content { margin:0 0 $spacing-2 0; white-space: pre-wrap; }
+  .comment-content { margin:0 0 $spacing-2 0; }
   .replies { margin-left: $spacing-5; display:flex; flex-direction:column; gap:$spacing-3; }
 }
 // =============================================================================

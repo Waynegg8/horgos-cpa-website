@@ -102,6 +102,10 @@ googleAnalytics = "G-RKMCS9WVS5"
   postalCode = "403"
   addressCountry = "TW"
 
+# reCAPTCHA 設定
+[Params.recaptcha]
+  site_key = "6LdOlZkrAAAAAJUXslB2aaWOKbAbOt_DRx5aea-"
+
 # 聯絡資訊配置
 [Params.contact]
   phone = "04-2220-5606"
