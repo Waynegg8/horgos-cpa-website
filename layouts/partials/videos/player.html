@@ -1,8 +1,11 @@
-{{ $youtube_id := .Params.youtube_id }}
-{{ $vimeo_id := .Params.vimeo_id }}
+{{ $youtube_id := (trim (.Params.youtube_id | default "") " ") }}
+{{ $vimeo_id := (trim (.Params.vimeo_id | default "") " ") }}
+{{/* 視為有效的條件：存在、長度足夠、且不是佔位字樣 */}}
+{{ $yt_valid := and (ne $youtube_id "") (ge (len $youtube_id) 8) (not (in (lower $youtube_id) "xxxx")) }}
+{{ $vimeo_valid := and (ne $vimeo_id "") (ge (len $vimeo_id) 6) (not (in (lower $vimeo_id) "xxxx")) }}
 
 <div class="video-player-container">
-  {{ if $youtube_id }}
+  {{ if $yt_valid }}
     <div class="video-responsive">
       <iframe 
         src="https://www.youtube.com/embed/{{ $youtube_id }}" 
@@ -15,7 +18,7 @@
         decoding="async">
       </iframe>
     </div>
-  {{ else if $vimeo_id }}
+  {{ else if $vimeo_valid }}
     <div class="video-responsive">
       <iframe 
         src="https://player.vimeo.com/video/{{ $vimeo_id }}" 
