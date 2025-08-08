@@ -45,8 +45,8 @@
                     <div class="team-member__info team-info-card">
                         <div class="team-member__header">
                             <h3 class="team-member__name">{{ $member.name }}</h3>
+                            {{ with $member.title }}<span class="team-member__title-badge">{{ . }}</span>{{ end }}
                         </div>
-                        {{ with $member.title }}<div class="team-member__role">{{ . }}</div>{{ end }}
                         <div class="team-member__details">
                             {{ with $member.education }}
                             <div class="team-member__education">
