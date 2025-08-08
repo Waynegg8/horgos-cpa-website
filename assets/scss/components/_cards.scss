@@ -29,6 +29,8 @@
   text-decoration: none;
   cursor: pointer;
   color: inherit;
+  position: relative;
+  z-index: 1;
   
   &:visited { color: inherit; }
   
@@ -120,6 +122,7 @@
     
     .article-title {
       margin: 0 0 $spacing-3 0;
+      font-size: $font-size-h5; // 強化一致性
       
       a {
         color: $color-text-primary;

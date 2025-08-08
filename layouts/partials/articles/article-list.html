@@ -1,6 +1,11 @@
 <!-- 文章列表頁 -->
 <div class="article-list">
-    <!-- 分類標籤（搜尋欄改由全域 search/list-search.html 提供，避免重複） -->
+    <!-- 搜索框（僅搜索文章類型） -->
+    <div class="list-search" role="search" aria-label="文章搜尋">
+        <input id="article-search-input" type="search" placeholder="搜尋文章標題或摘要..." aria-label="搜尋文章" />
+    </div>
+
+    <!-- 分類標籤 -->
     <div class="category-tags">
         <button class="category-tag category-search-btn active" data-category="all">全部文章</button>
         <button class="category-tag category-search-btn" data-category="startup-guide">創業教室</button>
@@ -115,6 +120,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   const categoryButtons = document.querySelectorAll('.category-search-btn');
   const articleItems = document.querySelectorAll('.article-item');
+  const searchInput = document.getElementById('article-search-input');
 
   // 分類切換（只篩選卡片，不覆寫全域搜尋）
   categoryButtons.forEach(button => {
@@ -130,5 +136,25 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
+
+  // 搜尋（僅針對本頁文章卡片）
+  if (searchInput) {
+    const normalize = (s) => (s || '').toLowerCase();
+    searchInput.addEventListener('input', function() {
+      const query = normalize(this.value);
+      articleItems.forEach(item => {
+        const title = normalize(item.dataset.title);
+        const summary = normalize(item.dataset.summary);
+        const match = !query || title.includes(query) || summary.includes(query);
+        // 保留分類過濾結果：只在當前 display!=='none' 的基礎上再套搜尋
+        if (match) {
+          // 若先前被分類隱藏，保持隱藏；否則顯示
+          if (item.getAttribute('data-filter-hidden') !== 'true') item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  }
 });
 </script>

@@ -57,6 +57,9 @@
   &__sidebar {
     width: 320px; // 稍微增加側邊欄寬度
     flex-shrink: 0;
+    position: sticky;
+    top: $spacing-8;
+    align-self: flex-start;
     
     @include tablet {
       width: 280px; // 平板版稍微增加寬度

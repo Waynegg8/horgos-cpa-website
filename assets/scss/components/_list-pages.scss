@@ -7,11 +7,12 @@
 
 // 1. 統一搜索區域樣式
 // -----------------------------------------------------------------------------
-.search-section {
+.search-section, .list-search {
   margin-bottom: $spacing-8;
   
   .search-container { margin-bottom: $spacing-6; }
   .search-form { display: flex; align-items: center; gap: $spacing-2; }
+  input[type="search"],
   
   .search-input {
     font-size: $font-size-base;
@@ -102,6 +103,23 @@
       color: $color-accent-highlight;
     }
   }
+}
+
+// 更高優先權統一文章卡片標題字級，避免被全域 h2/h3 樣式蓋過
+.article-list .article-title {
+  font-size: $font-size-h5; // 統一卡片標題大小
+  font-weight: 600;
+  line-height: $line-height-heading;
+}
+
+// 統一卡片內文與間距（避免大小不一）
+.article-list .article-summary {
+  font-size: $font-size-base;
+  -webkit-line-clamp: 3;
+}
+
+.article-list .article-meta__item {
+  font-size: $font-size-sm;
 }
 
 // 4. 統一卡片摘要樣式
