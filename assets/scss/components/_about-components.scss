@@ -5,30 +5,25 @@
 // 關於我們特色組件
 .about-features {
   padding: $spacing-16 0;
-  
+  background-color: rgba($color-bg-secondary, 0.5);
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-6;
+    @include tablet { grid-template-columns: repeat(2, 1fr); }
+    @include mobile { grid-template-columns: 1fr; gap: $spacing-4; }
+  }
+
+  .card-style { text-align: center; padding: $spacing-6; border: 1px solid $color-border-primary; }
+
   .about-feature__icon {
     text-align: center;
     margin-bottom: $spacing-4;
-    
-    i {
-      font-size: 2.5rem;
-      color: $color-accent-highlight;
-    }
+    i { font-size: 2.5rem; color: $color-accent-highlight; }
   }
-  
-  .about-feature__title {
-    font-size: $font-size-h4;
-    color: $color-text-primary;
-    margin-bottom: $spacing-3;
-    text-align: center;
-    font-weight: 600;
-  }
-  
-  .about-feature__description {
-    color: $color-text-secondary;
-    text-align: center;
-    line-height: $line-height-base;
-  }
+  .about-feature__title { font-size: $font-size-h4; color: $color-text-primary; margin-bottom: $spacing-3; font-weight: 600; }
+  .about-feature__description { color: $color-text-secondary; line-height: $line-height-base; }
 }
 
 // 專業認證組件
@@ -163,7 +158,7 @@
         width: 100%;
         height: auto; // 不裁切
         display: block;
-        border-radius: $border-radius-md;
+        border-radius: $border-radius-lg; // 照片改為明顯圓角
       }
     }
     
