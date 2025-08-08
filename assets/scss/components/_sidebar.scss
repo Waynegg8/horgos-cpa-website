@@ -59,6 +59,7 @@
     box-shadow: $shadow-sm;
     &:not(:last-child){ margin-bottom: $spacing-4; }
     min-width: 0; // 防止內部文字撐破
+    overflow: hidden; // 任何子元素都不可超出側欄
     
     &__title {
       margin: 0 0 $spacing-4 0;
@@ -175,36 +176,9 @@
       }
     }
     
-    &__link {
-      display: flex;
-      gap: $spacing-3;
-      color: $color-text-secondary;
-      text-decoration: none;
-      transition: all $transition-base ease;
-      padding: $spacing-2; // 增加內邊距
-      border-radius: $border-radius-md;
-      overflow: hidden;
-      
-      &:hover {
-        color: $color-accent-highlight;
-        background-color: rgba(255, 255, 255, 0.02);
-      }
-    }
+    &__link { display: flex; align-items: center; width: 100%; gap: $spacing-3; color: $color-text-secondary; text-decoration: none; transition: all $transition-base ease; padding: $spacing-2; border-radius: $border-radius-md; overflow: hidden; }
     
-    &__image,
-    &__thumbnail {
-      flex-shrink: 0;
-      width: 60px;
-      height: 45px;
-      border-radius: $border-radius-sm;
-      overflow: hidden;
-      
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
+    &__thumbnail { flex: 0 0 56px; width: 56px; height: 56px; border-radius: $border-radius-sm; overflow: hidden; img { width: 100%; height: 100%; object-fit: cover; } }
     
     &__icon {
       flex-shrink: 0;
@@ -221,9 +195,9 @@
       }
     }
     
-    &__content { flex: 1; min-width: 0; padding-right: $spacing-2; overflow: hidden; }
+    &__content { flex: 1 1 auto; min-width: 0; padding-right: $spacing-2; overflow: hidden; }
     
-    &__title { margin: 0 0 $spacing-1 0; font-size: $font-size-small; font-weight: 500; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+    &__title { display:block; margin: 0 0 $spacing-1 0; font-size: $font-size-small; font-weight: 500; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
     
     &__date {
       font-size: 0.75rem;

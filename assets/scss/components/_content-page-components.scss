@@ -150,6 +150,17 @@
   .sidebar-widget { position: relative; }
 }
 
+// 視頻頁：最新影片卡片永不超出側欄寬度（強化版）
+.videos {
+  .sidebar {
+    .sidebar-recent__item { width: 100%; }
+    .sidebar-recent__link { display: flex; align-items: center; width: 100%; overflow: hidden; gap: $spacing-3; }
+    .sidebar-recent__thumbnail { flex: 0 0 56px; width: 56px; height: 56px; border-radius: $border-radius-sm; overflow: hidden; }
+    .sidebar-recent__content { flex: 1 1 auto; min-width: 0; }
+    .sidebar-recent__title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+  }
+}
+
 // 視頻頁面專屬覆寫：徹底取消側欄分類/系列的膠囊漸層樣式（避免高度過大與視覺干擾）
 .videos {
   .two-column__sidebar { position: static !important; top: auto !important; height: auto !important; }

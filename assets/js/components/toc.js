@@ -106,6 +106,9 @@ function initTableOfContents() {
   // 初始化展開第一個章節
   const first = tocContainer.querySelector('.toc-item');
   if (first) first.classList.add('expanded');
+
+  // 讓 TOC 到文章結尾才釋放，避免覆蓋標籤雲
+  setupTOCStickyBoundary();
 }
 
 function setupAutoCollapseTOC() {
@@ -151,6 +154,26 @@ function setupAutoCollapseTOC() {
       node = node.parentElement.closest('.toc-item');
     }
   });
+}
+
+/**
+ * 讓 TOC 的 sticky 僅在文章範圍內作用，文章結尾即釋放，讓下方標籤雲上移顯示
+ */
+function setupTOCStickyBoundary() {
+  const toc = document.querySelector('.toc-container');
+  const article = document.querySelector('.article-content');
+  if (!toc || !article) return;
+
+  const offsetTop = parseInt(getComputedStyle(toc).top || '72', 10) || 72;
+  const onScroll = () => {
+    const articleRect = article.getBoundingClientRect();
+    const tocRect = toc.getBoundingClientRect();
+    // 當文章底部已與視窗上緣距離小於 TOC 高度 + top，代表 TOC 應該釋放
+    const shouldRelease = articleRect.bottom - (tocRect.height + offsetTop) <= 0;
+    toc.style.position = shouldRelease ? 'static' : 'sticky';
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
 
 function setupTOCHighlight() {

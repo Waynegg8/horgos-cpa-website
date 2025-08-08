@@ -165,6 +165,8 @@
     <!-- 頁腳摺疊 -->
     {{ $footerCollapseScript := resources.Get "js/components/footerCollapse.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $footerCollapseScript.RelPermalink }}" defer></script>
+    {{ $videoFallbackScript := resources.Get "js/components/video-fallback.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $videoFallbackScript.RelPermalink }}" defer></script>
     
     <!-- Hero 輪播功能 & 首頁進場動畫 (僅首頁) -->
     {{ if .IsHome }}
