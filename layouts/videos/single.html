@@ -12,8 +12,13 @@
         <div class="post__content">
           {{ partial "videos/player.html" . }}
           
+          {{ $clean := .Content }}
+          {{ with .Description }}
+            {{ $clean = replace $clean (printf "<p>%s</p>" .) "" }}
+            {{ $clean = replace $clean . "" }}
+          {{ end }}
           <div class="video-description-content">
-            {{ .Content }}
+            {{ $clean | safeHTML }}
           </div>
           
           {{ if .Params.series }}
@@ -66,23 +71,7 @@
           
           {{ partial "shared/dual-cta.html" . }}
 
-          <div class="video-comments">
-            <h3>留言討論</h3>
-            <div id="disqus_thread"></div>
-            <script>
-              var disqus_config = function () {
-                this.page.url = {{ .Permalink }};
-                this.page.identifier = {{ .File.UniqueID }};
-              };
-              (function() {
-                var d = document, s = d.createElement('script');
-                s.src = 'https://{{ .Site.Params.disqusShortname }}.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-              })();
-            </script>
-            <noscript>請啟用 JavaScript 以查看 <a href="https://disqus.com/?ref_noscript">Disqus 提供的評論功能</a></noscript>
-          </div>
+          {{ partial "shared/comments.html" . }}
           
           <div class="related-videos">
             <h3>相關影片</h3>

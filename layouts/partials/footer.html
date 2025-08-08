@@ -15,10 +15,14 @@
             <span class="footer-logo__text">HorgosCPA</span>
           </a>
         </div>
-        {{ with .Site.Data.seo.global }}
-        <div class="site-footer__seo-text">
-          <p>{{ . | safeHTML }}</p>
-        </div>
+        {{/* Footer SEO 亦依頁面種類：首頁 > 該 section > 通用 */}}
+        {{ if .IsHome }}
+          {{ with .Site.Data.seo.homepage }}<div class="site-footer__seo-text"><p>{{ . | safeHTML }}</p></div>{{ end }}
+        {{ else if eq .Kind "section" }}
+          {{ $sectionKey := printf "%s_section" .Section }}
+          {{ with index .Site.Data.seo $sectionKey }}<div class="site-footer__seo-text"><p>{{ . | safeHTML }}</p></div>{{ end }}
+        {{ else }}
+          {{ with .Site.Data.seo.global }}<div class="site-footer__seo-text"><p>{{ . | safeHTML }}</p></div>{{ end }}
         {{ end }}
       </div>
 

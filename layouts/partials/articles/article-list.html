@@ -32,9 +32,9 @@
                 <div class="card-horizontal__image">
                     {{ $page := . }}
                     {{ with .Params.image }}
-                    <img src="{{ . }}" alt="{{ $page.Title }}" loading="lazy">
+                    <img src="{{ . }}" alt="{{ $page.Title }}" loading="lazy" decoding="async" width="640" height="426">
                     {{ else }}
-                    <img src="/uploads/images/general/general-default.jpg" alt="{{ $page.Title }}" loading="lazy">
+                    <img src="/uploads/images/general/general-default.jpg" alt="{{ $page.Title }}" loading="lazy" decoding="async" width="640" height="426">
                     {{ end }}
                 </div>
                 <div class="card-horizontal__content">

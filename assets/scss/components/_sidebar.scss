@@ -3,6 +3,8 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-4; // 縮小側邊欄元件間距
+  position: relative; // 建立定位上下文，避免內部浮層遮蓋
+  z-index: 1;
   
   // 明確排序：確保目錄在最上方、標籤雲在最下方
   .toc-container { order: 0; }

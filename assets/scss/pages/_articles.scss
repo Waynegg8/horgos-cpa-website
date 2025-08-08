@@ -372,6 +372,43 @@
   }
 }
 
+// 系列導航（改為明確按鈕樣式）
+.series-navigation {
+  @extend .card-style;
+  margin: $spacing-8 0;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-4;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-h5;
+  }
+
+  &__progress {
+    color: $color-text-secondary;
+    font-size: $font-size-small;
+  }
+
+  &__links {
+    display: flex;
+    gap: $spacing-3;
+    flex-wrap: wrap;
+    margin-bottom: $spacing-4;
+  }
+
+  &__btn {
+    i { margin: 0; }
+  }
+
+  &__all {
+    text-align: center;
+  }
+}
 // 相關文章
 .article-related {
   margin-top: $spacing-12;

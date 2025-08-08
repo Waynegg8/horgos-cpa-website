@@ -1,6 +1,9 @@
 <!-- 影片列表頁 -->
 <div class="video-list">
     {{ $all := .RegularPages }}
+    {{ if eq .Kind "section" }}
+      {{ $all = .RegularPagesRecursive }}
+    {{ end }}
     {{ $sorted := $all.ByDate.Reverse }}
 
     <!-- 搜索框（僅搜索本頁影片） -->
@@ -30,9 +33,9 @@
            data-summary="{{ .Summary }}">
             <div class="video-card__thumbnail">
                 {{ with .Params.thumbnail }}
-                <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+                <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async" width="640" height="360">
                 {{ else }}
-                <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
+                <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy" decoding="async" width="640" height="360">
                 {{ end }}
                 {{ with .Params.duration }}
                 <span class="video-card__duration">{{ . }}</span>

@@ -1,13 +1,14 @@
 /* 目錄樣式 */
 .toc-container {
   margin-bottom: $spacing-8;
-  position: sticky; // 置頂跟隨，與側邊欄對齊
-  top: 90px; // 覆蓋導覽高度 + 間距
+  position: relative; // 讓整個側邊欄負責 sticky，避免 TOC 蓋住下方元件
+  top: auto;
   background-color: $color-bg-secondary;
   border-radius: $border-radius-lg;
   padding: $spacing-6;
   border: 1px solid $color-border-primary;
   box-shadow: none;
+  z-index: 0; // 低於側邊欄其他元件，避免覆蓋
   padding-right: $spacing-4; // 增加右側間距
   
   .toc-title {

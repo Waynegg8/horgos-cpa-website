@@ -8,15 +8,16 @@
 
 /* 服務列表頁 Page Header 置左（強化優先度避免舊樣式殘留） */
 .services {
+  .page-header { padding: $spacing-8 0; margin-bottom: $spacing-4; }
   .page-header__content { text-align: left; }
-  .page-header__line { margin: 0 0 $spacing-4 0; }
+  .page-header__line { margin: 0 0 $spacing-3 0; }
   .page-header__description { margin: 0; text-align: left; }
 }
 
 // 快速CTA
 .service-quick-cta {
-  margin-bottom: $spacing-6; // 縮小區塊間距
-  padding: $spacing-5;       // 稍微緊湊
+  margin-bottom: $spacing-4; // 再縮小區塊間距
+  padding: $spacing-4;       // 再緊湊
   .service-quick-cta__title { margin: 0 0 $spacing-2 0; font-size: $font-size-h3; }
   .service-quick-cta__desc { margin: 0; color: $color-text-secondary; }
   .btn { margin-left: $spacing-2; }
@@ -225,7 +226,7 @@
 
 /* 服務詳細頁面 */
 .service-detail {
-  padding: $spacing-4 0; // 再縮小整體上下間距，貼近 hero
+  padding: $spacing-2 0; // 進一步縮小整體上下間距，貼近 hero
   
   &__image {
     margin-bottom: $spacing-5; // 再縮小

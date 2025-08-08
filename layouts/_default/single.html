@@ -73,8 +73,9 @@
                     </button>
                 </div>
                 
-                <!-- 相關文章推薦 - 單行一卡，統一字級與間距 -->
-                {{ $related := .Site.RegularPages.Related . | first 3 }}
+                <!-- 相關文章推薦（僅推薦相同類型：文章 -> 文章） -->
+                {{ $relatedAll := .Site.RegularPages.Related . }}
+                {{ $related := where $relatedAll "Section" .Section | first 3 }}
                 {{ if $related }}
                 <section class="article-related">
                     <div class="container">
@@ -84,10 +85,11 @@
                             <a href="{{ .RelPermalink }}" class="card-style card-clickable article-item">
                               <div class="card-horizontal">
                                 <div class="card-horizontal__image">
-                                  {{ with .Params.image }}
-                                  <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+                                  {{ $rel := . }}
+                                  {{ with $rel.Params.image }}
+                                  <img src="{{ . }}" alt="{{ $rel.Title }}" loading="lazy" decoding="async" width="640" height="426">
                                   {{ else }}
-                                  <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
+                                  <img src="/uploads/images/general/general-default.jpg" alt="{{ $rel.Title }}" loading="lazy" decoding="async" width="640" height="426">
                                   {{ end }}
                                 </div>
                                 <div class="card-horizontal__content">
@@ -112,6 +114,36 @@
         <!-- 側邊欄 -->
         <div class="two-column__sidebar">
             {{ partial "sidebar/articles-sidebar.html" . }}
+        </div>
+    </div>
+    {{ else if eq .Section "faq" }}
+    <!-- FAQ 單一頁使用兩欄佈局（含側邊欄） -->
+    <div class="two-column">
+        <div class="two-column__main">
+            <article class="single-content">
+                <div class="article-content">
+                    {{ .Content }}
+                </div>
+            </article>
+            {{ partial "shared/comments.html" . }}
+        </div>
+        <div class="two-column__sidebar">
+            {{ partial "sidebar/faq-sidebar.html" . }}
+        </div>
+    </div>
+    {{ else if eq .Section "downloads" }}
+    <!-- 下載 單一頁使用兩欄佈局（含側邊欄） -->
+    <div class="two-column">
+        <div class="two-column__main">
+            <article class="single-content">
+                <div class="article-content">
+                    {{ .Content }}
+                </div>
+            </article>
+            {{ partial "shared/comments.html" . }}
+        </div>
+        <div class="two-column__sidebar">
+            {{ partial "sidebar/downloads-sidebar.html" . }}
         </div>
     </div>
     {{ else if eq .Section "articles" }}

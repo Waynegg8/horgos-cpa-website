@@ -7,12 +7,20 @@
       this.page.url = {{ .Permalink }};
       this.page.identifier = {{ .File.UniqueID }};
     };
-    (function() {
+    // 延遲載入 Disqus（使用者滾動到留言區才載入腳本）
+    const loadDisqus = () => {
+      if (window.disqusLoaded) return;
+      window.disqusLoaded = true;
       var d = document, s = d.createElement('script');
       s.src = 'https://{{ .Site.Params.disqusShortname }}.disqus.com/embed.js';
       s.setAttribute('data-timestamp', +new Date());
+      s.defer = true;
       (d.head || d.body).appendChild(s);
-    })();
+    };
+    const disqusObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { loadDisqus(); disqusObserver.disconnect(); } });
+    }, { rootMargin: '200px' });
+    disqusObserver.observe(document.getElementById('disqus_thread'));
   </script>
   <noscript>請啟用 JavaScript 以查看 <a href="https://disqus.com/?ref_noscript">Disqus 提供的評論功能</a></noscript>
 </section>

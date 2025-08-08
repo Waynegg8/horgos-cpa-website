@@ -133,12 +133,17 @@
 }
 
 // 統一卡片內文與間距（避免大小不一）
-.article-list .article-summary {
+.article-list .article-summary,
+.faq-list__grid .faq-summary,
+.download-list__grid .download-summary,
+.video-cards .video-card__excerpt {
   font-size: $font-size-base;
   -webkit-line-clamp: 3;
 }
 
-.article-list .article-meta__item {
+.article-list .article-meta__item,
+.faq-list__grid .faq-meta__item,
+.download-list__grid .download-meta__item {
   font-size: $font-size-sm;
 }
 

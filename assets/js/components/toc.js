@@ -71,7 +71,9 @@ function initTableOfContents() {
       const targetId = this.getAttribute('href').substring(1);
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
-        window.scrollTo({ top: targetElement.offsetTop - 100, behavior: 'smooth' });
+        // 與側邊欄 sticky 對齊（依 _layout.scss top: $spacing-4）
+        const offset = 24; // 約等於 $spacing-4
+        window.scrollTo({ top: targetElement.offsetTop - offset, behavior: 'smooth' });
       }
     });
   });

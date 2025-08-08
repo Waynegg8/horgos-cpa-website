@@ -28,10 +28,15 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://www.youtube.com" crossorigin>
+    <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">
     
     <!-- Main CSS -->
     {{ $style := resources.Get "scss/main.scss" | css.Sass | resources.Minify | resources.Fingerprint }}
@@ -131,48 +136,48 @@
     
     <!-- Main JavaScript -->
     {{ $script := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint }}
-    <script type="module" src="{{ $script.RelPermalink }}"></script>
+    <script type="module" src="{{ $script.RelPermalink }}" defer></script>
     
     <!-- Component JavaScript -->
     <!-- 載入狀態系統 -->
     {{ $loadingScript := resources.Get "js/components/loading.js" | resources.Minify | resources.Fingerprint }}
-    <script type="module" src="{{ $loadingScript.RelPermalink }}"></script>
+    <script type="module" src="{{ $loadingScript.RelPermalink }}" defer></script>
     
     <!-- 回到頂端按鈕 -->
     {{ $backToTopScript := resources.Get "js/components/back-to-top.js" | resources.Minify | resources.Fingerprint }}
-    <script type="module" src="{{ $backToTopScript.RelPermalink }}"></script>
+    <script type="module" src="{{ $backToTopScript.RelPermalink }}" defer></script>
 
     <!-- Header滾動效果 -->
     {{ $headerScrollScript := resources.Get "js/components/headerScroll.js" | resources.Minify | resources.Fingerprint }}
-    <script type="module" src="{{ $headerScrollScript.RelPermalink }}"></script>
+    <script type="module" src="{{ $headerScrollScript.RelPermalink }}" defer></script>
 
     <!-- 行動版導覽 -->
     {{ $mobileNavScript := resources.Get "js/components/mobileNav.js" | resources.Minify | resources.Fingerprint }}
-    <script type="module" src="{{ $mobileNavScript.RelPermalink }}"></script>
+    <script type="module" src="{{ $mobileNavScript.RelPermalink }}" defer></script>
 
     <!-- 頁腳摺疊 -->
     {{ $footerCollapseScript := resources.Get "js/components/footerCollapse.js" | resources.Minify | resources.Fingerprint }}
-    <script type="module" src="{{ $footerCollapseScript.RelPermalink }}"></script>
+    <script type="module" src="{{ $footerCollapseScript.RelPermalink }}" defer></script>
     
     <!-- Hero 輪播功能 & 首頁進場動畫 (僅首頁) -->
     {{ if .IsHome }}
     {{ $heroCarouselScript := resources.Get "js/components/hero-carousel.js" | resources.Minify | resources.Fingerprint }}
-    <script type="module" src="{{ $heroCarouselScript.RelPermalink }}"></script>
+    <script type="module" src="{{ $heroCarouselScript.RelPermalink }}" defer></script>
     {{ $inviewStatsScript := resources.Get "js/components/inview-stats.js" | resources.Minify | resources.Fingerprint }}
-    <script type="module" src="{{ $inviewStatsScript.RelPermalink }}"></script>
+    <script type="module" src="{{ $inviewStatsScript.RelPermalink }}" defer></script>
     {{ end }}
     
     <!-- About 圖片進場傾斜轉正效果 -->
     {{ if eq .Section "about" }}
     {{ $inviewTiltScript := resources.Get "js/components/inview-photo-tilt.js" | resources.Minify | resources.Fingerprint }}
-    <script type="module" src="{{ $inviewTiltScript.RelPermalink }}"></script>
+    <script type="module" src="{{ $inviewTiltScript.RelPermalink }}" defer></script>
     {{ end }}
     
     
     
     {{ if and (eq .Section "articles") (eq .Kind "page") }}
     {{ $tocScript := resources.Get "js/components/toc.js" | resources.Minify | resources.Fingerprint }}
-    <script src="{{ $tocScript.RelPermalink }}"></script>
+    <script src="{{ $tocScript.RelPermalink }}" defer></script>
     {{ end }}
     
     <!-- Custom JavaScript -->

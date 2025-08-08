@@ -4,12 +4,13 @@
     <div class="two-column__main">
       
       <!-- 頁面標題和內容 -->
-      <header class="page-header">
-        <h1 class="page-header__title">{{ .Title }}</h1>
-        {{ with .Content }}
-        <div class="page-header__description">{{ . }}</div>
-        {{ end }}
-      </header>
+      <div class="page-header">
+        <div class="page-header__content">
+          <h1 class="page-header__title">{{ .Title }}</h1>
+          <div class="page-header__line"></div>
+          {{ with .Description }}<p class="page-header__description">{{ . }}</p>{{ end }}
+        </div>
+      </div>
       
       <!-- 分類篩選 -->
       <div class="category-nav card-style">
@@ -29,7 +30,9 @@
       
       <!-- 影片列表 -->
       <div class="videos-list" id="videos-list">
-        {{ $paginator := .Paginate .RegularPages 10 }}
+        {{ $pages := .RegularPages }}
+        {{ if eq .Kind "section" }}{{ $pages = .RegularPagesRecursive }}{{ end }}
+        {{ $paginator := .Paginate $pages 10 }}
         {{ range $paginator.Pages }}
           {{ $p := . }}
           <div class="video-card" data-title="{{ .Title }}" data-description="{{ .Summary }}">
