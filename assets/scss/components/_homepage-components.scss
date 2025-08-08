@@ -38,6 +38,10 @@
   @extend .card-style;
   text-align: center;
   padding: $spacing-6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   &__number {
     font-size: 2rem;
     font-weight: 700;
@@ -46,6 +50,17 @@
   &__label {
     color: $color-text-secondary;
     margin-top: $spacing-1;
+  }
+  &__icon {
+    margin-bottom: $spacing-3;
+    i {
+      font-size: 2rem;
+      color: $color-accent-highlight;
+      display: inline-block;
+      line-height: 1;
+      vertical-align: middle;
+      text-rendering: geometricPrecision;
+    }
   }
 }
 

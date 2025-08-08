@@ -1,6 +1,6 @@
 <!-- 影片列表頁 -->
 <div class="video-list">
-    {{ $all := where .Site.RegularPages "Section" "videos" }}
+    {{ $all := .RegularPages }}
     {{ $sorted := $all.ByDate.Reverse }}
 
     <!-- 搜索框（僅搜索本頁影片） -->
@@ -8,15 +8,13 @@
         <input id="video-search-input" type="search" placeholder="搜尋影片標題或摘要..." aria-label="搜尋影片" />
     </div>
 
-    <!-- 分類標籤（無全域搜尋） -->
-    <div class="video-categories">
-        <div class="category-filters">
-            <button class="category-filter category-search-btn active" data-category="all">全部</button>
-            <button class="category-filter category-search-btn" data-category="popular">熱門影片</button>
-            <button class="category-filter category-search-btn" data-category="tutorials">教學影片</button>
-            <button class="category-filter category-search-btn" data-category="case-studies">案例分享</button>
-            <button class="category-filter category-search-btn" data-category="legal-explanation">法規解說</button>
-        </div>
+    <!-- 分類標籤（樣式與文章一致） -->
+    <div class="category-tags">
+        <button class="category-tag category-search-btn active" data-category="all">全部影片</button>
+        <button class="category-tag category-search-btn" data-category="popular">熱門影片</button>
+        <button class="category-tag category-search-btn" data-category="tutorials">教學影片</button>
+        <button class="category-tag category-search-btn" data-category="case-studies">案例分享</button>
+        <button class="category-tag category-search-btn" data-category="legal-explanation">法規解說</button>
     </div>
     
     <!-- 影片列表（僅分類篩選，不依賴全域搜尋） -->

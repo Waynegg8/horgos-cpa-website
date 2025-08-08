@@ -1,8 +1,11 @@
 <!-- 下載側邊欄 -->
 <div class="sidebar">
     <!-- 搜尋框 (僅在單篇頁面顯示) -->
-    {{ if eq .Kind "page" }}
-    {{ partial "search/sidebar-search.html" . }}
+    {{ if and (eq .Kind "page") (eq .Section "downloads") }}
+    <form class="sidebar-widget sidebar-search" action="/downloads/" method="get" role="search" aria-label="下載搜尋">
+        <input type="search" name="q" class="sidebar-search__input" placeholder="搜尋資源..." aria-label="搜尋下載" />
+        <button type="submit" class="btn btn-primary btn-sm sidebar-search__btn">搜尋</button>
+    </form>
     {{ end }}
     
     <!-- 分類列表 -->

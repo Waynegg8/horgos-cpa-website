@@ -4,7 +4,8 @@
     <div class="stats__grid">
       {{ range .Site.Data.strengths }}
       <div class="stat card-style">
-        <div class="stat__number">{{ .number }}</div>
+        <div class="stat__icon"><i class="{{ .icon | default "fas fa-chart-line" }}" aria-hidden="true"></i></div>
+        <div class="stat__number" data-target="{{ .number }}">0</div>
         <div class="stat__label">{{ .label }}</div>
       </div>
       {{ end }}

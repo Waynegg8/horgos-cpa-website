@@ -266,7 +266,7 @@
   .video-cards,
   .faq-list__grid,
   .download-list__grid {
-    grid-template-columns: 1fr; // 先保持單欄，如需雙欄可改為 1fr 1fr
+    grid-template-columns: 1fr;
   }
 }
 

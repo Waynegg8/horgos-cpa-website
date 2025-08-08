@@ -6,34 +6,17 @@
     </div>
 
     <!-- 分類搜索標籤 -->
-    <div class="category-nav card-style">
-        <div class="category-nav__links">
-            <button class="category-nav__link category-search-btn active" data-category="all">
-                <i class="fas fa-download"></i>
-                <span>全部下載</span>
-            </button>
-            <button class="category-nav__link category-search-btn" data-category="templates">
-                <i class="fas fa-file-word"></i>
-                <span>範本下載</span>
-            </button>
-            <button class="category-nav__link category-search-btn" data-category="forms">
-                <i class="fas fa-file-alt"></i>
-                <span>表格下載</span>
-            </button>
-            <button class="category-nav__link category-search-btn" data-category="checklists">
-                <i class="fas fa-tasks"></i>
-                <span>檢查清單</span>
-            </button>
-            <button class="category-nav__link category-search-btn" data-category="regulations">
-                <i class="fas fa-gavel"></i>
-                <span>法規文件</span>
-            </button>
-        </div>
+    <div class="category-tags">
+        <button class="category-tag category-search-btn active" data-category="all">全部下載</button>
+        <button class="category-tag category-search-btn" data-category="templates">範本下載</button>
+        <button class="category-tag category-search-btn" data-category="forms">表格下載</button>
+        <button class="category-tag category-search-btn" data-category="checklists">檢查清單</button>
+        <button class="category-tag category-search-btn" data-category="regulations">法規文件</button>
     </div>
     
     <!-- 下載列表 -->
     <div class="download-list__grid">
-        {{ $paginator := .Paginate (where .Site.RegularPages "Section" "downloads") 10 }}
+        {{ $paginator := .Paginate .RegularPages 10 }}
         {{ if not (gt (len $paginator.Pages) 0) }}
         <div class="empty-state">目前沒有符合條件的資源。</div>
         {{ end }}

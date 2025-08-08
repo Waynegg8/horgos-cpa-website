@@ -6,34 +6,17 @@
     </div>
 
     <!-- 分類搜索標籤 -->
-    <div class="category-nav card-style">
-        <div class="category-nav__links">
-            <button class="category-nav__link category-search-btn active" data-category="all">
-                <i class="fas fa-question-circle"></i>
-                <span>全部問題</span>
-            </button>
-            <button class="category-nav__link category-search-btn" data-category="startup">
-                <i class="fas fa-rocket"></i>
-                <span>創業問題</span>
-            </button>
-            <button class="category-nav__link category-search-btn" data-category="tax">
-                <i class="fas fa-file-invoice-dollar"></i>
-                <span>稅務問題</span>
-            </button>
-            <button class="category-nav__link category-search-btn" data-category="accounting">
-                <i class="fas fa-calculator"></i>
-                <span>記帳問題</span>
-            </button>
-            <button class="category-nav__link category-search-btn" data-category="others">
-                <i class="fas fa-ellipsis-h"></i>
-                <span>其他問題</span>
-            </button>
-        </div>
+    <div class="category-tags">
+        <button class="category-tag category-search-btn active" data-category="all">全部問題</button>
+        <button class="category-tag category-search-btn" data-category="startup">創業問題</button>
+        <button class="category-tag category-search-btn" data-category="tax">稅務問題</button>
+        <button class="category-tag category-search-btn" data-category="accounting">記帳問題</button>
+        <button class="category-tag category-search-btn" data-category="others">其他問題</button>
     </div>
     
     <!-- FAQ列表 -->
     <div class="faq-list__grid">
-        {{ $paginator := .Paginate (where .Site.RegularPages "Section" "faq") 10 }}
+        {{ $paginator := .Paginate .RegularPages 10 }}
         {{ if not (gt (len $paginator.Pages) 0) }}
         <div class="empty-state">目前沒有符合條件的問題。</div>
         {{ end }}

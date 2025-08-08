@@ -1,9 +1,17 @@
 {{ define "main" }}
 <div class="container">
     <div class="appointment-container">
-        <div class="appointment-header">
-            <h1>{{ .Title }}</h1>
-            <div class="appointment-description">{{ .Content }}</div>
+        <!-- 統一 page-header 左置對齊樣式 -->
+        <div class="page-header">
+          <div class="container">
+            <div class="page-header__content" style="text-align:left;">
+              <h1 class="page-header__title">{{ .Title }}</h1>
+              <div class="page-header__line"></div>
+              {{ with .Description }}
+              <p class="page-header__description">{{ . }}</p>
+              {{ end }}
+            </div>
+          </div>
         </div>
         
         <div class="appointment-layout">
@@ -441,12 +449,27 @@ document.addEventListener('DOMContentLoaded', function() {
   color: $color-status-error;
 }
 
+/* Fieldset 內距與邊框，避免內容貼邊 */
+.appointment-form fieldset {
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  margin: 0;
+}
+
+.appointment-form legend {
+  padding: 0 0.5rem;
+  margin-left: 0.25rem;
+  font-weight: 600;
+}
+
 .service-buttons { margin-bottom: 0.5rem; }
 
 .service-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
+  padding: 0.5rem; /* 與邊界留白 */
 }
 
 .service-buttons input[type="radio"] {
@@ -458,7 +481,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .service-button {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 0.9rem; /* 略縮小並提高垂直舒適度 */
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
@@ -479,22 +502,24 @@ document.addEventListener('DOMContentLoaded', function() {
   border-color: #22c55e;
 }
 
+
 .privacy-agreement {
   margin-top: 2rem;
   padding: 1.5rem;
-  background-color: transparent; /* 初始中性底色 */
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: #ffffff; /* 純白 */
+  border: 1px solid #e5e7eb; /* 淺灰邊框 */
   border-radius: 12px;
   transition: all 0.25s ease;
+  color: #111111; /* 文字黑 */
 }
 
 .privacy-agreement:hover {
-  background-color: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.25);
+  background-color: #ffffff; /* 保持白底 */
+  border-color: #d1d5db;
 }
 
 .privacy-agreement.agreed {
-  background-color: rgba(34, 197, 94, 0.10); /* 勾選後才高亮綠底 */
+  background-color: rgba(34, 197, 94, 0.08); /* 勾選後淡綠底 */
   border: 2px solid rgba(34, 197, 94, 0.30);
 }
 
@@ -518,7 +543,7 @@ document.addEventListener('DOMContentLoaded', function() {
   cursor: pointer;
   font-size: 0.95rem;
   line-height: 1.5;
-  color: #F0F0F0;
+  color: #111111; /* 黑字 */
 }
 
 .checkbox-custom {

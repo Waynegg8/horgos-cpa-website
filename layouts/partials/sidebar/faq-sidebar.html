@@ -1,8 +1,11 @@
 <!-- FAQ側邊欄 -->
 <div class="sidebar">
     <!-- 搜尋框 (僅在單篇頁面顯示) -->
-    {{ if eq .Kind "page" }}
-    {{ partial "search/sidebar-search.html" . }}
+    {{ if and (eq .Kind "page") (eq .Section "faq") }}
+    <form class="sidebar-widget sidebar-search" action="/faq/" method="get" role="search" aria-label="FAQ搜尋">
+        <input type="search" name="q" class="sidebar-search__input" placeholder="搜尋問題..." aria-label="搜尋FAQ" />
+        <button type="submit" class="btn btn-primary btn-sm sidebar-search__btn">搜尋</button>
+    </form>
     {{ end }}
     
     <!-- 分類列表 -->
