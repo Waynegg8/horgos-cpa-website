@@ -262,6 +262,7 @@
 
 // 服務卡片
 .service-card {
+  @extend .card-style; // 與全站卡片風格一致（含邊框與底色）
   text-align: center;
   padding: $spacing-8;
   display: flex;               // 縱向排列，將連結固定在底部
@@ -300,6 +301,8 @@
     align-items: center;
     gap: $spacing-2;
     white-space: nowrap;        // 不換行
+    justify-content: center;    // 置中
+    align-self: center;         // 保證在卡片中間
     
     &:hover {
       color: lighten($color-accent-highlight, 10%);
@@ -336,6 +339,8 @@
     text-decoration: none;
     font-weight: 500;
     transition: color $transition-base ease;
+    justify-content: center;    // 置中
+    align-self: center;         // 保證在卡片中間
   }
 }
 

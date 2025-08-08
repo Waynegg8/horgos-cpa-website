@@ -269,6 +269,9 @@
   }
 }
 
+// Facebook 圖示光學置中（glyph 本身左右留白不對稱）
+.social-button.facebook i { transform: translate(-50%, -50%) translateX(0.75px); }
+
 /* 移除先前的位移微調，改用絕對置中確保精準居中 */
 
 /* 動畫效果 */
