@@ -80,7 +80,9 @@
     <!-- 側邊欄區塊由各頁面模板自行處理 -->
 
     <!-- 全站 CTA：統一放在 SEO 區塊之上，避免各模板重複與位置錯誤 -->
-    {{ if or (eq .Section "services") (eq .Section "articles") (eq .Section "videos") (eq .Section "faq") (eq .Section "downloads") (eq .Section "about") }}
+    {{/* 規則：首頁與以下 section 顯示 CTA；排除 appointment（避免自我重複） */}}
+    {{ $ctaSections := slice "services" "articles" "videos" "faq" "downloads" "about" "contact" }}
+    {{ if and (ne .Section "appointment") (or .IsHome (in $ctaSections .Section)) }}
     {{ partial "shared/dual-cta.html" . }}
     {{ end }}
 
@@ -112,22 +114,19 @@
             <div class="social-buttons__menu" aria-hidden="true">
                 {{ with .Site.Params.widgets.social.line }}
                 <a href="https://line.me/R/ti/p/{{ . }}" class="social-button line" target="_blank" rel="noopener" aria-label="LINE">
-                    <i class="fab fa-line"></i>
+                    <img src="/uploads/icons/social/line.svg" width="20" height="20" alt="LINE" />
                 </a>
                 {{ end }}
-                
                 {{ with .Site.Params.widgets.social.threads }}
                 <a href="https://www.threads.net/@{{ . }}" class="social-button threads" target="_blank" rel="noopener" aria-label="Threads">
-                    <i class="fab fa-threads"></i>
+                    <img src="/uploads/icons/social/threads.svg" width="20" height="20" alt="Threads" />
                 </a>
                 {{ end }}
-                
                 {{ with .Site.Params.widgets.social.instagram }}
                 <a href="https://instagram.com/{{ . }}" class="social-button instagram" target="_blank" rel="noopener" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
+                    <img src="/uploads/icons/social/instagram.svg" width="20" height="20" alt="Instagram" />
                 </a>
                 {{ end }}
-                
                 {{ with .Site.Params.widgets.social.email }}
                 <a href="mailto:{{ . }}" class="social-button email" aria-label="Email">
                     <i class="fas fa-envelope"></i>

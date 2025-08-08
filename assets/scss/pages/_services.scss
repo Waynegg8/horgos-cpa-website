@@ -28,6 +28,23 @@
   }
 }
 
+// 服務詳細頁：文字說明區塊
+.service-section {
+  margin: $spacing-6 0;
+  h2, h3 { margin-top: 0; }
+  .service-steps { counter-reset: step; list-style: none; padding: 0; margin: $spacing-3 0; }
+  .service-steps li { position: relative; padding-left: $spacing-6; margin: $spacing-2 0; }
+  .service-steps li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 0.1rem;
+    width: 28px; height: 28px; border-radius: 50%;
+    display: grid; place-items: center; font-weight: 700;
+    background: linear-gradient(135deg, $color-accent-primary, $color-accent-highlight);
+    color: #fff; box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+  }
+  .service-docs, .service-how { margin: $spacing-3 0; padding-left: $spacing-5; }
+}
+
 /* 服務項目網格 */
 .services-grid {
   @include grid(4, $spacing-6);

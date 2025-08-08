@@ -1,29 +1,52 @@
 global: |
-  霍爾果斯會計師事務所是您在台中值得信賴的會計專業夥伴。我們提供專業的工商登記、稅務申報、財稅簽證及諮詢服務，協助您的事業穩健成長。
+  正在找值得信賴的台中會計師、台中會計師事務所？霍爾果斯會計師事務所立足台中，提供一站式的
+  <a href="/services/business-registration/">工商登記</a>、<a href="/services/tax-filing/">稅務申報</a>、
+  <a href="/services/audit-services/">財稅簽證</a>、記帳報稅與<a href="/services/consulting/">財務顧問</a>服務。
+  我們的會計師與稅務顧問具備跨產業經驗，會依您的商業模式與規模客製可落地的解決方案，
+  讓報表更透明、稅務更合規、現金流更健康。若您需要可靠的專業夥伴，歡迎直接
+  <a href="/appointment/">預約諮詢</a>或加入
+  <a href="https://line.me/R/ti/p/@208ihted" target="_blank" rel="noopener">LINE</a> 聯繫。
   
 homepage: |
-  專業會計師事務所提供完整的財務管理解決方案，包含<a href="/services/business-registration/">公司設立登記</a>、
-  <a href="/services/tax-filing/">稅務申報</a>、<a href="/services/audit-services/">財稅簽證</a>等服務。
-  立即聯絡我們，讓專業團隊為您的事業發展提供最佳支援。
+  台中在地的會計與稅務團隊，協助企業從創立、成長到擴張一路穩健：
+  <a href="/services/business-registration/">公司/商業設立與變更</a>、
+  <a href="/services/tax-filing/">各類稅務申報與規劃</a>、
+  <a href="/services/audit-services/">財務/稅務簽證與查核</a>、
+  <a href="/services/consulting/">企業顧問與管理會計</a>。
+  需要量身方案？<a href="/appointment/">預約諮詢</a>，今天就開始改善財務體質。
 
 articles_section: |
-  深入了解會計、稅務和創業相關的專業知識。我們的<a href="/articles/startup-guide/">創業教室</a>和
-  <a href="/articles/tax-planning/">稅務指南</a>為您提供實用的商業智慧。
+  台中會計師團隊撰寫的實務文章，聚焦創業與成長所需的會計、稅務與管理要點：
+  <a href="/articles/startup-guide/">創業教室</a>、<a href="/articles/tax-planning/">稅務指南</a>、
+  <a href="/articles/legal-updates/">法規更新</a>等主題，提供可立即採用的作法與清單。
 
 videos_section: |
-  透過專業影片學習會計實務和稅務規劃。我們的<a href="/videos/tutorials/">教學影片</a>和
-  <a href="/videos/case-studies/">案例分享</a>讓複雜概念變得簡單易懂。
+  以範例與清單呈現重點流程：
+  <a href="/videos/tutorials/">教學影片</a>、<a href="/videos/case-studies/">案例分享</a>、
+  <a href="/videos/legal-explanation/">法規說明</a>，把複雜變簡單。
 
 services_section: |
-  從<a href="/services/business-registration/">工商登記</a>到<a href="/services/consulting/">專業諮詢</a>，
-  我們提供全方位的會計師服務。立即<a href="/appointment/">預約諮詢</a>，讓我們為您量身打造最適合的解決方案。
+  我們在台中提供下列核心服務：
+  <a href="/services/business-registration/">公司/商業設立與變更</a>、
+  <a href="/services/tax-filing/">各類稅務申報與規劃</a>、
+  <a href="/services/audit-services/">財務/稅務簽證與查核</a>、
+  <a href="/services/consulting/">企業顧問與管理會計</a>。
+  從制度設計到申報執行，提供可衡量的成果。<a href="/appointment/">立即預約</a>。
 
 # 其他 section 專用 SEO 文字
 about_section: |
-  認識霍爾果斯會計師事務所的專業團隊與服務理念。我們擁有多元產業經驗，致力於提供透明、可靠、可落地的會計與稅務解決方案。
+  在台中深耕的專業團隊，具備製造、零售、科技與新創等產業經驗；以透明、可靠、可落地為原則，
+  為企業打造兼顧合規與效率的會計與稅務解決方案。
 
 faq_section: |
   查找常見的會計與稅務問題解答，包含營所稅、營業稅、勞健保與公司設立等主題，協助您快速釐清規定與實務處理方式。
 
 downloads_section: |
   下載各式實用文件與範本，例如公司設立申請書、費用估算表、流程檢查清單等，節省準備時間並降低作業錯誤。
+
+# 聯絡我們頁專用 SEO 文字
+contact_section: |
+  想了解適合您的會計與稅務方案？立即聯絡我們。您可透過電話、LINE 或親臨本所洽詢，
+  我們提供<a href="/services/consulting/">專業諮詢</a>、<a href="/services/business-registration/">公司設立登記</a>、
+  <a href="/services/tax-filing/">稅務申報</a>與<a href="/services/audit-services/">財稅簽證</a>等服務，
+  協助企業合規經營、優化稅負並提升財務效率。

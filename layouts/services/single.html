@@ -38,6 +38,9 @@
         <div class="service-detail__content">
             {{ .Content }}
         </div>
+
+        <!-- 結構化說明區塊（依服務自動載入） -->
+        {{ partial (printf "services/detail-%s.html" .File.ContentBaseName) . }}
         
         <!-- 服務內容清單 -->
         <div class="service-detail__list">
