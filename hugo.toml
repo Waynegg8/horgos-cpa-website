@@ -50,9 +50,9 @@ googleAnalytics = "G-RKMCS9WVS5"
 
   # 社群媒體
   [[Params.social]]
-    name = "Facebook"
-    icon = "fab fa-facebook-f"
-    url = "https://www.facebook.com/horgoscpa"
+    name = "Threads"
+    icon = "fab fa-threads"
+    url = "https://www.threads.net/@horgoscpa"
   [[Params.social]]
     name = "Line"
     icon = "fab fa-line"
@@ -84,7 +84,7 @@ googleAnalytics = "G-RKMCS9WVS5"
   tags_counter = true
 
 [Params.widgets.social]
-  facebook = "horgoscpa"
+  threads = "horgoscpa"
   instagram = "horgoscpa"
   line = "@208ihted"
   email = "admin@horgoscpa.com"

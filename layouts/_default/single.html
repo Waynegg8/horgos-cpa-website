@@ -59,8 +59,8 @@
                 <!-- 社群分享功能 -->
                 <div class="article-share">
                     <span class="article-share__title">分享文章：</span>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | safeURL }}" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer" aria-label="分享到 Facebook">
-                        <i class="fab fa-facebook-f"></i> Facebook
+                    <a href="https://www.threads.net/intent/post?text={{ .Title | urlquery }}%20{{ .Permalink | safeURL }}" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer" aria-label="分享到 Threads">
+                        <i class="fab fa-threads"></i> Threads
                     </a>
                     <a href="https://line.me/R/msg/text/?{{ .Title }}%0D%0A{{ .Permalink | safeURL }}" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer" aria-label="分享到 Line">
                         <i class="fab fa-line"></i> Line
