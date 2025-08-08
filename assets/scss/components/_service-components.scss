@@ -102,6 +102,7 @@
   }
   
   .commitment-card {
+    @extend .card-style; // 跟其他卡片一致
     text-align: center;
     
     &__icon {
