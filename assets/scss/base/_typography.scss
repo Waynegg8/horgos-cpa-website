@@ -216,9 +216,17 @@ strong, b {
   color: $color-text-primary;
 }
 
-em, i {
+// 僅對語義強調元素 em 套用斜體，避免影響以 <i> 承載的圖示字型
+em {
   font-style: italic;
   color: $color-text-secondary;
+}
+
+// Font Awesome 圖示類別強制為正常字型，修正傾斜與位移
+.fa, .fas, .far, .fal, .fat, .fab, .fa-solid, .fa-regular, .fa-brands {
+  font-style: normal !important;
+  line-height: 1;
+  vertical-align: middle;
 }
 
 // 10. 統一引用樣式
