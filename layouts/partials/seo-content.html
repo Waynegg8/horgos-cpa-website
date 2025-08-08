@@ -1,17 +1,23 @@
-{{/* 按頁面種類輸出 SEO 區塊（依專案文件）：首頁、各 section、其餘通用 */}}
+{{/* 按頁面種類輸出 SEO 區塊（依專案文件）：首頁、各 section、其餘通用。
+     僅在確實有內容時渲染區塊，避免出現空白高度。 */}}
 {{ if .Site.Data.seo }}
-<section class="seo-content-section" aria-label="SEO 說明">
-  <div class="container">
-    <div class="seo-content">
-      {{- if .IsHome -}}
-        {{ with .Site.Data.seo.homepage }}<div class="seo-text">{{ . | safeHTML }}</div>{{ end }}
-      {{- else if eq .Kind "section" -}}
-        {{ $sectionKey := printf "%s_section" .Section }}
-        {{ with index .Site.Data.seo $sectionKey }}<div class="seo-text">{{ . | safeHTML }}</div>{{ end }}
-      {{- else -}}
-        {{ with .Site.Data.seo.global }}<div class="seo-text">{{ . | safeHTML }}</div>{{ end }}
-      {{- end -}}
+  {{ $seoHTML := "" }}
+  {{ if .IsHome }}
+    {{ with .Site.Data.seo.homepage }}{{ $seoHTML = . }}{{ end }}
+  {{ else if eq .Kind "section" }}
+    {{ $sectionKey := printf "%s_section" .Section }}
+    {{ with index .Site.Data.seo $sectionKey }}{{ $seoHTML = . }}{{ end }}
+  {{ else }}
+    {{ with .Site.Data.seo.global }}{{ $seoHTML = . }}{{ end }}
+  {{ end }}
+
+  {{ with $seoHTML }}
+  <section class="seo-content-section" aria-label="SEO 說明">
+    <div class="container">
+      <div class="seo-content">
+        <div class="seo-text">{{ . | safeHTML }}</div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+  {{ end }}
 {{ end }}

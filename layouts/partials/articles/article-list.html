@@ -14,7 +14,8 @@
         <button class="category-tag category-search-btn" data-category="legal-updates">法規更新</button>
     </div>
     
-    {{ $all := .RegularPages }}
+    {{/* 取得本 section 內所有單篇文章（含子層，不含 _index）*/}}
+    {{ $all := .RegularPagesRecursive }}
     {{ $sorted := $all.ByDate.Reverse }}
 
     <!-- 文章列表 - 左圖右文卡片布局 -->
