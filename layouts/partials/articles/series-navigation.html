@@ -74,13 +74,19 @@
     {{ end }}
   </div>
 
-  {{ with ($scratch.Get "firstPost") }}
-  <div class="series-navigation__all">
-    <a href="{{ .RelPermalink }}" class="btn btn-primary series-navigation__btn-all">
-      <i class="fas fa-list"></i>
-      查看完整系列
-    </a>
-  </div>
+  {{/* 離開本系列提示：若下一篇或上一篇不屬於當前系列，顯示提示訊息 */}}
+  {{ $prevSel := ($scratch.Get "prev") }}
+  {{ $nextSel := ($scratch.Get "next") }}
+  {{ $isFirst := eq $seriesOrder 1 }}
+  {{ $isLast := eq $seriesOrder $seriesCount }}
+  {{ if or (and $nextSel (ne $nextSel.Params.series $series)) (and $prevSel (ne $prevSel.Params.series $series)) }}
+    <p class="series-navigation__note">
+      {{ if and $nextSel (ne $nextSel.Params.series $series) }}
+        {{ if $isLast }}本系列最後一篇，接下來將前往其他系列的推薦。{{ else }}下一篇內容來自其他系列的推薦。{{ end }}
+      {{ else if and $prevSel (ne $prevSel.Params.series $series) }}
+        {{ if $isFirst }}本系列第一篇，上一篇內容來自其他系列的推薦。{{ else }}上一篇內容來自其他系列的推薦。{{ end }}
+      {{ end }}
+    </p>
   {{ end }}
 </div>
 {{ else }}
