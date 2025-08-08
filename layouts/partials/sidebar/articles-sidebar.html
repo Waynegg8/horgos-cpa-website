@@ -81,14 +81,9 @@
     <div class="sidebar-widget sidebar-tags">
         <h3 class="sidebar-widget__title">標籤雲</h3>
         <div class="sidebar-tags__cloud">
-            <a href="/tags/創業/" class="sidebar-tags__tag" style="font-size: 1.4em;">創業</a>
-            <a href="/tags/公司設立/" class="sidebar-tags__tag" style="font-size: 1.3em;">公司設立</a>
-            <a href="/tags/稅務/" class="sidebar-tags__tag" style="font-size: 1.5em;">稅務</a>
-            <a href="/tags/節稅/" class="sidebar-tags__tag" style="font-size: 1.2em;">節稅</a>
-            <a href="/tags/會計/" class="sidebar-tags__tag" style="font-size: 1.4em;">會計</a>
-            <a href="/tags/記帳/" class="sidebar-tags__tag" style="font-size: 1.1em;">記帳</a>
-            <a href="/tags/法規/" class="sidebar-tags__tag" style="font-size: 1.3em;">法規</a>
-            <a href="/tags/財報/" class="sidebar-tags__tag" style="font-size: 1.2em;">財報</a>
+            {{ range $name, $_ := .Site.Taxonomies.tags }}
+                <a class="sidebar-tags__tag" href="{{ (printf "/tags/%s/" (urlize $name)) | relURL }}">{{ $name }}</a>
+            {{ end }}
         </div>
     </div>
     
