@@ -21,10 +21,11 @@
 .back-to-top {
   width: 3rem;
   height: 3rem;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: none;
   border-radius: 50%;
-  background-color: #ffffff; // 白色底更顯眼
-  color: #111111; // 深色箭頭
+  // 更顯眼：亮色漸層膠囊 + 外發光
+  background: linear-gradient(135deg, rgba($color-accent-primary, 0.95) 0%, rgba($color-accent-highlight, 0.95) 100%);
+  color: #ffffff; // 白色箭頭
   font-size: 1.2rem;
   cursor: pointer;
   display: none;
@@ -33,7 +34,7 @@
   justify-content: center;
   line-height: 1; // 修正 icon 垂直對齊
   transition: all $transition-base;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25); // 強化陰影
+  box-shadow: 0 8px 22px rgba($color-accent-primary, 0.35), 0 2px 8px rgba(0,0,0,0.35);
   position: relative;
 
   i {
@@ -49,11 +50,7 @@
     text-rendering: geometricPrecision;
   }
   
-  &:hover {
-    background-color: #f7f7f7;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.28);
-  }
+  &:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba($color-accent-highlight, 0.45), 0 3px 10px rgba(0,0,0,0.35); }
 
   // 外圈光暈
   &::after {
@@ -61,8 +58,8 @@
     position: absolute;
     inset: -6px;
     border-radius: 50%;
-    background: radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0) 100%);
-    filter: blur(3px);
+    background: radial-gradient(50% 50% at 50% 50%, rgba($color-accent-highlight,0.35) 0%, rgba($color-accent-highlight,0.15) 55%, rgba(0,0,0,0) 100%);
+    filter: blur(6px);
     pointer-events: none;
     z-index: -1;
   }
@@ -120,10 +117,10 @@
 .social-toggle {
   width: 3rem;
   height: 3rem;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: none;
   border-radius: 50%;
-  background-color: #ffffff; // 白底
-  color: #111111; // 分享圖標深色
+  background: linear-gradient(135deg, rgba($color-accent-primary, 0.95) 0%, rgba($color-accent-highlight, 0.95) 100%);
+  color: #ffffff; // 分享圖標白色
   font-size: 1.1rem;
   cursor: pointer;
   display: flex;
@@ -131,14 +128,10 @@
   justify-content: center;
   line-height: 1; // 修正圖示基線
   transition: all $transition-base;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 22px rgba($color-accent-primary, 0.35), 0 2px 8px rgba(0,0,0,0.35);
   position: relative;
   
-  &:hover {
-    background-color: #f7f7f7;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.28);
-  }
+  &:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba($color-accent-highlight, 0.45), 0 3px 10px rgba(0,0,0,0.35); }
   
   &:focus {
     outline: 2px solid $color-primary;
@@ -167,14 +160,14 @@
     text-rendering: geometricPrecision;
   }
 
-  // 外圈光暈（改為暗色柔影以襯托白底）
+  // 外圈光暈（與按鈕漸層一致的柔光）
   &::after {
     content: "";
     position: absolute;
     inset: -6px;
     border-radius: 50%;
-    background: radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0) 100%);
-    filter: blur(3px);
+    background: radial-gradient(50% 50% at 50% 50%, rgba($color-accent-highlight,0.35) 0%, rgba($color-accent-highlight,0.15) 55%, rgba(0,0,0,0) 100%);
+    filter: blur(6px);
     pointer-events: none;
     z-index: -1;
   }
@@ -197,14 +190,17 @@
   text-decoration: none;
   font-size: 1rem;
   transition: all $transition-base;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: none;
   position: relative;
-  color: #111111;
-  background-color: #ffffff; // 白底
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: inherit;
+  background-color: transparent; // 移除白底
+  border: none;
   
-  // 提升圖標對比
-  &.line i, &.facebook i, &.instagram i, &.email i { filter: drop-shadow(0 1px 1px rgba(0,0,0,0.25)); }
+  // 品牌色與光暈（僅圖標）
+  &.line i { color: #00C300; text-shadow: 0 0 8px rgba(0,195,0,0.45); }
+  &.facebook i { color: #1877F2; text-shadow: 0 0 8px rgba(24,119,242,0.45); }
+  &.instagram i { color: #E4405F; text-shadow: 0 0 8px rgba(228,64,95,0.45); }
+  &.email i { color: #F1F5F9; text-shadow: 0 0 8px rgba(255,255,255,0.35); }
 
   // 外圈光暈（暗色柔影）
   &::after {
@@ -212,8 +208,9 @@
     position: absolute;
     inset: -6px;
     border-radius: 50%;
-    background: radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.04) 60%, rgba(0,0,0,0) 100%);
-    filter: blur(3px);
+    // 弱化背景圓影，凸顯圖標自身光暈
+    background: radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.02) 60%, rgba(0,0,0,0) 100%);
+    filter: blur(2px);
     pointer-events: none;
     z-index: -1;
   }
@@ -231,18 +228,12 @@
     text-rendering: geometricPrecision;
   }
   
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  &:hover { transform: translateY(-2px) scale(1.05); }
+  
+  // 尺寸微調：僅圖標留白
+  i {
+    font-size: 1.15rem;
   }
-  
-  &.line { i { color: #00C300; } }
-  
-  &.facebook { i { color: #1877F2; } }
-  
-  &.instagram { i { color: #E4405F; } }
-  
-  &.email { i { color: #374151; } }
   
   @include mobile {
     width: 2.2rem;
@@ -253,6 +244,8 @@
 
 // Facebook 圖示光學置中（glyph 本身左右留白不對稱）
 .social-button.facebook i { transform: translate(-50%, -50%) translateX(2px) translateY(0.2px); }
+// 展開後套用呼吸效果
+.social-buttons:hover .social-buttons__menu .social-button { animation: pulseSoft 1.8s infinite ease-in-out; }
 
 /* 移除先前的位移微調，改用絕對置中確保精準居中 */
 
