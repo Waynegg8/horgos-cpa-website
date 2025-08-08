@@ -1,5 +1,9 @@
 <!-- 文章側邊欄 -->
 <div class="sidebar">
+    <!-- 目錄 (置頂顯示，滑動時最容易看到) -->
+    {{ if and (eq .Kind "page") (eq .Section "articles") }}
+    {{ partial "sidebar/table-of-contents.html" . }}
+    {{ end }}
     <!-- 分類列表 -->
     <div class="sidebar-widget sidebar-categories">
         <h3 class="sidebar-widget__title">文章分類</h3>
@@ -87,8 +91,4 @@
         </div>
     </div>
     
-    <!-- 目錄 (僅在單篇文章頁面顯示，放在最後) -->
-    {{ if and (eq .Kind "page") (eq .Section "articles") }}
-    {{ partial "sidebar/table-of-contents.html" . }}
-    {{ end }}
 </div>

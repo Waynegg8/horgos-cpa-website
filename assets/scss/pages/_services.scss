@@ -225,10 +225,10 @@
 
 /* 服務詳細頁面 */
 .service-detail {
-  padding: $spacing-6 0; // 整體上下間距縮小
+  padding: $spacing-4 0; // 再縮小整體上下間距，貼近 hero
   
   &__image {
-    margin-bottom: $spacing-6; // 縮小
+    margin-bottom: $spacing-5; // 再縮小
     border-radius: $border-radius-lg;
     overflow: hidden;
     box-shadow: $shadow-md;
@@ -241,11 +241,11 @@
   }
   
   &__content {
-    margin-bottom: $spacing-6; // 縮小
+    margin-bottom: $spacing-5; // 再縮小
   }
   
   &__list {
-    margin-bottom: $spacing-6; // 縮小
+    margin-bottom: $spacing-5; // 再縮小
     
     h2 {
       margin-bottom: $spacing-4;
