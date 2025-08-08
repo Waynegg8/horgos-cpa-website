@@ -18,16 +18,19 @@ function initBackToTop() {
     // 初始隱藏按鈕
     backToTopButton.style.display = 'none';
 
-    // 監聽滾動事件
+    // 監聽滾動事件：顯示/隱藏 & 自動收合社群列
+    const socialMenu = document.querySelector('.social-buttons__menu');
     window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            backToTopButton.style.display = 'flex';
-            backToTopButton.classList.add('visible');
-        } else {
-            backToTopButton.style.display = 'none';
-            backToTopButton.classList.remove('visible');
+        const y = window.pageYOffset || document.documentElement.scrollTop;
+        const show = y > 300;
+        backToTopButton.style.display = show ? 'flex' : 'none';
+        backToTopButton.classList.toggle('visible', show);
+        if (socialMenu) {
+            // 超過 300px 僅顯示第一顆（靠右對齊），其餘自動收合
+            socialMenu.style.opacity = show ? '1' : '0';
+            socialMenu.style.visibility = show ? 'visible' : 'hidden';
         }
-    });
+    }, { passive: true });
 
     // 點擊事件 - 回到頂端
     backToTopButton.addEventListener('click', function() {

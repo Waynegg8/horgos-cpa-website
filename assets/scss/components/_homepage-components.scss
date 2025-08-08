@@ -180,6 +180,17 @@
   }
 }
 
+/* 單一服務頁的圖文段落化（卡片改少量容器） */
+.service-detail {
+  display: grid; gap: $spacing-10;
+  &__image img { width: 100%; height: auto; border-radius: $border-radius-lg; box-shadow: $shadow-md; }
+  &__content { color: $color-text-secondary; }
+  &__list { background: transparent; border: none; padding: 0; }
+  .service-items { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: $spacing-2 $spacing-6; list-style: none; padding:0; margin:0; }
+  .service-items li { display:flex; align-items:center; gap:$spacing-2; }
+  @include mobile { .service-items { grid-template-columns: 1fr; } }
+}
+
 // 為何選擇我們
 .why-us {
   padding: $spacing-16 0;

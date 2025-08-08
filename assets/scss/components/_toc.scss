@@ -8,7 +8,7 @@
   padding: $spacing-4;
   border: 1px solid $color-border-primary;
   box-shadow: none;
-  z-index: 0; // 更低層級，確保不覆蓋標籤雲
+  z-index: 2; // 保證 TOC 置頂效果
   padding-right: $spacing-4; // 增加右側間距
   
   .toc-title {

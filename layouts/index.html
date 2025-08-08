@@ -20,8 +20,18 @@
     <!-- 客戶見證區 -->
     {{ partial "homepage/testimonials.html" . }}
     
-    <!-- 創業專區展示 -->
-    {{ partial "homepage/startup-section.html" . }}
+    <!-- 統一改為「服務導覽」圖文＋流程摘要，減少卡片密度 -->
+    <section class="service-overview">
+      <div class="container">
+        <div class="service-overview__row">
+          <div class="service-overview__text">
+            <h2 class="service-overview__title">我們的服務，從設立到營運</h2>
+            <p class="service-overview__text">公司設立、稅務申報與財務顧問一次到位。用標準作業與文件清單，讓流程更穩、更快。</p>
+          </div>
+          <div class="service-overview__media"><img src="/uploads/images/services/services-tax-default.jpg" alt="服務導覽" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
     
     <!-- 為何選擇我們 -->
     {{ partial "homepage/why-us.html" . }}
