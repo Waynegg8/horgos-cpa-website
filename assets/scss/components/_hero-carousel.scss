@@ -112,6 +112,10 @@
   cursor: pointer;
   z-index: 3;
   transition: all 0.3s ease;
+  display: flex;                 // 垂直水平置中
+  align-items: center;
+  justify-content: center;
+  line-height: 1;                // 修正字型高導致的垂直誤差
   
   &:hover {
     background: rgba(0, 0, 0, 0.7);

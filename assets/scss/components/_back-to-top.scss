@@ -28,8 +28,10 @@
   font-size: 1.2rem;
   cursor: pointer;
   display: none;
+  display: none;
   align-items: center;
   justify-content: center;
+  line-height: 1; // 修正 icon 垂直對齊
   transition: all $transition-base;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   
@@ -101,6 +103,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 1; // 修正圖示基線
   transition: all $transition-base;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   
@@ -119,12 +122,15 @@
     background-color: darken($color-accent, 15%);
     
     i {
-      transform: rotate(45deg);
+      transform: none; // 不旋轉，避免箭頭顯示歪斜
     }
   }
   
   i {
     transition: transform $transition-base;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
   
   @include mobile {
@@ -141,6 +147,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 1; // 修正圖示垂直對齊
   text-decoration: none;
   font-size: 1rem;
   transition: all $transition-base;
