@@ -73,17 +73,28 @@
 
           {{ partial "shared/comments.html" . }}
           
+          {{/* 相關影片：優先以相同標籤；若無標籤則以相同分類；再無則以最新影片 */}}
+          {{ $allVideos := where .Site.RegularPages "Section" "videos" }}
+          {{ $related := slice }}
+          {{ if .Params.tags }}
+            {{ $related = where $allVideos "Params.tags" "intersect" .Params.tags }}
+          {{ else if .Params.category }}
+            {{ $related = where $allVideos "Params.category" .Params.category }}
+          {{ else }}
+            {{ $related = $allVideos.ByDate.Reverse }}
+          {{ end }}
+          {{ $related = where $related "Permalink" "!=" .Permalink }}
+          {{ $related = first 3 $related }}
+          {{ if gt (len $related) 0 }}
           <div class="related-videos">
             <h3>相關影片</h3>
             <div class="related-videos-grid">
-              {{ $related := (where .Site.RegularPages "Type" "videos") | intersect (where .Site.RegularPages "Params.tags" "intersect" .Params.tags) | first 3 }}
               {{ range $related }}
-                {{ if ne .Permalink $.Permalink }}
-                  {{ partial "videos/card.html" . }}
-                {{ end }}
+                {{ partial "videos/card.html" . }}
               {{ end }}
             </div>
           </div>
+          {{ end }}
         </div>
       </article>
     </div>

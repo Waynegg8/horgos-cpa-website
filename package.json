@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "hugo server -D",
     "build": "hugo --minify",
+    "gen:samples": "node scripts/generate-sample-content.js",
     "test:performance": "node scripts/performance-test.js",
     "test:accessibility": "node scripts/accessibility-test.js",
     "test:final": "node scripts/final-check.js",

@@ -4,7 +4,8 @@
     <div class="series-navigation__header">
         <h3 class="series-navigation__title">{{ .Params.series }} 系列</h3>
         {{ $series := .Params.series }}
-        {{ $seriesOrder := .Params.series_order }}
+        {{ $seriesOrder := 1 }}
+        {{ with .Params.series_order }}{{ $seriesOrder = (int .) }}{{ end }}
         {{ $category := .Params.category }}
         {{ $seriesPosts := where (where .Site.RegularPages "Params.series" $series) "Params.draft" "!=" true }}
         {{ $seriesCount := len $seriesPosts }}
@@ -14,27 +15,32 @@
     <div class="series-navigation__links">
         {{ if gt $seriesOrder 1 }}
             {{ $prevPost := where (where .Site.RegularPages "Params.series" $series) "Params.series_order" (sub $seriesOrder 1) }}
-            {{ with index $prevPost 0 }}
+            {{ if gt (len $prevPost) 0 }}
+            {{ with (index $prevPost 0) }}
                 <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__prev" aria-label="上一篇：{{ .Title }}">
                     <i class="fas fa-arrow-left"></i>
                     <span>上一篇</span>
                 </a>
             {{ end }}
+            {{ end }}
         {{ end }}
 
         {{ if lt $seriesOrder $seriesCount }}
             {{ $nextPost := where (where .Site.RegularPages "Params.series" $series) "Params.series_order" (add $seriesOrder 1) }}
-            {{ with index $nextPost 0 }}
+            {{ if gt (len $nextPost) 0 }}
+            {{ with (index $nextPost 0) }}
                 <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__next" aria-label="下一篇：{{ .Title }}">
                     <span>下一篇</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
             {{ end }}
+            {{ end }}
         {{ end }}
     </div>
 
-    {{ $firstPost := index (where (where .Site.RegularPages "Params.series" $series) "Params.series_order" 1) 0 }}
-    {{ with $firstPost }}
+    {{ $firstList := where (where .Site.RegularPages "Params.series" $series) "Params.series_order" 1 }}
+    {{ if gt (len $firstList) 0 }}
+    {{ $firstPost := index $firstList 0 }}
     <div class="series-navigation__all">
         <a href="{{ .RelPermalink }}" class="btn btn-primary series-navigation__btn-all">
             <i class="fas fa-list"></i>
