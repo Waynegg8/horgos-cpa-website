@@ -18,6 +18,11 @@
   }
 }
 
+// 允許任何跳躍連結可視化聚焦（避免「跳轉連結無法聚焦」）
+.skip-links a:focus-visible {
+  position: static;
+}
+
 /* 鍵盤焦點樣式 */
 :focus {
   outline: 2px solid $color-accent-primary;

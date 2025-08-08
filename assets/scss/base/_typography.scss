@@ -197,16 +197,26 @@ li {
 
 // 8. 統一連結樣式
 // -----------------------------------------------------------------------------
+// 連結預設必須以「不只顏色」區別：全站預設加底線
 a {
   color: $color-accent-highlight;
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
   transition: color $transition-base $ease-in-out;
   padding-right: $spacing-2;
   
   &:hover {
     color: lighten($color-accent-highlight, 10%);
-    text-decoration: underline;
   }
+  &:focus-visible {
+    outline: 2px solid $color-accent-highlight;
+    outline-offset: 2px;
+  }
+}
+
+// 例外：在導航、按鈕、卡片連結等場景移除底線（仍保留聚焦樣式）
+.nav-link, .mobile-nav__link, .mobile-nav__dropdown-link, .btn, .service-card, .dropdown-item, .video-card__watch, .social-button, .back-to-top {
+  text-decoration: none;
 }
 
 // 9. 統一強調文字樣式
