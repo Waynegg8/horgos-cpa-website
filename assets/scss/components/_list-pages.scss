@@ -400,3 +400,13 @@
     padding: $spacing-1 $spacing-3;
   }
 } 
+
+// 12. 文章列表頁 hero 區描述不換行（桌面）
+.articles {
+  .page-header__description {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    display: inline-block;
+  }
+}
