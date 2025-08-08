@@ -53,36 +53,12 @@ function initBackToTop() {
  * 初始化社群媒體按鈕
  */
 function initSocialButtons() {
-    const socialToggle = document.getElementById('social-toggle');
     const socialMenu = document.querySelector('.social-buttons__menu');
-    
-    if (!socialToggle || !socialMenu) return;
-
-    // 鍵盤無障礙支援
-    socialToggle.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            // 模擬滑鼠懸停效果
-            socialMenu.style.opacity = '1';
-            socialMenu.style.visibility = 'visible';
-            socialMenu.style.transform = 'translateY(0)';
-            
-            // 添加一個臨時的鍵盤事件監聽器來關閉選單
-            const closeMenu = function(event) {
-                if (event.key === 'Escape' || event.key === 'Tab') {
-                    socialMenu.style.opacity = '';
-                    socialMenu.style.visibility = '';
-                    socialMenu.style.transform = '';
-                    document.removeEventListener('keydown', closeMenu);
-                }
-            };
-            
-            document.addEventListener('keydown', closeMenu);
-        }
-    });
-    
-    // 添加呼吸律動效果
-    addPulseAnimation(socialToggle);
+    if (!socialMenu) return;
+    // 改為常駐顯示，不再使用切換按鈕，避免誤觸造成位置漂移
+    socialMenu.style.opacity = '1';
+    socialMenu.style.visibility = 'visible';
+    socialMenu.style.transform = 'translateY(0)';
 }
 
 /**

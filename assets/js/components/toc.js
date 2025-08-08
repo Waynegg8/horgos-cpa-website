@@ -168,9 +168,14 @@ function setupTOCStickyBoundary() {
   const onScroll = () => {
     const articleRect = article.getBoundingClientRect();
     const tocRect = toc.getBoundingClientRect();
-    // 當文章底部已與視窗上緣距離小於 TOC 高度 + top，代表 TOC 應該釋放
     const shouldRelease = articleRect.bottom - (tocRect.height + offsetTop) <= 0;
-    toc.style.position = shouldRelease ? 'static' : 'sticky';
+    // 永遠維持 sticky，但在接近底部時，改用 translateY 模擬停住，以保留「置頂感」直到最底
+    if (shouldRelease) {
+      const delta = articleRect.bottom - (tocRect.height + offsetTop);
+      toc.style.transform = `translateY(${delta}px)`;
+    } else {
+      toc.style.transform = 'translateY(0)';
+    }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();

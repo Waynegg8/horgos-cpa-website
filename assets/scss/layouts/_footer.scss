@@ -173,30 +173,20 @@
   gap: $spacing-4;
   margin-top: $spacing-6;
 
-    .social-link {
+  .social-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
+    width: 2.5rem; // 保留點擊熱區
     height: 2.5rem;
     border-radius: 50%;
-    font-size: 1.15rem;
-    color: #ffffff;
-    background-color: rgba(255,255,255,0.08); // default fallback
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-    transition: transform $transition-base, box-shadow $transition-base, filter $transition-base, background-color $transition-base;
+    background: transparent; // 移除底色，避免在深底看成黑圓
+    box-shadow: none;
+    transition: transform $transition-base;
 
-    // Brand colors
-    &.threads { background-color: #111111; }
-    &.line { background-color: #00C300; }
-    &.instagram { background: radial-gradient(circle at 30% 110%, #ffdb8b, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc); }
-      img { width: 22px; height: 22px; display: block; object-fit: contain; }
+    img { width: 26px; height: 26px; display: block; object-fit: contain; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.35)); }
 
-    &:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.28);
-      filter: brightness(1.05);
-    }
+    &:hover { transform: translateY(-2px) scale(1.04); }
   }
 }
 

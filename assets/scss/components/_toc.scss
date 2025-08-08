@@ -5,7 +5,7 @@
   top: 72px; // 與固定導覽列高度對齊，避免被覆蓋/抖動
   background-color: $color-bg-secondary;
   border-radius: $border-radius-lg;
-  padding: $spacing-6;
+  padding: $spacing-4;
   border: 1px solid $color-border-primary;
   box-shadow: none;
   z-index: 1; // 降低一點層級，避免覆蓋標籤雲

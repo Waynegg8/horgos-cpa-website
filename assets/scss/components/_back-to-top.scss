@@ -143,51 +143,35 @@
 }
 
 .social-button {
-  width: 48px;  /* 放大並統一尺寸，避免圖標顯得擠壓或歪斜 */
+  width: 48px;  /* 點擊熱區，保持一致 */
   height: 48px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 0; // 移除行高影響，精準置中
+  line-height: 0;
   text-decoration: none;
   font-size: 1rem;
-  transition: all $transition-base;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  transition: transform $transition-base ease;
   position: relative;
-  color: #ffffff; /* 內建白色字，讓品牌色做底 */
-  background-color: #1877F2; /* 默認以品牌藍，會被各品牌覆蓋 */
   border: none;
-  
-  // 品牌色與光暈（僅圖標）
-  &.line { background-color: #00C300; }
-  /* Threads 在深色背景上增加雙層描邊與內光，保證可見度 */
-  &.threads { background: #000000; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
-  &.instagram { background: radial-gradient(circle at 30% 110%, #ffdb8b, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc); }
-  &.email { background-color: #111827; }
-  // 以圖片呈現時，確保水平垂直置中
-  img { width: 22px; height: 22px; display: block; object-fit: contain; image-rendering: -webkit-optimize-contrast; }
+  background: transparent; /* 移除彩色圓底，改為純圖片呈現 */
+  box-shadow: none;        /* 移除外圈陰影，避免在深色底看成黑圈 */
 
-  // 外圈光暈（暗色柔影）
-  &::after {
-    content: "";
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    // 弱化背景圓影，凸顯圖標自身光暈
-    background: radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.02) 60%, rgba(0,0,0,0) 100%);
-    filter: blur(2px);
-    pointer-events: none;
-    z-index: -1;
+  /* 僅顯示圖標圖片，提供可讀性陰影 */
+  img {
+    width: 28px;
+    height: 28px;
+    display: block;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.45)); /* 在深底仍清晰 */
   }
-  
-  i { position: static; transform: none; width: 22px; height: 22px; line-height: 22px; text-align: center; vertical-align: middle; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; font-size: 22px; }
-  
-  &:hover { transform: translateY(-2px) scale(1.05); }
-  
-  // 尺寸微調：維持一致字級
-  
-  @include mobile { width: 44px; height: 44px; font-size: 1rem; }
+
+  i { display: none; }
+
+  &:hover { transform: translateY(-2px) scale(1.06); }
+
+  @include mobile { width: 44px; height: 44px; }
 }
 
 // 移除個別圖示的位移微調，統一由 flex 完整置中

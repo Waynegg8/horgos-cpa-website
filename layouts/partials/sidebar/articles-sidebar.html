@@ -30,11 +30,22 @@
         </ul>
     </div>
 
-    <!-- 目錄：應位於系列文章下、標籤雲上 -->
+    <!-- TOC + 標籤雲 同步 sticky 群組 -->
     {{ if and (eq .Kind "page") (eq .Section "articles") }}
-    {{ partial "sidebar/table-of-contents.html" . }}
+    <div class="sidebar-sticky-group">
+        {{ partial "sidebar/table-of-contents.html" . }}
+        <!-- 標籤雲：與 TOC 同步移動，不被 TOC 蓋住 -->
+        <div class="sidebar-widget sidebar-tags">
+            <h3 class="sidebar-widget__title">標籤雲</h3>
+            <div class="sidebar-tags__cloud">
+                {{ range $name, $_ := .Site.Taxonomies.tags }}
+                    <a class="sidebar-tags__tag" href="{{ (printf "/tags/%s/" (urlize $name)) | relURL }}">{{ $name }}</a>
+                {{ end }}
+            </div>
+        </div>
+    </div>
     {{ end }}
-    
+
     {{ if ne .Kind "page" }}
     <!-- 最新文章：僅列表頁顯示，單一文章頁不顯示 -->
     <div class="sidebar-widget sidebar-recent">
