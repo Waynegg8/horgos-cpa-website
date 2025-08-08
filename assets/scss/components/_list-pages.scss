@@ -10,9 +10,8 @@
 .search-section {
   margin-bottom: $spacing-8;
   
-  .search-container {
-    margin-bottom: $spacing-6;
-  }
+  .search-container { margin-bottom: $spacing-6; }
+  .search-form { display: flex; align-items: center; gap: $spacing-2; }
   
   .search-input {
     font-size: $font-size-base;
@@ -33,6 +32,8 @@
   .search-button {
     font-size: $font-size-base;
     padding: $spacing-3 $spacing-4;
+    @extend .btn;
+    @extend .btn-secondary;
   }
 }
 
@@ -69,11 +70,7 @@
       border-color: $color-accent-highlight;
     }
     
-    &.active {
-      background-color: $color-accent-highlight;
-      color: #ffffff;
-      border-color: $color-accent-highlight;
-    }
+    &.active { background-color: rgba($color-accent-highlight, 0.15); color: $color-accent-highlight; border-color: $color-accent-highlight; }
     
     i {
       font-size: $font-size-sm;

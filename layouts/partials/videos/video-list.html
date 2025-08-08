@@ -1,7 +1,7 @@
 <!-- 影片列表頁 -->
 <div class="video-list">
     <!-- 精選影片 -->
-    {{ $all := where .Pages "Type" "videos" }}
+    {{ $all := where .Site.RegularPages "Section" "videos" }}
     {{ $sorted := $all.ByDate.Reverse }}
     {{ if gt (len $sorted) 0 }}
     {{ $featured := index $sorted 0 }}

@@ -28,6 +28,9 @@
   display: block;
   text-decoration: none;
   cursor: pointer;
+  color: inherit;
+  
+  &:visited { color: inherit; }
   
   &:hover {
     transform: translateY(-4px);

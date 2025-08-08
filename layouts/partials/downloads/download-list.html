@@ -28,7 +28,7 @@
     
     <!-- 下載列表 -->
     <div class="download-list__grid">
-        {{ $paginator := .Paginate (where .Pages "Type" "downloads") 10 }}
+        {{ $paginator := .Paginate (where .Site.RegularPages "Section" "downloads") 10 }}
         {{ if not (gt (len $paginator.Pages) 0) }}
         <div class="empty-state">目前沒有符合條件的資源。</div>
         {{ end }}
