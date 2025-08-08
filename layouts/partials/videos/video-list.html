@@ -30,7 +30,7 @@
     </section>
     {{ end }}
 
-    <!-- 分類搜索標籤 -->
+    <!-- 分類標籤（無全域搜尋） -->
     <div class="video-categories">
         <div class="category-filters">
             <button class="category-filter category-search-btn active" data-category="all">全部</button>
@@ -41,7 +41,7 @@
         </div>
     </div>
     
-    <!-- 影片列表 -->
+    <!-- 影片列表（僅分類篩選，不依賴全域搜尋） -->
     <div class="video-cards">
         {{ $rest := after 1 $sorted }}
         {{ $paginator := .Paginate $rest 10 }}

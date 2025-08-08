@@ -17,10 +17,6 @@
 <div class="container container--content">
     <div class="two-column">
         <div class="two-column__main">
-            {{ if or (eq .Section "articles") (eq .Section "videos") (eq .Section "faq") (eq .Section "downloads") }}
-            {{ partial "search/list-search.html" . }}
-            {{ end }}
-            
             {{ .Content }}
             
             {{ if eq .Section "about" }}
