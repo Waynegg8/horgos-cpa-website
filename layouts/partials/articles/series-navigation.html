@@ -60,34 +60,33 @@
   {{ end }}
 
   <div class="series-navigation__links">
-    {{ with ($scratch.Get "prev") }}
-      <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__prev" aria-label="上一篇：{{ .Title }}">
-        <i class="fas fa-arrow-left"></i>
-        <span>上一篇：{{ .Title }}</span>
-      </a>
+    {{ $prevSel := ($scratch.Get "prev") }}
+    {{ $nextSel := ($scratch.Get "next") }}
+    {{ $isFirst := eq $seriesOrder 1 }}
+    {{ $isLast := eq $seriesOrder $seriesCount }}
+
+    {{ with $prevSel }}
+      <div class="series-navigation__item">
+        <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__prev" aria-label="上一篇：{{ .Title }}">
+          <span>上一篇：{{ .Title }}</span>
+        </a>
+        {{ if ne .Params.series $series }}
+          <div class="series-navigation__caption">{{ if $isFirst }}本系列第一篇，上一篇內容來自其他系列推薦。{{ else }}上一篇內容來自其他系列推薦。{{ end }}</div>
+        {{ end }}
+      </div>
     {{ end }}
-    {{ with ($scratch.Get "next") }}
-      <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__next" aria-label="下一篇：{{ .Title }}">
-        <span>下一篇：{{ .Title }}</span>
-        <i class="fas fa-arrow-right"></i>
-      </a>
+
+    {{ with $nextSel }}
+      <div class="series-navigation__item">
+        <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__next" aria-label="下一篇：{{ .Title }}">
+          <span>下一篇：{{ .Title }}</span>
+        </a>
+        {{ if ne .Params.series $series }}
+          <div class="series-navigation__caption">{{ if $isLast }}本系列最後一篇，接下來將前往其他系列的推薦。{{ else }}下一篇內容來自其他系列推薦。{{ end }}</div>
+        {{ end }}
+      </div>
     {{ end }}
   </div>
-
-  {{/* 離開本系列提示：若下一篇或上一篇不屬於當前系列，顯示提示訊息 */}}
-  {{ $prevSel := ($scratch.Get "prev") }}
-  {{ $nextSel := ($scratch.Get "next") }}
-  {{ $isFirst := eq $seriesOrder 1 }}
-  {{ $isLast := eq $seriesOrder $seriesCount }}
-  {{ if or (and $nextSel (ne $nextSel.Params.series $series)) (and $prevSel (ne $prevSel.Params.series $series)) }}
-    <p class="series-navigation__note">
-      {{ if and $nextSel (ne $nextSel.Params.series $series) }}
-        {{ if $isLast }}本系列最後一篇，接下來將前往其他系列的推薦。{{ else }}下一篇內容來自其他系列的推薦。{{ end }}
-      {{ else if and $prevSel (ne $prevSel.Params.series $series) }}
-        {{ if $isFirst }}本系列第一篇，上一篇內容來自其他系列的推薦。{{ else }}上一篇內容來自其他系列的推薦。{{ end }}
-      {{ end }}
-    </p>
-  {{ end }}
 </div>
 {{ else }}
 <!-- 非系列文章：同分類日期相鄰（若為系列則指向該系列第1篇） -->
@@ -125,17 +124,29 @@
 
 <div class="article-navigation">
   <div class="article-navigation__links">
-    {{ with ($scratch.Get "prev") }}
-      <a href="{{ .RelPermalink }}" class="btn btn-secondary article-navigation__prev" aria-label="上一篇：{{ .Title }}">
-        <i class="fas fa-arrow-left"></i>
-        <span>上一篇：{{ .Title }}</span>
-      </a>
+    {{ $prevSel := ($scratch.Get "prev") }}
+    {{ $nextSel := ($scratch.Get "next") }}
+
+    {{ with $prevSel }}
+      <div class="article-navigation__item">
+        <a href="{{ .RelPermalink }}" class="btn btn-secondary article-navigation__prev" aria-label="上一篇：{{ .Title }}">
+          <span>上一篇：{{ .Title }}</span>
+        </a>
+        {{ if .Params.series }}
+          <div class="article-navigation__caption">上一篇內容來自其他系列推薦。</div>
+        {{ end }}
+      </div>
     {{ end }}
-    {{ with ($scratch.Get "next") }}
-      <a href="{{ .RelPermalink }}" class="btn btn-secondary article-navigation__next" aria-label="下一篇：{{ .Title }}">
-        <span>下一篇：{{ .Title }}</span>
-        <i class="fas fa-arrow-right"></i>
-      </a>
+
+    {{ with $nextSel }}
+      <div class="article-navigation__item">
+        <a href="{{ .RelPermalink }}" class="btn btn-secondary article-navigation__next" aria-label="下一篇：{{ .Title }}">
+          <span>下一篇：{{ .Title }}</span>
+        </a>
+        {{ if .Params.series }}
+          <div class="article-navigation__caption">下一篇內容來自其他系列推薦。</div>
+        {{ end }}
+      </div>
     {{ end }}
   </div>
 </div>

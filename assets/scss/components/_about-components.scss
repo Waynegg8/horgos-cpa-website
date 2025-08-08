@@ -333,33 +333,36 @@
     
     .skill-tag {
       position: relative;
-      background: linear-gradient(135deg, #0a3d62 0%, #3c8dbc 100%);
-      color: #ffffff;
+      color: #0B1520;
       padding: $spacing-2 $spacing-4;
       border-radius: $border-radius-full;
       font-size: $font-size-base;
       font-weight: 700;
-      border: 1px solid rgba(255,255,255,0.08); // 銳利邊界
-      box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+      box-shadow: 0 6px 16px rgba(14,165,233,0.25);
       letter-spacing: .02em;
-      text-shadow: none;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       overflow: hidden;
-      transition: transform $transition-base $ease-in-out, filter $transition-base $ease-in-out;
+      transition: transform .28s ease, box-shadow .28s ease;
+      will-change: transform;
 
-      // 取消掃光，避免文字霧化
-      &:before { display: none; }
+      // 深到淺藍系（避免紫色），並增加多色巡迴
+      background: linear-gradient(135deg, #0B72B9 0%, #4FC3F7 100%);
+      &:nth-child(6n+2){ background: linear-gradient(135deg, #0B5FA4 0%, #60A5FA 100%);} 
+      &:nth-child(6n+3){ background: linear-gradient(135deg, #0A4E8E 0%, #93C5FD 100%);} 
+      &:nth-child(6n+4){ background: linear-gradient(135deg, #0A3F78 0%, #BFDBFE 100%);} 
+      &:nth-child(6n+5){ background: linear-gradient(135deg, #093366 0%, #A5B4FC 100%);} 
+      &:nth-child(6n+6){ background: linear-gradient(135deg, #0B5394 0%, #60A5FA 100%);} 
 
-      // 多色藍綠系（避免紫色）
-      &:nth-child(6n+1) { background: linear-gradient(135deg, #0a3d62 0%, #3c8dbc 100%); }
-      &:nth-child(6n+2) { background: linear-gradient(135deg, #0e5e6f 0%, #3aa6b9 100%); }
-      &:nth-child(6n+3) { background: linear-gradient(135deg, #064e87 0%, #00b2ff 100%); }
-      &:nth-child(6n+4) { background: linear-gradient(135deg, #0b6ef3 0%, #66b2ff 100%); }
-      &:nth-child(6n+5) { background: linear-gradient(135deg, #0f766e 0%, #34d399 100%); }
-      &:nth-child(6n+6) { background: linear-gradient(135deg, #0d5c63 0%, #33cccc 100%); }
+      // 斜向掃光動畫（Stripe 風）
+      &::after {
+        content: "";
+        position: absolute; top: 0; left: -120%; width: 120%; height: 100%;
+        background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+        transform: skewX(-20deg);
+        animation: tagShine 3.2s ease-in-out infinite;
+      }
 
-      &:hover { transform: translateY(-1px); }
+      &:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(14,165,233,0.32); }
+      &:active { transform: translateY(0); }
     }
   }
   
@@ -372,4 +375,10 @@
 @keyframes shine-sweep {
   0% { left: -150%; }
   100% { left: 150%; }
+}
+
+@keyframes tagShine {
+  0% { left: -120%; }
+  50% { left: 120%; }
+  100% { left: 120%; }
 }
