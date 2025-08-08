@@ -146,8 +146,9 @@
 }
 
 // 細微光學置中調整（chevron 左右留白不對稱）
-.hero-carousel__control--prev i { transform: translateX(0.5px); }
-.hero-carousel__control--next i { transform: translateX(-0.5px); }
+// 更明顯的光學置中
+.hero-carousel__control--prev i { transform: translateX(1px); }
+.hero-carousel__control--next i { transform: translateX(-1px); }
 
 .hero-carousel__control--prev {
   left: $spacing-4;
