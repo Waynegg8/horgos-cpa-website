@@ -132,7 +132,10 @@
     grid-template-columns: 360px 1fr; // 再放大照片欄寬
     gap: $spacing-8;
     padding: $spacing-8;
-    background-color: transparent; // 由內部卡片呈現卡片感
+    background-color: $color-bg-secondary; // 大卡容器底色
+    border: 1px solid $color-border-primary; // 大卡容器邊框
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-sm;
     
     @include tablet {
       grid-template-columns: 280px 1fr;
@@ -231,5 +234,5 @@
   
   // 兩張卡片風格
   .team-photo-card { padding: 0; }
-  .team-info-card { padding: $spacing-6; background-color: $color-bg-secondary; border: 1px solid $color-border-primary; }
+  .team-info-card { padding: $spacing-6; background-color: transparent; }
 }
