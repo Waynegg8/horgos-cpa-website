@@ -1,13 +1,10 @@
 // SEO內容區塊樣式
 .seo-content-section {
   background-color: $color-bg-secondary;
-  padding: $spacing-6 0; // 縮小上下內距
-  margin-top: $spacing-6; // 縮小與上方區塊的距離
+  padding: $spacing-5 0; // 更緊湊
+  margin-top: $spacing-4; // 與上方距離更小
   border-top: 1px solid $color-border-primary;
   padding-right: $spacing-4; // 保持右側間距
-
-  @include tablet { padding: $spacing-5 0; margin-top: $spacing-5; }
-  @include mobile { padding: $spacing-4 0; margin-top: $spacing-4; }
 }
 
 .seo-content {
