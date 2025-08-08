@@ -41,21 +41,19 @@
                     <fieldset class="form-group">
                         <legend>諮詢服務類型 <span class="required">*</span></legend>
                         <div class="service-buttons" role="radiogroup" aria-describedby="service-error">
-                            <div class="service-button-row">
+                            <div class="service-grid">
                                 <input type="radio" id="service-business" name="service" value="工商登記" required aria-required="true">
                                 <label for="service-business" class="service-button">工商登記</label>
-                                
+
                                 <input type="radio" id="service-tax" name="service" value="稅務申報" required aria-required="true">
                                 <label for="service-tax" class="service-button">稅務申報</label>
-                            </div>
-                            <div class="service-button-row">
+
                                 <input type="radio" id="service-audit" name="service" value="財稅簽證" required aria-required="true">
                                 <label for="service-audit" class="service-button">財稅簽證</label>
-                                
+
                                 <input type="radio" id="service-consulting" name="service" value="諮詢服務" required aria-required="true">
                                 <label for="service-consulting" class="service-button">諮詢服務</label>
-                            </div>
-                            <div class="service-button-row">
+
                                 <input type="radio" id="service-other" name="service" value="其他服務" required aria-required="true">
                                 <label for="service-other" class="service-button">其他服務</label>
                             </div>
@@ -80,10 +78,10 @@
                         <div class="error-message" id="privacy-error" aria-live="polite"></div>
                     </div>
                     
-                    <div class="form-group">
-                        <button type="submit" id="submit-btn" class="submit-button">送出預約</button>
-                        <div id="form-status" class="form-status" aria-live="assertive"></div>
-                    </div>
+                        <div class="form-group">
+                            <button type="submit" id="submit-btn" class="submit-button">送出預約</button>
+                            <div id="form-status" class="form-status sr-only" aria-live="assertive" aria-hidden="true"></div>
+                        </div>
                 </form>
             </div>
             
@@ -122,6 +120,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('appointment-form');
   const submitBtn = document.getElementById('submit-btn');
   const formStatus = document.getElementById('form-status');
+  
+  // 同步隱私同意區塊樣式（未勾選為中性，勾選後高亮）
+  const privacyCheckbox = document.getElementById('privacy');
+  const privacyBox = document.querySelector('.privacy-agreement');
+  if (privacyCheckbox && privacyBox) {
+    const syncPrivacyStyle = () => {
+      privacyBox.classList.toggle('agreed', privacyCheckbox.checked);
+    };
+    privacyCheckbox.addEventListener('change', syncPrivacyStyle);
+    syncPrivacyStyle();
+  }
   
   // 服務按鈕點擊效果
   const serviceButtons = document.querySelectorAll('.service-button');
@@ -286,6 +295,8 @@ document.addEventListener('DOMContentLoaded', function() {
       submitBtn.textContent = '送出預約';
       submitBtn.setAttribute('aria-busy', 'false');
       formStatus.textContent = '預約申請已成功送出，我們將盡快與您聯繫確認詳情。';
+      formStatus.classList.remove('sr-only');
+      formStatus.removeAttribute('aria-hidden');
       formStatus.classList.add('success');
       formStatus.setAttribute('role', 'alert');
       
@@ -306,6 +317,8 @@ document.addEventListener('DOMContentLoaded', function() {
       submitBtn.textContent = '送出預約';
       submitBtn.setAttribute('aria-busy', 'false');
       formStatus.textContent = '提交失敗，請稍後再試或直接聯絡我們。';
+      formStatus.classList.remove('sr-only');
+      formStatus.removeAttribute('aria-hidden');
       formStatus.classList.add('error');
       formStatus.setAttribute('role', 'alert');
       
@@ -428,21 +441,12 @@ document.addEventListener('DOMContentLoaded', function() {
   color: $color-status-error;
 }
 
-.service-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
-}
+.service-buttons { margin-bottom: 0.5rem; }
 
-.service-button-row {
-  display: flex;
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
-  justify-content: space-between;
-}
-
-.service-button-row:last-child {
-  justify-content: flex-start;
 }
 
 .service-buttons input[type="radio"] {
@@ -461,6 +465,7 @@ document.addEventListener('DOMContentLoaded', function() {
   cursor: pointer;
   transition: all 0.3s ease;
   color: #F0F0F0;
+  text-align: center;
 }
 
 .service-button:hover {
@@ -477,15 +482,20 @@ document.addEventListener('DOMContentLoaded', function() {
 .privacy-agreement {
   margin-top: 2rem;
   padding: 1.5rem;
-  background-color: rgba(34, 197, 94, 0.1);
-  border: 2px solid rgba(34, 197, 94, 0.3);
+  background-color: transparent; /* 初始中性底色 */
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
 .privacy-agreement:hover {
-  background-color: rgba(34, 197, 94, 0.15);
-  border-color: rgba(34, 197, 94, 0.5);
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.privacy-agreement.agreed {
+  background-color: rgba(34, 197, 94, 0.10); /* 勾選後才高亮綠底 */
+  border: 2px solid rgba(34, 197, 94, 0.30);
 }
 
 .privacy-checkbox-container {
@@ -651,15 +661,7 @@ button:focus {
     margin-bottom: 1.25rem;
   }
   
-  .service-buttons {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .service-button-row {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+  .service-grid { grid-template-columns: 1fr; gap: 0.5rem; }
   
   .service-button {
     width: 100%;

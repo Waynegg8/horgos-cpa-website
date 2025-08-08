@@ -34,30 +34,31 @@
       
       <!-- 影片列表 -->
       <div class="videos-list" id="videos-list">
-        {{ $paginator := .Paginate (where .Pages "Type" "videos") 10 }}
+        {{ $paginator := .Paginate .RegularPages 10 }}
         {{ range $paginator.Pages }}
+          {{ $p := . }}
           <div class="video-card" data-title="{{ .Title }}" data-description="{{ .Summary }}">
             <a href="{{ .RelPermalink }}" class="video-card-link">
               <div class="video-thumbnail">
                 {{ with .Params.thumbnail }}
-                <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+                <img src="{{ . }}" alt="{{ $p.Title }}" loading="lazy">
                 {{ else }}
-                <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
+                <img src="/uploads/images/general/general-default.jpg" alt="{{ $p.Title }}" loading="lazy">
                 {{ end }}
                 <div class="video-duration-badge">
                   {{ with .Params.duration }}{{ . }}{{ else }}--:--{{ end }}
                 </div>
               </div>
               <div class="video-card-content">
-                <h2 class="video-title">{{ $.Title }}</h2>
+                <h2 class="video-title">{{ .Title }}</h2>
                 <div class="video-meta">
-                  <span class="video-meta__item"><i class="fas fa-calendar-alt"></i> {{ $.Date.Format "2006-01-02" }}</span>
+                  <span class="video-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
                   <span class="video-meta__item"><i class="fas fa-play-circle"></i> 影片</span>
-                  {{ with $.Params.series }}
+                  {{ with .Params.series }}
                   <span class="video-meta__item"><i class="fas fa-bookmark"></i> {{ . }}</span>
                   {{ end }}
                 </div>
-                <p class="video-description">{{ $.Summary | truncate 100 }}</p>
+                <p class="video-description">{{ .Summary | plainify | truncate 100 }}</p>
               </div>
             </a>
           </div>
@@ -102,6 +103,11 @@
     </div>
   </div>
 </div>
+
+<!-- 雙CTA行動呼籲區域（影音專區） -->
+<div class="container">
+  {{ partial "shared/dual-cta.html" . }}
+  </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

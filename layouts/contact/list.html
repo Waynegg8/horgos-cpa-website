@@ -73,4 +73,36 @@
     </div>
   </div>
 </div>
+
+<!-- 交通資訊區塊 -->
+<section class="contact-transportation section--sm">
+  <div class="container">
+    <h2 class="content-block__title">交通資訊</h2>
+    <div class="transport-grid">
+      <div class="transport-item card-style">
+        <h3><i class="fas fa-bus"></i> 公車</h3>
+        <p>近站牌：{{ with .Site.Params.transport.bus_stop }}{{ . }}{{ else }}科博館（範例）{{ end }}</p>
+        <p>路線：{{ with .Site.Params.transport.bus_lines }}{{ . }}{{ else }}市區公車 11、27、290（範例）{{ end }}</p>
+      </div>
+      <div class="transport-item card-style">
+        <h3><i class="fas fa-train"></i> 火車/高鐵</h3>
+        <p>{{ with .Site.Params.transport.rail }}{{ . }}{{ else }}台中車站轉乘公車約 15 分鐘（範例）{{ end }}</p>
+      </div>
+      <div class="transport-item card-style">
+        <h3><i class="fas fa-parking"></i> 停車</h3>
+        <p>{{ with .Site.Params.transport.parking }}{{ . }}{{ else }}鄰近收費停車場步行 3 分鐘（範例）{{ end }}</p>
+      </div>
+    </div>
+  </div>
+  <style>
+    .transport-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    @media (max-width: 992px){.transport-grid{grid-template-columns:1fr}}
+    .transport-item h3{margin:0 0 .5rem 0;display:flex;align-items:center;gap:.5rem}
+    .transport-item p{margin:.25rem 0;color:var(--color-text-secondary,#9ca3af)}
+  </style>
+</section>
+<!-- 雙CTA行動呼籲區域（聯絡我們） -->
+<div class="container">
+  {{ partial "shared/dual-cta.html" . }}
+</div>
 {{ end }}
