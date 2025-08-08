@@ -67,19 +67,18 @@ function initTableOfContents() {
   // 添加目錄到容器
   tocContainer.appendChild(tocList);
   
-  // 設置目錄滾動跟隨
-  setupStickyTOC();
+  // 置頂與自動收合
+  setupAutoCollapseTOC();
   
   // 設置目錄項高亮
   setupTOCHighlight();
 }
 
-function setupStickyTOC() {
+function setupAutoCollapseTOC() {
   const tocContainer = document.getElementById('toc-container');
-  const sidebar = document.querySelector('.sidebar');
-  if (!tocContainer || !sidebar) return;
+  if (!tocContainer) return;
   
-  // 創建目錄標題
+  // 標題
   let tocTitle = tocContainer.querySelector('.toc-title');
   if (!tocTitle) {
     tocTitle = document.createElement('h3');
@@ -89,61 +88,31 @@ function setupStickyTOC() {
   }
   
   const tocList = tocContainer.querySelector('.toc-list');
-  
-  // 創建折疊/展開按鈕
   const toggleBtn = document.createElement('button');
   toggleBtn.className = 'toc-toggle';
   toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
   tocTitle.appendChild(toggleBtn);
   
-  // 初始狀態
   let isCollapsed = false;
-  let isSticky = false;
   
-  // 折疊/展開功能
+  // 點擊折疊
   toggleBtn.addEventListener('click', function() {
     isCollapsed = !isCollapsed;
-    
-    if (isCollapsed) {
-      tocList.style.maxHeight = '0';
-      toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
-    } else {
-      tocList.style.maxHeight = '500px';
-      toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
-    }
+    tocList.style.display = isCollapsed ? 'none' : 'block';
+    toggleBtn.innerHTML = isCollapsed ? '<i class="fas fa-chevron-down"></i>' : '<i class="fas fa-chevron-up"></i>';
   });
   
-  // 滾動事件處理
-  window.addEventListener('scroll', function() {
-    const scrollY = window.scrollY;
-    const sidebarBottom = sidebar.offsetTop + sidebar.offsetHeight;
-    
-    // 當滾動超過側邊欄底部時，固定目錄
-    if (scrollY > sidebarBottom - 300) {
-      if (!isSticky) {
-        tocContainer.classList.add('toc-sticky');
-        isSticky = true;
-        
-        // 如果不是已經折疊，則自動折疊
-        if (!isCollapsed) {
-          isCollapsed = true;
-          tocList.style.maxHeight = '0';
-          toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
-        }
-      }
-    } else {
-      if (isSticky) {
-        tocContainer.classList.remove('toc-sticky');
-        isSticky = false;
-        
-        // 如果是折疊狀態，則自動展開
-        if (isCollapsed) {
-          isCollapsed = false;
-          tocList.style.maxHeight = '500px';
-          toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
-        }
-      }
-    }
+  // 滾動時自動收起子層（僅保留當前區塊）
+  window.addEventListener('scroll', () => {
+    const active = document.querySelector('.toc-link.active');
+    const items = document.querySelectorAll('.toc-item');
+    if (!active) return;
+    const activeItem = active.parentElement;
+    items.forEach(item => {
+      const isParentOrSelf = item === activeItem || item.contains(activeItem);
+      // 僅顯示父層與自身，同層其他子項淡出
+      item.style.opacity = isParentOrSelf ? '1' : '0.6';
+    });
   });
 }
 

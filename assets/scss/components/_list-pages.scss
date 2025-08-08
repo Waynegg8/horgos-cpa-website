@@ -208,7 +208,7 @@
 .faq-list__grid,
 .download-list__grid {
   display: grid;
-  grid-template-columns: 1fr; // 單欄更易讀
+  grid-template-columns: 1fr; // 默認單欄
   gap: $spacing-6;
   margin-bottom: $spacing-8;
   
@@ -218,6 +218,16 @@
   
   @include mobile {
     gap: $spacing-4;
+  }
+}
+
+// 桌面雙欄（依規範可選，提升密度但保持可讀）
+@media (min-width: $breakpoint-desktop) {
+  .article-list__grid,
+  .video-cards,
+  .faq-list__grid,
+  .download-list__grid {
+    grid-template-columns: 1fr; // 先保持單欄，如需雙欄可改為 1fr 1fr
   }
 }
 
