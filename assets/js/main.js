@@ -25,6 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 更新頁腳年份
     updateFooterYear();
+
+    // 捲動揭示效果（Stripe 風格微互動）
+    initReveal();
 });
 
 /**
@@ -245,4 +248,28 @@ function updateFooterYear() {
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
+}
+
+/**
+ * 滾動揭示動畫：對 .card-style、.btn、.sidebar-widget、.stat、.testimonial 等元素
+ */
+function initReveal() {
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduce) return;
+
+    const targets = document.querySelectorAll('.card-style, .btn, .sidebar-widget, .stat, .testimonial, .service-card, .download-item, .faq-item');
+    if (!targets.length) return;
+
+    targets.forEach(el => el.classList.add('reveal'));
+
+    const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal--in');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+    targets.forEach(el => io.observe(el));
 }

@@ -19,8 +19,8 @@
 
 /* 回到頂端按鈕 */
 .back-to-top {
-  width: 3rem;
-  height: 3rem;
+  width: 44px;
+  height: 44px;
   border: none;
   border-radius: 50%;
   // 更顯眼：亮色漸層膠囊 + 外發光
@@ -37,18 +37,7 @@
   box-shadow: 0 8px 22px rgba($color-accent-primary, 0.35), 0 2px 8px rgba(0,0,0,0.35);
   position: relative;
 
-  i {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1em;
-    height: 1em;
-    line-height: 1;
-    vertical-align: middle;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: geometricPrecision;
-  }
+  i { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; line-height: 1; vertical-align: middle; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
   
   &:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba($color-accent-highlight, 0.45), 0 3px 10px rgba(0,0,0,0.35); }
 
@@ -105,7 +94,7 @@
     margin-bottom: $spacing-2;
     display: flex;
     flex-direction: column;
-    align-items: flex-end; // 確保所有圓形按鈕右緣對齊，垂直成一直線
+    align-items: stretch; // 讓每顆按鈕寬度一致，保證垂直
     gap: $spacing-2;
     opacity: 0;
     visibility: hidden;
@@ -181,8 +170,8 @@
 }
 
 .social-button {
-  width: 2.9rem;  /* 放大 */
-  height: 2.9rem; /* 放大 */
+  width: 44px;  /* 固定一致寬高，避免字型差異造成偏移 */
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -194,12 +183,20 @@
   box-shadow: 0 6px 16px rgba(0,0,0,0.15);
   position: relative;
   color: #ffffff; /* 內建白色字，讓品牌色做底 */
-  background-color: #1877F2; /* 默認以 Facebook 藍，會被各品牌覆蓋 */
+  background-color: #1877F2; /* 默認以品牌藍，會被各品牌覆蓋 */
   border: none;
   
   // 品牌色與光暈（僅圖標）
   &.line { background-color: #00C300; }
-  &.threads { background-color: #111111; }
+  /* Threads 在深色背景上增加雙層描邊與內光，保證可見度 */
+  &.threads {
+    background: #000000;
+    // 外圈微亮描邊 + 內圈白色描邊，深底也清楚
+    box-shadow:
+      0 6px 16px rgba(0,0,0,0.25),
+      0 0 0 1px rgba(255,255,255,0.35),
+      inset 0 0 0 2px #ffffff;
+  }
   &.instagram { background: radial-gradient(circle at 30% 110%, #ffdb8b, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc); }
   &.email { background-color: #111827; }
   &.line i, &.threads i, &.instagram i, &.email i { color: #ffffff; text-shadow: none; }
@@ -217,17 +214,7 @@
     z-index: -1;
   }
   
-  i {
-    position: static; // 交由flex置中，避免因字型邊界造成偏移
-    transform: none;
-    width: auto;
-    height: auto;
-    line-height: 1;
-    vertical-align: middle;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: geometricPrecision;
-    font-size: 1.25rem;
-  }
+  i { position: static; transform: none; width: auto; height: auto; line-height: 1; vertical-align: middle; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; font-size: 20px; }
   
   &:hover { transform: translateY(-2px) scale(1.05); }
   
@@ -241,8 +228,11 @@
 }
 
 // 移除個別圖示的位移微調，統一由 flex 完整置中
-// 展開後套用呼吸效果
-.social-buttons:hover .social-buttons__menu .social-button { animation: pulseSoft 1.8s infinite ease-in-out; }
+// 展開後套用更輕微的呼吸效果以減少視覺漂移
+.social-buttons:hover .social-buttons__menu .social-button { animation: pulseSoft 2.2s infinite ease-in-out; }
+
+/* 保障對比度：深色背景時 Threads 圖示自動加外描邊 */
+.social-button.threads i { filter: drop-shadow(0 0 2px rgba(255,255,255,0.75)); }
 
 /* 移除先前的位移微調，改用絕對置中確保精準居中 */
 

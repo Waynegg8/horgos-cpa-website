@@ -59,7 +59,12 @@
         {{ if in (slice "articles" "videos" "faq" "downloads") .Section }}
         <div class="two-column__sidebar">
             {{ if eq .Section "articles" }}
-                {{ partial "sidebar/articles-sidebar.html" . }}
+                {{/* 列表頁與單頁分流：列表頁不顯示「熱門標籤」，單頁維持原設計 */}}
+                {{ if eq .Kind "section" }}
+                    {{ partial "sidebar/articles-list-sidebar.html" . }}
+                {{ else }}
+                    {{ partial "sidebar/articles-sidebar.html" . }}
+                {{ end }}
             {{ else if eq .Section "videos" }}
                 {{ partial "sidebar/videos-sidebar.html" . }}
             {{ else if eq .Section "faq" }}

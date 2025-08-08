@@ -38,16 +38,25 @@
 @keyframes pulseSoft {
   0% {
     transform: scale(1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
   }
   50% {
-    transform: scale(1.04);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
   }
+}
+
+// 滾動揭示（淡入 + 位移 + 輕量縮放）
+.reveal { opacity: 0; transform: translateY(16px) scale(0.995); }
+.reveal--in { opacity: 1; transform: translateY(0) scale(1); transition: opacity .6s ease, transform .6s cubic-bezier(0.22, 1, 0.36, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .reveal--in { transition: none !important; }
 }
 
 // 淡入上移效果

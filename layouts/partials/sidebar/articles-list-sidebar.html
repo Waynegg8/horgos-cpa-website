@@ -1,0 +1,53 @@
+<!-- 文章列表頁專用側邊欄（移除熱門標籤，保留系列與最新文章） -->
+<div class="sidebar">
+  <!-- 系列列表（series 有自己獨立列表頁） -->
+  <div class="sidebar-widget sidebar-series">
+    <h3 class="sidebar-widget__title">系列文章</h3>
+    <ul class="sidebar-series__list">
+      <li class="sidebar-series__item">
+        <a href="/articles/startup-guide/" class="sidebar-series__link">公司設立系列</a>
+      </li>
+      <li class="sidebar-series__item">
+        <a href="/articles/tax-planning/" class="sidebar-series__link">稅務規劃系列</a>
+      </li>
+      <li class="sidebar-series__item">
+        <a href="/articles/accounting-basics/" class="sidebar-series__link">會計入門系列</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 最新文章：僅列表頁顯示，避免與單一文章頁重複 -->
+  <div class="sidebar-widget sidebar-recent">
+    <h3 class="sidebar-widget__title">最新文章</h3>
+    <ul class="sidebar-recent__list">
+      {{ range first 5 (where .Site.RegularPages "Section" "articles") }}
+      <li class="sidebar-recent__item">
+        <a href="{{ .RelPermalink }}" class="sidebar-recent__link">
+          <div class="sidebar-recent__thumbnail">
+            {{ with .Params.image }}
+            <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+            {{ else }}
+            <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy">
+            {{ end }}
+          </div>
+          <div class="sidebar-recent__content">
+            <div class="sidebar-recent__title">{{ .Title }}</div>
+            <div class="sidebar-recent__date">{{ .Date.Format "2006-01-02" }}</div>
+          </div>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+
+  <!-- 標籤雲 -->
+  <div class="sidebar-widget sidebar-tags">
+    <h3 class="sidebar-widget__title">標籤雲</h3>
+    <div class="sidebar-tags__cloud">
+      {{ range $name, $_ := .Site.Taxonomies.tags }}
+        <a class="sidebar-tags__tag" href="{{ (printf "/tags/%s/" (urlize $name)) | relURL }}">{{ $name }}</a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+

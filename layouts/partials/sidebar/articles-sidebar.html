@@ -10,21 +10,7 @@
         </button>
     </form>
     {{ end }}
-    <!-- 標籤快速篩選入口（指向列表頁帶 q 參數） -->
-    <div class="sidebar-widget sidebar-categories">
-        <h3 class="sidebar-widget__title">熱門標籤</h3>
-        <ul class="sidebar-categories__list">
-            {{ $tags := first 8 (sort .Site.Taxonomies.tags.ByCount "Count" "desc") }}
-            {{ range $tags }}
-            <li class="sidebar-categories__item">
-                <a href="/articles/?q={{ .Name | urlquery }}" class="sidebar-categories__link">
-                    {{ .Name }}
-                    <span class="sidebar-categories__count">{{ .Count }}</span>
-                </a>
-            </li>
-            {{ end }}
-        </ul>
-    </div>
+    {{/* 單一文章頁不再顯示「熱門標籤」，避免與主內容重複與視覺擁擠 */}}
     
     <!-- 系列列表（series 有自己獨立列表頁） -->
     <div class="sidebar-widget sidebar-series">
