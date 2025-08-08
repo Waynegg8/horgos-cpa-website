@@ -159,6 +159,10 @@
     .sidebar-recent__content { flex: 1 1 auto; min-width: 0; }
     .sidebar-recent__title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
   }
+  // 統一側欄高度表現：與文章/FAQ一致，無多餘頂部間距或固定高度
+  .two-column__sidebar { align-self: flex-start; padding-top: 0; margin-top: 0; height: auto !important; }
+  .sidebar-widget { height: auto; }
+  .sidebar-widget:first-child { margin-top: 0; }
 }
 
 // 視頻頁面專屬覆寫：徹底取消側欄分類/系列的膠囊漸層樣式（避免高度過大與視覺干擾）

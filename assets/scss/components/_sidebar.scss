@@ -16,7 +16,7 @@
   
   // 明確排序：確保目錄在最上方、標籤雲在最下方（TOC 不再個別 sticky，避免蓋住其他小工具）
   // TOC 與標籤雲一起置於同一 sticky 區域：讓兩者同步移動
-  .sidebar-sticky-group { position: sticky; top: 72px; display: flex; flex-direction: column; gap: $spacing-4; z-index: 0; }
+  .sidebar-sticky-group { position: sticky; top: 72px; display: flex; flex-direction: column; gap: $spacing-2; z-index: 0; }
   body.articles[data-kind="page"] & .sidebar-sticky-group { position: sticky; }
   .sidebar-sticky-group .toc-container { position: static; }
   .sidebar-search { order: 0; }

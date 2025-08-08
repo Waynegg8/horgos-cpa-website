@@ -384,10 +384,12 @@
   margin: $spacing-8 0;
 
   &__links {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: $spacing-3;
-    flex-wrap: wrap;
     margin-bottom: $spacing-4;
+    align-items: start;
+    @include mobile { grid-template-columns: 1fr; }
   }
 
   // 水平排列的項目（按鈕上、標語在下）
@@ -396,7 +398,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: $spacing-2;
-    min-width: 280px;
+    min-width: 0; // 允許縮放以保持水平排列
   }
 
   &__caption {
