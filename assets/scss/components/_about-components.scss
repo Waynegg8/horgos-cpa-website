@@ -228,13 +228,24 @@
       font-size: $font-size-small;
       line-height: 1.4;
       white-space: nowrap;
-      border: 1px solid rgba($color-accent-highlight, 0.55);
-      color: #111111; // 黑字
-      background: #ffffff; // 白底
-      box-shadow: inset 0 0 0 1px rgba(16,185,129,0.22);
+      color: #ffffff; /* 白字 */
+      background: linear-gradient(135deg, rgba($color-accent-primary, 0.95) 0%, rgba($color-accent-highlight, 0.95) 100%);
+      box-shadow: 0 8px 22px rgba($color-accent-primary, 0.35), 0 2px 8px rgba(0,0,0,0.25);
       overflow: hidden;
 
-      // 亮面掃描效果
+      // 外圈柔光以呼應右下角按鈕
+      &::after {
+        content: "";
+        position: absolute;
+        inset: -6px;
+        border-radius: $border-radius-full;
+        background: radial-gradient(50% 50% at 50% 50%, rgba($color-accent-highlight,0.35) 0%, rgba($color-accent-highlight,0.15) 55%, rgba(0,0,0,0) 100%);
+        filter: blur(6px);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      // 亮面掃描效果（保留但疊在漸層上）
       &:before {
         content: "";
         position: absolute;
@@ -242,10 +253,9 @@
         left: -150%;
         height: 100%;
         width: 150%;
-        // 強化掃光：加入綠→白→綠的高對比過渡
-        background: linear-gradient(110deg, transparent 0%, rgba(16,185,129,0.22) 45%, rgba(255,255,255,0.5) 50%, rgba(16,185,129,0.22) 55%, transparent 100%);
+        background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
         transform: skewX(-20deg);
-        animation: shine-sweep 1.8s $ease-in-out infinite; // 更快更明顯
+        animation: shine-sweep 1.8s $ease-in-out infinite;
       }
     }
 
@@ -322,14 +332,14 @@
     
     .skill-tag {
       position: relative;
-      background: #ffffff; /* 白底 */
-      color: #111111;      /* 黑字 */
+      background: linear-gradient(135deg, rgba($color-accent-primary, 0.95) 0%, rgba($color-accent-highlight, 0.95) 100%);
+      color: #ffffff;
       padding: $spacing-1 $spacing-3;
       border-radius: $border-radius-full;
       font-size: $font-size-small;
       font-weight: 600;
-      border: 1px solid rgba(16,185,129,0.45);
-      box-shadow: inset 0 0 0 1px rgba(16,185,129,0.18);
+      border: none;
+      box-shadow: 0 6px 16px rgba($color-accent-primary, 0.25);
       overflow: hidden;
       transition: transform $transition-base $ease-in-out, filter $transition-base $ease-in-out;
       
@@ -341,7 +351,7 @@
         left: -150%;
         height: 100%;
         width: 150%;
-        background: linear-gradient(110deg, transparent 0%, rgba(16,185,129,0.18) 45%, rgba(255,255,255,0.35) 50%, rgba(16,185,129,0.18) 55%, transparent 100%);
+        background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
         transform: skewX(-20deg);
         animation: shine-sweep 1.8s $ease-in-out infinite; /* 漸層更強、更快 */
       }

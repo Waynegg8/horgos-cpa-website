@@ -180,8 +180,8 @@
 }
 
 .social-button {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.9rem;  /* 放大 */
+  height: 2.9rem; /* 放大 */
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -190,17 +190,18 @@
   text-decoration: none;
   font-size: 1rem;
   transition: all $transition-base;
-  box-shadow: none;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
   position: relative;
-  color: inherit;
-  background-color: transparent; // 移除白底
+  color: #ffffff; /* 內建白色字，讓品牌色做底 */
+  background-color: #1877F2; /* 默認以 Facebook 藍，會被各品牌覆蓋 */
   border: none;
   
   // 品牌色與光暈（僅圖標）
-  &.line i { color: #00C300; text-shadow: 0 0 8px rgba(0,195,0,0.45); }
-  &.facebook i { color: #1877F2; text-shadow: 0 0 8px rgba(24,119,242,0.45); }
-  &.instagram i { color: #E4405F; text-shadow: 0 0 8px rgba(228,64,95,0.45); }
-  &.email i { color: #F1F5F9; text-shadow: 0 0 8px rgba(255,255,255,0.35); }
+  &.line { background-color: #00C300; }
+  &.facebook { background-color: #1877F2; }
+  &.instagram { background: radial-gradient(circle at 30% 110%, #ffdb8b, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc); }
+  &.email { background-color: #111827; }
+  &.line i, &.facebook i, &.instagram i, &.email i { color: #ffffff; text-shadow: none; }
 
   // 外圈光暈（暗色柔影）
   &::after {
@@ -220,8 +221,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 1em;
-    height: 1em;
+    width: 1.05em; /* 稍大 */
+    height: 1.05em;
     line-height: 1;
     vertical-align: middle;
     -webkit-font-smoothing: antialiased;
@@ -231,9 +232,7 @@
   &:hover { transform: translateY(-2px) scale(1.05); }
   
   // 尺寸微調：僅圖標留白
-  i {
-    font-size: 1.15rem;
-  }
+  i { font-size: 1.25rem; }
   
   @include mobile {
     width: 2.2rem;
