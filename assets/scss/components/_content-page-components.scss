@@ -239,7 +239,7 @@
 
 // 頁面標題區域優化
 .page-header {
-  text-align: center;
+  text-align: left; // 置左
   margin-bottom: $spacing-8;
   
   &__title {
@@ -250,7 +250,7 @@
   &__description {
     color: $color-text-secondary;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0; // 置左
     line-height: $line-height-base;
   }
 }
