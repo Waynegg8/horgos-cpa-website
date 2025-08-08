@@ -3,14 +3,42 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-4; // 縮小側邊欄元件間距
-  position: sticky; // 讓整個側欄跟隨滾動（由父層 two-column__sidebar 控制 top）
-  top: $spacing-4;
-  height: max-content;
+  // 交由父層 `.two-column__sidebar` 做 sticky，避免巢狀 sticky 失效
+  position: static;
   z-index: 1;
   
   // 明確排序：確保目錄在最上方、標籤雲在最下方
   .toc-container { order: 0; position: sticky; top: $spacing-4; }
   .sidebar-search { order: 0; }
+  // 側邊欄搜尋框（單一內容頁會出現）
+  .sidebar-search {
+    display: flex;
+    gap: $spacing-2;
+    margin: 0;
+    padding: 0;
+    
+    &__input {
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 40px;
+      padding: 0 $spacing-3;
+      border-radius: $border-radius-full;
+      border: 1px solid $color-border-primary;
+      background: rgba(255,255,255,0.06);
+      color: $color-text-primary;
+    }
+    
+    &__btn {
+      flex: 0 0 auto;
+      height: 40px;
+      padding: 0 $spacing-3;
+      border-radius: $border-radius-full;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-1;
+    }
+  }
   .sidebar-categories { order: 1; }
   .sidebar-series { order: 2; }
   .sidebar-recent { order: 3; }
@@ -57,29 +85,40 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: $spacing-2 $spacing-3; // 收斂內邊距
-      color: $color-text-secondary;
+      gap: $spacing-3;
+      padding: $spacing-2 $spacing-3;
       text-decoration: none;
-      border-radius: $border-radius-md;
-      transition: all $transition-base ease;
-      word-wrap: break-word; // 長文字換行
-      line-height: 1.3; // 更緊湊
-      
+      border-radius: $border-radius-full; // 膠囊外觀
+      transition: transform $transition-base ease, box-shadow $transition-base ease, filter $transition-base ease;
+      word-wrap: break-word;
+      line-height: 1.2;
+      font-weight: 600;
+      color: #0B1520; // 深色字以提升可讀性
+      background: linear-gradient(135deg, #E0F2FF 0%, #B2EAFF 100%);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.16);
+
+      // 多色循環，與 tag 一致
+      &:nth-child(6n+2) { background: linear-gradient(135deg, #E6FFED 0%, #B7F5C3 100%); }
+      &:nth-child(6n+3) { background: linear-gradient(135deg, #FFF4E6 0%, #FFD6A8 100%); }
+      &:nth-child(6n+4) { background: linear-gradient(135deg, #F3E8FF 0%, #D9C8FF 100%); }
+      &:nth-child(6n+5) { background: linear-gradient(135deg, #FFE8EF 0%, #FFC5D6 100%); }
+      &:nth-child(6n+6) { background: linear-gradient(135deg, #E8FEFF 0%, #C8F8FF 100%); }
+
       &:hover,
       &.active {
-        background-color: rgba(255, 255, 255, 0.05);
-        color: $color-accent-highlight;
-        transform: translateX(4px); // 添加懸停效果
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+        filter: brightness(1.03);
       }
     }
     
     &__count {
       font-size: $font-size-small;
-      color: $color-text-tertiary;
-      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      background-color: rgba(0,0,0,0.45);
       padding: $spacing-1 $spacing-2;
-      border-radius: $border-radius-sm;
-      margin-left: $spacing-2; // 增加左邊距
+      border-radius: $border-radius-full;
+      margin-left: auto; // 對齊到右側
     }
   }
   
@@ -101,18 +140,25 @@
     
     &__link {
       display: block;
-      padding: $spacing-2 $spacing-4; // 增加水平內邊距
-      color: $color-text-secondary;
+      padding: $spacing-2 $spacing-4;
       text-decoration: none;
-      border-radius: $border-radius-md;
-      transition: all $transition-base ease;
+      border-radius: $border-radius-full; // 膠囊
+      transition: transform $transition-base ease, box-shadow $transition-base ease, filter $transition-base ease;
       font-size: $font-size-small;
-      line-height: 1.4; // 改善行高
-      
+      line-height: 1.3;
+      font-weight: 600;
+      color: #0B1520;
+      background: linear-gradient(135deg, #E0F2FF 0%, #B2EAFF 100%);
+      &:nth-child(6n+2) { background: linear-gradient(135deg, #E6FFED 0%, #B7F5C3 100%); }
+      &:nth-child(6n+3) { background: linear-gradient(135deg, #FFF4E6 0%, #FFD6A8 100%); }
+      &:nth-child(6n+4) { background: linear-gradient(135deg, #F3E8FF 0%, #D9C8FF 100%); }
+      &:nth-child(6n+5) { background: linear-gradient(135deg, #FFE8EF 0%, #FFC5D6 100%); }
+      &:nth-child(6n+6) { background: linear-gradient(135deg, #E8FEFF 0%, #C8F8FF 100%); }
+
       &:hover {
-        background-color: rgba(255, 255, 255, 0.05);
-        color: $color-accent-highlight;
-        transform: translateX(4px); // 添加懸停效果
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+        filter: brightness(1.03);
       }
     }
   }
@@ -270,14 +316,21 @@
       display: flex;
       align-items: center;
       gap: $spacing-2;
-      padding: $spacing-2 $spacing-4; // 增加水平內邊距
-      color: $color-text-secondary;
+      padding: $spacing-2 $spacing-4;
       text-decoration: none;
-      border-radius: $border-radius-md;
-      transition: all $transition-base ease;
+      border-radius: $border-radius-full; // 膠囊
+      transition: transform $transition-base ease, box-shadow $transition-base ease, filter $transition-base ease;
       font-size: $font-size-small;
-      line-height: 1.4; // 改善行高
-      
+      line-height: 1.3;
+      font-weight: 600;
+      color: #0B1520;
+      background: linear-gradient(135deg, #E0F2FF 0%, #B2EAFF 100%);
+      &:nth-child(6n+2) { background: linear-gradient(135deg, #E6FFED 0%, #B7F5C3 100%); }
+      &:nth-child(6n+3) { background: linear-gradient(135deg, #FFF4E6 0%, #FFD6A8 100%); }
+      &:nth-child(6n+4) { background: linear-gradient(135deg, #F3E8FF 0%, #D9C8FF 100%); }
+      &:nth-child(6n+5) { background: linear-gradient(135deg, #FFE8EF 0%, #FFC5D6 100%); }
+      &:nth-child(6n+6) { background: linear-gradient(135deg, #E8FEFF 0%, #C8F8FF 100%); }
+
       i {
         font-size: 1rem;
         width: 20px; // 固定圖標寬度
@@ -285,9 +338,9 @@
       }
       
       &:hover {
-        background-color: rgba(255, 255, 255, 0.05);
-        color: $color-accent-highlight;
-        transform: translateX(4px); // 添加懸停效果
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+        filter: brightness(1.03);
       }
     }
   }

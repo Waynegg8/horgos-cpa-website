@@ -4,7 +4,10 @@
     <!-- 側邊搜尋（單一文章頁專用）：提交後導向列表頁並帶入關鍵字 -->
     <form class="sidebar-widget sidebar-search" action="/articles/" method="get" role="search" aria-label="文章搜尋">
         <input type="search" name="q" class="sidebar-search__input" placeholder="搜尋文章..." aria-label="搜尋文章" />
-        <button type="submit" class="btn btn-primary btn-sm sidebar-search__btn">搜尋</button>
+        <button type="submit" class="btn btn-primary btn-sm sidebar-search__btn" aria-label="搜尋">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="sr-only">搜尋</span>
+        </button>
     </form>
     {{ end }}
     <!-- 標籤快速篩選入口（指向列表頁帶 q 參數） -->
