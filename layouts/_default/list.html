@@ -25,7 +25,7 @@
             <!-- 服務項目頁面內容 -->
             {{ partial "services/service-cards.html" . }}
             {{ else if eq .Section "articles" }}
-            <!-- 文章列表頁面內容 -->
+            <!-- 文章列表頁面內容（支援 ?q= 以標籤或關鍵字搜尋） -->
             {{ partial "articles/article-list.html" . }}
             <script>
             // 列表頁自動帶入 q 參數並觸發在地搜尋（文章/影片/FAQ/下載）

@@ -309,11 +309,12 @@
       line-height: $line-height-heading;
       margin: $spacing-5 0 $spacing-3 0;
     }
-    h1 { font-size: $font-size-h2; }
-    h2 { font-size: $font-size-h3; }
-    h3 { font-size: $font-size-h4; }
-    h4 { font-size: $font-size-h5; }
-    h5, h6 { font-size: $font-size-lg; }
+    // 統一降低單頁標題層級，以避免不同內容來源的字級不一致
+    h1 { font-size: $font-size-h3; }
+    h2 { font-size: $font-size-h4; }
+    h3 { font-size: $font-size-h5; }
+    h4 { font-size: $font-size-h6; }
+    h5, h6 { font-size: $font-size-base; }
 
     p, li { font-size: $font-size-base; color: $color-text-secondary; }
     strong { color: $color-text-primary; }

@@ -7,38 +7,23 @@
         <button type="submit" class="btn btn-primary btn-sm sidebar-search__btn">搜尋</button>
     </form>
     {{ end }}
-    <!-- 分類列表 -->
+    <!-- 標籤快速篩選入口（指向列表頁帶 q 參數） -->
     <div class="sidebar-widget sidebar-categories">
-        <h3 class="sidebar-widget__title">文章分類</h3>
+        <h3 class="sidebar-widget__title">熱門標籤</h3>
         <ul class="sidebar-categories__list">
+            {{ $tags := first 8 (sort .Site.Taxonomies.tags.ByCount "Count" "desc") }}
+            {{ range $tags }}
             <li class="sidebar-categories__item">
-                <a href="/articles/startup-guide/" class="sidebar-categories__link">
-                    創業教室
-                    <span class="sidebar-categories__count">{{ len (where .Site.RegularPages "Section" "articles") }}</span>
+                <a href="/articles/?q={{ .Name | urlquery }}" class="sidebar-categories__link">
+                    {{ .Name }}
+                    <span class="sidebar-categories__count">{{ .Count }}</span>
                 </a>
             </li>
-            <li class="sidebar-categories__item">
-                <a href="/articles/tax-planning/" class="sidebar-categories__link">
-                    稅務指南
-                    <span class="sidebar-categories__count">{{ len (where .Site.RegularPages "Section" "articles") }}</span>
-                </a>
-            </li>
-            <li class="sidebar-categories__item">
-                <a href="/articles/accounting-basics/" class="sidebar-categories__link">
-                    會計實務
-                    <span class="sidebar-categories__count">{{ len (where .Site.RegularPages "Section" "articles") }}</span>
-                </a>
-            </li>
-            <li class="sidebar-categories__item">
-                <a href="/articles/legal-updates/" class="sidebar-categories__link">
-                    法規更新
-                    <span class="sidebar-categories__count">{{ len (where .Site.RegularPages "Section" "articles") }}</span>
-                </a>
-            </li>
+            {{ end }}
         </ul>
     </div>
     
-    <!-- 系列列表 -->
+    <!-- 系列列表（series 有自己獨立列表頁） -->
     <div class="sidebar-widget sidebar-series">
         <h3 class="sidebar-widget__title">系列文章</h3>
         <ul class="sidebar-series__list">
