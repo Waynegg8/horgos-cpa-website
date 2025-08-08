@@ -40,6 +40,7 @@ googleAnalytics = "G-RKMCS9WVS5"
   # customJS = ["js/custom.js"]
   # 極致效能模式：true 時關閉第三方字體與 Font Awesome 的初始載入
   performance_mode = true
+  ga_id = "G-RKMCS9WVS5"
   
   # Footer 參數
   [Params.footer]
