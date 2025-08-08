@@ -15,24 +15,16 @@
 <div class="container">
     <div class="services-page">
         
-        <!-- 服務項目卡片展示 (Per Spec 4.6.1) - 僅在有子頁時顯示，避免空白區塊 -->
-        {{ if gt (len .Pages) 0 }}
-        <section class="services-grid-section">
-            <div class="services-grid">
-            {{ range .Pages }}
-            <a href="{{ .Permalink }}" class="card-style service-card-link">
-                <div class="service-card__icon">
-                    {{ with .Params.icon }}<i class="{{ . }}"></i>{{ else }}<i class="fas fa-briefcase"></i>{{ end }}
-                </div>
-                <h3 class="service-card__title">{{ .Title }}</h3>
-                <p class="service-card__description">{{ .Description }}</p>
-                <span class="service-card__link">了解更多 <i class="fas fa-arrow-right"></i></span>
-            </a>
-            {{ end }}
+        <!-- 以圖文段落呈現服務（減少大量卡片） -->
+        <section class="service-overview">
+          <div class="service-overview__row">
+            <div class="service-overview__text">
+              <h2 class="service-overview__title">我們如何協助你</h2>
+              <p class="service-overview__text">從公司設立、營運稅務到財務顧問，提供一致的方法論與文件清單；你只需依清單準備資料，其餘交給我們。</p>
             </div>
+            <div class="service-overview__media"><img src="/uploads/images/services/services-tax-default.jpg" alt="服務總覽" loading="lazy"/></div>
+          </div>
         </section>
-        {{ end }}
-    <!-- 文字帶圖片敘述（先於卡片群後，避免頁面全是卡片） -->
         {{ partial "homepage/text-image-sections.html" . }}
 
     <!-- 服務特色區 -->

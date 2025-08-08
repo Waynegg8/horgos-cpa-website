@@ -143,34 +143,24 @@
 }
 
 .social-button {
-  width: 48px;  /* 點擊熱區，保持一致 */
+  width: 48px;
   height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 0;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: transform $transition-base ease;
-  position: relative;
-  border: none;
-  background: transparent; /* 移除彩色圓底，改為純圖片呈現 */
-  box-shadow: none;        /* 移除外圈陰影，避免在深色底看成黑圈 */
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 0; text-decoration: none; font-size: 1rem;
+  transition: transform $transition-base ease, box-shadow $transition-base ease;
+  position: relative; border: none;
+  background: #111; /* 預設深底 */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 
-  /* 僅顯示圖標圖片，提供可讀性陰影 */
-  img {
-    width: 28px;
-    height: 28px;
-    display: block;
-    object-fit: contain;
-    image-rendering: -webkit-optimize-contrast;
-    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.45)); /* 在深底仍清晰 */
-  }
+  &.line { background-color: #00C300; }
+  &.threads { background-color: #000000; }
+  &.instagram { background: radial-gradient(circle at 30% 110%, #ffdb8b, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc); }
+  &.email { background-color: #111827; }
 
+  img { width: 22px; height: 22px; display: block; object-fit: contain; }
   i { display: none; }
-
-  &:hover { transform: translateY(-2px) scale(1.06); }
-
+  &:hover { transform: translateY(-2px) scale(1.06); box-shadow: 0 10px 22px rgba(0,0,0,0.3); }
   @include mobile { width: 44px; height: 44px; }
 }
 

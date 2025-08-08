@@ -72,14 +72,6 @@
     </div>
     {{ end }}
     
-    <!-- 標籤雲：需要顯示；不顯示所謂「熱門標籤」 -->
-    <div class="sidebar-widget sidebar-tags">
-        <h3 class="sidebar-widget__title">標籤雲</h3>
-        <div class="sidebar-tags__cloud">
-            {{ range $name, $_ := .Site.Taxonomies.tags }}
-                <a class="sidebar-tags__tag" href="{{ (printf "/tags/%s/" (urlize $name)) | relURL }}">{{ $name }}</a>
-            {{ end }}
-        </div>
-    </div>
+    {{/* 單一文章頁：標籤雲已在 sidebar-sticky-group 中，這裡不再重複輸出 */}}
     
 </div>

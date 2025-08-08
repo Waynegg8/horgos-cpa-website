@@ -1,7 +1,21 @@
 {{ define "main" }}
 <div class="homepage-container">
-    <!-- Hero輪播區 -->
-    {{ partial "homepage/hero-carousel.html" . }}
+    <!-- 新 Hero：左右分割介紹 + CTA -->
+    <section class="hero-split">
+      <div class="container hero-split__container">
+        <div class="hero-split__content">
+          <h1 class="hero-split__title">台中會計師｜一站式工商登記、稅務申報與財務顧問</h1>
+          <p class="hero-split__subtitle">聚焦中小企業的合規、效率與成長，用標準流程與專家顧問，讓你專心做生意。</p>
+          <div class="hero-split__actions">
+            <a href="/appointment/" class="btn-cta-primary">立即預約諮詢</a>
+            <a href="/services/" class="btn-cta-secondary">了解服務</a>
+          </div>
+        </div>
+        <div class="hero-split__media">
+          <img src="/uploads/images/general/hero-office.webp" alt="專業會計顧問團隊" loading="eager" />
+        </div>
+      </div>
+    </section>
     
     <!-- 客戶見證區 -->
     {{ partial "homepage/testimonials.html" . }}
@@ -12,8 +26,32 @@
     <!-- 為何選擇我們 -->
     {{ partial "homepage/why-us.html" . }}
 
-    <!-- 服務項目卡片展示 -->
-    {{ partial "homepage/service-cards.html" . }}
+    <!-- 服務總覽（圖文段落，取代大量卡片） -->
+    <section class="service-overview">
+      <div class="container">
+        <div class="service-overview__row">
+          <div class="service-overview__text">
+            <h2 class="service-overview__title">工商登記與公司設立</h2>
+            <p class="service-overview__text">從名稱預查、章程、負責人印鑑到稅籍登記與開戶，提供一條龍代辦；標準清單+時程表，避免遺漏。</p>
+          </div>
+          <div class="service-overview__media"><img src="/uploads/images/services/services-business-registration.jpg" alt="工商登記" loading="lazy" /></div>
+        </div>
+        <div class="service-overview__row">
+          <div class="service-overview__media"><img src="/uploads/images/services/services-tax-business.jpg" alt="稅務申報" loading="lazy" /></div>
+          <div class="service-overview__text">
+            <h2 class="service-overview__title">稅務申報與帳務維運</h2>
+            <p class="service-overview__text">每月/每季申報、年度結算、扣繳與二代健保；用雲端憑證與對帳流程，把發票與文件一次就收齊。</p>
+          </div>
+        </div>
+        <div class="service-overview__row">
+          <div class="service-overview__text">
+            <h2 class="service-overview__title">財務顧問與內控制度</h2>
+            <p class="service-overview__text">建立科目表、成本制度與報表節奏；導入請購到付款(P2P)與收款到入帳(O2C)流程，讓數字支持決策。</p>
+          </div>
+          <div class="service-overview__media"><img src="/uploads/images/services/services-tax-default.jpg" alt="財務顧問" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
     
     <!-- 服務介紹（非卡片，含重點文案與流程） -->
     {{ partial "services/service-features.html" . }}

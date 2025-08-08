@@ -43,7 +43,21 @@
           <div class="site-footer__business-status" id="footer-business-status">
             <!-- JS will populate this -->
           </div>
-          {{/* 移除 footer 內的社群列，避免與右側浮動鈕重複且造成版面雜訊 */}}
+          <!-- Social Media -->
+          <div class="site-footer__social">
+            {{ $threads := or .Site.Params.widgets.social.threads "horgoscpa" }}
+            {{ $ig := or .Site.Params.widgets.social.instagram "horgoscpa" }}
+            {{ $line := or .Site.Params.widgets.social.line "@208ihted" }}
+            <a href="https://www.threads.net/@{{ $threads }}" class="social-link threads" target="_blank" rel="noopener" aria-label="Threads">
+              <img src="/uploads/icons/social/threads.svg" alt="Threads" width="22" height="22" />
+            </a>
+            <a href="https://line.me/R/ti/p/{{ $line }}" class="social-link line" target="_blank" rel="noopener" aria-label="LINE">
+              <img src="/uploads/icons/social/line.svg" alt="LINE" width="22" height="22" />
+            </a>
+            <a href="https://www.instagram.com/{{ $ig }}" class="social-link instagram" target="_blank" rel="noopener" aria-label="Instagram">
+              <img src="/uploads/icons/social/instagram.svg" alt="Instagram" width="22" height="22" />
+            </a>
+          </div>
         </div>
       </div>
 
