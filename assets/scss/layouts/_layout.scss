@@ -62,7 +62,7 @@
     position: static;
     top: auto;
     height: auto;
-    align-self: auto;
+    align-self: stretch;
     
     @include tablet {
       width: 280px; // 平板版稍微增加寬度
@@ -82,6 +82,12 @@
     align-self: flex-start;
     will-change: top;
   }
+
+  // 明確規則：列表頁側欄不可 sticky，必須隨頁面自然滾動
+  body.articles &__sidebar,
+  body.videos &__sidebar,
+  body.faq &__sidebar,
+  body.downloads &__sidebar { position: static !important; top: auto !important; height: auto; }
   
   @include tablet {
     gap: $spacing-5; // 平板版減少間距

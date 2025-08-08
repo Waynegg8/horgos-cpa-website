@@ -191,7 +191,7 @@
     &.line { background-color: #00C300; }
     &.instagram { background: radial-gradient(circle at 30% 110%, #ffdb8b, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc); }
 
-      i { font-size: 1.125rem; line-height: 1; }
+      i { font-size: 1.125rem; width: 20px; height: 20px; display: inline-block; line-height: 20px; text-align: center; }
 
     &:hover {
       transform: translateY(-2px) scale(1.05);

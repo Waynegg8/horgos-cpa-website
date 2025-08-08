@@ -3,11 +3,12 @@ title: "常見問題 6（accounting）"
 date: "2024-07-07"
 category: "accounting"
 tags: ["會計", "記帳"]
-slug: "sample-faq-6"
+slug: "faq-6"
 seo_title: "常見問題 6（accounting）｜台中會計師 FAQ 解答"
 seo_description: "針對「常見問題 6（accounting）」的實務解答與落地步驟，由霍爾果斯會計師事務所整理。"
 draft: false
 ---
+
 
 ### 問題背景
 常見問題 6（accounting） 常見於中小企業的日常營運。以下整理判斷原則與實務影響。
@@ -25,3 +26,4 @@ draft: false
 ### 延伸建議
 - 下載對應範本或清單，寫入你公司的實際欄位
 - 與會計師定期檢視並調整內控
+

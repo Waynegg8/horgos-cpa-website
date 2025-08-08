@@ -199,7 +199,7 @@
   }
   &.instagram { background: radial-gradient(circle at 30% 110%, #ffdb8b, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc); }
   &.email { background-color: #111827; }
-  &.line i, &.threads i, &.instagram i, &.email i { color: #ffffff; text-shadow: none; font-size: 20px; }
+  &.line i, &.threads i, &.instagram i, &.email i { color: #ffffff; text-shadow: none; font-size: 20px; width: 20px; height: 20px; line-height: 20px; text-align: center; }
 
   // 外圈光暈（暗色柔影）
   &::after {
@@ -214,7 +214,7 @@
     z-index: -1;
   }
   
-  i { position: static; transform: none; width: auto; height: auto; line-height: 1; vertical-align: middle; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; font-size: 20px; }
+  i { position: static; transform: none; width: 20px; height: 20px; line-height: 20px; text-align: center; vertical-align: middle; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; font-size: 20px; }
   
   &:hover { transform: translateY(-2px) scale(1.05); }
   

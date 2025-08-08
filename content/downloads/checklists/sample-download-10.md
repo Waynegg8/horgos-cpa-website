@@ -6,11 +6,12 @@ tags: ["清單", "檢核"]
 filetype: "docx"
 filesize: "150KB"
 image: "/uploads/images/general/general-default.jpg"
-slug: "sample-download-10"
+slug: "download-10"
 seo_title: "下載資源 10（checklists） 下載｜台中會計師提供實務文件"
 seo_description: "可直接應用於checklists的 下載資源 10（checklists），附欄位說明與步驟，協助快速落地。"
 draft: false
 ---
+
 
 ## 檔案用途
 用於下載資源 10（checklists）相關作業，內容包含必要欄位與示例，適合直接套用。
@@ -29,3 +30,4 @@ draft: false
 - 重要變更請留存會議與簽核紀錄
 
 > 若需依產業客製，我們可協助調整格式與欄位。
+

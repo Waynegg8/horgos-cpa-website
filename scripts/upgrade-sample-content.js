@@ -43,7 +43,15 @@ function get(section, key, md) {
 
 function ensureSlug(file, title, md) {
   const slugMatch = md.match(/\nslug:\s*"([^"]*)"/);
-  if (slugMatch) return slugMatch[1];
+  if (slugMatch) {
+    const val = slugMatch[1];
+    // 將 sample-* slug 改為語意化（若包含 sample）
+    if (/^sample-/.test(val)) {
+      const base = path.parse(file).name; // e.g. sample-video-1
+      return base.replace(/^sample-/, '');
+    }
+    return val;
+  }
   const base = path.parse(file).name; // e.g. sample-video-4
   // 簡單 slug：檔名
   return base.toLowerCase();
