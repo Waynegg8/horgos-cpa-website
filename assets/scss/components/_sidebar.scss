@@ -3,7 +3,9 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-4; // 縮小側邊欄元件間距
-  position: relative; // 建立定位上下文，避免內部浮層遮蓋
+  position: sticky; // 讓整個側欄跟隨滾動（由父層 two-column__sidebar 控制 top）
+  top: $spacing-4;
+  height: max-content;
   z-index: 1;
   
   // 明確排序：確保目錄在最上方、標籤雲在最下方
@@ -189,14 +191,14 @@
       line-height: 1.3;
       overflow: hidden;
       text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+      white-space: nowrap; // 單行顯示，避免擠壓日期
     }
     
     &__date {
       font-size: 0.75rem;
       color: $color-text-tertiary;
+      white-space: nowrap; // 日期固定單行
+      margin-left: auto;   // 將日期推到右側
     }
   }
   

@@ -21,55 +21,9 @@
             {{ $clean | safeHTML }}
           </div>
           
-          {{ if .Params.series }}
-          <div class="series-navigation">
-            <h3>系列影片導航</h3>
-            
-            {{ $series := .Params.series }}
-            {{ $currentOrder := .Params.series_order }}
-            {{ $seriesPages := where (where .Site.RegularPages "Params.series" $series) "Type" "videos" }}
-            {{ $totalInSeries := len $seriesPages }}
-            
-            <div class="series-progress">
-              <span>{{ $series }} 系列 {{ $currentOrder }}/{{ $totalInSeries }}</span>
-              <div class="progress-bar">
-                <div class="progress" style="width: {{ mul (div $currentOrder $totalInSeries) 100 }}%;"></div>
-              </div>
-            </div>
-            
-            <div class="series-links">
-              {{ $prevPage := where $seriesPages ".Params.series_order" (sub $currentOrder 1) }}
-              {{ $nextPage := where $seriesPages ".Params.series_order" (add $currentOrder 1) }}
-              
-              {{ if $prevPage }}
-                {{ with index $prevPage 0 }}
-                <a href="{{ .RelPermalink }}" class="prev-link">
-                  <i class="fas fa-arrow-left"></i> 上一部: {{ .Title }}
-                </a>
-                {{ end }}
-              {{ end }}
-              
-              {{ if $nextPage }}
-                {{ with index $nextPage 0 }}
-                <a href="{{ .RelPermalink }}" class="next-link">
-                  下一部: {{ .Title }} <i class="fas fa-arrow-right"></i>
-                </a>
-                {{ end }}
-              {{ end }}
-            </div>
-            
-            <a href="{{ with index (where $seriesPages ".Params.series_order" 1) 0 }}{{ .RelPermalink }}{{ end }}" class="view-series-btn">
-              查看完整系列
-            </a>
-          </div>
-          {{ end }}
+          {{ partial "videos/series-navigation.html" . }}
           
-          <div class="cta-section">
-            <a href="/appointment/" class="cta-button primary">立即預約諮詢</a>
-            <a href="https://line.me/R/ti/p/@horgoscpa" class="cta-button secondary">加入Line諮詢</a>
-          </div>
-          
-          {{ partial "shared/dual-cta.html" . }}
+          {{/* 單頁不再本地插入 CTA，統一於 base 模板 SEO 區塊上方輸出 */}}
 
           {{ partial "shared/comments.html" . }}
           

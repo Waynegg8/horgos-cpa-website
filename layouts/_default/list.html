@@ -70,15 +70,11 @@
         </div>
         {{ end }}
     </div>
-    
     {{ if eq .Section "downloads" }}
     <!-- 下載須知 (移到CTA上方) -->
     {{ partial "downloads/download-notice.html" . }}
     {{ end }}
     
-    {{ if or (eq .Section "services") (eq .Section "about") (eq .Section "articles") (eq .Section "videos") (eq .Section "faq") (eq .Section "downloads") }}
-    <!-- 雙CTA行動呼籲區域 -->
-    {{ partial "shared/dual-cta.html" . }}
-    {{ end }}
+    {{/* 列表頁不再在此輸出 CTA，統一由 baseof 在 SEO 區塊上方輸出 */}}
 </div>
 {{ end }}

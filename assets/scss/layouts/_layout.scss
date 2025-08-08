@@ -59,6 +59,7 @@
     flex-shrink: 0;
     position: sticky;
     top: $spacing-4; // 減少與視窗頂之間的空隙
+    height: max-content; // 讓 sticky 正常運作，避免被父容器高度限制
     align-self: flex-start;
     
     @include tablet {

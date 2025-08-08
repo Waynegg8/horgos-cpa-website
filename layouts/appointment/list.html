@@ -2,9 +2,9 @@
 <div class="container">
     <div class="appointment-container">
         <!-- 統一 page-header 左置對齊樣式 -->
-        <div class="page-header">
+        <div class="page-header page-header--compact">
           <div class="container">
-            <div class="page-header__content" style="text-align:left;">
+            <div class="page-header__content">
               <h1 class="page-header__title">{{ .Title }}</h1>
               <div class="page-header__line"></div>
               {{ with .Description }}
@@ -511,6 +511,8 @@ document.addEventListener('DOMContentLoaded', function() {
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.06); /* 微陰影，提升清晰度 */
   transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+  color: #111111 !important; /* 文字固定深色，不受主題影響 */
+  opacity: 1 !important; /* 取消任何潛在透明度影響 */
 }
 
 .privacy-agreement:hover {
@@ -748,12 +750,11 @@ button:focus {
   border-top: 1px solid #E5E7EB;
 }
 
-.current-business-status h4 {
+  .current-business-status h4 {
   margin-bottom: 1rem;
   font-size: 1.1rem;
-}}
+  }
 </style>
 
-<!-- 雙CTA行動呼籲區域 -->
-{{ partial "shared/dual-cta.html" . }}
+<!-- CTA 已由 base 模板統一輸出於 SEO 區塊之上 -->
 {{ end }}

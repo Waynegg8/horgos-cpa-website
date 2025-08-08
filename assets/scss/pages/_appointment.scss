@@ -1,0 +1,13 @@
+/* 覆寫預約頁隱私同意區塊，確保深色主題下維持白底黑字且不透明 */
+.appointment-container .privacy-agreement,
+.appointment-container .privacy-agreement * {
+  color: #111111 !important;
+}
+.appointment-container .privacy-agreement {
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  opacity: 1 !important;
+}
+.appointment-container .privacy-label a {
+  color: #22c55e !important;
+}

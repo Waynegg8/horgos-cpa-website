@@ -173,9 +173,6 @@
     </div>
     {{ end }}
     
-    {{ if or (eq .Section "services") (eq .Section "articles") (eq .Section "videos") (eq .Section "faq") (eq .Section "downloads") (eq .Section "about") }}
-    <!-- 雙CTA行動呼籲區域 -->
-    {{ partial "shared/dual-cta.html" . }}
-    {{ end }}
+    {{/* 單頁模板不再在此插入 CTA，統一由 baseof 於 SEO 區塊上方輸出，避免重複與錯位 */}}
 </div>
 {{ end }}

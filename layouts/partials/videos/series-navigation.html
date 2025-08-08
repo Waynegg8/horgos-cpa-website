@@ -1,0 +1,53 @@
+{{ if .Params.series }}
+<div class="series-navigation">
+  <div class="series-navigation__header">
+    <h3 class="series-navigation__title">{{ .Params.series }} 系列</h3>
+    {{ $series := .Params.series }}
+    {{ $seriesOrder := 1 }}
+    {{ with .Params.series_order }}{{ $seriesOrder = (int .) }}{{ end }}
+    {{ $videoSeries := where (where .Site.RegularPages "Section" "videos") "Params.series" $series }}
+    {{ $videoSeries = where $videoSeries "Params.draft" "!=" true }}
+    {{ $seriesCount := len $videoSeries }}
+    <span class="series-navigation__progress">第 {{ $seriesOrder }} / {{ $seriesCount }} 部</span>
+  </div>
+
+  <div class="series-navigation__links">
+    {{ if gt $seriesOrder 1 }}
+      {{ $prevList := where (where .Site.RegularPages "Section" "videos") "Params.series_order" (sub $seriesOrder 1) }}
+      {{ $prevList = where $prevList "Params.series" $series }}
+      {{ if gt (len $prevList) 0 }}
+        {{ with (index $prevList 0) }}
+          <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__prev" aria-label="上一部：{{ .Title }}">
+            <i class="fas fa-arrow-left"></i>
+            <span>上一部</span>
+          </a>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    {{ $videoSeries := where (where .Site.RegularPages "Section" "videos") "Params.series" $series }}
+    {{ $nextList := where $videoSeries "Params.series_order" (add $seriesOrder 1) }}
+    {{ if gt (len $nextList) 0 }}
+      {{ with (index $nextList 0) }}
+        <a href="{{ .RelPermalink }}" class="btn btn-secondary series-navigation__btn series-navigation__next" aria-label="下一部：{{ .Title }}">
+          <span>下一部</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      {{ end }}
+    {{ end }}
+  </div>
+
+  {{ $firstList := where (where .Site.RegularPages "Section" "videos") "Params.series_order" 1 }}
+  {{ $firstList = where $firstList "Params.series" $series }}
+  {{ if gt (len $firstList) 0 }}
+    {{ $first := index $firstList 0 }}
+    <div class="series-navigation__all">
+      <a href="{{ $first.RelPermalink }}" class="btn btn-primary series-navigation__btn-all">
+        <i class="fas fa-list"></i>
+        查看完整系列
+      </a>
+    </div>
+  {{ end }}
+</div>
+{{ end }}
+
