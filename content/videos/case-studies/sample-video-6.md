@@ -1,4 +1,3 @@
----
 title: "自動化記帳導入失敗：原因診斷與重啟計畫（案例解析）"
 date: "2024-08-07"
 category: "case-studies"
@@ -6,10 +5,10 @@ tags: ["自動化", "記帳", "導入失敗", "專案管理"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "09:05"
 slug: "automation-bookkeeping-failure-recovery"
+youtube_id: "xxxxxxxx"
 seo_title: "【自動化記帳導入失敗：原因診斷與重啟計畫（案例解析）】｜台中會計師｜霍爾果斯會計師事務所"
 seo_description: "實務解析：自動化記帳導入失敗：原因診斷與重啟計畫（案例解析）。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
 draft: false
----
 
 
 

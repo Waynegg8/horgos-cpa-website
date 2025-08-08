@@ -1,20 +1,18 @@
----
-title: "下載資源 6（checklists）"
+title: "營業稅雙月申報檢查清單（PDF）"
 date: "2024-06-07"
 category: "checklists"
-tags: ["清單", "檢核"]
+tags: ["營業稅", "申報", "檢核"]
 filetype: "pdf"
 filesize: "130KB"
 image: "/uploads/images/general/general-default.jpg"
-slug: "download-6"
-seo_title: "下載資源 6（checklists） 下載｜台中會計師提供實務文件"
-seo_description: "可直接應用於checklists的 下載資源 6（checklists），附欄位說明與步驟，協助快速落地。"
+slug: "vat-bimonthly-filing-checklist"
+seo_title: "營業稅雙月申報檢查清單（PDF）下載｜台中會計師提供"
+seo_description: "包含銷/進項資料整理、回條歸檔、零稅率文件比對與內部簽核欄位，按表逐項完成即可。"
 draft: false
----
 
 
 ## 檔案用途
-用於下載資源 6（checklists）相關作業，內容包含必要欄位與示例，適合直接套用。
+協助財會人員以同一份清單完成雙月申報與歸檔。
 
 ## 適用情境
 - 新創或中小企業標準流程

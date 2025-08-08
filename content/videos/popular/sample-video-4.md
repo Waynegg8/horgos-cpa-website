@@ -1,4 +1,3 @@
----
 title: "記帳外包 vs. 內聘會計：成本、風險與管理效率完整比較"
 date: "2024-08-05"
 category: "popular"
@@ -6,10 +5,10 @@ tags: ["記帳外包", "內部會計", "成本控管", "中小企業"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "10:05"
 slug: "outsourcing-bookkeeping-vs-inhouse"
+youtube_id: "xxxxxxxx"
 seo_title: "【記帳外包 vs. 內聘會計：成本、風險與管理效率完整比較】｜台中會計師｜霍爾果斯會計師事務所"
 seo_description: "實務解析：記帳外包 vs. 內聘會計：成本、風險與管理效率完整比較。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
 draft: false
----
 
 
 

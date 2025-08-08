@@ -17,6 +17,8 @@ id = "HUGO_CMS_KV"
 # 環境變數（需要在Cloudflare Dashboard中設置實際值）
 [vars]
 RECAPTCHA_SITE_KEY = "6LdOlZkrAAAAAJUXslB2aaWOKbAbOt_DRx5aea-"
+RECAPTCHA_SECRET_KEY = "${RECAPTCHA_SECRET_KEY}"
+ADMIN_EMAIL = "admin@horgoscpa.com"
 
 # 敏感環境變數（在Cloudflare Dashboard的Settings > Environment variables中設置）
 # RECAPTCHA_SECRET_KEY = "6LdOlZkrAAAAAMISudyFizqlhGlLkHJM0YHwmulS"

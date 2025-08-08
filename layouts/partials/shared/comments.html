@@ -32,8 +32,6 @@
     <div id="comment-status" class="form-status" role="status" aria-live="polite"></div>
   </form>
 
-  <!-- reCAPTCHA v3 -->
-  <script src="https://www.google.com/recaptcha/api.js?render={{ .Site.Params.recaptcha.site_key }}" defer></script>
   {{ $commentsScript := resources.Get "js/components/comments.js" | resources.Minify | resources.Fingerprint }}
   <script type="module" src="{{ $commentsScript.RelPermalink }}" defer></script>
 </section>

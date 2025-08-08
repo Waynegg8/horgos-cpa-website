@@ -1,20 +1,18 @@
----
-title: "下載資源 11（regulations）"
+title: "稅務試算與暫繳規定彙編（XLSX）"
 date: "2024-06-12"
 category: "regulations"
-tags: ["法規", "說明"]
+tags: ["暫繳", "稅務試算", "營所稅"]
 filetype: "xlsx"
 filesize: "155KB"
 image: "/uploads/images/general/general-default.jpg"
-slug: "download-11"
-seo_title: "下載資源 11（regulations） 下載｜台中會計師提供實務文件"
-seo_description: "可直接應用於regulations的 下載資源 11（regulations），附欄位說明與步驟，協助快速落地。"
+slug: "tax-prepayment-and-estimation-compendium"
+seo_title: "稅務試算與暫繳規定彙編（XLSX）下載｜台中會計師整理"
+seo_description: "彙整暫繳適用門檻、計算方式與申報時點，附試算表與注意事項。"
 draft: false
----
 
 
 ## 檔案用途
-用於下載資源 11（regulations）相關作業，內容包含必要欄位與示例，適合直接套用。
+用於快速試算暫繳與年度稅額，作為資金規劃依據。
 
 ## 適用情境
 - 新創或中小企業標準流程

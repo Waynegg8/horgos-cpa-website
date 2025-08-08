@@ -1,4 +1,3 @@
----
 title: "股東分紅與薪資怎麼配？三種組合的稅負試算與建議"
 date: "2024-08-10"
 category: "tutorials"
@@ -6,10 +5,10 @@ tags: ["股利", "薪資", "稅負試算", "分紅制度"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "09:30"
 slug: "dividend-vs-salary-tax-strategy"
+youtube_id: "xxxxxxxx"
 seo_title: "【股東分紅與薪資怎麼配？三種組合的稅負試算與建議】｜台中會計師｜霍爾果斯會計師事務所"
 seo_description: "實務解析：股東分紅與薪資怎麼配？三種組合的稅負試算與建議。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
 draft: false
----
 
 
 

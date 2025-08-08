@@ -1,20 +1,18 @@
----
-title: "下載資源 5（forms）"
+title: "股東會議紀錄範本（XLSX）"
 date: "2024-06-06"
 category: "forms"
-tags: ["表單", "申請"]
+tags: ["會議紀錄", "股東會", "決議"]
 filetype: "xlsx"
 filesize: "125KB"
 image: "/uploads/images/general/general-default.jpg"
-slug: "download-5"
-seo_title: "下載資源 5（forms） 下載｜台中會計師提供實務文件"
-seo_description: "可直接應用於forms的 下載資源 5（forms），附欄位說明與步驟，協助快速落地。"
+slug: "shareholders-meeting-minutes-template"
+seo_title: "股東會議紀錄範本（XLSX）下載｜台中會計師提供"
+seo_description: "涵蓋開會事由、決議事項、出席名冊、表決結果與附件清單，可直接填寫使用。"
 draft: false
----
 
 
 ## 檔案用途
-用於下載資源 5（forms）相關作業，內容包含必要欄位與示例，適合直接套用。
+用於製作合規的股東會或臨時會議紀錄，便於後續法遵查核。
 
 ## 適用情境
 - 新創或中小企業標準流程

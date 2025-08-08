@@ -1,20 +1,18 @@
----
-title: "下載資源 9（forms）"
+title: "董事會決議範本（PDF）"
 date: "2024-06-10"
 category: "forms"
-tags: ["表單", "申請"]
+tags: ["董事會", "決議", "範本"]
 filetype: "pdf"
 filesize: "145KB"
 image: "/uploads/images/general/general-default.jpg"
-slug: "download-9"
-seo_title: "下載資源 9（forms） 下載｜台中會計師提供實務文件"
-seo_description: "可直接應用於forms的 下載資源 9（forms），附欄位說明與步驟，協助快速落地。"
+slug: "board-resolution-template"
+seo_title: "董事會決議範本（PDF）下載｜台中會計師提供"
+seo_description: "提供投資、借款、授信、增資等常見決議範本，附議程與簽核欄位，可直接使用。"
 draft: false
----
 
 
 ## 檔案用途
-用於下載資源 9（forms）相關作業，內容包含必要欄位與示例，適合直接套用。
+協助公司製作標準決議文件，確保法遵與簽核完整。
 
 ## 適用情境
 - 新創或中小企業標準流程

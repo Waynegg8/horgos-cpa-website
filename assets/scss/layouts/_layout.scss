@@ -77,7 +77,7 @@
   // 需要明確 sticky 的情境（例如：文章單頁）
   &__sidebar--sticky {
     position: sticky;
-    top: $spacing-4;
+    top: calc(56px + $spacing-2); // 與導覽列高度對齊，避免遮住內容
     height: max-content;
     align-self: flex-start;
     will-change: top;

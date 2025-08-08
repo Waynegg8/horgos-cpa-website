@@ -1,20 +1,18 @@
----
-title: "下載資源 8（templates）"
+title: "報價單範本（XLSX）"
 date: "2024-06-09"
 category: "templates"
-tags: ["範本", "文件"]
+tags: ["報價單", "範本", "合約前置"]
 filetype: "xlsx"
 filesize: "140KB"
 image: "/uploads/images/general/general-default.jpg"
-slug: "download-8"
-seo_title: "下載資源 8（templates） 下載｜台中會計師提供實務文件"
-seo_description: "可直接應用於templates的 下載資源 8（templates），附欄位說明與步驟，協助快速落地。"
+slug: "quotation-template"
+seo_title: "報價單範本（XLSX）下載｜台中會計師提供"
+seo_description: "含品項、數量、單價、稅額、付款條件、有效期限與章欄，可直接開立對客用。"
 draft: false
----
 
 
 ## 檔案用途
-用於下載資源 8（templates）相關作業，內容包含必要欄位與示例，適合直接套用。
+協助業務快速出具規範化報價，與合約條款銜接。
 
 ## 適用情境
 - 新創或中小企業標準流程

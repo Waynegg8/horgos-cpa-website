@@ -15,7 +15,7 @@
   body.articles & .sidebar-recent + .sidebar-tags { margin-top: $spacing-3; }
   
   // 明確排序：確保目錄在最上方、標籤雲在最下方（TOC 不再個別 sticky，避免蓋住其他小工具）
-  .toc-container { order: 0; position: static; top: auto; }
+  .toc-container { order: 0; position: sticky; top: 72px; z-index: 1; }
   .sidebar-search { order: 0; }
   // 側邊欄搜尋框（單一內容頁會出現）
   .sidebar-search {
@@ -46,9 +46,9 @@
       gap: $spacing-1;
     }
   }
-  .sidebar-categories { order: 3; }
-  .sidebar-series { order: 2; }
-  .sidebar-recent { order: 1; }
+  .sidebar-categories { order: 2; }
+  .sidebar-series { order: 1; }
+  .sidebar-recent { order: 3; }
   .sidebar-tags { order: 99; }
   
   // 側邊欄小工具

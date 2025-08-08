@@ -1,4 +1,3 @@
----
 title: "進項憑證缺漏被查核：中小企業如何補救（實務案例）"
 date: "2024-08-03"
 category: "case-studies"
@@ -6,10 +5,10 @@ tags: ["稅務稽查", "進項憑證", "補件", "雲端發票"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "08:12"
 slug: "case-study-invoice-audit-remedy"
+youtube_id: "xxxxxxxx"
 seo_title: "【進項憑證缺漏被查核：中小企業如何補救（實務案例）】｜台中會計師｜霍爾果斯會計師事務所"
 seo_description: "實務解析：進項憑證缺漏被查核：中小企業如何補救（實務案例）。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
 draft: false
----
 
 
 

@@ -1,4 +1,3 @@
----
 title: "公司設立基本資料表（DOCX）"
 date: "2024-06-02"
 category: "forms"
@@ -10,7 +9,6 @@ slug: "download-1"
 seo_title: "公司設立基本資料表（DOCX） 下載｜台中會計師提供實務文件"
 seo_description: "可直接應用於forms的 公司設立基本資料表（DOCX），附欄位說明與步驟，協助快速落地。"
 draft: false
----
 
 
 

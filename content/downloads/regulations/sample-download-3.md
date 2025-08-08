@@ -1,20 +1,18 @@
----
-title: "下載資源 3（regulations）"
+title: "境外電商稅籍登錄與申報規範（PDF）"
 date: "2024-06-04"
 category: "regulations"
-tags: ["法規", "說明"]
+tags: ["跨境電商", "稅籍登錄", "營業稅"]
 filetype: "pdf"
 filesize: "115KB"
 image: "/uploads/images/general/general-default.jpg"
-slug: "download-3"
-seo_title: "下載資源 3（regulations） 下載｜台中會計師提供實務文件"
-seo_description: "可直接應用於regulations的 下載資源 3（regulations），附欄位說明與步驟，協助快速落地。"
+slug: "cross-border-ecommerce-vat-guideline"
+seo_title: "境外電商稅籍登錄與申報規範（PDF）下載｜台中會計師整理"
+seo_description: "彙整境外賣家稅籍登錄、代徵機制與申報規定，附常見問答與申請連結。"
 draft: false
----
 
 
 ## 檔案用途
-用於下載資源 3（regulations）相關作業，內容包含必要欄位與示例，適合直接套用。
+作為跨境電商相關稅務規定的快速參考文件。
 
 ## 適用情境
 - 新創或中小企業標準流程

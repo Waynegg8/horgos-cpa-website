@@ -1,20 +1,18 @@
----
-title: "下載資源 4（templates）"
+title: "公司內控制度範本（DOCX）"
 date: "2024-06-05"
 category: "templates"
-tags: ["範本", "文件"]
+tags: ["內控", "規範", "用印"]
 filetype: "docx"
 filesize: "120KB"
 image: "/uploads/images/general/general-default.jpg"
-slug: "download-4"
-seo_title: "下載資源 4（templates） 下載｜台中會計師提供實務文件"
-seo_description: "可直接應用於templates的 下載資源 4（templates），附欄位說明與步驟，協助快速落地。"
+slug: "internal-control-policy-template"
+seo_title: "公司內控制度範本（DOCX）下載｜台中會計師提供"
+seo_description: "包含用印規範、印章管理、採購流程與權限設計的可編輯範本，附清單可直接導入。"
 draft: false
----
 
 
 ## 檔案用途
-用於下載資源 4（templates）相關作業，內容包含必要欄位與示例，適合直接套用。
+可作為中小企業內控起始文件，搭配權限與簽核表執行。
 
 ## 適用情境
 - 新創或中小企業標準流程

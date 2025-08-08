@@ -1,4 +1,3 @@
----
 title: "2025 稅法修正重點：最低稅負、股利課稅與跨境新制"
 date: "2024-08-04"
 category: "legal-explanation"
@@ -6,10 +5,10 @@ tags: ["稅法修正", "最低稅負", "股利課稅", "跨境稅務"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "12:40"
 slug: "tax-law-amendments-2025-overview"
+youtube_id: "xxxxxxxx"
 seo_title: "【2025 稅法修正重點：最低稅負、股利課稅與跨境新制】｜台中會計師｜霍爾果斯會計師事務所"
 seo_description: "實務解析：2025 稅法修正重點：最低稅負、股利課稅與跨境新制。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
 draft: false
----
 
 
 

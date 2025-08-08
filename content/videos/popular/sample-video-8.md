@@ -1,4 +1,3 @@
----
 title: "雲端發票整合會計系統：中小企業導入實戰經驗"
 date: "2024-08-09"
 category: "popular"
@@ -6,10 +5,10 @@ tags: ["雲端發票", "會計系統", "自動化", "整合"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "11:20"
 slug: "e-invoice-to-accounting-integration"
+youtube_id: "xxxxxxxx"
 seo_title: "【雲端發票整合會計系統：中小企業導入實戰經驗】｜台中會計師｜霍爾果斯會計師事務所"
 seo_description: "實務解析：雲端發票整合會計系統：中小企業導入實戰經驗。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
 draft: false
----
 
 
 

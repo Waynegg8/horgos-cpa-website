@@ -1,20 +1,18 @@
----
-title: "下載資源 7（regulations）"
+title: "電子發票作廢與折讓規範（DOCX）"
 date: "2024-06-08"
 category: "regulations"
-tags: ["法規", "說明"]
+tags: ["電子發票", "作廢", "折讓"]
 filetype: "docx"
 filesize: "135KB"
 image: "/uploads/images/general/general-default.jpg"
-slug: "download-7"
-seo_title: "下載資源 7（regulations） 下載｜台中會計師提供實務文件"
-seo_description: "可直接應用於regulations的 下載資源 7（regulations），附欄位說明與步驟，協助快速落地。"
+slug: "einvoice-void-allowance-rules"
+seo_title: "電子發票作廢與折讓規範（DOCX）下載｜台中會計師整理"
+seo_description: "整理作廢與折讓之法規節點與文件需求，附對應系統欄位與會計分錄建議。"
 draft: false
----
 
 
 ## 檔案用途
-用於下載資源 7（regulations）相關作業，內容包含必要欄位與示例，適合直接套用。
+協助企業依據規範正確處理作廢與折讓，並同步帳務與申報。
 
 ## 適用情境
 - 新創或中小企業標準流程

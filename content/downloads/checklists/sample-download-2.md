@@ -1,20 +1,18 @@
----
-title: "下載資源 2（checklists）"
+title: "公司設立流程檢查清單（XLSX）"
 date: "2024-06-03"
 category: "checklists"
-tags: ["清單", "檢核"]
+tags: ["檢核", "設立", "流程"]
 filetype: "xlsx"
 filesize: "110KB"
 image: "/uploads/images/general/general-default.jpg"
-slug: "download-2"
-seo_title: "下載資源 2（checklists） 下載｜台中會計師提供實務文件"
-seo_description: "可直接應用於checklists的 下載資源 2（checklists），附欄位說明與步驟，協助快速落地。"
+slug: "company-setup-checklist"
+seo_title: "公司設立流程檢查清單（XLSX）下載｜台中會計師製作"
+seo_description: "包含名稱預查、章程、資本額、場地證明、稅籍登記等欄位與時程，照表逐項勾選即可落地執行。"
 draft: false
----
 
 
 ## 檔案用途
-用於下載資源 2（checklists）相關作業，內容包含必要欄位與示例，適合直接套用。
+本清單以時程與責任分工呈現公司設立流程，適合新創快速啟動與交接。
 
 ## 適用情境
 - 新創或中小企業標準流程

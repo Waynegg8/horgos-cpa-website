@@ -125,6 +125,28 @@
   .sidebar-widget { position: relative; }
 }
 
+// 視頻頁面專屬覆寫：徹底取消側欄分類/系列的膠囊漸層樣式（避免高度過大與視覺干擾）
+.videos {
+  .two-column__sidebar { position: static !important; top: auto !important; height: auto !important; }
+  .sidebar {
+    .sidebar-categories__link,
+    .sidebar-series__link {
+      background: $color-bg-primary; // 亮度一致
+      border: 1px solid $color-border-primary;
+      border-radius: $border-radius-md;
+      box-shadow: none;
+      color: $color-text-primary;
+      padding: $spacing-2 $spacing-3;
+      font-weight: 500;
+    }
+    // 以更高選擇器覆蓋舊有 nth-child 漸層規則
+    .sidebar-categories__link:nth-child(n),
+    .sidebar-series__link:nth-child(n) {
+      background: $color-bg-primary;
+    }
+  }
+}
+
 // Sticky 平滑：避免內部元素造成抖動
 .two-column__sidebar, .two-column__sidebar--sticky { contain: layout paint; position: static; top: auto; }
 
