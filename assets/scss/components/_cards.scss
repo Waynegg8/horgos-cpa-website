@@ -272,7 +272,9 @@
     font-size: 3rem;
     color: $color-accent-highlight;
     margin-bottom: $spacing-4;
-    display: block;
+    display: flex;                // 垂直水平置中，避免圖標偏移
+    align-items: center;
+    justify-content: center;
   }
   
   &__title {
@@ -307,7 +309,34 @@
 
 // 服務列表頁的卡片（與 .service-card 同步行為）
 .service-card-link {
-  @extend .service-card;
+  // 與 .service-card 對齊的版型（避免延伸順序造成覆蓋）
+  text-align: center;
+  padding: $spacing-8;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
+  .service-card__icon {
+    font-size: 3rem;
+    color: $color-accent-highlight;
+    margin-bottom: $spacing-4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .service-card__title { font-size: $font-size-h3; color: $color-text-primary; margin-bottom: $spacing-3; font-weight: 600; }
+  .service-card__description { color: $color-text-secondary; line-height: $line-height-base; margin-bottom: $spacing-6; }
+  .service-card__link {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-2;
+    white-space: nowrap;
+    color: $color-accent-highlight;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color $transition-base ease;
+  }
 }
 
 // 分類導航卡片

@@ -167,6 +167,10 @@
   transition: all $transition-base;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   color: white;
+  backdrop-filter: saturate(140%) blur(2px); // 提升清晰度感受
+  
+  // 提升圖標對比
+  &.line i, &.facebook i, &.instagram i, &.email i { filter: drop-shadow(0 1px 1px rgba(0,0,0,0.35)); }
   
   i {
     display: inline-flex;
