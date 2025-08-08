@@ -6,9 +6,11 @@ tags: ["境外收入", "勞務輸出", "營所稅", "跨境課稅"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "09:18"
 slug: "overseas-service-income-tax"
-seo_title: "賣服務到國外要不要課稅？境外收入判斷與申報要點"
-seo_description: "以實際合約範例解析勞務輸出/境外收入的認定原則、常見誤區與稅務風險，並說明正確的申報方式。"
+seo_title: "【勞務輸出與境外收入：常見課稅誤區解析】｜台中會計師｜霍爾果斯會計師事務所"
+seo_description: "實務解析：勞務輸出與境外收入：常見課稅誤區解析。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
+draft: false
 ---
+
 
 透過實際合約與開票案例，說明境外收入的判斷與文件保存重點。
 

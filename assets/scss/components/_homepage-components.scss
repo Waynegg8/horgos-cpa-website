@@ -17,6 +17,18 @@
   }
 }
 
+/* 文字帶圖片段落 */
+.ti-section { padding: $spacing-16 0; }
+.ti-block { display: flex; flex-direction: column; gap: $spacing-12; }
+.ti-item { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: $spacing-8; align-items: center; }
+.ti-item--reverse { grid-template-columns: 0.9fr 1.1fr; }
+.ti-item__text h2 { margin: 0 0 $spacing-4 0; font-size: $font-size-h2; }
+.ti-item__text p { margin: 0 0 $spacing-4 0; color: $color-text-secondary; }
+.ti-item__text ul { margin: 0; padding-left: $spacing-6; }
+.ti-item__image img { width: 100%; height: auto; border-radius: $border-radius-lg; box-shadow: $shadow-lg; }
+
+@include tablet { .ti-item, .ti-item--reverse { grid-template-columns: 1fr; } }
+
 // 數據亮點區
 .stats {
   padding: $spacing-16 0 $spacing-8;

@@ -6,9 +6,11 @@ tags: ["行政救濟", "更正申報", "復查", "稅務爭議"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "08:50"
 slug: "tax-appeal-success-case"
-seo_title: "遇到稅務爭議怎麼辦？成功救濟案例告訴你要準備什麼"
-seo_description: "分享一件成功的更正申報與復查案例，逐步說明事證蒐集、法律依據撰寫與溝通節奏，附文件清單供下載。"
+seo_title: "【稅務行政救濟成功案例：更正申報與復查的關鍵文件】｜台中會計師｜霍爾果斯會計師事務所"
+seo_description: "實務解析：稅務行政救濟成功案例：更正申報與復查的關鍵文件。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
+draft: false
 ---
+
 
 我們把案件拆解為三個成功關鍵：事實釐清、法律論述、與態度策略，提供可複製的實務模板。
 

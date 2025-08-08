@@ -1,16 +1,14 @@
 {{ define "main" }}
 <div class="container">
     <div class="appointment-container">
-        <!-- 統一 page-header 左置對齊樣式 -->
+        <!-- 統一 page-header 左置對齊樣式（避免雙層 container 造成左側多餘空白） -->
         <div class="page-header page-header--compact">
-          <div class="container">
-            <div class="page-header__content">
-              <h1 class="page-header__title">{{ .Title }}</h1>
-              <div class="page-header__line"></div>
-              {{ with .Description }}
-              <p class="page-header__description">{{ . }}</p>
-              {{ end }}
-            </div>
+          <div class="page-header__content">
+            <h1 class="page-header__title">{{ .Title }}</h1>
+            <div class="page-header__line"></div>
+            {{ with .Description }}
+            <p class="page-header__description">{{ . }}</p>
+            {{ end }}
           </div>
         </div>
         

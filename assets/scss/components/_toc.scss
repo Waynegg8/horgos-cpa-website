@@ -8,7 +8,7 @@
   padding: $spacing-6;
   border: 1px solid $color-border-primary;
   box-shadow: none;
-  z-index: 0; // 低於側邊欄其他元件，避免覆蓋
+  z-index: 2; // 提高層級，確保在系列區塊之上但不覆蓋頁面
   padding-right: $spacing-4; // 增加右側間距
   
   .toc-title {

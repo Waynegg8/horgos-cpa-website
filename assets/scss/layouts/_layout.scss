@@ -58,11 +58,11 @@
   &__sidebar {
     width: 320px; // 稍微增加側邊欄寬度
     flex-shrink: 0;
-    // 預設：列表頁期望 sticky；單頁另用 --sticky 控制
-    position: sticky;
-    top: $spacing-4;
-    height: max-content;
-    align-self: flex-start;
+    // 預設改為非 sticky，避免擋住 TOC。需要固定時，請加上 --sticky 修飾。
+    position: static;
+    top: auto;
+    height: auto;
+    align-self: auto;
     
     @include tablet {
       width: 280px; // 平板版稍微增加寬度

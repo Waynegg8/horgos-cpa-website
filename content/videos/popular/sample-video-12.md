@@ -6,9 +6,11 @@ tags: ["損益表", "資產負債表", "現金流量表", "財務指標"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "12:10"
 slug: "how-to-read-financial-statements"
-seo_title: "看懂財報其實不難：10 個指標快速掌握公司體質"
-seo_description: "用實例帶你看懂三大報表的關鍵連動與10個常用指標，讓經營決策更精準，附可下載的檢核表。"
+seo_title: "【財報閱讀術：老闆必懂的三大報表10個關鍵指標】｜台中會計師｜霍爾果斯會計師事務所"
+seo_description: "實務解析：財報閱讀術：老闆必懂的三大報表10個關鍵指標。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
+draft: false
 ---
+
 
 本影片專為企業主準備，從營運角度拆解財報：哪些數字會影響決策、哪些變化需要警覺。
 

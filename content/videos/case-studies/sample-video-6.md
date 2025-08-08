@@ -6,9 +6,11 @@ tags: ["自動化", "記帳", "導入失敗", "專案管理"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "09:05"
 slug: "automation-bookkeeping-failure-recovery"
-seo_title: "自動化記帳導入為何失敗？三步重啟專案的正確方式"
-seo_description: "解析一項自動化記帳專案失敗的真正原因，提出盤點、分層上線與KPI設計的重啟計畫，避免再次踩雷。"
+seo_title: "【自動化記帳導入失敗：原因診斷與重啟計畫（案例解析）】｜台中會計師｜霍爾果斯會計師事務所"
+seo_description: "實務解析：自動化記帳導入失敗：原因診斷與重啟計畫（案例解析）。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
+draft: false
 ---
+
 
 透過實際專案失敗案例，說明「一次到位」的常見風險與如何逐步重啟。
 

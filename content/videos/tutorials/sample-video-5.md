@@ -6,9 +6,11 @@ tags: ["電子申報", "錯誤排除", "折讓", "作廢"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "07:55"
 slug: "e-filing-error-handling"
-seo_title: "電子申報錯誤怎麼解？作廢與折讓處理教學"
-seo_description: "教你在財政部電子申報系統處理常見錯誤：發票作廢、折讓單補登、重複上傳資料清理，以及回條保存與對帳。"
+seo_title: "【線上報稅常見錯誤排除：發票作廢、折讓與重複上傳】｜台中會計師｜霍爾果斯會計師事務所"
+seo_description: "實務解析：線上報稅常見錯誤排除：發票作廢、折讓與重複上傳。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
+draft: false
 ---
+
 
 影片逐步示範在電子申報系統處理三種最常見錯誤的方式，並提供統一的檢核表避免再次發生。
 

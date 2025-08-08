@@ -6,9 +6,11 @@ tags: ["股利", "薪資", "稅負試算", "分紅制度"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "09:30"
 slug: "dividend-vs-salary-tax-strategy"
-seo_title: "股利與薪資怎麼配最省？稅負試算教學"
-seo_description: "以實例試算股利、薪資、執行業務三種報酬組合的稅負差異，並提供公司決策與個人申報的實務建議。"
+seo_title: "【股東分紅與薪資怎麼配？三種組合的稅負試算與建議】｜台中會計師｜霍爾果斯會計師事務所"
+seo_description: "實務解析：股東分紅與薪資怎麼配？三種組合的稅負試算與建議。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
+draft: false
 ---
+
 
 本影片提供股東與負責人規劃報酬時的試算框架，並解釋不同選擇對現金流與合規的影響。
 

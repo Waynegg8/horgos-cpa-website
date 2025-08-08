@@ -6,9 +6,11 @@ tags: ["雲端發票", "會計系統", "自動化", "整合"]
 thumbnail: "/uploads/images/general/general-default.jpg"
 duration: "11:20"
 slug: "e-invoice-to-accounting-integration"
-seo_title: "雲端發票怎麼整合到會計系統？一步步帶你做"
-seo_description: "示範以電子發票平台資料整合至會計系統的流程：API 匯入、對帳、錯誤處理與內控設計，提供 SOP 範本可直接套用。"
+seo_title: "【雲端發票整合會計系統：中小企業導入實戰經驗】｜台中會計師｜霍爾果斯會計師事務所"
+seo_description: "實務解析：雲端發票整合會計系統：中小企業導入實戰經驗。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
+draft: false
 ---
+
 
 我們分享 3 家產業的導入經驗，從資料抓取到會計分錄自動化，並提醒常見的踩雷點。
 

@@ -2,10 +2,15 @@
 title: "線上申報營業稅實作教學（雙月）"
 date: "2024-08-02"
 category: "tutorials"
+tags: ["教學", "操作", "電子申報", "線上申報"]
 thumbnail: "/uploads/images/videos/tax-filing-guide.webp"
 duration: "06:30"
-description: "帶你完成雙月營業稅線上申報：系統登入、銷項/進項匯入、試算與送出注意事項。"
+slug: "sample-video-1"
+seo_title: "【線上申報營業稅實作教學（雙月）】｜台中會計師｜霍爾果斯會計師事務所"
+seo_description: "實務解析：線上申報營業稅實作教學（雙月）。由台中會計師整理重點、清單與注意事項，提供可直接落地的做法。"
+draft: false
 ---
+
 
 本影片示範在財政部電子申報系統完成雙月營業稅申報流程：
 

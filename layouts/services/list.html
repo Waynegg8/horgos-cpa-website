@@ -32,6 +32,9 @@
             </div>
         </section>
         {{ end }}
+    <!-- 文字帶圖片敘述（先於卡片群後，避免頁面全是卡片） -->
+        {{ partial "homepage/text-image-sections.html" . }}
+
     <!-- 服務特色區 -->
         {{ partial "services/service-features.html" . }}
         
