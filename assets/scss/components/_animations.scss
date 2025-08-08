@@ -26,6 +26,14 @@
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+// 統計卡片重播微動態（短暫彈跳+陰影）
+.stat.stat-replay { animation: statReplay 0.7s ease-out; }
+@keyframes statReplay {
+  0% { transform: translateY(-2px) scale(0.98); box-shadow: 0 0 0 rgba(0,0,0,0); }
+  40% { transform: translateY(0) scale(1.02); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+  100% { transform: none; box-shadow: none; }
+}
+
 // 較柔和的呼吸效果（專供 CTA 使用）
 @keyframes pulseSoft {
   0% {

@@ -21,17 +21,46 @@
     requestAnimationFrame(step);
   };
 
+  // 作法：
+  // 1) 進場時觸發一次
+  // 2) 之後每隔幾秒自動重新播放數字滾動與卡片微動態，營造「一直有動畫」的感覺
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('inview');
-        const numberEl = entry.target.querySelector('.stat__number');
-        if (numberEl && !numberEl.dataset.animated) {
-          numberEl.dataset.animated = 'true';
-          animateCount(numberEl);
-        }
-        observer.unobserve(entry.target);
-      }
+      if (!entry.isIntersecting) return;
+      const card = entry.target;
+      card.classList.add('inview');
+      const numberEl = card.querySelector('.stat__number');
+      if (!numberEl) return;
+
+      const play = () => {
+        // 每次重播前，先把數字歸零（保留字尾）
+        const targetStr = numberEl.getAttribute('data-target') || '0';
+        const suffix = targetStr.replace(/[0-9]/g, '');
+        numberEl.textContent = '0' + suffix;
+        animateCount(numberEl);
+        // 加上短暫微動態類（由 CSS 控制）
+        card.classList.add('stat-replay');
+        setTimeout(() => card.classList.remove('stat-replay'), 700);
+      };
+
+      // 首次播放
+      play();
+      // 循環播放（每 6 秒）
+      const interval = setInterval(play, 6000);
+      card.dataset.statInterval = interval;
+
+      // 當卡片離開視窗很遠時停止循環，節省資源
+      const stopObserver = new IntersectionObserver((ents) => {
+        ents.forEach(e => {
+          if (!e.isIntersecting) {
+            clearInterval(Number(card.dataset.statInterval));
+            stopObserver.disconnect();
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+      stopObserver.observe(card);
+
+      observer.unobserve(card);
     });
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
 
