@@ -87,19 +87,19 @@ body.downloads-single .sidebar-categories__link {
   text-overflow: ellipsis !important;
 }
 
-/* 列表頁側欄：徹底改為隨頁滾動（非 sticky） */
-body.articles .two-column__sidebar,
-body.videos .two-column__sidebar,
-body.faq .two-column__sidebar,
-body.downloads .two-column__sidebar,
-body.articles .sidebar,
-body.videos .sidebar,
-body.faq .sidebar,
-body.downloads .sidebar,
-body.articles .sidebar-sticky-group,
-body.videos .sidebar-sticky-group,
-body.faq .sidebar-sticky-group,
-body.downloads .sidebar-sticky-group {
+/* 列表頁側欄：徹底改為隨頁滾動（非 sticky） — 僅限 section 列表頁 */
+body.articles[data-kind="section"] .two-column__sidebar,
+body.videos[data-kind="section"] .two-column__sidebar,
+body.faq[data-kind="section"] .two-column__sidebar,
+body.downloads[data-kind="section"] .two-column__sidebar,
+body.articles[data-kind="section"] .sidebar,
+body.videos[data-kind="section"] .sidebar,
+body.faq[data-kind="section"] .sidebar,
+body.downloads[data-kind="section"] .sidebar,
+body.articles[data-kind="section"] .sidebar-sticky-group,
+body.videos[data-kind="section"] .sidebar-sticky-group,
+body.faq[data-kind="section"] .sidebar-sticky-group,
+body.downloads[data-kind="section"] .sidebar-sticky-group {
   position: static !important;
   top: auto !important;
   height: auto !important;
@@ -107,11 +107,11 @@ body.downloads .sidebar-sticky-group {
   contain: none !important;
 }
 
-/* 防止子元素自行 sticky */
-body.articles .sidebar *[style*="position: sticky"],
-body.videos .sidebar *[style*="position: sticky"],
-body.faq .sidebar *[style*="position: sticky"],
-body.downloads .sidebar *[style*="position: sticky"] {
+/* 防止子元素自行 sticky（僅限列表頁） */
+body.articles[data-kind="section"] .sidebar *[style*="position: sticky"],
+body.videos[data-kind="section"] .sidebar *[style*="position: sticky"],
+body.faq[data-kind="section"] .sidebar *[style*="position: sticky"],
+body.downloads[data-kind="section"] .sidebar *[style*="position: sticky"] {
   position: static !important;
   top: auto !important;
 }
@@ -120,5 +120,5 @@ body.downloads .sidebar *[style*="position: sticky"] {
 .two-column { align-items: flex-start !important; }
 .two-column__sidebar { align-self: flex-start !important; }
 
-/* 影片單一頁保險：側欄完全非 sticky、非伸展 */
+/* 影片單一頁保險：側欄完全非伸展 */
 body.videos[data-kind="page"] .two-column__sidebar { align-self: flex-start !important; }

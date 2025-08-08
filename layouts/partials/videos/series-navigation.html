@@ -1,3 +1,55 @@
+{{ $current := . }}
+{{ $all := where .Site.RegularPages "Section" "videos" }}
+{{ $all = where $all "Params.draft" "!=" true }}
+
+{{/* 重用文章的水平排列視覺：series-navigation + __links + __item */}}
+<div class="series-navigation">
+  <div class="series-navigation__links">
+    {{/* 找同分類中時間相鄰的影片作為「上一篇/下一篇」；若無，退而在全站找最近日期 */}}
+    {{ $cat := .Params.category }}
+    {{ $pages := cond (ne $cat nil) (where $all "Params.category" $cat) $all }}
+    {{ $pages = sort $pages ".Date" "asc" }}
+    {{ $idx := -1 }}
+    {{ range $i, $p := $pages }}{{ if eq $p.RelPermalink $current.RelPermalink }}{{ $idx = $i }}{{ end }}{{ end }}
+
+    {{/* 上一篇 */}}
+    {{ $prev := false }}
+    {{ if and (ge $idx 1) (lt $idx (len $pages)) }}
+      {{ $prev = index $pages (sub $idx 1) }}
+    {{ end }}
+    {{ if not $prev }}
+      {{ $prev = index (sort $all ".Date" "desc") 0 }}
+      {{ if eq $prev.RelPermalink $current.RelPermalink }}{{ $prev = false }}{{ end }}
+    {{ end }}
+    {{ if $prev }}
+      <div class="series-navigation__item">
+        <a class="btn btn-secondary series-navigation__btn" href="{{ $prev.RelPermalink }}">上一篇：{{ $prev.Title }}</a>
+        {{ if ne ($prev.Params.series) ($current.Params.series) }}
+        <div class="series-navigation__caption">上一篇內容來自其他系列推薦。</div>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{/* 下一篇 */}}
+    {{ $next := false }}
+    {{ if and (ge $idx 0) (lt (add $idx 1) (len $pages)) }}
+      {{ $next = index $pages (add $idx 1) }}
+    {{ end }}
+    {{ if not $next }}
+      {{ $next = index (sort $all ".Date" "asc") 0 }}
+      {{ if eq $next.RelPermalink $current.RelPermalink }}{{ $next = false }}{{ end }}
+    {{ end }}
+    {{ if $next }}
+      <div class="series-navigation__item">
+        <a class="btn btn-secondary series-navigation__btn" href="{{ $next.RelPermalink }}">下一篇：{{ $next.Title }}</a>
+        {{ if ne ($next.Params.series) ($current.Params.series) }}
+        <div class="series-navigation__caption">下一篇內容來自其他系列推薦。</div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</div>
+
 {{/* 統一使用與文章相同的導航樣式與邏輯 */}}
 {{ partial "articles/series-navigation.html" . }}
 

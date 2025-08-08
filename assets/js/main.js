@@ -6,6 +6,8 @@
 import loadingSystem from './components/loading.js';
 // 導入鍵盤導航功能
 import keyboardNavigation from './components/keyboard-nav.js';
+// 文章目錄（單一文章頁）
+import './components/toc.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     // 初始化載入狀態系統
