@@ -29,7 +29,7 @@
     </div>
     
     <!-- 精選文章 -->
-    {{ $all := where .Pages "Type" "articles" }}
+    {{ $all := where .Site.RegularPages "Section" "articles" }}
     {{ $sorted := $all.ByDate.Reverse }}
     {{ if gt (len $sorted) 0 }}
     {{ $featured := index $sorted 0 }}
