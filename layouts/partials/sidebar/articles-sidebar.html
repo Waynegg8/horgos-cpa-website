@@ -1,10 +1,5 @@
 <!-- 文章側邊欄 -->
 <div class="sidebar">
-    <!-- 目錄 (置頂顯示，滑動時最容易看到) -->
-    {{ if and (eq .Kind "page") (eq .Section "articles") }}
-    {{ partial "sidebar/table-of-contents.html" . }}
-    {{ end }}
-
     {{ if and (eq .Kind "page") (eq .Section "articles") }}
     <!-- 側邊搜尋（單一文章頁專用）：提交後導向列表頁並帶入關鍵字 -->
     <form class="sidebar-widget sidebar-search" action="/articles/" method="get" role="search" aria-label="文章搜尋">
@@ -64,6 +59,11 @@
             </li>
         </ul>
     </div>
+
+    <!-- 目錄：應位於系列文章下、標籤雲上 -->
+    {{ if and (eq .Kind "page") (eq .Section "articles") }}
+    {{ partial "sidebar/table-of-contents.html" . }}
+    {{ end }}
     
     {{ if ne .Kind "page" }}
     <!-- 最新文章：僅列表頁顯示，單一文章頁不顯示 -->

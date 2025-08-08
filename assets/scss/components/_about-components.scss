@@ -218,7 +218,7 @@
     }
     
     // 右側同列徽章（稅務規劃與企業顧問專家）
-    &__title-badge {
+      &__title-badge {
       position: relative;
       display: inline-flex;
       align-items: center;
@@ -228,9 +228,10 @@
       font-size: $font-size-small;
       line-height: 1.4;
       white-space: nowrap;
-      color: #ffffff; /* 白字 */
-      background: linear-gradient(135deg, rgba($color-accent-primary, 0.95) 0%, rgba($color-accent-highlight, 0.95) 100%);
-      box-shadow: 0 8px 22px rgba($color-accent-primary, 0.35), 0 2px 8px rgba(0,0,0,0.25);
+        color: #ffffff; /* 白字 */
+        /* 深到淺的藍色系漸層（左深右淺） */
+        background: linear-gradient(135deg, #0a3d62 0%, #3c8dbc 100%);
+        box-shadow: 0 8px 22px rgba(10,61,98,0.35), 0 2px 8px rgba(0,0,0,0.25);
       overflow: hidden;
 
       // 外圈柔光以呼應右下角按鈕
@@ -239,7 +240,7 @@
         position: absolute;
         inset: -6px;
         border-radius: $border-radius-full;
-        background: radial-gradient(50% 50% at 50% 50%, rgba($color-accent-highlight,0.35) 0%, rgba($color-accent-highlight,0.15) 55%, rgba(0,0,0,0) 100%);
+        background: radial-gradient(50% 50% at 50% 50%, rgba(60,141,188,0.35) 0%, rgba(60,141,188,0.15) 55%, rgba(0,0,0,0) 100%);
         filter: blur(6px);
         pointer-events: none;
         z-index: -1;
@@ -332,14 +333,15 @@
     
     .skill-tag {
       position: relative;
-      background: linear-gradient(135deg, rgba($color-accent-primary, 0.95) 0%, rgba($color-accent-highlight, 0.95) 100%);
+      /* 深到淺的藍色系漸層（左深右淺） */
+      background: linear-gradient(135deg, #0a3d62 0%, #3c8dbc 100%);
       color: #ffffff;
       padding: $spacing-1 $spacing-3;
       border-radius: $border-radius-full;
       font-size: $font-size-small;
       font-weight: 600;
       border: none;
-      box-shadow: 0 6px 16px rgba($color-accent-primary, 0.25);
+      box-shadow: 0 6px 16px rgba(10,61,98,0.25);
       overflow: hidden;
       transition: transform $transition-base $ease-in-out, filter $transition-base $ease-in-out;
       
