@@ -61,6 +61,7 @@
   display: flex;
   gap: $spacing-6;
   align-items: flex-start;
+  overflow: visible; // 確保內容完整顯示
   
   @include tablet {
     gap: $spacing-5;
@@ -70,6 +71,7 @@
     flex-shrink: 0;
     width: 240px;
     position: relative;
+    overflow: hidden;
     
     img {
       width: 100%;
