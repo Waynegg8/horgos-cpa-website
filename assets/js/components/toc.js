@@ -166,7 +166,8 @@ function setupTOCHighlight() {
   // 滾動事件處理
   window.addEventListener('scroll', function() {
     // 當前滾動位置
-    const scrollPosition = window.scrollY + 150;
+    const stickyOffset = 80; // 與 CSS top 對應
+    const scrollPosition = window.scrollY + stickyOffset;
     
     // 找到當前可見的標題
     let currentHeading = null;

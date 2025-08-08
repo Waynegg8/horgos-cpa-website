@@ -2,7 +2,7 @@
 .toc-container {
   margin-bottom: $spacing-8;
   position: sticky; // 到達此區才吸附
-  top: $spacing-4; // 與側欄頂部對齊
+  top: 72px; // 與固定導覽列高度對齊，避免被覆蓋/抖動
   background-color: $color-bg-secondary;
   border-radius: $border-radius-lg;
   padding: $spacing-6;
