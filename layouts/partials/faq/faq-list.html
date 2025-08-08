@@ -34,7 +34,7 @@
         {{ end }}
         {{ range $paginator.Pages }}
         <a href="{{ .RelPermalink }}" class="card-style card-clickable faq-item" 
-           data-category="{{ .Params.category | default "other" }}" 
+           data-category="{{ (.Params.category | default "other") | urlize }}" 
            data-title="{{ .Title }}" 
            data-summary="{{ .Summary }}">
             <div class="card-horizontal">

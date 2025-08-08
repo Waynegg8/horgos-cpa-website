@@ -50,7 +50,7 @@
         {{ end }}
         {{ range $paginator.Pages }}
         <a href="{{ .RelPermalink }}" class="video-card card-style card-clickable video-item"
-           data-category="{{ .Params.category | default "other" }}"
+           data-category="{{ (.Params.category | default "other") | urlize }}"
            data-title="{{ .Title }}"
            data-summary="{{ .Summary }}">
             <div class="video-card__thumbnail">
