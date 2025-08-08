@@ -365,10 +365,10 @@ textarea.form-control {
   align-items: flex-start;
   gap: 0.75rem;
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid #262626;
-  border-radius: 8px;
-  margin: 1.5rem 0;
+  background-color: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  margin: 1.25rem 0;
   
   input[type="checkbox"] {
     margin: 0;
@@ -384,14 +384,14 @@ textarea.form-control {
   }
   
   label {
-    color: #F0F0F0;
+    color: #111827;
     font-size: 0.875rem;
     line-height: 1.5;
     cursor: pointer;
     flex: 1;
     
     a {
-      color: #22c55e;
+      color: #16a34a;
       text-decoration: none;
       font-weight: 500;
       
@@ -534,16 +534,16 @@ textarea.form-control {
 
 // 留言表單樣式
 .comment-form-container {
-  margin: 2rem 0;
+  margin: 1.25rem 0; // 收斂外距
   
   .comment-form {
     background-color: #141414;
     border: 1px solid #262626;
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1rem; // 收斂內距
     
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.875rem; // 減少欄位間距
       
       &:last-child {
         margin-bottom: 0;
@@ -592,15 +592,10 @@ textarea.form-control {
     
     .form-textarea {
       resize: vertical;
-      min-height: 100px;
+      min-height: 90px; // 稍降高度
     }
     
-    .form-help {
-      display: block;
-      color: #A1A1A1;
-      font-size: 0.75rem;
-      margin-top: 0.25rem;
-    }
+    .form-help { display: none; } // 隱藏說明小字
     
     .comment-submit-btn {
       background: linear-gradient(135deg, #204B6E 0%, #1a3d5a 100%);

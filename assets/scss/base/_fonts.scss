@@ -24,10 +24,14 @@
   --font-accent: 'TouchMe Sans', 'Noto Sans TC', sans-serif;
 }
 
-/* 應用字體到元素 */
-h1, h2, h3, .section-title {
-  font-family: var(--font-heading);
-}
+/* 應用字體到元素（頁面主要內容區改回閱讀用字體，避免大小視覺不一）*/
+h1, h2, h3, .section-title { font-family: var(--font-heading); }
+.single-content .article-content h1,
+.single-content .article-content h2,
+.single-content .article-content h3,
+.single-content .article-content h4,
+.single-content .article-content h5,
+.single-content .article-content h6 { font-family: $font-family-base; }
 
 .hero-carousel__content h2,
 .service-card__title,

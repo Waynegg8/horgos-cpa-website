@@ -6,6 +6,7 @@
   // 交由父層 `.two-column__sidebar` 做 sticky，避免巢狀 sticky 失效
   position: static;
   z-index: 1;
+  max-height: none; // 避免撐高覆蓋
 
   // 列表頁視覺密度與分隔
   body.articles & { .sidebar-widget { margin-bottom: $spacing-4; } }
@@ -53,7 +54,7 @@
   &-widget {
     background-color: $color-bg-secondary;
     border-radius: $border-radius-lg;
-    padding: $spacing-5; // 收斂內邊距
+    padding: $spacing-4; // 再收斂內邊距，降低總高度
     box-shadow: $shadow-sm;
     &:not(:last-child){ margin-bottom: $spacing-4; }
     

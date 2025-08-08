@@ -1,4 +1,4 @@
-<!-- 客戶見證區（全新設計：大圖、橫向卡片、滑動輪播） -->
+<!-- 客戶見證區（Stripe 風格：連續流動滑動 + 邊緣淡出 + 懸停暫停） -->
 <section class="testimonials section" aria-label="客戶見證">
   <div class="container">
     <div class="testimonials__title">
@@ -6,7 +6,7 @@
       <div class="page-header__line" aria-hidden="true"></div>
     </div>
 
-    {{/* 讀取 data/testimonials.yml，若無則顯示預設三則 */}}
+    {{/* 讀取 data/testimonials.yml，若無則顯示預設 */}}
     {{ $items := .Site.Data.testimonials }}
     {{ if not $items }}
       {{ $items = slice
@@ -18,12 +18,12 @@
       }}
     {{ end }}
 
-    <div class="tn-carousel" data-autoplay="true" data-interval="4500">
-      <button class="tn-nav tn-prev" aria-label="上一則"><i class="fas fa-chevron-left"></i></button>
-      <div class="tn-viewport">
-        <div class="tn-track">
+    <div class="tn-infinite" data-speed="0.5">
+      <div class="tn-infinite__fade tn-infinite__fade--left" aria-hidden="true"></div>
+      <div class="tn-infinite__viewport">
+        <div class="tn-infinite__track">
           {{ range $items }}
-          <figure class="testimonial card-style tn-slide">
+          <figure class="testimonial tn-infinite__slide">
             <div class="testimonial__media">
               <img class="testimonial__avatar" src="{{ .avatar | default "/uploads/images/general/general-default.jpg" }}" alt="{{ .name }}" loading="lazy" decoding="async" width="128" height="128" />
             </div>
@@ -38,10 +38,11 @@
           {{ end }}
         </div>
       </div>
-      <button class="tn-nav tn-next" aria-label="下一則"><i class="fas fa-chevron-right"></i></button>
-      <div class="tn-dots" aria-hidden="true"></div>
+      <div class="tn-infinite__fade tn-infinite__fade--right" aria-hidden="true"></div>
     </div>
 
   </div>
+  {{ $tnCarousel := resources.Get "js/components/testimonials-carousel.js" | resources.Minify | resources.Fingerprint }}
+  <script type="module" src="{{ $tnCarousel.RelPermalink }}" defer></script>
 </section>
 

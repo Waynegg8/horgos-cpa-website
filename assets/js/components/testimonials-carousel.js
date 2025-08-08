@@ -1,65 +1,73 @@
-// 簡易輪播：自動播放、可左右切換、支援響應式顯示 1~3 張
+// Stripe 風格：無限水平流動跑馬燈 + 懸停暫停 + RWD
 document.addEventListener('DOMContentLoaded', () => {
-  const carousels = document.querySelectorAll('.tn-carousel');
-  carousels.forEach(initCarousel);
+  initInfiniteCarousels();
 });
 
-function initCarousel(root){
-  const track = root.querySelector('.tn-track');
-  const slides = Array.from(root.querySelectorAll('.tn-slide'));
-  const prev = root.querySelector('.tn-prev');
-  const next = root.querySelector('.tn-next');
-  const dots = root.querySelector('.tn-dots');
-  if (!track || slides.length === 0) return;
+function initInfiniteCarousels(){
+  const roots = document.querySelectorAll('.tn-infinite');
+  roots.forEach(setupInfinite);
+}
 
-  let index = 0;
-  let autoplay = root.dataset.autoplay === 'true';
-  const interval = parseInt(root.dataset.interval || '4500', 10);
-  let timer = null;
+function setupInfinite(root){
+  const viewport = root.querySelector('.tn-infinite__viewport');
+  const track = root.querySelector('.tn-infinite__track');
+  let slides = Array.from(root.querySelectorAll('.tn-infinite__slide'));
+  if (!viewport || !track || slides.length === 0) return;
 
-  // dots
-  slides.forEach((_, i) => {
-    const b = document.createElement('button');
-    if (i === 0) b.classList.add('active');
-    b.addEventListener('click', () => goTo(i));
-    dots.appendChild(b);
-  });
-
-  function visibleCount(){
-    if (window.innerWidth < 640) return 1; // mobile
-    if (window.innerWidth < 1024) return 1; // tablet 顯示更大卡片
-    return 2; // desktop 顯示兩張大卡
+  // 依視窗決定一屏顯示張數
+  function perView(){
+    if (window.innerWidth < 640) return 1;
+    if (window.innerWidth < 1024) return 1;
+    return 2;
   }
 
-  function goTo(i){
-    index = (i + slides.length) % slides.length;
-    const w = 100 / visibleCount();
-    track.style.transform = `translateX(-${index * w}%)`;
-    dots.querySelectorAll('button').forEach((d, di) => d.classList.toggle('active', di === index));
-    restart();
+  // 複製節點，確保可循環滾動
+  function populate(){
+    // 清掉舊複本
+    track.querySelectorAll('.tn-infinite__clone').forEach(n => n.remove());
+    const n = perView();
+    const need = Math.max(4, n * 4); // 至少4*n張以確保順暢
+    while (slides.length < need){
+      const copy = slides.map(s => s.cloneNode(true));
+      copy.forEach(c => { c.classList.add('tn-infinite__clone'); track.appendChild(c); });
+      slides = Array.from(track.querySelectorAll('.tn-infinite__slide'));
+    }
+    applyWidths();
   }
 
-  function nextSlide(){ goTo(index + 1); }
-  function prevSlide(){ goTo(index - 1); }
+  function applyWidths(){
+    const n = perView();
+    const w = 100 / n;
+    Array.from(track.children).forEach(el => el.style.minWidth = `${w}%`);
+  }
 
-  function start(){ if (autoplay) timer = setInterval(nextSlide, interval); }
-  function stop(){ if (timer) clearInterval(timer); timer = null; }
-  function restart(){ stop(); start(); }
+  // 使用 CSS 變換連續移動
+  let rafId = null;
+  const baseSpeed = parseFloat(root.dataset.speed || '0.5'); // px/ms 相對速度
+  let lastTs = 0;
+  let offset = 0; // 以百分比為單位偏移
 
-  next?.addEventListener('click', nextSlide);
-  prev?.addEventListener('click', prevSlide);
+  function step(ts){
+    if (!lastTs) lastTs = ts;
+    const dt = ts - lastTs; lastTs = ts;
+    const n = perView();
+    const w = 100 / n; // 單張寬度百分比
+    offset += (baseSpeed * dt) / 10; // 速度調校
+    // 無限循環：位移達一張寬度就重置
+    if (offset >= w) offset -= w;
+    track.style.transform = `translateX(-${offset}%)`;
+    rafId = requestAnimationFrame(step);
+  }
+
+  function start(){ cancelAnimationFrame(rafId); rafId = requestAnimationFrame(step); }
+  function stop(){ cancelAnimationFrame(rafId); rafId = null; }
+
+  // 互動：懸停暫停、視窗改變重算
   root.addEventListener('mouseenter', stop);
   root.addEventListener('mouseleave', start);
-  window.addEventListener('resize', () => goTo(index));
+  window.addEventListener('resize', () => { populate(); });
 
-  // 初始
-  // 將每張寬度設為 100/可視數
-  function applyWidth(){
-    const n = visibleCount();
-    slides.forEach(slide => { slide.style.minWidth = `${100 / n}%`; });
-  }
-  applyWidth();
-  goTo(0);
+  populate();
   start();
 }
 

@@ -48,7 +48,7 @@
                         <span class="download-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
                         {{ with .Params.category }}<span class="download-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>{{ end }}
                     </div>
-                    <p class="download-summary">{{ .Summary | truncate 100 }}</p>
+                    <p class="download-summary">{{ .Summary | plainify | truncate 100 }}</p>
                 </div>
             </div>
         </a>

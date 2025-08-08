@@ -58,11 +58,9 @@
   &__sidebar {
     width: 320px; // 稍微增加側邊欄寬度
     flex-shrink: 0;
-    position: sticky; // 讓整體側欄隨滾
-    top: $spacing-4; // 到達視窗頂即吸附
-    height: max-content; // 讓 sticky 正常運作，避免被父容器高度限制
+    // 預設不 sticky，避免非文章單頁造成視覺干擾
+    position: static;
     align-self: flex-start;
-    will-change: top; // 提示瀏覽器優化 sticky 計算
     
     @include tablet {
       width: 280px; // 平板版稍微增加寬度
@@ -72,6 +70,15 @@
       width: 100%; // 手機版使用全寬
       display: block; // 改為顯示而不是隱藏
     }
+  }
+
+  // 僅對需要的頁面開啟 sticky（例如：文章單頁）
+  &__sidebar--sticky {
+    position: sticky;
+    top: $spacing-4;
+    height: max-content;
+    align-self: flex-start;
+    will-change: top;
   }
   
   @include tablet {

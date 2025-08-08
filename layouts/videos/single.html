@@ -1,8 +1,8 @@
 {{ define "main" }}
 <div class="container">
   <!-- 影片頁面使用兩欄佈局 -->
-  <div class="two-column">
-    <div class="two-column__main">
+    <div class="two-column">
+      <div class="two-column__main">
       <article class="post">
         <header class="post__header">
           <h1 class="post__title">{{ .Title }}</h1>
@@ -17,6 +17,8 @@
             {{ $clean = replace $clean (printf "<p>%s</p>" .) "" }}
             {{ $clean = replace $clean . "" }}
           {{ end }}
+          {{/* 移除內容起始處與 Hero 重複的主標題（<h1>...） */}}
+          {{ $clean = replaceRE "^\\s*<h1[^>]*>.*?</h1>" $clean "" }}
           <div class="video-description-content">
             {{ $clean | safeHTML }}
           </div>

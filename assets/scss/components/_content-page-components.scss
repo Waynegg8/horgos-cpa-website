@@ -132,7 +132,9 @@
   
   .notice-card {
     max-width: 800px;
-    margin: 0 auto;
+    // 與列表區塊左側對齊：取消水平置中
+    margin: 0; // 取代 0 auto
+    margin-right: auto; // 保留必要時的右側自適應
     text-align: left;
     padding-right: $spacing-4; // 增加右側間距
     
@@ -309,6 +311,8 @@
     font-size: $font-size-base; // 全站正文字級基準
     line-height: $line-height-base;
     color: $color-text-primary;
+    // 統一內文標題字型，避免 h2/h3 與 h4/h5/h6 使用不同字體造成視覺大小不一
+    h1, h2, h3, h4, h5, h6 { font-family: $font-family-base; }
     
     h1, h2, h3, h4, h5, h6 {
       color: $color-text-primary;
