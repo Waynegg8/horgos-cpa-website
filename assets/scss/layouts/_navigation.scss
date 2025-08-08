@@ -142,9 +142,9 @@
   top: calc(100% + #{$spacing-2});
   left: 0; // 與父項左緣對齊，避免視覺偏右
   transform: translateY(10px);
-  min-width: 160px; // 更緊湊的最小寬
-  max-width: 220px; // 上限，避免過寬
-  width: max-content; // 依內容自適應
+  min-width: 140px; // 再縮窄
+  max-width: 200px; // 再降低上限
+  width: auto; // 依內容但不超上限
   background: $color-bg-secondary;
   border-radius: $border-radius-lg;
   border: 1px solid $color-border-primary;
