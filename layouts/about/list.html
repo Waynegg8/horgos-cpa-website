@@ -25,9 +25,6 @@
             </div>
         </section>
         
-        <!-- 服務宗旨區 -->
-        {{ partial "about/about-features.html" . }}
-        
         <!-- 專業認證區 -->
         {{ partial "about/professional-certifications.html" . }}
         
@@ -84,6 +81,9 @@
         </section>
     </div>
     
+    <!-- 服務宗旨區（移至 CTA 上方） -->
+    {{ partial "about/about-features.html" . }}
+
     <!-- 雙CTA行動呼籲區域 -->
     {{ partial "shared/dual-cta.html" . }}
 </div>

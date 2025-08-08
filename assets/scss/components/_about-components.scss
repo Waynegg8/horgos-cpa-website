@@ -4,7 +4,7 @@
 
 // 關於我們特色組件
 .about-features {
-  padding: $spacing-16 0;
+  padding: $spacing-12 0; // 減少上下間距
   background-color: rgba($color-bg-secondary, 0.5);
 
   .card-grid {
@@ -28,7 +28,7 @@
 
 // 專業認證組件
 .professional-certifications {
-  padding: $spacing-16 0;
+  padding: $spacing-12 0; // 減少上下間距
   background-color: rgba($color-bg-secondary, 0.5);
   
   .certification-cards {
@@ -73,14 +73,14 @@
 
 // 關於介紹區域
 .about-hero {
-  padding: $spacing-16 0 $spacing-8;
+  padding: $spacing-12 0 $spacing-6; // 減少上下間距
   .about-hero__title { font-size: $font-size-h1; font-weight: 700; margin-bottom: $spacing-3; }
   .about-hero__desc { color: $color-text-secondary; max-width: 820px; line-height: $line-height-base; }
   .about-hero__divider { height: 1px; background: $color-border-primary; margin-top: $spacing-6; }
 }
 
 .about-intro {
-  padding: $spacing-16 0;
+  padding: $spacing-12 0; // 減少上下間距
   
   &__content {
     .feature-list {
@@ -128,7 +128,7 @@
 
 // 團隊介紹區域
 .team-section {
-  padding: $spacing-16 0;
+  padding: $spacing-12 0; // 減少上下間距
   
   .team-members {
     display: flex;
