@@ -212,9 +212,7 @@
         width: 150%;
         background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%);
         transform: skewX(-20deg);
-      }
-      &:hover:before {
-        animation: shine-sweep 1.2s $ease-in-out;
+        animation: shine-sweep 2.4s $ease-in-out infinite;
       }
     }
 
@@ -237,6 +235,9 @@
     
     &__details {
       margin-bottom: $spacing-4;
+      display: flex;             // 垂直排列確保順序
+      flex-direction: column;    
+      gap: $spacing-3;
       
       h4 {
         font-size: $font-size-base;
@@ -269,6 +270,10 @@
         }
       }
     }
+
+    // 明確指定區塊順序：學歷在上、證照與職務在下
+    &__education { order: 1; }
+    &__certificates { order: 2; }
     
     &__bio {
       color: $color-text-secondary;
@@ -305,12 +310,10 @@
         width: 150%;
         background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.10) 50%, transparent 100%);
         transform: skewX(-20deg);
+        animation: shine-sweep 2.6s $ease-in-out infinite;
       }
       &:hover {
         transform: translateY(-1px);
-      }
-      &:hover:before {
-        animation: shine-sweep 1.2s $ease-in-out;
       }
     }
   }
