@@ -52,8 +52,13 @@
   padding-bottom: $spacing-3;
   border-bottom: 1px solid $color-border-primary;
 
+  // 在桌面也顯示小標題（按鈕外觀僅作為標題容器，不可點擊）
   .footer-collapse-toggle {
-    display: none; // Hidden on desktop
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    pointer-events: none; // 桌面不允許點擊切換
+    &::after { display: none; } // 桌面隱藏箭頭
   }
 }
 
@@ -185,6 +190,8 @@
 @include mobile {
   .footer-heading--collapsible .footer-collapse-toggle {
     display: flex;
+    pointer-events: auto; // 行動版可點擊
+    &::after { display: inline-block; } // 行動版顯示箭頭
   }
 
   .footer-collapse-content {
