@@ -1,0 +1,10 @@
+{{- $src := .src -}}
+{{- $site := .Site -}}
+{{- $use := $site.Params.images.use_cdn | default false -}}
+{{- $prefix := $site.Params.images.cdn_prefix | default "" -}}
+{{- if and $use (ne $prefix "") (hasPrefix $src "/uploads/") -}}
+{{- printf "%s%s" $prefix $src -}}
+{{- else -}}
+{{- $src -}}
+{{- end -}}
+

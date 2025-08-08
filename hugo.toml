@@ -41,6 +41,9 @@ googleAnalytics = "G-RKMCS9WVS5"
   # 極致效能模式：true 時關閉第三方字體與 Font Awesome 的初始載入
   performance_mode = true
   ga_id = "G-RKMCS9WVS5"
+  [Params.images]
+    use_cdn = true
+    cdn_prefix = "https://imagedelivery.net/" # 若你使用 Cloudflare Images，填入你的專屬 prefix
   
   # Footer 參數
   [Params.footer]
