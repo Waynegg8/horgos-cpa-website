@@ -29,6 +29,9 @@
     <!-- FAQ列表 -->
     <div class="faq-list__grid">
         {{ $paginator := .Paginate (where .Pages "Type" "faq") 10 }}
+        {{ if not (gt (len $paginator.Pages) 0) }}
+        <div class="empty-state">目前沒有符合條件的問題。</div>
+        {{ end }}
         {{ range $paginator.Pages }}
         <a href="{{ .RelPermalink }}" class="card-style card-clickable faq-item" 
            data-category="{{ .Params.category | default "other" }}" 

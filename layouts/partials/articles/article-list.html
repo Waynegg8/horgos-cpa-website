@@ -62,6 +62,9 @@
     <div class="article-list__grid">
         {{ $rest := after 1 $sorted }}
         {{ $paginator := .Paginate $rest 10 }}
+        {{ if not (gt (len $paginator.Pages) 0) }}
+        <div class="empty-state">目前沒有符合條件的文章。</div>
+        {{ end }}
         {{ range $paginator.Pages }}
         <a href="{{ .RelPermalink }}" class="card-style card-clickable article-item" 
            data-category="{{ .Params.category | default "other" }}" 

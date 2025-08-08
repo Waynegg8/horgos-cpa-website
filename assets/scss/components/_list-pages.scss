@@ -223,6 +223,15 @@
   }
 }
 
+// 空狀態樣式
+.empty-state {
+  text-align: center;
+  color: $color-text-secondary;
+  padding: $spacing-12 0;
+  border: 1px dashed $color-border-primary;
+  border-radius: $border-radius-lg;
+}
+
 // 11. 精選區塊樣式（文章/影片可共用結構）
 .featured-article {
   display: grid;
