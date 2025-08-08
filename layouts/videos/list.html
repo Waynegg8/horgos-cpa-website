@@ -2,8 +2,6 @@
 <div class="container">
   <div class="two-column">
     <div class="two-column__main">
-      <!-- 搜索框 -->
-      {{ partial "search/list-search.html" . }}
       
       <!-- 頁面標題和內容 -->
       <header class="page-header">
@@ -28,9 +26,6 @@
           {{ end }}
         </div>
       </div>
-      
-      <!-- 搜尋結果容器 -->
-      <div id="search-results" class="search-results" style="display: none;"></div>
       
       <!-- 影片列表 -->
       <div class="videos-list" id="videos-list">
@@ -109,50 +104,5 @@
   {{ partial "shared/dual-cta.html" . }}
   </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const searchInput = document.getElementById('search-input');
-  const searchResults = document.getElementById('search-results');
-  const videosList = document.getElementById('videos-list');
-  
-  if (searchInput && searchResults && videosList) {
-    // 簡化版前端搜尋功能
-    searchInput.addEventListener('input', function() {
-      const query = this.value.toLowerCase();
-      
-      if (query.length < 2) {
-        searchResults.style.display = 'none';
-        videosList.style.display = 'block';
-        return;
-      }
-      
-      // 前端篩選
-      const videos = document.querySelectorAll('.video-card');
-      let results = [];
-      
-      videos.forEach(video => {
-        const title = video.querySelector('.video-title').textContent.toLowerCase();
-        const description = video.querySelector('.video-description').textContent.toLowerCase();
-        
-        if (title.includes(query) || description.includes(query)) {
-          results.push(video.cloneNode(true));
-        }
-      });
-      
-      if (results.length > 0) {
-        searchResults.innerHTML = '';
-        results.forEach(result => {
-          searchResults.appendChild(result);
-        });
-        searchResults.style.display = 'block';
-        videosList.style.display = 'none';
-      } else {
-        searchResults.innerHTML = '<div class="no-results card-style">沒有找到相關影片</div>';
-        searchResults.style.display = 'block';
-        videosList.style.display = 'none';
-      }
-    });
-  }
-});
-</script>
+<script></script>
 {{ end }}
