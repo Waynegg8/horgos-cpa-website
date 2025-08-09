@@ -19,9 +19,15 @@
     transition-delay: 0s;
   }
 
-  // 當 Cookie bar 顯示時，抬高浮動按鈕位置避免被覆蓋
-  body.cookie-visible .floating-buttons {
-    bottom: $spacing-12; // 比原本多一層高度
+  // 接受按鈕：提高可見度
+  #cookie-accept {
+    @extend .btn;
+    background-color: $color-accent-highlight;
+    color: #0a0a0a;
+    border: 1px solid transparent;
+    &:hover {
+      background-color: lighten($color-accent-highlight, 5%);
+    }
   }
   
   &__content {

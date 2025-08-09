@@ -32,6 +32,11 @@
 @import "components/back-to-top";
 @import "components/animations";
 @import "components/cookie-consent";
+
+// 當 Cookie bar 顯示時，抬高浮動按鈕位置避免被覆蓋（全域層級）
+body.cookie-visible .floating-buttons {
+  bottom: $spacing-16; // 64px
+}
 @import "components/dual-cta";
 @import "components/service-components";
 @import "components/readability-enhancements";

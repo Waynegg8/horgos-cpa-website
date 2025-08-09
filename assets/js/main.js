@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 捲動揭示效果（Stripe 風格微互動）
     initReveal();
+    // 初始調整浮動按鈕（避免首次載入就被覆蓋）
+    updateFloatingButtonsOffset();
+    window.addEventListener('resize', updateFloatingButtonsOffset, { passive: true });
 });
 
 /**
@@ -224,10 +227,13 @@ function initCookieConsent() {
         setTimeout(function() {
             cookieConsent.classList.add('show');
             document.body.classList.add('cookie-visible');
+            // 顯示後以實際高度動態上移浮動按鈕，避免遮擋
+            updateFloatingButtonsOffset();
         }, 1000);
     }
     else {
         document.body.classList.remove('cookie-visible');
+        updateFloatingButtonsOffset();
     }
     
     // 接受Cookie
@@ -235,7 +241,26 @@ function initCookieConsent() {
         localStorage.setItem('cookieConsent', 'true');
         cookieConsent.classList.remove('show');
         document.body.classList.remove('cookie-visible');
+        updateFloatingButtonsOffset();
     });
+}
+
+/**
+ * 根據 Cookie bar 實際高度，動態上移右下角浮動按鈕，避免遮擋
+ */
+function updateFloatingButtonsOffset() {
+    const floating = document.querySelector('.floating-buttons');
+    const cookieBar = document.getElementById('cookie-consent');
+    if (!floating || !cookieBar) return;
+
+    const isVisible = cookieBar.classList.contains('show') && getComputedStyle(cookieBar).visibility !== 'hidden';
+    if (isVisible) {
+        const barHeight = cookieBar.offsetHeight || 64; // 後備值
+        const offset = 16; // 額外間距
+        floating.style.bottom = `${barHeight + offset}px`;
+    } else {
+        floating.style.bottom = '';
+    }
 }
 
 /**
