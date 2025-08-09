@@ -15,11 +15,13 @@ class ImageOptimization {
    */
   init() {
     if (this.initialized) return;
-    
-    this.setupIntersectionObserver();
-    this.setupLazyLoading();
-    this.setupProgressiveLoading();
-    this.initialized = true;
+    // 首屏階段不註冊任何觀察，延後到頁面穩定再進行，避免關鍵路徑依附樹延長
+    window.addEventListener('load', () => {
+      this.setupIntersectionObserver();
+      this.setupLazyLoading();
+      this.setupProgressiveLoading();
+      this.initialized = true;
+    }, { once: true });
   }
 
   /**

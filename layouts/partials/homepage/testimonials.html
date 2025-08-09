@@ -28,8 +28,8 @@
               <img class="testimonial__avatar" src="{{ .avatar | default "/uploads/images/general/general-default.jpg" }}" alt="{{ .name }}" loading="lazy" decoding="async" width="128" height="128" />
             </div>
             <figcaption class="testimonial__content">
-              <div class="testimonial__stars" aria-label="五星好評">
-                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <div class="testimonial__stars" aria-hidden="true">
+                <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
               </div>
               <blockquote class="testimonial__quote">{{ .quote }}</blockquote>
               <div class="testimonial__author">{{ .name }}</div>

@@ -7,18 +7,23 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  const scrollThreshold = 10; // Only add class after scrolling 10px
+  const scrollThreshold = 10;
+  let ticking = false;
+
+  const update = () => {
+    const y = window.scrollY || window.pageYOffset;
+    if (y > scrollThreshold) header.classList.add('is-scrolled');
+    else header.classList.remove('is-scrolled');
+    ticking = false;
+  };
 
   const handleScroll = () => {
-    if (window.scrollY > scrollThreshold) {
-      header.classList.add('is-scrolled');
-    } else {
-      header.classList.remove('is-scrolled');
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
     }
   };
 
   window.addEventListener('scroll', handleScroll, { passive: true });
-  
-  // Initial check in case the page is reloaded with the scroll position past the threshold
-  handleScroll();
+  update();
 });

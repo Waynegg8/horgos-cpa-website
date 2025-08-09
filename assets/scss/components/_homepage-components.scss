@@ -385,6 +385,8 @@
   @extend .btn;
   background-color: #00A83A; // 更深的Line綠，提升對比
   color: #ffffff;
+  font-weight: 700; // 加粗提高對比可視性
+  text-shadow: 0 1px 0 rgba(0,0,0,0.35); // 細微陰影，提升亮底下白字辨識
   padding: $spacing-4 $spacing-8;
   font-size: $font-size-lg;
   border-radius: $border-radius-lg;
