@@ -26,12 +26,12 @@
     
     a {
       color: $color-accent-highlight;
-      text-decoration: none;
+      text-decoration: underline; // 連結必須依賴顏色區別：加底線
+      text-underline-offset: 2px;
       transition: color $transition-base ease;
       
       &:hover {
         color: lighten($color-accent-highlight, 10%);
-        text-decoration: underline;
       }
     }
     

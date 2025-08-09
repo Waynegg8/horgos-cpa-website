@@ -84,7 +84,8 @@
     
     <!-- Custom CSS -->
     {{ range .Site.Params.customCSS }}
-    <link rel="stylesheet" href="{{ . | relURL }}">
+    <link rel="stylesheet" href="{{ . | relURL }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ . | relURL }}"></noscript>
     {{ end }}
     
     <!-- Google Analytics 延後載入（依 Cookie 同意）由 analytics.js 控制 -->

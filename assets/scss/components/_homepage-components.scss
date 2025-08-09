@@ -27,7 +27,8 @@
   &__title { font-size: $font-size-h1; margin: 0 0 $spacing-4; }
   &__subtitle { color: $color-text-secondary; margin-bottom: $spacing-6; max-width: 56ch; }
   &__actions { display: flex; gap: $spacing-3; }
-  &__media img { width: 100%; height: auto; border-radius: $border-radius-lg; box-shadow: $shadow-lg; }
+  &__media { aspect-ratio: 3 / 2; }
+  &__media img { width: 100%; height: 100%; object-fit: cover; border-radius: $border-radius-lg; box-shadow: $shadow-lg; }
 
   @include mobile { &__container { grid-template-columns: 1fr; gap: $spacing-6; } &__title { font-size: $font-size-h2; } }
 }
@@ -37,7 +38,8 @@
   padding: $spacing-12 0;
   display: grid; gap: $spacing-10;
   &__row { display: grid; grid-template-columns: 1fr 1fr; gap: $spacing-8; align-items: center; }
-  &__media img { width: 100%; border-radius: $border-radius-lg; box-shadow: $shadow-md; }
+  &__media { aspect-ratio: 16 / 9; }
+  &__media img { width: 100%; height: 100%; object-fit: cover; border-radius: $border-radius-lg; box-shadow: $shadow-md; }
   &__title { margin: 0 0 $spacing-3; }
   &__text { color: $color-text-secondary; }
   @include mobile { &__row { grid-template-columns: 1fr; } }
@@ -381,7 +383,7 @@
 
 .btn-cta-secondary {
   @extend .btn;
-  background-color: $color-line;
+  background-color: #00A83A; // 更深的Line綠，提升對比
   color: #ffffff;
   padding: $spacing-4 $spacing-8;
   font-size: $font-size-lg;
@@ -389,8 +391,8 @@
   animation: pulseSoft 1.6s infinite ease-in-out; // CTA 使用較柔和呼吸
   
   &:hover:not(:disabled) {
-    background-color: darken($color-line, 10%);
+    background-color: darken(#00A83A, 10%);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba($color-line, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 168, 58, 0.3);
   }
 }
