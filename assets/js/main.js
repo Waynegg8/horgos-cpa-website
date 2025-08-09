@@ -223,13 +223,18 @@ function initCookieConsent() {
         // 顯示Cookie同意條款
         setTimeout(function() {
             cookieConsent.classList.add('show');
+            document.body.classList.add('cookie-visible');
         }, 1000);
+    }
+    else {
+        document.body.classList.remove('cookie-visible');
     }
     
     // 接受Cookie
     acceptBtn.addEventListener('click', function() {
         localStorage.setItem('cookieConsent', 'true');
         cookieConsent.classList.remove('show');
+        document.body.classList.remove('cookie-visible');
     });
 }
 
