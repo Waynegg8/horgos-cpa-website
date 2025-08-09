@@ -201,18 +201,20 @@
     box-shadow: none !important;
   }
 
+  // 以 CSS 變數控制個別圖示縮放，讓 Threads 可微放大
   img {
     width: 100%;
     height: 100%;
     display: block;
     object-fit: contain;
+    transform: scale(var(--icon-scale, 1));
     transition: transform $transition-base;
   }
 
   i { display: none; }
 
   &:hover img {
-    transform: translateY(-2px) scale(1.06);
+    transform: translateY(-2px) scale(calc(var(--icon-scale, 1) * 1.06));
   }
 
   @include mobile {
@@ -221,6 +223,9 @@
     img { width: 100%; height: 100%; }
   }
 }
+
+// Threads 視覺略小，微幅放大
+.social-button.threads { --icon-scale: 1.15; }
 
 // 移除過去的呼吸動效與描邊，保持純淨的圖檔外觀
 

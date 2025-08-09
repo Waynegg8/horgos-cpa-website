@@ -177,8 +177,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: auto;
-    height: auto;
+    width: 48px; // 與右下按鈕一致
+    height: 48px;
     border-radius: 0;
     background: none;
     box-shadow: none;
@@ -193,17 +193,22 @@
       box-shadow: none !important;
     }
 
+    // 以 CSS 變數控制個別圖示縮放，讓 Threads 微放大
     img {
-      width: 28px;
-      height: 28px;
+      width: 100%;
+      height: 100%;
       display: block;
       object-fit: contain;
       transition: transform $transition-base;
+      transform: scale(var(--icon-scale, 1));
     }
 
-    &:hover img { transform: scale(1.04); }
+    &:hover img { transform: scale(calc(var(--icon-scale, 1) * 1.04)); }
   }
 }
+
+// Footer 內 Threads 視覺略小，微幅放大
+.site-footer__social .social-link.threads { --icon-scale: 1.15; }
 
 // Bottom Bar (Region 5)
 .site-footer__bottom {
