@@ -15,7 +15,7 @@ function initBackToTop() {
     const backToTopButton = document.getElementById('back-to-top');
     if (!backToTopButton) return;
 
-    // 初始隱藏按鈕
+    // 初始隱藏按鈕（避免載入瞬間閃爍）
     backToTopButton.style.display = 'none';
 
     // 監聽滾動事件：顯示/隱藏
@@ -28,20 +28,14 @@ function initBackToTop() {
 
     // 點擊事件 - 回到頂端
     backToTopButton.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'auto' });
     });
 
     // 鍵盤無障礙支援
     backToTopButton.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'auto' });
         }
     });
 }

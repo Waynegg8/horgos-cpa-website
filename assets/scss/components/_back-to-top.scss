@@ -81,20 +81,18 @@
  
   // 預設僅顯示第一顆；滑鼠經過或聚焦時展開。行動裝置上改為常駐顯示。
   &__menu {
-    position: absolute;
-    bottom: 100%;
-    right: 0;
-    margin-bottom: $spacing-2;
+    position: static; // 讓內容佔位，避免高度為 0 導致看不到
     display: flex;
     flex-direction: column;
     align-items: center; // 每顆都以中心對齊
     gap: $spacing-2;
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: none;
     transition: opacity $transition-base $ease-out,
                 transform $transition-base $ease-out;
     padding-right: 0;
+    margin-bottom: $spacing-2;
   }
 
   // 預設僅顯示第一顆按鈕（作為觸發區）
