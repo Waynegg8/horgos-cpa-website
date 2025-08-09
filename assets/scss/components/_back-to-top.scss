@@ -78,9 +78,8 @@
   display: flex;
   flex-direction: column;
   align-items: center; // 以中心線對齊，避免看起來歪
-  
-  // 改為常駐顯示，不需 hover
-  
+ 
+  // 預設收合；滑鼠經過或聚焦時展開。行動裝置上改為常駐顯示。
   &__menu {
     position: absolute;
     bottom: 100%;
@@ -90,11 +89,30 @@
     flex-direction: column;
     align-items: center; // 每顆都以中心對齊
     gap: $spacing-2;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px) scale(0.98);
+    transition: opacity $transition-base $ease-out,
+                transform $transition-base $ease-out,
+                visibility 0s linear $transition-base;
+    padding-right: 0;
+  }
+
+  &:hover .social-buttons__menu,
+  &:focus-within .social-buttons__menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
-    transition: none;
-    padding-right: 0;
+    transform: translateY(0) scale(1);
+    transition-delay: 0s, 0s, 0s;
+  }
+
+  @include mobile {
+    &__menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: none;
+    }
   }
 }
 
@@ -148,33 +166,52 @@
 }
 
 .social-button {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  line-height: 0; text-decoration: none; font-size: 1rem;
-  transition: transform $transition-base ease, box-shadow $transition-base ease;
-  position: relative; border: none;
-  background: #111; /* 預設深底 */
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: auto;
+  height: auto;
+  line-height: 0;
+  text-decoration: none;
+  font-size: 1rem;
+  position: relative;
+  border: none;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition: none;
 
-  &.line { background-color: #00C300; }
-  &.threads { background-color: #000000; }
-  &.instagram { background: radial-gradient(circle at 30% 110%, #ffdb8b, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc); }
-  &.email { background-color: #111827; }
+  // 僅顯示圖檔，不加底色
+  &.line,
+  &.threads,
+  &.instagram,
+  &.email {
+    background: none !important;
+    box-shadow: none !important;
+  }
 
-  img { width: 22px; height: 22px; display: block; object-fit: contain; }
+  img {
+    width: 28px;
+    height: 28px;
+    display: block;
+    object-fit: contain;
+    transition: transform $transition-base;
+  }
+
   i { display: none; }
-  &:hover { transform: translateY(-2px) scale(1.06); box-shadow: 0 10px 22px rgba(0,0,0,0.3); }
-  @include mobile { width: 44px; height: 44px; }
+
+  &:hover img {
+    transform: translateY(-2px) scale(1.06);
+  }
+
+  @include mobile {
+    img { width: 26px; height: 26px; }
+  }
 }
 
-// 移除個別圖示的位移微調，統一由 flex 完整置中
-// 展開後套用更輕微的呼吸效果以減少視覺漂移
-.social-buttons:hover .social-buttons__menu .social-button { animation: pulseSoft 2.2s infinite ease-in-out; }
+// 移除過去的呼吸動效與描邊，保持純淨的圖檔外觀
 
-/* 保障對比度：深色背景時 Threads 圖示自動加外描邊 */
-.social-button.threads i { filter: drop-shadow(0 0 2px rgba(255,255,255,0.75)); }
 
 /* 移除先前的位移微調，改用絕對置中確保精準居中 */
 

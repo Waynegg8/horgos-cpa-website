@@ -18,18 +18,12 @@ function initBackToTop() {
     // 初始隱藏按鈕
     backToTopButton.style.display = 'none';
 
-    // 監聽滾動事件：顯示/隱藏 & 自動收合社群列
-    const socialMenu = document.querySelector('.social-buttons__menu');
+    // 監聽滾動事件：顯示/隱藏
     window.addEventListener('scroll', function() {
         const y = window.pageYOffset || document.documentElement.scrollTop;
         const show = y > 300;
         backToTopButton.style.display = show ? 'flex' : 'none';
         backToTopButton.classList.toggle('visible', show);
-        if (socialMenu) {
-            // 超過 300px 僅顯示第一顆（靠右對齊），其餘自動收合
-            socialMenu.style.opacity = show ? '1' : '0';
-            socialMenu.style.visibility = show ? 'visible' : 'hidden';
-        }
     }, { passive: true });
 
     // 點擊事件 - 回到頂端
@@ -56,12 +50,8 @@ function initBackToTop() {
  * 初始化社群媒體按鈕
  */
 function initSocialButtons() {
-    const socialMenu = document.querySelector('.social-buttons__menu');
-    if (!socialMenu) return;
-    // 改為常駐顯示，不再使用切換按鈕，避免誤觸造成位置漂移
-    socialMenu.style.opacity = '1';
-    socialMenu.style.visibility = 'visible';
-    socialMenu.style.transform = 'translateY(0)';
+    // 由 CSS 控制展開/收合（hover/focus-within）；行動裝置預設常駐顯示
+    // 此處保留函式以維持匯入結構
 }
 
 /**
