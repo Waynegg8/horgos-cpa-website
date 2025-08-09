@@ -1,5 +1,13 @@
 // 觀察首頁統計卡片，進場時加入 inview 以觸發動畫
 (() => {
+  // 等到頁面 load 後再初始化，避免關鍵路徑阻塞
+  if (document.readyState !== 'complete') {
+    window.addEventListener('load', init, { once: true });
+  } else {
+    init();
+  }
+
+  function init() {
   if (!('IntersectionObserver' in window)) {
     document.querySelectorAll('.stat').forEach(el => el.classList.add('inview'));
     return;
@@ -65,5 +73,6 @@
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
 
   document.querySelectorAll('.stat').forEach(el => observer.observe(el));
+  }
 })();
 
