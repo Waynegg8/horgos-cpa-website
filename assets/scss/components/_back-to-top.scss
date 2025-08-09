@@ -3,7 +3,7 @@
 .floating-buttons {
   position: fixed;
   bottom: $spacing-6;
-  right: $spacing-6;
+  right: $spacing-10; // 左移，留出社群鈕位於其上方
   z-index: z('floating');
   display: flex;
   flex-direction: column;
@@ -82,11 +82,10 @@
   // 預設僅顯示第一顆；滑鼠經過或聚焦時展開。行動裝置上改為常駐顯示。
   &__menu {
     position: absolute;
-    bottom: 100%;
-    right: 0;
-    margin-bottom: $spacing-2;
+    bottom: calc(100% + #{$spacing-2}); // 貼齊回到頂端的上方
+    right: -$spacing-2; // 與回到頂端中心線對齊
     display: flex;
-    flex-direction: column-reverse; // 讓靠近右下角的那顆先顯示，其餘向上展開
+    flex-direction: column-reverse; // 初始顯示位於最底的 LINE，其他往上展開
     align-items: center; // 每顆都以中心對齊
     gap: $spacing-2;
     opacity: 1;
@@ -100,11 +99,11 @@
   // 預設僅顯示第一顆按鈕（作為觸發區）
   &__menu .social-button {
     opacity: 0;
-    transform: translateY(6px) scale(0.96);
+    transform: translateY(-6px) scale(0.96); // 向上展開動畫
     pointer-events: none;
     transition: opacity $transition-base $ease-out, transform $transition-base $ease-out;
   }
-  // 以 LINE 作為第一顆（靠近右下角），其餘向上展開
+  // 以 LINE 作為第一顆（靠近回到頂端），其餘向上展開
   &__menu .social-button:last-child {
     opacity: 1;
     transform: translateY(0) scale(1);

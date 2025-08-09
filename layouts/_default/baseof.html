@@ -145,11 +145,6 @@
         <!-- 社群媒體按鈕組 -->
         <div class="social-buttons">
             <div class="social-buttons__menu">
-                {{ with .Site.Params.widgets.social.line }}
-                <a href="https://line.me/R/ti/p/{{ . }}" class="social-button line" target="_blank" rel="noopener" aria-label="LINE">
-                    <img src="/uploads/icons/social/line.svg" width="22" height="22" alt="LINE" />
-                </a>
-                {{ end }}
                 {{ with .Site.Params.widgets.social.threads }}
                 <a href="https://www.threads.net/@{{ . }}" class="social-button threads" target="_blank" rel="noopener" aria-label="Threads">
                     <img src="/uploads/icons/social/threads.svg" width="22" height="22" alt="Threads" />
@@ -163,6 +158,11 @@
                 {{ with .Site.Params.widgets.social.email }}
                 <a href="mailto:{{ . }}" class="social-button email" aria-label="Email">
                     <img src="/uploads/icons/social/email.svg" width="22" height="22" alt="Email" />
+                </a>
+                {{ end }}
+                {{ with .Site.Params.widgets.social.line }}
+                <a href="https://line.me/R/ti/p/{{ . }}" class="social-button line" target="_blank" rel="noopener" aria-label="LINE">
+                    <img src="/uploads/icons/social/line.svg" width="22" height="22" alt="LINE" />
                 </a>
                 {{ end }}
             </div>
