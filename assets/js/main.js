@@ -2,17 +2,10 @@
  * 主要JavaScript文件
  */
 
-// 導入載入狀態系統
-import loadingSystem from './components/loading.js';
-// 導入鍵盤導航功能
-import keyboardNavigation from './components/keyboard-nav.js';
+// 元件腳本已在模板中以獨立指令碼載入（避免瀏覽器再向 /assets/js/components/* 請求造成 404）
 
 document.addEventListener('DOMContentLoaded', function() {
-    // 初始化載入狀態系統
-    loadingSystem.init();
-    
-    // 初始化鍵盤導航功能
-    keyboardNavigation.init();
+    // 組件初始化已由各自檔案內的 DOMContentLoaded 事件處理
     
     // 初始化導航選單
     initNavigation();

@@ -37,7 +37,7 @@
         {{ with .Params.thumbnail }}
           <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async" />
         {{ else }}
-          <img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy" decoding="async" />
+<img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy" decoding="async" width="640" height="360" />
         {{ end }}
       </div>
       <div class="video-fallback__note">本頁目前以圖文說明呈現，影片將於近期上線。</div>

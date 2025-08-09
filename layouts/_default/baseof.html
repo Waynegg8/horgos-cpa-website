@@ -48,7 +48,7 @@
 
     <!-- Preload LCP image on homepage -->
     {{ if .IsHome }}
-    <link rel="preload" as="image" href="/uploads/images/general/hero-office.webp" imagesrcset="/uploads/images/general/hero-office.webp 1200w" fetchpriority="high">
+    <link rel="preload" as="image" href="/uploads/images/general/general-accounting-desk.avif" fetchpriority="high">
     {{ end }}
     
     {{ if not $perf }}
@@ -199,6 +199,10 @@
     {{ $mobileNavScript := resources.Get "js/components/mobileNav.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $mobileNavScript.RelPermalink }}" defer></script>
 
+    <!-- 鍵盤導航（無障礙） -->
+    {{ $keyboardNav := resources.Get "js/components/keyboard-nav.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $keyboardNav.RelPermalink }}" defer></script>
+
     <!-- 頁腳摺疊 -->
     {{ $footerCollapseScript := resources.Get "js/components/footerCollapse.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $footerCollapseScript.RelPermalink }}" defer></script>
@@ -208,6 +212,8 @@
     <script type="module" src="{{ $businessStatus.RelPermalink }}" defer></script>
     {{ $analytics := resources.Get "js/components/analytics.js" | resources.Minify | resources.Fingerprint }}
     <script type="module" src="{{ $analytics.RelPermalink }}" defer></script>
+    {{ $imageOptimization := resources.Get "js/components/image-optimization.js" | resources.Minify | resources.Fingerprint }}
+    <script type="module" src="{{ $imageOptimization.RelPermalink }}" defer></script>
     
     <!-- Hero 輪播功能 & 首頁進場動畫 (僅首頁) -->
     {{ if .IsHome }}

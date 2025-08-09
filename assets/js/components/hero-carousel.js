@@ -67,6 +67,15 @@ class HeroCarousel {
         this.handleUserInteraction();
         this.showSlide(index);
       });
+      // 鍵盤啟用
+      indicator.setAttribute('tabindex', '0');
+      indicator.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.handleUserInteraction();
+          this.showSlide(index);
+        }
+      });
     });
 
     // 滑鼠懸停
@@ -170,7 +179,7 @@ class HeroCarousel {
    */
   updateIndicatorsAria() {
     this.indicators.forEach((indicator, index) => {
-      indicator.setAttribute('aria-selected', index === this.currentSlide ? 'true' : 'false');
+      indicator.setAttribute('aria-pressed', index === this.currentSlide ? 'true' : 'false');
     });
   }
 
