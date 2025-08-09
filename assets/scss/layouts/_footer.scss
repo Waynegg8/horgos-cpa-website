@@ -177,20 +177,30 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem; // 保留點擊熱區
-    height: 2.5rem;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-    transition: transform $transition-base;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    transition: none;
 
-    &.line { background-color: #00C300; }
-    &.threads { background-color: #000000; }
-    &.instagram { background: radial-gradient(circle at 30% 110%, #ffdb8b, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc); }
+    // 僅顯示圖檔，不加底色
+    &.line,
+    &.threads,
+    &.instagram {
+      background: none !important;
+      box-shadow: none !important;
+    }
 
-    img { width: 22px; height: 22px; display: block; object-fit: contain; }
+    img {
+      width: 28px;
+      height: 28px;
+      display: block;
+      object-fit: contain;
+      transition: transform $transition-base;
+    }
 
-    &:hover { transform: translateY(-2px) scale(1.04); }
+    &:hover img { transform: scale(1.04); }
   }
 }
 
