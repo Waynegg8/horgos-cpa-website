@@ -8,11 +8,13 @@
   padding: $spacing-4;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   // 確保在浮動按鈕之上顯示
-  z-index: z('floating') + 1;
+  // 直接高於所有浮動層，避免被覆蓋
+  z-index: z('modal');
   transform: translateY(0); // 預設佔位避免 CLS，再以 visibility 控制顯示
   visibility: hidden;
   transition: visibility 0s linear .3s, transform $transition-base $ease-out;
   padding-right: $spacing-4; // 增加右側間距
+  border-top: 1px solid $color-border-primary;
   
   &.show {
     visibility: visible;
@@ -41,7 +43,7 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: center; // 置中
+    justify-content: space-between; // 左文右鈕，避免窄螢幕折到看不到
     flex-wrap: wrap;
     gap: $spacing-4;
     padding-right: $spacing-2; // 增加右側間距
@@ -67,6 +69,7 @@
     @include mobile {
       flex-direction: column;
       align-items: center; // 手機置中
+      text-align: center;
       gap: $spacing-3;
     }
   }
