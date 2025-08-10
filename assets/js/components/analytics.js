@@ -32,5 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Load after first user interaction or 2s timeout
   ['pointerdown','keydown','scroll'].forEach(evt => document.addEventListener(evt, loadGA, { once: true, passive: true }));
   setTimeout(loadGA, 2000);
+
+  // 立即響應 Cookie 同意事件（不需等待互動/timeout）
+  window.addEventListener('cookie-consent-accepted', loadGA, { once: true });
 });
 

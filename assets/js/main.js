@@ -274,6 +274,8 @@ function initCookieConsent() {
     } else {
         document.body.classList.remove('cookie-visible');
         updateFloatingButtonsOffset();
+        // 若一開始就已同意，對外發出事件（供 analytics 等模組接續處理）
+        try { window.dispatchEvent(new CustomEvent('cookie-consent-accepted', { detail: { source: 'pre-accepted' } })); } catch (_) {}
     }
     
     // 接受Cookie
@@ -286,6 +288,8 @@ function initCookieConsent() {
         cookieConsent.classList.remove('show');
         document.body.classList.remove('cookie-visible');
         updateFloatingButtonsOffset();
+        // 對外廣播已同意事件，供其他模組（如 analytics）即時響應
+        try { window.dispatchEvent(new CustomEvent('cookie-consent-accepted', { detail: { source: 'user' } })); } catch (_) {}
     });
 }
 

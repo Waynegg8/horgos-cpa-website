@@ -14,9 +14,9 @@
 
 <div class="container container--content">
     {{ if eq .Section "articles" }}
-    <!-- 文章頁面使用全寬佈局（僅保留 TOC，無側邊欄） -->
-    <div class="full-width">
-        <div class="full-width__content">
+    <!-- 文章頁面使用兩欄佈局（右側僅顯示 TOC） -->
+    <div class="two-column">
+        <div class="two-column__main">
             <article class="single-content">
                 <!-- 文章標頭資訊區 -->
                 <div class="article-header">
@@ -48,9 +48,6 @@
                     </div>
                 </div>
                 
-                <!-- 文章目錄（僅文章保留） -->
-                {{ partial "sidebar/table-of-contents.html" . }}
-
                 <!-- 文章內容區域 -->
                 <div class="article-content">
                     {{ .Content }}
@@ -123,6 +120,10 @@
                     {{ .Content }}
                 </div>
             </article>
+        </div>
+        <!-- 右側僅保留 TOC -->
+        <div class="two-column__sidebar">
+            {{ partial "sidebar/table-of-contents.html" . }}
         </div>
     </div>
     {{ else if eq .Section "downloads" }}
