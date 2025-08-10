@@ -77,17 +77,17 @@
   // 需要明確 sticky 的情境（例如：文章單頁）
   &__sidebar--sticky {
     position: sticky;
-    top: calc(56px + $spacing-2); // 與導覽列高度對齊，避免遮住內容
+    top: 72px; // 與固定導覽列高度對齊
     height: max-content;
     align-self: flex-start;
     will-change: top;
   }
 
-  // 明確規則：列表頁側欄不可 sticky，必須隨頁面自然滾動
-  body.articles &__sidebar,
-  body.videos &__sidebar,
-  body.faq &__sidebar,
-  body.downloads &__sidebar { position: static; top: auto; height: auto; }
+  // 明確規則：列表頁側欄不可 sticky，必須隨頁面自然滾動（僅 section 列表頁禁用）
+  body.articles[data-kind="section"] &__sidebar,
+  body.videos[data-kind="section"] &__sidebar,
+  body.faq[data-kind="section"] &__sidebar,
+  body.downloads[data-kind="section"] &__sidebar { position: static; top: auto; height: auto; }
   
   @include tablet {
     gap: $spacing-5; // 平板版減少間距

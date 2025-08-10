@@ -86,3 +86,9 @@
   
   // 取消固定定位版本，避免與側邊欄錯位
 }
+
+// 當外層側欄已 sticky，內層 TOC 改為靜態，避免巢狀 sticky 互相影響
+.two-column__sidebar--sticky .toc-container {
+  position: static;
+  top: auto;
+}

@@ -111,7 +111,7 @@
             {{ end }}
         </div>
         <!-- 文章側邊欄（含 TOC／系列與標籤雲） -->
-        <div class="two-column__sidebar">
+        <div class="two-column__sidebar two-column__sidebar--sticky">
             {{/* 單一文章頁側邊欄僅顯示目錄（置頂 sticky） */}}
             {{ partial "sidebar/table-of-contents.html" . }}
         </div>
@@ -127,7 +127,7 @@
             </article>
         </div>
         <!-- 右側僅保留 TOC -->
-        <div class="two-column__sidebar">
+        <div class="two-column__sidebar two-column__sidebar--sticky">
             {{ partial "sidebar/table-of-contents.html" . }}
         </div>
     </div>

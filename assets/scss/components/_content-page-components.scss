@@ -188,7 +188,9 @@
 }
 
 // Sticky：讓單一文章頁 TOC 能正常吸附
-.two-column__sidebar, .two-column__sidebar--sticky { position: static; top: auto; }
+// 交由修飾類 two-column__sidebar--sticky 控制吸附
+.two-column__sidebar { position: static; top: auto; }
+.two-column__sidebar--sticky { position: sticky; top: 72px; height: max-content; align-self: flex-start; }
 // 文章單頁明確取消任何 contain，避免干擾 position: sticky
 body.articles[data-kind="page"] .two-column__sidebar { contain: none; }
 
