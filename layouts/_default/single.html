@@ -110,6 +110,10 @@
             </section>
             {{ end }}
         </div>
+        <!-- 文章側邊欄（含 TOC／系列與標籤雲） -->
+        <div class="two-column__sidebar">
+            {{ partial "sidebar/articles-sidebar.html" . }}
+        </div>
     </div>
     {{ else if eq .Section "faq" }}
     <!-- FAQ 單一頁使用全寬佈局（移除側邊欄與留言） -->

@@ -379,7 +379,9 @@
 
 // 系列導航（改為明確按鈕樣式）
 
-.series-navigation {
+// 導航模組：系列導航與一般推薦共用結構
+.series-navigation,
+.article-navigation {
   @extend .card-style;
   margin: $spacing-8 0;
 
@@ -408,18 +410,9 @@
     margin-top: -$spacing-1;
   }
 
-  &__btn {
-    i { margin: 0; }
-  }
+  &__btn { i { margin: 0; } }
 
-  &__all {
-    text-align: center;
-  }
-}
-
-// 一般文章推薦導航（外觀與 .series-navigation 對齊）
-.article-navigation {
-  @extend .series-navigation;
+  &__all { text-align: center; }
 }
 // 相關文章
 .article-related {
