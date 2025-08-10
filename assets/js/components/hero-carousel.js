@@ -25,6 +25,12 @@ class HeroCarousel {
     this.carousel = document.querySelector('.hero-carousel');
     if (!this.carousel) return;
 
+    // 允許由 data-delay 自訂自動切換間隔（毫秒），例如 data-delay="2500"
+    const delayAttr = parseInt(this.carousel.dataset.delay, 10);
+    if (!Number.isNaN(delayAttr) && delayAttr > 0) {
+      this.autoPlayDelay = delayAttr;
+    }
+
     this.slides = this.carousel.querySelectorAll('.hero-carousel__slide');
     this.indicators = this.carousel.querySelectorAll('.hero-carousel__indicator');
     this.prevBtn = this.carousel.querySelector('.hero-carousel__control--prev');

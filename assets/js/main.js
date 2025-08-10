@@ -4,18 +4,18 @@
 
 // 元件腳本已在模板中以獨立指令碼載入（避免瀏覽器再向 /assets/js/components/* 請求造成 404）
 
-document.addEventListener('DOMContentLoaded', function() {
+function bootstrapApplication() {
     // 組件初始化已由各自檔案內的 DOMContentLoaded 事件處理
-    
+
     // 初始化導航選單
     initNavigation();
-    
+
     // 初始化輪播（首頁才會載入對應元件，此處跳過以減少執行成本）
     // initCarousel();
-    
+
     // 初始化Cookie同意條款
     initCookieConsent();
-    
+
     // 更新頁腳年份
     updateFooterYear();
 
@@ -24,7 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始調整浮動按鈕（避免首次載入就被覆蓋）
     updateFloatingButtonsOffset();
     window.addEventListener('resize', updateFloatingButtonsOffset, { passive: true });
-});
+}
+
+// 若 DOM 已就緒則立即啟動，否則等待 DOMContentLoaded，避免偶發事件錯過導致未初始化
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrapApplication, { once: true });
+} else {
+    bootstrapApplication();
+}
 
 /**
  * 初始化導航選單
@@ -212,6 +219,41 @@ function initCarousel() {
     startAutoplay();
 }
 
+// 安全的本地儲存與 Cookie 後備
+function safeGetLocalStorageItem(key) {
+    try {
+        return localStorage.getItem(key);
+    } catch (_) {
+        return null;
+    }
+}
+
+function safeSetLocalStorageItem(key, value) {
+    try {
+        localStorage.setItem(key, value);
+        return true;
+    } catch (_) {
+        return false;
+    }
+}
+
+function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+}
+
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()}; path=/`;
+}
+
+function hasConsent() {
+    const ls = safeGetLocalStorageItem('cookieConsent');
+    if (ls) return true;
+    return getCookie('cookieConsent') === 'true';
+}
+
 /**
  * 初始化Cookie同意條款
  */
@@ -221,24 +263,26 @@ function initCookieConsent() {
     
     if (!cookieConsent || !acceptBtn) return;
     
-    // 檢查Cookie是否已接受
-    if (!localStorage.getItem('cookieConsent')) {
-        // 顯示Cookie同意條款
-        setTimeout(function() {
+    // 檢查是否已同意（含 localStorage 與 Cookie 後備）
+    if (!hasConsent()) {
+        // 盡快顯示（避免 1s 延遲造成「沒出現」的錯覺），但仍在下一個 frame 進行以確保樣式就緒
+        requestAnimationFrame(() => {
             cookieConsent.classList.add('show');
             document.body.classList.add('cookie-visible');
-            // 顯示後以實際高度動態上移浮動按鈕，避免遮擋
             updateFloatingButtonsOffset();
-        }, 1000);
-    }
-    else {
+        });
+    } else {
         document.body.classList.remove('cookie-visible');
         updateFloatingButtonsOffset();
     }
     
     // 接受Cookie
     acceptBtn.addEventListener('click', function() {
-        localStorage.setItem('cookieConsent', 'true');
+        const ok = safeSetLocalStorageItem('cookieConsent', 'true');
+        if (!ok) {
+            // 後備：寫入第一方 Cookie，保存一年
+            setCookie('cookieConsent', 'true', 365);
+        }
         cookieConsent.classList.remove('show');
         document.body.classList.remove('cookie-visible');
         updateFloatingButtonsOffset();

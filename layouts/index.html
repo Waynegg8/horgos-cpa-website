@@ -1,24 +1,40 @@
 {{ define "main" }}
 <div class="homepage-container">
-    <!-- 新 Hero：左右分割介紹 + CTA -->
-    <section class="hero-split">
-      <div class="container hero-split__container">
-        <div class="hero-split__content">
-          <h1 class="hero-split__title">台中會計師｜一站式工商登記、稅務申報與財務顧問</h1>
-          <p class="hero-split__subtitle">聚焦中小企業的合規、效率與成長，用標準流程與專家顧問，讓你專心做生意。</p>
-          <div class="hero-split__actions">
-            <a href="/appointment/" class="btn-cta-primary">立即預約諮詢</a>
-            <a href="/services/" class="btn-cta-secondary">了解服務</a>
+    <!-- Hero 輪播：3 張圖、每 2.5 秒切換，整張可點擊跳轉 -->
+    <section class="hero-carousel" data-delay="2500" aria-label="首頁輪播">
+      <div class="hero-carousel__container">
+        <div class="hero-carousel__slides">
+          <div class="hero-carousel__slide active">
+            <a class="hero-carousel__link" href="/services/business-registration/" aria-label="前往工商登記與公司設立">
+              <img class="hero-carousel__image" src="/uploads/images/services/services-business-registration.avif" alt="工商登記與公司設立">
+            </a>
+          </div>
+          <div class="hero-carousel__slide">
+            <a class="hero-carousel__link" href="/services/tax-filing/" aria-label="前往稅務申報與帳務維運">
+              <img class="hero-carousel__image" src="/uploads/images/services/services-tax-business.avif" alt="稅務申報與帳務維運">
+            </a>
+          </div>
+          <div class="hero-carousel__slide">
+            <a class="hero-carousel__link" href="/services/consulting/" aria-label="前往財務顧問與內控制度">
+              <img class="hero-carousel__image" src="/uploads/images/services/services-internal-control.avif" alt="財務顧問與內控制度">
+            </a>
           </div>
         </div>
-         <div class="hero-split__media">
-           {{ partial "responsive-image.html" (dict "src" "/uploads/images/general/general-accounting-desk.webp" "alt" "專業會計顧問團隊" "lazy" "false" "sizes" "(max-width: 1024px) 100vw, 50vw") }}
-         </div>
+
+        <!-- 控制按鈕 -->
+        <button class="hero-carousel__control hero-carousel__control--prev" aria-label="上一張"><i class="fas fa-chevron-left"></i></button>
+        <button class="hero-carousel__control hero-carousel__control--next" aria-label="下一張"><i class="fas fa-chevron-right"></i></button>
+
+        <!-- 指示器 -->
+        <div class="hero-carousel__indicators" role="tablist" aria-label="輪播指示器">
+          <button class="hero-carousel__indicator active" aria-label="第 1 張" aria-pressed="true"></button>
+          <button class="hero-carousel__indicator" aria-label="第 2 張" aria-pressed="false"></button>
+          <button class="hero-carousel__indicator" aria-label="第 3 張" aria-pressed="false"></button>
+        </div>
       </div>
     </section>
     
-    <!-- 客戶見證區 -->
-    {{ partial "homepage/testimonials.html" . }}
+    
     
     <!-- 統一改為「服務導覽」圖文＋流程摘要，減少卡片密度 -->
     <section class="service-overview">
@@ -38,43 +54,9 @@
     <!-- 為何選擇我們 -->
     {{ partial "homepage/why-us.html" . }}
 
-    <!-- 服務總覽（圖文段落，取代大量卡片） -->
-    <section class="service-overview">
-      <div class="container">
-        <div class="service-overview__row">
-          <div class="service-overview__text">
-            <h2 class="service-overview__title">工商登記與公司設立</h2>
-            <p class="service-overview__text">從名稱預查、章程、負責人印鑑到稅籍登記與開戶，提供一條龍代辦；標準清單+時程表，避免遺漏。</p>
-          </div>
-          <div class="service-overview__media">
-            {{ partial "responsive-image.html" (dict "src" "/uploads/images/services/services-business-registration.webp" "alt" "工商登記" "sizes" "(max-width: 1024px) 100vw, 50vw") }}
-          </div>
-        </div>
-        <div class="service-overview__row">
-          <div class="service-overview__media">
-            {{ partial "responsive-image.html" (dict "src" "/uploads/images/services/services-tax-business.webp" "alt" "稅務申報" "sizes" "(max-width: 1024px) 100vw, 50vw") }}
-          </div>
-          <div class="service-overview__text">
-            <h2 class="service-overview__title">稅務申報與帳務維運</h2>
-            <p class="service-overview__text">每月/每季申報、年度結算、扣繳與二代健保；用雲端憑證與對帳流程，把發票與文件一次就收齊。</p>
-          </div>
-        </div>
-        <div class="service-overview__row">
-          <div class="service-overview__text">
-            <h2 class="service-overview__title">財務顧問與內控制度</h2>
-            <p class="service-overview__text">建立科目表、成本制度與報表節奏；導入請購到付款(P2P)與收款到入帳(O2C)流程，讓數字支持決策。</p>
-          </div>
-            <div class="service-overview__media">
-              {{ partial "responsive-image.html" (dict "src" "/uploads/images/services/services-tax-default.webp" "alt" "財務顧問" "sizes" "(max-width: 1024px) 100vw, 50vw") }}
-            </div>
-        </div>
-      </div>
-    </section>
     
-    <!-- 服務介紹（非卡片，含重點文案與流程） -->
-    {{ partial "services/service-features.html" . }}
-    {{ partial "services/service-process.html" . }}
-    {{ partial "services/service-commitment.html" . }}
+    
+    
     
     <!-- 文帶圖敘述區（新增，避免全是卡片） -->
     {{ partial "homepage/text-image-sections.html" . }}

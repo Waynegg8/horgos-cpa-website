@@ -6,10 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadGA = () => {
     if (window.__gaLoaded) return;
     // 僅在使用者同意 Cookie 時載入 GA，避免在 PSI 中引入額外第三方請求
+    let consentOk = false;
     try {
-      const consent = localStorage.getItem('cookieConsent');
-      if (!consent) return;
+      consentOk = !!localStorage.getItem('cookieConsent');
     } catch (_) {}
+    if (!consentOk) {
+      // 後備：檢查第一方 Cookie
+      try {
+        consentOk = document.cookie.includes('cookieConsent=true');
+      } catch (_) {}
+    }
+    if (!consentOk) return;
     window.__gaLoaded = true;
     const s = document.createElement('script');
     s.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
