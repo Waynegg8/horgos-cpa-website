@@ -10,6 +10,8 @@
 {{ $seriesOrder := 1 }}
 {{ with .Params.series_order }}{{ $seriesOrder = (int .) }}{{ end }}
 {{ $seriesPosts := where $all "Params.series" $series }}
+{{/* 嚴格限制同分類 */}}
+{{ $seriesPosts = where $seriesPosts "Params.category" $category }}
 {{ $seriesCount := len $seriesPosts }}
 {{ $firstList := where $seriesPosts "Params.series_order" 1 }}
 {{ $scratch.Set "firstPost" false }}
@@ -28,11 +30,6 @@
     {{ $sameCatSeriesFirst = where $sameCatSeriesFirst "Params.series_order" 1 }}
     {{ if gt (len $sameCatSeriesFirst) 0 }}
       {{ $scratch.Set "prev" (index (sort $sameCatSeriesFirst ".Date" "desc") 0) }}
-    {{ else }}
-      {{ $anyCatSeriesFirst := where (where $all "Params.series_order" 1) "Params.series" "!=" $series }}
-      {{ if gt (len $anyCatSeriesFirst) 0 }}
-        {{ $scratch.Set "prev" (index (sort $anyCatSeriesFirst ".Date" "desc") 0) }}
-      {{ end }}
     {{ end }}
   {{ end }}
 
@@ -47,11 +44,6 @@
     {{ $sameCatSeriesFirstN = where $sameCatSeriesFirstN "Params.series_order" 1 }}
     {{ if gt (len $sameCatSeriesFirstN) 0 }}
       {{ $scratch.Set "next" (index (sort $sameCatSeriesFirstN ".Date" "desc") 0) }}
-    {{ else }}
-      {{ $anyCatSeriesFirstN := where (where $all "Params.series_order" 1) "Params.series" "!=" $series }}
-      {{ if gt (len $anyCatSeriesFirstN) 0 }}
-        {{ $scratch.Set "next" (index (sort $anyCatSeriesFirstN ".Date" "desc") 0) }}
-      {{ end }}
     {{ end }}
   {{ end }}
 
@@ -107,19 +99,11 @@
   {{ if lt (add $idx 1) (len $catPages) }}{{ $scratch.Set "next" (index $catPages (add $idx 1)) }}{{ end }}
 {{ end }}
 
-{{/* 2) 若同分類沒有前/後，依系列邏輯回退：優先同分類的其他系列第一篇，否則任意系列第一篇，最後以全站同類型最新文章作保底 */}}
+{{/* 2) 若同分類沒有前/後，只在同分類內回退到其他系列的第一篇；不跨分類、不全站保底 */}}
 {{ if not ($scratch.Get "prev") }}
   {{ $sameCatSeriesFirst := (where (where (where $all "Params.series" "!=" nil) "Params.category" $cat) "Params.series_order" 1) }}
   {{ if gt (len $sameCatSeriesFirst) 0 }}
     {{ $scratch.Set "prev" (index (sort $sameCatSeriesFirst ".Date" "desc") 0) }}
-  {{ else }}
-    {{ $anySeriesFirst := where $all "Params.series_order" 1 }}
-    {{ if gt (len $anySeriesFirst) 0 }}
-      {{ $scratch.Set "prev" (index (sort $anySeriesFirst ".Date" "desc") 0) }}
-    {{ else }}
-      {{ $fallbackPrev := where (sort $all ".Date" "desc") "RelPermalink" "!=" $current.RelPermalink }}
-      {{ if gt (len $fallbackPrev) 0 }}{{ $scratch.Set "prev" (index $fallbackPrev 0) }}{{ end }}
-    {{ end }}
   {{ end }}
 {{ end }}
 
@@ -127,14 +111,6 @@
   {{ $sameCatSeriesFirstN := (where (where (where $all "Params.series" "!=" nil) "Params.category" $cat) "Params.series_order" 1) }}
   {{ if gt (len $sameCatSeriesFirstN) 0 }}
     {{ $scratch.Set "next" (index (sort $sameCatSeriesFirstN ".Date" "desc") 0) }}
-  {{ else }}
-    {{ $anySeriesFirstN := where $all "Params.series_order" 1 }}
-    {{ if gt (len $anySeriesFirstN) 0 }}
-      {{ $scratch.Set "next" (index (sort $anySeriesFirstN ".Date" "desc") 0) }}
-    {{ else }}
-      {{ $fallbackNext := where (sort $all ".Date" "asc") "RelPermalink" "!=" $current.RelPermalink }}
-      {{ if gt (len $fallbackNext) 0 }}{{ $scratch.Set "next" (index $fallbackNext 0) }}{{ end }}
-    {{ end }}
   {{ end }}
 {{ end }}
 

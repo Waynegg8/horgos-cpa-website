@@ -410,9 +410,29 @@
     margin-top: -$spacing-1;
   }
 
-  &__btn { i { margin: 0; } }
+  &__btn {
+    /* 讓長標題在兩欄布局時不會互相重疊 */
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+    i { margin: 0; }
+  }
 
   &__all { text-align: center; }
+}
+
+/* 文章導覽按鈕在兩欄時允許換行，避免長標題重疊 */
+.article-navigation__prev,
+.article-navigation__next {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
 }
 // 相關文章
 .article-related {

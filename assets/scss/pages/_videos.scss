@@ -347,6 +347,12 @@
       font-size: 0.875rem;
       transition: all 0.3s ease;
       
+      /* 允許換行避免重疊 */
+      white-space: normal;
+      overflow-wrap: anywhere;
+      text-align: left;
+      line-height: 1.5;
+      
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
         border-color: #204B6E;

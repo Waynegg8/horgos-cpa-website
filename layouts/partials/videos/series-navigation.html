@@ -5,9 +5,9 @@
 {{/* 重用文章的水平排列視覺：series-navigation + __links + __item */}}
 <div class="series-navigation">
   <div class="series-navigation__links">
-    {{/* 找同分類中時間相鄰的影片作為「上一篇/下一篇」；若無，退而在全站找最近日期 */}}
+    {{/* 僅在相同分類中找相鄰內容；沒有分類則不顯示推薦 */}}
     {{ $cat := .Params.category }}
-    {{ $pages := cond (ne $cat nil) (where $all "Params.category" $cat) $all }}
+    {{ $pages := cond (ne $cat nil) (where $all "Params.category" $cat) (slice) }}
     {{ $pages = sort $pages ".Date" "asc" }}
     {{ $idx := -1 }}
     {{ range $i, $p := $pages }}{{ if eq $p.RelPermalink $current.RelPermalink }}{{ $idx = $i }}{{ end }}{{ end }}
@@ -16,10 +16,6 @@
     {{ $prev := false }}
     {{ if and (ge $idx 1) (lt $idx (len $pages)) }}
       {{ $prev = index $pages (sub $idx 1) }}
-    {{ end }}
-    {{ if not $prev }}
-      {{ $prev = index (sort $all ".Date" "desc") 0 }}
-      {{ if eq $prev.RelPermalink $current.RelPermalink }}{{ $prev = false }}{{ end }}
     {{ end }}
     {{ if $prev }}
       <div class="series-navigation__item">
@@ -35,10 +31,6 @@
     {{ if and (ge $idx 0) (lt (add $idx 1) (len $pages)) }}
       {{ $next = index $pages (add $idx 1) }}
     {{ end }}
-    {{ if not $next }}
-      {{ $next = index (sort $all ".Date" "asc") 0 }}
-      {{ if eq $next.RelPermalink $current.RelPermalink }}{{ $next = false }}{{ end }}
-    {{ end }}
     {{ if $next }}
       <div class="series-navigation__item">
         <a class="btn btn-secondary series-navigation__btn" href="{{ $next.RelPermalink }}">下一篇：{{ $next.Title }}</a>
@@ -49,7 +41,4 @@
     {{ end }}
   </div>
 </div>
-
-{{/* 統一使用與文章相同的導航樣式與邏輯 */}}
-{{ partial "articles/series-navigation.html" . }}
 
