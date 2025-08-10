@@ -1,72 +1,12 @@
-<!-- 影片側邊欄（與其他單一內容頁一致：搜尋 → 系列 → 分類 → 最新） -->
+<!-- 影片列表頁側邊欄：僅保留分類 -->
 <div class="sidebar">
-    <!-- 側邊搜尋：導向影片列表頁，在地搜尋 -->
-    <form class="sidebar-widget sidebar-search" action="/videos/" method="get" role="search" aria-label="影片搜尋">
-        <input type="search" name="q" class="sidebar-search__input" placeholder="搜尋影片..." aria-label="搜尋影片" />
-        <button type="submit" class="btn btn-primary btn-sm sidebar-search__btn" aria-label="搜尋">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="sr-only">搜尋</span>
-        </button>
-    </form>
-
-    <!-- 系列列表（若有） -->
-    {{ if .Params.series }}
-    <div class="sidebar-widget sidebar-series">
-        <h3 class="sidebar-widget__title">系列影片</h3>
-        <ul class="sidebar-series__list">
-            {{ $series := .Params.series }}
-            {{ $section := .Section }}
-            {{ range where .Site.RegularPages "Section" $section }}
-                {{ if and (eq .Params.series $series) (eq .Params.series_order 1) }}
-                <li class="sidebar-series__item">
-                    <a href="{{ .RelPermalink }}" class="sidebar-series__link">{{ $series }}</a>
-                </li>
-                {{ end }}
-            {{ end }}
-        </ul>
-    </div>
-    {{ end }}
-
-    <!-- 分類列表 -->
-    <div class="sidebar-widget">
+    <div class="sidebar-widget sidebar-categories">
         <h3 class="sidebar-widget__title">影片分類</h3>
-        <ul class="sidebar-categories">
-            <li class="sidebar-categories__item">
-                <a href="/videos/popular/" class="sidebar-categories__link {{ if eq .RelPermalink "/videos/popular/" }}active{{ end }}">熱門影片</a>
-            </li>
-            <li class="sidebar-categories__item">
-                <a href="/videos/tutorials/" class="sidebar-categories__link {{ if eq .RelPermalink "/videos/tutorials/" }}active{{ end }}">教學影片</a>
-            </li>
-            <li class="sidebar-categories__item">
-                <a href="/videos/case-studies/" class="sidebar-categories__link {{ if eq .RelPermalink "/videos/case-studies/" }}active{{ end }}">案例分享</a>
-            </li>
-            <li class="sidebar-categories__item">
-                <a href="/videos/legal-explanation/" class="sidebar-categories__link {{ if eq .RelPermalink "/videos/legal-explanation/" }}active{{ end }}">法規解說</a>
-            </li>
-        </ul>
-    </div>
-
-    <!-- 最新影片 -->
-    <div class="sidebar-widget">
-        <h3 class="sidebar-widget__title">最新影片</h3>
-        <ul class="sidebar-recent">
-            {{ range first 5 (where .Site.RegularPages "Section" "videos") }}
-            <li class="sidebar-recent__item">
-                <a href="{{ .RelPermalink }}" class="sidebar-recent__link">
-                    <div class="sidebar-recent__thumbnail">
-                        {{ with .Params.thumbnail }}
-                        <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
-                        {{ else }}
-<img src="/uploads/images/general/general-default.jpg" alt="{{ $.Title }}" loading="lazy" width="120" height="80">
-                        {{ end }}
-                    </div>
-                    <div class="sidebar-recent__content">
-                        <h4 class="sidebar-recent__title">{{ .Title }}</h4>
-                        <span class="sidebar-recent__date">{{ .Date.Format "2006-01-02" }}</span>
-                    </div>
-                </a>
-            </li>
-            {{ end }}
+        <ul class="sidebar-categories__list">
+            <li class="sidebar-categories__item"><a href="/videos/popular/" class="sidebar-categories__link {{ if eq .RelPermalink "/videos/popular/" }}active{{ end }}">熱門影片</a></li>
+            <li class="sidebar-categories__item"><a href="/videos/tutorials/" class="sidebar-categories__link {{ if eq .RelPermalink "/videos/tutorials/" }}active{{ end }}">教學影片</a></li>
+            <li class="sidebar-categories__item"><a href="/videos/case-studies/" class="sidebar-categories__link {{ if eq .RelPermalink "/videos/case-studies/" }}active{{ end }}">案例分享</a></li>
+            <li class="sidebar-categories__item"><a href="/videos/legal-explanation/" class="sidebar-categories__link {{ if eq .RelPermalink "/videos/legal-explanation/" }}active{{ end }}">法規解說</a></li>
         </ul>
     </div>
 </div>

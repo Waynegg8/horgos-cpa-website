@@ -58,11 +58,10 @@
             {{ end }}
         </div>
         
-        <!-- 側邊欄 -->
+        <!-- 側邊欄（所有列表頁：articles / videos / faq / downloads） -->
         {{ if in (slice "articles" "videos" "faq" "downloads") .Section }}
         <div class="two-column__sidebar">
             {{ if eq .Section "articles" }}
-                {{/* 列表頁與單頁分流：列表頁不顯示「熱門標籤」，單頁維持原設計 */}}
                 {{ if eq .Kind "section" }}
                     {{ partial "sidebar/articles-list-sidebar.html" . }}
                 {{ else }}

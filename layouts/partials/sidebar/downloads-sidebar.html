@@ -1,117 +1,12 @@
-<!-- 下載側邊欄 -->
+<!-- 下載列表頁側邊欄：僅保留分類 -->
 <div class="sidebar">
-    <!-- 搜尋框 (僅在單篇頁面顯示) -->
-    {{ if and (eq .Kind "page") (eq .Section "downloads") }}
-    <form class="sidebar-widget sidebar-search" action="/downloads/" method="get" role="search" aria-label="下載搜尋">
-        <input type="search" name="q" class="sidebar-search__input" placeholder="搜尋資源..." aria-label="搜尋下載" />
-        <button type="submit" class="btn btn-primary btn-sm sidebar-search__btn" aria-label="搜尋">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="sr-only">搜尋</span>
-        </button>
-    </form>
-    {{ end }}
-    
-    <!-- 分類列表 -->
-    <div class="sidebar-widget">
+    <div class="sidebar-widget sidebar-categories">
         <h3 class="sidebar-widget__title">下載分類</h3>
-        <ul class="sidebar-categories">
-            <li class="sidebar-categories__item">
-                <a href="/downloads/templates/" class="sidebar-categories__link {{ if eq .RelPermalink "/downloads/templates/" }}active{{ end }}">
-                    範本下載
-                </a>
-            </li>
-            <li class="sidebar-categories__item">
-                <a href="/downloads/forms/" class="sidebar-categories__link {{ if eq .RelPermalink "/downloads/forms/" }}active{{ end }}">
-                    表格下載
-                </a>
-            </li>
-            <li class="sidebar-categories__item">
-                <a href="/downloads/checklists/" class="sidebar-categories__link {{ if eq .RelPermalink "/downloads/checklists/" }}active{{ end }}">
-                    檢查清單
-                </a>
-            </li>
-            <li class="sidebar-categories__item">
-                <a href="/downloads/regulations/" class="sidebar-categories__link {{ if eq .RelPermalink "/downloads/regulations/" }}active{{ end }}">
-                    法規文件
-                </a>
-            </li>
-        </ul>
-    </div>
-    
-    <!-- 檔案類型篩選 -->
-    <div class="sidebar-widget">
-        <h3 class="sidebar-widget__title">檔案類型</h3>
-        <ul class="sidebar-filetypes">
-            <li class="sidebar-filetypes__item">
-                <a href="/downloads/?filetype=pdf" class="sidebar-filetypes__link">
-                    <i class="far fa-file-pdf"></i> PDF文件
-                </a>
-            </li>
-            <li class="sidebar-filetypes__item">
-                <a href="/downloads/?filetype=docx" class="sidebar-filetypes__link">
-                    <i class="far fa-file-word"></i> Word文件
-                </a>
-            </li>
-            <li class="sidebar-filetypes__item">
-                <a href="/downloads/?filetype=xlsx" class="sidebar-filetypes__link">
-                    <i class="far fa-file-excel"></i> Excel試算表
-                </a>
-            </li>
-            <li class="sidebar-filetypes__item">
-                <a href="/downloads/?filetype=zip" class="sidebar-filetypes__link">
-                    <i class="far fa-file-archive"></i> 壓縮檔案
-                </a>
-            </li>
-        </ul>
-    </div>
-    
-    <!-- 系列列表 -->
-    {{ if .Params.series }}
-    <div class="sidebar-widget">
-        <h3 class="sidebar-widget__title">系列資源</h3>
-        <ul class="sidebar-series">
-            {{ $series := .Params.series }}
-            {{ $section := .Section }}
-            {{ range where .Site.RegularPages "Section" $section }}
-                {{ if and (eq .Params.series $series) (eq .Params.series_order 1) }}
-                <li class="sidebar-series__item">
-                    <a href="{{ .RelPermalink }}" class="sidebar-series__link">
-                        {{ $series }}
-                    </a>
-                </li>
-                {{ end }}
-            {{ end }}
-        </ul>
-    </div>
-    {{ end }}
-    
-    <!-- 最新下載 -->
-    <div class="sidebar-widget">
-        <h3 class="sidebar-widget__title">最新上傳</h3>
-        <ul class="sidebar-recent">
-            {{ range first 5 (where .Site.RegularPages "Section" "downloads") }}
-            <li class="sidebar-recent__item">
-                <a href="{{ .RelPermalink }}" class="sidebar-recent__link">
-                    <div class="sidebar-recent__icon">
-                        {{ if eq .Params.filetype "pdf" }}
-                        <i class="far fa-file-pdf"></i>
-                        {{ else if eq .Params.filetype "docx" }}
-                        <i class="far fa-file-word"></i>
-                        {{ else if eq .Params.filetype "xlsx" }}
-                        <i class="far fa-file-excel"></i>
-                        {{ else if eq .Params.filetype "zip" }}
-                        <i class="far fa-file-archive"></i>
-                        {{ else }}
-                        <i class="far fa-file"></i>
-                        {{ end }}
-                    </div>
-                    <div class="sidebar-recent__content">
-                        <h4 class="sidebar-recent__title">{{ .Title }}</h4>
-                        <span class="sidebar-recent__date">{{ .Date.Format "2006-01-02" }}</span>
-                    </div>
-                </a>
-            </li>
-            {{ end }}
+        <ul class="sidebar-categories__list">
+            <li class="sidebar-categories__item"><a href="/downloads/templates/" class="sidebar-categories__link {{ if eq .RelPermalink "/downloads/templates/" }}active{{ end }}">範本下載</a></li>
+            <li class="sidebar-categories__item"><a href="/downloads/forms/" class="sidebar-categories__link {{ if eq .RelPermalink "/downloads/forms/" }}active{{ end }}">表格下載</a></li>
+            <li class="sidebar-categories__item"><a href="/downloads/checklists/" class="sidebar-categories__link {{ if eq .RelPermalink "/downloads/checklists/" }}active{{ end }}">檢查清單</a></li>
+            <li class="sidebar-categories__item"><a href="/downloads/regulations/" class="sidebar-categories__link {{ if eq .RelPermalink "/downloads/regulations/" }}active{{ end }}">法規文件</a></li>
         </ul>
     </div>
 </div>
