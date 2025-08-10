@@ -14,11 +14,9 @@
   body.articles & .sidebar-series + .sidebar-recent { margin-top: $spacing-3; }
   body.articles & .sidebar-recent + .sidebar-tags { margin-top: $spacing-3; }
   
-  // 明確排序：確保目錄在最上方、標籤雲在最下方（TOC 不再個別 sticky，避免蓋住其他小工具）
-  // TOC 與標籤雲一起置於同一 sticky 區域：讓兩者同步移動
+  // 列表頁才使用 sticky 群組；單一文章頁僅保留 TOC（由 .toc-container 自行 sticky）
   .sidebar-sticky-group { position: sticky; top: 72px; display: flex; flex-direction: column; gap: $spacing-2; z-index: 0; }
-  // 單一文章頁：改由 TOC 自身 sticky，群組不 sticky，避免 TOC 被群組裁切或錯位
-  body.articles[data-kind="page"] & .sidebar-sticky-group { position: static; top: auto; }
+  body.articles[data-kind="page"] & .sidebar-sticky-group { display: none; }
   .sidebar-sticky-group .toc-container { position: static; }
   .sidebar-search { order: 0; }
   // 側邊欄搜尋框（單一內容頁會出現）

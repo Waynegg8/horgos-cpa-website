@@ -112,7 +112,8 @@
         </div>
         <!-- 文章側邊欄（含 TOC／系列與標籤雲） -->
         <div class="two-column__sidebar">
-            {{ partial "sidebar/articles-sidebar.html" . }}
+            {{/* 單一文章頁側邊欄僅顯示目錄（置頂 sticky） */}}
+            {{ partial "sidebar/table-of-contents.html" . }}
         </div>
     </div>
     {{ else if eq .Section "faq" }}
