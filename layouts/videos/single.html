@@ -1,8 +1,8 @@
 {{ define "main" }}
 <div class="container">
-  <!-- 影片頁面使用兩欄佈局 -->
-    <div class="two-column">
-      <div class="two-column__main">
+  <!-- 影片頁面使用全寬佈局 -->
+    <div class="full-width">
+      <div class="full-width__content">
       <article class="post">
         <header class="post__header">
           <h1 class="post__title">{{ .Title }}</h1>
@@ -26,8 +26,6 @@
           {{ partial "videos/series-navigation.html" . }}
           
           {{/* 單頁不再本地插入 CTA，統一於 base 模板 SEO 區塊上方輸出 */}}
-
-          {{ partial "shared/comments.html" . }}
           
           {{/* 相關影片：優先以相同標籤；若無標籤則以相同分類；再無則以最新影片 */}}
           {{ $allVideos := where .Site.RegularPages "Section" "videos" }}
@@ -53,11 +51,6 @@
           {{ end }}
         </div>
       </article>
-    </div>
-    
-    <!-- 側邊欄 -->
-    <div class="two-column__sidebar">
-      {{ partial "sidebar/videos-sidebar.html" . }}
     </div>
   </div>
 </div>

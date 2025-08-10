@@ -14,9 +14,9 @@
 
 <div class="container container--content">
     {{ if eq .Section "articles" }}
-    <!-- 文章頁面使用兩欄佈局 -->
-    <div class="two-column">
-        <div class="two-column__main">
+    <!-- 文章頁面使用全寬佈局（僅保留 TOC，無側邊欄） -->
+    <div class="full-width">
+        <div class="full-width__content">
             <article class="single-content">
                 <!-- 文章標頭資訊區 -->
                 <div class="article-header">
@@ -48,6 +48,9 @@
                     </div>
                 </div>
                 
+                <!-- 文章目錄（僅文章保留） -->
+                {{ partial "sidebar/table-of-contents.html" . }}
+
                 <!-- 文章內容區域 -->
                 <div class="article-content">
                     {{ .Content }}
@@ -74,7 +77,6 @@
                 </div>
                 
             </article>
-            {{ partial "shared/comments.html" . }}
             
             <!-- 相關文章推薦（僅推薦相同類型：文章 -> 文章） -->
             {{ $relatedAll := .Site.RegularPages.Related . }}
@@ -111,40 +113,27 @@
             </section>
             {{ end }}
         </div>
-        
-        <!-- 側邊欄（單頁改為非 sticky，僅 TOC 自身 sticky） -->
-        <div class="two-column__sidebar">
-            {{ partial "sidebar/articles-sidebar.html" . }}
-        </div>
     </div>
     {{ else if eq .Section "faq" }}
-    <!-- FAQ 單一頁使用兩欄佈局（含側邊欄） -->
-    <div class="two-column">
-        <div class="two-column__main">
+    <!-- FAQ 單一頁使用全寬佈局（移除側邊欄與留言） -->
+    <div class="full-width">
+        <div class="full-width__content">
             <article class="single-content">
                 <div class="article-content">
                     {{ .Content }}
                 </div>
             </article>
-            {{ partial "shared/comments.html" . }}
-        </div>
-        <div class="two-column__sidebar">
-            {{ partial "sidebar/faq-sidebar.html" . }}
         </div>
     </div>
     {{ else if eq .Section "downloads" }}
-    <!-- 下載 單一頁使用兩欄佈局（含側邊欄） -->
-    <div class="two-column">
-        <div class="two-column__main">
+    <!-- 下載 單一頁使用全寬佈局（移除側邊欄與留言） -->
+    <div class="full-width">
+        <div class="full-width__content">
             <article class="single-content">
                 <div class="article-content">
                     {{ .Content }}
                 </div>
             </article>
-            {{ partial "shared/comments.html" . }}
-        </div>
-        <div class="two-column__sidebar">
-            {{ partial "sidebar/downloads-sidebar.html" . }}
         </div>
     </div>
     {{ else }}
@@ -164,7 +153,7 @@
             </article>
         </div>
     </div>
-    {{ partial "shared/comments.html" . }}
+    
     {{ end }}
     
     {{/* 單頁模板不再在此插入 CTA，統一由 baseof 於 SEO 區塊上方輸出，避免重複與錯位 */}}
