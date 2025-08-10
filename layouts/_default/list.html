@@ -28,8 +28,23 @@
             {{ partial "services/service-process.html" . }}
             {{ partial "services/service-commitment.html" . }}
             {{ else if eq .Section "articles" }}
-            <!-- 文章列表頁面內容（支援 ?q= 以標籤或關鍵字搜尋） -->
-            {{ partial "articles/article-list.html" . }}
+            <!-- 文章列表頁面內容（支援 ?tag= 以標籤篩選） -->
+            {{/* 根據 URL 參數 tag 篩選文章 */}}
+            {{ $allArticles := where .Site.RegularPages "Section" "articles" }}
+            {{ $allArticles = where $allArticles "Params.draft" "!=" true }}
+
+            {{ $tag := "" }}
+            {{ if .URL.Query.Get "tag" }}
+              {{ $tag = .URL.Query.Get "tag" }}
+            {{ end }}
+
+            {{ $filteredArticles := $allArticles }}
+            {{ if $tag }}
+              {{ $filteredArticles = where $allArticles "Params.tags" "intersect" (slice $tag) }}
+            {{ end }}
+
+            {{ $paginator := .Paginate $filteredArticles }}
+            {{ partial "articles/article-list.html" (dict "Paginator" $paginator "Tag" $tag "Page" .) }}
             <script>
             // 列表頁自動帶入 q 參數並觸發在地搜尋（文章/影片/FAQ/下載）
             document.addEventListener('DOMContentLoaded', function() {

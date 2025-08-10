@@ -1,121 +1,153 @@
 <!-- 文章列表頁 -->
-<div class="article-list">
-    <!-- 搜索框（僅搜索文章類型） -->
-    <div class="list-search" role="search" aria-label="文章搜尋">
-        <label class="search-field">
-            <i class="fas fa-search search-icon" aria-hidden="true"></i>
-            <input id="article-search-input" class="search-input" type="search" placeholder="搜尋文章標題或摘要..." aria-label="搜尋文章" />
-        </label>
-    </div>
-
-    <!-- 標籤快速篩選（以 tags 為準，不與 series 混淆） -->
-    <div class="category-tags">
-        <button class="category-tag category-search-btn active" data-tag="all">全部文章</button>
-        {{/* 從全站 tags 生成常用標籤（前 8 個） */}}
-        {{ $tags := first 8 (sort .Site.Taxonomies.tags.ByCount "Count" "desc") }}
-        {{ range $tags }}
-          <button class="category-tag category-search-btn" data-tag="{{ .Name | urlize }}">{{ .Name }}</button>
-        {{ end }}
-    </div>
-    
-    {{/* 取得本 section 內所有單篇文章（含子層，不含 _index）*/}}
-    {{ $all := .RegularPagesRecursive }}
-    {{ $sorted := $all.ByDate.Reverse }}
-
-    <!-- 文章列表 - 左圖右文卡片布局 -->
-    <div class="article-list__grid">
-        {{ $paginator := .Paginate $sorted 10 }}
-        {{ if not (gt (len $paginator.Pages) 0) }}
-        <div class="empty-state">目前沒有符合條件的文章。</div>
-        {{ end }}
-        {{ range $paginator.Pages }}
-        <a href="{{ .RelPermalink }}" class="card-style card-clickable article-item" 
-           data-tags="{{ delimit (.Params.tags | default (slice)) "," | lower }}" 
-           data-title="{{ .Title }}" 
-           data-summary="{{ .Summary }}">
-            <div class="card-horizontal">
-                <div class="card-horizontal__image">
-                    {{ $page := . }}
-                    {{ with .Params.image }}
-                    <img src="{{ . }}" alt="{{ $page.Title }}" loading="lazy" decoding="async" width="640" height="426" sizes="(max-width: 1024px) 100vw, 640px">
-                    {{ else }}
-                    <img src="/uploads/images/general/general-default.jpg" alt="{{ $page.Title }}" loading="lazy" decoding="async" width="640" height="426" sizes="(max-width: 1024px) 100vw, 640px">
-                    {{ end }}
-                </div>
-                <div class="card-horizontal__content">
-                    <h2 class="article-title">{{ .Title }}</h2>
-                    {{ with .Params.category }}
-                    <div class="article-topic-badge">{{ . }} 第 1 篇</div>
-                    {{ end }}
-                    <div class="article-meta">
-                        <span class="article-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
-                        {{ with .Params.tags }}
-                        <span class="article-meta__item"><i class="fas fa-tags"></i> {{ delimit . ", " }}</span>
-                        {{ end }}
-                        {{/* 移除系列顯示，改由主題徽章呈現 */}}
-                    </div>
-                    <p class="article-summary">{{ .Summary | plainify | truncate 100 }}</p>
-                </div>
-            </div>
-        </a>
-        {{ end }}
-    </div>
-    
-    <!-- 分頁導航 -->
-    {{ if gt .Paginator.TotalPages 1 }}
-    <nav class="pagination" role="navigation" aria-label="分頁導航">
-        <div class="pagination__info">
-            第 {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }} 頁，共 {{ .Paginator.TotalNumberOfElements }} 篇文章
-        </div>
-        <div class="pagination__controls">
-            {{ if .Paginator.HasPrev }}
-                <a href="{{ .Paginator.Prev.URL }}" class="pagination__link pagination__link--prev" aria-label="上一頁">
-                    <i class="fas fa-chevron-left"></i>
-                    上一頁
-                </a>
-            {{ end }}
-            
-            {{ range .Paginator.Pagers }}
-                {{ if eq . $.Paginator }}
-                    <span class="pagination__link pagination__link--current" aria-current="page">{{ .PageNumber }}</span>
-                {{ else }}
-                    <a href="{{ .URL }}" class="pagination__link">{{ .PageNumber }}</a>
-                {{ end }}
-            {{ end }}
-            
-            {{ if .Paginator.HasNext }}
-                <a href="{{ .Paginator.Next.URL }}" class="pagination__link pagination__link--next" aria-label="下一頁">
-                    下一頁
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-            {{ end }}
-        </div>
-    </nav>
+<div class="articles-list">
+  <!-- 搜尋和篩選區 -->
+  <div class="list-search" role="search" aria-label="文章搜尋">
+    <label class="search-field">
+      <i class="fas fa-search search-icon" aria-hidden="true"></i>
+      <input type="text" id="article-search-input" placeholder="搜尋文章標題或摘要..." class="search-input" aria-label="搜尋文章">
+    </label>
+  </div>
+  
+  <!-- 分類標籤 -->
+  <div class="category-tags">
+    <button class="category-tag category-search-btn{{ if not .Tag }} active{{ end }}" data-tag="all" onclick="filterByTag('all')">全部文章</button>
+    {{ $tags := first 8 (sort .Page.Site.Taxonomies.tags.ByCount "Count" "desc") }}
+    {{ range $tags }}
+      <button class="category-tag category-search-btn{{ if eq (.Name | lower) .Tag }} active{{ end }}" data-tag="{{ .Name | lower }}" onclick="filterByTag('{{ .Name | lower }}')">{{ .Name }}</button>
     {{ end }}
+  </div>
+
+  <!-- 文章列表 -->
+  <div class="articles-list__grid">
+    {{ if not (gt (len .Paginator.Pages) 0) }}
+      <div class="empty-state">目前沒有符合條件的文章。</div>
+    {{ else }}
+      {{ range .Paginator.Pages }}
+        <article class="article-item" 
+          data-tags="{{ delimit (.Params.tags | default (slice)) "," | lower }}" 
+          data-title="{{ .Title }}" 
+          data-summary="{{ .Summary }}">
+          <div class="article-item__image">
+            {{ with .Params.image }}
+              <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+            {{ else }}
+              <img src="/uploads/images/articles/article-default.jpg" alt="{{ .Title }}" loading="lazy">
+            {{ end }}
+          </div>
+          
+          <div class="article-item__content">
+            <div class="article-item__meta">
+              <span class="article-item__date"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
+              {{ with .Params.category }}
+                <span class="article-topic-badge">{{ . }}</span>
+              {{ end }}
+            </div>
+            
+            <h3 class="article-item__title">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h3>
+            
+            <p class="article-item__summary">{{ .Summary }}</p>
+            
+            {{ with .Params.tags }}
+              <div class="article-item__tags">
+                {{ range first 3 . }}
+                  <span class="tag">{{ . }}</span>
+                {{ end }}
+              </div>
+            {{ end }}
+          </div>
+        </article>
+      {{ end }}
+    {{ end }}
+  </div>
+
+  <!-- 分頁導航 -->
+  {{ if gt .Paginator.TotalPages 1 }}
+    <nav class="pagination" role="navigation" aria-label="分頁導航">
+      <div class="pagination__info">
+        第{{ .Paginator.PageNumber }}/{{ .Paginator.TotalPages }}頁, 共 {{ .Paginator.TotalNumberOfElements }} 篇文章
+      </div>
+      <div class="pagination__controls">
+        {{ if .Paginator.HasPrev }}
+          {{ $prevURL := .Paginator.Prev.URL }}
+          {{ if .Tag }}
+            <a href="{{ $prevURL }}&tag={{ .Tag }}" class="pagination__link pagination__link--prev" aria-label="上一頁">
+              <i class="fas fa-chevron-left"></i>
+              上一頁
+            </a>
+          {{ else }}
+            <a href="{{ $prevURL }}" class="pagination__link pagination__link--prev" aria-label="上一頁">
+              <i class="fas fa-chevron-left"></i>
+              上一頁
+            </a>
+          {{ end }}
+        {{ end }}
+        
+        {{ range .Paginator.Pagers }}
+          {{ $pageURL := .URL }}
+          {{ if $.Tag }}
+            <a href="{{ $pageURL }}&tag={{ $.Tag }}" class="pagination__link {{ if eq . $.Paginator }} pagination__link--current{{ end }}">{{ .PageNumber }}</a>
+          {{ else }}
+            <a href="{{ $pageURL }}" class="pagination__link {{ if eq . $.Paginator }} pagination__link--current{{ end }}">{{ .PageNumber }}</a>
+          {{ end }}
+        {{ end }}
+        
+        {{ if .Paginator.HasNext }}
+          {{ $nextURL := .Paginator.Next.URL }}
+          {{ if .Tag }}
+            <a href="{{ $nextURL }}&tag={{ .Tag }}" class="pagination__link pagination__link--next" aria-label="下一頁">
+              下一頁
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          {{ else }}
+            <a href="{{ $nextURL }}" class="pagination__link pagination__link--next" aria-label="下一頁">
+              下一頁
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          {{ end }}
+        {{ end }}
+      </div>
+    </nav>
+  {{ end }}
 </div>
 
 <script>
+// 分類標籤篩選 - 全域函數
+function filterByTag(tag) {
+  if (tag === 'all') {
+    window.location.href = window.location.pathname;
+  } else {
+    const url = new URL(window.location);
+    url.searchParams.set('tag', tag);
+    window.location.href = url.toString();
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   const categoryButtons = document.querySelectorAll('.category-search-btn');
   const articleItems = document.querySelectorAll('.article-item');
   const searchInput = document.getElementById('article-search-input');
 
-  // Tag 篩選（只影響本頁卡片展示，不改變 URL）
-  categoryButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const tag = this.dataset.tag;
-      categoryButtons.forEach(btn => btn.classList.remove('active'));
-      this.classList.add('active');
+  // 頁面載入時自動套用 URL 參數的標籤篩選
+  const urlParams = new URLSearchParams(window.location.search);
+  const tag = urlParams.get('tag');
+  
+  if (tag) {
+    // 移除所有按鈕的 active 狀態
+    categoryButtons.forEach(btn => btn.classList.remove('active'));
+    
+    // 找到對應的標籤按鈕並設為 active
+    const targetButton = Array.from(categoryButtons).find(btn => 
+      btn.dataset.tag === tag
+    );
+    
+    if (targetButton) {
+      targetButton.classList.add('active');
+    }
+  }
 
-      articleItems.forEach(item => {
-        const tags = (item.dataset.tags || '').split(',');
-        const visible = tag === 'all' || tags.includes(tag);
-        item.style.display = visible ? 'block' : 'none';
-      });
-    });
-  });
-
-  // 搜尋（僅針對本頁文章卡片）
+  // 搜尋功能
   if (searchInput) {
     const normalize = (s) => (s || '').toLowerCase();
     searchInput.addEventListener('input', function() {
@@ -124,10 +156,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = normalize(item.dataset.title);
         const summary = normalize(item.dataset.summary);
         const match = !query || title.includes(query) || summary.includes(query);
-        // 保留分類過濾結果：只在當前 display!=='none' 的基礎上再套搜尋
         if (match) {
-          // 若先前被分類隱藏，保持隱藏；否則顯示
-          if (item.getAttribute('data-filter-hidden') !== 'true') item.style.display = 'block';
+          if (item.style.display !== 'none') item.style.display = 'block';
         } else {
           item.style.display = 'none';
         }
