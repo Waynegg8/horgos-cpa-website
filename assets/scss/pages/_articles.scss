@@ -416,6 +416,11 @@
     text-align: center;
   }
 }
+
+// 一般文章推薦導航（外觀與 .series-navigation 對齊）
+.article-navigation {
+  @extend .series-navigation;
+}
 // 相關文章
 .article-related {
   margin-top: $spacing-12;
