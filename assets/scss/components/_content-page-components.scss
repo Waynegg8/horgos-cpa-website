@@ -187,8 +187,10 @@
   }
 }
 
-// Sticky 平滑：避免內部元素造成抖動
-.two-column__sidebar, .two-column__sidebar--sticky { contain: layout paint; position: static; top: auto; }
+// Sticky：讓單一文章頁 TOC 能正常吸附
+.two-column__sidebar, .two-column__sidebar--sticky { position: static; top: auto; }
+// 文章單頁明確取消任何 contain，避免干擾 position: sticky
+body.articles[data-kind="page"] .two-column__sidebar { contain: none; }
 
 // FAQ分類區域
 .faq-categories {
