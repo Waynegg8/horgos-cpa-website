@@ -1,19 +1,15 @@
-{{ define "main" }}
+<!-- 文章列表頁側邊欄：僅保留分類 -->
 <div class="sidebar">
-  <div class="sidebar__section">
-    <h3 class="sidebar__title">文章分類</h3>
-    <ul class="sidebar__list">
-      {{ range .Site.Sections }}
-        {{ if eq .Section "articles" }}
-          {{ range .Sections }}
-            <li class="sidebar__item">
-              <a href="{{ .RelPermalink }}" class="sidebar__link{{ if eq .RelPermalink $.RelPermalink }} sidebar__link--active{{ end }}">{{ .Title | replace " - 霍爾果斯會計師事務所" "" }}</a>
-            </li>
-          {{ end }}
-        {{ end }}
+  <div class="sidebar-widget sidebar-categories">
+    <h3 class="sidebar-widget__title">文章分類</h3>
+    <ul class="sidebar-categories__list">
+      {{ $root := site.GetPage "section" "articles" }}
+      {{ range $root.Sections }}
+      <li class="sidebar-categories__item">
+        <a href="{{ .RelPermalink }}" class="sidebar-categories__link {{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">{{ .Title | replace " - 霍爾果斯會計師事務所" "" }}</a>
+      </li>
       {{ end }}
     </ul>
   </div>
 </div>
-{{ end }}
 

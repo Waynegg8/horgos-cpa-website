@@ -65,36 +65,7 @@
     </div>
     
     <!-- 分頁導航 -->
-    {{ if gt .Paginator.TotalPages 1 }}
-    <nav class="pagination" role="navigation" aria-label="分頁導航">
-        <div class="pagination__info">
-            第 {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }} 頁，共 {{ .Paginator.TotalNumberOfElements }} 個影片
-        </div>
-        <div class="pagination__controls">
-            {{ if .Paginator.HasPrev }}
-                <a href="{{ .Paginator.Prev.URL }}" class="pagination__link pagination__link--prev" aria-label="上一頁">
-                    <i class="fas fa-chevron-left"></i>
-                    上一頁
-                </a>
-            {{ end }}
-            
-            {{ range .Paginator.Pagers }}
-                {{ if eq . $.Paginator }}
-                    <span class="pagination__link pagination__link--current" aria-current="page">{{ .PageNumber }}</span>
-                {{ else }}
-                    <a href="{{ .URL }}" class="pagination__link">{{ .PageNumber }}</a>
-                {{ end }}
-            {{ end }}
-            
-            {{ if .Paginator.HasNext }}
-                <a href="{{ .Paginator.Next.URL }}" class="pagination__link pagination__link--next" aria-label="下一頁">
-                    下一頁
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-            {{ end }}
-        </div>
-    </nav>
-    {{ end }}
+    {{ template "_internal/pagination.html" . }}
 </div>
 
 <script>
