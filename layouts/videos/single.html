@@ -27,21 +27,18 @@
           
           {{/* 單頁不再本地插入 CTA，統一於 base 模板 SEO 區塊上方輸出 */}}
           
-          {{/* 相關影片：嚴格同分類；同分類內優先同標籤，否則同分類最新；若無分類則不顯示 */}}
+          {{/* 相關影片：優先同系列，其次同分類（文件規範） */}}
           {{ $allVideos := where .Site.RegularPages "Section" "videos" }}
-          {{ $cat := .Params.category }}
           {{ $related := slice }}
-          {{ if ne $cat nil }}
-            {{ $sameCat := where $allVideos "Params.category" $cat }}
-            {{ if .Params.tags }}
-              {{ $tagged := where $sameCat "Params.tags" "intersect" .Params.tags }}
-              {{ if gt (len $tagged) 0 }}
-                {{ $related = $tagged }}
-              {{ else }}
-                {{ $related = $sameCat.ByDate.Reverse }}
-              {{ end }}
+          {{ if .Params.series }}
+            {{ $related = where $allVideos "Params.series" .Params.series }}
+          {{ end }}
+          {{ if or (not .Params.series) (eq (len $related) 0) }}
+            {{ $cat := .Params.category }}
+            {{ if ne $cat nil }}
+              {{ $related = where $allVideos "Params.category" $cat }}
             {{ else }}
-              {{ $related = $sameCat.ByDate.Reverse }}
+              {{ $related = slice }}
             {{ end }}
           {{ end }}
           {{ $related = where $related "Permalink" "!=" .Permalink }}
