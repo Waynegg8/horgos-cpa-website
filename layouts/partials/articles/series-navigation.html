@@ -114,6 +114,38 @@
   {{ if lt (add $idx 1) (len $catPages) }}{{ $scratch.Set "next" (index $catPages (add $idx 1)) }}{{ end }}
 {{ end }}
 
+{{/* 2) 若同分類沒有前/後，採用文件精神的保底策略以避免空白：
+      優先：同分類其他系列的 series_order=1；其次：其他分類系列的 series_order=1；最後：全站依日期回退 */}}
+{{ if not ($scratch.Get "prev") }}
+  {{ $sameCatSeriesFirst := (where (where (where $all "Params.series" "!=" nil) "Params.category" $cat) "Params.series_order" 1) }}
+  {{ if gt (len $sameCatSeriesFirst) 0 }}
+    {{ $scratch.Set "prev" (index (sort $sameCatSeriesFirst ".Date" "desc") 0) }}
+  {{ else }}
+    {{ $anySeriesFirst := where $all "Params.series_order" 1 }}
+    {{ if gt (len $anySeriesFirst) 0 }}
+      {{ $scratch.Set "prev" (index (sort $anySeriesFirst ".Date" "desc") 0) }}
+    {{ else }}
+      {{ $fallbackPrev := where (sort $all ".Date" "desc") "RelPermalink" "!=" $current.RelPermalink }}
+      {{ if gt (len $fallbackPrev) 0 }}{{ $scratch.Set "prev" (index $fallbackPrev 0) }}{{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if not ($scratch.Get "next") }}
+  {{ $sameCatSeriesFirstN := (where (where (where $all "Params.series" "!=" nil) "Params.category" $cat) "Params.series_order" 1) }}
+  {{ if gt (len $sameCatSeriesFirstN) 0 }}
+    {{ $scratch.Set "next" (index (sort $sameCatSeriesFirstN ".Date" "desc") 0) }}
+  {{ else }}
+    {{ $anySeriesFirstN := where $all "Params.series_order" 1 }}
+    {{ if gt (len $anySeriesFirstN) 0 }}
+      {{ $scratch.Set "next" (index (sort $anySeriesFirstN ".Date" "desc") 0) }}
+    {{ else }}
+      {{ $fallbackNext := where (sort $all ".Date" "asc") "RelPermalink" "!=" $current.RelPermalink }}
+      {{ if gt (len $fallbackNext) 0 }}{{ $scratch.Set "next" (index $fallbackNext 0) }}{{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
 {{/* 若推薦到系列文章則改指向其 series_order=1 */}}
 {{ with ($scratch.Get "prev") }}
   {{ if .Params.series }}
