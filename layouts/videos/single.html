@@ -47,7 +47,29 @@
               {{ end }}
             {{ end }}
           {{ end }}
-          {{ $related := sort ($scratch.Get "candidates") ".Date" "desc" | first 3 }}
+          {{/* 先取「其他主題的第一部」候選，若不足 3 再以其他主題的最新影片補滿 */}}
+          {{ $initial := sort ($scratch.Get "candidates") ".Date" "desc" }}
+          {{ $sel := newScratch }}
+          {{ $sel.Set "list" (slice) }}
+          {{ $sel.Set "links" (slice) }}
+          {{ range $initial }}
+            {{ $sel.Add "list" (slice .) }}
+            {{ $sel.Add "links" (slice .RelPermalink) }}
+          {{ end }}
+
+          {{ if lt (len ($sel.Get "list")) 3 }}
+            {{ $fallbackAll := sort $allVideos ".Date" "desc" }}
+            {{ range $fallbackAll }}
+              {{ $cat := .Params.category }}
+              {{ if and (ne $cat $currentCat) (ne .RelPermalink $.RelPermalink) (not (in ($sel.Get "links") .RelPermalink)) }}
+                {{ $sel.Add "list" (slice .) }}
+                {{ $sel.Add "links" (slice .RelPermalink) }}
+              {{ end }}
+              {{ if ge (len ($sel.Get "list")) 3 }}{{ break }}{{ end }}
+            {{ end }}
+          {{ end }}
+
+          {{ $related := first 3 ($sel.Get "list") }}
           {{ if gt (len $related) 0 }}
           <div class="related-videos">
             <h3>或許你還想看看</h3>
