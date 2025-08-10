@@ -88,6 +88,23 @@
   body.videos[data-kind="section"] &__sidebar,
   body.faq[data-kind="section"] &__sidebar,
   body.downloads[data-kind="section"] &__sidebar { position: static; top: auto; height: auto; }
+
+  // 列表頁側欄精簡寬度（視覺更輕巧）
+  body.articles[data-kind="section"] &__sidebar,
+  body.videos[data-kind="section"] &__sidebar,
+  body.faq[data-kind="section"] &__sidebar,
+  body.downloads[data-kind="section"] &__sidebar {
+    width: 260px; // 從 320px 縮至 260px
+  }
+
+  @include tablet {
+    body.articles[data-kind="section"] &__sidebar,
+    body.videos[data-kind="section"] &__sidebar,
+    body.faq[data-kind="section"] &__sidebar,
+    body.downloads[data-kind="section"] &__sidebar {
+      width: 220px; // 平板再收斂
+    }
+  }
   
   @include tablet {
     gap: $spacing-5; // 平板版減少間距

@@ -57,7 +57,7 @@
   &-widget {
     background-color: $color-bg-secondary;
     border-radius: $border-radius-lg;
-    padding: $spacing-4; // 再收斂內邊距，降低總高度
+    padding: $spacing-3; // 再收斂內邊距，降低總高度，讓外觀更輕
     box-shadow: $shadow-sm;
     &:not(:last-child){ margin-bottom: $spacing-4; }
     min-width: 0; // 防止內部文字撐破
@@ -65,7 +65,7 @@
     
     &__title {
       margin: 0 0 $spacing-4 0;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
       color: $color-text-primary;
       border-bottom: 2px solid $color-accent-highlight;
@@ -96,7 +96,7 @@
     &__link {
       display: block;
       width: 100%;
-      padding: $spacing-2 $spacing-3;
+      padding: $spacing-2 $spacing-3; // 保持可點擊範圍
       text-decoration: none;
       border-radius: $border-radius-md;
       border: 1px solid $color-border-primary;
@@ -106,12 +106,8 @@
       font-weight: 600;
       transition: background $transition-base ease, transform $transition-base ease, box-shadow $transition-base ease;
 
-      &:hover,
-      &.active {
-        background: rgba($color-text-primary, 0.06);
-        transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-      }
+      &:hover { background: rgba($color-text-primary, 0.06); }
+      &.active { background: rgba($color-accent-highlight, 0.1); border-color: rgba($color-accent-highlight, 0.4); }
     }
     
     &__count {

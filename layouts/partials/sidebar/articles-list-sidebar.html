@@ -6,7 +6,7 @@
       {{ $root := site.GetPage "section" "articles" }}
       {{ range $root.Sections }}
       <li class="sidebar-categories__item">
-        <a href="{{ .RelPermalink }}" class="sidebar-categories__link {{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">{{ .Title }}</a>
+        <a href="{{ .RelPermalink }}" class="sidebar-categories__link {{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">{{ .Title | replace " - 霍爾果斯會計師事務所" "" }}</a>
       </li>
       {{ end }}
     </ul>
