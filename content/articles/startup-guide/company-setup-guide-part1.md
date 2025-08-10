@@ -8,8 +8,7 @@ cover: "/uploads/images/articles/company-setup-guide.webp"
 author: "張會計師"
 seo_title: "公司設立完整指南：如何選擇公司型態與準備文件 - 霍爾果斯會計事務所"
 seo_description: "了解公司設立的前置準備工作，包含選擇適合的公司型態、準備必要文件和規劃資本額。"
-series: "company-setup-guide"
-series_order: 1
+order: 1
 draft: false
 ---
 

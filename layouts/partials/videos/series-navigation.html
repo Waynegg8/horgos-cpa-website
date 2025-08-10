@@ -4,125 +4,106 @@
 
 {{ $scratch := newScratch }}
 
-{{ if .Params.series }}
-<!-- 系列導航（依文件三層優先） -->
-{{ $series := .Params.series }}
-{{ $category := .Params.category }}
-{{ $seriesOrder := 1 }}
-{{ with .Params.series_order }}{{ $seriesOrder = (int .) }}{{ end }}
-{{ $seriesPosts := where $all "Params.series" $series }}
-{{ $seriesCount := len $seriesPosts }}
-{{ $firstList := where $seriesPosts "Params.series_order" 1 }}
-{{ $scratch.Set "firstPost" false }}
-{{ if gt (len $firstList) 0 }}{{ $scratch.Set "firstPost" (index $firstList 0) }}{{ end }}
-
-<div class="series-navigation">
-  <div class="series-navigation__links">
-    {{/* 上一篇候選 */}}
-    {{ $scratch.Set "prev" false }}
-    {{ if gt $seriesOrder 1 }}
-      {{ $prevList := where $seriesPosts "Params.series_order" (sub $seriesOrder 1) }}
-      {{ if gt (len $prevList) 0 }}{{ $scratch.Set "prev" (index $prevList 0) }}{{ end }}
-    {{ end }}
-    {{ if not ($scratch.Get "prev") }}
-      {{ $sameCatSeriesFirst := where (where (where $all "Params.series" "!=" nil) "Params.series" "!=" $series) "Params.category" $category }}
-      {{ $sameCatSeriesFirst = where $sameCatSeriesFirst "Params.series_order" 1 }}
-      {{ if gt (len $sameCatSeriesFirst) 0 }}
-        {{ $scratch.Set "prev" (index (sort $sameCatSeriesFirst ".Date" "desc") 0) }}
-      {{ else }}
-        {{ $anyCatSeriesFirst := where (where $all "Params.series_order" 1) "Params.series" "!=" $series }}
-        {{ if gt (len $anyCatSeriesFirst) 0 }}
-          {{ $scratch.Set "prev" (index (sort $anyCatSeriesFirst ".Date" "desc") 0) }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-
-    {{/* 下一篇候選 */}}
-    {{ $scratch.Set "next" false }}
-    {{ if lt $seriesOrder $seriesCount }}
-      {{ $nextList := where $seriesPosts "Params.series_order" (add $seriesOrder 1) }}
-      {{ if gt (len $nextList) 0 }}{{ $scratch.Set "next" (index $nextList 0) }}{{ end }}
-    {{ end }}
-    {{ if not ($scratch.Get "next") }}
-      {{ $sameCatSeriesFirstN := where (where (where $all "Params.series" "!=" nil) "Params.series" "!=" $series) "Params.category" $category }}
-      {{ $sameCatSeriesFirstN = where $sameCatSeriesFirstN "Params.series_order" 1 }}
-      {{ if gt (len $sameCatSeriesFirstN) 0 }}
-        {{ $scratch.Set "next" (index (sort $sameCatSeriesFirstN ".Date" "desc") 0) }}
-      {{ else }}
-        {{ $anyCatSeriesFirstN := where (where $all "Params.series_order" 1) "Params.series" "!=" $series }}
-        {{ if gt (len $anyCatSeriesFirstN) 0 }}
-          {{ $scratch.Set "next" (index (sort $anyCatSeriesFirstN ".Date" "desc") 0) }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-
-    {{/* 輸出 */}}
-    {{ with ($scratch.Get "prev") }}
-      <div class="series-navigation__item">
-        <a class="btn btn-secondary series-navigation__btn" href="{{ .RelPermalink }}">上一篇：{{ .Title }}</a>
-        {{ if ne (.Params.series) $series }}
-        <div class="series-navigation__caption">上一篇內容來自其他系列推薦。</div>
-        {{ end }}
-      </div>
-    {{ end }}
-
-    {{ with ($scratch.Get "next") }}
-      <div class="series-navigation__item">
-        <a class="btn btn-secondary series-navigation__btn" href="{{ .RelPermalink }}">下一篇：{{ .Title }}</a>
-        {{ if ne (.Params.series) $series }}
-        <div class="series-navigation__caption">下一篇內容來自其他系列推薦。</div>
-        {{ end }}
-      </div>
-    {{ end }}
-  </div>
-</div>
-
-{{ else }}
-<!-- 非系列影片：同分類相鄰；若推薦到系列影片則指向該系列第一部 -->
+{{/* 改為與文章相同的分類＋order邏輯（不使用系列） */}}
 {{ $cat := .Params.category }}
-{{ $catPages := cond (ne $cat nil) (where $all "Params.category" $cat) (slice) }}
-{{ $catPages = sort $catPages ".Date" "asc" }}
-{{ $idx := -1 }}
-{{ range $i, $p := $catPages }}{{ if eq $p.RelPermalink $current.RelPermalink }}{{ $idx = $i }}{{ end }}{{ end }}
-{{ $scratch.Set "prev" false }}
-{{ $scratch.Set "next" false }}
-{{ if ge $idx 0 }}
-  {{ if gt $idx 0 }}{{ $scratch.Set "prev" (index $catPages (sub $idx 1)) }}{{ end }}
-  {{ if lt (add $idx 1) (len $catPages) }}{{ $scratch.Set "next" (index $catPages (add $idx 1)) }}{{ end }}
+
+{{ $sameCat := slice }}
+{{ if ne $cat nil }}
+  {{ $sameCat = where $all "Params.category" $cat }}
 {{ end }}
 
-{{ with ($scratch.Get "prev") }}
-  {{ if .Params.series }}
-    {{ if ne (int (default 1 .Params.series_order)) 1 }}
-      {{ $firstP := where (where $all "Params.series" .Params.series) "Params.series_order" 1 }}
-      {{ if gt (len $firstP) 0 }}{{ $scratch.Set "prev" (index $firstP 0) }}{{ end }}
+{{ $withOrder := (where $sameCat "Params.order" "!=" nil) }}
+{{ $withOrder = sort $withOrder "Params.order" "asc" }}
+{{ $noOrder := (where $sameCat "Params.order" "==" nil) }}
+{{ $noOrder = sort $noOrder ".Date" "asc" }}
+{{ $scratch.Set "sortedCat" (slice) }}
+{{ range $withOrder }}{{ $scratch.Add "sortedCat" (slice .) }}{{ end }}
+{{ range $noOrder }}{{ $scratch.Add "sortedCat" (slice .) }}{{ end }}
+{{ $sortedCat := ($scratch.Get "sortedCat") }}
+
+{{/* 其他分類第一部清單 */}}
+{{ $scratch.Set "seenCats" (dict) }}
+{{ $scratch.Set "otherFirst" (slice) }}
+{{ range $all }}
+  {{ $c := .Params.category }}
+  {{ if ne $c nil }}
+    {{ if or (eq $cat nil) (ne $c $cat) }}
+      {{ if not (isset ($scratch.Get "seenCats") $c) }}
+        {{ $catPages := where $all "Params.category" $c }}
+        {{ $pHasOrder := where $catPages "Params.order" "!=" nil }}
+        {{ $first := cond (gt (len $pHasOrder) 0) (index (sort $pHasOrder "Params.order" "asc") 0) (index (sort $catPages ".Date" "asc") 0) }}
+        {{ if $first }}
+          {{ $scratch.Add "otherFirst" (slice $first) }}
+          {{ $scratch.SetInMap "seenCats" $c true }}
+        {{ end }}
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
-{{ with ($scratch.Get "next") }}
-  {{ if .Params.series }}
-    {{ if ne (int (default 1 .Params.series_order)) 1 }}
-      {{ $firstN := where (where $all "Params.series" .Params.series) "Params.series_order" 1 }}
-      {{ if gt (len $firstN) 0 }}{{ $scratch.Set "next" (index $firstN 0) }}{{ end }}
+{{ $otherFirst := sort ($scratch.Get "otherFirst") ".Date" "desc" }}
+
+{{ $prev := false }}
+{{ $next := false }}
+{{ if ne $cat nil }}
+  {{ $idx := -1 }}
+  {{ range $i, $p := $sortedCat }}{{ if eq $p.RelPermalink .RelPermalink }}{{ $idx = $i }}{{ end }}{{ end }}
+  {{ if ge $idx 0 }}
+    {{ if gt $idx 0 }}{{ $prev = index $sortedCat (sub $idx 1) }}{{ end }}
+    {{ if lt (add $idx 1) (len $sortedCat) }}{{ $next = index $sortedCat (add $idx 1) }}{{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if not $prev }}
+  {{ if gt (len $otherFirst) 0 }}
+    {{ $prev = index $otherFirst 0 }}
+  {{ end }}
+{{ end }}
+
+{{ if not $next }}
+  {{ if gt (len $otherFirst) 0 }}
+    {{ range $i, $p := $otherFirst }}
+      {{ if or (not $prev) (ne $p.RelPermalink $prev.RelPermalink) }}
+        {{ $next = $p }}
+        {{ break }}
+      {{ end }}
+    {{ end }}
+    {{ if not $next }}
+      {{ if $prev }}
+        {{ $pcat := $prev.Params.category }}
+        {{ $plist := where $all "Params.category" $pcat }}
+        {{ $pHasOrder := where $plist "Params.order" "!=" nil }}
+        {{ if gt (len $pHasOrder) 1 }}
+          {{ $sorted := sort $pHasOrder "Params.order" "asc" }}
+          {{ $second := index $sorted 1 }}
+          {{ if ne $second.RelPermalink .RelPermalink }}{{ $next = $second }}{{ end }}
+        {{ else }}
+          {{ $sorted := sort $plist ".Date" "desc" }}
+          {{ range $sorted }}
+            {{ if and (ne .RelPermalink $prev.RelPermalink) (ne .RelPermalink $.RelPermalink) }}
+              {{ $next = . }}
+              {{ break }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
 
 <div class="series-navigation">
   <div class="series-navigation__links">
-    {{ with ($scratch.Get "prev") }}
+    {{ with $prev }}
       <div class="series-navigation__item">
         <a class="btn btn-secondary series-navigation__btn" href="{{ .RelPermalink }}">上一篇：{{ .Title }}</a>
-        {{ if .Params.series }}<div class="series-navigation__caption">上一篇內容來自其他系列推薦。</div>{{ end }}
+        {{ if ne .Params.category $cat }}<div class="series-navigation__caption">上一篇內容來自其他主題推薦。</div>{{ end }}
       </div>
     {{ end }}
-    {{ with ($scratch.Get "next") }}
+    {{ with $next }}
       <div class="series-navigation__item">
         <a class="btn btn-secondary series-navigation__btn" href="{{ .RelPermalink }}">下一篇：{{ .Title }}</a>
-        {{ if .Params.series }}<div class="series-navigation__caption">下一篇內容來自其他系列推薦。</div>{{ end }}
+        {{ if ne .Params.category $cat }}<div class="series-navigation__caption">下一篇內容來自其他主題推薦。</div>{{ end }}
       </div>
     {{ end }}
   </div>
 </div>
-{{ end }}
 

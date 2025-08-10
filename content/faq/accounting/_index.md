@@ -2,8 +2,8 @@
 title: "記帳問題"
 description: "日常記帳和會計處理常見問題解答"
 date: 2024-05-24
-seo_title: "記帳會計處理常見問題解答 - Hugo會計事務所"
-seo_description: "解答日常記帳、會計科目使用、憑證處理等會計實務問題，提供專業建議與操作指導，幫助您正確處理會計事務。立即查看 https://hugo-accounting.com/faq/accounting/"
+seo_title: "記帳會計處理常見問題解答 - 霍爾果斯"
+seo_description: "解答日常記帳、會計科目使用、憑證處理等會計實務問題，提供專業建議與操作指導，幫助您正確處理會計事務。立即查看 https://horgoscpa.com/faq/accounting/"
 ---
 
 ## 記帳問題

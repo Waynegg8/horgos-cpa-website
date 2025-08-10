@@ -2,7 +2,7 @@
 title: "發票與進項扣抵常見錯誤：避免被補稅的 7 個關鍵"
 date: 2024-07-02
 category: "tax-planning"
-series: "稅務指南"
+order: 2
 description: "整理營業稅進項扣抵的實務重點與常見錯誤，提供帳務與文件留存的自我檢查表。"
 ---
 

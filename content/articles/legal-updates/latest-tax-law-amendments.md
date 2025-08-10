@@ -6,10 +6,9 @@ category: "legal-updates"
 tags: ["稅法修正", "營所稅", "綜所稅"]
 cover: "/uploads/images/articles/tax-law-updates.webp"
 author: "陳稅務"
-seo_title: "2024年最新稅法修正重點解析 - Hugo會計事務所"
-seo_description: "了解2024年最新稅法修正的重要內容，包含營所稅、綜所稅、營業稅等變動，以及對企業和個人的影響。立即訪問 https://hugo-accounting.com/articles/legal-updates/latest-tax-law-amendments/ 獲取最新稅法資訊。"
-series: "tax-law-updates"
-series_order: 1
+seo_title: "2024年最新稅法修正重點解析 - 霍爾果斯"
+seo_description: "了解2024年最新稅法修正的重要內容，包含營所稅、綜所稅、營業稅等變動，以及對企業和個人的影響。立即訪問 https://horgoscpa.com/articles/legal-updates/latest-tax-law-amendments/ 獲取最新稅法資訊。"
+order: 1
 draft: false
 ---
 

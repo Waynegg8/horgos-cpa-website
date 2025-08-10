@@ -4,10 +4,9 @@ date: "2024-05-18"
 description: "企業薪資結構規劃指南與稅務優化策略"
 category: "others"
 tags: ["薪資規劃", "員工福利", "節稅"]
-series: "hr-management"
-series_order: 1
-seo_title: "企業薪資結構規劃與稅務優化策略 - Hugo會計事務所"
-seo_description: "專業會計師解析企業薪資結構規劃方法，包含各種薪酬組成部分的稅務影響、福利項目設計與實務案例分析。立即了解 https://hugo-accounting.com/faq/others/salary-benefits/"
+order: 1
+seo_title: "企業薪資結構規劃與稅務優化策略 - 霍爾果斯"
+seo_description: "專業會計師解析企業薪資結構規劃方法，包含各種薪酬組成部分的稅務影響、福利項目設計與實務案例分析。立即了解 https://horgoscpa.com/faq/others/salary-benefits/"
 draft: false
 ---
 

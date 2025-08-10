@@ -7,10 +7,9 @@ tags: ["公司設立", "創業", "工商登記"]
 youtube_id: "xxxxxxxx" # 替換為實際YouTube ID
 thumbnail: "/uploads/images/videos/company-setup-thumbnail.webp"
 duration: "18:42"
-series: "startup-guide"
-series_order: 1
-seo_title: "公司設立完整指南影片 - Hugo會計事務所"
-seo_description: "專業會計師詳解公司設立流程、資本額規劃、登記文件準備等關鍵步驟，幫助創業者順利完成公司設立。立即觀看 https://hugo-accounting.com/videos/popular/company-setup-guide/"
+order: 1
+seo_title: "公司設立完整指南影片 - 霍爾果斯"
+seo_description: "專業會計師詳解公司設立流程、資本額規劃、登記文件準備等關鍵步驟，幫助創業者順利完成公司設立。立即觀看 https://horgoscpa.com/videos/popular/company-setup-guide/"
 draft: false
 ---
 

@@ -4,8 +4,7 @@ date: "2024-05-10"
 description: "解析不同公司類型的優缺點與適用情境"
 category: "startup"
 tags: ["公司設立", "創業", "工商登記"]
-series: "company-setup"
-series_order: 1
+order: 1
 seo_title: "如何選擇適合的公司類型？有限公司、股份有限公司和獨資企業比較 - 霍爾果斯會計事務所"
 seo_description: "專業會計師解析有限公司、股份有限公司和獨資企業的差異、優缺點與適用情境。"
 draft: false

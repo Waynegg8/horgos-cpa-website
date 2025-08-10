@@ -4,10 +4,9 @@ date: "2024-05-20"
 description: "中小企業保險規劃指南與風險管理策略"
 category: "others"
 tags: ["企業保險", "風險管理", "財務規劃"]
-series: "hr-management"
-series_order: 2
-seo_title: "中小企業保險規劃指南與風險管理策略 - Hugo會計事務所"
-seo_description: "專業會計師解析中小企業必要與選擇性保險項目，包含各類保險的成本效益分析、投保策略與實務案例說明。立即了解 https://hugo-accounting.com/faq/others/business-insurance/"
+order: 2
+seo_title: "中小企業保險規劃指南與風險管理策略 - 霍爾果斯"
+seo_description: "專業會計師解析中小企業必要與選擇性保險項目，包含各類保險的成本效益分析、投保策略與實務案例說明。立即了解 https://horgoscpa.com/faq/others/business-insurance/"
 draft: false
 ---
 

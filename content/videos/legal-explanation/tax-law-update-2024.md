@@ -7,10 +7,9 @@ tags: ["稅法修正", "法規更新", "所得稅"]
 youtube_id: "xxxxxxxx" # 替換為實際YouTube ID
 thumbnail: "/uploads/images/videos/tax-law-update-thumbnail.webp"
 duration: "25:30"
-series: "tax-law-updates"
-series_order: 1
-seo_title: "2024年稅法修正重點解析 - Hugo會計事務所"
-seo_description: "專業會計師詳解2024年最新稅法修正內容、適用對象與影響範圍，幫助企業及個人因應稅制變革，做好稅務規劃。立即觀看 https://hugo-accounting.com/videos/legal-explanation/tax-law-update-2024/"
+order: 1
+seo_title: "2024年稅法修正重點解析 - 霍爾果斯"
+seo_description: "專業會計師詳解2024年最新稅法修正內容、適用對象與影響範圍，幫助企業及個人因應稅制變革，做好稅務規劃。立即觀看 https://horgoscpa.com/videos/legal-explanation/tax-law-update-2024/"
 draft: false
 ---
 

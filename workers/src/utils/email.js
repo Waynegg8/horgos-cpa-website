@@ -27,7 +27,7 @@ export async function sendEmail(options, env) {
     
     // 準備郵件數據
     const emailData = {
-      from: env.EMAIL_FROM || 'noreply@hugo-accounting.com',
+      from: env.EMAIL_FROM || 'noreply@horgoscpa.com',
       to,
       subject,
       text,
@@ -77,19 +77,19 @@ export async function sendAppointmentConfirmation(appointment, env) {
   const { name, email, service_type } = appointment;
   const appointmentId = appointment.id || generateAppointmentId();
   
-  const subject = `【Hugo會計事務所】預約確認 #${appointmentId}`;
+  const subject = `【霍爾果斯】預約確認 #${appointmentId}`;
   
   const html = `
     <div style="font-family: 'Noto Sans TC', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #374151;">
       <div style="text-align: center; margin-bottom: 30px;">
-        <img src="https://hugo-accounting.com/logo.png" alt="Hugo會計事務所" style="max-width: 200px;">
+        <img src="https://horgoscpa.com/logo.png" alt="霍爾果斯" style="max-width: 200px;">
       </div>
       
       <h1 style="color: #204B6E; font-size: 24px; margin-bottom: 20px;">預約確認通知</h1>
       
       <p>親愛的 ${name} 您好：</p>
       
-      <p>感謝您預約Hugo會計事務所的${getServiceTypeName(service_type)}服務。我們已收到您的預約申請，以下是您的預約詳情：</p>
+      <p>感謝您預約霍爾果斯的${getServiceTypeName(service_type)}服務。我們已收到您的預約申請，以下是您的預約詳情：</p>
       
       <div style="background-color: #F5F6F5; padding: 15px; border-radius: 8px; margin: 20px 0;">
         <p><strong>預約編號：</strong> #${appointmentId}</p>
@@ -103,12 +103,12 @@ export async function sendAppointmentConfirmation(appointment, env) {
       <ul>
         <li>電話：(04) 2345-6789</li>
         <li>LINE：@hugo-accounting</li>
-        <li>Email：contact@hugo-accounting.com</li>
+        <li>Email：contact@horgoscpa.com</li>
       </ul>
       
       <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #E5E7EB; font-size: 14px; color: #6B7280;">
         <p>此為系統自動發送的郵件，請勿直接回覆。</p>
-        <p>© 2024 Hugo會計師事務所 版權所有</p>
+        <p>© 2024 霍爾果斯 版權所有</p>
       </div>
     </div>
   `;
@@ -118,7 +118,7 @@ export async function sendAppointmentConfirmation(appointment, env) {
 
 親愛的 ${name} 您好：
 
-感謝您預約Hugo會計事務所的${getServiceTypeName(service_type)}服務。我們已收到您的預約申請，以下是您的預約詳情：
+感謝您預約霍爾果斯的${getServiceTypeName(service_type)}服務。我們已收到您的預約申請，以下是您的預約詳情：
 
 預約編號： #${appointmentId}
 服務類型： ${getServiceTypeName(service_type)}
@@ -129,10 +129,10 @@ export async function sendAppointmentConfirmation(appointment, env) {
 如有任何問題，請隨時與我們聯繫：
 - 電話：(04) 2345-6789
 - LINE：@hugo-accounting
-- Email：contact@hugo-accounting.com
+- Email：contact@horgoscpa.com
 
 此為系統自動發送的郵件，請勿直接回覆。
-© 2024 Hugo會計師事務所 版權所有
+© 2024 霍爾果斯 版權所有
   `;
   
   return await sendEmail({ to: email, subject, html, text }, env);
@@ -173,7 +173,7 @@ export async function sendAdminNotification(appointment, env) {
       
       <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #E5E7EB; font-size: 14px; color: #6B7280;">
         <p>此為系統自動發送的郵件。</p>
-        <p>© 2024 Hugo會計師事務所 版權所有</p>
+        <p>© 2024 霍爾果斯 版權所有</p>
       </div>
     </div>
   `;
@@ -195,11 +195,11 @@ ${content || '(無填寫)'}
 請盡快安排客服人員與客戶聯繫，確認諮詢時間和詳細事項。
 
 此為系統自動發送的郵件。
-© 2024 Hugo會計師事務所 版權所有
+© 2024 霍爾果斯 版權所有
   `;
   
   return await sendEmail({ 
-    to: env.ADMIN_EMAIL || 'admin@hugo-accounting.com', 
+    to: env.ADMIN_EMAIL || 'admin@horgoscpa.com', 
     subject, 
     html, 
     text 

@@ -2,7 +2,7 @@
 title: "2024 扣繳稅率與申報規定更新一覽"
 date: 2024-08-05
 category: "legal-updates"
-series: "法規更新"
+order: 2
 description: "彙整 2024 年度常見給付項目之扣繳稅率與新制重點，含實務案例。"
 ---
 

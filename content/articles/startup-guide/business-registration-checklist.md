@@ -2,7 +2,7 @@
 title: "公司設立實務清單：從預查到開戶的關鍵步驟"
 date: 2024-06-25
 category: "startup-guide"
-series: "創業教室"
+order: 4
 description: "以清單化方式整理公司設立前後的流程、文件與常見時程，供創業者逐項檢查。"
 ---
 

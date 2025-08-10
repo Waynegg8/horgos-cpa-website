@@ -12,8 +12,13 @@
       {{ end }}
     </div>
     
-    <div class="video-card-content">
+      <div class="video-card-content">
       <h3 class="video-title">{{ .Title }}</h3>
+      {{ with .Params.category }}
+      <div class="video-topic-badge">
+        {{ . }} 第 1 篇
+      </div>
+      {{ end }}
       
       <div class="video-meta">
         <span class="video-date">
@@ -28,12 +33,7 @@
         </span>
         {{ end }}
         
-        {{ if .Params.series }}
-        <span class="video-series">
-          <i class="fas fa-list-ol"></i>
-          系列: {{ .Params.series }}
-        </span>
-        {{ end }}
+        {{/* 移除系列顯示，統一以主題徽章顯示 */}}
       </div>
       
       <div class="video-description">

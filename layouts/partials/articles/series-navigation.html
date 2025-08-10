@@ -1,3 +1,141 @@
+{{/*
+  文章導航（不使用系列）：
+  - 有分類：同分類按 order（缺省以日期補序）找相鄰；到邊界時改推其他分類的第一篇
+  - 無分類：上一篇、下一篇皆從其他分類的第一篇中選，且兩側不可相同
+  - 確保左右不會是同一篇；必要時以「該分類第二篇」或「全站最新非當前」作最後保底
+*/}}
+
+{{ $current := . }}
+{{ $all := where .Site.RegularPages "Section" "articles" }}
+{{ $all = where $all "Params.draft" "!=" true }}
+{{ $scratch := newScratch }}
+
+{{ $cat := .Params.category }}
+
+{{/* 建立同分類清單（僅當有分類時）並依 order→日期 排序 */}}
+{{ $sameCat := slice }}
+{{ if ne $cat nil }}
+  {{ $sameCat = where $all "Params.category" $cat }}
+{{ end }}
+
+{{ $withOrder := (where $sameCat "Params.order" "!=" nil) }}
+{{ $withOrder = sort $withOrder "Params.order" "asc" }}
+{{ $noOrder := (where $sameCat "Params.order" "==" nil) }}
+{{ $noOrder = sort $noOrder ".Date" "asc" }}
+
+{{ $scratch.Set "sortedCat" (slice) }}
+{{ range $withOrder }}{{ $scratch.Add "sortedCat" (slice .) }}{{ end }}
+{{ range $noOrder }}{{ $scratch.Add "sortedCat" (slice .) }}{{ end }}
+{{ $sortedCat := ($scratch.Get "sortedCat") }}
+
+{{/* 其他分類的第一篇清單（排序：各分類第一篇日期新→舊） */}}
+{{ $scratch.Set "seenCats" (dict) }}
+{{ $scratch.Set "otherFirst" (slice) }}
+{{ range $all }}
+  {{ $c := .Params.category }}
+  {{ if ne $c nil }}
+    {{ if or (eq $cat nil) (ne $c $cat) }}
+      {{ if not (isset ($scratch.Get "seenCats") $c) }}
+        {{ $catPages := where $all "Params.category" $c }}
+        {{ $pHasOrder := where $catPages "Params.order" "!=" nil }}
+        {{ $first := false }}
+        {{ if gt (len $pHasOrder) 0 }}
+          {{ $first = index (sort $pHasOrder "Params.order" "asc") 0 }}
+        {{ else }}
+          {{ $first = index (sort $catPages ".Date" "asc") 0 }}
+        {{ end }}
+        {{ if $first }}
+          {{ $scratch.Add "otherFirst" (slice $first) }}
+          {{ $scratch.SetInMap "seenCats" $c true }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $otherFirst := sort ($scratch.Get "otherFirst") ".Date" "desc" }}
+
+{{/* 初步候選：同分類相鄰（僅當有分類） */}}
+{{ $prev := false }}
+{{ $next := false }}
+{{ if ne $cat nil }}
+  {{ $idx := -1 }}
+  {{ range $i, $p := $sortedCat }}{{ if eq $p.RelPermalink $current.RelPermalink }}{{ $idx = $i }}{{ end }}{{ end }}
+  {{ if ge $idx 0 }}
+    {{ if gt $idx 0 }}
+      {{ $prev = index $sortedCat (sub $idx 1) }}
+    {{ end }}
+    {{ if lt (add $idx 1) (len $sortedCat) }}
+      {{ $next = index $sortedCat (add $idx 1) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* 邊界保底：使用其他分類第一篇，並保證兩側不同且不等於當前 */}}
+{{ if not $prev }}
+  {{ if gt (len $otherFirst) 0 }}
+    {{ $prev = index $otherFirst 0 }}
+    {{ if eq $prev.RelPermalink $current.RelPermalink }}{{ $prev = false }}{{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if not $next }}
+  {{ if gt (len $otherFirst) 0 }}
+    {{/* 找到與 prev 不同的第一個 */}}
+    {{ range $i, $p := $otherFirst }}
+      {{ if and (ne $p.RelPermalink $current.RelPermalink) (or (not $prev) (ne $p.RelPermalink $prev.RelPermalink)) }}
+        {{ $next = $p }}
+        {{ break }}
+      {{ end }}
+    {{ end }}
+    {{ if not $next }}
+      {{/* 若只有一個分類的第一篇，嘗試該分類的第二篇 */}}
+      {{ if $prev }}
+        {{ $pcat := $prev.Params.category }}
+        {{ $plist := where $all "Params.category" $pcat }}
+        {{ $pHasOrder := where $plist "Params.order" "!=" nil }}
+        {{ if gt (len $pHasOrder) 1 }}
+          {{ $sorted := sort $pHasOrder "Params.order" "asc" }}
+          {{ $second := index $sorted 1 }}
+          {{ if ne $second.RelPermalink $current.RelPermalink }}{{ $next = $second }}{{ end }}
+        {{ else }}
+          {{ $sorted := sort $plist ".Date" "desc" }}
+          {{ range $sorted }}
+            {{ if and (ne .RelPermalink $current.RelPermalink) (or (not $prev) (ne .RelPermalink $prev.RelPermalink)) }}
+              {{ $next = . }}
+              {{ break }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<div class="article-navigation">
+  <div class="article-navigation__links">
+    {{ with $prev }}
+      <div class="article-navigation__item">
+        <a href="{{ .RelPermalink }}" class="btn btn-secondary article-navigation__prev" aria-label="上一篇：{{ .Title }}">
+          <span>上一篇：{{ .Title }}</span>
+        </a>
+        {{ if ne .Params.category $cat }}
+          <div class="article-navigation__caption">上一篇內容來自其他主題推薦。</div>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{ with $next }}
+      <div class="article-navigation__item">
+        <a href="{{ .RelPermalink }}" class="btn btn-secondary article-navigation__next" aria-label="下一篇：{{ .Title }}">
+          <span>下一篇：{{ .Title }}</span>
+        </a>
+        {{ if ne .Params.category $cat }}
+          <div class="article-navigation__caption">下一篇內容來自其他主題推薦。</div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</div>
 {{ $current := . }}
 {{ $all := where .Site.RegularPages "Section" "articles" }}
 {{ $all = where $all "Params.draft" "!=" true }}
@@ -51,6 +189,28 @@
       {{ $anyCatSeriesFirstN := where (where $all "Params.series_order" 1) "Params.series" "!=" $series }}
       {{ if gt (len $anyCatSeriesFirstN) 0 }}
         {{ $scratch.Set "next" (index (sort $anyCatSeriesFirstN ".Date" "desc") 0) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{/* 如果備選結果導致上一篇與下一篇相同，嘗試改選不同的一篇避免重複 */}}
+  {{ $prevSelTmp := ($scratch.Get "prev") }}
+  {{ $nextSelTmp := ($scratch.Get "next") }}
+  {{ if and $prevSelTmp $nextSelTmp }}
+    {{ if eq $prevSelTmp.RelPermalink $nextSelTmp.RelPermalink }}
+      {{ $sameList := where (where (where $all "Params.series" "!=" nil) "Params.series" "!=" $series) "Params.category" $category }}
+      {{ $sameList = where $sameList "Params.series_order" 1 }}
+      {{ if gt (len $sameList) 1 }}
+        {{ $scratch.Set "next" (index (sort $sameList ".Date" "desc") 1) }}
+      {{ else }}
+        {{ $anyList := where (where $all "Params.series_order" 1) "Params.series" "!=" $series }}
+        {{ $anyList = where $anyList "RelPermalink" "!=" $prevSelTmp.RelPermalink }}
+        {{ if gt (len $anyList) 0 }}
+          {{ $scratch.Set "next" (index (sort $anyList ".Date" "desc") 0) }}
+        {{ else }}
+          {{ $fallback := where (sort $all ".Date" "desc") "RelPermalink" "!=" $prevSelTmp.RelPermalink }}
+          {{ if gt (len $fallback) 0 }}{{ $scratch.Set "next" (index $fallback 0) }}{{ end }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}

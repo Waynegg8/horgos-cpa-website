@@ -2,8 +2,8 @@
 title: "稅務問題"
 description: "稅務申報相關常見問題解答"
 date: 2024-05-24
-seo_title: "稅務申報常見問題解答 - Hugo會計事務所"
-seo_description: "解答營業稅、營所稅、綜所稅等稅務申報常見問題，提供專業稅務建議與節稅方法，幫助您合法節稅。立即查看 https://hugo-accounting.com/faq/tax/"
+seo_title: "稅務申報常見問題解答 - 霍爾果斯"
+seo_description: "解答營業稅、營所稅、綜所稅等稅務申報常見問題，提供專業稅務建議與節稅方法，幫助您合法節稅。立即查看 https://horgoscpa.com/faq/tax/"
 ---
 
 ## 稅務問題

@@ -8,8 +8,8 @@ file_type: "pdf"
 file_size: "420 KB"
 last_updated: "2024-05-10"
 download_link: "/uploads/files/forms-company-registration.pdf"
-seo_title: "公司設立登記申請書下載 - Hugo會計事務所"
-seo_description: "免費下載最新版公司設立登記申請書及填寫範例說明，包含詳細填寫指南和常見問題解答。立即下載 https://hugo-accounting.com/downloads/forms/company-registration/"
+seo_title: "公司設立登記申請書下載 - 霍爾果斯"
+seo_description: "免費下載最新版公司設立登記申請書及填寫範例說明，包含詳細填寫指南和常見問題解答。立即下載 https://horgoscpa.com/downloads/forms/company-registration/"
 draft: false
 ---
 

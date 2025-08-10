@@ -7,10 +7,9 @@ tags: ["營業稅", "稅務申報", "教學"]
 youtube_id: "xxxxxxxx" # 替換為實際YouTube ID
 thumbnail: "/uploads/images/videos/tax-filing-guide-thumbnail.webp"
 duration: "15:25"
-series: "tax-filing"
-series_order: 1
-seo_title: "營業稅申報完整教學 - Hugo會計事務所"
-seo_description: "專業會計師詳細解說營業稅申報流程、常見錯誤與注意事項，讓您輕鬆完成申報。立即觀看 https://hugo-accounting.com/videos/tutorials/tax-filing-guide/"
+order: 1
+seo_title: "營業稅申報完整教學 - 霍爾果斯"
+seo_description: "專業會計師詳細解說營業稅申報流程、常見錯誤與注意事項，讓您輕鬆完成申報。立即觀看 https://horgoscpa.com/videos/tutorials/tax-filing-guide/"
 draft: false
 ---
 

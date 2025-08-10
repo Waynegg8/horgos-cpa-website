@@ -2,7 +2,7 @@
 title: "零稅率證明文件一次看懂：外銷服務與出口報關實務"
 date: 2024-08-12
 category: "tax-planning"
-series: "稅務指南"
+order: 1
 description: "外銷服務適用零稅率時，應準備的佐證文件與常見爭點整理。"
 ---
 

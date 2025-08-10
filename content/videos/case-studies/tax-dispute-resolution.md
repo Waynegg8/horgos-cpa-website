@@ -7,10 +7,9 @@ tags: ["稅務爭議", "案例分析", "稅務規劃"]
 youtube_id: "xxxxxxxx" # 替換為實際YouTube ID
 thumbnail: "/uploads/images/videos/tax-dispute-thumbnail.webp"
 duration: "22:15"
-series: "tax-dispute"
-series_order: 1
-seo_title: "稅務爭議案例解析 - Hugo會計事務所"
-seo_description: "透過真實案例分析稅務爭議的成因、處理過程與解決方案，幫助企業避免類似風險，妥善應對稅務挑戰。立即觀看 https://hugo-accounting.com/videos/case-studies/tax-dispute-resolution/"
+order: 1
+seo_title: "稅務爭議案例解析 - 霍爾果斯"
+seo_description: "透過真實案例分析稅務爭議的成因、處理過程與解決方案，幫助企業避免類似風險，妥善應對稅務挑戰。立即觀看 https://horgoscpa.com/videos/case-studies/tax-dispute-resolution/"
 draft: false
 ---
 

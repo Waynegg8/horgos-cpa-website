@@ -2,7 +2,7 @@
 title: "會計科目表設計指南：從 0 到可用的實務範例"
 date: 2024-07-18
 category: "accounting-basics"
-series: "會計實務"
+order: 1
 description: "中小企業建立科目表的結構化做法，含分級編碼原則、常見錯誤與實例。"
 ---
 

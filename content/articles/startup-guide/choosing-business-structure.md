@@ -2,7 +2,7 @@
 title: "公司型態怎麼選？有限公司、股份有限公司一次搞懂"
 date: 2024-06-10
 category: "startup-guide"
-series: "創業教室"
+order: 3
 description: "創業第一步從選擇公司型態開始，本文以實務觀點比較有限公司與股份有限公司的差異與申請要點。"
 ---
 

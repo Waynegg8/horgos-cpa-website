@@ -155,6 +155,17 @@
     flex: 1;
     padding-right: $spacing-4; // 增加右側間距
     
+    .video-topic-badge {
+      display: inline-block;
+      margin: 0.25rem 0 0.5rem;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid #262626;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: #A1A1A1;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    
     .video-title {
       margin: 0 0 0.75rem;
       font-size: 1.25rem;

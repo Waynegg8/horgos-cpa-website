@@ -6,10 +6,9 @@ category: "accounting-basics"
 tags: ["財務報表", "財務分析", "財務比率"]
 cover: "/uploads/images/articles/financial-statement-analysis.webp"
 author: "王會計"
-seo_title: "財務報表分析入門：關鍵財務指標解讀指南 - Hugo會計事務所"
-seo_description: "學習如何分析財務報表和解讀關鍵財務指標，有效評估企業的財務健康狀況。立即訪問 https://hugo-accounting.com/articles/accounting-basics/financial-statement-analysis-guide/ 獲取專業財務知識。"
-series: "financial-analysis"
-series_order: 1
+seo_title: "財務報表分析入門：關鍵財務指標解讀指南 - 霍爾果斯"
+seo_description: "學習如何分析財務報表和解讀關鍵財務指標，有效評估企業的財務健康狀況。立即訪問 https://horgoscpa.com/articles/accounting-basics/financial-statement-analysis-guide/ 獲取專業財務知識。"
+order: 1
 draft: false
 ---
 

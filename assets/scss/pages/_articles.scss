@@ -229,6 +229,18 @@
   line-height: $line-height-base;
 }
 
+/* 主題徽章：顯示「{主題} 第 1 篇」 */
+.article-topic-badge {
+  display: inline-block;
+  margin: 0.25rem 0 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid $color-border-primary;
+  border-radius: 6px;
+  font-size: $font-size-small;
+  color: $color-text-secondary;
+  background: rgba(255, 255, 255, 0.04);
+}
+
 // 單篇文章頁面
 .single-content {
   margin-bottom: $spacing-16;

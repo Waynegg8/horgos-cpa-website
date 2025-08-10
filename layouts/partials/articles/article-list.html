@@ -44,14 +44,15 @@
                 </div>
                 <div class="card-horizontal__content">
                     <h2 class="article-title">{{ .Title }}</h2>
+                    {{ with .Params.category }}
+                    <div class="article-topic-badge">{{ . }} 第 1 篇</div>
+                    {{ end }}
                     <div class="article-meta">
                         <span class="article-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
                         {{ with .Params.tags }}
                         <span class="article-meta__item"><i class="fas fa-tags"></i> {{ delimit . ", " }}</span>
                         {{ end }}
-                        {{ with .Params.series }}
-                        <span class="article-meta__item"><i class="fas fa-bookmark"></i> {{ . }}</span>
-                        {{ end }}
+                        {{/* 移除系列顯示，改由主題徽章呈現 */}}
                     </div>
                     <p class="article-summary">{{ .Summary | plainify | truncate 100 }}</p>
                 </div>

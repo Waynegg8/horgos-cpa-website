@@ -72,16 +72,31 @@
                 
             </article>
             
-            <!-- 相關文章推薦（嚴格同分類） -->
-            {{ $relatedAll := .Site.RegularPages.Related . }}
-            {{ $cat := .Params.category }}
-            {{ $related := cond (ne $cat nil) (where (where $relatedAll "Section" .Section) "Params.category" $cat) (slice) }}
-            {{ $related = where $related "Permalink" "!=" .Permalink }}
-            {{ $related = first 3 $related }}
+            <!-- 或許你還想看看：推薦非同主題的文章（各主題第一篇） -->
+            {{ $allArticles := where .Site.RegularPages "Section" "articles" }}
+            {{ $currentCat := .Params.category }}
+            {{ $scratch := newScratch }}
+            {{ $scratch.Set "seen" (dict) }}
+            {{ $scratch.Set "candidates" (slice) }}
+            {{ range $allArticles }}
+              {{ $c := .Params.category }}
+              {{ if and (ne $c nil) (ne $c $currentCat) }}
+                {{ if not (isset ($scratch.Get "seen") $c) }}
+                  {{ $catPages := where $allArticles "Params.category" $c }}
+                  {{ $withOrder := where $catPages "Params.order" "!=" nil }}
+                  {{ $first := cond (gt (len $withOrder) 0) (index (sort $withOrder "Params.order" "asc") 0) (index (sort $catPages ".Date" "asc") 0) }}
+                  {{ if and $first (ne $first.RelPermalink .RelPermalink) }}
+                    {{ $scratch.Add "candidates" (slice $first) }}
+                    {{ $scratch.SetInMap "seen" $c true }}
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+            {{ end }}
+            {{ $related := sort ($scratch.Get "candidates") ".Date" "desc" | first 3 }}
             {{ if gt (len $related) 0 }}
             <section class="article-related">
                 <div class="container">
-                    <h3 class="section-title">相關推薦</h3>
+                    <h3 class="section-title">或許你還想看看</h3>
                     <div class="article-list__grid">
                         {{ range $related }}
                         <a href="{{ .RelPermalink }}" class="card-style card-clickable article-item">
@@ -96,6 +111,9 @@
                             </div>
                             <div class="card-horizontal__content">
                               <h2 class="article-title">{{ .Title }}</h2>
+                              {{ with .Params.category }}
+                              <div class="article-topic-badge">{{ . }} 第 1 篇</div>
+                              {{ end }}
                               <div class="article-meta">
                                 <span class="article-meta__item"><i class="fas fa-calendar-alt"></i> {{ .Date.Format "2006-01-02" }}</span>
                                 {{ with .Params.category }}<span class="article-meta__item"><i class="fas fa-folder"></i> {{ . }}</span>{{ end }}

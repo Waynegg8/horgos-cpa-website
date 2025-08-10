@@ -1,4 +1,4 @@
-# Hugo 會計事務所網站
+# 霍爾果斯網站
 
 這是一個使用 Hugo 框架建立的會計事務所網站，具有完整的前後端功能、SEO 優化和內容管理系統。
 
@@ -99,7 +99,7 @@ npm run deploy
 
 ## 內容管理
 
-1. 訪問管理介面：`https://hugo-accounting.com/admin`
+1. 訪問管理介面：`https://horgoscpa.com/admin`
 2. 使用 GitHub 帳號登入
 3. 編輯內容並發布
 

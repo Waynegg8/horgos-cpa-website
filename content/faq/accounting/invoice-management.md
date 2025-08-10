@@ -4,10 +4,9 @@ date: "2024-05-15"
 description: "發票憑證保存管理完整指南與電子發票處理規範"
 category: "accounting"
 tags: ["發票管理", "電子發票", "憑證保存"]
-series: "accounting-basics"
-series_order: 2
-seo_title: "發票憑證保存管理指南與電子發票處理規範 - Hugo會計事務所"
-seo_description: "專業會計師解析企業發票憑證保存管理方法，包含電子發票與紙本發票的法規要求、保存年限與管理系統建議。立即了解 https://hugo-accounting.com/faq/accounting/invoice-management/"
+order: 2
+seo_title: "發票憑證保存管理指南與電子發票處理規範 - 霍爾果斯"
+seo_description: "專業會計師解析企業發票憑證保存管理方法，包含電子發票與紙本發票的法規要求、保存年限與管理系統建議。立即了解 https://horgoscpa.com/faq/accounting/invoice-management/"
 draft: false
 ---
 

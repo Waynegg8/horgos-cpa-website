@@ -3,8 +3,8 @@ backend:
   branch: master # Branch to update (optional; defaults to master)
 
 # These lines should match your site URL
-site_url: https://hugo-accounting.com
-display_url: https://hugo-accounting.com
+site_url: https://horgoscpa.com
+display_url: https://horgoscpa.com
 
 # Media files will be stored in the repo under static/uploads
 media_folder: "static/uploads"
@@ -39,8 +39,7 @@ collections:
       - {label: "作者", name: "author", widget: "string"}
       - {label: "SEO標題", name: "seo_title", widget: "string"}
       - {label: "SEO描述", name: "seo_description", widget: "text"}
-      - {label: "系列", name: "series", widget: "string", required: false}
-      - {label: "系列順序", name: "series_order", widget: "number", required: false}
+      - {label: "順序（同主題內）", name: "order", widget: "number", required: false, hint: "同一主題（category）內的閱讀順序，1 表示最前"}
       - {label: "草稿", name: "draft", widget: "boolean", default: false}
       - {label: "內容", name: "body", widget: "markdown"}
   
@@ -61,8 +60,7 @@ collections:
       - {label: "分類", name: "category", widget: "select", options: ["popular", "tutorials", "case-studies", "legal-explanation"]}
       - {label: "縮圖", name: "thumbnail", widget: "image", required: false, hint: "若不上傳則自動使用影片縮圖"}
       - {label: "時長", name: "duration", widget: "string", hint: "例如：12:34"}
-      - {label: "系列", name: "series", widget: "string", required: false}
-      - {label: "系列順序", name: "series_order", widget: "number", required: false}
+      - {label: "順序（同主題內）", name: "order", widget: "number", required: false, hint: "同一主題（category）內的順序，1 表示最前"}
       - {label: "SEO標題", name: "seo_title", widget: "string"}
       - {label: "SEO描述", name: "seo_description", widget: "text"}
       - {label: "草稿", name: "draft", widget: "boolean", default: false}
@@ -81,8 +79,7 @@ collections:
       - {label: "發布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
       - {label: "分類", name: "category", widget: "select", options: ["startup", "tax", "accounting", "others"]}
       - {label: "標籤", name: "tags", widget: "list"}
-      - {label: "系列", name: "series", widget: "string", required: false}
-      - {label: "系列順序", name: "series_order", widget: "number", required: false}
+      - {label: "順序（同主題內）", name: "order", widget: "number", required: false, hint: "同一主題（category）內的順序，1 表示最前"}
       - {label: "SEO標題", name: "seo_title", widget: "string"}
       - {label: "SEO描述", name: "seo_description", widget: "text"}
       - {label: "草稿", name: "draft", widget: "boolean", default: false}

@@ -6,10 +6,9 @@ category: "tax-planning"
 tags: ["營所稅", "節稅", "稅務規劃"]
 cover: "/uploads/images/articles/corporate-tax-saving.webp"
 author: "李稅務"
-seo_title: "企業合法節稅策略：營所稅優化完整指南 - Hugo會計事務所"
-seo_description: "了解企業如何透過合法方式優化營所稅，包含費用認列、投資抵減、虧損扣抵等多種節稅策略。立即訪問 https://hugo-accounting.com/articles/tax-planning/corporate-tax-saving-strategies/ 獲取專業稅務建議。"
-series: "tax-optimization"
-series_order: 1
+seo_title: "企業合法節稅策略：營所稅優化完整指南 - 霍爾果斯"
+seo_description: "了解企業如何透過合法方式優化營所稅，包含費用認列、投資抵減、虧損扣抵等多種節稅策略。立即訪問 https://horgoscpa.com/articles/tax-planning/corporate-tax-saving-strategies/ 獲取專業稅務建議。"
+order: 1
 draft: false
 ---
 

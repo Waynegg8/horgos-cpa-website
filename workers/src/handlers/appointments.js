@@ -192,12 +192,12 @@ async function storeAppointment(appointment, env) {
  * @param {Object} env - 環境變數和綁定
  */
 async function sendCustomerConfirmation(appointment, env) {
-  const subject = `【Hugo會計事務所】預約諮詢確認 - 預約編號：${appointment.id}`;
+  const subject = `【霍爾果斯】預約諮詢確認 - 預約編號：${appointment.id}`;
   
   const body = `
     親愛的 ${appointment.name} 您好，
     
-    感謝您預約Hugo會計事務所的諮詢服務。以下是您的預約詳情：
+    感謝您預約霍爾果斯的諮詢服務。以下是您的預約詳情：
     
     預約編號：${appointment.id}
     諮詢服務：${appointment.service}
@@ -209,12 +209,12 @@ async function sendCustomerConfirmation(appointment, env) {
     
     如有任何問題，請隨時聯繫我們：
     電話：02-2345-6789
-    Email：contact@hugo-accounting.com
+    Email：contact@horgoscpa.com
     LINE：@hugoaccounting
     
     感謝您的信任與支持！
     
-    Hugo會計事務所 敬上
+    霍爾果斯 敬上
   `;
   
   await sendEmail({

@@ -4,10 +4,9 @@ date: "2024-05-12"
 description: "解析小型企業會計人力配置與外包服務選擇指南"
 category: "accounting"
 tags: ["會計人力", "記帳", "會計外包"]
-series: "accounting-basics"
-series_order: 1
-seo_title: "小規模企業是否需要專職會計？會計服務選擇指南 - Hugo會計事務所"
-seo_description: "專業會計師解析小型企業會計人力配置策略，包含內部會計與外包服務的優缺點比較、成本分析與選擇建議。立即了解 https://hugo-accounting.com/faq/accounting/bookkeeping-basics/"
+order: 1
+seo_title: "小規模企業是否需要專職會計？會計服務選擇指南 - 霍爾果斯"
+seo_description: "專業會計師解析小型企業會計人力配置策略，包含內部會計與外包服務的優缺點比較、成本分析與選擇建議。立即了解 https://horgoscpa.com/faq/accounting/bookkeeping-basics/"
 draft: false
 ---
 

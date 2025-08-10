@@ -4,10 +4,9 @@ date: "2024-05-08"
 description: "解析營業稅申報期限與逾期罰則"
 category: "tax"
 tags: ["營業稅", "稅務申報", "罰則"]
-series: "tax-filing"
-series_order: 1
-seo_title: "營業稅申報期限與逾期罰則說明 - Hugo會計事務所"
-seo_description: "詳細解析營業稅申報期限、逾期罰則與補救措施，幫助企業避免不必要的稅務罰款與滯納金。立即了解 https://hugo-accounting.com/faq/tax/vat-filing/"
+order: 1
+seo_title: "營業稅申報期限與逾期罰則說明 - 霍爾果斯"
+seo_description: "詳細解析營業稅申報期限、逾期罰則與補救措施，幫助企業避免不必要的稅務罰款與滯納金。立即了解 https://horgoscpa.com/faq/tax/vat-filing/"
 draft: false
 ---
 

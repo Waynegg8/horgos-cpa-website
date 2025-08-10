@@ -8,8 +8,8 @@ file_type: "xlsx"
 file_size: "350 KB"
 last_updated: "2024-05-05"
 download_link: "/uploads/files/checklists-tax-filing-checklist.xlsx"
-seo_title: "營所稅結算申報檢查清單下載 - Hugo會計事務所"
-seo_description: "免費下載專業營利事業所得稅結算申報檢查清單，包含收入、成本費用、稅額計算等全面檢查項目，確保申報準確無誤。立即下載 https://hugo-accounting.com/downloads/checklists/tax-filing-checklist/"
+seo_title: "營所稅結算申報檢查清單下載 - 霍爾果斯"
+seo_description: "免費下載專業營利事業所得稅結算申報檢查清單，包含收入、成本費用、稅額計算等全面檢查項目，確保申報準確無誤。立即下載 https://horgoscpa.com/downloads/checklists/tax-filing-checklist/"
 draft: false
 ---
 

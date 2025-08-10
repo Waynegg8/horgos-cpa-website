@@ -27,25 +27,30 @@
           
           {{/* 單頁不再本地插入 CTA，統一於 base 模板 SEO 區塊上方輸出 */}}
           
-          {{/* 相關影片：優先同系列，其次同分類（文件規範） */}}
+          {{/* 或許你還想看看：推薦其他影片主題的第一部 */}}
           {{ $allVideos := where .Site.RegularPages "Section" "videos" }}
-          {{ $related := slice }}
-          {{ if .Params.series }}
-            {{ $related = where $allVideos "Params.series" .Params.series }}
-          {{ end }}
-          {{ if or (not .Params.series) (eq (len $related) 0) }}
-            {{ $cat := .Params.category }}
-            {{ if ne $cat nil }}
-              {{ $related = where $allVideos "Params.category" $cat }}
-            {{ else }}
-              {{ $related = slice }}
+          {{ $currentCat := .Params.category }}
+          {{ $scratch := newScratch }}
+          {{ $scratch.Set "seen" (dict) }}
+          {{ $scratch.Set "candidates" (slice) }}
+          {{ range $allVideos }}
+            {{ $c := .Params.category }}
+            {{ if and (ne $c nil) (ne $c $currentCat) }}
+              {{ if not (isset ($scratch.Get "seen") $c) }}
+                {{ $catPages := where $allVideos "Params.category" $c }}
+                {{ $withOrder := where $catPages "Params.order" "!=" nil }}
+                {{ $first := cond (gt (len $withOrder) 0) (index (sort $withOrder "Params.order" "asc") 0) (index (sort $catPages ".Date" "asc") 0) }}
+                {{ if and $first (ne $first.RelPermalink .RelPermalink) }}
+                  {{ $scratch.Add "candidates" (slice $first) }}
+                  {{ $scratch.SetInMap "seen" $c true }}
+                {{ end }}
+              {{ end }}
             {{ end }}
           {{ end }}
-          {{ $related = where $related "Permalink" "!=" .Permalink }}
-          {{ $related = first 3 $related }}
+          {{ $related := sort ($scratch.Get "candidates") ".Date" "desc" | first 3 }}
           {{ if gt (len $related) 0 }}
           <div class="related-videos">
-            <h3>相關影片</h3>
+            <h3>或許你還想看看</h3>
             <div class="related-videos-grid">
               {{ range $related }}
                 {{ partial "videos/card.html" . }}

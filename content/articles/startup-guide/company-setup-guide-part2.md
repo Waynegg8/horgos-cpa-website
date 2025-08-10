@@ -6,10 +6,9 @@ category: "startup-guide"
 tags: ["創業", "公司設立", "商業登記"]
 cover: "/uploads/images/articles/company-setup-guide-2.webp"
 author: "張會計師"
-seo_title: "公司設立完整指南：登記流程與設立後應辦事項 - Hugo會計事務所"
-seo_description: "了解公司設立的登記流程、申請步驟，以及設立後需要辦理的重要事項。立即訪問 https://hugo-accounting.com/articles/startup-guide/company-setup-guide-part2/ 獲取專業指導。"
-series: "company-setup-guide"
-series_order: 2
+seo_title: "公司設立完整指南：登記流程與設立後應辦事項 - 霍爾果斯"
+seo_description: "了解公司設立的登記流程、申請步驟，以及設立後需要辦理的重要事項。立即訪問 https://horgoscpa.com/articles/startup-guide/company-setup-guide-part2/ 獲取專業指導。"
+order: 2
 draft: false
 ---
 

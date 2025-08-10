@@ -23,7 +23,7 @@ const pagesToTest = [
 
 // 測試配置
 const config = {
-  baseUrl: 'https://hugo-accounting.com',
+  baseUrl: 'https://horgoscpa.com',
   outputDir: './accessibility-reports',
   threshold: {
     critical: 0,

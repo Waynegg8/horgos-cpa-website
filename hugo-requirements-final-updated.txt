@@ -1,6 +1,6 @@
 
 
-# Hugo 會計事務所網站完整需求文件（最終修正版）
+# 霍爾果斯網站完整需求文件（最終修正版）
 
 ## 第1章 專案總體要求與架構
 
@@ -133,8 +133,8 @@ category: "startup-guide"
 tags: ["創業", "公司設立"]
 cover: "/uploads/images/articles/company-setup-guide.webp"
 author: "作者姓名"
-seo_title: "公司設立完整指南 - Hugo會計事務所"
-seo_description: "了解公司設立的完整流程，包含詳細步驟與注意事項，立即訪問 https://hugo-accounting.com/articles/startup-guide/company-setup/"
+seo_title: "公司設立完整指南 - 霍爾果斯"
+seo_description: "了解公司設立的完整流程，包含詳細步驟與注意事項，立即訪問 https://horgoscpa.com/articles/startup-guide/company-setup/"
 series: "startup-guide"
 series_order: 1
 draft: false
